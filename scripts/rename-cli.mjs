@@ -46,8 +46,8 @@ function parseArgs(argv) {
   if (!/^(?:@[a-z0-9._-]+\/)?[a-z0-9._-]+$/.test(values.package)) throw new Error("--package must be a valid lowercase npm package name.");
   if (!/^[a-z][a-z0-9]*(?:\.[a-z][a-z0-9]*)+$/.test(values.namespace)) throw new Error("--namespace must be a dotted lowercase identifier.");
   if (!values.display.trim()) throw new Error("--display must not be empty.");
-  if (values.repo === OLD_REPO || values.command === OLD_COMMAND || values.namespace === OLD_NAMESPACE) {
-    throw new Error("Provide new repository, command, and extension namespace names.");
+  if (values.repo === OLD_REPO || values.command === OLD_COMMAND) {
+    throw new Error("Provide new repository and command names.");
   }
   return values;
 }
@@ -71,7 +71,7 @@ function ensureClean(root) {
 }
 
 function replacementMap(options) {
-  const words = options.command.split("-");
+  const words = options.display.trim().split(/\s+/).map((word) => word.toLowerCase());
   const pascal = words.map((word) => word[0].toUpperCase() + word.slice(1)).join("");
   return {
     [OLD_NAMESPACE]: options.namespace,

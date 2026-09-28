@@ -1,6 +1,6 @@
 # CLI rename inventory and tool
 
-The CLI repository name, npm package name, executable name, product identity, and extension namespace are separate inputs. `rename-cli.mjs` changes them together across the CLI and sibling Marketplace repositories. It does **not** change the Marketplace's logical ID (`teamai`), the Marketplace repository name, the GitHub owner (`teamai-vault`), the example Logical Project ID (`teamai`), or references to the original upstream TeamAI. Use `rename-marketplace.mjs` separately if the Marketplace ID itself must change.
+The CLI repository name, npm package name, executable name, product identity, and extension namespace are separate inputs. `rename-cli.mjs` applies the requested values across the CLI and sibling Marketplace repositories. A value may stay the same, as with `--display "Team AI"` and `--namespace com.company.teamai` when only the command and repository are renamed. It does **not** change the Marketplace's logical ID (`teamai`), the Marketplace repository name, the GitHub owner (`teamai-vault`), the example Logical Project ID (`teamai`), or references to the original upstream TeamAI. Use `rename-marketplace.mjs` separately if the Marketplace ID itself must change.
 
 ## Rename inventory
 

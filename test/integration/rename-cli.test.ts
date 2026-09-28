@@ -58,6 +58,23 @@ test("previews and applies a full local identity rename without changing Marketp
   }
 }, 15_000);
 
+test("keeps the Team AI display and extension namespace during the teamai rename", async () => {
+  const { root, cli, marketplace } = await fixture();
+  try {
+    const result = spawnSync(process.execPath, [script, "--workspace", root, "--repo", "teamai-cli-copilot", "--command", "teamai", "--display", "Team AI", "--namespace", "com.company.teamai", "--rename-directory", "--skip-github", "--apply"], { cwd: root, encoding: "utf8" });
+    expect(result.status, result.stderr).toBe(0);
+    expect(existsSync(cli)).toBe(false);
+    const renamed = path.join(root, "teamai-cli-copilot");
+    expect(JSON.parse(await readFile(path.join(renamed, "package.json"), "utf8"))).toMatchObject({ name: "teamai-cli-copilot", bin: { teamai: "dist/cli.js" } });
+    expect(await readFile(path.join(renamed, "skills", "teamai", "SKILL.md"), "utf8")).toContain("Team AI uses ~/.teamai and com.company.teamai.");
+    expect(await readFile(path.join(marketplace, "AGENTS.md"), "utf8")).toContain("../teamai-cli-copilot/docs. Run teamai.");
+    expect(await readFile(path.join(root, "AGENTS.md"), "utf8")).toBe("teamai-cli-copilot is the Team AI CLI.\n");
+  } finally {
+    if (!path.resolve(root).startsWith(path.resolve(process.env.TEST_TMP_ROOT ?? os.tmpdir()) + path.sep)) throw new Error("Unsafe fixture cleanup path.");
+    await rm(root, { recursive: true, force: true });
+  }
+}, 15_000);
+
 test("renames the local checkout and sibling references when explicitly requested", async () => {
   const { root, marketplace } = await fixture();
   try {
