@@ -45,3 +45,17 @@ npm run test:e2e:fallback
 ```
 
 Both E2E scripts require the sibling `../teamai-marketplace`, Git, and a real `copilot` executable; they use isolated temporary profiles. Record the platform actually exercised instead of inferring cross-platform success. Run test gates sequentially because integration tests start many subprocesses and fixed per-test timeouts can fail under concurrent load.
+
+## Agent skills
+
+### Issue tracker
+
+Issues and specs live in GitHub Issues for `teamai-vault/teamai-cli-copilot`. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Use the five default triage labels. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Use a single-context layout. See `docs/agents/domain.md`.
