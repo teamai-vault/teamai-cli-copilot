@@ -161,7 +161,7 @@ async function main() {
     : "Rename complete: no standalone old-ID tokens remain.");
   console.log("Repository/package names containing the old text as part of a larger hyphenated identifier were intentionally preserved.");
   console.log("The Team AI CLI repository is not modified because CLI identity is independent from Marketplace identity.");
-  console.log("This tool updates source repositories only. If the old Marketplace ID has already been used by developers or business repositories, migrate local Copilot registrations, ~/.team-ai/config.yaml, and repository .github/copilot/settings.json separately.");
+  console.log("This tool updates source repositories only. If the old Marketplace ID has already been used by developers or business repositories, migrate local Copilot registrations, ~/.teamai/config.yaml, and repository .github/copilot/settings.json separately.");
 }
 
 main().catch((error) => {

@@ -7,7 +7,7 @@ import type { CommandContext } from "./context.js";
 
 export async function projectsListCommand(context: CommandContext): Promise<void> {
   const config = await readGlobalConfig(context.homeDir);
-  if (!config) throw new Error("Team AI is not initialized. Run `team-ai init` first.");
+  if (!config) throw new Error("Team AI is not initialized. Run `teamai init` first.");
   const catalog = await context.loadMarketplace(config.marketplace.source, context.cwd);
   try {
     if (catalog.name !== config.marketplace.name) throw new Error(`Marketplace name changed from '${config.marketplace.name}' to '${catalog.name}'.`);
@@ -24,9 +24,9 @@ export async function projectsListCommand(context: CommandContext): Promise<void
 
 export async function projectsSetCommand(context: CommandContext, values: string[]): Promise<void> {
   const config = await readGlobalConfig(context.homeDir);
-  if (!config) throw new Error("Team AI is not initialized. Run `team-ai init` first.");
+  if (!config) throw new Error("Team AI is not initialized. Run `teamai init` first.");
   const identity = await detectProjectIdentity(context.cwd);
-  if (!identity) throw new Error("team-ai projects set requires a Git repository.");
+  if (!identity) throw new Error("teamai projects set requires a Git repository.");
   const catalog = await context.loadMarketplace(config.marketplace.source, context.cwd);
   try {
     if (catalog.name !== config.marketplace.name) throw new Error(`Marketplace name changed from '${config.marketplace.name}' to '${catalog.name}'.`);

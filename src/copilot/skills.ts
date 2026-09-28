@@ -85,7 +85,7 @@ export async function convergeManagedSkills(
   };
 
   if (options.dryRun) await action();
-  else await withFileLock(path.join(personalSkillsRoot(homeDir), ".team-ai.lock"), action);
+  else await withFileLock(path.join(personalSkillsRoot(homeDir), ".teamai.lock"), action);
   return { changes, available: [...available].filter((name) => desired.includes(name)).sort(), managedSkillPaths: records };
 }
 

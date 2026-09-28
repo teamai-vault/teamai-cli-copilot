@@ -6,8 +6,8 @@ import { tempDir } from "../helpers/test-utils.js";
 
 describe("project partition diagnostics", () => {
   test("reports orphan and stale partitions without mutating them", async () => {
-    const home = await tempDir("team-ai-partitions-");
-    const projects = path.join(home, ".team-ai", "projects");
+    const home = await tempDir("teamai-partitions-");
+    const projects = path.join(home, ".teamai", "projects");
     const orphan = path.join(projects, "orphan-partition");
     const stale = path.join(projects, "stale-partition");
     await mkdir(orphan, { recursive: true });

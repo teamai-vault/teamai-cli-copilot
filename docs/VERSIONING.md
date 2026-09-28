@@ -4,13 +4,13 @@ Team AI uses Semantic Versioning independently for the CLI, the Marketplace cata
 
 ## CLI
 
-The CLI version must match in `package.json`, `package-lock.json`, and `team-ai --version`.
+The CLI version must match in `package.json`, `package-lock.json`, and `teamai --version`.
 
 - Major: breaking command, config, or managed-state contract.
 - Minor: backward-compatible command or capability.
 - Patch: backward-compatible fix or internal hardening.
 
-The bundled `skills/team-ai/` Agent Skill has no independent release version. It is part of the CLI package and uses the CLI package version in its ownership record. After a CLI upgrade, the next `team-ai init` or `team-ai sync` converges the installed built-in Skill to the bundled content.
+The bundled `skills/teamai/` Agent Skill has no independent release version. It is part of the CLI package and uses the CLI package version in its ownership record. After a CLI upgrade, the next `teamai init` or `teamai sync` converges the installed built-in Skill to the bundled content.
 
 ## Marketplace
 

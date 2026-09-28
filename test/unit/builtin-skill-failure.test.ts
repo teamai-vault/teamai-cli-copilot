@@ -27,7 +27,7 @@ afterEach(async () => {
 
 describe("built-in Team AI Skill ownership failure", () => {
   test("rolls back a fresh install when ownership persistence fails", async () => {
-    const home = await tempDir("team-ai-builtin-ownership-failure-home-");
+    const home = await tempDir("teamai-builtin-ownership-failure-home-");
     cleanup.push(home);
 
     await expect(convergeBuiltInTeamAiSkill(home)).rejects.toThrow("forced ownership write failure");

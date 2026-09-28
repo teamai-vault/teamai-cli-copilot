@@ -6,7 +6,7 @@ import { tempDir, TEST_MARKETPLACE_NAME, TEST_MARKETPLACE_SOURCE } from "../help
 
 describe("repository Copilot settings", () => {
   test("preserves unknown fields and unrelated plugins", async () => {
-    const root = await tempDir("team-ai-settings-");
+    const root = await tempDir("teamai-settings-");
     const settingsPath = path.join(root, ".github", "copilot", "settings.json");
     await mkdir(path.dirname(settingsPath), { recursive: true });
     await writeFile(settingsPath, JSON.stringify({
@@ -30,7 +30,7 @@ describe("repository Copilot settings", () => {
   });
 
   test("reports invalid JSON clearly", async () => {
-    const root = await tempDir("team-ai-settings-bad-");
+    const root = await tempDir("teamai-settings-bad-");
     const settingsPath = path.join(root, ".github", "copilot", "settings.json");
     await mkdir(path.dirname(settingsPath), { recursive: true });
     await writeFile(settingsPath, "{", "utf8");

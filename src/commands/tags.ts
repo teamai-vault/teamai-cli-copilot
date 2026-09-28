@@ -3,7 +3,7 @@ import type { CommandContext } from "./context.js";
 
 export async function tagsListCommand(context: CommandContext): Promise<void> {
   const config = await readGlobalConfig(context.homeDir);
-  if (!config) throw new Error("Team AI is not initialized. Run `team-ai init` first.");
+  if (!config) throw new Error("Team AI is not initialized. Run `teamai init` first.");
   const catalog = await context.loadMarketplace(config.marketplace.source, context.cwd);
   try {
     if (catalog.name !== config.marketplace.name) throw new Error(`Marketplace name changed from '${config.marketplace.name}' to '${catalog.name}'.`);

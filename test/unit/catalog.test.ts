@@ -21,7 +21,7 @@ async function trackedTempDir(prefix: string): Promise<string> {
 }
 
 async function createMarketplace(roleKind: string = "role", marketplaceName = "test-marketplace", roleName = "api"): Promise<string> {
-  const root = await trackedTempDir("team-ai-catalog-");
+  const root = await trackedTempDir("teamai-catalog-");
   await mkdir(path.join(root, ".github", "plugin"), { recursive: true });
   for (const [name, kind] of [["common", "common"], [roleName, roleKind]]) {
     await mkdir(path.join(root, "plugins", name), { recursive: true });
@@ -50,8 +50,8 @@ async function git(cwd: string, args: string[]): Promise<void> {
 }
 
 async function createGitRemoteMarketplace(): Promise<{ root: string; source: string; bare: string }> {
-  const root = await trackedTempDir("team-ai-catalog-remote-work-");
-  const bare = await trackedTempDir("team-ai-catalog-remote-bare-");
+  const root = await trackedTempDir("teamai-catalog-remote-work-");
+  const bare = await trackedTempDir("teamai-catalog-remote-bare-");
   await git(bare, ["init", "--bare"]);
   await mkdir(path.join(root, ".github", "plugin"), { recursive: true });
   for (const [name, kind] of [["common", "common"], ["api", "role"]]) {
@@ -63,13 +63,13 @@ async function createGitRemoteMarketplace(): Promise<{ root: string; source: str
     }), "utf8");
   }
   await writeFile(path.join(root, ".github", "plugin", "marketplace.json"), JSON.stringify({
-    name: "remote-team-ai",
+    name: "remote-teamai",
     plugins: ["common", "api"].map((name) => ({ name, version: "0.1.0", source: `./plugins/${name}` })),
   }), "utf8");
   await writeFile(path.join(root, "skills.yaml"), "version: 1\nskills: {}\n", "utf8");
   await writeFile(path.join(root, "marker.txt"), "v1", "utf8");
   await git(root, ["init", "-b", "main"]);
-  await git(root, ["config", "user.email", "team-ai@example.invalid"]);
+  await git(root, ["config", "user.email", "teamai@example.invalid"]);
   await git(root, ["config", "user.name", "Team AI Test"]);
   await git(root, ["add", "."]);
   await git(root, ["commit", "-m", "initial"]);
@@ -137,7 +137,7 @@ describe("Team AI Marketplace catalog", () => {
 
   test("uses a persistent shallow cache, tracks revisions, and supports qualified refs", async () => {
     const remote = await createGitRemoteMarketplace();
-    const home = await trackedTempDir("team-ai-catalog-cache-home-");
+    const home = await trackedTempDir("teamai-catalog-cache-home-");
     const first = await loadMarketplaceCatalog(remote.source, process.cwd(), { homeDir: home, refresh: true });
     const firstRevision = first.revision;
     expect(await readFile(path.join(first.root, "marker.txt"), "utf8")).toBe("v1");
@@ -146,10 +146,10 @@ describe("Team AI Marketplace catalog", () => {
       .resolves.toMatchObject({ exitCode: 0, stdout: expect.stringContaining("true") });
     await first.dispose();
 
-    const cacheEntries = await readdir(path.join(home, ".team-ai", "marketplaces"));
+    const cacheEntries = await readdir(path.join(home, ".teamai", "marketplaces"));
     expect(cacheEntries).toHaveLength(1);
     const cached = await loadMarketplaceCatalog(remote.source, process.cwd(), { homeDir: home });
-    expect(cached.root.toLowerCase()).toContain(path.join(home, ".team-ai", "marketplaces").toLowerCase());
+    expect(cached.root.toLowerCase()).toContain(path.join(home, ".teamai", "marketplaces").toLowerCase());
     expect(cached.revision).toBe(firstRevision);
     await cached.dispose();
 
@@ -171,10 +171,10 @@ describe("Team AI Marketplace catalog", () => {
     expect(await readFile(path.join(qualified.root, "marker.txt"), "utf8")).toBe("feature");
     await qualified.dispose();
 
-    const localHome = await trackedTempDir("team-ai-catalog-local-home-");
+    const localHome = await trackedTempDir("teamai-catalog-local-home-");
     const local = await loadMarketplaceCatalog(remote.root, process.cwd(), { homeDir: localHome, refresh: true });
     expect(local.root.toLowerCase()).toBe(remote.root.toLowerCase());
-    expect(await readdir(path.join(localHome, ".team-ai")).catch(() => [])).toEqual([]);
+    expect(await readdir(path.join(localHome, ".teamai")).catch(() => [])).toEqual([]);
     await local.dispose();
   }, 30_000);
 
@@ -188,7 +188,7 @@ describe("Team AI Marketplace catalog", () => {
     await git(remote.root, ["commit", "-m", "add long path"]);
     await git(remote.root, ["push", "origin", "main"]);
 
-    const home = await trackedTempDir("team-ai-catalog-long-path-home-");
+    const home = await trackedTempDir("teamai-catalog-long-path-home-");
     const initial = await loadMarketplaceCatalog(remote.source, process.cwd(), { homeDir: home, refresh: true });
     expect(await readFile(path.join(initial.root, longPath), "utf8")).toBe("v1");
     await expect(runProcess("git", ["config", "--local", "--get", "core.longpaths"], { cwd: initial.root }))
@@ -206,7 +206,7 @@ describe("Team AI Marketplace catalog", () => {
 
   test("keeps the previous checkout on fetch failure and never persists dry-run acquisition", async () => {
     const remote = await createGitRemoteMarketplace();
-    const home = await trackedTempDir("team-ai-catalog-failure-home-");
+    const home = await trackedTempDir("teamai-catalog-failure-home-");
     const initial = await loadMarketplaceCatalog(remote.source, process.cwd(), { homeDir: home, refresh: true });
     await initial.dispose();
     await rm(remote.bare, { recursive: true, force: true });
@@ -217,10 +217,10 @@ describe("Team AI Marketplace catalog", () => {
     await expect(readFile(path.join(preserved.root, "marker.txt"))).resolves.toEqual(Buffer.from("v1"));
     await preserved.dispose();
 
-    const missingHome = await trackedTempDir("team-ai-catalog-missing-home-");
+    const missingHome = await trackedTempDir("teamai-catalog-missing-home-");
     await expect(loadMarketplaceCatalog(remote.source, process.cwd(), { homeDir: missingHome }))
-      .rejects.toThrow("Run `team-ai init` or `team-ai sync` first.");
-    const dryRunHome = await trackedTempDir("team-ai-catalog-dry-home-");
+      .rejects.toThrow("Run `teamai init` or `teamai sync` first.");
+    const dryRunHome = await trackedTempDir("teamai-catalog-dry-home-");
     const dryRun = await loadMarketplaceCatalog(pathToFileURL(remote.root).href, process.cwd(), {
       homeDir: dryRunHome,
       refresh: true,
@@ -228,15 +228,15 @@ describe("Team AI Marketplace catalog", () => {
     });
     expect(await readFile(path.join(dryRun.root, "marker.txt"))).toEqual(Buffer.from("v1"));
     await dryRun.dispose();
-    await expect(readdir(path.join(dryRunHome, ".team-ai"))).rejects.toMatchObject({ code: "ENOENT" });
+    await expect(readdir(path.join(dryRunHome, ".teamai"))).rejects.toMatchObject({ code: "ENOENT" });
   }, 30_000);
 
   test("rejects a competing refresh while the cache lock is held", async () => {
     const remote = await createGitRemoteMarketplace();
-    const home = await trackedTempDir("team-ai-catalog-lock-home-");
+    const home = await trackedTempDir("teamai-catalog-lock-home-");
     const initial = await loadMarketplaceCatalog(remote.source, process.cwd(), { homeDir: home, refresh: true });
     await initial.dispose();
-    const marketplaceRoot = path.join(home, ".team-ai", "marketplaces");
+    const marketplaceRoot = path.join(home, ".teamai", "marketplaces");
     const [entry] = await readdir(marketplaceRoot);
     await withFileLock(path.join(marketplaceRoot, entry, "lock"), async () => {
       await expect(loadMarketplaceCatalog(remote.source, process.cwd(), { homeDir: home, refresh: true }))

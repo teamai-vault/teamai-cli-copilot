@@ -16,8 +16,8 @@ afterEach(async () => {
 });
 
 test("skill read, tag selection, installation, and removal use explicit managed IDs", async () => {
-  const home = await tempDir("team-ai-skill-home-");
-  const source = await tempDir("team-ai-skill-source-");
+  const home = await tempDir("teamai-skill-home-");
+  const source = await tempDir("teamai-skill-source-");
   cleanup.add(home);
   cleanup.add(source);
   const skillRoot = path.join(source, "skills", "release-helper");
@@ -62,8 +62,8 @@ test("skill read, tag selection, installation, and removal use explicit managed 
 });
 
 test("dry-run sync uses planned plugin enablement for selected plugin skills", async () => {
-  const home = await tempDir("team-ai-skill-sync-home-");
-  const source = await tempDir("team-ai-skill-sync-source-");
+  const home = await tempDir("teamai-skill-sync-home-");
+  const source = await tempDir("teamai-skill-sync-source-");
   cleanup.add(home);
   cleanup.add(source);
   const config = createConfig({ name: TEST_MARKETPLACE_NAME, source: TEST_MARKETPLACE_SOURCE });
@@ -82,8 +82,8 @@ test("dry-run sync uses planned plugin enablement for selected plugin skills", a
 });
 
 test("sync preserves converged plugin ownership when a later skill convergence fails", async () => {
-  const home = await tempDir("team-ai-skill-failure-home-");
-  const source = await tempDir("team-ai-skill-failure-source-");
+  const home = await tempDir("teamai-skill-failure-home-");
+  const source = await tempDir("teamai-skill-failure-source-");
   cleanup.add(home);
   cleanup.add(source);
   const config = createConfig({ name: TEST_MARKETPLACE_NAME, source: TEST_MARKETPLACE_SOURCE });
@@ -99,11 +99,11 @@ test("sync preserves converged plugin ownership when a later skill convergence f
 
   expect(await runCli(["sync"], { cwd: source, homeDir: home, copilot: fake.client, loadMarketplace: async () => catalog, out: () => undefined, err: () => undefined })).toBe(1);
   expect((await readGlobalConfig(home))?.managedPlugins).toEqual([
-    "aos@test-team-ai",
-    "api@test-team-ai",
-    "common@test-team-ai",
-    "design@test-team-ai",
-    "ios@test-team-ai",
-    "qa@test-team-ai",
+    "aos@test-teamai",
+    "api@test-teamai",
+    "common@test-teamai",
+    "design@test-teamai",
+    "ios@test-teamai",
+    "qa@test-teamai",
   ]);
 });

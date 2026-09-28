@@ -63,7 +63,7 @@ export async function skillInstallCommand(context: CommandContext, names: string
     next.managedSkillPaths = result.managedSkillPaths;
     printChanges(result.changes, context);
     for (const name of result.available) context.out(`AVAILABLE via plugin: ${name}`);
-    if (context.dryRun) context.out("WOULD write: ~/.team-ai/config.yaml");
+    if (context.dryRun) context.out("WOULD write: ~/.teamai/config.yaml");
     else await writeGlobalConfig(next, context.homeDir);
   } finally {
     await catalog.dispose();
@@ -80,7 +80,7 @@ export async function skillRemoveCommand(context: CommandContext, names: string[
     const result = await convergeManagedSkills(next, catalog.skills, await enabledPlugins(context), context.homeDir, { dryRun: context.dryRun });
     next.managedSkillPaths = result.managedSkillPaths;
     printChanges(result.changes, context);
-    if (context.dryRun) context.out("WOULD write: ~/.team-ai/config.yaml");
+    if (context.dryRun) context.out("WOULD write: ~/.teamai/config.yaml");
     else await writeGlobalConfig(next, context.homeDir);
   } finally {
     await catalog.dispose();
@@ -89,7 +89,7 @@ export async function skillRemoveCommand(context: CommandContext, names: string[
 
 async function configuredCatalog(context: CommandContext): Promise<{ config: TeamAiConfig; catalog: MarketplaceCatalog }> {
   const config = await readGlobalConfig(context.homeDir);
-  if (!config) throw new Error("Team AI is not initialized. Run `team-ai init` first.");
+  if (!config) throw new Error("Team AI is not initialized. Run `teamai init` first.");
   const catalog = await context.loadMarketplace(config.marketplace.source, context.cwd);
   if (catalog.name !== config.marketplace.name) {
     await catalog.dispose();

@@ -8,7 +8,7 @@ Edit `src/`; `src/cli.ts` is the executable entry point and `dist/` is generated
 - Route native Copilot mutations through `CopilotOperations`. Native Copilot is preferred; `FallbackCopilotClient` is selected only when Copilot CLI is unavailable and VS Code is available.
 - Read plugin kind from `extensions.com.company.teamai.kind`. User scope installs `common` and every `role`, enables `common` plus exactly one role; optional `project` plugins come only from `manifest/projects.yaml` and are owned per physical workspace.
 - Treat `config.managedPlugins` as the ownership boundary. Preserve matching user-owned plugins and unknown fields in Copilot, VS Code, and repository settings.
-- Marketplace user instructions have one frozen contract: mirror `instructions/**/*.instructions.md` byte-for-byte into `~/.copilot/instructions/team-ai/`. Team AI owns only that target subtree; preserve every other user instruction path and the existing link/path safety checks.
+- Marketplace user instructions have one frozen contract: mirror `instructions/**/*.instructions.md` byte-for-byte into `~/.copilot/instructions/teamai/`. Team AI owns only that target subtree; preserve every other user instruction path and the existing link/path safety checks.
 - Use the atomic-write helpers in `src/utils/fs.ts`; use the existing file lock for shared Copilot state.
 
 ## Where to start

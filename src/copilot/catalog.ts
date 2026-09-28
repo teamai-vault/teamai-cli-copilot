@@ -247,7 +247,7 @@ async function materializeMarketplace(
   if (!options.refresh) {
     const cached = marketplaceCachePaths(source, options.homeDir ?? os.homedir());
     if (!await isDirectory(cached.checkout)) {
-      throw new Error(`Marketplace cache is missing for '${source}'. Run \`team-ai init\` or \`team-ai sync\` first.`);
+      throw new Error(`Marketplace cache is missing for '${source}'. Run \`teamai init\` or \`teamai sync\` first.`);
     }
     return {
       root: cached.checkout,
@@ -330,7 +330,7 @@ async function materializeTemporary(
   url: string,
   ref: string | undefined,
 ): Promise<{ root: string; revision?: string; dispose: () => Promise<void> }> {
-  const temporaryRoot = await mkdtemp(path.join(os.tmpdir(), "team-ai-marketplace-"));
+  const temporaryRoot = await mkdtemp(path.join(os.tmpdir(), "teamai-marketplace-"));
   const checkout = path.join(temporaryRoot, "checkout");
   try {
     await cloneMarketplace(url, cwd, checkout, source);

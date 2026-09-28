@@ -40,10 +40,10 @@ async function reportManagedUserInstructions(
     }
     const missing = state.changes.filter((change) => change.type === "create").length;
     const stale = state.changes.filter((change) => change.type === "remove").length;
-    if (missing > 0 && stale === 0) warn(`Managed user instructions: ${missing} missing. Run team-ai sync.`);
-    else if (stale > 0 && missing === 0) warn("Managed user instructions: stale managed files present. Run team-ai sync.");
-    else warn("Managed user instructions: stale. Run team-ai sync.");
-    if (!state.targetWritable) fail("Managed user instruction target is not writable; cannot repair with team-ai sync.");
+    if (missing > 0 && stale === 0) warn(`Managed user instructions: ${missing} missing. Run teamai sync.`);
+    else if (stale > 0 && missing === 0) warn("Managed user instructions: stale managed files present. Run teamai sync.");
+    else warn("Managed user instructions: stale. Run teamai sync.");
+    if (!state.targetWritable) fail("Managed user instruction target is not writable; cannot repair with teamai sync.");
   } catch (error) {
     fail(`Marketplace user instructions could not be read: ${(error as Error).message}`);
   }
@@ -70,8 +70,8 @@ export async function doctorCommand(context: CommandContext): Promise<DoctorResu
     const builtInSkill = await inspectBuiltInTeamAiSkill(context.homeDir);
     if (builtInSkill.status === "current") ok("Built-in Team AI Skill: current (" + builtInSkill.version + ").");
     else if (builtInSkill.status === "collision") fail("Built-in Team AI Skill collision: " + builtInSkill.reason + ".");
-    else if (builtInSkill.status === "missing") warn("Built-in Team AI Skill: missing. Run team-ai init or team-ai sync.");
-    else warn("Built-in Team AI Skill: stale. Run team-ai sync.");
+    else if (builtInSkill.status === "missing") warn("Built-in Team AI Skill: missing. Run teamai init or teamai sync.");
+    else warn("Built-in Team AI Skill: stale. Run teamai sync.");
   } catch (error) {
     fail("Built-in Team AI Skill diagnostics failed: " + (error as Error).message);
   }
@@ -101,7 +101,7 @@ export async function doctorCommand(context: CommandContext): Promise<DoctorResu
   let config;
   try {
     config = await readGlobalConfig(context.homeDir);
-    if (!config) warn("Team AI config is missing. Run `team-ai init --marketplace <source> --role <role>`. ");
+    if (!config) warn("Team AI config is missing. Run `teamai init --marketplace <source> --role <role>`. ");
     else if (!config.role) warn("Team AI role is not configured.");
     else ok(`Team AI config: role=${config.role}`);
   } catch (error) {
@@ -113,14 +113,14 @@ export async function doctorCommand(context: CommandContext): Promise<DoctorResu
       if (vscodeMarketplaceIsFirst(await readTextIfExists(context.vscodeSettingsPath), config.marketplace.source)) {
         ok("VS Code Marketplace registration is first in chat.plugins.marketplaces.");
       } else {
-        fail("VS Code Marketplace registration is missing or not first. Run team-ai sync.");
+        fail("VS Code Marketplace registration is missing or not first. Run teamai sync.");
       }
       if (context.copilotMode === "fallback") {
         const { settings } = await readCopilotState(context.homeDir);
         if (marketplaceRegistrationMatches(settings, config.marketplace.name, config.marketplace.source)) {
           ok(`Copilot user Marketplace ${config.marketplace.name} is registered.`);
         } else {
-          fail(`Copilot user Marketplace ${config.marketplace.name} is inconsistent. Run team-ai sync.`);
+          fail(`Copilot user Marketplace ${config.marketplace.name} is inconsistent. Run teamai sync.`);
         }
         for (const problem of await fallbackStateProblems(context.homeDir, config.managedPlugins ?? [])) fail(problem);
       }
@@ -144,7 +144,7 @@ export async function doctorCommand(context: CommandContext): Promise<DoctorResu
       if (copilotAvailable) {
         const marketplaces = await context.copilot.listMarketplaces(context.cwd);
         if (!marketplaces.some((item) => item.name === config.marketplace.name)) {
-          fail(`Marketplace ${config.marketplace.name} is not registered. Run team-ai sync.`);
+          fail(`Marketplace ${config.marketplace.name} is not registered. Run teamai sync.`);
         } else {
           ok(`Marketplace ${config.marketplace.name} is registered.`);
         }
@@ -153,8 +153,8 @@ export async function doctorCommand(context: CommandContext): Promise<DoctorResu
           const expectedEnabled = new Set(enabledUserPlugins(config.role, catalog.plugins, config.marketplace.name));
           for (const desired of userPlugins(catalog.plugins, config.marketplace.name)) {
             const row = plugins.find((item) => pluginSpec(item) === desired);
-            if (!row) fail(`${desired} is not installed. Run team-ai sync.`);
-            else if (row.enabled !== expectedEnabled.has(desired)) fail(`${desired} has incorrect enablement. Run team-ai sync.`);
+            if (!row) fail(`${desired} is not installed. Run teamai sync.`);
+            else if (row.enabled !== expectedEnabled.has(desired)) fail(`${desired} has incorrect enablement. Run teamai sync.`);
             else ok(`${desired} is ${row.enabled ? "enabled" : "installed and disabled"}.`);
           }
         }
@@ -181,7 +181,7 @@ export async function doctorCommand(context: CommandContext): Promise<DoctorResu
     }
     const state = await readProjectState(identity.projectAnchor, context.homeDir);
     const projection = projectionFor(state, identity.workspaceRoot);
-    for (const root of [path.join(identity.workspaceRoot, ".github", "instructions", "team-ai"), path.join(identity.workspaceRoot, ".team-ai", "context")]) {
+    for (const root of [path.join(identity.workspaceRoot, ".github", "instructions", "teamai"), path.join(identity.workspaceRoot, ".teamai", "context")]) {
       try {
         await lstat(root);
         if (!projection || (projection.instructionRoot !== root && projection.contextRoot !== root)) {
@@ -207,7 +207,7 @@ export async function doctorCommand(context: CommandContext): Promise<DoctorResu
           });
           const projectionStateChanged = JSON.stringify(result.projection) !== JSON.stringify(projection);
           if (result.changes.length === 0 && !projectionStateChanged) ok("Logical Project context: current.");
-          else warn("Logical Project context is stale. Run team-ai sync.");
+          else warn("Logical Project context is stale. Run teamai sync.");
           for (const message of result.warnings) warn(`Logical Project Plugin: ${message}`);
           projectSettings = result.mergedSettings;
         } else {
@@ -231,7 +231,7 @@ export async function doctorCommand(context: CommandContext): Promise<DoctorResu
       const skillResult = await convergeManagedSkills(config, catalogSnapshot.skills, effectiveEnabledPluginSpecs(installed, projectSettings), context.homeDir, { dryRun: true });
       const skillStateChanged = JSON.stringify(skillResult.managedSkillPaths) !== JSON.stringify(config.managedSkillPaths ?? {});
       if (skillResult.changes.length === 0 && !skillStateChanged) ok("Managed personal skills: current.");
-      else warn("Managed personal skills are stale. Run team-ai sync.");
+      else warn("Managed personal skills are stale. Run teamai sync.");
     } catch (error) {
       fail(`Managed personal skill diagnostics failed: ${(error as Error).message}`);
     }

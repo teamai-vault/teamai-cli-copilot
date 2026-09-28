@@ -43,7 +43,7 @@ export async function initCommand(context: CommandContext, options: InitOptions)
 
     const builtInSkill = await convergeBuiltInTeamAiSkill(context.homeDir, { dryRun: context.dryRun });
     if (builtInSkill.change) {
-      context.out((context.dryRun ? "WOULD" : "DONE") + " " + builtInSkill.change + ": ~/.copilot/skills/team-ai");
+      context.out((context.dryRun ? "WOULD" : "DONE") + " " + builtInSkill.change + ": ~/.copilot/skills/teamai");
     }
     const userInstructions = await convergeMarketplaceUserInstructions(catalog.root, context.homeDir, { dryRun: context.dryRun });
     if (context.copilotMode === "unavailable") {
@@ -93,12 +93,12 @@ export async function initCommand(context: CommandContext, options: InitOptions)
     }
 
     if (!context.dryRun) await writeGlobalConfig(config, context.homeDir);
-    else context.out("WOULD write: ~/.team-ai/config.yaml");
+    else context.out("WOULD write: ~/.teamai/config.yaml");
   } finally {
     await catalog.dispose();
   }
 }
 
 function nonInteractiveRequirement(missing: string): string {
-  return `${missing} is required in non-interactive mode. Use: team-ai init --marketplace <source> --role <role>`;
+  return `${missing} is required in non-interactive mode. Use: teamai init --marketplace <source> --role <role>`;
 }

@@ -19,7 +19,7 @@ afterEach(async () => {
 
 describe("built-in Team AI Skill", () => {
   test("installs the bundled Skill, records ownership, and is idempotent", async () => {
-    const home = await tempDir("team-ai-builtin-skill-home-");
+    const home = await tempDir("teamai-builtin-skill-home-");
     cleanup.add(home);
 
     const first = await convergeBuiltInTeamAiSkill(home);
@@ -37,7 +37,7 @@ describe("built-in Team AI Skill", () => {
       target: string;
     };
     const packageJson = JSON.parse(await readFile(new URL("../../package.json", import.meta.url), "utf8")) as { version: string };
-    expect(ownership).toMatchObject({ managedBy: "team-ai-cli", skill: "team-ai", version: packageJson.version, target });
+    expect(ownership).toMatchObject({ managedBy: "teamai-cli", skill: "teamai", version: packageJson.version, target });
 
     const before = (await stat(path.join(target, "SKILL.md"))).mtimeMs;
     const second = await convergeBuiltInTeamAiSkill(home);
@@ -48,7 +48,7 @@ describe("built-in Team AI Skill", () => {
   });
 
   test("repairs owned stale content", async () => {
-    const home = await tempDir("team-ai-builtin-skill-update-home-");
+    const home = await tempDir("teamai-builtin-skill-update-home-");
     cleanup.add(home);
     await convergeBuiltInTeamAiSkill(home);
 
@@ -63,7 +63,7 @@ describe("built-in Team AI Skill", () => {
   });
 
   test("refuses an existing unowned target", async () => {
-    const home = await tempDir("team-ai-builtin-skill-collision-home-");
+    const home = await tempDir("teamai-builtin-skill-collision-home-");
     cleanup.add(home);
     const target = builtInTeamAiSkillTarget(home);
     await mkdir(target, { recursive: true });
@@ -75,7 +75,7 @@ describe("built-in Team AI Skill", () => {
   });
 
   test("dry-run previews creation without writing target or ownership", async () => {
-    const home = await tempDir("team-ai-builtin-skill-dry-home-");
+    const home = await tempDir("teamai-builtin-skill-dry-home-");
     cleanup.add(home);
 
     const result = await convergeBuiltInTeamAiSkill(home, { dryRun: true });
@@ -94,7 +94,7 @@ describe("built-in Team AI Skill", () => {
     expect(contents).not.toContain("manifest/projects.yaml");
     expect(contents).not.toContain("skills.yaml");
     expect(contents).toContain("**Physical Project** - the current Git repository/workspace.");
-    expect(contents).toContain("Initialize Team AI for the user -> `team-ai init` (user scope only)");
+    expect(contents).toContain("Initialize Team AI for the user -> `teamai init` (user scope only)");
     expect(contents).not.toContain("â");
   });
 });

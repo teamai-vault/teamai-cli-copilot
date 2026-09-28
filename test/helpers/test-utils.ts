@@ -6,7 +6,7 @@ import { CopilotClient } from "../../src/copilot/cli.js";
 import type { MarketplaceCatalog } from "../../src/copilot/catalog.js";
 import { runProcess } from "../../src/utils/process.js";
 
-export const TEST_MARKETPLACE_NAME = "test-team-ai";
+export const TEST_MARKETPLACE_NAME = "test-teamai";
 export const TEST_MARKETPLACE_SOURCE = "https://github.com/test-org/teamai-marketplace.git";
 
 export function isPermissionError(error: unknown): boolean {
@@ -35,7 +35,7 @@ export async function createFakeCopilot(initial?: Partial<FakeCopilotState>): Pr
   statePath: string;
   readState: () => Promise<FakeCopilotState>;
 }> {
-  const directory = await tempDir("team-ai-fake-copilot-");
+  const directory = await tempDir("teamai-fake-copilot-");
   const statePath = path.join(directory, "state.json");
   const state: FakeCopilotState = {
     marketplaceName: initial?.marketplaceName ?? TEST_MARKETPLACE_NAME,
@@ -63,7 +63,7 @@ export async function createFakeCopilot(initial?: Partial<FakeCopilotState>): Pr
   };
 }
 
-export async function loadFakeMarketplace(root = path.join(os.tmpdir(), "team-ai-fake-marketplace-without-instructions")): Promise<MarketplaceCatalog> {
+export async function loadFakeMarketplace(root = path.join(os.tmpdir(), "teamai-fake-marketplace-without-instructions")): Promise<MarketplaceCatalog> {
   return {
     name: TEST_MARKETPLACE_NAME,
     root,
@@ -82,10 +82,10 @@ export async function loadFakeMarketplace(root = path.join(os.tmpdir(), "team-ai
 }
 
 export async function createGitRepo(): Promise<string> {
-  const root = await tempDir("team-ai-git-");
+  const root = await tempDir("teamai-git-");
   const init = await runProcess("git", ["init", "-b", "main"], { cwd: root });
   if (init.exitCode !== 0) throw new Error(init.stderr);
-  await runProcess("git", ["config", "user.email", "team-ai@example.invalid"], { cwd: root });
+  await runProcess("git", ["config", "user.email", "teamai@example.invalid"], { cwd: root });
   await runProcess("git", ["config", "user.name", "Team AI Test"], { cwd: root });
   await writeFile(path.join(root, "README.md"), "# test\n", "utf8");
   await runProcess("git", ["add", "README.md"], { cwd: root });

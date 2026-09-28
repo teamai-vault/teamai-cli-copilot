@@ -1,15 +1,15 @@
 {
-  "name": "teamai-cli-customization",
+  "name": "teamai-cli-copilot",
   "version": "0.3.0",
   "type": "module",
   "files": [
     "dist",
-    "skills/team-ai",
+    "skills/teamai",
     "README.md",
     "README.zh-CN.md"
   ],
   "bin": {
-    "team-ai": "dist/cli.js"
+    "teamai": "dist/cli.js"
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
@@ -18,7 +18,7 @@
     "test": "vitest run --no-file-parallelism",
     "test:unit": "vitest run test/unit --no-file-parallelism",
     "test:integration": "vitest run test/integration --no-file-parallelism",
-    "test:e2e:copilot": "node scripts/smoke-team-ai.mjs",
+    "test:e2e:copilot": "node scripts/smoke-teamai.mjs",
     "test:e2e:fallback": "node scripts/smoke-fallback.mjs",
     "rename:marketplace": "node scripts/rename-marketplace.mjs"
   },

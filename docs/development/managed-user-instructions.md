@@ -6,7 +6,7 @@ The Marketplace source and installed target are deliberately different:
 
 ```text
 Marketplace: instructions/**/*.instructions.md
-User target: ~/.copilot/instructions/team-ai/
+User target: ~/.copilot/instructions/teamai/
 ```
 
 Relative paths and bytes are preserved. Marketplace maintainers own the approved source content; Team AI owns managed instruction state in the target subtree. Personal or third-party instructions must live elsewhere under `~/.copilot/instructions/`.

@@ -13,12 +13,12 @@ describe("VS Code User Settings merge", () => {
   ],
 }
 `;
-    const merged = mergeVsCodeMarketplace(current, "https://example.com/team-ai.git");
+    const merged = mergeVsCodeMarketplace(current, "https://example.com/teamai.git");
     expect(merged).toContain("// keep this comment");
     expect(merged).toContain("// existing marketplace");
     expect(merged).toContain('"editor.fontSize": 14');
     expect((parse(merged) as Record<string, string[]>)["chat.plugins.marketplaces"]).toEqual([
-      "https://example.com/team-ai.git",
+      "https://example.com/teamai.git",
       "https://example.com/existing.git",
     ]);
   });
@@ -29,12 +29,12 @@ describe("VS Code User Settings merge", () => {
     "first",
     // keep second
     "second",
-    "team-ai",
+    "teamai",
   ],
 }
 `;
-    const merged = mergeVsCodeMarketplace(current, "team-ai");
+    const merged = mergeVsCodeMarketplace(current, "teamai");
     expect(merged).toContain("// keep second");
-    expect((parse(merged) as Record<string, string[]>)["chat.plugins.marketplaces"]).toEqual(["team-ai", "first", "second"]);
+    expect((parse(merged) as Record<string, string[]>)["chat.plugins.marketplaces"]).toEqual(["teamai", "first", "second"]);
   });
 });

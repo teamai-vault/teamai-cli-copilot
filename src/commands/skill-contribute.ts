@@ -21,9 +21,9 @@ export async function skillContributeCommand(context: CommandContext, options: S
   if (options.target === "standalone" && options.plugin) throw new Error("--plugin is only valid with --target plugin.");
   if (options.target === "plugin" && !options.plugin) throw new Error("--target plugin requires --plugin <name>.");
   const config = await readGlobalConfig(context.homeDir);
-  if (!config) throw new Error("Team AI is not initialized. Run `team-ai init` first.");
+  if (!config) throw new Error("Team AI is not initialized. Run `teamai init` first.");
   const identity = await detectProjectIdentity(context.cwd);
-  if (!identity) throw new Error("team-ai skill contribute requires a Git repository.");
+  if (!identity) throw new Error("teamai skill contribute requires a Git repository.");
   const skill = await readLocalSkill(options.path, context.cwd);
   const gitIdentity = await readGitIdentity(identity.workspaceRoot);
   const catalog = await context.loadMarketplace(config.marketplace.source, context.cwd);
@@ -31,12 +31,12 @@ export async function skillContributeCommand(context: CommandContext, options: S
     if (catalog.name !== config.marketplace.name) throw new Error(`Marketplace name changed from '${config.marketplace.name}' to '${catalog.name}'.`);
     assertTarget(catalog, skill.name, options);
     const remote = await resolveGitHubMarketplaceRemote(config.marketplace.source, context.cwd);
-    const branch = `team-ai/skill-${skill.name.replace(/[^a-z0-9]+/g, "-")}-${context.now().getTime()}`;
+    const branch = `teamai/skill-${skill.name.replace(/[^a-z0-9]+/g, "-")}-${context.now().getTime()}`;
     const result = await context.contributeGitHub({
       remote,
       branch,
       identity: gitIdentity,
-      commitMessage: `team-ai: contribute skill ${skill.name}`,
+      commitMessage: `teamai: contribute skill ${skill.name}`,
       pullRequestTitle: `Contribute skill: ${skill.name}`,
       pullRequestBody: `Contribute skill '${skill.name}' as ${options.target}.`,
       dryRun: context.dryRun,

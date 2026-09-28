@@ -17,7 +17,7 @@ describe("Git project identity", () => {
 
   test("Git worktree has a distinct workspaceRoot and stable main anchor", async () => {
     const root = await createGitRepo();
-    const parent = await tempDir("team-ai-worktree-parent-");
+    const parent = await tempDir("teamai-worktree-parent-");
     const worktree = path.join(parent, "feature-worktree");
     const result = await runProcess("git", ["worktree", "add", "-b", "feature-test", worktree], { cwd: root });
     expect(result.exitCode).toBe(0);

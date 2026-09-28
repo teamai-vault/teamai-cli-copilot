@@ -44,7 +44,7 @@ settlement-worker
 
 - repo-native `.github/*`；
 - `workspaceRoot / projectAnchor`；
-- `~/.team-ai/projects/<anchor>/state.json`；
+- `~/.teamai/projects/<anchor>/state.json`；
 - 与一个或多个 Logical Project 建立本地绑定。
 
 关系允许多对多：
@@ -186,17 +186,17 @@ V1 不加入 resource namespaces、inheritance、precedence、nested projects �
 
 ---
 
-## 4. `team-ai projects`
+## 4. `teamai projects`
 
 沿用原版 TeamAI Logical Project 的核心交互，但保持精简：
 
 ```text
-team-ai projects
-team-ai projects list
-team-ai projects set <ids...>
+teamai projects
+teamai projects list
+teamai projects set <ids...>
 ```
 
-`team-ai projects` 默认等于 `list`。
+`teamai projects` 默认等于 `list`。
 
 `projects list` 显示：
 
@@ -208,9 +208,9 @@ team-ai projects set <ids...>
 `projects set`：
 
 ```text
-team-ai projects set payments
-team-ai projects set payments risk
-team-ai projects set
+teamai projects set payments
+teamai projects set payments risk
+teamai projects set
 ```
 
 底层直接保存数组：
@@ -221,12 +221,12 @@ team-ai projects set
 }
 ```
 
-> 后续修订：`init --project` 已移除。`init` 只负责 User Scope；`team-ai projects set <ids...>` 是唯一 Logical Project binding 入口；`init --project` 会直接报错。
+> 后续修订：`init --project` 已移除。`init` 只负责 User Scope；`teamai projects set <ids...>` 是唯一 Logical Project binding 入口；`init --project` 会直接报错。
 
 ~~首次 `init` 同时支持直接绑定 Logical Project：~~（原设计，已废弃）
 
 ```text
-team-ai init --marketplace <source> --role api --project payments
+teamai init --marketplace <source> --role api --project payments
 ```
 
 多个 Project 可采用重复参数或逗号分隔，最终统一解析成 `logicalProjects[]`。`--project` 接收 **Logical Project ID**，不接收 Plugin 名；如果该 Logical Project 声明 optional Plugin，CLI 由 manifest 自动解析。
@@ -304,8 +304,8 @@ Team AI 不再把 `Rule` 设计成一种自己的资源格式。
 | Scope | Marketplace / Source | 最终真实机器位置 | Team AI 是否拆开 copy | Activation condition |
 |---|---|---|---|---|
 | **Plugin** | `plugins/<plugin>/com.github.copilot/rules/` | `~/.copilot/installed-plugins/<marketplace>/<plugin>/com.github.copilot/rules/` | **否，整包安装** | Plugin enabled |
-| **User / Department** | `instructions/` | `~/.copilot/instructions/team-ai/` | **是** | 用户配置该 Marketplace |
-| **Logical Project** | `contexts/<id>/instructions/` | `<repo>/.github/instructions/team-ai/<id>/` | **是** | 当前 Physical Project 绑定该 Logical Project |
+| **User / Department** | `instructions/` | `~/.copilot/instructions/teamai/` | **是** | 用户配置该 Marketplace |
+| **Logical Project** | `contexts/<id>/instructions/` | `<repo>/.github/instructions/teamai/<id>/` | **是** | 当前 Physical Project 绑定该 Logical Project |
 | **Physical Project** | Repo 自己的 `.github/copilot-instructions.md` / `.github/instructions/**` | 原地 | **否** | Repo 自身 |
 
 核心原则：
@@ -361,7 +361,7 @@ instructions/**/*.instructions.md
 Target 不变：
 
 ```text
-~/.copilot/instructions/team-ai/**
+~/.copilot/instructions/teamai/**
 ```
 
 语义：
@@ -394,14 +394,14 @@ payments + risk
 则投影到：
 
 ```text
-<physical-repo>/.github/instructions/team-ai/payments/**
-<physical-repo>/.github/instructions/team-ai/risk/**
+<physical-repo>/.github/instructions/teamai/payments/**
+<physical-repo>/.github/instructions/teamai/risk/**
 ```
 
 Team AI 只拥有：
 
 ```text
-.github/instructions/team-ai/**
+.github/instructions/teamai/**
 ```
 
 该路径是 **Team AI reserved projection path**。如果首次使用时该目录已经存在，但当前 Team AI machine state 并未声明 ownership，CLI 必须拒绝 silent overwrite，并由 `doctor` 报告 collision。
@@ -426,7 +426,7 @@ Physical Project 自己正式提交的：
 例如文件位于：
 
 ```text
-.github/instructions/team-ai/payments/payment.instructions.md
+.github/instructions/teamai/payments/payment.instructions.md
 ```
 
 并不意味着它自动只作用于 `payments/**`。
@@ -530,10 +530,10 @@ contexts/<project-id>/docs/**
 投影：
 
 ```text
-<physical-repo>/.team-ai/context/<project-id>/docs/**
+<physical-repo>/.teamai/context/<project-id>/docs/**
 ```
 
-`.team-ai/context/**` 同样是 Team AI reserved machine projection path；已有未被 Team AI state 管理的内容时不得 silent overwrite。
+`.teamai/context/**` 同样是 Team AI reserved machine projection path；已有未被 Team AI state 管理的内容时不得 silent overwrite。
 
 ### Learnings
 
@@ -547,14 +547,14 @@ learnings/<project-id>/**
 投影：
 
 ```text
-<physical-repo>/.team-ai/context/shared/learnings/**
-<physical-repo>/.team-ai/context/<project-id>/learnings/**
+<physical-repo>/.teamai/context/shared/learnings/**
+<physical-repo>/.teamai/context/<project-id>/learnings/**
 ```
 
 Team AI 可生成极薄的：
 
 ```text
-.github/instructions/team-ai/context.instructions.md
+.github/instructions/teamai/context.instructions.md
 ```
 
 只告诉 Agent：
@@ -603,7 +603,7 @@ V1 不建立 confidence/vote/search engine。
 新增：
 
 ```text
-team-ai learning share <file>
+teamai learning share <file>
 ```
 
 可选：
@@ -759,19 +759,19 @@ tags:
 不做：
 
 ```text
-team-ai skill validate
+teamai skill validate
 ```
 
 做：
 
 ```text
-team-ai skill list
-team-ai skill show <name>
-team-ai skill install <name...>
-team-ai skill install --tag <tag>
-team-ai skill remove <name...>
-team-ai skill contribute <path>
-team-ai tags list
+teamai skill list
+teamai skill show <name>
+teamai skill install <name...>
+teamai skill install --tag <tag>
+teamai skill remove <name...>
+teamai skill contribute <path>
+teamai tags list
 ```
 
 `skill list` 支持：
@@ -799,7 +799,7 @@ team-ai tags list
 例如：
 
 ```text
-team-ai skill install --tag experimental
+teamai skill install --tag experimental
 ```
 
 执行时：
@@ -831,7 +831,7 @@ Copilot / VS Code 原生支持 personal skills：
 
 ```text
 plugins/qa/skills/test-plan
-  -> team-ai skill install test-plan
+  -> teamai skill install test-plan
   -> ~/.copilot/skills/test-plan/
 ```
 
@@ -880,7 +880,7 @@ skills/<name>/
 
 ```text
 members/<user>.yaml
-team-ai members
+teamai members
 ```
 
 当前 Team governance 使用 Git-native：
@@ -931,7 +931,7 @@ Skills
 建议：
 
 ```text
-~/.team-ai/marketplaces/<source-hash>/
+~/.teamai/marketplaces/<source-hash>/
 └── checkout/
 ```
 
@@ -965,8 +965,8 @@ V1 只做 persistent shallow cache。
 只有：
 
 ```text
-team-ai init
-team-ai sync
+teamai init
+teamai sync
 ```
 
 允许刷新 Marketplace **shared read cache**（fetch/reset）。
@@ -974,27 +974,27 @@ team-ai sync
 其他命令默认只消费当前 cache，不隐式联网刷新，例如：
 
 ```text
-team-ai role list
-team-ai projects list
-team-ai projects set
-team-ai skill list
-team-ai skill show
-team-ai skill install
-team-ai tags list
-team-ai status
-team-ai doctor
+teamai role list
+teamai projects list
+teamai projects set
+teamai skill list
+teamai skill show
+teamai skill install
+teamai tags list
+teamai status
+teamai doctor
 ```
 
 如果 cache 尚不存在，这些依赖 Marketplace 的命令应明确提示先执行：
 
 ```text
-team-ai init
+teamai init
 ```
 
 或：
 
 ```text
-team-ai sync
+teamai sync
 ```
 
 Contribution 命令为了创建 branch / PR 可以执行其自身隔离的 Git fetch/push，但不得借此隐式刷新 shared Marketplace read cache。
@@ -1047,8 +1047,8 @@ Docs + Learnings
 4. Logical Project 不等于 Plugin；Plugin 是可选 executable capability；不存在独立 Product entity。
 5. Instruction / Rule 的四个 activation scope 明确分开：Plugin、User/Department、Logical Project、Physical Project。
 6. Plugin Rule 保留在完整 Agent Plugin package 的 `com.github.copilot/rules/` 中，不拆成 user instruction。
-7. User / Department Instructions 投影到 `~/.copilot/instructions/team-ai/`。
-8. Logical Project Instructions 投影到 `<repo>/.github/instructions/team-ai/<id>/`。
+7. User / Department Instructions 投影到 `~/.copilot/instructions/teamai/`。
+8. Logical Project Instructions 投影到 `<repo>/.github/instructions/teamai/<id>/`。
 9. Physical Project 自己的 `.github/copilot-instructions.md` / `.github/instructions/**` 原地保持 repo-owned。
 10. `applyTo` 决定 workspace 内的文件匹配；目录层级只表达 ownership / organization。
 11. Logical Project Instruction 优先使用 `**` 或 portable glob；强依赖 repo 路径的规则下沉到 Physical Project。
