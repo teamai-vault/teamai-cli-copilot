@@ -13,13 +13,13 @@ import { printActions, printUserInstructionActions, printWarnings } from "./help
 
 export async function syncCommand(context: CommandContext): Promise<void> {
   const config = await readGlobalConfig(context.homeDir);
-  if (!config?.role) throw new Error("Team AI is not initialized. Run `team-ai init` first.");
+  if (!config?.role) throw new Error("Team AI is not initialized. Run `teamai init` first.");
   const originalConfig = JSON.stringify(config);
   let persistedConfig = originalConfig;
 
   const builtInSkill = await convergeBuiltInTeamAiSkill(context.homeDir, { dryRun: context.dryRun });
   if (builtInSkill.change) {
-    context.out((context.dryRun ? "WOULD" : "DONE") + " " + builtInSkill.change + ": ~/.copilot/skills/team-ai");
+    context.out((context.dryRun ? "WOULD" : "DONE") + " " + builtInSkill.change + ": ~/.copilot/skills/teamai");
   }
   const catalog = await context.loadMarketplace(config.marketplace.source, context.cwd, { refresh: true });
   if (catalog.name !== config.marketplace.name) {
@@ -70,7 +70,7 @@ export async function syncCommand(context: CommandContext): Promise<void> {
     config.managedSkillPaths = skillResult.managedSkillPaths;
     for (const change of skillResult.changes) context.out(`${context.dryRun ? "WOULD" : "DONE"} ${change.type}: ${change.name}`);
     if (!context.dryRun && JSON.stringify(config) !== persistedConfig) await writeGlobalConfig(config, context.homeDir);
-    if (context.dryRun && JSON.stringify(config) !== originalConfig) context.out("WOULD write: ~/.team-ai/config.yaml");
+    if (context.dryRun && JSON.stringify(config) !== originalConfig) context.out("WOULD write: ~/.teamai/config.yaml");
   } finally {
     await catalog.dispose();
   }

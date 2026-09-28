@@ -19,10 +19,10 @@ function capture() {
 }
 
 async function marketplace(): Promise<string> {
-  const root = await tempDir("team-ai-learning-marketplace-");
+  const root = await tempDir("teamai-learning-marketplace-");
   const initialized = await runProcess("git", ["init", "-b", "main"], { cwd: root });
   if (initialized.exitCode !== 0) throw new Error(initialized.stderr);
-  await runProcess("git", ["config", "user.email", "team-ai@example.invalid"], { cwd: root });
+  await runProcess("git", ["config", "user.email", "teamai@example.invalid"], { cwd: root });
   await runProcess("git", ["config", "user.name", "Team AI Test"], { cwd: root });
   await runProcess("git", ["remote", "add", "origin", "https://github.com/test-org/teamai-marketplace.git"], { cwd: root });
   await mkdir(path.join(root, "manifest"), { recursive: true });
@@ -43,8 +43,8 @@ async function setActiveProjects(repo: string, home: string, ids: string[]): Pro
         workspaceRoot: identity.workspaceRoot,
         logicalProjects: ids,
         managedProjectPlugins: [],
-        instructionRoot: path.join(identity.workspaceRoot, ".github", "instructions", "team-ai"),
-        contextRoot: path.join(identity.workspaceRoot, ".team-ai", "context"),
+        instructionRoot: path.join(identity.workspaceRoot, ".github", "instructions", "teamai"),
+        contextRoot: path.join(identity.workspaceRoot, ".teamai", "context"),
       },
     },
   }, home);
@@ -53,10 +53,10 @@ async function setActiveProjects(repo: string, home: string, ids: string[]): Pro
 describe("learning share", () => {
   test("routes one active project and creates minimal frontmatter in the contribution worktree", async () => {
     const repo = await createGitRepo();
-    const home = await tempDir("team-ai-learning-home-");
+    const home = await tempDir("teamai-learning-home-");
     const source = await marketplace();
     const body = path.join(repo, "payment-retry.md");
-    const staging = await tempDir("team-ai-learning-staging-");
+    const staging = await tempDir("teamai-learning-staging-");
     const fake = await createFakeCopilot();
     await writeFile(body, "Retry only after token refresh.\n", "utf8");
     await writeGlobalConfig(createConfig({ name: TEST_MARKETPLACE_NAME, source }), home);
@@ -87,12 +87,12 @@ describe("learning share", () => {
     expect(shared).toContain("tags:\n  - payment\n  - retry");
     expect(shared).toContain("Retry only after token refresh.");
     expect(output.stdout.some((line) => line.includes("learnings/payments.v2/payment-retry.md"))).toBe(true);
-    expect(contributionBranch).toBe(`team-ai/learning-payments-v2-${now.getTime()}`);
+    expect(contributionBranch).toBe(`teamai/learning-payments-v2-${now.getTime()}`);
   });
 
   test("routes zero active projects to shared and requires an explicit target for multiple", async () => {
     const repo = await createGitRepo();
-    const home = await tempDir("team-ai-learning-routing-home-");
+    const home = await tempDir("teamai-learning-routing-home-");
     const source = await marketplace();
     const fake = await createFakeCopilot();
     await writeFile(path.join(repo, "note.md"), "A note.\n", "utf8");
@@ -134,7 +134,7 @@ describe("learning share", () => {
 
   test("integration: isolated local Git worktree and mocked gh create a branch contribution", async () => {
     const source = await createGitRepo();
-    const remote = path.join(await tempDir("team-ai-learning-remote-"), "marketplace.git");
+    const remote = path.join(await tempDir("teamai-learning-remote-"), "marketplace.git");
     const initialized = await runProcess("git", ["init", "--bare", remote]);
     if (initialized.exitCode !== 0) throw new Error(initialized.stderr);
     await runProcess("git", ["remote", "add", "origin", remote], { cwd: source });
@@ -142,16 +142,16 @@ describe("learning share", () => {
     if (pushed.exitCode !== 0) throw new Error(pushed.stderr);
     const defaultBranch = await runProcess("git", ["--git-dir", remote, "symbolic-ref", "HEAD", "refs/heads/main"]);
     if (defaultBranch.exitCode !== 0) throw new Error(defaultBranch.stderr);
-    const gitConfig = path.join(await tempDir("team-ai-learning-git-config-"), "config");
+    const gitConfig = path.join(await tempDir("teamai-learning-git-config-"), "config");
     await writeFile(gitConfig, `[url \"${pathToFileURL(remote).href}\"]\n\tinsteadOf = https://github.com/test-org/teamai-marketplace.git\n`, "utf8");
     const environment = { ...process.env, GIT_CONFIG_GLOBAL: gitConfig, GIT_CONFIG_NOSYSTEM: "1" };
     const ghCalls: string[][] = [];
 
     const result = await submitGitHubContribution({
       remote: "https://github.com/test-org/teamai-marketplace.git",
-      branch: "team-ai/learning-shared-123",
-      identity: { name: "Team AI Test", email: "team-ai@example.invalid" },
-      commitMessage: "team-ai: share learning example",
+      branch: "teamai/learning-shared-123",
+      identity: { name: "Team AI Test", email: "teamai@example.invalid" },
+      commitMessage: "teamai: share learning example",
       pullRequestTitle: "Share learning: example",
       pullRequestBody: "fixture",
       env: environment,
@@ -171,8 +171,8 @@ describe("learning share", () => {
     });
 
     expect(result.pullRequestUrl).toBe("https://github.com/test-org/teamai-marketplace/pull/42");
-    expect(ghCalls).toEqual([["pr", "create", "--title", "Share learning: example", "--body", "fixture", "--head", "team-ai/learning-shared-123"]]);
-    const committed = await runProcess("git", ["--git-dir", remote, "show", "team-ai/learning-shared-123:learnings/shared/example.md"]);
+    expect(ghCalls).toEqual([["pr", "create", "--title", "Share learning: example", "--body", "fixture", "--head", "teamai/learning-shared-123"]]);
+    const committed = await runProcess("git", ["--git-dir", remote, "show", "teamai/learning-shared-123:learnings/shared/example.md"]);
     expect(committed.stdout).toBe("example\n");
   });
 
@@ -180,9 +180,9 @@ describe("learning share", () => {
     let calls = 0;
     const result = await submitGitHubContribution({
       remote: "https://github.com/test-org/teamai-marketplace.git",
-      branch: "team-ai/learning-shared-123",
-      identity: { name: "Team AI Test", email: "team-ai@example.invalid" },
-      commitMessage: "team-ai: share learning example",
+      branch: "teamai/learning-shared-123",
+      identity: { name: "Team AI Test", email: "teamai@example.invalid" },
+      commitMessage: "teamai: share learning example",
       pullRequestTitle: "Share learning: example",
       pullRequestBody: "fixture",
       dryRun: true,
@@ -195,7 +195,7 @@ describe("learning share", () => {
       },
     });
     expect(calls).toBe(0);
-    expect(result.planned).toContain("git push -u origin team-ai/learning-shared-123");
+    expect(result.planned).toContain("git push -u origin teamai/learning-shared-123");
   });
 
   test("resolves a local Marketplace through its GitHub origin", async () => {

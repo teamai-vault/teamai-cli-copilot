@@ -2,14 +2,14 @@
 
 [中文](README.zh-CN.md) | English
 
-`team-ai` is a thin, Copilot-native control layer for shared GitHub Copilot capabilities. It keeps Agent Plugin packages, the department Marketplace, and project-local `.github/*` customization in their native locations instead of introducing another runtime or plugin format.
+`teamai` is a thin, Copilot-native control layer for shared GitHub Copilot capabilities. It keeps Agent Plugin packages, the department Marketplace, and project-local `.github/*` customization in their native locations instead of introducing another runtime or plugin format.
 
 The CLI is independent from any particular department Marketplace. Each user configures one Marketplace source; departments can maintain their own Marketplace while using the same CLI.
 
 ## Architecture
 
 ```text
-                    team-ai CLI
+                    teamai CLI
               company-wide control plane
                          |
                          | init --marketplace <source>
@@ -39,15 +39,15 @@ The CLI has no built-in department Marketplace. `teamai-vault/teamai-marketplace
 
 ## Built-in Agent Skill
 
-The npm package ships a small, self-contained `team-ai` Agent Skill from `skills/team-ai/`. `team-ai init` and `team-ai sync` converge that bundled Skill to:
+The npm package ships a small, self-contained `teamai` Agent Skill from `skills/teamai/`. `teamai init` and `teamai sync` converge that bundled Skill to:
 
 ```text
-~/.copilot/skills/team-ai/
+~/.copilot/skills/teamai/
 ```
 
 The Skill teaches an Agent how to route Team AI intent through the public CLI and to use current `--help` output for exact syntax. It does not read or depend on a department Marketplace's files or layout. Its shipped version follows the CLI package version.
 
-Ownership is recorded separately under `~/.team-ai/built-in-skills/`. An existing `~/.copilot/skills/team-ai/` without Team AI CLI ownership is treated as a collision and is never silently overwritten. `doctor` reports missing, stale, or colliding built-in Skill state.
+Ownership is recorded separately under `~/.teamai/built-in-skills/`. An existing `~/.copilot/skills/teamai/` without Team AI CLI ownership is treated as a collision and is never silently overwritten. `doctor` reports missing, stale, or colliding built-in Skill state.
 
 ## Requirements
 
@@ -95,9 +95,9 @@ The plugin name does not encode its kind. The CLI reads the shared metadata name
 
 ## Logical Project context and learnings
 
-`team-ai init` configures only user scope and never binds Logical Projects. `team-ai projects list` reads the catalog; `team-ai projects set <ids...>` (repeated or comma-separated IDs) is the only command that changes the current physical Git workspace binding, and `sync` re-converges the saved binding of the current workspace only. Convergence has four scopes: Marketplace Plugin packages and managed user instructions (`init`, `sync`), plus physical-repository Logical Project instructions and physical-repository context/learning files (`projects set`, `sync`).
+`teamai init` configures only user scope and never binds Logical Projects. `teamai projects list` reads the catalog; `teamai projects set <ids...>` (repeated or comma-separated IDs) is the only command that changes the current physical Git workspace binding, and `sync` re-converges the saved binding of the current workspace only. Convergence has four scopes: Marketplace Plugin packages and managed user instructions (`init`, `sync`), plus physical-repository Logical Project instructions and physical-repository context/learning files (`projects set`, `sync`).
 
-Active Project instruction files are mirrored byte-for-byte to `.github/instructions/team-ai/<id>/`; project docs and project/shared learnings go to `.team-ai/context/`. Team AI writes one `context.instructions.md` pointer with `applyTo: "**"`, plus Git-resolved `info/exclude` entries for only those two reserved roots. It never adopts an occupied reserved path, even if empty, and never rewrites Marketplace source frontmatter. Portable or path-specific `applyTo` matching remains a documented future validation item; no runtime instruction injection is claimed.
+Active Project instruction files are mirrored byte-for-byte to `.github/instructions/teamai/<id>/`; project docs and project/shared learnings go to `.teamai/context/`. Team AI writes one `context.instructions.md` pointer with `applyTo: "**"`, plus Git-resolved `info/exclude` entries for only those two reserved roots. It never adopts an occupied reserved path, even if empty, and never rewrites Marketplace source frontmatter. Portable or path-specific `applyTo` matching remains a documented future validation item; no runtime instruction injection is claimed.
 
 ## Marketplace-managed user instructions
 
@@ -107,9 +107,9 @@ An optional Marketplace `instructions/` directory may contain native Copilot ins
 instructions/**/*.instructions.md
 ```
 
-`team-ai init` and `team-ai sync` mirror those files byte-for-byte into the managed user-level directory `~/.copilot/instructions/team-ai/`, preserving relative paths. The directory is Team AI-owned; keep personal instructions elsewhere under `~/.copilot/instructions/`. File and folder names only organize content—Team AI does not assign company, department, role, or action semantics, and native Copilot frontmatter remains unchanged.
+`teamai init` and `teamai sync` mirror those files byte-for-byte into the managed user-level directory `~/.copilot/instructions/teamai/`, preserving relative paths. The directory is Team AI-owned; keep personal instructions elsewhere under `~/.copilot/instructions/`. File and folder names only organize content—Team AI does not assign company, department, role, or action semantics, and native Copilot frontmatter remains unchanged.
 
-This is the only narrow exception to the prohibition on arbitrary or generic resource copying/injection: the concrete use case is deploying department-approved Copilot user instructions. Marketplace maintainers own and review the content; Team AI owns only `~/.copilot/instructions/team-ai/` and mirrors the frozen `instructions/**/*.instructions.md` contract there. The CLI accepts regular single-link-count files and rejects link-like entries or unsafe source/target boundaries visible during its filesystem checks, writes atomically, and leaves all other user instructions untouched. It does not defend against a separate process replacing an already-checked path during the operation; that race is outside the V1 threat model.
+This is the only narrow exception to the prohibition on arbitrary or generic resource copying/injection: the concrete use case is deploying department-approved Copilot user instructions. Marketplace maintainers own and review the content; Team AI owns only `~/.copilot/instructions/teamai/` and mirrors the frozen `instructions/**/*.instructions.md` contract there. The CLI accepts regular single-link-count files and rejects link-like entries or unsafe source/target boundaries visible during its filesystem checks, writes atomically, and leaves all other user instructions untouched. It does not defend against a separate process replacing an already-checked path during the operation; that race is outside the V1 threat model.
 
 If both Copilot CLI and VS Code are unavailable, `init`/`sync` still converge this file tree but return an error explaining that plugin convergence could not run; the command must not report full initialization or synchronization success.
 
@@ -118,16 +118,16 @@ If both Copilot CLI and VS Code are unavailable, `init`/`sync` still converge th
 The four first-time interactive combinations are:
 
 ```text
-team-ai init                                             # prompt for Marketplace, then Role
-team-ai init --marketplace <source>                      # prompt for Role
-team-ai init --role api                                  # prompt for Marketplace
-team-ai init --marketplace <source> --role api           # no prompts
+teamai init                                             # prompt for Marketplace, then Role
+teamai init --marketplace <source>                      # prompt for Role
+teamai init --role api                                  # prompt for Marketplace
+teamai init --marketplace <source> --role api           # no prompts
 ```
 
 In an interactive terminal, the role picker uses the roles exposed by the Marketplace and selects exactly one role. In a non-TTY environment (CI, redirected stdin, or another non-interactive shell), missing values are errors rather than prompts. Supply both values explicitly:
 
 ```text
-team-ai init --marketplace <source> --role <role>
+teamai init --marketplace <source> --role <role>
 ```
 
 Initialization:
@@ -164,48 +164,48 @@ The config schema is version `1` and uses `marketplace.source` as its only sourc
 ## Commands
 
 ```text
-team-ai init [--marketplace <source>] [--role api|ios|aos|qa|design]
-team-ai projects [list]
-team-ai projects set <ids...>
-team-ai learning share <file> [--project <id>|--shared] [--tags <tag...>]
-team-ai skill list [--tag <tag>] [--owner <owner>] [--source plugin|standalone]
-team-ai skill show <name>
-team-ai skill install <name...>
-team-ai skill install --tag <tag> [--yes]
-team-ai skill remove <name...>
-team-ai skill contribute <path> --owner <owner> [--tags <tag...>] --target standalone|plugin [--plugin <plugin>]
-team-ai tags list
-team-ai sync
-team-ai role list
-team-ai role set <role>
-team-ai status
-team-ai doctor
+teamai init [--marketplace <source>] [--role api|ios|aos|qa|design]
+teamai projects [list]
+teamai projects set <ids...>
+teamai learning share <file> [--project <id>|--shared] [--tags <tag...>]
+teamai skill list [--tag <tag>] [--owner <owner>] [--source plugin|standalone]
+teamai skill show <name>
+teamai skill install <name...>
+teamai skill install --tag <tag> [--yes]
+teamai skill remove <name...>
+teamai skill contribute <path> --owner <owner> [--tags <tag...>] --target standalone|plugin [--plugin <plugin>]
+teamai tags list
+teamai sync
+teamai role list
+teamai role set <role>
+teamai status
+teamai doctor
 ```
 
 All write commands support the global `--dry-run` option. A first-time dry run can inspect the supplied Marketplace and reports planned Marketplace/plugin/config/project changes without mutating state.
 
 `learning share` adds the supplied Markdown body to `learnings/<project>/` through a GitHub pull request. It defaults to the one active Logical Project, uses `shared` with none, and requires `--project` or `--shared` with several. Contributions use an isolated bare clone and worktree; they never change the active Marketplace checkout or shared read cache. A dry run previews the branch, commit, push, and pull-request steps without performing them.
 
-### `team-ai sync`
+### `teamai sync`
 
 `sync` means convergence and repair. It installs missing Team AI-owned user plugins, restores enablement, refreshes Marketplace registration, updates VS Code Marketplace registration, refreshes project machine state, and repairs managed personal Skills. It does not copy central Skills, Agents, Instructions, Hooks, or MCP definitions into the project.
 
-### `team-ai skill` and `team-ai tags`
+### `teamai skill` and `teamai tags`
 
 Skill reads use the saved Marketplace cache. The catalog scans Plugin-contained and top-level Skills, then reads owner/tags/standalone governance from `skills.yaml`. `skill install --tag` resolves the current matching names and stores those explicit names; tags are not subscriptions. Top-level Skills are copied byte-for-byte to `~/.copilot/skills/<name>/`. Explicitly standalone Plugin Skills are copied there only when the containing Plugin is not already enabled. Existing unowned personal Skill directories are refused; `skill remove` deletes only recorded Team AI-owned copies.
 
 `skill contribute` sends a local Skill directory through the same isolated GitHub worktree and PR flow as `learning share`. It requires an owner and target; plugin targets also require an existing Marketplace plugin. The command checks `SKILL.md`, unsafe paths, name collisions, and `skills.yaml` metadata, but does not provide a Skill quality-lint command.
 
-### `team-ai role`
+### `teamai role`
 
 ```text
-team-ai role list
-team-ai role set qa
+teamai role list
+teamai role set qa
 ```
 
 Changing role keeps all Team AI role plugins installed, enables `common` plus the new role, and disables the other Team AI-owned roles. A pre-existing user-owned plugin is preserved and is never claimed from its name alone.
 
-### `team-ai status` and `team-ai doctor`
+### `teamai status` and `teamai doctor`
 
 `status` reports Marketplace revision, selected Logical Projects, managed personal Skills, Project context, and learning projection. `doctor` reuses dry-run convergence against the locally loaded cache to report stale context, missing or colliding owned Skills, invalid active Project bindings, and optional Plugin inconsistencies without repairing them. Neither command refreshes a remote Marketplace cache. Hook declarations are validated as Marketplace content, but the CLI does not execute Hooks or pretend that unavailable runtime inspection succeeded.
 
@@ -239,7 +239,7 @@ User-level Copilot registration is represented by `extraKnownMarketplaces` in `~
 
 Team AI also registers the source in VS Code User Settings under `chat.plugins.marketplaces`. The merge is JSONC-safe: comments, trailing commas, unknown settings, and existing entries are preserved, while the configured source is inserted or moved to index `0`.
 
-Logical Project projections use `.github/instructions/team-ai/**` and `.team-ai/context/**`; both reserved paths are rejected when unowned. Optional Project Plugin settings are read-modify-written only for explicitly owned entries.
+Logical Project projections use `.github/instructions/teamai/**` and `.teamai/context/**`; both reserved paths are rejected when unowned. Optional Project Plugin settings are read-modify-written only for explicitly owned entries.
 
 ## Ownership and project state
 
@@ -248,7 +248,7 @@ Logical Project projections use `.github/instructions/team-ai/**` and `.team-ai/
 The real business Git repository is the Project scope. Project-specific Copilot customization stays in `.github/*`; Project is not a Plugin type. Machine state is partitioned by the stable Git project anchor:
 
 ```text
-~/.team-ai/
+~/.teamai/
   config.yaml
   projects/
     <safe-anchor>-<hash>/

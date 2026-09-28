@@ -23,8 +23,8 @@ async function git(cwd: string, args: string[]): Promise<void> {
 }
 
 async function marketplace(): Promise<{ root: string; bare: string }> {
-  const root = await tempDir("team-ai-skill-contribute-marketplace-");
-  const bareParent = await tempDir("team-ai-skill-contribute-remote-");
+  const root = await tempDir("teamai-skill-contribute-marketplace-");
+  const bareParent = await tempDir("teamai-skill-contribute-remote-");
   cleanup.add(root);
   cleanup.add(bareParent);
   const bare = path.join(bareParent, "marketplace.git");
@@ -57,7 +57,7 @@ async function marketplace(): Promise<{ root: string; bare: string }> {
 
 test("integration: skill contribute uses an isolated worktree and mocked gh", async () => {
   const business = await createGitRepo();
-  const home = await tempDir("team-ai-skill-contribute-home-");
+  const home = await tempDir("teamai-skill-contribute-home-");
   cleanup.add(business);
   cleanup.add(home);
   const remote = await marketplace();
@@ -68,7 +68,7 @@ test("integration: skill contribute uses an isolated worktree and mocked gh", as
   await writeGlobalConfig(createConfig({ name: TEST_MARKETPLACE_NAME, source: remote.root }), home);
   const fake = await createFakeCopilot();
   cleanup.add(path.dirname(fake.statePath));
-  const gitConfigRoot = await tempDir("team-ai-skill-contribute-git-config-");
+  const gitConfigRoot = await tempDir("teamai-skill-contribute-git-config-");
   cleanup.add(gitConfigRoot);
   const gitConfig = path.join(gitConfigRoot, "config");
   await writeFile(gitConfig, `[url \"${pathToFileURL(remote.bare).href}\"]\n\tinsteadOf = https://github.com/test-org/teamai-marketplace.git\n`, "utf8");
@@ -97,7 +97,7 @@ test("integration: skill contribute uses an isolated worktree and mocked gh", as
 
   expect(await runCli(["skill", "contribute", "release-helper", "--owner", "release-team", "--tags", "release", "experimental", "--target", "standalone"], context)).toBe(0);
   expect(stdout).toContain("Pull request: https://github.com/test-org/teamai-marketplace/pull/77");
-  const branch = `team-ai/skill-release-helper-${now.getTime()}`;
+  const branch = `teamai/skill-release-helper-${now.getTime()}`;
   const skill = await runProcess("git", ["--git-dir", remote.bare, "show", `${branch}:skills/release-helper/SKILL.md`]);
   expect(skill.stdout).toContain("name: release-helper");
   const metadata = await runProcess("git", ["--git-dir", remote.bare, "show", `${branch}:skills.yaml`]);

@@ -37,8 +37,8 @@ export async function convergeLogicalProjectContext(options: {
 }): Promise<{ projection: ProjectProjection; changes: string[]; warnings: string[]; mergedSettings: ProjectSettings }> {
   const projects = selectedLogicalProjects(await loadLogicalProjects(options.marketplaceRoot, options.plugins), options.logicalProjects);
   const previous = projectionFor(options.state, options.identity.workspaceRoot);
-  const instructionRoot = path.join(options.identity.workspaceRoot, ".github", "instructions", "team-ai");
-  const contextRoot = path.join(options.identity.workspaceRoot, ".team-ai", "context");
+  const instructionRoot = path.join(options.identity.workspaceRoot, ".github", "instructions", "teamai");
+  const contextRoot = path.join(options.identity.workspaceRoot, ".teamai", "context");
   await assertSafeAncestors(instructionRoot, options.identity.workspaceRoot);
   await assertSafeAncestors(contextRoot, options.identity.workspaceRoot);
   await assertOwnedOrMissing(instructionRoot, previous?.instructionRoot === instructionRoot);
@@ -72,7 +72,7 @@ export async function convergeLogicalProjectContext(options: {
   }
   await mirrorTree(path.join(options.marketplaceRoot, "learnings", "shared"), path.join(contextRoot, "shared", "learnings"), false, options.marketplaceRoot, options.dryRun, changes);
   await writePointer(instructionRoot, projects.map((project) => project.id), options.dryRun, changes);
-  await updateGitExclude(options.identity.workspaceRoot, ["/.github/instructions/team-ai/", "/.team-ai/context/"], options.dryRun, changes);
+  await updateGitExclude(options.identity.workspaceRoot, ["/.github/instructions/teamai/", "/.teamai/context/"], options.dryRun, changes);
 
   return {
     projection: {
@@ -202,7 +202,7 @@ async function removeOwned(target: string, dryRun: boolean | undefined, changes:
 
 async function writePointer(instructionRoot: string, ids: string[], dryRun: boolean | undefined, changes: string[]): Promise<void> {
   const pointer = path.join(instructionRoot, "context.instructions.md");
-  const paths = [".team-ai/context/shared/learnings", ...ids.flatMap((id) => [`.team-ai/context/${id}/docs`, `.team-ai/context/${id}/learnings`])];
+  const paths = [".teamai/context/shared/learnings", ...ids.flatMap((id) => [`.teamai/context/${id}/docs`, `.teamai/context/${id}/learnings`])];
   const contents = `---\napplyTo: "**"\n---\n\nActive Logical Projects: ${ids.join(", ") || "none"}\n\nRead these paths only when the task needs that context:\n${paths.map((entry) => `- ${entry}`).join("\n")}\n\nLearnings are historical team experience, not mandatory policy.\n`;
   if (await readTextIfExists(pointer) !== contents) {
     changes.push(pointer);

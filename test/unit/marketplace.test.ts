@@ -5,7 +5,7 @@ import { createFakeCopilot, tempDir, TEST_MARKETPLACE_NAME, TEST_MARKETPLACE_SOU
 
 describe("marketplace source handling", () => {
   test("passes remote Git URLs through unchanged and resolves local relative paths", async () => {
-    const cwd = await tempDir("team-ai-marketplace-cwd-");
+    const cwd = await tempDir("teamai-marketplace-cwd-");
     expect(normalizeMarketplaceSource(TEST_MARKETPLACE_SOURCE, cwd)).toBe(TEST_MARKETPLACE_SOURCE);
     expect(normalizeMarketplaceSource("../department-marketplace", cwd)).toBe(path.resolve(cwd, "../department-marketplace"));
   });

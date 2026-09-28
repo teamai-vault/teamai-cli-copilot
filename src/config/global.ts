@@ -5,7 +5,7 @@ import { atomicWriteText, readTextIfExists } from "../utils/fs.js";
 import { type TeamAiConfig, validateConfig } from "./schema.js";
 
 export function teamAiHome(homeDir = os.homedir()): string {
-  return path.join(homeDir, ".team-ai");
+  return path.join(homeDir, ".teamai");
 }
 
 export function configPath(homeDir = os.homedir()): string {

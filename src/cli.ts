@@ -17,7 +17,7 @@ const VERSION = "0.3.0";
 
 function usage(): string {
   return [
-    "team-ai <command> [options]",
+    "teamai <command> [options]",
     "",
     "Commands:",
     "  init [--marketplace <source>] [--role api|ios|aos|qa|design]",
@@ -89,11 +89,11 @@ export async function runCli(argv: string[], overrides: Partial<CommandContext> 
   try {
     if (args.includes("--product") || args.some((arg) => arg.startsWith("--product="))) {
       throw new Error(args[0] === "init"
-        ? "--product has been removed.\nUse `team-ai projects set <ids...>` inside the target Git repository."
+        ? "--product has been removed.\nUse `teamai projects set <ids...>` inside the target Git repository."
         : "--product has been removed. Use --project <id>.");
     }
     if (args[0] === "init" && args.some((arg) => arg === "--project" || arg.startsWith("--project="))) {
-      throw new Error("--project is not supported by init.\nUse `team-ai projects set <ids...>` inside the target Git repository.");
+      throw new Error("--project is not supported by init.\nUse `teamai projects set <ids...>` inside the target Git repository.");
     }
     await resolveCopilotBackend(context);
     switch (args[0]) {
@@ -115,7 +115,7 @@ export async function runCli(argv: string[], overrides: Partial<CommandContext> 
           await roleSetCommand(context, args[2]);
           return 0;
         }
-        throw new Error("Use `team-ai role list` or `team-ai role set <role>`. ");
+        throw new Error("Use `teamai role list` or `teamai role set <role>`. ");
       case "projects":
         if (args.length === 1 || args[1] === "list") {
           await projectsListCommand(context);
@@ -125,7 +125,7 @@ export async function runCli(argv: string[], overrides: Partial<CommandContext> 
           await projectsSetCommand(context, args.slice(2));
           return 0;
         }
-        throw new Error("Use `team-ai projects [list]` or `team-ai projects set <ids...>`. ");
+        throw new Error("Use `teamai projects [list]` or `teamai projects set <ids...>`. ");
       case "skill":
         if (args[1] === "list") {
           await skillListCommand(context, { tag: optionValue(args, "--tag"), owner: optionValue(args, "--owner"), source: optionValue(args, "--source") });
@@ -162,13 +162,13 @@ export async function runCli(argv: string[], overrides: Partial<CommandContext> 
           });
           return 0;
         }
-        throw new Error("Use `team-ai skill list`, `show`, `install`, `remove`, or `contribute`.");
+        throw new Error("Use `teamai skill list`, `show`, `install`, `remove`, or `contribute`.");
       case "tags":
         if (args[1] === "list") {
           await tagsListCommand(context);
           return 0;
         }
-        throw new Error("Use `team-ai tags list`.");
+        throw new Error("Use `teamai tags list`.");
       case "learning":
         if (args[1] === "share" && args[2] && !args[2].startsWith("--")) {
           const projects = optionValues(args, "--project");
@@ -181,7 +181,7 @@ export async function runCli(argv: string[], overrides: Partial<CommandContext> 
           });
           return 0;
         }
-        throw new Error("Use `team-ai learning share <file> [--project <id>|--shared] [--tags <tag...>]`.");
+        throw new Error("Use `teamai learning share <file> [--project <id>|--shared] [--tags <tag...>]`.");
       case "status":
         await statusCommand(context);
         return 0;

@@ -41,7 +41,7 @@ export async function convergeUserPlugins(
   catalog: CatalogPlugin[],
   options: { dryRun?: boolean; cwd?: string } = {},
 ): Promise<ConvergeResult> {
-  if (!config.role) throw new Error("No Team AI role is configured. Run `team-ai init` first.");
+  if (!config.role) throw new Error("No Team AI role is configured. Run `teamai init` first.");
 
   const actions: PlannedAction[] = [];
   const warnings: string[] = [];

@@ -32,7 +32,7 @@ function capture() {
 describe("built-in Team AI Skill CLI convergence", () => {
   test("init installs it independently of Marketplace Skills and sync repairs it", async () => {
     const repo = await createGitRepo();
-    const home = await tempDir("team-ai-builtin-cli-home-");
+    const home = await tempDir("teamai-builtin-cli-home-");
     cleanup.add(repo);
     cleanup.add(home);
     const fake = await createFakeCopilot();
@@ -45,16 +45,16 @@ describe("built-in Team AI Skill CLI convergence", () => {
       out: initOutput.out,
       err: initOutput.err,
     })).toBe(0);
-    expect(initOutput.stdout).toContain("DONE create: ~/.copilot/skills/team-ai");
+    expect(initOutput.stdout).toContain("DONE create: ~/.copilot/skills/teamai");
 
     const skillFile = path.join(builtInTeamAiSkillTarget(home), "SKILL.md");
-    expect(await readFile(skillFile, "utf8")).toContain("name: team-ai");
+    expect(await readFile(skillFile, "utf8")).toContain("name: teamai");
 
     await writeFile(skillFile, "stale\n", "utf8");
     const syncOutput = capture();
     expect(await runCli(["sync"], { ...base, out: syncOutput.out, err: syncOutput.err })).toBe(0);
-    expect(syncOutput.stdout).toContain("DONE update: ~/.copilot/skills/team-ai");
-    expect(await readFile(skillFile, "utf8")).toContain("name: team-ai");
+    expect(syncOutput.stdout).toContain("DONE update: ~/.copilot/skills/teamai");
+    expect(await readFile(skillFile, "utf8")).toContain("name: teamai");
 
     const doctorOutput = capture();
     expect(await runCli(["doctor"], { ...base, out: doctorOutput.out, err: doctorOutput.err })).toBe(0);

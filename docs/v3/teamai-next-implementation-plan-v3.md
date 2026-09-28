@@ -9,12 +9,12 @@
 保留当前：
 
 ```text
-team-ai init
-team-ai sync
-team-ai role list
-team-ai role set
-team-ai status
-team-ai doctor
+teamai init
+teamai sync
+teamai role list
+teamai role set
+teamai status
+teamai doctor
 ```
 
 以及：
@@ -52,7 +52,7 @@ clone --depth 1 -> temp -> delete
 ## 新目录
 
 ```text
-~/.team-ai/marketplaces/<source-hash>/
+~/.teamai/marketplaces/<source-hash>/
 ├── checkout/
 └── lock
 ```
@@ -99,8 +99,8 @@ revision 未变化时：
 shared Marketplace read cache **只有 `init` 和 `sync` 可以 refresh**：
 
 ```text
-team-ai init
-team-ai sync
+teamai init
+teamai sync
 ```
 
 其他依赖 Marketplace 的命令默认只读当前 cache，不触发 fetch：
@@ -114,7 +114,7 @@ status
 doctor
 ```
 
-cache 不存在时，明确提示用户先运行 `team-ai init` 或 `team-ai sync`。
+cache 不存在时，明确提示用户先运行 `teamai init` 或 `teamai sync`。
 
 `skill contribute` / `learning share` 创建 PR 时可以在隔离 worktree/clone 中做必要的 Git fetch/push，但不能修改 shared read cache。
 
@@ -154,7 +154,7 @@ instructions/**/*.instructions.md
 User / Department Target 不变：
 
 ```text
-~/.copilot/instructions/team-ai/
+~/.copilot/instructions/teamai/
 ```
 
 ## 四个 scope 的实现边界
@@ -167,12 +167,12 @@ Plugin
 
 User / Department
   source: instructions/**
-  target: ~/.copilot/instructions/team-ai/**
+  target: ~/.copilot/instructions/teamai/**
   action: Team AI mirror
 
 Logical Project
   source: contexts/<id>/instructions/**
-  target: <repo>/.github/instructions/team-ai/<id>/**
+  target: <repo>/.github/instructions/teamai/<id>/**
   action: Team AI mirror only when project active
 
 Physical Project
@@ -186,7 +186,7 @@ Physical Project
 
 - filesystem backend materialize 完整 Plugin package；
 - `com.github.copilot/rules/` 保持在 installed plugin 中；
-- 不把 Plugin Rules 复制到 `~/.copilot/instructions/team-ai/`；
+- 不把 Plugin Rules 复制到 `~/.copilot/instructions/teamai/`；
 - enable/disable Plugin 决定 Plugin Rule lifecycle。
 
 ## Rename 改动
@@ -210,7 +210,7 @@ Physical Project
 由于当前没有正式用户，在进入 Logical Project 实现前一次性清理旧 Product 概念：
 
 ```text
-team-ai init --product          -> 删除
+teamai init --product          -> 删除
 kind: product                   -> kind: project
 Product-specific helper names   -> Project/Logical Project naming
 productPlugins state            -> managedProjectPlugins（仅在 ownership 必要时保留）
@@ -273,17 +273,17 @@ projects:
 
 ---
 
-# Phase 4 — `team-ai projects`
+# Phase 4 — `teamai projects`
 
 新增：
 
 ```text
-team-ai projects
-team-ai projects list
-team-ai projects set <ids...>
+teamai projects
+teamai projects list
+teamai projects set <ids...>
 ```
 
-`team-ai projects` 默认 `list`。
+`teamai projects` 默认 `list`。
 
 ## `projects list`
 
@@ -313,18 +313,18 @@ team-ai projects set <ids...>
 
 ## `init --project`（已移除）
 
-> 后续修订：`init --project` 已移除。`init` 只负责 User Scope；`team-ai projects set <ids...>` 是唯一 Logical Project binding 入口；`init --project` 会直接报错。
+> 后续修订：`init --project` 已移除。`init` 只负责 User Scope；`teamai projects set <ids...>` 是唯一 Logical Project binding 入口；`init --project` 会直接报错。
 
 现有：
 
 ```text
-team-ai init --product <name>
+teamai init --product <name>
 ```
 
 直接删除并替换为：
 
 ```text
-team-ai init --project <id>
+teamai init --project <id>
 ```
 
 `--project` 表示 Logical Project ID；多个 ID 可重复或逗号分隔。CLI 从 `manifest/projects.yaml` 自动解析其 optional Plugin。
@@ -343,7 +343,7 @@ team-ai init --project <id>
 "logicalProjects": []
 ```
 
-如果 machine-state schemaVersion 升版，仅迁移 machine state，不影响 `~/.team-ai/config.yaml version: 1`。
+如果 machine-state schemaVersion 升版，仅迁移 machine state，不影响 `~/.teamai/config.yaml version: 1`。
 
 ---
 
@@ -358,7 +358,7 @@ plugin: payments
 当：
 
 ```text
-team-ai projects set payments
+teamai projects set payments
 ```
 
 时：
@@ -389,7 +389,7 @@ product-teamai demo       -> 删除或改造成真实 Logical Project Plugin；�
 
 ```text
 --project
-team-ai projects ...
+teamai projects ...
 ```
 
 不再新增任何 Product command / metadata。
@@ -407,7 +407,7 @@ contexts/<project-id>/instructions/**/*.instructions.md
 ## Target
 
 ```text
-<physical-repo>/.github/instructions/team-ai/<project-id>/**
+<physical-repo>/.github/instructions/teamai/<project-id>/**
 ```
 
 ## Ownership
@@ -415,7 +415,7 @@ contexts/<project-id>/instructions/**/*.instructions.md
 仅：
 
 ```text
-.github/instructions/team-ai/**
+.github/instructions/teamai/**
 ```
 
 该路径为 Team AI reserved projection path。首次发现该目录已存在但不在当前 Team AI machine state ownership 中时：
@@ -503,12 +503,12 @@ contexts/<project-id>/docs/**
 ## Target
 
 ```text
-<physical-repo>/.team-ai/context/<project-id>/docs/**
+<physical-repo>/.teamai/context/<project-id>/docs/**
 ```
 
-`.team-ai/` 加入 `.git/info/exclude`。
+`.teamai/` 加入 `.git/info/exclude`。
 
-`.team-ai/context/**` 为 Team AI reserved projection path；已有未声明 ownership 的内容时拒绝覆盖。
+`.teamai/context/**` 为 Team AI reserved projection path；已有未声明 ownership 的内容时拒绝覆盖。
 
 需要真实 E2E 验证 Copilot / VS Code 是否能稳定读取被 `.git/info/exclude` 隐藏的 context 文件；如果 native discovery/search 对 ignored files 有限制，再调整 storage strategy。
 
@@ -517,7 +517,7 @@ contexts/<project-id>/docs/**
 维护：
 
 ```text
-.github/instructions/team-ai/context.instructions.md
+.github/instructions/teamai/context.instructions.md
 ```
 
 只包含：
@@ -543,8 +543,8 @@ learnings/
 ## Target
 
 ```text
-<physical-repo>/.team-ai/context/shared/learnings/
-<physical-repo>/.team-ai/context/<project>/learnings/
+<physical-repo>/.teamai/context/shared/learnings/
+<physical-repo>/.teamai/context/<project>/learnings/
 ```
 
 每个 Physical Project 同步：
@@ -565,12 +565,12 @@ V1 不做 search / votes / confidence / ranking。
 
 ---
 
-# Phase 9 — `team-ai learning share`
+# Phase 9 — `teamai learning share`
 
 新增：
 
 ```text
-team-ai learning share <file>
+teamai learning share <file>
 ```
 
 选项：
@@ -697,9 +697,9 @@ skills:
 新增：
 
 ```text
-team-ai skill list
-team-ai skill show <name>
-team-ai tags list
+teamai skill list
+teamai skill show <name>
+teamai tags list
 ```
 
 ## `skill list`
@@ -794,14 +794,14 @@ resolve source
 
 ---
 
-# Phase 14 — `team-ai skill install/remove`
+# Phase 14 — `teamai skill install/remove`
 
 新增：
 
 ```text
-team-ai skill install <name...>
-team-ai skill install --tag <tag>
-team-ai skill remove <name...>
+teamai skill install <name...>
+teamai skill install --tag <tag>
+teamai skill remove <name...>
 ```
 
 ## Standalone source
@@ -859,12 +859,12 @@ tag
 
 ---
 
-# Phase 15 — `team-ai skill contribute`
+# Phase 15 — `teamai skill contribute`
 
 新增：
 
 ```text
-team-ai skill contribute <path>
+teamai skill contribute <path>
 ```
 
 确定：
@@ -943,7 +943,7 @@ Marketplace revision
 在 Learning share + static context 稳定后再做：
 
 ```text
-team-ai learning promote <learning>
+teamai learning promote <learning>
   --to skill
   --to instruction
   --to doc
@@ -1005,7 +1005,7 @@ knowledge lifecycle
 ### P1
 
 4. Logical Project manifest
-5. `team-ai projects list/set`
+5. `teamai projects list/set`
 6. Logical Project optional Plugin linkage
 7. Logical Project Instructions
 8. Logical Project Docs

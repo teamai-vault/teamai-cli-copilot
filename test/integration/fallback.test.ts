@@ -12,7 +12,7 @@ import { createGitRepo, tempDir } from "../helpers/test-utils.js";
 import { runProcess } from "../../src/utils/process.js";
 
 async function createMarketplace(): Promise<string> {
-  const root = await tempDir("team-ai-fallback-marketplace-");
+  const root = await tempDir("teamai-fallback-marketplace-");
   await mkdir(path.join(root, ".github", "plugin"), { recursive: true });
   const plugins = [
     { name: "common", kind: "common" },
@@ -35,7 +35,7 @@ async function createMarketplace(): Promise<string> {
     }
   }
   await writeFile(path.join(root, ".github", "plugin", "marketplace.json"), JSON.stringify({
-    name: "fallback-team-ai",
+    name: "fallback-teamai",
     plugins: plugins.map((plugin) => ({ name: plugin.name, version: "0.1.0", source: `./plugins/${plugin.name}` })),
   }), "utf8");
   await writeFile(path.join(root, "skills.yaml"), "version: 1\nskills: {}\n", "utf8");
@@ -49,7 +49,7 @@ async function git(cwd: string, args: string[]): Promise<void> {
 
 async function createCachedMarketplace(home: string, source: string): Promise<void> {
   const sourceHash = createHash("sha256").update(source).digest("hex");
-  const root = path.join(home, ".team-ai", "marketplaces", sourceHash, "checkout");
+  const root = path.join(home, ".teamai", "marketplaces", sourceHash, "checkout");
   await mkdir(path.join(root, ".github", "plugin"), { recursive: true });
   for (const [name, kind] of [["common", "common"], ["api", "role"]]) {
     await mkdir(path.join(root, "plugins", name), { recursive: true });
@@ -60,12 +60,12 @@ async function createCachedMarketplace(home: string, source: string): Promise<vo
     }), "utf8");
   }
   await writeFile(path.join(root, ".github", "plugin", "marketplace.json"), JSON.stringify({
-    name: "fallback-cache-team-ai",
+    name: "fallback-cache-teamai",
     plugins: ["common", "api"].map((name) => ({ name, version: "0.1.0", source: `./plugins/${name}` })),
   }), "utf8");
   await writeFile(path.join(root, "skills.yaml"), "version: 1\nskills: {}\n", "utf8");
   await git(root, ["init"]);
-  await git(root, ["config", "user.email", "team-ai@example.invalid"]);
+  await git(root, ["config", "user.email", "teamai@example.invalid"]);
   await git(root, ["config", "user.name", "Team AI Test"]);
   await git(root, ["add", "."]);
   await git(root, ["commit", "-m", "cached marketplace"]);
@@ -74,16 +74,16 @@ async function createCachedMarketplace(home: string, source: string): Promise<vo
 describe("VS Code-only Copilot fallback", () => {
   test("direct fallback clients read the caller's persistent Marketplace cache", async () => {
     const repo = await createGitRepo();
-    const home = await tempDir("team-ai-fallback-cache-home-");
-    const source = "https://example.invalid/team-ai-marketplace.git";
+    const home = await tempDir("teamai-fallback-cache-home-");
+    const source = "https://example.invalid/teamai-marketplace.git";
     await createCachedMarketplace(home, source);
     const settings = { extraKnownMarketplaces: {} as Record<string, { source: Record<string, string> }> };
-    registerMarketplaceState(settings, "fallback-cache-team-ai", source);
+    registerMarketplaceState(settings, "fallback-cache-teamai", source);
     await mkdir(path.dirname(copilotSettingsPath(home)), { recursive: true });
     await writeFile(copilotSettingsPath(home), JSON.stringify(settings), "utf8");
 
     const client = new FallbackCopilotClient(home, () => new Date("2026-09-15T00:00:00.000Z"));
-    await expect(client.browseMarketplace("fallback-cache-team-ai", repo)).resolves.toEqual([
+    await expect(client.browseMarketplace("fallback-cache-teamai", repo)).resolves.toEqual([
       { name: "common", version: "0.1.0" },
       { name: "api", version: "0.1.0" },
     ]);
@@ -91,7 +91,7 @@ describe("VS Code-only Copilot fallback", () => {
 
   test("materializes all user plugins and keeps Copilot enablement metadata synchronized", async () => {
     const repo = await createGitRepo();
-    const home = await tempDir("team-ai-fallback-home-");
+    const home = await tempDir("teamai-fallback-home-");
     const marketplace = await createMarketplace();
     const configPath = copilotConfigPath(home);
     const settingsPath = copilotSettingsPath(home);
@@ -101,13 +101,13 @@ describe("VS Code-only Copilot fallback", () => {
       unknownSetting: true,
       enabledPlugins: { "personal@other": true },
       extraKnownMarketplaces: {
-        "fallback-team-ai": {
+        "fallback-teamai": {
           source: { source: "github", repo: "old/source", nativeField: "keep" },
           entryField: "keep",
         },
       },
     };
-    registerMarketplaceState(initialSettings, "fallback-team-ai", marketplace);
+    registerMarketplaceState(initialSettings, "fallback-teamai", marketplace);
     await writeFile(settingsPath, JSON.stringify(initialSettings), "utf8");
     const vscodePath = path.join(home, "Code", "settings.json");
     await mkdir(path.dirname(vscodePath), { recursive: true });
@@ -119,7 +119,7 @@ describe("VS Code-only Copilot fallback", () => {
     const base = {
       cwd: repo,
       homeDir: home,
-      copilot: new CopilotClient("team-ai-command-that-does-not-exist"),
+      copilot: new CopilotClient("teamai-command-that-does-not-exist"),
       vscodeAvailable: async () => true,
       vscodeSettingsPath: vscodePath,
       now: () => new Date("2026-09-15T00:00:00.000Z"),
@@ -129,9 +129,9 @@ describe("VS Code-only Copilot fallback", () => {
 
     expect(await runCli(["init", "--marketplace", marketplace, "--role", "api"], base)).toBe(0);
     expect((await readGlobalConfig(home))?.managedPlugins).toEqual([
-      "api@fallback-team-ai",
-      "common@fallback-team-ai",
-      "qa@fallback-team-ai",
+      "api@fallback-teamai",
+      "common@fallback-teamai",
+      "qa@fallback-teamai",
     ]);
 
     const copilotConfig = JSON.parse(await readFile(configPath, "utf8"));
@@ -142,7 +142,7 @@ describe("VS Code-only Copilot fallback", () => {
     for (const name of ["common", "api", "qa"]) {
       const installed = copilotConfig.installedPlugins.find((item: { name: string }) => item.name === name);
       expect(installed).toMatchObject({
-        marketplace: "fallback-team-ai",
+        marketplace: "fallback-teamai",
         version: "0.1.0",
         installed_at: "2026-09-15T00:00:00.000Z",
       });
@@ -151,24 +151,24 @@ describe("VS Code-only Copilot fallback", () => {
     expect(copilotSettings.unknownSetting).toBe(true);
     expect(copilotSettings.enabledPlugins).toMatchObject({
       "personal@other": true,
-      "common@fallback-team-ai": true,
-      "api@fallback-team-ai": true,
-      "qa@fallback-team-ai": false,
+      "common@fallback-teamai": true,
+      "api@fallback-teamai": true,
+      "qa@fallback-teamai": false,
     });
-    expect(copilotSettings.extraKnownMarketplaces["fallback-team-ai"].source.path).toBe(marketplace);
-    expect(copilotSettings.extraKnownMarketplaces["fallback-team-ai"].source.nativeField).toBe("keep");
-    expect(copilotSettings.extraKnownMarketplaces["fallback-team-ai"].source.repo).toBeUndefined();
-    expect(copilotSettings.extraKnownMarketplaces["fallback-team-ai"].entryField).toBe("keep");
-    await expect(readFile(path.join(installedPluginsRoot(home), "fallback-team-ai", "qa", "content.txt"), "utf8")).resolves.toBe("qa");
-    await expect(readFile(path.join(installedPluginsRoot(home), "fallback-team-ai", "api", "com.github.copilot", "rules", "api.instructions.md"), "utf8")).resolves.toContain("api rule");
-    await expect(readFile(path.join(home, ".copilot", "instructions", "team-ai", "api.instructions.md"), "utf8")).rejects.toMatchObject({ code: "ENOENT" });
+    expect(copilotSettings.extraKnownMarketplaces["fallback-teamai"].source.path).toBe(marketplace);
+    expect(copilotSettings.extraKnownMarketplaces["fallback-teamai"].source.nativeField).toBe("keep");
+    expect(copilotSettings.extraKnownMarketplaces["fallback-teamai"].source.repo).toBeUndefined();
+    expect(copilotSettings.extraKnownMarketplaces["fallback-teamai"].entryField).toBe("keep");
+    await expect(readFile(path.join(installedPluginsRoot(home), "fallback-teamai", "qa", "content.txt"), "utf8")).resolves.toBe("qa");
+    await expect(readFile(path.join(installedPluginsRoot(home), "fallback-teamai", "api", "com.github.copilot", "rules", "api.instructions.md"), "utf8")).resolves.toContain("api rule");
+    await expect(readFile(path.join(home, ".copilot", "instructions", "teamai", "api.instructions.md"), "utf8")).rejects.toMatchObject({ code: "ENOENT" });
 
     expect(await runCli(["role", "set", "qa"], base)).toBe(0);
     const switchedConfig = JSON.parse(await readFile(configPath, "utf8"));
     const switchedSettings = JSON.parse(await readFile(settingsPath, "utf8"));
-    expect(switchedSettings.enabledPlugins["api@fallback-team-ai"]).toBe(false);
-    expect(await readFile(path.join(installedPluginsRoot(home), "fallback-team-ai", "api", "com.github.copilot", "rules", "api.instructions.md"), "utf8")).toContain("api rule");
-    expect(switchedSettings.enabledPlugins["qa@fallback-team-ai"]).toBe(true);
+    expect(switchedSettings.enabledPlugins["api@fallback-teamai"]).toBe(false);
+    expect(await readFile(path.join(installedPluginsRoot(home), "fallback-teamai", "api", "com.github.copilot", "rules", "api.instructions.md"), "utf8")).toContain("api rule");
+    expect(switchedSettings.enabledPlugins["qa@fallback-teamai"]).toBe(true);
     expect(switchedConfig.installedPlugins.find((item: { name: string }) => item.name === "api").enabled).toBe(false);
     expect(switchedConfig.installedPlugins.find((item: { name: string }) => item.name === "qa").enabled).toBe(true);
 

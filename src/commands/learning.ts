@@ -20,9 +20,9 @@ export interface LearningShareOptions {
 export async function learningShareCommand(context: CommandContext, options: LearningShareOptions): Promise<void> {
   if (options.project && options.shared) throw new Error("Use either --project <id> or --shared.");
   const config = await readGlobalConfig(context.homeDir);
-  if (!config) throw new Error("Team AI is not initialized. Run `team-ai init` first.");
+  if (!config) throw new Error("Team AI is not initialized. Run `teamai init` first.");
   const identity = await detectProjectIdentity(context.cwd);
-  if (!identity) throw new Error("team-ai learning share requires a Git repository.");
+  if (!identity) throw new Error("teamai learning share requires a Git repository.");
   const learning = await readLearning(options.file, context.cwd);
   const gitIdentity = await readGitIdentity(identity.workspaceRoot);
   const catalog = await context.loadMarketplace(config.marketplace.source, context.cwd);
@@ -42,12 +42,12 @@ export async function learningShareCommand(context: CommandContext, options: Lea
     });
     const contents = `---\n${frontmatter}---\n\n${learning.contents}`;
     const remote = await resolveGitHubMarketplaceRemote(config.marketplace.source, context.cwd);
-    const branch = `team-ai/learning-${target.replace(/[^a-z0-9]+/g, "-")}-${context.now().getTime()}`;
+    const branch = `teamai/learning-${target.replace(/[^a-z0-9]+/g, "-")}-${context.now().getTime()}`;
     const result = await context.contributeGitHub({
       remote,
       branch,
       identity: gitIdentity,
-      commitMessage: `team-ai: share learning ${learning.title}`,
+      commitMessage: `teamai: share learning ${learning.title}`,
       pullRequestTitle: `Share learning: ${learning.title}`,
       pullRequestBody: `Share learning '${learning.title}' for ${target}.`,
       dryRun: context.dryRun,

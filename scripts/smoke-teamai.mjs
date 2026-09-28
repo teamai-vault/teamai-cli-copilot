@@ -50,7 +50,7 @@ function enabledPluginSkill(skills, name, expectedPath) {
 }
 
 try {
-  runRoot = await mkdtemp(path.join(os.tmpdir(), "team-ai-real-e2e-"));
+  runRoot = await mkdtemp(path.join(os.tmpdir(), "teamai-real-e2e-"));
   const profile = path.join(runRoot, "profile");
   repository = path.join(runRoot, "repository");
   const copilotHome = path.join(profile, ".copilot");
@@ -72,7 +72,7 @@ try {
   delete env.GITHUB_TOKEN;
 
   await run("git", ["init", "-b", "main"]);
-  await run("git", ["config", "user.email", "team-ai@example.invalid"]);
+  await run("git", ["config", "user.email", "teamai@example.invalid"]);
   await run("git", ["config", "user.name", "Team AI Test"]);
   await writeFile(path.join(repository, "README.md"), "# test\n", "utf8");
   await run("git", ["add", "README.md"]);
@@ -88,11 +88,11 @@ try {
   await run(process.execPath, [cli, "status"]);
   await run(process.execPath, [cli, "doctor"]);
 
-  const projectedInstruction = path.join(repository, ".github", "instructions", "team-ai", "teamai", "context.instructions.md");
+  const projectedInstruction = path.join(repository, ".github", "instructions", "teamai", "teamai", "context.instructions.md");
   const sourceInstruction = path.join(marketplaceRoot, "contexts", "teamai", "instructions", "context.instructions.md");
   assert.deepEqual(await readFile(projectedInstruction), await readFile(sourceInstruction));
-  await assert.doesNotReject(readFile(path.join(repository, ".team-ai", "context", "teamai", "docs", "architecture.md"), "utf8"));
-  await assert.doesNotReject(readFile(path.join(repository, ".team-ai", "context", "shared", "learnings", "validation.md"), "utf8"));
+  await assert.doesNotReject(readFile(path.join(repository, ".teamai", "context", "teamai", "docs", "architecture.md"), "utf8"));
+  await assert.doesNotReject(readFile(path.join(repository, ".teamai", "context", "shared", "learnings", "validation.md"), "utf8"));
 
   const installed = JSON.parse((await runCopilot(["plugins", "list", "--kind", "plugin", "--json"])).stdout).plugins;
   for (const name of ["common", "api", "ios", "aos", "qa", "design"]) {
@@ -109,7 +109,7 @@ try {
   assert.equal(contextInstructions.length, 2, "Native Copilot should list both working-directory context instructions.");
 
   const skills = JSON.parse((await runCopilot(["skill", "list", "--json"])).stdout);
-  assertSkillPath(skills, "team-ai", path.join(copilotHome, "skills", "team-ai"), "personal-copilot", "Built-in Team AI Skill");
+  assertSkillPath(skills, "teamai", path.join(copilotHome, "skills", "teamai"), "personal-copilot", "Built-in Team AI Skill");
   assertSkillPath(skills, "release-helper", path.join(copilotHome, "skills", "release-helper"), "personal-copilot", "Managed personal Skill");
   const pluginSkillPath = path.join(marketplaceRoot, "plugins", "common", "skills", "code-review");
   const pluginSkill = enabledPluginSkill(skills, "code-review", pluginSkillPath);
@@ -123,7 +123,7 @@ try {
   const vscodeSettings = JSON.parse(await readFile(path.join(appData, "Code", "User", "settings.json"), "utf8"));
   assert.equal(vscodeSettings["chat.plugins.marketplaces"][0], marketplaceRoot);
 
-  console.log(`Real team-ai native Copilot E2E passed on ${process.platform}.`);
+  console.log(`Real teamai native Copilot E2E passed on ${process.platform}.`);
 } finally {
   if (runRoot) await rm(runRoot, { recursive: true, force: true });
 }

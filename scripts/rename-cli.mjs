@@ -212,7 +212,7 @@ function main() {
     run("git", ["remote", "set-url", "origin", remote.replace(OLD_REPO, options.repo)], cliRoot);
     const oldPages = `https://${owner}.github.io/${OLD_REPO}/`;
     if (homepage === oldPages) {
-      run("gh", ["repo", "edit", "-R", `${owner}/${options.repo}`, "--homepage", `https://${owner}.github.io/${options.repo}/`], workspace);
+      run("gh", ["repo", "edit", `${owner}/${options.repo}`, "--homepage", `https://${owner}.github.io/${options.repo}/`], workspace);
     }
   }
   if (options["rename-directory"]) renameSync(cliRoot, path.join(workspace, options.repo));

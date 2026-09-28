@@ -22,8 +22,8 @@ async function source(root: string, name: string): Promise<string> {
 
 describe("managed personal skills", () => {
   test("copies complete standalone resources and removes only recorded ownership", async () => {
-    const root = await tempDir("team-ai-skills-");
-    const home = await tempDir("team-ai-skills-home-");
+    const root = await tempDir("teamai-skills-");
+    const home = await tempDir("teamai-skills-home-");
     cleanup.add(root);
     cleanup.add(home);
     const releaseRoot = await source(root, "release-helper");
@@ -48,8 +48,8 @@ describe("managed personal skills", () => {
   });
 
   test("refuses an existing unowned personal skill", async () => {
-    const root = await tempDir("team-ai-skills-");
-    const home = await tempDir("team-ai-skills-home-");
+    const root = await tempDir("teamai-skills-");
+    const home = await tempDir("teamai-skills-home-");
     cleanup.add(root);
     cleanup.add(home);
     const releaseRoot = await source(root, "release-helper");

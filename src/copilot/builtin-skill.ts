@@ -4,8 +4,8 @@ import { fileURLToPath } from "node:url";
 import { teamAiHome } from "../config/global.js";
 import { atomicWriteJson, directoriesEqual, pathsEqual, readJsonIfExists, replaceDirectory, withFileLock } from "../utils/fs.js";
 
-const BUILT_IN_SKILL_NAME = "team-ai";
-const OWNER = "team-ai-cli";
+const BUILT_IN_SKILL_NAME = "teamai";
+const OWNER = "teamai-cli";
 
 interface BuiltInSkillOwnership {
   schemaVersion: 1;
@@ -28,7 +28,7 @@ export interface BuiltInSkillConvergence {
 }
 
 export function builtInTeamAiSkillSource(): string {
-  return fileURLToPath(new URL("../../skills/team-ai/", import.meta.url));
+  return fileURLToPath(new URL("../../skills/teamai/", import.meta.url));
 }
 
 export function builtInTeamAiSkillTarget(homeDir: string): string {
@@ -96,7 +96,7 @@ export async function convergeBuiltInTeamAiSkill(
   if (options.dryRun) return { state, change };
 
   const source = builtInTeamAiSkillSource();
-  const lockPath = path.join(homeDir, ".copilot", "skills", ".team-ai.lock");
+  const lockPath = path.join(homeDir, ".copilot", "skills", ".teamai.lock");
   await withFileLock(lockPath, async () => {
     const current = await inspectBuiltInTeamAiSkill(homeDir);
     if (current.status === "collision") {

@@ -6,7 +6,7 @@ import { printActions, printWarnings } from "./helpers.js";
 
 export async function roleListCommand(context: CommandContext): Promise<void> {
   const current = await readGlobalConfig(context.homeDir);
-  if (!current) throw new Error("Team AI is not initialized. Run `team-ai init` first.");
+  if (!current) throw new Error("Team AI is not initialized. Run `teamai init` first.");
   const { catalog, dispose } = await roleCatalog(context, current.marketplace.source, current.marketplace.name);
   try {
     for (const plugin of catalog.filter((item) => item.kind === "role")) context.out(plugin.name);
@@ -17,7 +17,7 @@ export async function roleListCommand(context: CommandContext): Promise<void> {
 
 export async function roleSetCommand(context: CommandContext, role: string): Promise<void> {
   const current = await readGlobalConfig(context.homeDir);
-  if (!current) throw new Error("Team AI is not initialized. Run `team-ai init` first.");
+  if (!current) throw new Error("Team AI is not initialized. Run `teamai init` first.");
 
   const { catalog, dispose } = await roleCatalog(context, current.marketplace.source, current.marketplace.name);
   try {
@@ -31,7 +31,7 @@ export async function roleSetCommand(context: CommandContext, role: string): Pro
     printWarnings(converged.warnings, context.out);
     next.managedPlugins = converged.managedPlugins;
     if (!context.dryRun) await writeGlobalConfig(next, context.homeDir);
-    else context.out("WOULD write: ~/.team-ai/config.yaml");
+    else context.out("WOULD write: ~/.teamai/config.yaml");
     context.out(`Role: ${role}`);
   } finally {
     await dispose();

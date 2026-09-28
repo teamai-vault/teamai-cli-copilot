@@ -70,7 +70,7 @@ export async function submitGitHubContribution(options: GitHubContributionOption
   if (options.dryRun) return { branch: options.branch, planned };
 
   const run = options.run ?? runProcess;
-  const temporary = await mkdtemp(path.join(os.tmpdir(), "team-ai-contribution-"));
+  const temporary = await mkdtemp(path.join(os.tmpdir(), "teamai-contribution-"));
   const bare = path.join(temporary, "marketplace.git");
   const worktree = path.join(temporary, "worktree");
   try {
@@ -107,7 +107,7 @@ function githubRemote(source: string): string {
 }
 
 function safeBranch(branch: string): boolean {
-  return /^team-ai\/[a-z0-9][a-z0-9-]*$/.test(branch);
+  return /^teamai\/[a-z0-9][a-z0-9-]*$/.test(branch);
 }
 
 function validIdentity(identity: GitIdentity): boolean {

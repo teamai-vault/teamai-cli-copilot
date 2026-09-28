@@ -18,12 +18,12 @@ describe("published package", () => {
     const entry = Array.isArray(parsed) ? parsed[0] : Object.values(parsed)[0];
     const paths = (entry?.files ?? []).map((file) => file.path).filter((value): value is string => typeof value === "string");
 
-    expect(paths).toContain("skills/team-ai/SKILL.md");
-    expect(paths).toContain("skills/team-ai/references/commands.md");
+    expect(paths).toContain("skills/teamai/SKILL.md");
+    expect(paths).toContain("skills/teamai/references/commands.md");
     expect(paths).toContain("dist/copilot/builtin-skill.js");
     expect(paths.filter((value) => value.startsWith("skills/")).sort()).toEqual([
-      "skills/team-ai/SKILL.md",
-      "skills/team-ai/references/commands.md",
+      "skills/teamai/SKILL.md",
+      "skills/teamai/references/commands.md",
     ]);
 
     const packageJson = JSON.parse(await readFile(new URL("../../package.json", import.meta.url), "utf8")) as { version: string };

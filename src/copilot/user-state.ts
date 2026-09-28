@@ -51,7 +51,7 @@ export async function updateCopilotState(
   homeDir: string,
   update: (config: CopilotConfigFile, settings: CopilotSettingsFile) => void | Promise<void>,
 ): Promise<void> {
-  await withFileLock(path.join(copilotHome(homeDir), ".team-ai.lock"), async () => {
+  await withFileLock(path.join(copilotHome(homeDir), ".teamai.lock"), async () => {
     const { config, settings } = await readCopilotState(homeDir);
     await update(config, settings);
     await atomicWriteJson(copilotConfigPath(homeDir), config);

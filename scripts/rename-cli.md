@@ -1,5 +1,7 @@
 # CLI rename inventory and tool
 
+The `team-ai` to `teamai` and `teamai-cli-customization` to `teamai-cli-copilot` migration was applied on 2026-09-29. This is the pre-migration inventory and one-time tool record. The script expects the old checkout name, so its command below applies only to a pre-migration checkout.
+
 The CLI repository name, npm package name, executable name, product identity, and extension namespace are separate inputs. `rename-cli.mjs` applies the requested values across the CLI and sibling Marketplace repositories. A value may stay the same, as with `--display "Team AI"` and `--namespace com.company.teamai` when only the command and repository are renamed. It does **not** change the Marketplace's logical ID (`teamai`), the Marketplace repository name, the GitHub owner (`teamai-vault`), the example Logical Project ID (`teamai`), or references to the original upstream TeamAI. Use `rename-marketplace.mjs` separately if the Marketplace ID itself must change.
 
 ## Rename inventory
@@ -18,7 +20,7 @@ The CLI repository name, npm package name, executable name, product identity, an
 
 The script reads only Git-tracked text files, so ignored `devDocs/`, `dist/`, `node_modules/`, `.codegraph/`, and workspace historical source documents remain untouched. The script and its test retain the old identifiers deliberately so the tool stays reusable. Review historical documents manually if their titles or links are still presented as current guidance.
 
-## Use
+## Historical invocation
 
 Run from the workspace parent directory. The default is a read-only preview:
 

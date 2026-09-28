@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Team AI CLI</title>
-<meta name="description" content="team-ai 把部门 Marketplace 里的 Copilot Plugins、Instructions 和 Skills 同步到你的机器和你的 Repo。">
+<meta name="description" content="teamai 把部门 Marketplace 里的 Copilot Plugins、Instructions 和 Skills 同步到你的机器和你的 Repo。">
 <meta name="color-scheme" content="light dark">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/geist@5/index.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/geist-mono@5/index.css">
@@ -222,7 +222,7 @@ footer a:hover{color:var(--text)}
 
 <nav>
   <div class="wrap">
-    <a class="brand" href="#top"><i class="ph ph-terminal-window"></i>team-ai</a>
+    <a class="brand" href="#top"><i class="ph ph-terminal-window"></i>teamai</a>
     <div class="links">
       <a href="#terms">术语</a>
       <a href="#model">概念</a>
@@ -231,7 +231,7 @@ footer a:hover{color:var(--text)}
       <a href="#skills">Skills</a>
       <a href="#commands">命令</a>
     </div>
-    <a class="btn" href="https://github.com/teamai-vault/teamai-cli-customization"><i class="ph ph-github-logo"></i>GitHub</a>
+    <a class="btn" href="https://github.com/teamai-vault/teamai-cli-copilot"><i class="ph ph-github-logo"></i>GitHub</a>
   </div>
 </nav>
 
@@ -240,10 +240,10 @@ footer a:hover{color:var(--text)}
   <header class="hero">
     <div>
       <h1>团队的 Copilot 配置，<br>一条命令<em>同步到位</em>。</h1>
-      <p>部门 Marketplace 定义 Plugins、Instructions 和 Skills。team-ai 把它们装到你的机器和你的 Repo，并保持最新。</p>
+      <p>部门 Marketplace 定义 Plugins、Instructions 和 Skills。teamai 把它们装到你的机器和你的 Repo，并保持最新。</p>
       <div class="ctas">
         <a class="btn primary" href="#start">3 分钟上手<i class="ph ph-arrow-down"></i></a>
-        <a class="btn" href="https://github.com/teamai-vault/teamai-cli-customization#readme">阅读 README</a>
+        <a class="btn" href="https://github.com/teamai-vault/teamai-cli-copilot#readme">阅读 README</a>
       </div>
     </div>
 
@@ -281,7 +281,7 @@ footer a:hover{color:var(--text)}
           <div><dt>Plugin<small>Agent Plugin</small></dt><dd>Copilot 的扩展包，可以打包 Skills、Agents、MCP Servers 和 Hooks。按用途分 <code>common</code>、<code>role</code>、<code>project</code> 三类。</dd></div>
           <div><dt>Role<small>你的岗位</small></dt><dd><code>api</code>、<code>ios</code>、<code>aos</code>、<code>qa</code>、<code>design</code> 之一。决定启用哪个 role Plugin。</dd></div>
           <div><dt>Skill<small>按需加载的能力</small></dt><dd>一个 <code>SKILL.md</code> 目录。Copilot 遇到相关任务时才读取。可以随 Plugin 提供，也可以单独安装。</dd></div>
-          <div><dt>Instructions<small>常驻规则</small></dt><dd><code>*.instructions.md</code> 文件，Copilot 按 <code>applyTo</code> 自动带进对话。部门级的镜像到 <code>~/.copilot/instructions/team-ai/</code>。</dd></div>
+          <div><dt>Instructions<small>常驻规则</small></dt><dd><code>*.instructions.md</code> 文件，Copilot 按 <code>applyTo</code> 自动带进对话。部门级的镜像到 <code>~/.copilot/instructions/teamai/</code>。</dd></div>
         </dl>
       </div>
       <div class="gset">
@@ -304,17 +304,17 @@ footer a:hover{color:var(--text)}
     </div>
     <div class="rows">
       <div class="row">
-        <code>team-ai init</code>
+        <code>teamai init</code>
         <div class="say">我是谁</div>
-        <div><span class="scope">你的机器</span><div class="what">Marketplace、Role、用户级 Instructions、内置的 team-ai Skill。只做一次。</div></div>
+        <div><span class="scope">你的机器</span><div class="what">Marketplace、Role、用户级 Instructions、内置的 teamai Skill。只做一次。</div></div>
       </div>
       <div class="row">
-        <code>team-ai projects set <span>&lt;ids&gt;</span></code>
+        <code>teamai projects set <span>&lt;ids&gt;</span></code>
         <div class="say">这个 Repo 是做什么的</div>
         <div><span class="scope">当前 Repo</span><div class="what">绑定一个或多个 Logical Project，立即写入对应的业务上下文。</div></div>
       </div>
       <div class="row">
-        <code>team-ai sync</code>
+        <code>teamai sync</code>
         <div class="say">更新到最新</div>
         <div><span class="scope">你的机器 + 当前 Repo</span><div class="what">刷新 Marketplace，按已声明的状态重新收敛。不会扫描机器上的其他 Repo。</div></div>
       </div>
@@ -328,40 +328,40 @@ footer a:hover{color:var(--text)}
     </div>
     <div class="steps">
       <div class="step">
-        <div><h3><i class="ph ph-download-simple"></i>安装</h3><p>目前从源码安装，<code>npm link</code> 后即可全局使用 <code>team-ai</code>。</p></div>
-        <pre class="term"><span class="c">$</span> git clone https://github.com/teamai-vault/teamai-cli-customization.git
-<span class="c">$</span> cd teamai-cli-customization
+        <div><h3><i class="ph ph-download-simple"></i>安装</h3><p>目前从源码安装，<code>npm link</code> 后即可全局使用 <code>teamai</code>。</p></div>
+        <pre class="term"><span class="c">$</span> git clone https://github.com/teamai-vault/teamai-cli-copilot.git
+<span class="c">$</span> cd teamai-cli-copilot
 <span class="c">$</span> npm install &amp;&amp; npm run build &amp;&amp; npm link</pre>
       </div>
       <div class="step">
         <div><h3><i class="ph ph-user-circle"></i>初始化自己</h3><p>指定部门 Marketplace 和你的 Role。Plugins 全部安装，只启用 common 和你的 Role。</p></div>
         <div>
-<pre class="term"><span class="c">$</span> team-ai init --marketplace &lt;owner/repo&gt; --role api
+<pre class="term"><span class="c">$</span> teamai init --marketplace &lt;owner/repo&gt; --role api
 Marketplace discovered: teamai
-DONE create: ~/.copilot/skills/team-ai
+DONE create: ~/.copilot/skills/teamai
 DONE plugin-install: common@teamai
 DONE plugin-install: api@teamai
 DONE plugin-install: ios@teamai
 DONE plugin-disable: ios@teamai
 <span class="d">...</span>
-DONE create: ~/.copilot/instructions/team-ai/global.instructions.md</pre>
+DONE create: ~/.copilot/instructions/teamai/global.instructions.md</pre>
         </div>
       </div>
       <div class="step">
-        <div><h3><i class="ph ph-git-branch"></i>绑定 Repo</h3><p>进入业务 Repo，告诉 team-ai 它属于哪个 Logical Project。内容立即就位，并自动加入 Git exclude。</p></div>
+        <div><h3><i class="ph ph-git-branch"></i>绑定 Repo</h3><p>进入业务 Repo，告诉 teamai 它属于哪个 Logical Project。内容立即就位，并自动加入 Git exclude。</p></div>
         <div>
 <pre class="term"><span class="c">$</span> cd payment-service
-<span class="c">$</span> team-ai projects set teamai
-DONE write: .github/instructions/team-ai/teamai/context.instructions.md
-DONE write: .team-ai/context/teamai/docs/architecture.md
-DONE write: .team-ai/context/shared/learnings/validation.md
+<span class="c">$</span> teamai projects set teamai
+DONE write: .github/instructions/teamai/teamai/context.instructions.md
+DONE write: .teamai/context/teamai/docs/architecture.md
+DONE write: .teamai/context/shared/learnings/validation.md
 DONE write: .git/info/exclude</pre>
           <p class="cap">路径已缩短为相对 Repo 根目录。</p>
         </div>
       </div>
       <div class="step">
         <div><h3><i class="ph ph-arrows-clockwise"></i>保持最新</h3><p>团队更新了 Plugins、文档或 Skills 之后，在 Repo 里跑一次 sync。</p></div>
-        <pre class="term"><span class="c">$</span> team-ai sync
+        <pre class="term"><span class="c">$</span> teamai sync
 Copilot plugin state is already converged.
 Managed user instructions are already converged (2).</pre>
       </div>
@@ -371,18 +371,18 @@ Managed user instructions are already converged (2).</pre>
   <section id="files">
     <div class="head">
       <h2>它会写到哪里。</h2>
-      <p class="lede">team-ai 只管理高亮的路径。你自己的 Instructions、Skills 和 Repo 文件保持原样，路径被占用时会拒绝覆盖。</p>
+      <p class="lede">teamai 只管理高亮的路径。你自己的 Instructions、Skills 和 Repo 文件保持原样，路径被占用时会拒绝覆盖。</p>
     </div>
     <div class="trees">
       <div class="tree">
         <h3><i class="ph ph-desktop"></i>你的机器</h3>
         <ol>
           <li>~/.copilot/</li>
-          <li class="own i1">skills/team-ai/<span>内置 Skill</span></li>
+          <li class="own i1">skills/teamai/<span>内置 Skill</span></li>
           <li class="own i1">skills/release-helper/<span>你安装的 Team Skill</span></li>
-          <li class="own i1">instructions/team-ai/<span>部门 Instructions 镜像</span></li>
+          <li class="own i1">instructions/teamai/<span>部门 Instructions 镜像</span></li>
           <li class="no i1">instructions/my-notes.md<span>你自己的</span></li>
-          <li>~/.team-ai/</li>
+          <li>~/.teamai/</li>
           <li class="own i1">config.yaml<span>Marketplace、Role、所有权</span></li>
           <li class="own i1">projects/&lt;repo&gt;/<span>每个 Repo 的绑定</span></li>
         </ol>
@@ -391,8 +391,8 @@ Managed user instructions are already converged (2).</pre>
         <h3><i class="ph ph-folder-simple"></i>当前 Repo</h3>
         <ol>
           <li>payment-service/</li>
-          <li class="own i1">.github/instructions/team-ai/<span>业务 Instructions</span></li>
-          <li class="own i1">.team-ai/context/<span>Docs 与 Learnings</span></li>
+          <li class="own i1">.github/instructions/teamai/<span>业务 Instructions</span></li>
+          <li class="own i1">.teamai/context/<span>Docs 与 Learnings</span></li>
           <li class="own opt i1">.github/copilot/settings.json<span>可选，见 <a href="#terms">Project Plugin</a></span></li>
           <li class="no i1">.github/copilot-instructions.md<span>你自己的</span></li>
           <li class="no i1">src/<span>你自己的</span></li>
@@ -400,21 +400,21 @@ Managed user instructions are already converged (2).</pre>
         </ol>
       </div>
     </div>
-    <div class="legend"><span><i class="a"></i>team-ai 管理</span><span><i class="c"></i>按需出现</span><span><i class="b"></i>不会触碰</span></div>
+    <div class="legend"><span><i class="a"></i>teamai 管理</span><span><i class="c"></i>按需出现</span><span><i class="b"></i>不会触碰</span></div>
   </section>
 
   <section id="roles">
     <div class="roles">
       <div>
         <h2>切换 Role，不用重装。</h2>
-        <p class="lede">所有 Role Plugin 都已安装。team-ai 只启用 common 加上你选的那一个，切换只是换一个开关。</p>
+        <p class="lede">所有 Role Plugin 都已安装。teamai 只启用 common 加上你选的那一个，切换只是换一个开关。</p>
       </div>
       <div>
         <div class="label"><code>--role api</code></div>
         <div class="plugrow">
           <span class="plug on">common</span><span class="plug on">api</span><span class="plug">ios</span><span class="plug">aos</span><span class="plug">qa</span><span class="plug">design</span>
         </div>
-        <div class="label"><code>team-ai role set qa</code></div>
+        <div class="label"><code>teamai role set qa</code></div>
         <div class="plugrow">
           <span class="plug on">common</span><span class="plug">api</span><span class="plug">ios</span><span class="plug">aos</span><span class="plug on">qa</span><span class="plug">design</span>
         </div>
@@ -429,7 +429,7 @@ Managed user instructions are already converged (2).</pre>
     <div class="bento">
       <div class="tile t-wide">
         <h3>浏览团队目录</h3>
-        <p><code>team-ai skill list</code> 可按 <code>--tag</code>、<code>--owner</code>、<code>--source</code> 过滤。</p>
+        <p><code>teamai skill list</code> 可按 <code>--tag</code>、<code>--owner</code>、<code>--source</code> 过滤。</p>
         <table class="skl">
           <tr><td>code-review</td><td class="dim">plugin:common</td><td class="dim">review</td><td>available via plugin</td></tr>
           <tr><td>delivery</td><td class="dim">plugin:api</td><td class="dim">delivery,workflow</td><td>available via plugin</td></tr>
@@ -444,7 +444,7 @@ Managed user instructions are already converged (2).</pre>
           <dt>Tags</dt><dd>release, experimental</dd>
           <dt>Source</dt><dd>standalone</dd>
         </dl>
-        <p><code>team-ai skill show release-helper</code></p>
+        <p><code>teamai skill show release-helper</code></p>
       </div>
       <div class="tile t-half">
         <h3>两种 Skill</h3>
@@ -466,7 +466,7 @@ Managed user instructions are already converged (2).</pre>
 
   <section id="health">
     <div class="health">
-      <pre class="term"><span class="c">$</span> team-ai doctor
+      <pre class="term"><span class="c">$</span> teamai doctor
 <span class="ok">✓</span> Git: git version 2.54.0.windows.1
 <span class="ok">✓</span> Built-in Team AI Skill: current (0.3.0).
 <span class="ok">✓</span> Copilot backend: GitHub Copilot CLI 1.0.83.
@@ -490,7 +490,7 @@ Managed user instructions are already converged (2).</pre>
   <section id="share">
     <div class="head">
       <h2>把经验还给团队。</h2>
-      <p class="lede">分享一条排障经验，或者贡献一个 Skill。team-ai 在隔离的 worktree 里完成提交并通过 <code>gh</code> 开 PR，不动你本地的 Marketplace。</p>
+      <p class="lede">分享一条排障经验，或者贡献一个 Skill。teamai 在隔离的 worktree 里完成提交并通过 <code>gh</code> 开 PR，不动你本地的 Marketplace。</p>
     </div>
     <div class="flow">
       <div><i class="ph ph-file-text"></i><b>本地文件</b><span>一份 Markdown 或一个 Skill 目录</span></div>
@@ -499,8 +499,8 @@ Managed user instructions are already converged (2).</pre>
       <div><i class="ph ph-git-pull-request"></i><b>Pull Request</b><span>由 Marketplace 维护者审核</span></div>
     </div>
     <div class="two">
-      <pre class="term"><span class="c">$</span> team-ai learning share note.md</pre>
-      <pre class="term"><span class="c">$</span> team-ai skill contribute ./my-skill \
+      <pre class="term"><span class="c">$</span> teamai learning share note.md</pre>
+      <pre class="term"><span class="c">$</span> teamai skill contribute ./my-skill \
     --owner api-team --target standalone</pre>
     </div>
   </section>
@@ -508,7 +508,7 @@ Managed user instructions are already converged (2).</pre>
   <section id="commands">
     <div class="head">
       <h2>全部命令。</h2>
-      <p class="lede">精确语法以 <code>team-ai --help</code> 为准。</p>
+      <p class="lede">精确语法以 <code>teamai --help</code> 为准。</p>
     </div>
     <div class="ref">
       <div>
@@ -553,11 +553,11 @@ Managed user instructions are already converged (2).</pre>
   <div class="wrap">
     <span>Team AI CLI. Set once, sync often.</span>
     <nav>
-      <a href="https://github.com/teamai-vault/teamai-cli-customization">GitHub</a>
-      <a href="https://github.com/teamai-vault/teamai-cli-customization/blob/main/README.md">README</a>
-      <a href="https://github.com/teamai-vault/teamai-cli-customization/blob/main/README.zh-CN.md">中文 README</a>
-      <a href="https://github.com/teamai-vault/teamai-cli-customization/tree/main/docs/v3">设计文档</a>
-      <a href="https://github.com/teamai-vault/teamai-cli-customization/blob/main/docs/VERSIONING.md">版本规则</a>
+      <a href="https://github.com/teamai-vault/teamai-cli-copilot">GitHub</a>
+      <a href="https://github.com/teamai-vault/teamai-cli-copilot/blob/main/README.md">README</a>
+      <a href="https://github.com/teamai-vault/teamai-cli-copilot/blob/main/README.zh-CN.md">中文 README</a>
+      <a href="https://github.com/teamai-vault/teamai-cli-copilot/tree/main/docs/v3">设计文档</a>
+      <a href="https://github.com/teamai-vault/teamai-cli-copilot/blob/main/docs/VERSIONING.md">版本规则</a>
     </nav>
   </div>
 </footer>

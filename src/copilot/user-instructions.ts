@@ -29,11 +29,11 @@ export interface UserInstructionState {
 }
 
 export function userInstructionTargetRoot(homeDir: string): string {
-  return path.join(homeDir, ".copilot", "instructions", "team-ai");
+  return path.join(homeDir, ".copilot", "instructions", "teamai");
 }
 
 export function userInstructionDisplayPath(relativePath: string): string {
-  return `~/.copilot/instructions/team-ai/${relativePath}`;
+  return `~/.copilot/instructions/teamai/${relativePath}`;
 }
 
 export async function discoverMarketplaceUserInstructions(marketplaceRoot: string): Promise<ManagedUserInstruction[]> {

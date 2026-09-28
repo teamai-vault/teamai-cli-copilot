@@ -7,8 +7,8 @@ import { tempDir } from "../helpers/test-utils.js";
 
 describe("rename-marketplace development tool", () => {
   test("renames standalone marketplace identity tokens without renaming repository identities", async () => {
-    const root = await tempDir("team-ai-rename-tool-");
-    const cliRepo = path.join(root, "teamai-cli-customization");
+    const root = await tempDir("teamai-rename-tool-");
+    const cliRepo = path.join(root, "teamai-cli-copilot");
     const marketplaceRepo = path.join(root, "teamai-marketplace");
     await mkdir(path.join(cliRepo, "src"), { recursive: true });
     await mkdir(path.join(marketplaceRepo, ".github", "plugin"), { recursive: true });

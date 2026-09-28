@@ -66,7 +66,7 @@ async function runExecutable(command, args, env) {
 }
 
 try {
-  runRoot = await mkdtemp(path.join(os.tmpdir(), "team-ai-fallback-e2e-"));
+  runRoot = await mkdtemp(path.join(os.tmpdir(), "teamai-fallback-e2e-"));
   const profile = path.join(runRoot, "profile");
   const repository = path.join(runRoot, "repository");
   const appData = path.join(profile, "AppData", "Roaming");
@@ -85,7 +85,7 @@ try {
   delete fallbackEnv.COPILOT_HOME;
 
   await run("git", ["init", "-b", "main"], { cwd: repository, env: { ...fallbackEnv, PATH: process.env.PATH } });
-  await run("git", ["config", "user.email", "team-ai@example.invalid"], { cwd: repository, env: { ...fallbackEnv, PATH: process.env.PATH } });
+  await run("git", ["config", "user.email", "teamai@example.invalid"], { cwd: repository, env: { ...fallbackEnv, PATH: process.env.PATH } });
   await run("git", ["config", "user.name", "Team AI Test"], { cwd: repository, env: { ...fallbackEnv, PATH: process.env.PATH } });
   await writeFile(path.join(repository, "README.md"), "# test\n", "utf8");
   await run("git", ["add", "README.md"], { cwd: repository, env: { ...fallbackEnv, PATH: process.env.PATH } });
@@ -114,9 +114,9 @@ try {
     assert.ok(nativePlugins.some((plugin) => plugin.name === name), `native Copilot should recognize ${name}@teamai`);
   }
   const nativeSkills = JSON.parse((await runCopilot(["skill", "list", "--json"], { cwd: repository, env: nativeEnv })).stdout);
-  const builtInSkill = nativeSkills.find((skill) => skill.name === "team-ai" && skill.source === "personal-copilot");
+  const builtInSkill = nativeSkills.find((skill) => skill.name === "teamai" && skill.source === "personal-copilot");
   assert.ok(builtInSkill, "native Copilot should recognize the built-in Team AI Skill");
-  assert.equal(normalizedPath(builtInSkill.path), normalizedPath(path.join(profile, ".copilot", "skills", "team-ai")));
+  assert.equal(normalizedPath(builtInSkill.path), normalizedPath(path.join(profile, ".copilot", "skills", "teamai")));
 
   console.log(`Fallback materialization and native Copilot recognition passed on ${process.platform}.`);
 } finally {
