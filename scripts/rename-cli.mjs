@@ -169,7 +169,7 @@ function checkGithub(owner, options) {
 function main() {
   const options = parseArgs(process.argv.slice(2));
   if (options.help) { console.log(usage()); return; }
-  const workspace = path.resolve(options.workspace ?? path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "..", ".."));
+  const workspace = path.resolve(options.workspace ?? path.join(path.dirname(fileURLToPath(import.meta.url)), "..", ".."));
   const cliRoot = path.join(workspace, OLD_REPO);
   const marketplaceRoot = path.join(workspace, "teamai-marketplace");
   if (!existsSync(cliRoot) || !existsSync(marketplaceRoot)) throw new Error("Both sibling repositories must exist in the workspace.");
