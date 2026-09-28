@@ -279,7 +279,7 @@ npm run test:e2e:fallback
 npm test
 ```
 
-两个 E2E 脚本都会创建隔离的临时 profile 和 Git Repo。`test:e2e:copilot` 验证投影 instruction 的原始字节，以及 native instruction list 的 name/scope/source，并验证真实 personal Skill 与已启用 Plugin Skill 的精确 native path；`test:e2e:fallback` 需要 `TEAM_AI_E2E_CODE_BIN` 或可用的 `code` 命令，并在隔离 profile 中先验证它，再验证 VS Code-only materializer 与 native 对 materialized state 的识别。资源列表不等于模型读取 ignored docs 或应用 `applyTo`；认证 model-read probe 仍未验证。本分支最新实证见 [`docs/HANDOFF.md`](docs/HANDOFF.md)。
+两个 E2E 脚本都会创建隔离的临时 profile 和 Git Repo。`test:e2e:copilot` 验证投影 instruction 的原始字节，以及 native instruction list 的 name/scope/source，并验证真实 personal Skill 与已启用 Plugin Skill 的精确 native path；`test:e2e:fallback` 需要 `TEAM_AI_E2E_CODE_BIN` 或可用的 `code` 命令，并在隔离 profile 中先验证它，再验证 VS Code-only materializer 与 native 对 materialized state 的识别。资源列表不等于模型读取 ignored docs 或应用 `applyTo`；认证 model-read probe 仍未验证。当前实现状态与验证边界见 [`docs/HANDOFF.md`](docs/HANDOFF.md)。
 
 ## 当前不做
 
@@ -287,6 +287,6 @@ npm test
 
 ## 项目文档
 
-- [`docs/IMPLEMENTATION-PLAN.md`](docs/IMPLEMENTATION-PLAN.md)：当前 frozen delta 的实施计划与完成状态。
-- [`docs/HANDOFF.md`](docs/HANDOFF.md)：当前实现状态与验证证据。
+- [`docs/IMPLEMENTATION-PLAN.md`](docs/IMPLEMENTATION-PLAN.md)：V3 设计与实施要求的入口。
+- [`docs/HANDOFF.md`](docs/HANDOFF.md)：当前 V3 实现状态与验证边界。
 - [`docs/VERSIONING.md`](docs/VERSIONING.md)：CLI、Marketplace 与 Plugin 的版本规则。

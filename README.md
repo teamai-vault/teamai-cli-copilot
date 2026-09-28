@@ -279,7 +279,7 @@ npm run test:e2e:fallback
 npm test
 ```
 
-The two E2E scripts create isolated temporary profiles and repositories. `test:e2e:copilot` verifies projected instruction bytes and native instruction listing by name/scope/source, plus exact native paths for a real personal Skill and an enabled Plugin Skill. `test:e2e:fallback` requires `TEAM_AI_E2E_CODE_BIN` or a working `code` command, validates it with the isolated profile, then exercises the VS Code-only materializer and native recognition of the materialized state. Resource listing is not proof that a model read ignored docs or applied `applyTo`; that authenticated model-read probe remains unverified. The latest branch evidence is recorded in [`docs/HANDOFF.md`](docs/HANDOFF.md).
+The two E2E scripts create isolated temporary profiles and repositories. `test:e2e:copilot` verifies projected instruction bytes and native instruction listing by name/scope/source, plus exact native paths for a real personal Skill and an enabled Plugin Skill. `test:e2e:fallback` requires `TEAM_AI_E2E_CODE_BIN` or a working `code` command, validates it with the isolated profile, then exercises the VS Code-only materializer and native recognition of the materialized state. Resource listing is not proof that a model read ignored docs or applied `applyTo`; that authenticated model-read probe remains unverified. Current implementation status and verification limits are summarized in [`docs/HANDOFF.md`](docs/HANDOFF.md).
 
 ## Non-goals
 
@@ -287,6 +287,6 @@ This project does not implement a default Marketplace, multiple-Marketplace merg
 
 ## Project documents
 
-- [`docs/IMPLEMENTATION-PLAN.md`](docs/IMPLEMENTATION-PLAN.md) — current frozen-delta implementation plan and status.
-- [`docs/HANDOFF.md`](docs/HANDOFF.md) — current implementation state and validation evidence.
+- [`docs/IMPLEMENTATION-PLAN.md`](docs/IMPLEMENTATION-PLAN.md) — entry to the V3 design and implementation requirements.
+- [`docs/HANDOFF.md`](docs/HANDOFF.md) — current V3 implementation status and verification limits.
 - [`docs/VERSIONING.md`](docs/VERSIONING.md) — CLI, Marketplace, and Plugin release/version rules.
