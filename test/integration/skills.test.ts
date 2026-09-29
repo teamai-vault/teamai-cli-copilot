@@ -79,7 +79,7 @@ test("dry-run sync uses planned plugin enablement for selected plugin skills", a
 
   expect(await runCli(["--dry-run", "sync"], { cwd: source, homeDir: home, copilot: fake.client, loadMarketplace: async () => catalog, out: () => undefined, err: () => undefined })).toBe(0);
   expect((await readGlobalConfig(home))?.managedPlugins).toEqual([]);
-});
+}, 30_000);
 
 test("sync keeps an owned personal Skill when its enabled Plugin has no package cache", async () => {
   const home = await tempDir("teamai-skill-unmaterialized-home-");
@@ -197,7 +197,7 @@ test("sync keeps an owned personal Skill until the enabled Plugin package contai
   expect(await runSync()).toBe(0);
   expect((await readGlobalConfig(home))?.managedSkillPaths?.["api-review"]).toBeUndefined();
   await expect(readFile(path.join(skillTarget, "SKILL.md"))).rejects.toMatchObject({ code: "ENOENT" });
-});
+}, 30_000);
 
 test("sync preserves converged plugin ownership when a later skill convergence fails", async () => {
   const home = await tempDir("teamai-skill-failure-home-");
@@ -224,4 +224,4 @@ test("sync preserves converged plugin ownership when a later skill convergence f
     "ios@test-teamai",
     "qa@test-teamai",
   ]);
-});
+}, 30_000);

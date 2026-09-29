@@ -10,7 +10,7 @@ import { detectProjectIdentity } from "../../src/project/anchors.js";
 import { projectionFor } from "../../src/project/context.js";
 import { readProjectState } from "../../src/project/state.js";
 import { refreshPublishedLearningSnapshot } from "../../src/project/published-cache.js";
-import { createFakeCopilot, createGitRepo, tempDir } from "../helpers/test-utils.js";
+import { createFakeCopilot, createGitRepo, loadFakeMarketplace, tempDir } from "../helpers/test-utils.js";
 import { runProcess } from "../../src/utils/process.js";
 import * as fsHelpers from "../../src/utils/fs.js";
 import { loadMarketplaceCatalog } from "../../src/copilot/catalog.js";
@@ -102,6 +102,22 @@ function capture() {
 }
 
 describe("published Learnings sync", () => {
+  test("fake Marketplace fixture preserves an existing local origin", async () => {
+    const source = await createGitRepo();
+    cleanup.add(source);
+    await git(source, ["remote", "add", "origin", "https://github.com/test-org/teamai-marketplace.git"]);
+    const originBefore = await git(source, ["remote", "get-url", "origin"]);
+    const refsBefore = await git(source, ["show-ref", "--head"]);
+    const fetchHeadPath = path.join(source, ".git", "FETCH_HEAD");
+    const fetchHeadBefore = await readIfExists(fetchHeadPath);
+
+    await loadFakeMarketplace(source);
+
+    expect(await git(source, ["remote", "get-url", "origin"])).toBe(originBefore);
+    expect(await git(source, ["show-ref", "--head"])).toBe(refsBefore);
+    expect(await readIfExists(fetchHeadPath)).toEqual(fetchHeadBefore);
+  });
+
   test("dry-run leaves a local Marketplace source repository untouched", async () => {
     const workspace = await createGitRepo();
     cleanup.add(workspace);

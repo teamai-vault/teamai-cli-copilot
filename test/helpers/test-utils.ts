@@ -1,4 +1,5 @@
 import { mkdir, mkdtemp, readFile, realpath, rm, symlink, writeFile } from "node:fs/promises";
+import { rmSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -8,7 +9,19 @@ import { runProcess } from "../../src/utils/process.js";
 
 export const TEST_MARKETPLACE_NAME = "test-teamai";
 export const TEST_MARKETPLACE_SOURCE = "https://github.com/test-org/teamai-marketplace.git";
-const fakeAuthorityPreparation = new Map<string, Promise<void>>();
+let fakeAuthorityPreparation: Promise<string> | undefined;
+const fakeFixtureId = `${process.pid}-${Date.now()}`;
+const fakeAuthorityRoot = path.join(os.tmpdir(), `teamai-test-authority-${fakeFixtureId}.git`);
+const fakeMarketplaceRoot = path.join(os.tmpdir(), `teamai-fake-marketplace-${fakeFixtureId}`);
+process.once("exit", () => {
+  for (const root of [fakeAuthorityRoot, fakeMarketplaceRoot]) {
+    try {
+      rmSync(root, { recursive: true, force: true });
+    } catch {
+      // Test cleanup must not mask the process result.
+    }
+  }
+});
 
 export function isPermissionError(error: unknown): boolean {
   return ["EACCES", "EPERM"].includes((error as NodeJS.ErrnoException).code ?? "");
@@ -67,15 +80,8 @@ export async function createFakeCopilot(initial?: Partial<FakeCopilotState>): Pr
 export async function loadFakeMarketplace(root?: string): Promise<MarketplaceCatalog> {
   const catalogRoot = root && !/^(?:[a-z][a-z0-9+.-]*:\/\/|git@)/i.test(root)
     ? root
-    : path.join(os.tmpdir(), "teamai-fake-marketplace-without-instructions");
-  const preparationKey = path.resolve(catalogRoot);
-  let preparation = fakeAuthorityPreparation.get(preparationKey);
-  if (!preparation) {
-    preparation = ensureFakePublishedAuthority(catalogRoot);
-    fakeAuthorityPreparation.set(preparationKey, preparation);
-    void preparation.catch(() => fakeAuthorityPreparation.delete(preparationKey));
-  }
-  await preparation;
+    : fakeMarketplaceRoot;
+  await prepareFakePublishedAuthority(catalogRoot);
   return {
     name: TEST_MARKETPLACE_NAME,
     root: catalogRoot,
@@ -93,16 +99,35 @@ export async function loadFakeMarketplace(root?: string): Promise<MarketplaceCat
   };
 }
 
-async function ensureFakePublishedAuthority(root: string): Promise<void> {
+export async function prepareFakePublishedAuthority(root: string): Promise<void> {
   await mkdir(root, { recursive: true });
-  const bare = path.join(root, ".teamai-test-authority.git");
-  const bareCheck = await runProcess("git", ["--git-dir", bare, "rev-parse", "--is-bare-repository"], { cwd: root });
+  const topLevel = await runProcess("git", ["rev-parse", "--show-toplevel"], { cwd: root });
+  if (topLevel.exitCode === 0) {
+    if (!samePath(topLevel.stdout.trim(), root)) return;
+    const origin = await runProcess("git", ["remote", "get-url", "origin"], { cwd: root });
+    if (origin.exitCode === 0) return;
+  } else {
+    const init = await runProcess("git", ["init", "-b", "main"], { cwd: root });
+    if (init.exitCode !== 0) throw new Error(init.stderr);
+  }
+
+  if (!fakeAuthorityPreparation) {
+    fakeAuthorityPreparation = createFakePublishedAuthority();
+    void fakeAuthorityPreparation.catch(() => { fakeAuthorityPreparation = undefined; });
+  }
+  const bare = await fakeAuthorityPreparation;
+  const remote = await runProcess("git", ["remote", "add", "origin", bare], { cwd: root });
+  if (remote.exitCode !== 0) throw new Error(remote.stderr);
+}
+
+async function createFakePublishedAuthority(): Promise<string> {
+  const bareCheck = await runProcess("git", ["--git-dir", fakeAuthorityRoot, "rev-parse", "--is-bare-repository"]);
   if (bareCheck.exitCode !== 0 || bareCheck.stdout.trim() !== "true") {
-    const initializedBare = await runProcess("git", ["init", "--bare", bare], { cwd: root });
+    const initializedBare = await runProcess("git", ["init", "--bare", fakeAuthorityRoot]);
     if (initializedBare.exitCode !== 0) throw new Error(initializedBare.stderr);
   }
 
-  const branch = await runProcess("git", ["ls-remote", bare, "refs/heads/teamai-learnings"], { cwd: root });
+  const branch = await runProcess("git", ["ls-remote", fakeAuthorityRoot, "refs/heads/teamai-learnings"]);
   if (branch.exitCode !== 0) throw new Error(branch.stderr);
   if (!branch.stdout.trim()) {
     const seed = await tempDir("teamai-fake-authority-seed-");
@@ -119,23 +144,21 @@ async function ensureFakePublishedAuthority(root: string): Promise<void> {
       await runProcess("git", ["add", "."], { cwd: seed });
       const commit = await runProcess("git", ["commit", "-m", "test published authority"], { cwd: seed });
       if (commit.exitCode !== 0) throw new Error(commit.stderr);
-      const push = await runProcess("git", ["push", bare, "HEAD:refs/heads/teamai-learnings"], { cwd: seed });
+      const push = await runProcess("git", ["push", fakeAuthorityRoot, "HEAD:refs/heads/teamai-learnings"], { cwd: seed });
       if (push.exitCode !== 0) throw new Error(push.stderr);
     } finally {
       await rm(seed, { recursive: true, force: true });
     }
   }
+  return fakeAuthorityRoot;
+}
 
-  const initialized = await runProcess("git", ["rev-parse", "--git-dir"], { cwd: root });
-  if (initialized.exitCode !== 0) {
-    const init = await runProcess("git", ["init", "-b", "main"], { cwd: root });
-    if (init.exitCode !== 0) throw new Error(init.stderr);
-  }
-  const origin = await runProcess("git", ["remote", "get-url", "origin"], { cwd: root });
-  const remote = origin.exitCode === 0
-    ? await runProcess("git", ["remote", "set-url", "origin", bare], { cwd: root })
-    : await runProcess("git", ["remote", "add", "origin", bare], { cwd: root });
-  if (remote.exitCode !== 0) throw new Error(remote.stderr);
+function samePath(left: string, right: string): boolean {
+  const resolvedLeft = path.resolve(left);
+  const resolvedRight = path.resolve(right);
+  return process.platform === "win32"
+    ? resolvedLeft.toLowerCase() === resolvedRight.toLowerCase()
+    : resolvedLeft === resolvedRight;
 }
 
 export async function createGitRepo(): Promise<string> {

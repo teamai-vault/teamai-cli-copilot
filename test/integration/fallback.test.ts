@@ -8,7 +8,7 @@ import { FallbackCopilotClient } from "../../src/copilot/fallback.js";
 import { TEAM_AI_EXTENSION_NAMESPACE } from "../../src/copilot/catalog.js";
 import { CopilotClient } from "../../src/copilot/cli.js";
 import { copilotConfigPath, copilotSettingsPath, installedPluginsRoot, registerMarketplaceState } from "../../src/copilot/user-state.js";
-import { createGitRepo, tempDir } from "../helpers/test-utils.js";
+import { createGitRepo, prepareFakePublishedAuthority, tempDir } from "../helpers/test-utils.js";
 import { runProcess } from "../../src/utils/process.js";
 
 async function createMarketplace(): Promise<string> {
@@ -39,6 +39,7 @@ async function createMarketplace(): Promise<string> {
     plugins: plugins.map((plugin) => ({ name: plugin.name, version: "0.1.0", source: `./plugins/${plugin.name}` })),
   }), "utf8");
   await writeFile(path.join(root, "skills.yaml"), "version: 1\nskills: {}\n", "utf8");
+  await prepareFakePublishedAuthority(root);
   return root;
 }
 
