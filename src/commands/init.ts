@@ -74,6 +74,7 @@ export async function initCommand(context: CommandContext, options: InitOptions)
       converged = await convergeUserPlugins(context.copilot, config, catalog.plugins, {
         dryRun: context.dryRun,
         cwd: context.cwd,
+        resourceRevision: catalog.revision,
       });
     } catch (error) {
       if (marketplaceAdded && !context.dryRun) {

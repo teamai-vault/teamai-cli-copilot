@@ -8,8 +8,28 @@ import { partitionPath } from "../project/partition.js";
 import { readProjectState } from "../project/state.js";
 import type { CommandContext } from "./context.js";
 import { projectCustomizationCounts } from "./helpers.js";
+import { collectResourceSnapshot } from "./resource-snapshot.js";
 
-export async function statusCommand(context: CommandContext): Promise<void> {
+export async function statusCommand(context: CommandContext, options: { resources?: boolean; json?: boolean } = {}): Promise<void> {
+  if (options.resources || options.json) {
+    const snapshot = await collectResourceSnapshot(context);
+    if (options.json) context.out(JSON.stringify(snapshot, null, 2));
+    else {
+      context.out("Team AI resources");
+      for (const resource of snapshot.resources) {
+        const runtime = Object.entries(resource.runtime).map(([consumer, value]) => `${consumer}=${value}`).join(",");
+        const sourceRevision = resource.source.revision ?? snapshot.resourceRevision ?? "unknown";
+        const target = resource.targetPath ?? "unknown";
+        const reasons = resource.reasons.length > 0 ? resource.reasons.join(",") : "none";
+        context.out(`${resource.scope} ${resource.kind} ${resource.name} selected=${resource.selected} owned=${resource.owned} source-revision=${sourceRevision} delivery=${resource.delivery} target=${target} configured-active=${resource.configuredActive} runtime=${runtime} reasons=${reasons}`);
+      }
+      for (const diagnostic of snapshot.diagnostics) {
+        context.out(`${diagnostic.severity.toUpperCase()} ${diagnostic.code}: ${diagnostic.message}`);
+      }
+    }
+    return;
+  }
+
   const config = await readGlobalConfig(context.homeDir);
   context.out("Team AI");
   context.out("");

@@ -20,7 +20,7 @@ export async function createDirectoryLink(target: string, linkPath: string): Pro
 export interface FakeCopilotState {
   marketplaceName: string;
   marketplaces: Array<{ name: string; source?: string }>;
-  plugins: Array<{ name: string; marketplace?: string; version?: string; enabled: boolean; source?: string }>;
+  plugins: Array<{ name: string; marketplace?: string; version?: string; enabled: boolean; source?: string; cache_path?: string }>;
   mcpServers: Array<{ name: string; enabled?: boolean; source?: string }>;
   mcpErrors: unknown[];
   catalog: Record<string, Array<{ name: string; version: string }>>;

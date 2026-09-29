@@ -3,7 +3,7 @@ import path from "node:path";
 import { readGlobalConfig, writeGlobalConfig } from "../config/global.js";
 import type { TeamAiConfig } from "../config/schema.js";
 import type { MarketplaceCatalog } from "../copilot/catalog.js";
-import { effectiveEnabledPluginSpecs, convergeManagedSkills, personalSkillPath } from "../copilot/skills.js";
+import { convergeManagedSkills, effectiveEnabledPluginSpecs, materializedEnabledPluginSkillNames, personalSkillPath } from "../copilot/skills.js";
 import { readProjectSettings } from "../copilot/project-settings.js";
 import { detectProjectIdentity } from "../project/anchors.js";
 import { promptText } from "../utils/prompt.js";
@@ -13,13 +13,13 @@ export async function skillListCommand(context: CommandContext, options: { tag?:
   const { config, catalog } = await configuredCatalog(context);
   try {
     if (options.source && options.source !== "plugin" && options.source !== "standalone") throw new Error("--source must be plugin or standalone.");
-    const available = effectiveSkillNames(catalog, await enabledPlugins(context));
+    const available = await pluginSkillAvailability(context, catalog);
     for (const skill of catalog.skills.filter((skill) =>
       (!options.tag || skill.tags.includes(options.tag)) &&
       (!options.owner || skill.owner === options.owner) &&
       (!options.source || skill.sourceType === options.source),
     )) {
-      context.out(`${skill.name}\t${skill.sourceType === "plugin" ? `plugin:${skill.plugin}` : "standalone"}\t${skill.owner}\t${skill.tags.join(",")}\t${await localStatus(config, context.homeDir, skill.name, available.has(skill.name))}`);
+      context.out(`${skill.name}\t${skill.sourceType === "plugin" ? `plugin:${skill.plugin}` : "standalone"}\t${skill.owner}\t${skill.tags.join(",")}\t${await localStatus(config, context.homeDir, skill.name, available.materializedPluginSkills.has(skill.name))}`);
     }
   } finally {
     await catalog.dispose();
@@ -38,8 +38,8 @@ export async function skillShowCommand(context: CommandContext, name: string): P
     context.out(`Source: ${skill.sourceType === "plugin" ? `plugin:${skill.plugin}` : "standalone"}`);
     context.out(`Containing plugin: ${skill.plugin ?? "none"}`);
     context.out(`Source path: ${skill.sourcePath}`);
-    const available = effectiveSkillNames(catalog, await enabledPlugins(context));
-    context.out(`Local status: ${await localStatus(config, context.homeDir, skill.name, available.has(skill.name))}`);
+    const available = await pluginSkillAvailability(context, catalog);
+    context.out(`Local status: ${await localStatus(config, context.homeDir, skill.name, available.materializedPluginSkills.has(skill.name))}`);
     context.out(`Managed personal path: ${config.managedSkillPaths?.[skill.name] ?? "none"}`);
   } finally {
     await catalog.dispose();
@@ -59,7 +59,11 @@ export async function skillInstallCommand(context: CommandContext, names: string
       if ((await promptText("? Install selected skills? [y/N]: ")).toLowerCase() !== "y") throw new Error("Skill installation cancelled.");
     }
     const next: TeamAiConfig = { ...config, managedSkills: [...new Set([...(config.managedSkills ?? []), ...selected])].sort() };
-    const result = await convergeManagedSkills(next, catalog.skills, await enabledPlugins(context), context.homeDir, { dryRun: context.dryRun });
+    const availability = await pluginSkillAvailability(context, catalog);
+    const result = await convergeManagedSkills(next, catalog.skills, availability.enabledPlugins, context.homeDir, {
+      dryRun: context.dryRun,
+      materializedPluginSkills: availability.materializedPluginSkills,
+    });
     next.managedSkillPaths = result.managedSkillPaths;
     printChanges(result.changes, context);
     for (const name of result.available) context.out(`AVAILABLE via plugin: ${name}`);
@@ -77,7 +81,11 @@ export async function skillRemoveCommand(context: CommandContext, names: string[
     const selected = [...new Set(names)];
     for (const name of selected) if (!catalog.skills.some((skill) => skill.name === name) && !config.managedSkills?.includes(name) && !config.managedSkillPaths?.[name]) throw new Error(`Unknown skill '${name}'.`);
     const next: TeamAiConfig = { ...config, managedSkills: (config.managedSkills ?? []).filter((name) => !selected.includes(name)) };
-    const result = await convergeManagedSkills(next, catalog.skills, await enabledPlugins(context), context.homeDir, { dryRun: context.dryRun });
+    const availability = await pluginSkillAvailability(context, catalog);
+    const result = await convergeManagedSkills(next, catalog.skills, availability.enabledPlugins, context.homeDir, {
+      dryRun: context.dryRun,
+      materializedPluginSkills: availability.materializedPluginSkills,
+    });
     next.managedSkillPaths = result.managedSkillPaths;
     printChanges(result.changes, context);
     if (context.dryRun) context.out("WOULD write: ~/.teamai/config.yaml");
@@ -98,14 +106,17 @@ async function configuredCatalog(context: CommandContext): Promise<{ config: Tea
   return { config, catalog };
 }
 
-async function enabledPlugins(context: CommandContext): Promise<Set<string>> {
+async function pluginSkillAvailability(context: CommandContext, catalog: MarketplaceCatalog): Promise<{
+  enabledPlugins: Set<string>;
+  materializedPluginSkills: Set<string>;
+}> {
   const installed = await context.copilot.listPlugins(context.cwd);
   const identity = await detectProjectIdentity(context.cwd);
-  return effectiveEnabledPluginSpecs(installed, identity ? await readProjectSettings(identity.workspaceRoot) : undefined);
-}
-
-function effectiveSkillNames(catalog: MarketplaceCatalog, enabled: Set<string>): Set<string> {
-  return new Set(catalog.skills.filter((skill) => skill.sourceType === "plugin" && skill.plugin && enabled.has(`${skill.plugin}@${catalog.name}`)).map((skill) => skill.name));
+  const settings = identity ? await readProjectSettings(identity.workspaceRoot) : undefined;
+  return {
+    enabledPlugins: effectiveEnabledPluginSpecs(installed, settings),
+    materializedPluginSkills: await materializedEnabledPluginSkillNames(installed, catalog.skills, catalog.name, settings),
+  };
 }
 
 async function localStatus(config: TeamAiConfig, homeDir: string, name: string, available: boolean): Promise<string> {

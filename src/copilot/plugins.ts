@@ -1,6 +1,10 @@
+import { lstat, readFile } from "node:fs/promises";
+import path from "node:path";
 import type { TeamAiConfig } from "../config/schema.js";
-import type { CatalogPlugin } from "./catalog.js";
+import { readSkillFrontmatter, type CatalogPlugin, type CatalogSkill } from "./catalog.js";
 import type { CopilotOperations, InstalledPlugin } from "./cli.js";
+import { computeResourceSnapshot, resourceSourceHash, userPluginResource, type ResourceDelivery, type ResourceRecord } from "../resources/snapshot.js";
+import { VERSION } from "../version.js";
 
 export interface PlannedAction {
   kind: "marketplace-add" | "plugin-install" | "plugin-enable" | "plugin-update" | "plugin-disable";
@@ -11,6 +15,7 @@ export interface ConvergeResult {
   actions: PlannedAction[];
   catalogAvailable: boolean;
   managedPlugins: string[];
+  resources: ResourceRecord[];
   warnings: string[];
 }
 
@@ -35,17 +40,98 @@ export function pluginSpec(plugin: Pick<InstalledPlugin, "name" | "marketplace">
   return plugin.marketplace ? `${plugin.name}@${plugin.marketplace}` : plugin.name;
 }
 
+export async function inspectPluginDelivery(
+  plugin: Pick<InstalledPlugin, "name" | "version" | "cache_path">,
+): Promise<ResourceDelivery> {
+  if (typeof plugin.cache_path !== "string" || plugin.cache_path.length === 0 || !plugin.version) return "unknown";
+  try {
+    const root = await lstat(plugin.cache_path);
+    if (root.isSymbolicLink() || !root.isDirectory()) return "stale";
+    const manifestPath = `${plugin.cache_path}/plugin.json`;
+    const manifestFile = await lstat(manifestPath);
+    if (!manifestFile.isFile() || manifestFile.isSymbolicLink()) return "stale";
+    let manifest: unknown;
+    try {
+      manifest = JSON.parse(await readFile(manifestPath, "utf8"));
+    } catch (error) {
+      if (error instanceof SyntaxError) return "stale";
+      throw error;
+    }
+    if (!manifest || typeof manifest !== "object" || Array.isArray(manifest)) return "stale";
+    const identity = manifest as { name?: unknown; version?: unknown };
+    return identity.name === plugin.name && identity.version === plugin.version ? "present" : "stale";
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === "ENOENT") return "missing";
+    throw error;
+  }
+}
+
+export async function inspectPluginSkillDelivery(
+  plugin: Pick<InstalledPlugin, "name" | "version" | "cache_path">,
+  skill: CatalogSkill,
+): Promise<ResourceDelivery> {
+  if (skill.sourceType !== "plugin" || skill.plugin !== plugin.name) return "unknown";
+  const packageDelivery = await inspectPluginDelivery(plugin);
+  if (packageDelivery !== "present") return packageDelivery;
+  const skillPath = path.join(plugin.cache_path!, "skills", skill.name, "SKILL.md");
+  try {
+    const file = await lstat(skillPath);
+    if (!file.isFile()) return "stale";
+    try {
+      const frontmatter = await readSkillFrontmatter(skillPath);
+      return frontmatter.name === skill.name ? "present" : "stale";
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "";
+      if (message.startsWith(`Marketplace skill '${skillPath}' `)) return "stale";
+      throw error;
+    }
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === "ENOENT") return "missing";
+    throw error;
+  }
+}
+
+export async function inspectUserPluginResources(
+  catalog: CatalogPlugin[],
+  marketplaceName: string,
+  sourceHash: string,
+  installed: Array<{ name: string; marketplace?: string; version?: string; cache_path?: string; enabled?: boolean }>,
+  options: {
+    managedPlugins?: Iterable<string>;
+    expectedEnabled?: ReadonlySet<string>;
+    settingsEnabled?: Record<string, boolean>;
+    resourceRevision?: string;
+  } = {},
+): Promise<ResourceRecord[]> {
+  const owned = new Set(options.managedPlugins ?? []);
+  return await Promise.all(userPlugins(catalog, marketplaceName).map(async (spec) => {
+    const [name] = spec.split("@");
+    const current = installed.find((candidate) => candidate.name === name && candidate.marketplace === marketplaceName);
+    return userPluginResource({
+      spec,
+      sourceHash,
+      relativePath: `plugins/${name}/plugin.json`,
+      revision: options.resourceRevision,
+      selected: true,
+      owned: owned.has(spec),
+      targetPath: current?.cache_path,
+      delivery: current ? await inspectPluginDelivery(current) : "missing",
+      configuredActive: current?.enabled ?? options.settingsEnabled?.[spec] ?? "unknown",
+      expectedActive: options.expectedEnabled?.has(spec),
+    });
+  }));
+}
+
 export async function convergeUserPlugins(
   client: CopilotOperations,
   config: TeamAiConfig,
   catalog: CatalogPlugin[],
-  options: { dryRun?: boolean; cwd?: string } = {},
+  options: { dryRun?: boolean; cwd?: string; resourceRevision?: string } = {},
 ): Promise<ConvergeResult> {
   if (!config.role) throw new Error("No Team AI role is configured. Run `teamai init` first.");
 
   const actions: PlannedAction[] = [];
   const warnings: string[] = [];
-  const installSpecs = userPlugins(catalog, config.marketplace.name);
   const enabledSpecs = new Set(enabledUserPlugins(config.role, catalog, config.marketplace.name));
   const owned = new Set(config.managedPlugins ?? []);
   const marketplaces = await client.listMarketplaces(options.cwd);
@@ -55,10 +141,23 @@ export async function convergeUserPlugins(
   }
 
   let installed = await client.listPlugins(options.cwd);
-  for (const spec of installSpecs) {
+  const records = await inspectUserPluginResources(catalog, config.marketplace.name, resourceSourceHash(config.marketplace.source), installed, {
+    managedPlugins: owned,
+    expectedEnabled: enabledSpecs,
+    resourceRevision: options.resourceRevision,
+  });
+  const resourceSnapshot = computeResourceSnapshot({
+    cliVersion: VERSION,
+    scope: "user",
+    resources: records,
+  });
+
+  for (const resource of resourceSnapshot.resources) {
+    if (!resource.selected || !resource.pluginSpec) continue;
+    const spec = resource.pluginSpec;
     const [name, marketplace] = spec.split("@");
     let current = installed.find((item) => item.name === name && item.marketplace === marketplace);
-    if (!current || (owned.has(spec) && current.source === "filesystem") || (!owned.has(spec) && current.enabled === false && current.source === `live-marketplace:${marketplace}`)) {
+    if (!current || (owned.has(spec) && (current.source === "filesystem" || resource.delivery === "missing" || resource.delivery === "stale"))) {
       actions.push({ kind: "plugin-install", target: spec });
       owned.add(spec);
       if (!options.dryRun) {
@@ -69,8 +168,10 @@ export async function convergeUserPlugins(
       } else {
         current = { name, marketplace, version: catalog.find((plugin) => plugin.name === name)?.version, enabled: true };
       }
-    } else if (!owned.has(spec)) {
-      warnings.push(`${spec} already exists but is not Team AI managed; preserving the user's enabled/version state.`);
+    } else if (!resource.owned) {
+      warnings.push(resource.reasons.includes("USER_OVERRIDE")
+        ? `${spec} is user-owned and differs from the selected role; preserving the override.`
+        : `${spec} already exists but is not Team AI managed; preserving the user's enabled/version state.`);
       continue;
     }
 
@@ -91,5 +192,5 @@ export async function convergeUserPlugins(
     }
   }
 
-  return { actions, catalogAvailable: true, managedPlugins: [...owned].sort(), warnings };
+  return { actions, catalogAvailable: true, managedPlugins: [...owned].sort(), resources: resourceSnapshot.resources, warnings };
 }

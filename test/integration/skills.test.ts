@@ -81,6 +81,124 @@ test("dry-run sync uses planned plugin enablement for selected plugin skills", a
   expect((await readGlobalConfig(home))?.managedPlugins).toEqual([]);
 });
 
+test("sync keeps an owned personal Skill when its enabled Plugin has no package cache", async () => {
+  const home = await tempDir("teamai-skill-unmaterialized-home-");
+  const source = await tempDir("teamai-skill-unmaterialized-source-");
+  cleanup.add(home);
+  cleanup.add(source);
+  const skillRoot = path.join(source, "plugins", "api", "skills", "api-review");
+  const skillTarget = personalSkillPath(home, "api-review");
+  await mkdir(skillRoot, { recursive: true });
+  await writeFile(path.join(skillRoot, "SKILL.md"), "---\nname: api-review\ndescription: API review\n---\n", "utf8");
+  await mkdir(skillTarget, { recursive: true });
+  await writeFile(path.join(skillTarget, "SKILL.md"), "---\nname: api-review\ndescription: API review\n---\n", "utf8");
+
+  const config = createConfig({ name: TEST_MARKETPLACE_NAME, source: TEST_MARKETPLACE_SOURCE });
+  config.role = "api";
+  config.managedPlugins = [`common@${TEST_MARKETPLACE_NAME}`, `api@${TEST_MARKETPLACE_NAME}`];
+  config.managedSkills = ["api-review"];
+  config.managedSkillPaths = { "api-review": skillTarget };
+  await writeGlobalConfig(config, home);
+
+  const baseCatalog = await loadFakeMarketplace(source);
+  const catalog: MarketplaceCatalog = {
+    ...baseCatalog,
+    skills: [{ name: "api-review", description: "API review", sourceType: "plugin", plugin: "api", sourcePath: "plugins/api/skills/api-review", root: skillRoot, owner: "api", tags: [], standalone: true }],
+  };
+  const fake = await createFakeCopilot({
+    marketplaces: [{ name: TEST_MARKETPLACE_NAME, source: TEST_MARKETPLACE_SOURCE }],
+    plugins: [
+      { name: "common", marketplace: TEST_MARKETPLACE_NAME, version: "0.1.0", enabled: true, source: `live-marketplace:${TEST_MARKETPLACE_NAME}` },
+      { name: "api", marketplace: TEST_MARKETPLACE_NAME, version: "0.1.0", enabled: true, source: `live-marketplace:${TEST_MARKETPLACE_NAME}` },
+    ],
+  });
+  const output: string[] = [];
+
+  expect(await runCli(["sync"], {
+    cwd: source,
+    homeDir: home,
+    copilot: fake.client,
+    loadMarketplace: async () => catalog,
+    out: (line) => output.push(line),
+    err: () => undefined,
+  })).toBe(0);
+  expect(output.some((line) => line.includes("remove: api-review"))).toBe(false);
+  expect((await readGlobalConfig(home))?.managedSkillPaths?.["api-review"]).toBe(skillTarget);
+  expect(await readFile(path.join(skillTarget, "SKILL.md"), "utf8")).toContain("name: api-review");
+});
+
+test("sync keeps an owned personal Skill until the enabled Plugin package contains its Skill file", async () => {
+  const home = await tempDir("teamai-skill-file-missing-home-");
+  const source = await tempDir("teamai-skill-file-missing-source-");
+  const commonCache = path.join(source, "cache", "common");
+  const apiCache = path.join(source, "cache", "api");
+  cleanup.add(home);
+  cleanup.add(source);
+  const skillRoot = path.join(source, "plugins", "api", "skills", "api-review");
+  const skillTarget = personalSkillPath(home, "api-review");
+  await mkdir(skillRoot, { recursive: true });
+  await writeFile(path.join(skillRoot, "SKILL.md"), "---\nname: api-review\ndescription: API review\n---\n", "utf8");
+  await mkdir(skillTarget, { recursive: true });
+  await writeFile(path.join(skillTarget, "SKILL.md"), "---\nname: api-review\ndescription: API review\n---\n", "utf8");
+  for (const [directory, name] of [[commonCache, "common"], [apiCache, "api"]] as const) {
+    await mkdir(directory, { recursive: true });
+    await writeFile(path.join(directory, "plugin.json"), JSON.stringify({ name, version: "0.1.0" }), "utf8");
+  }
+
+  const config = createConfig({ name: TEST_MARKETPLACE_NAME, source: TEST_MARKETPLACE_SOURCE });
+  config.role = "api";
+  config.managedPlugins = [`common@${TEST_MARKETPLACE_NAME}`, `api@${TEST_MARKETPLACE_NAME}`];
+  config.managedSkills = ["api-review"];
+  config.managedSkillPaths = { "api-review": skillTarget };
+  await writeGlobalConfig(config, home);
+
+  const baseCatalog = await loadFakeMarketplace(source);
+  const catalog: MarketplaceCatalog = {
+    ...baseCatalog,
+    skills: [{ name: "api-review", description: "API review", sourceType: "plugin", plugin: "api", sourcePath: "plugins/api/skills/api-review", root: skillRoot, owner: "api", tags: [], standalone: true }],
+  };
+  const fake = await createFakeCopilot({
+    marketplaces: [{ name: TEST_MARKETPLACE_NAME, source: TEST_MARKETPLACE_SOURCE }],
+    plugins: [
+      { name: "common", marketplace: TEST_MARKETPLACE_NAME, version: "0.1.0", enabled: true, source: `live-marketplace:${TEST_MARKETPLACE_NAME}`, cache_path: commonCache },
+      { name: "api", marketplace: TEST_MARKETPLACE_NAME, version: "0.1.0", enabled: true, source: `live-marketplace:${TEST_MARKETPLACE_NAME}`, cache_path: apiCache },
+    ],
+  });
+  const runSync = async (args = ["sync"]) => await runCli(args, {
+    cwd: source,
+    homeDir: home,
+    copilot: fake.client,
+    loadMarketplace: async () => catalog,
+    out: () => undefined,
+    err: () => undefined,
+  });
+
+  expect(await runSync(["--dry-run", "sync"])).toBe(0);
+  expect((await readGlobalConfig(home))?.managedSkillPaths?.["api-review"]).toBe(skillTarget);
+  expect(await readFile(path.join(skillTarget, "SKILL.md"), "utf8")).toContain("name: api-review");
+
+  expect(await runSync()).toBe(0);
+  expect((await readGlobalConfig(home))?.managedSkillPaths?.["api-review"]).toBe(skillTarget);
+  expect(await readFile(path.join(skillTarget, "SKILL.md"), "utf8")).toContain("name: api-review");
+
+  const installedSkillPath = path.join(apiCache, "skills", "api-review", "SKILL.md");
+  await mkdir(path.dirname(installedSkillPath), { recursive: true });
+  await writeFile(installedSkillPath, "", "utf8");
+  expect(await runSync()).toBe(0);
+  expect((await readGlobalConfig(home))?.managedSkillPaths?.["api-review"]).toBe(skillTarget);
+  expect(await readFile(path.join(skillTarget, "SKILL.md"), "utf8")).toContain("name: api-review");
+
+  await writeFile(installedSkillPath, "---\nname: [broken\n---\n", "utf8");
+  expect(await runSync()).toBe(0);
+  expect((await readGlobalConfig(home))?.managedSkillPaths?.["api-review"]).toBe(skillTarget);
+  expect(await readFile(path.join(skillTarget, "SKILL.md"), "utf8")).toContain("name: api-review");
+
+  await writeFile(installedSkillPath, "---\nname: api-review\ndescription: API review\n---\n", "utf8");
+  expect(await runSync()).toBe(0);
+  expect((await readGlobalConfig(home))?.managedSkillPaths?.["api-review"]).toBeUndefined();
+  await expect(readFile(path.join(skillTarget, "SKILL.md"))).rejects.toMatchObject({ code: "ENOENT" });
+});
+
 test("sync preserves converged plugin ownership when a later skill convergence fails", async () => {
   const home = await tempDir("teamai-skill-failure-home-");
   const source = await tempDir("teamai-skill-failure-source-");

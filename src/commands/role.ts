@@ -19,13 +19,14 @@ export async function roleSetCommand(context: CommandContext, role: string): Pro
   const current = await readGlobalConfig(context.homeDir);
   if (!current) throw new Error("Team AI is not initialized. Run `teamai init` first.");
 
-  const { catalog, dispose } = await roleCatalog(context, current.marketplace.source, current.marketplace.name);
+  const { catalog, revision, dispose } = await roleCatalog(context, current.marketplace.source, current.marketplace.name);
   try {
     enabledUserPlugins(role, catalog, current.marketplace.name);
     const next = { ...current, role };
     const converged = await convergeUserPlugins(context.copilot, next, catalog, {
       dryRun: context.dryRun,
       cwd: context.cwd,
+      resourceRevision: revision,
     });
     printActions(converged.actions, context.dryRun, context.out);
     printWarnings(converged.warnings, context.out);
@@ -42,11 +43,11 @@ async function roleCatalog(
   context: CommandContext,
   source: string,
   marketplaceName: string,
-): Promise<{ catalog: CatalogPlugin[]; dispose: () => Promise<void> }> {
+): Promise<{ catalog: CatalogPlugin[]; revision?: string; dispose: () => Promise<void> }> {
   const loaded = await context.loadMarketplace(source, context.cwd);
   if (loaded.name !== marketplaceName) {
     await loaded.dispose();
     throw new Error(`Marketplace name changed from '${marketplaceName}' to '${loaded.name}'.`);
   }
-  return { catalog: loaded.plugins, dispose: loaded.dispose };
+  return { catalog: loaded.plugins, revision: loaded.revision, dispose: loaded.dispose };
 }

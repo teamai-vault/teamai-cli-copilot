@@ -1,7 +1,7 @@
 import { readGlobalConfig, writeGlobalConfig } from "../config/global.js";
 import { convergeBuiltInTeamAiSkill } from "../copilot/builtin-skill.js";
 import { convergeUserPlugins, type PlannedAction } from "../copilot/plugins.js";
-import { effectiveEnabledPluginSpecs, convergeManagedSkills } from "../copilot/skills.js";
+import { effectiveEnabledPluginSpecs, materializedEnabledPluginSkillNames, convergeManagedSkills } from "../copilot/skills.js";
 import type { InstalledPlugin } from "../copilot/cli.js";
 import { convergeMarketplaceUserInstructions } from "../copilot/user-instructions.js";
 import { registerVsCodeMarketplace } from "../copilot/vscode-settings.js";
@@ -54,7 +54,7 @@ export async function syncCommand(context: CommandContext): Promise<void> {
       printUserInstructionActions(userInstructions, context.dryRun, context.homeDir, context.out);
       throw new Error("Copilot CLI and VS Code backends are unavailable; Marketplace user instructions were synchronized, but plugin convergence could not run.");
     }
-    converged = await convergeUserPlugins(context.copilot, config, catalog.plugins, { dryRun: context.dryRun, cwd: context.cwd });
+    converged = await convergeUserPlugins(context.copilot, config, catalog.plugins, { dryRun: context.dryRun, cwd: context.cwd, resourceRevision: catalog.revision });
     if (!context.dryRun && converged.actions.length > 0) persistentUserChanges.push("Copilot plugins");
     printActions(converged.actions, context.dryRun, context.out);
     printWarnings(converged.warnings, context.out);
@@ -123,8 +123,22 @@ export async function syncCommand(context: CommandContext): Promise<void> {
       }
     }
     const installed = await context.copilot.listPlugins(context.cwd);
-    const enabled = effectiveEnabledPluginSpecs(context.dryRun ? applyPlannedPluginActions(installed, converged.actions) : installed, mergedProjectSettings);
-    const skillResult = await convergeManagedSkills(config, catalog.skills, enabled, context.homeDir, { dryRun: context.dryRun });
+    const plannedMaterialized = context.dryRun
+      ? converged.actions.filter((action) => action.kind === "plugin-install").map((action) => action.target)
+      : [];
+    const effectivePlugins = context.dryRun ? applyPlannedPluginActions(installed, converged.actions) : installed;
+    const enabled = effectiveEnabledPluginSpecs(effectivePlugins, mergedProjectSettings);
+    const materializedPluginSkills = await materializedEnabledPluginSkillNames(
+      effectivePlugins,
+      catalog.skills,
+      config.marketplace.name,
+      mergedProjectSettings,
+      plannedMaterialized,
+    );
+    const skillResult = await convergeManagedSkills(config, catalog.skills, enabled, context.homeDir, {
+      dryRun: context.dryRun,
+      materializedPluginSkills,
+    });
     config.managedSkillPaths = skillResult.managedSkillPaths;
     if (!context.dryRun && skillResult.changes.length > 0) persistentUserChanges.push("managed personal Skills");
     for (const change of skillResult.changes) context.out(`${context.dryRun ? "WOULD" : "DONE"} ${change.type}: ${change.name}`);

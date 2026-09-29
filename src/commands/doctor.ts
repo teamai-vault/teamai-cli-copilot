@@ -1,14 +1,14 @@
-import { access, lstat, readFile } from "node:fs/promises";
+import { access, lstat } from "node:fs/promises";
 import { constants } from "node:fs";
 import path from "node:path";
 import { readGlobalConfig } from "../config/global.js";
 import { inspectBuiltInTeamAiSkill } from "../copilot/builtin-skill.js";
 import { enabledUserPlugins, pluginSpec, userPlugins } from "../copilot/plugins.js";
-import { effectiveEnabledPluginSpecs, convergeManagedSkills } from "../copilot/skills.js";
+import { convergeManagedSkills, effectiveEnabledPluginSpecs, materializedEnabledPluginSkillNames, materializedEnabledPluginSpecs } from "../copilot/skills.js";
 import { readProjectSettings } from "../copilot/project-settings.js";
 import type { MarketplaceCatalog } from "../copilot/catalog.js";
 import { checkUserInstructionState, discoverMarketplaceUserInstructions, userInstructionTargetRoot } from "../copilot/user-instructions.js";
-import { marketplaceRegistrationMatches, readCopilotState, type CopilotInstalledPlugin } from "../copilot/user-state.js";
+import { marketplaceRegistrationMatches, readCopilotState } from "../copilot/user-state.js";
 import { vscodeMarketplaceIsFirst } from "../copilot/vscode-settings.js";
 import { detectProjectIdentity } from "../project/anchors.js";
 import { convergeLogicalProjectContext, projectionFor } from "../project/context.js";
@@ -17,7 +17,9 @@ import { partitionPath } from "../project/partition.js";
 import { inspectProjectPartitions, readProjectState } from "../project/state.js";
 import { executableVersion } from "../utils/process.js";
 import { readTextIfExists } from "../utils/fs.js";
+import type { ResourceDiagnostic } from "../resources/snapshot.js";
 import type { CommandContext } from "./context.js";
+import { collectResourceSnapshot } from "./resource-snapshot.js";
 
 export interface DoctorResult {
   errors: number;
@@ -49,42 +51,20 @@ async function reportManagedUserInstructions(
   }
 }
 
-async function isMaterializedPlugin(plugin: CopilotInstalledPlugin): Promise<boolean> {
-  if (typeof plugin.cache_path !== "string" || plugin.cache_path.length === 0) return false;
-  if (typeof plugin.version !== "string" || plugin.version.length === 0) return false;
-  try {
-    const root = await lstat(plugin.cache_path);
-    if (root.isSymbolicLink() || !root.isDirectory()) return false;
-    const manifestPath = path.join(plugin.cache_path, "plugin.json");
-    const manifestFile = await lstat(manifestPath);
-    if (!manifestFile.isFile() || manifestFile.isSymbolicLink()) return false;
-    let manifest: unknown;
-    try {
-      manifest = JSON.parse(await readFile(manifestPath, "utf8"));
-    } catch (error) {
-      if (error instanceof SyntaxError) return false;
-      throw error;
-    }
-    if (!manifest || typeof manifest !== "object" || Array.isArray(manifest)) return false;
-    const identity = manifest as { name?: unknown; version?: unknown };
-    return identity.name === plugin.name && identity.version === plugin.version;
-  } catch (error) {
-    if ((error as NodeJS.ErrnoException).code === "ENOENT") return false;
-    throw error;
-  }
-}
-
-export async function doctorCommand(context: CommandContext): Promise<DoctorResult> {
+export async function doctorCommand(context: CommandContext, jsonOutput = false): Promise<DoctorResult> {
+  const snapshot = jsonOutput ? await collectResourceSnapshot(context) : undefined;
+  const output: string[] = [];
+  const emit = (message: string) => jsonOutput ? output.push(message) : context.out(message);
   let errors = 0;
   let warnings = 0;
-  const ok = (message: string) => context.out(`✓ ${message}`);
+  const ok = (message: string) => emit(`✓ ${message}`);
   const warn = (message: string) => {
     warnings += 1;
-    context.out(`! ${message}`);
+    emit(`! ${message}`);
   };
   const fail = (message: string) => {
     errors += 1;
-    context.out(`✗ ${message}`);
+    emit(`✗ ${message}`);
   };
 
   const gitVersion = await executableVersion("git", ["--version"]);
@@ -159,9 +139,11 @@ export async function doctorCommand(context: CommandContext): Promise<DoctorResu
             const row = inventory.find((item) => pluginSpec(item) === desired);
             if (!row) warn(`${desired} is absent from local Plugin inventory; runtime state is unobserved.`);
             else {
-              const enabled = copilotSettings.enabledPlugins?.[desired] ?? row.enabled;
+              const enabled = row.enabled ?? copilotSettings.enabledPlugins?.[desired];
+              const owned = (config.managedPlugins ?? []).includes(desired);
               if (typeof enabled !== "boolean") warn(`${desired} enablement is unknown in local settings.`);
-              else if (enabled !== expectedEnabled.has(desired)) fail(`${desired} has incorrect configured enablement. Run teamai sync.`);
+              else if (!owned && enabled !== expectedEnabled.has(desired)) warn(`${desired} is user-owned and differs from the selected role; preserving the override.`);
+              else if (owned && enabled !== expectedEnabled.has(desired)) fail(`${desired} has incorrect configured enablement. Run teamai sync.`);
               else ok(`${desired} is configured ${enabled ? "enabled" : "installed and disabled"}; runtime unobserved.`);
             }
           }
@@ -240,18 +222,24 @@ export async function doctorCommand(context: CommandContext): Promise<DoctorResu
       } else {
         const installed = copilotConfig.installedPlugins.map((plugin) => ({
           ...plugin,
-          enabled: copilotSettings.enabledPlugins?.[`${plugin.name}@${plugin.marketplace}`] ?? plugin.enabled ?? false,
+          enabled: plugin.enabled ?? copilotSettings.enabledPlugins?.[`${plugin.name}@${plugin.marketplace}`] ?? false,
         }));
         const enabledPlugins = effectiveEnabledPluginSpecs(installed, projectSettings);
-        const unavailable: string[] = [];
-        for (const spec of enabledPlugins) {
-          const plugin = installed.find((item) => pluginSpec(item) === spec);
-          if (!plugin || !await isMaterializedPlugin(plugin)) unavailable.push(spec);
-        }
+        const materializedPlugins = await materializedEnabledPluginSpecs(installed, projectSettings);
+        const unavailable = [...enabledPlugins].filter((spec) => !materializedPlugins.has(spec));
         if (unavailable.length > 0) {
           warn("Managed personal Skill availability is unknown because enabled Plugin package delivery could not be verified: " + unavailable.join(", ") + ".");
         } else {
-          const skillResult = await convergeManagedSkills(config, catalogSnapshot.skills, enabledPlugins, context.homeDir, { dryRun: true });
+          const materializedPluginSkills = await materializedEnabledPluginSkillNames(
+            installed,
+            catalogSnapshot.skills,
+            config.marketplace.name,
+            projectSettings,
+          );
+          const skillResult = await convergeManagedSkills(config, catalogSnapshot.skills, enabledPlugins, context.homeDir, {
+            dryRun: true,
+            materializedPluginSkills,
+          });
           const skillStateChanged = JSON.stringify(skillResult.managedSkillPaths) !== JSON.stringify(config.managedSkillPaths ?? {});
           if (skillResult.changes.length === 0 && !skillStateChanged) ok("Managed personal skills: current.");
           else warn("Managed personal skills are stale. Run teamai sync.");
@@ -273,5 +261,20 @@ export async function doctorCommand(context: CommandContext): Promise<DoctorResu
     warn(`Could not inspect Team AI project partitions: ${(error as Error).message}`);
   }
 
+  if (snapshot) {
+    const doctorDiagnostics: ResourceDiagnostic[] = [];
+    for (const line of output) {
+      if (line.startsWith("! ")) doctorDiagnostics.push({ code: "DOCTOR_WARNING", severity: "warning", message: line.slice(2) });
+      else if (line.startsWith("✗ ")) doctorDiagnostics.push({ code: "DOCTOR_ERROR", severity: "error", message: line.slice(2) });
+    }
+    const diagnostics = [...snapshot.diagnostics];
+    for (const diagnostic of doctorDiagnostics) {
+      if (!diagnostics.some((item) => item.severity === diagnostic.severity && item.message === diagnostic.message)) diagnostics.push(diagnostic);
+    }
+    snapshot.diagnostics = diagnostics.sort((left, right) => left.code < right.code ? -1 : left.code > right.code ? 1 : left.message < right.message ? -1 : left.message > right.message ? 1 : 0);
+    context.out(JSON.stringify(snapshot, null, 2));
+    errors += snapshot.diagnostics.filter((diagnostic) => diagnostic.severity === "error").length;
+    warnings += snapshot.diagnostics.filter((diagnostic) => diagnostic.severity === "warning").length;
+  }
   return { errors, warnings };
 }

@@ -523,7 +523,7 @@ describe("CLI integration with fake Copilot executable", () => {
     const config = await readGlobalConfig(home);
     expect(config?.managedPlugins).not.toContain(`api@${TEST_MARKETPLACE_NAME}`);
     expect(config?.managedPlugins).toHaveLength(5);
-    expect(output.stdout.some((line) => line.includes("not Team AI managed"))).toBe(true);
+    expect(output.stdout.some((line) => line.includes("preserving the override"))).toBe(true);
   }, CLI_PROCESS_TEST_TIMEOUT);
 
   test("warns when an enabled desired plugin remains user-owned", async () => {
@@ -549,7 +549,7 @@ describe("CLI integration with fake Copilot executable", () => {
     expect(output.stdout.some((line) => line.includes("not Team AI managed"))).toBe(true);
   }, CLI_PROCESS_TEST_TIMEOUT);
 
-  test("claims disabled live-marketplace projections by installing the desired plugins", async () => {
+  test("preserves unowned disabled live-marketplace plugins as role overrides", async () => {
     const repo = await createGitRepo();
     const home = await tempDir("teamai-live-marketplace-home-");
     const fake = await createFakeCopilot({
@@ -571,11 +571,14 @@ describe("CLI integration with fake Copilot executable", () => {
     })).toBe(0);
 
     const state = await fake.readState();
-    expect(state.plugins.find((item) => item.name === "common")?.enabled).toBe(true);
-    expect(state.plugins.find((item) => item.name === "design")?.enabled).toBe(true);
+    expect(state.plugins.find((item) => item.name === "common")?.enabled).toBe(false);
+    expect(state.plugins.find((item) => item.name === "design")?.enabled).toBe(false);
     const config = await readGlobalConfig(home);
-    expect(config?.managedPlugins).toHaveLength(6);
-    expect(output.stdout.filter((line) => line.includes("plugin-install")).length).toBe(6);
+    expect(config?.managedPlugins).toHaveLength(4);
+    expect(config?.managedPlugins).not.toContain(`common@${TEST_MARKETPLACE_NAME}`);
+    expect(config?.managedPlugins).not.toContain(`design@${TEST_MARKETPLACE_NAME}`);
+    expect(output.stdout.filter((line) => line.includes("plugin-install")).length).toBe(4);
+    expect(output.stdout.some((line) => line.includes("user-owned and differs from the selected role"))).toBe(true);
   }, CLI_PROCESS_TEST_TIMEOUT);
 
   test("binds Logical Projects only through projects set and removes only owned plugins when switched", async () => {

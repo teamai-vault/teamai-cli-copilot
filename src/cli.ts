@@ -14,8 +14,7 @@ import { syncCommand } from "./commands/sync.js";
 import { tagsListCommand } from "./commands/tags.js";
 import { assertCopilotHomeMatchesOwnership } from "./copilot/builtin-skill.js";
 import { copilotHome } from "./copilot/user-state.js";
-
-const VERSION = "0.3.0";
+import { VERSION } from "./version.js";
 
 function usage(): string {
   return [
@@ -35,8 +34,8 @@ function usage(): string {
     "  skill remove <name...>",
     "  skill contribute <path> --owner <owner> [--tags <tag...>] --target standalone|plugin [--plugin <plugin>]",
     "  tags list",
-    "  status",
-    "  doctor",
+    "  status [--resources] [--json]",
+    "  doctor [--json]",
     "",
     "Global options:",
     "  --dry-run   Preview writes and Copilot mutations",
@@ -70,6 +69,8 @@ const optionRules: Record<string, Record<string, OptionRule>> = {
     "--shared": { kind: "boolean" },
     "--tags": { kind: "many" },
   },
+  status: { "--resources": { kind: "boolean" }, "--json": { kind: "boolean" } },
+  doctor: { "--json": { kind: "boolean" } },
 };
 
 function parseOptions(tokens: string[], rules: Record<string, OptionRule>, command: string): { positionals: string[]; options: ParsedOptions } {
@@ -194,8 +195,8 @@ function parseInvocation(argv: string[]): Invocation {
       }
       break;
     case "tags list": exact(0, "teamai tags list"); break;
-    case "status": exact(0, "teamai status"); break;
-    case "doctor": exact(0, "teamai doctor"); break;
+    case "status": exact(0, "teamai status [--resources] [--json]"); break;
+    case "doctor": exact(0, "teamai doctor [--json]"); break;
   }
 
   return { command, subcommand, positionals, options: parsed.options };
@@ -312,17 +313,27 @@ export async function runCli(argv: string[], overrides: Partial<CommandContext> 
         });
         return 0;
       case "status":
-        await statusCommand(context);
+        await statusCommand(context, { resources: hasOption(invocation.options, "--resources"), json: hasOption(invocation.options, "--json") });
         return 0;
       case "doctor": {
-        const result = await doctorCommand(context);
+        const result = await doctorCommand(context, hasOption(invocation.options, "--json"));
         return result.errors > 0 ? 1 : 0;
       }
       default:
         throw new UsageError(`Unknown command '${invocation.command}'.\n${usage()}`);
     }
   } catch (error) {
-    context.err(`ERROR: ${(error as Error).message}`);
+    const command = argv.find((arg) => arg !== "--dry-run" && arg !== "--help");
+    const jsonOutput = argv.includes("--json") && (command === "status" || command === "doctor");
+    if (jsonOutput) {
+      context.out(JSON.stringify({
+        schemaVersion: 1,
+        error: {
+          code: error instanceof UsageError ? "USAGE_ERROR" : "COMMAND_ERROR",
+          message: error instanceof Error ? error.message : String(error),
+        },
+      }));
+    } else context.err(`ERROR: ${(error as Error).message}`);
     return error instanceof UsageError ? 2 : 1;
   }
 }
