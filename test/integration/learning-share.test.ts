@@ -1,17 +1,30 @@
-import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { pathToFileURL } from "node:url";
 import path from "node:path";
-import { describe, expect, test } from "vitest";
+import { afterEach, describe, expect, test } from "vitest";
 import { runCli } from "../../src/cli.js";
 import { resolveGitHubMarketplaceRemote, submitGitHubContribution } from "../../src/contribution/github.js";
-import { learningHash, learningOutboxDirectory } from "../../src/contribution/learning-outbox.js";
+import { learningHash, learningOutboxDirectory, type LearningOperation } from "../../src/contribution/learning-outbox.js";
 import { writeGlobalConfig } from "../../src/config/global.js";
 import { createConfig } from "../../src/config/schema.js";
 import { detectProjectIdentity } from "../../src/project/anchors.js";
 import { projectionKey } from "../../src/project/context.js";
 import { writeProjectState } from "../../src/project/state.js";
 import { runProcess } from "../../src/utils/process.js";
-import { createFakeCopilot, createGitRepo, loadFakeMarketplace, tempDir, TEST_MARKETPLACE_NAME } from "../helpers/test-utils.js";
+import { createFakeCopilot, createGitRepo, loadFakeMarketplace, tempDir as createTempDir, TEST_MARKETPLACE_NAME } from "../helpers/test-utils.js";
+
+const cleanup = new Set<string>();
+
+afterEach(async () => {
+  await Promise.all([...cleanup].map(async (target) => await rm(target, { recursive: true, force: true })));
+  cleanup.clear();
+});
+
+async function tempDir(prefix: string): Promise<string> {
+  const root = await createTempDir(prefix);
+  cleanup.add(root);
+  return root;
+}
 
 function capture() {
   const stdout: string[] = [];
@@ -77,6 +90,165 @@ async function marketplaceWithLearningRemote(): Promise<{ root: string; remote: 
   await git(["checkout", "main"]);
   await git(["remote", "set-url", "origin", "https://github.com/test-org/teamai-marketplace.git"]);
   return { root, remote, baseCommit };
+}
+
+interface RetryFixture {
+  repo: string;
+  retryCwd: string;
+  home: string;
+  source: string;
+  remote: string;
+  env: NodeJS.ProcessEnv;
+  operation: LearningOperation;
+  counters: { pushes: number; prLists: number; prCreates: number };
+  ghQueries: string[][];
+  run: (command: string, args: string[], options?: { cwd?: string; env?: NodeJS.ProcessEnv }) => Promise<{ exitCode: number; stdout: string; stderr: string }>;
+  setPullRequest: (state: "OPEN" | "CLOSED" | "MERGED" | undefined, mergedAt?: string | null, overrides?: { headOwner?: string; body?: string }) => void;
+  pullRequestBody: () => string;
+}
+
+async function retryFixture(initialFailure: "push" | "pr" | "push-before", transport: "https" | "ssh" = "https"): Promise<RetryFixture> {
+  const repo = await createGitRepo();
+  cleanup.add(repo);
+  const retryCwd = await createGitRepo();
+  cleanup.add(retryCwd);
+  const home = await tempDir("teamai-learning-retry-home-");
+  const { root: source, remote } = await marketplaceWithLearningRemote();
+  const sourceRemote = transport === "ssh" ? "ssh://git@github.com/test-org/teamai-marketplace.git" : "https://github.com/test-org/teamai-marketplace.git";
+  if (transport === "ssh") await runProcess("git", ["remote", "set-url", "origin", sourceRemote], { cwd: source });
+  await writeFile(path.join(repo, "note.md"), "Keep this exact learning.\r\n", "utf8");
+  await writeGlobalConfig(createConfig({ name: TEST_MARKETPLACE_NAME, source }), home);
+  await runProcess("git", ["config", "user.name", "Retry User"], { cwd: retryCwd });
+  await runProcess("git", ["config", "user.email", "retry@example.invalid"], { cwd: retryCwd });
+  const gitConfig = path.join(await tempDir("teamai-learning-retry-git-config-"), "config");
+  await writeFile(gitConfig, `[url "${pathToFileURL(remote).href}"]\n\tinsteadOf = ${sourceRemote}\n`, "utf8");
+  const env = { ...process.env, GIT_CONFIG_GLOBAL: gitConfig, GIT_CONFIG_NOSYSTEM: "1" };
+  const counters = { pushes: 0, prLists: 0, prCreates: 0 };
+  const ghQueries: string[][] = [];
+  let pullRequestState: "OPEN" | "CLOSED" | "MERGED" | undefined;
+  let mergedAt: string | null = null;
+  let pullRequestHeadOwner = "test-org";
+  let pullRequestBody = "";
+  let firstPushLost = false;
+  let firstPrLost = false;
+  const run: RetryFixture["run"] = async (command, args, options) => {
+    if (command === "git" && args[0] === "push") {
+      counters.pushes += 1;
+      if (initialFailure === "push-before" && !firstPushLost) {
+        firstPushLost = true;
+        return { exitCode: 1, stdout: "", stderr: "simulated push failure before remote update" };
+      }
+      const pushed = await runProcess(command, args, { ...options, env });
+      if (initialFailure === "push" && !firstPushLost) {
+        firstPushLost = true;
+        return { ...pushed, exitCode: 1, stderr: "simulated lost push response" };
+      }
+      return pushed;
+    }
+    if (command === "gh" && args[0] === "api" && args.includes("repos/test-org/teamai-marketplace/pulls")) {
+      counters.prLists += 1;
+      ghQueries.push([...args]);
+      if (!pullRequestState) return { exitCode: 0, stdout: "[]", stderr: "" };
+      const headFilter = args.find((argument) => argument.startsWith("head=test-org:"));
+      const branch = headFilter?.slice("head=test-org:".length) ?? "";
+      const head = await runProcess("git", ["--git-dir", remote, "rev-parse", `refs/heads/${branch}`]);
+      return {
+        exitCode: 0,
+        stdout: JSON.stringify([{
+          number: 42,
+          html_url: "https://github.com/test-org/teamai-marketplace/pull/42",
+          state: pullRequestState === "MERGED" ? "closed" : pullRequestState.toLowerCase(),
+          base: { ref: "teamai-learnings", repo: { full_name: "test-org/teamai-marketplace" } },
+          head: {
+            ref: branch,
+            sha: head.exitCode === 0 ? head.stdout.trim() : null,
+            repo: { full_name: `${pullRequestHeadOwner}/teamai-marketplace`, owner: { login: pullRequestHeadOwner } },
+          },
+          body: pullRequestBody,
+          merged_at: mergedAt,
+        }]),
+        stderr: "",
+      };
+    }
+    if (command === "gh" && args[0] === "pr" && args[1] === "create") {
+      counters.prCreates += 1;
+      pullRequestState ??= "OPEN";
+      pullRequestBody = args[args.indexOf("--body") + 1] ?? "";
+      if (initialFailure === "pr" && !firstPrLost) {
+        firstPrLost = true;
+        return { exitCode: 1, stdout: "", stderr: "simulated lost pull request response" };
+      }
+      return { exitCode: 0, stdout: "https://github.com/test-org/teamai-marketplace/pull/42\n", stderr: "" };
+    }
+    return await runProcess(command, args, { ...options, env });
+  };
+
+  const output = capture();
+  const exitCode = await runCli(["learning", "share", "note.md"], {
+    cwd: repo,
+    homeDir: home,
+    loadMarketplace: async () => loadFakeMarketplace(source),
+    contributeGitHub: async (options) => await submitGitHubContribution({ ...options, env, run }),
+    out: output.out,
+    err: output.err,
+  });
+  expect(exitCode).toBe(1);
+  const files = await readdir(learningOutboxDirectory(home));
+  expect(files).toHaveLength(1);
+  const operation = JSON.parse(await readFile(path.join(learningOutboxDirectory(home), files[0]), "utf8")) as LearningOperation;
+  return {
+    repo,
+    retryCwd,
+    home,
+    source,
+    remote,
+    env,
+    operation,
+    counters,
+    ghQueries,
+    run,
+    setPullRequest: (state, date = null, overrides = {}) => {
+      pullRequestState = state;
+      mergedAt = date;
+      pullRequestHeadOwner = overrides.headOwner ?? "test-org";
+      if (overrides.body !== undefined) pullRequestBody = overrides.body;
+    },
+    pullRequestBody: () => pullRequestBody,
+  };
+}
+
+async function updateRemoteFile(fixture: RetryFixture, branch: string, destination: string, content: Uint8Array): Promise<void> {
+  const work = await tempDir("teamai-learning-retry-edit-");
+  const cloned = await runProcess("git", ["clone", fixture.remote, work]);
+  if (cloned.exitCode !== 0) throw new Error(cloned.stderr);
+  const checkout = await runProcess("git", ["checkout", "-b", branch, `origin/${branch}`], { cwd: work });
+  if (checkout.exitCode !== 0) throw new Error(checkout.stderr);
+  await mkdir(path.dirname(path.join(work, destination)), { recursive: true });
+  await writeFile(path.join(work, destination), content);
+  const added = await runProcess("git", ["-c", "core.autocrlf=false", "add", "--", destination], { cwd: work });
+  if (added.exitCode !== 0) throw new Error(added.stderr);
+  const commit = await runProcess("git", ["-c", "user.name=Retry User", "-c", "user.email=retry@example.invalid", "commit", "-m", "change learning fixture"], { cwd: work });
+  if (commit.exitCode !== 0) throw new Error(commit.stderr);
+  const pushed = await runProcess("git", ["push", "origin", `HEAD:refs/heads/${branch}`], { cwd: work });
+  if (pushed.exitCode !== 0) throw new Error(pushed.stderr);
+}
+
+async function readRemoteFile(fixture: RetryFixture, branch: string, destination: string): Promise<Buffer> {
+  const shown = await runProcess("git", ["--git-dir", fixture.remote, "show", `refs/heads/${branch}:${destination}`]);
+  if (shown.exitCode !== 0) throw new Error(shown.stderr);
+  return Buffer.from(shown.stdout, "utf8");
+}
+
+async function retry(fixture: RetryFixture, argv = ["learning", "retry"]): Promise<{ exitCode: number; output: ReturnType<typeof capture> }> {
+  const output = capture();
+  const exitCode = await runCli([...argv, fixture.operation.id], {
+    cwd: fixture.retryCwd,
+    homeDir: fixture.home,
+    contributeGitHub: async (options) => await submitGitHubContribution({ ...options, env: fixture.env, run: fixture.run }),
+    out: output.out,
+    err: output.err,
+  });
+  return { exitCode, output };
 }
 
 describe("learning share", () => {
@@ -352,8 +524,7 @@ describe("learning share", () => {
     expect(output.stderr[0]).toContain(`Learning contribution failed (${failureCode})`);
     expect(output.stderr[0]).toContain(`Saved operation ID: ${operation.id}`);
     expect(output.stderr[0]).toContain(`Last confirmed phase: ${operation.phase}`);
-    expect(output.stderr[0]).toContain("command is not available yet");
-    expect(output.stderr[0]).toContain("teamai learning pending");
+    expect(output.stderr[0]).toContain(`teamai learning retry ${operation.id}`);
 
     const remoteBranches = await runProcess("git", ["--git-dir", remote, "for-each-ref", "--format=%(refname:short)", "refs/heads"]);
     expect(remoteBranches.exitCode).toBe(0);
@@ -379,6 +550,163 @@ describe("learning share", () => {
       status: "retryable-error",
       lastError: { code: failureCode },
     });
+  }, 20_000);
+
+  test("learning retry validates its operation ID and argument count", async () => {
+    const home = await tempDir("teamai-learning-retry-args-home-");
+    const output = capture();
+    expect(await runCli(["learning", "retry"], { homeDir: home, out: output.out, err: output.err })).toBe(2);
+    expect(await runCli(["learning", "retry", "bad-id"], { homeDir: home, out: output.out, err: output.err })).toBe(2);
+    expect(await runCli(["learning", "retry", "00000000-0000-4000-8000-000000000001", "extra"], { homeDir: home, out: output.out, err: output.err })).toBe(2);
+    expect(await runCli(["learning", "retry", "00000000-0000-4000-8000-000000000001", "--unknown"], { homeDir: home, out: output.out, err: output.err })).toBe(2);
+    expect(output.stderr.every((line) => line.startsWith("ERROR:"))).toBe(true);
+    await expect(readdir(learningOutboxDirectory(home))).rejects.toMatchObject({ code: "ENOENT" });
+  });
+
+  test("learning retry dry-run previews the frozen operation without reading or writing remotely", async () => {
+    const fixture = await retryFixture("push");
+    const outboxPath = path.join(learningOutboxDirectory(fixture.home), `${fixture.operation.id}.json`);
+    const before = await readFile(outboxPath);
+    const output = capture();
+    let contributionCalls = 0;
+    const exitCode = await runCli(["--dry-run", "learning", "retry", fixture.operation.id], {
+      cwd: fixture.retryCwd,
+      homeDir: fixture.home,
+      contributeGitHub: async () => {
+        contributionCalls += 1;
+        throw new Error("dry-run must not reach the contribution helper");
+      },
+      out: output.out,
+      err: output.err,
+    });
+    expect(exitCode).toBe(0);
+    expect(output.stdout.join("\n")).toContain(fixture.operation.destination);
+    expect(contributionCalls).toBe(0);
+    expect(fixture.counters).toEqual({ pushes: 1, prLists: 0, prCreates: 0 });
+    expect(await readFile(outboxPath)).toEqual(before);
+  }, 20_000);
+
+  test.each(["push", "pr"] as const)("learning retry recovers a lost %s response without repeating it", async (lostResponse) => {
+    const fixture = await retryFixture(lostResponse);
+    await writeGlobalConfig(createConfig({ name: TEST_MARKETPLACE_NAME, source: "https://github.com/other-org/other-marketplace.git" }), fixture.home);
+    const before = { ...fixture.counters };
+    const result = await retry(fixture);
+    expect(result.exitCode).toBe(0);
+    expect(result.output.stderr).toEqual([]);
+    expect(fixture.counters.pushes).toBe(before.pushes);
+    expect(fixture.counters.prCreates).toBe(lostResponse === "push" ? 1 : before.prCreates);
+    expect(fixture.counters.prLists).toBe(1);
+    expect(fixture.ghQueries[0]).toEqual(expect.arrayContaining([
+      "--method", "GET", "repos/test-org/teamai-marketplace/pulls", "-f", "state=all", "-f", "base=teamai-learnings", "-f", `head=test-org:${fixture.operation.branch}`,
+    ]));
+    expect(fixture.pullRequestBody()).toContain(`Operation ID: ${fixture.operation.id}`);
+    expect(fixture.pullRequestBody()).toContain(`Payload SHA-256: ${fixture.operation.contentHash}`);
+    const updated = JSON.parse(await readFile(path.join(learningOutboxDirectory(fixture.home), `${fixture.operation.id}.json`), "utf8")) as LearningOperation;
+    expect(updated).toMatchObject({
+      id: fixture.operation.id,
+      sourceHash: fixture.operation.sourceHash,
+      originWorkspaceKey: fixture.operation.originWorkspaceKey,
+      logicalProject: fixture.operation.logicalProject,
+      destination: fixture.operation.destination,
+      contentHash: fixture.operation.contentHash,
+      phase: "pr-open",
+      status: "ready",
+    });
+    expect(Buffer.from(updated.payloadBase64, "base64")).toEqual(Buffer.from(fixture.operation.payloadBase64, "base64"));
+    expect(await readRemoteFile(fixture, fixture.operation.branch, fixture.operation.destination))
+      .toEqual(Buffer.from(fixture.operation.payloadBase64, "base64"));
+  }, 20_000);
+
+  test.each([
+    ["same-name fork PR", { headOwner: "attacker" }],
+    ["PR with a different payload marker", { body: "Operation ID: 00000000-0000-4000-8000-000000000001\nPayload SHA-256: wrong" }],
+  ] as const)("learning retry blocks an unrelated %s without pushing or creating another PR", async (_label, overrides) => {
+    const fixture = await retryFixture("pr");
+    fixture.setPullRequest("OPEN", null, overrides);
+    const before = { ...fixture.counters };
+    const result = await retry(fixture);
+    expect(result.exitCode).toBe(1);
+    expect(result.output.stderr.join("\n")).toContain("REMOTE_CONTENT_CONFLICT");
+    expect(fixture.counters.pushes).toBe(before.pushes);
+    expect(fixture.counters.prCreates).toBe(before.prCreates);
+    const updated = JSON.parse(await readFile(path.join(learningOutboxDirectory(fixture.home), `${fixture.operation.id}.json`), "utf8")) as LearningOperation;
+    expect(updated).toMatchObject({ status: "blocked", lastError: { code: "REMOTE_CONTENT_CONFLICT" } });
+  }, 20_000);
+
+  test("learning retry uses frozen SSH source and author from a different directory without Git identity", async () => {
+    const fixture = await retryFixture("push-before", "ssh");
+    expect(fixture.operation.sourceRemote).toBe("ssh://git@github.com/test-org/teamai-marketplace.git");
+    expect(fixture.operation.commitIdentity).toEqual({ name: "Team AI Test", email: "teamai@example.invalid" });
+    await runProcess("git", ["config", "--unset-all", "user.name"], { cwd: fixture.retryCwd });
+    await runProcess("git", ["config", "--unset-all", "user.email"], { cwd: fixture.retryCwd });
+
+    const emptyGlobalConfig = path.join(await tempDir("teamai-learning-empty-git-config-"), "config");
+    await writeFile(emptyGlobalConfig, "", "utf8");
+    const previousGlobal = process.env.GIT_CONFIG_GLOBAL;
+    const previousNoSystem = process.env.GIT_CONFIG_NOSYSTEM;
+    process.env.GIT_CONFIG_GLOBAL = emptyGlobalConfig;
+    process.env.GIT_CONFIG_NOSYSTEM = "1";
+    try {
+      const result = await retry(fixture);
+      expect(result.exitCode, result.output.stderr.join("\n")).toBe(0);
+      const author = await runProcess("git", ["--git-dir", fixture.remote, "show", "-s", "--format=%an%n%ae", fixture.operation.branch]);
+      expect(author.stdout.trim().split(/\r?\n/)).toEqual(["Team AI Test", "teamai@example.invalid"]);
+      expect(await readRemoteFile(fixture, fixture.operation.branch, fixture.operation.destination))
+        .toEqual(Buffer.from(fixture.operation.payloadBase64, "base64"));
+    } finally {
+      if (previousGlobal === undefined) delete process.env.GIT_CONFIG_GLOBAL;
+      else process.env.GIT_CONFIG_GLOBAL = previousGlobal;
+      if (previousNoSystem === undefined) delete process.env.GIT_CONFIG_NOSYSTEM;
+      else process.env.GIT_CONFIG_NOSYSTEM = previousNoSystem;
+    }
+  }, 20_000);
+
+  test("learning retry blocks a same-name branch with different content and never force-pushes", async () => {
+    const fixture = await retryFixture("push");
+    const payload = Buffer.from(fixture.operation.payloadBase64, "base64");
+    await updateRemoteFile(fixture, fixture.operation.branch, fixture.operation.destination, Buffer.concat([payload, Buffer.from("remote edit\n")]));
+    const remoteHead = await runProcess("git", ["--git-dir", fixture.remote, "rev-parse", `refs/heads/${fixture.operation.branch}`]);
+    const result = await retry(fixture);
+    expect(result.exitCode).toBe(1);
+    expect(result.output.stderr.join("\n")).toContain("REMOTE_CONTENT_CONFLICT");
+    expect(fixture.counters.pushes).toBe(1);
+    expect(fixture.counters.prCreates).toBe(0);
+    const after = await runProcess("git", ["--git-dir", fixture.remote, "rev-parse", `refs/heads/${fixture.operation.branch}`]);
+    expect(after.stdout.trim()).toBe(remoteHead.stdout.trim());
+    const updated = JSON.parse(await readFile(path.join(learningOutboxDirectory(fixture.home), `${fixture.operation.id}.json`), "utf8")) as LearningOperation;
+    expect(updated).toMatchObject({ status: "blocked", lastError: { code: "REMOTE_CONTENT_CONFLICT" } });
+  }, 20_000);
+
+  test.each([
+    ["merged exact content", "MERGED", "exact", 0, "published", "complete"],
+    ["merged modified content", "MERGED", "modified", 1, "branch-pushed", "blocked"],
+    ["closed without merge", "CLOSED", "unchanged", 0, "closed-without-merge", "complete"],
+  ] as const)("learning retry classifies %s separately", async (_label, state, content, expectedExit, phase, status) => {
+    const fixture = await retryFixture("pr");
+    fixture.setPullRequest(state, state === "MERGED" ? "2026-09-29T00:00:00Z" : null);
+    if (content !== "unchanged") {
+      const payload = Buffer.from(fixture.operation.payloadBase64, "base64");
+      await updateRemoteFile(
+        fixture,
+        "teamai-learnings",
+        fixture.operation.destination,
+        content === "exact" ? payload : Buffer.concat([payload, Buffer.from("reviewed edit\n")]),
+      );
+      expect(await readRemoteFile(fixture, "teamai-learnings", fixture.operation.destination)).toEqual(
+        content === "exact" ? payload : Buffer.concat([payload, Buffer.from("reviewed edit\n")]),
+      );
+    }
+    const result = await retry(fixture);
+    expect(result.exitCode, result.output.stderr.join("\n")).toBe(expectedExit);
+    expect(fixture.counters.pushes).toBe(1);
+    expect(fixture.counters.prCreates).toBe(1);
+    const updated = JSON.parse(await readFile(path.join(learningOutboxDirectory(fixture.home), `${fixture.operation.id}.json`), "utf8")) as LearningOperation;
+    expect(updated).toMatchObject({ phase, status });
+    if (state === "MERGED" && content === "modified") {
+      expect(updated.lastError?.code).toBe("MERGED_CONTENT_MODIFIED");
+    }
+    if (content === "exact") expect(result.output.stdout.join("\n")).toContain("published");
+    if (state === "CLOSED") expect(result.output.stdout.join("\n")).toContain("closed without merging");
   }, 20_000);
 
   test("integration: isolated local Git worktree and mocked gh create a branch contribution", async () => {
@@ -450,6 +778,16 @@ describe("learning share", () => {
   test("resolves a local Marketplace through its GitHub origin", async () => {
     const source = await marketplace();
     await expect(resolveGitHubMarketplaceRemote(source, source)).resolves.toBe("https://github.com/test-org/teamai-marketplace.git");
+    await expect(resolveGitHubMarketplaceRemote("git@github.com:test-org/teamai-marketplace", source))
+      .resolves.toBe("git@github.com:test-org/teamai-marketplace.git");
+    let credentialError = "";
+    try {
+      await resolveGitHubMarketplaceRemote("https://token:secret@github.com/test-org/teamai-marketplace.git", source);
+    } catch (error) {
+      credentialError = (error as Error).message;
+    }
+    expect(credentialError).toContain("must not contain credentials");
+    expect(credentialError).not.toContain("secret");
     const withoutOrigin = await createGitRepo();
     await expect(resolveGitHubMarketplaceRemote(withoutOrigin, withoutOrigin)).rejects.toThrow("has no origin remote");
   });

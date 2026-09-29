@@ -24,6 +24,8 @@ export interface LearningOperation {
   id: string;
   sourceHash: string;
   remoteIdentity: string;
+  sourceRemote?: string;
+  commitIdentity?: { name: string; email: string };
   resourceRevision?: string;
   metadata: LearningMetadata;
   fileName: string;
@@ -46,6 +48,10 @@ export interface LearningOperation {
 
 export function learningHash(value: string | Uint8Array): string {
   return createHash("sha256").update(value).digest("hex");
+}
+
+export function isFrozenLearningPullRequestBody(body: string, id: string, contentHash: string): boolean {
+  return hasExactMarker(body, "Operation ID", id) && hasExactMarker(body, "Payload SHA-256", contentHash);
 }
 
 export function learningOutboxDirectory(homeDir: string): string {
@@ -117,13 +123,42 @@ function validateOperation(value: unknown, filename: string): LearningOperation 
   if (!/^[a-zA-Z0-9_.-]+\/[a-zA-Z0-9_.-]+$/.test(operation.remoteIdentity) || !/^[a-f0-9]{64}$/.test(operation.sourceHash)) {
     throw new Error("Learning outbox source identity is invalid.");
   }
+  const expectedRemotes = [
+    `https://github.com/${operation.remoteIdentity}.git`,
+    `git@github.com:${operation.remoteIdentity}.git`,
+    `ssh://git@github.com/${operation.remoteIdentity}.git`,
+  ];
+  if ((operation.sourceRemote === undefined) !== (operation.commitIdentity === undefined) ||
+      operation.sourceRemote !== undefined && !expectedRemotes.includes(operation.sourceRemote) ||
+      operation.commitIdentity !== undefined && (!operation.commitIdentity ||
+        typeof operation.commitIdentity.name !== "string" || !operation.commitIdentity.name.trim() || /[\r\n\0]/.test(operation.commitIdentity.name) ||
+        typeof operation.commitIdentity.email !== "string" || !operation.commitIdentity.email.trim() || /[\r\n\0]/.test(operation.commitIdentity.email))) {
+    throw new Error("Learning outbox frozen retry metadata is invalid.");
+  }
+  const project = operation.logicalProject;
+  const fileName = operation.fileName;
+  if (!project || project === "." || project === ".." || /[\\/\0]/.test(project) ||
+      typeof fileName !== "string" || !/^[a-z0-9][a-z0-9._-]*\.md$/i.test(fileName) ||
+      operation.destination !== path.posix.join("learnings", project, fileName) ||
+      !/^[a-f0-9]{64}$/.test(operation.originWorkspaceKey) ||
+      operation.baseCommit !== undefined && !/^[a-f0-9]{40,64}$/i.test(operation.baseCommit) ||
+      !operation.metadata || operation.metadata.id !== operation.id || operation.metadata.logicalProject !== project ||
+      typeof operation.metadata.title !== "string" || typeof operation.metadata.owner !== "string" ||
+      typeof operation.metadata.sourceRepo !== "string" || typeof operation.metadata.createdAt !== "string" ||
+      !Array.isArray(operation.metadata.tags) || operation.metadata.tags.some((tag) => typeof tag !== "string")) {
+    throw new Error("Learning outbox target or metadata is invalid.");
+  }
   if (operation.branch !== `teamai/learning-${operation.id}` || operation.baseBranch !== "teamai-learnings" ||
       !["queued", "branch-pushed", "pr-open", "published", "closed-without-merge"].includes(operation.phase) ||
       !["ready", "retryable-error", "blocked", "complete"].includes(operation.status)) {
     throw new Error("Learning outbox state is invalid.");
   }
+  if ((operation.phase === "published" || operation.phase === "closed-without-merge") !== (operation.status === "complete")) {
+    throw new Error("Learning outbox terminal state is invalid.");
+  }
   if (!/^[a-f0-9]{64}$/.test(operation.contentHash) ||
-      typeof operation.bodyBase64 !== "string" || typeof operation.payloadBase64 !== "string") {
+      typeof operation.bodyBase64 !== "string" || typeof operation.payloadBase64 !== "string" ||
+      typeof operation.pullRequestTitle !== "string" || typeof operation.pullRequestBody !== "string") {
     throw new Error("Learning outbox payload is invalid.");
   }
   const body = Buffer.from(operation.bodyBase64, "base64");
@@ -133,5 +168,14 @@ function validateOperation(value: unknown, filename: string): LearningOperation 
       !payload.subarray(payload.length - body.length).equals(body)) {
     throw new Error("Learning outbox payload hash does not match.");
   }
+  if (operation.sourceRemote && !isFrozenLearningPullRequestBody(operation.pullRequestBody, operation.id, operation.contentHash)) {
+    throw new Error("Learning outbox pull request identity is invalid.");
+  }
   return operation;
+}
+
+function hasExactMarker(body: string, label: string, value: string): boolean {
+  const marker = `${label}: ${value}`;
+  const matchingLines = body.split(/\r?\n/).filter((line) => line.startsWith(`${label}:`));
+  return matchingLines.length === 1 && matchingLines[0] === marker;
 }

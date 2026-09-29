@@ -73,8 +73,10 @@ test("integration: skill contribute uses an isolated worktree and mocked gh", as
   const gitConfig = path.join(gitConfigRoot, "config");
   await writeFile(gitConfig, `[url \"${pathToFileURL(remote.bare).href}\"]\n\tinsteadOf = https://github.com/test-org/teamai-marketplace.git\n`, "utf8");
   const environment = { ...process.env, GIT_CONFIG_GLOBAL: gitConfig, GIT_CONFIG_NOSYSTEM: "1" };
+  const resourceBase = (await runProcess("git", ["--git-dir", remote.bare, "rev-parse", "refs/heads/main"])).stdout.trim();
   const now = new Date("2026-09-22T00:00:00.000Z");
   const stdout: string[] = [];
+  const ghCalls: string[][] = [];
   const context = {
     cwd: business,
     homeDir: home,
@@ -85,9 +87,13 @@ test("integration: skill contribute uses an isolated worktree and mocked gh", as
     contributeGitHub: async (options: Parameters<typeof submitGitHubContribution>[0]) => await submitGitHubContribution({
       ...options,
       env: environment,
-      run: async (command, args, options) => command === "gh"
-        ? { exitCode: 0, stdout: "https://github.com/test-org/teamai-marketplace/pull/77\n", stderr: "" }
-        : await runProcess(command, args, options),
+      run: async (command, args, options) => {
+        if (command === "gh") {
+          ghCalls.push(args);
+          return { exitCode: 0, stdout: "https://github.com/test-org/teamai-marketplace/pull/77\n", stderr: "" };
+        }
+        return await runProcess(command, args, options);
+      },
     }),
   };
 
@@ -98,6 +104,9 @@ test("integration: skill contribute uses an isolated worktree and mocked gh", as
   expect(await runCli(["skill", "contribute", "release-helper", "--owner", "release-team", "--tags", "release", "experimental", "--target", "standalone"], context)).toBe(0);
   expect(stdout).toContain("Pull request: https://github.com/test-org/teamai-marketplace/pull/77");
   const branch = `teamai/skill-release-helper-${now.getTime()}`;
+  const branchBase = await runProcess("git", ["--git-dir", remote.bare, "rev-parse", `${branch}^`]);
+  expect(branchBase.stdout.trim()).toBe(resourceBase);
+  expect(ghCalls[0]).not.toContain("teamai-learnings");
   const skill = await runProcess("git", ["--git-dir", remote.bare, "show", `${branch}:skills/release-helper/SKILL.md`]);
   expect(skill.stdout).toContain("name: release-helper");
   const metadata = await runProcess("git", ["--git-dir", remote.bare, "show", `${branch}:skills.yaml`]);

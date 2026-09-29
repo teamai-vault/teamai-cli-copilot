@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 import { createCommandContext, resolveCopilotBackend, type CommandContext } from "./commands/context.js";
 import { doctorCommand } from "./commands/doctor.js";
 import { initCommand } from "./commands/init.js";
-import { learningPendingCommand, learningShareCommand } from "./commands/learning.js";
+import { learningPendingCommand, learningRetryCommand, learningShareCommand } from "./commands/learning.js";
 import { projectsListCommand, projectsSetCommand } from "./commands/projects.js";
 import { roleListCommand, roleSetCommand } from "./commands/role.js";
 import { skillInstallCommand, skillListCommand, skillRemoveCommand, skillShowCommand } from "./commands/skill.js";
@@ -25,6 +25,7 @@ function usage(): string {
     "  projects [list|set <ids...>]",
     "  learning share <file> [--project <id>|--shared] [--tags <tag...>]",
     "  learning pending [--json]",
+    "  learning retry <id>",
     "  sync",
     "  role list",
     "  role set <role>",
@@ -70,6 +71,7 @@ const optionRules: Record<string, Record<string, OptionRule>> = {
     "--shared": { kind: "boolean" },
     "--tags": { kind: "many" },
   },
+  "learning retry": {},
   status: { "--resources": { kind: "boolean" }, "--json": { kind: "boolean" } },
   doctor: { "--json": { kind: "boolean" } },
   "learning pending": { "--json": { kind: "boolean" } },
@@ -154,7 +156,7 @@ function parseInvocation(argv: string[]): Invocation {
     optionKey = `${command} ${subcommand ?? ""}`.trim();
   }
 
-  const supported = ["init", "sync", "role list", "role set", "projects list", "projects set", "learning share", "learning pending", "skill list", "skill show", "skill install", "skill remove", "skill contribute", "tags list", "status", "doctor"];
+  const supported = ["init", "sync", "role list", "role set", "projects list", "projects set", "learning share", "learning pending", "learning retry", "skill list", "skill show", "skill install", "skill remove", "skill contribute", "tags list", "status", "doctor"];
   if (!supported.includes(optionKey)) throw new UsageError(`Unknown command or subcommand.\n${usage()}`);
   const parsed = parseOptions(optionArgs, optionRules[optionKey] ?? {}, optionKey);
   const positionals = parsed.positionals;
@@ -177,6 +179,12 @@ function parseInvocation(argv: string[]): Invocation {
       if (parsed.options.has("--project") && parsed.options.has("--shared")) throw new UsageError("Use either --project <id> or --shared.");
       break;
     case "learning pending": exact(0, "teamai learning pending [--json]"); break;
+    case "learning retry":
+      exact(1, "teamai learning retry <id>");
+      if (!/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(positionals[0])) {
+        throw new UsageError("Learning operation ID must be a UUID.");
+      }
+      break;
     case "skill list": exact(0, "teamai skill list [--tag <tag>] [--owner <owner>] [--source plugin|standalone]"); break;
     case "skill show": exact(1, "teamai skill show <name>"); break;
     case "skill install": {
@@ -316,6 +324,7 @@ export async function runCli(argv: string[], overrides: Partial<CommandContext> 
         return 0;
       case "learning":
         if (invocation.subcommand === "pending") await learningPendingCommand(context, hasOption(invocation.options, "--json"));
+        else if (invocation.subcommand === "retry") await learningRetryCommand(context, invocation.positionals[0]);
         else await learningShareCommand(context, {
           file: invocation.positionals[0],
           project: option(invocation.options, "--project"),

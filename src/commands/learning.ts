@@ -27,7 +27,7 @@ export async function learningShareCommand(context: CommandContext, options: Lea
   if (!identity) throw new Error("teamai learning share requires a Git repository.");
   const learning = await readLearning(options.file, context.cwd);
   const gitIdentity = await readGitIdentity(identity.workspaceRoot);
-  if (!gitIdentity.name || !gitIdentity.email || /[\r\n]/.test(gitIdentity.name) || /[\r\n]/.test(gitIdentity.email)) {
+  if (!gitIdentity.name || !gitIdentity.email || /[\r\n\0]/.test(gitIdentity.name) || /[\r\n\0]/.test(gitIdentity.email)) {
     throw new Error("Git user.name and user.email must be non-empty single-line values.");
   }
   const source = await resolveGitHubMarketplaceSource(config.marketplace.source, context.cwd);
@@ -58,6 +58,8 @@ export async function learningShareCommand(context: CommandContext, options: Lea
       id,
       sourceHash: learningHash(config.marketplace.source),
       remoteIdentity: source.repository,
+      sourceRemote: source.remote,
+      commitIdentity: gitIdentity,
       ...(catalog.revision ? { resourceRevision: catalog.revision } : {}),
       metadata,
       fileName: learning.name,
@@ -70,7 +72,7 @@ export async function learningShareCommand(context: CommandContext, options: Lea
       branch: `teamai/learning-${id}`,
       baseBranch: "teamai-learnings",
       pullRequestTitle: `Share learning: ${learning.title}`,
-      pullRequestBody: `Share learning '${learning.title}' for ${target}.`,
+      pullRequestBody: `Share learning '${learning.title}' for ${target}.\n\nOperation ID: ${id}\nPayload SHA-256: ${learningHash(payload)}`,
       phase: "queued",
       status: "ready",
     };
@@ -98,21 +100,7 @@ export async function learningShareCommand(context: CommandContext, options: Lea
           if (!context.dryRun) await updateLearningOperation(context.homeDir, updated);
           Object.assign(operation, updated);
         },
-        prepare: async (worktree) => {
-          const targetPath = safeContributionPath(worktree, destination);
-          await assertSafeContributionAncestors(worktree, targetPath);
-          try {
-            const existing = await lstat(targetPath);
-            if (existing.isSymbolicLink() || !existing.isFile() || existing.nlink > 1) {
-              throw new Error(`Unsafe learning destination '${destination}'.`);
-            }
-            throw new Error(`Learning already exists at '${destination}'. Choose a different file name.`);
-          } catch (error) {
-            if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
-          }
-          await atomicWriteFile(targetPath, payload);
-          return [destination];
-        },
+        prepare: async (worktree) => await prepareLearningContribution(worktree, destination, payload),
       });
       if (context.dryRun) {
         context.out(`WOULD learning share: ${learning.name} -> ${destination}`);
@@ -147,8 +135,8 @@ export async function learningShareCommand(context: CommandContext, options: Lea
       }
       throw new Error(
         `Learning contribution failed (${failure.code}): ${failure.message} Last confirmed phase: ${operation.phase}. ` +
-        `Saved operation ID: ${id}. ${failure.nextStep} The \`teamai learning retry <id>\` command is not available yet; ` +
-        "run `teamai learning pending` to inspect the saved operation. Do not rerun `learning share` as a retry because it creates a new operation.",
+        `Saved operation ID: ${id}. ${failure.nextStep} Run \`teamai learning retry ${id}\` to resume this operation; ` +
+        "do not rerun `learning share` because it creates a new operation.",
       );
     }
   } finally {
@@ -182,6 +170,80 @@ export async function learningPendingCommand(context: CommandContext, json: bool
   }
 }
 
+export async function learningRetryCommand(context: CommandContext, id: string): Promise<void> {
+  const operation = (await listLearningOperations(context.homeDir)).find((candidate) => candidate.id === id.toLowerCase());
+  if (!operation) throw new Error(`No saved learning operation '${id}' exists.`);
+  if (operation.status === "complete") {
+    context.out(`Learning contribution ${operation.id}: ${operation.phase}`);
+    if (operation.phase === "closed-without-merge") context.out("The pull request was closed without merging; no new pull request was created.");
+    return;
+  }
+  if (operation.status === "blocked") {
+    throw new Error(`Learning contribution ${operation.id} is blocked${operation.lastError ? ` (${operation.lastError.code}: ${operation.lastError.message})` : ""}.`);
+  }
+  if (context.dryRun) {
+    context.out(`WOULD learning retry: ${operation.id} -> ${operation.remoteIdentity}:${operation.baseBranch}/${operation.branch}`);
+    context.out(`WOULD learning payload: ${operation.destination} sha256:${operation.contentHash}`);
+    return;
+  }
+
+  try {
+    const payload = Buffer.from(operation.payloadBase64, "base64");
+    if (learningHash(payload) !== operation.contentHash) throw new GitHubContributionError("REMOTE_CONTENT_CONFLICT", "The saved learning payload hash does not match.");
+    if (!operation.sourceRemote || !operation.commitIdentity) {
+      throw new GitHubContributionError("FROZEN_RETRY_METADATA_MISSING", "This saved operation predates frozen retry source and commit identity metadata.");
+    }
+    const result = await context.contributeGitHub({
+      remote: operation.sourceRemote,
+      repository: operation.remoteIdentity,
+      branch: operation.branch,
+      baseBranch: operation.baseBranch,
+      identity: operation.commitIdentity,
+      commitMessage: `teamai: share learning ${operation.metadata.title}`,
+      pullRequestTitle: operation.pullRequestTitle,
+      pullRequestBody: operation.pullRequestBody,
+      learningRetry: { id: operation.id, destination: operation.destination, payload, contentHash: operation.contentHash, baseCommit: operation.baseCommit },
+      dryRun: false,
+      checkpoint: async (checkpoint) => {
+        const updated: LearningOperation = { ...operation, status: "ready" };
+        delete updated.lastError;
+        if (checkpoint.phase === "base-resolved") updated.baseCommit = checkpoint.baseCommit;
+        if (checkpoint.phase === "branch-pushed" || checkpoint.phase === "pr-open" ||
+            checkpoint.phase === "published" || checkpoint.phase === "closed-without-merge") {
+          updated.phase = checkpoint.phase;
+        }
+        if (checkpoint.phase === "pr-open") {
+          updated.pullRequest = { number: checkpoint.pullRequestNumber, url: checkpoint.pullRequestUrl };
+        }
+        if (checkpoint.phase === "published" || checkpoint.phase === "closed-without-merge") updated.status = "complete";
+        await updateLearningOperation(context.homeDir, updated);
+        Object.assign(operation, updated);
+      },
+      prepare: async (worktree) => await prepareLearningContribution(worktree, operation.destination, payload),
+    });
+    if (result.outcome === "published" || result.outcome === "closed-without-merge") {
+      context.out(`Learning contribution ${operation.id}: ${result.outcome}`);
+      if (result.outcome === "closed-without-merge") context.out("The pull request was closed without merging; no new pull request was created.");
+    } else {
+      context.out(`DONE learning retry: ${operation.id} (${operation.phase})`);
+      if (result.pullRequestUrl) context.out(`Pull request: ${result.pullRequestUrl}`);
+    }
+  } catch (error) {
+    const failure = classifyLearningFailure(error);
+    operation.status = failure.status;
+    operation.lastError = { code: failure.code, message: failure.message };
+    try {
+      await updateLearningOperation(context.homeDir, operation);
+    } catch {
+      // Preserve the last durable phase if its error checkpoint also fails.
+    }
+    throw new Error(
+      `Learning retry failed (${failure.code}): ${failure.message} Last confirmed phase: ${operation.phase}. ` +
+      `Saved operation ID: ${operation.id}. ${failure.nextStep}`,
+    );
+  }
+}
+
 function classifyLearningFailure(error: unknown): {
   code: string;
   status: LearningOperation["status"];
@@ -199,7 +261,31 @@ function classifyLearningFailure(error: unknown): {
   }
 
   const code = error instanceof GitHubContributionError ? error.code : "CONTRIBUTION_FAILED";
+  if (code === "REMOTE_CONTENT_CONFLICT") {
+    return {
+      code,
+      status: "blocked",
+      message: errorMessage || "The remote branch differs from the saved operation.",
+      nextStep: "Review the remote branch and pull request manually; Team AI did not overwrite it.",
+    };
+  }
+  if (code === "MERGED_CONTENT_MODIFIED") {
+    return {
+      code,
+      status: "blocked",
+      message: "The merged learning differs from the saved payload on the authoritative Learnings branch.",
+      nextStep: "Review the merged content manually; Team AI did not overwrite it.",
+    };
+  }
   const steps: Record<string, { message: string; nextStep: string }> = {
+    FROZEN_RETRY_METADATA_MISSING: {
+      message: "This saved operation does not contain the frozen source transport and commit identity required for safe retry.",
+      nextStep: "Review the Marketplace and Git identity manually; Team AI will not infer missing retry metadata from the current directory.",
+    },
+    PAYLOAD_CONTENT_CHANGED: {
+      message: "Git filters changed the saved learning bytes while staging.",
+      nextStep: "Review repository attributes or filters, then retry the same saved operation.",
+    },
     SOURCE_CLONE_FAILED: {
       message: "Could not access the configured Marketplace repository.",
       nextStep: "Check network connectivity and GitHub read access to the repository.",
@@ -236,11 +322,22 @@ function classifyLearningFailure(error: unknown): {
       message: "The branch push was confirmed, but pull request creation was not confirmed.",
       nextStep: "Check GitHub for an existing pull request from this branch before taking manual action.",
     },
+    BRANCH_LOOKUP_FAILED: {
+      message: "Could not verify the saved contribution branch or pull request head.",
+      nextStep: "Check GitHub read access and retry; no branch was force-pushed.",
+    },
+    PULL_REQUEST_LOOKUP_FAILED: {
+      message: "Could not verify existing pull requests for this operation.",
+      nextStep: "Check GitHub read access and retry before creating another pull request.",
+    },
     CONTRIBUTION_FAILED: {
       message: "The contribution stopped before another phase was confirmed.",
       nextStep: "Check GitHub access and the local Git state.",
     },
   };
+  if (code === "FROZEN_RETRY_METADATA_MISSING") {
+    return { code, status: "blocked", ...steps[code] };
+  }
   return {
     code,
     status: "retryable-error",
@@ -310,4 +407,20 @@ async function assertSafeContributionAncestors(worktree: string, target: string)
     if (parent === current || path.relative(root, parent).startsWith("..")) throw new Error("Unsafe learning destination.");
     current = parent;
   }
+}
+
+async function prepareLearningContribution(worktree: string, destination: string, payload: Uint8Array): Promise<string[]> {
+  const targetPath = safeContributionPath(worktree, destination);
+  await assertSafeContributionAncestors(worktree, targetPath);
+  try {
+    const existing = await lstat(targetPath);
+    if (existing.isSymbolicLink() || !existing.isFile() || existing.nlink > 1) {
+      throw new Error(`Unsafe learning destination '${destination}'.`);
+    }
+    throw new Error(`Learning already exists at '${destination}'. Choose a different file name.`);
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
+  }
+  await atomicWriteFile(targetPath, payload);
+  return [destination];
 }

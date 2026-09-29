@@ -13,6 +13,7 @@ Use this as an intent map, not as a cached CLI manual. Run `teamai <command> --h
 | `teamai skill contribute` | Contribute a Skill through the supported Team AI contribution workflow. |
 | `teamai tags list` | Browse current Skill tags. |
 | `teamai learning share` | Share a Learning through the supported contribution workflow. |
+| `teamai learning retry <id>` | Resume a saved Learning contribution without creating a new operation. |
 | `teamai status` | Read the current Team AI state summary. |
 | `teamai doctor` | Diagnose inconsistent, stale, missing, or conflicting Team AI-managed state. |
 
@@ -22,6 +23,7 @@ Use this as an intent map, not as a cached CLI manual. Run `teamai <command> --h
 - "Show experimental skills." -> `teamai skill list --tag experimental`
 - "Install the experimental skills." -> use `teamai skill install` with the current tag-selection syntax reported by `--help`
 - "Share this troubleshooting note with the team." -> `teamai learning share`
+- "Resume saved Learning operation <id>." -> `teamai learning retry <id>`
 - "Bring Team AI up to date." -> `teamai sync`
 - "Why is Team AI inconsistent?" -> `teamai status`, then `teamai doctor`
 
