@@ -1,4 +1,4 @@
-# Marketplace Rename Tool
+# CLI Maintainer Scripts
 
 [中文](#中文) | [English](#english)
 
@@ -111,6 +111,24 @@ npm run test:e2e:fallback
 
 最后使用真实 Copilot CLI 做 add / browse / install smoke test，并确认 VS Code Marketplace source 仍在 `chat.plugins.marketplaces` 首位。
 
+### Learnings authority branch
+
+`init-learnings-branch.mjs` 是管理员工具，用于初始化 Marketplace 的 `teamai-learnings` 权威分支。默认只预览：
+
+```powershell
+node scripts/init-learnings-branch.mjs --marketplace <marketplace-git-url>
+```
+
+确认目标后，显式使用 `--apply`：
+
+```powershell
+node scripts/init-learnings-branch.mjs --marketplace <marketplace-git-url> --apply
+```
+
+脚本在隔离临时 Git 仓库创建无 parent 的 root commit，只推送 `refs/heads/teamai-learnings`。分支已存在或并发创建时会停止且不覆盖；当前 checkout、`main` 和其他 refs 保持不变。分支保护与 CODEOWNERS 仍由管理员单独配置并验证。
+
+预览和写入阶段的 Git 命令都在隔离临时 bare 仓库执行。系统、全局或环境 Git 配置若将 fetch 或 push 地址重写到其他目标，脚本会拒绝；设置 `GIT_NAMESPACE` 也会拒绝。凭据与 hooks 使用该隔离仓库可见的系统、全局和环境配置；调用 checkout 的本地 Git 配置不会参与。请确保 `user.name`、`user.email` 和所需凭据在这些配置来源中可用。
+
 ## English
 
 `rename-marketplace.mjs` is a Marketplace maintainer utility. It renames the logical Copilot Marketplace ID inside one target Marketplace repository.
@@ -152,6 +170,24 @@ npm run test:e2e:fallback
 ```
 
 The two E2E commands use isolated temporary state. The native check exercises real Copilot; the fallback check hides Copilot CLI, materializes plugins into `~/.copilot/installed-plugins`, merges Copilot metadata, and checks native recognition afterward.
+
+### Learnings authority branch
+
+`init-learnings-branch.mjs` is an administrator tool for creating the Marketplace `teamai-learnings` authority branch. It previews by default:
+
+```powershell
+node scripts/init-learnings-branch.mjs --marketplace <marketplace-git-url>
+```
+
+After confirming the target, pass `--apply` to write:
+
+```powershell
+node scripts/init-learnings-branch.mjs --marketplace <marketplace-git-url> --apply
+```
+
+The script creates a parentless root commit in an isolated temporary Git repository and pushes only `refs/heads/teamai-learnings`. It stops if the branch already exists or another initializer wins the race; it does not overwrite refs or change the caller's checkout. Branch protection and CODEOWNERS remain separate administrator work.
+
+Preview and apply run all Git commands in an isolated temporary bare repository. The operation stops if system, global, or environment Git configuration rewrites either fetch or push to a different target, and it rejects `GIT_NAMESPACE`. Credentials and hooks come from the system, global, and environment configuration visible to that isolated repository; the caller checkout's local Git configuration is not loaded. Ensure `user.name`, `user.email`, and required credentials are available from those configuration sources.
 
 If the old Marketplace ID is already deployed, update Copilot registrations, installed Plugin specs, `~/.teamai/`, `~/.copilot/`, and `.github/copilot/settings.json` separately. This source-repository utility never changes those external locations.
 
