@@ -3,6 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { teamAiHome } from "../config/global.js";
 import { atomicWriteJson, directoriesEqual, pathsEqual, readJsonIfExists, replaceDirectory, withFileLock } from "../utils/fs.js";
+import { copilotHome } from "./user-state.js";
 
 const BUILT_IN_SKILL_NAME = "teamai";
 const OWNER = "teamai-cli";
@@ -32,7 +33,7 @@ export function builtInTeamAiSkillSource(): string {
 }
 
 export function builtInTeamAiSkillTarget(homeDir: string): string {
-  return path.join(homeDir, ".copilot", "skills", BUILT_IN_SKILL_NAME);
+  return path.join(copilotHome(homeDir), "skills", BUILT_IN_SKILL_NAME);
 }
 
 export function builtInTeamAiSkillOwnershipPath(homeDir: string): string {
@@ -59,9 +60,7 @@ export async function inspectBuiltInTeamAiSkill(homeDir: string): Promise<BuiltI
     return { status: "missing", target, version };
   }
 
-  if (!pathsEqual(ownership.target, target)) {
-    throw new Error("Built-in Team AI Skill ownership points to an unexpected target: " + ownership.target);
-  }
+  if (!pathsEqual(ownership.target, target)) throw copilotHomeMismatch(ownership.target, target);
   if (!targetExists) return { status: "stale", target, version, reason: "owned target is missing" };
 
   try {
@@ -82,6 +81,13 @@ export async function inspectBuiltInTeamAiSkill(homeDir: string): Promise<BuiltI
   };
 }
 
+export async function assertCopilotHomeMatchesOwnership(homeDir: string): Promise<void> {
+  const ownership = await readOwnership(homeDir);
+  if (!ownership) return;
+  const target = builtInTeamAiSkillTarget(homeDir);
+  if (!pathsEqual(ownership.target, target)) throw copilotHomeMismatch(ownership.target, target);
+}
+
 export async function convergeBuiltInTeamAiSkill(
   homeDir: string,
   options: { dryRun?: boolean } = {},
@@ -96,7 +102,7 @@ export async function convergeBuiltInTeamAiSkill(
   if (options.dryRun) return { state, change };
 
   const source = builtInTeamAiSkillSource();
-  const lockPath = path.join(homeDir, ".copilot", "skills", ".teamai.lock");
+  const lockPath = path.join(copilotHome(homeDir), "skills", ".teamai.lock");
   await withFileLock(lockPath, async () => {
     const current = await inspectBuiltInTeamAiSkill(homeDir);
     if (current.status === "collision") {
@@ -128,6 +134,10 @@ export async function convergeBuiltInTeamAiSkill(
     }
   });
   return { state: await inspectBuiltInTeamAiSkill(homeDir), change };
+}
+
+function copilotHomeMismatch(ownedTarget: string, expectedTarget: string): Error {
+  return new Error(`COPILOT_HOME root mismatch: Team AI owns the built-in Skill at '${ownedTarget}', but the current target is '${expectedTarget}'. Refusing to move or reassign it.`);
 }
 
 async function readOwnership(homeDir: string): Promise<BuiltInSkillOwnership | undefined> {

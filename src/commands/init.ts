@@ -5,6 +5,7 @@ import { normalizeMarketplaceSource, resolveMarketplaceConfig } from "../copilot
 import { convergeUserPlugins, enabledUserPlugins } from "../copilot/plugins.js";
 import { convergeMarketplaceUserInstructions } from "../copilot/user-instructions.js";
 import { registerVsCodeMarketplace } from "../copilot/vscode-settings.js";
+import { copilotDisplayPath } from "../copilot/user-state.js";
 import type { CommandContext } from "./context.js";
 import { printActions, printUserInstructionActions, printWarnings } from "./helpers.js";
 
@@ -43,11 +44,11 @@ export async function initCommand(context: CommandContext, options: InitOptions)
 
     const builtInSkill = await convergeBuiltInTeamAiSkill(context.homeDir, { dryRun: context.dryRun });
     if (builtInSkill.change) {
-      context.out((context.dryRun ? "WOULD" : "DONE") + " " + builtInSkill.change + ": ~/.copilot/skills/teamai");
+      context.out((context.dryRun ? "WOULD" : "DONE") + " " + builtInSkill.change + ": " + copilotDisplayPath("skills/teamai", context.homeDir));
     }
     const userInstructions = await convergeMarketplaceUserInstructions(catalog.root, context.homeDir, { dryRun: context.dryRun });
     if (context.copilotMode === "unavailable") {
-      printUserInstructionActions(userInstructions, context.dryRun, context.out);
+      printUserInstructionActions(userInstructions, context.dryRun, context.homeDir, context.out);
       throw new Error("Copilot CLI and VS Code backends are unavailable; Marketplace user instructions were synchronized, but plugin convergence could not run.");
     }
 
@@ -86,7 +87,7 @@ export async function initCommand(context: CommandContext, options: InitOptions)
     }
     printActions(converged.actions, context.dryRun, context.out);
     printWarnings(converged.warnings, context.out);
-    printUserInstructionActions(userInstructions, context.dryRun, context.out);
+    printUserInstructionActions(userInstructions, context.dryRun, context.homeDir, context.out);
     config.managedPlugins = converged.managedPlugins;
     if (await registerVsCodeMarketplace(context.vscodeSettingsPath, source, context.dryRun)) {
       context.out(`${context.dryRun ? "WOULD" : "DONE"} write: VS Code User Settings chat.plugins.marketplaces`);

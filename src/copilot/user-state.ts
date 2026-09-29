@@ -25,7 +25,22 @@ export interface CopilotSettingsFile {
 }
 
 export function copilotHome(homeDir: string): string {
-  return path.join(homeDir, ".copilot");
+  const configured = process.env.COPILOT_HOME;
+  if (configured === undefined || configured.length === 0) return path.join(homeDir, ".copilot");
+  if (configured.includes("\0") || !path.isAbsolute(configured)) {
+    throw new Error("COPILOT_HOME must be an absolute directory path.");
+  }
+  const resolved = path.resolve(configured);
+  if (resolved === path.parse(resolved).root) {
+    throw new Error("COPILOT_HOME cannot be a filesystem root.");
+  }
+  return resolved;
+}
+
+export function copilotDisplayPath(relativePath: string, homeDir: string): string {
+  const configured = process.env.COPILOT_HOME;
+  if (configured === undefined || configured.length === 0) return `~/.copilot/${relativePath.replace(/[\\/]+/g, "/")}`;
+  return path.join(copilotHome(homeDir), ...relativePath.split(/[\\/]+/));
 }
 
 export function copilotConfigPath(homeDir: string): string {
@@ -120,11 +135,11 @@ export async function fallbackStateProblems(homeDir: string, managedPlugins: str
     const marketplace = spec.slice(at + 1);
     const entry = (config.installedPlugins ?? []).find((item) => item.name === name && item.marketplace === marketplace);
     if (!entry) {
-      problems.push(`${spec} is missing from ~/.copilot/config.json installedPlugins.`);
+      problems.push(`${spec} is missing from ${copilotDisplayPath("config.json", homeDir)} installedPlugins.`);
       continue;
     }
     const authority = settings.enabledPlugins?.[spec];
-    if (typeof authority !== "boolean") problems.push(`${spec} is missing from ~/.copilot/settings.json enabledPlugins.`);
+    if (typeof authority !== "boolean") problems.push(`${spec} is missing from ${copilotDisplayPath("settings.json", homeDir)} enabledPlugins.`);
     else if (entry.enabled !== authority) problems.push(`${spec} enabled state differs between Copilot config.json and settings.json.`);
     if (typeof entry.cache_path !== "string" || !await directoryExists(entry.cache_path)) {
       problems.push(`${spec} cache_path is missing or not materialized.`);

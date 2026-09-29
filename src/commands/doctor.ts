@@ -1,4 +1,4 @@
-import { access, lstat } from "node:fs/promises";
+import { access, lstat, readFile } from "node:fs/promises";
 import { constants } from "node:fs";
 import path from "node:path";
 import { readGlobalConfig } from "../config/global.js";
@@ -8,7 +8,7 @@ import { effectiveEnabledPluginSpecs, convergeManagedSkills } from "../copilot/s
 import { readProjectSettings } from "../copilot/project-settings.js";
 import type { MarketplaceCatalog } from "../copilot/catalog.js";
 import { checkUserInstructionState, discoverMarketplaceUserInstructions, userInstructionTargetRoot } from "../copilot/user-instructions.js";
-import { fallbackStateProblems, marketplaceRegistrationMatches, readCopilotState } from "../copilot/user-state.js";
+import { marketplaceRegistrationMatches, readCopilotState, type CopilotInstalledPlugin } from "../copilot/user-state.js";
 import { vscodeMarketplaceIsFirst } from "../copilot/vscode-settings.js";
 import { detectProjectIdentity } from "../project/anchors.js";
 import { convergeLogicalProjectContext, projectionFor } from "../project/context.js";
@@ -49,6 +49,31 @@ async function reportManagedUserInstructions(
   }
 }
 
+async function isMaterializedPlugin(plugin: CopilotInstalledPlugin): Promise<boolean> {
+  if (typeof plugin.cache_path !== "string" || plugin.cache_path.length === 0) return false;
+  if (typeof plugin.version !== "string" || plugin.version.length === 0) return false;
+  try {
+    const root = await lstat(plugin.cache_path);
+    if (root.isSymbolicLink() || !root.isDirectory()) return false;
+    const manifestPath = path.join(plugin.cache_path, "plugin.json");
+    const manifestFile = await lstat(manifestPath);
+    if (!manifestFile.isFile() || manifestFile.isSymbolicLink()) return false;
+    let manifest: unknown;
+    try {
+      manifest = JSON.parse(await readFile(manifestPath, "utf8"));
+    } catch (error) {
+      if (error instanceof SyntaxError) return false;
+      throw error;
+    }
+    if (!manifest || typeof manifest !== "object" || Array.isArray(manifest)) return false;
+    const identity = manifest as { name?: unknown; version?: unknown };
+    return identity.name === plugin.name && identity.version === plugin.version;
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === "ENOENT") return false;
+    throw error;
+  }
+}
+
 export async function doctorCommand(context: CommandContext): Promise<DoctorResult> {
   let errors = 0;
   let warnings = 0;
@@ -76,29 +101,11 @@ export async function doctorCommand(context: CommandContext): Promise<DoctorResu
     fail("Built-in Team AI Skill diagnostics failed: " + (error as Error).message);
   }
 
-  let copilotAvailable = true;
-  try {
-    ok(`Copilot backend: ${await context.copilot.version()}`);
-  } catch (error) {
-    copilotAvailable = false;
-    fail((error as Error).message);
-  }
-
-  if (copilotAvailable) {
-    try {
-      const mcp = await context.copilot.listMcpServers(context.cwd);
-      if (mcp.errors.length > 0) {
-        for (const error of mcp.errors) fail(`Native MCP inspection: ${error}`);
-      } else {
-        ok(`Native MCP inspection: ${mcp.servers.length > 0 ? mcp.servers.map((server) => server.name).join(", ") : "no configured servers"}`);
-      }
-    } catch (error) {
-      fail(`Native MCP inspection failed: ${(error as Error).message}`);
-    }
-    warn("Native Plugin Hook runtime inspection is unavailable; Team AI validates declarations but never executes Hooks.");
-  }
+  warn("Copilot runtime and native MCP state are unobserved by this read-only diagnostic.");
 
   let config;
+  let copilotConfig;
+  let copilotSettings;
   try {
     config = await readGlobalConfig(context.homeDir);
     if (!config) warn("Team AI config is missing. Run `teamai init --marketplace <source> --role <role>`. ");
@@ -110,19 +117,20 @@ export async function doctorCommand(context: CommandContext): Promise<DoctorResu
 
   if (config) {
     try {
+      ({ config: copilotConfig, settings: copilotSettings } = await readCopilotState(context.homeDir));
       if (vscodeMarketplaceIsFirst(await readTextIfExists(context.vscodeSettingsPath), config.marketplace.source)) {
         ok("VS Code Marketplace registration is first in chat.plugins.marketplaces.");
       } else {
         fail("VS Code Marketplace registration is missing or not first. Run teamai sync.");
       }
-      if (context.copilotMode === "fallback") {
-        const { settings } = await readCopilotState(context.homeDir);
-        if (marketplaceRegistrationMatches(settings, config.marketplace.name, config.marketplace.source)) {
-          ok(`Copilot user Marketplace ${config.marketplace.name} is registered.`);
+      if (copilotSettings?.extraKnownMarketplaces?.[config.marketplace.name]) {
+        if (marketplaceRegistrationMatches(copilotSettings, config.marketplace.name, config.marketplace.source)) {
+          ok(`Copilot user Marketplace ${config.marketplace.name} is registered in local settings.`);
         } else {
-          fail(`Copilot user Marketplace ${config.marketplace.name} is inconsistent. Run teamai sync.`);
+          fail(`Copilot user Marketplace ${config.marketplace.name} has a source mismatch in local settings. Run teamai sync.`);
         }
-        for (const problem of await fallbackStateProblems(context.homeDir, config.managedPlugins ?? [])) fail(problem);
+      } else {
+        warn(`Copilot user Marketplace ${config.marketplace.name} is not recorded in local settings; runtime state is unobserved.`);
       }
     } catch (error) {
       fail(`User-level Copilot/VS Code settings diagnostics failed: ${(error as Error).message}`);
@@ -141,26 +149,26 @@ export async function doctorCommand(context: CommandContext): Promise<DoctorResu
       ok(`Marketplace cache/catalog: ${catalog.revision ?? "local source"}.`);
       await reportManagedUserInstructions(catalog.root, context.homeDir, ok, warn, fail);
 
-      if (copilotAvailable) {
-        const marketplaces = await context.copilot.listMarketplaces(context.cwd);
-        if (!marketplaces.some((item) => item.name === config.marketplace.name)) {
-          fail(`Marketplace ${config.marketplace.name} is not registered. Run teamai sync.`);
+      if (config.role && copilotConfig && copilotSettings) {
+        const expectedEnabled = new Set(enabledUserPlugins(config.role, catalog.plugins, config.marketplace.name));
+        const inventory = copilotConfig.installedPlugins ?? [];
+        if (inventory.length === 0) {
+          warn("Copilot Plugin inventory is not recorded in local settings; installed/runtime state is unobserved.");
         } else {
-          ok(`Marketplace ${config.marketplace.name} is registered.`);
-        }
-        if (config.role) {
-          const plugins = await context.copilot.listPlugins(context.cwd);
-          const expectedEnabled = new Set(enabledUserPlugins(config.role, catalog.plugins, config.marketplace.name));
           for (const desired of userPlugins(catalog.plugins, config.marketplace.name)) {
-            const row = plugins.find((item) => pluginSpec(item) === desired);
-            if (!row) fail(`${desired} is not installed. Run teamai sync.`);
-            else if (row.enabled !== expectedEnabled.has(desired)) fail(`${desired} has incorrect enablement. Run teamai sync.`);
-            else ok(`${desired} is ${row.enabled ? "enabled" : "installed and disabled"}.`);
+            const row = inventory.find((item) => pluginSpec(item) === desired);
+            if (!row) warn(`${desired} is absent from local Plugin inventory; runtime state is unobserved.`);
+            else {
+              const enabled = copilotSettings.enabledPlugins?.[desired] ?? row.enabled;
+              if (typeof enabled !== "boolean") warn(`${desired} enablement is unknown in local settings.`);
+              else if (enabled !== expectedEnabled.has(desired)) fail(`${desired} has incorrect configured enablement. Run teamai sync.`);
+              else ok(`${desired} is configured ${enabled ? "enabled" : "installed and disabled"}; runtime unobserved.`);
+            }
           }
         }
       }
     } catch (error) {
-      fail(`${copilotAvailable ? "Copilot plugin diagnostics failed" : "Marketplace user instructions could not be read"}: ${(error as Error).message}`);
+      fail(`Marketplace/Copilot local diagnostics failed: ${(error as Error).message}`);
     } finally {
       await catalog?.dispose();
     }
@@ -227,11 +235,28 @@ export async function doctorCommand(context: CommandContext): Promise<DoctorResu
 
   if (config && catalogSnapshot) {
     try {
-      const installed = copilotAvailable ? await context.copilot.listPlugins(context.cwd) : [];
-      const skillResult = await convergeManagedSkills(config, catalogSnapshot.skills, effectiveEnabledPluginSpecs(installed, projectSettings), context.homeDir, { dryRun: true });
-      const skillStateChanged = JSON.stringify(skillResult.managedSkillPaths) !== JSON.stringify(config.managedSkillPaths ?? {});
-      if (skillResult.changes.length === 0 && !skillStateChanged) ok("Managed personal skills: current.");
-      else warn("Managed personal skills are stale. Run teamai sync.");
+      if (!copilotConfig || !copilotSettings || !(copilotConfig.installedPlugins?.length)) {
+        warn("Managed personal Skill availability is unknown because no local Plugin inventory is recorded.");
+      } else {
+        const installed = copilotConfig.installedPlugins.map((plugin) => ({
+          ...plugin,
+          enabled: copilotSettings.enabledPlugins?.[`${plugin.name}@${plugin.marketplace}`] ?? plugin.enabled ?? false,
+        }));
+        const enabledPlugins = effectiveEnabledPluginSpecs(installed, projectSettings);
+        const unavailable: string[] = [];
+        for (const spec of enabledPlugins) {
+          const plugin = installed.find((item) => pluginSpec(item) === spec);
+          if (!plugin || !await isMaterializedPlugin(plugin)) unavailable.push(spec);
+        }
+        if (unavailable.length > 0) {
+          warn("Managed personal Skill availability is unknown because enabled Plugin package delivery could not be verified: " + unavailable.join(", ") + ".");
+        } else {
+          const skillResult = await convergeManagedSkills(config, catalogSnapshot.skills, enabledPlugins, context.homeDir, { dryRun: true });
+          const skillStateChanged = JSON.stringify(skillResult.managedSkillPaths) !== JSON.stringify(config.managedSkillPaths ?? {});
+          if (skillResult.changes.length === 0 && !skillStateChanged) ok("Managed personal skills: current.");
+          else warn("Managed personal skills are stale. Run teamai sync.");
+        }
+      }
     } catch (error) {
       fail(`Managed personal skill diagnostics failed: ${(error as Error).message}`);
     }

@@ -5,6 +5,7 @@ import { effectiveEnabledPluginSpecs, convergeManagedSkills } from "../copilot/s
 import type { InstalledPlugin } from "../copilot/cli.js";
 import { convergeMarketplaceUserInstructions } from "../copilot/user-instructions.js";
 import { registerVsCodeMarketplace } from "../copilot/vscode-settings.js";
+import { copilotDisplayPath } from "../copilot/user-state.js";
 import { detectProjectIdentity } from "../project/anchors.js";
 import { convergeLogicalProjectContext, projectionFor, withProjection } from "../project/context.js";
 import { readProjectState, writeProjectState } from "../project/state.js";
@@ -19,7 +20,7 @@ export async function syncCommand(context: CommandContext): Promise<void> {
 
   const builtInSkill = await convergeBuiltInTeamAiSkill(context.homeDir, { dryRun: context.dryRun });
   if (builtInSkill.change) {
-    context.out((context.dryRun ? "WOULD" : "DONE") + " " + builtInSkill.change + ": ~/.copilot/skills/teamai");
+    context.out((context.dryRun ? "WOULD" : "DONE") + " " + builtInSkill.change + ": " + copilotDisplayPath("skills/teamai", context.homeDir));
   }
   const catalog = await context.loadMarketplace(config.marketplace.source, context.cwd, { refresh: true });
   if (catalog.name !== config.marketplace.name) {
@@ -31,13 +32,13 @@ export async function syncCommand(context: CommandContext): Promise<void> {
   try {
     userInstructions = await convergeMarketplaceUserInstructions(catalog.root, context.homeDir, { dryRun: context.dryRun });
     if (context.copilotMode === "unavailable") {
-      printUserInstructionActions(userInstructions, context.dryRun, context.out);
+      printUserInstructionActions(userInstructions, context.dryRun, context.homeDir, context.out);
       throw new Error("Copilot CLI and VS Code backends are unavailable; Marketplace user instructions were synchronized, but plugin convergence could not run.");
     }
     converged = await convergeUserPlugins(context.copilot, config, catalog.plugins, { dryRun: context.dryRun, cwd: context.cwd });
     printActions(converged.actions, context.dryRun, context.out);
     printWarnings(converged.warnings, context.out);
-    printUserInstructionActions(userInstructions, context.dryRun, context.out);
+    printUserInstructionActions(userInstructions, context.dryRun, context.homeDir, context.out);
     if (await registerVsCodeMarketplace(context.vscodeSettingsPath, config.marketplace.source, context.dryRun)) {
       context.out(`${context.dryRun ? "WOULD" : "DONE"} write: VS Code User Settings chat.plugins.marketplaces`);
     }

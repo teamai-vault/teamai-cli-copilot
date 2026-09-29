@@ -1,9 +1,10 @@
-import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { describe, expect, test } from "vitest";
 import { runCli } from "../../src/cli.js";
 import { readGlobalConfig, writeGlobalConfig } from "../../src/config/global.js";
 import { createConfig } from "../../src/config/schema.js";
+import type { CatalogSkill } from "../../src/copilot/catalog.js";
 import { CopilotClient } from "../../src/copilot/cli.js";
 import { partitionPath } from "../../src/project/partition.js";
 import { detectProjectIdentity } from "../../src/project/anchors.js";
@@ -25,6 +26,43 @@ function capture() {
   const stdout: string[] = [];
   const stderr: string[] = [];
   return { stdout, stderr, out: (line: string) => stdout.push(line), err: (line: string) => stderr.push(line) };
+}
+
+async function snapshotFiles(root: string): Promise<string[]> {
+  const files: string[] = [];
+  const walk = async (directory: string) => {
+    let entries;
+    try {
+      entries = await readdir(directory, { withFileTypes: true });
+    } catch (error) {
+      if ((error as NodeJS.ErrnoException).code === "ENOENT") return;
+      throw error;
+    }
+    for (const entry of entries) {
+      const target = path.join(directory, entry.name);
+      if (entry.isDirectory()) await walk(target);
+      else if (entry.isFile()) files.push(`${path.relative(root, target)}:${(await readFile(target)).toString("base64")}`);
+    }
+  };
+  await walk(root);
+  return files.sort();
+}
+
+function trackCopilotCalls<T extends object>(client: T): { client: T; calls: string[] } {
+  const calls: string[] = [];
+  return {
+    calls,
+    client: new Proxy(client, {
+      get(target, key, receiver) {
+        const value = Reflect.get(target, key, receiver);
+        if (typeof value !== "function") return value;
+        return (...args: unknown[]) => {
+          calls.push(String(key));
+          return Reflect.apply(value, target, args);
+        };
+      },
+    }),
+  };
 }
 
 describe("CLI integration with fake Copilot executable", () => {
@@ -50,7 +88,7 @@ describe("CLI integration with fake Copilot executable", () => {
   test("rejects the removed Product option", async () => {
     const repo = await createGitRepo();
     const output = capture();
-    expect(await runCli(["init", "--product=payments"], { cwd: repo, out: output.out, err: output.err })).toBe(1);
+    expect(await runCli(["init", "--product=payments"], { cwd: repo, out: output.out, err: output.err })).toBe(2);
     expect(output.stderr.join("\n")).toContain("ERROR: --product has been removed.\nUse `teamai projects set <ids...>` inside the target Git repository.");
   }, CLI_PROCESS_TEST_TIMEOUT);
 
@@ -182,7 +220,7 @@ describe("CLI integration with fake Copilot executable", () => {
 
     const status = capture();
     expect(await runCli(["status"], { ...base, out: status.out, err: status.err })).toBe(0);
-    expect(status.stdout.some((line) => line.includes(`qa@${TEST_MARKETPLACE_NAME}: enabled`))).toBe(true);
+    expect(status.stdout.some((line) => line.includes(`qa@${TEST_MARKETPLACE_NAME}: not present in local inventory; runtime unobserved`))).toBe(true);
     expect(status.stdout).toContain("  Marketplace revision: unknown");
     expect(status.stdout).toContain("  Managed personal skills: none");
     expect(status.stdout.some((line) => line.startsWith("  Project context: "))).toBe(true);
@@ -190,9 +228,9 @@ describe("CLI integration with fake Copilot executable", () => {
 
     const doctor = capture();
     expect(await runCli(["doctor"], { ...base, out: doctor.out, err: doctor.err })).toBe(0);
-    expect(doctor.stdout.some((line) => line.includes(`qa@${TEST_MARKETPLACE_NAME} is enabled.`))).toBe(true);
+    expect(doctor.stdout.some((line) => line.includes("Copilot runtime and native MCP state are unobserved"))).toBe(true);
     expect(doctor.stdout).toContain("✓ Logical Project context: current.");
-    expect(doctor.stdout).toContain("✓ Managed personal skills: current.");
+    expect(doctor.stdout.some((line) => line.includes("Managed personal Skill availability is unknown"))).toBe(true);
 
     const unavailableStatus = capture();
     expect(await runCli(["status"], {
@@ -349,7 +387,7 @@ describe("CLI integration with fake Copilot executable", () => {
     const output = capture();
 
     const rejected = capture();
-    expect(await runCli(["init", "--marketplace", TEST_MARKETPLACE_SOURCE, "--role", "api", "--project", "payments"], { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace, out: rejected.out, err: rejected.err })).toBe(1);
+    expect(await runCli(["init", "--marketplace", TEST_MARKETPLACE_SOURCE, "--role", "api", "--project", "payments"], { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace, out: rejected.out, err: rejected.err })).toBe(2);
     expect(rejected.stderr.join("\n")).toContain("--project is not supported by init.\nUse `teamai projects set <ids...>` inside the target Git repository.");
     expect(await readGlobalConfig(home)).toBeUndefined();
 
@@ -386,53 +424,324 @@ describe("CLI integration with fake Copilot executable", () => {
     expect(JSON.parse(await readFile(path.join(repo, ".github", "copilot", "settings.json"), "utf8")).enabledPlugins[`payments@${TEST_MARKETPLACE_NAME}`]).toBeUndefined();
   }, CLI_PROCESS_TEST_TIMEOUT);
 
-  test("status and doctor inspect native MCP without claiming Hook execution", async () => {
+  test("status and doctor do not start Copilot to inspect runtime-only state", async () => {
     const repo = await createGitRepo();
     const home = await tempDir("teamai-capabilities-home-");
     const fake = await createFakeCopilot({
       mcpServers: [{ name: "shared-tools", enabled: true, source: "plugin:test-plugin" }],
     });
+    const tracked = trackCopilotCalls(fake.client);
 
     const status = capture();
     expect(await runCli(["status"], {
       cwd: repo,
       homeDir: home,
-      copilot: fake.client,
+      copilot: tracked.client,
       loadMarketplace: loadFakeMarketplace,
       out: status.out,
       err: status.err,
     })).toBe(0);
-    expect(status.stdout).toContain("  Native MCP servers: shared-tools");
+    expect(status.stdout).toContain("  Native MCP servers: runtime unobserved (status is read-only)");
     expect(status.stdout).toContain("  Native Plugin Hooks: declaration validation only; runtime inspection unavailable");
 
     const doctor = capture();
     expect(await runCli(["doctor"], {
       cwd: repo,
       homeDir: home,
-      copilot: fake.client,
+      copilot: tracked.client,
       loadMarketplace: loadFakeMarketplace,
       out: doctor.out,
       err: doctor.err,
     })).toBe(0);
-    expect(doctor.stdout).toContain("✓ Native MCP inspection: shared-tools");
-    expect(doctor.stdout).toContain("! Native Plugin Hook runtime inspection is unavailable; Team AI validates declarations but never executes Hooks.");
+    expect(doctor.stdout).toContain("! Copilot runtime and native MCP state are unobserved by this read-only diagnostic.");
+    expect(tracked.calls).toEqual([]);
   }, CLI_PROCESS_TEST_TIMEOUT);
 
-  test("doctor reports native MCP inspection errors", async () => {
+  test("status and doctor leave persistent state unchanged", async () => {
     const repo = await createGitRepo();
-    const home = await tempDir("teamai-mcp-error-home-");
-    const fake = await createFakeCopilot({ mcpErrors: ["broken MCP declaration"] });
+    const home = await tempDir("teamai-read-only-home-");
+    const fake = await createFakeCopilot();
+    const tracked = trackCopilotCalls(fake.client);
     const output = capture();
+
+    await writeGlobalConfig(createConfig({ name: TEST_MARKETPLACE_NAME, source: TEST_MARKETPLACE_SOURCE }), home);
+    const vscodeSettingsPath = path.join(home, "Code", "settings.json");
+    await mkdir(path.dirname(vscodeSettingsPath), { recursive: true });
+    await writeFile(vscodeSettingsPath, JSON.stringify({ "chat.plugins.marketplaces": [TEST_MARKETPLACE_SOURCE] }), "utf8");
+    const before = await snapshotFiles(home);
+    let refreshRequested = false;
+    const loadReadOnlyCatalog = async (_source: string, _cwd: string, options?: { refresh?: boolean }) => {
+      refreshRequested ||= options?.refresh === true;
+      return loadFakeMarketplace();
+    };
+    expect(await runCli(["status"], {
+      cwd: repo,
+      homeDir: home,
+      copilot: tracked.client,
+      vscodeSettingsPath,
+      loadMarketplace: loadReadOnlyCatalog,
+      out: output.out,
+      err: output.err,
+    })).toBe(0);
+    expect(await runCli(["doctor"], {
+      cwd: repo,
+      homeDir: home,
+      copilot: tracked.client,
+      vscodeSettingsPath,
+      loadMarketplace: loadReadOnlyCatalog,
+      out: output.out,
+      err: output.err,
+    })).toBe(0);
+    expect(tracked.calls).toEqual([]);
+    expect(refreshRequested).toBe(false);
+    expect(await snapshotFiles(home)).toEqual(before);
+  }, CLI_PROCESS_TEST_TIMEOUT);
+
+  test("invalid flags fail before backend or Marketplace work and use usage exit code 2", async () => {
+    const repo = await createGitRepo();
+    const home = await tempDir("teamai-invalid-flags-home-");
+    const fake = await createFakeCopilot();
+    const tracked = trackCopilotCalls(fake.client);
+    let marketplaceLoads = 0;
+    let vscodeChecks = 0;
+    const invalidArgs = [
+      ["init", "--marketplace", TEST_MARKETPLACE_SOURCE, "--role", "api", "--unknown"],
+      ["init", "--marketplace", TEST_MARKETPLACE_SOURCE, "--role", "api", "--role", "qa"],
+      ["init", "--marketplace"],
+      ["skill", "list", "--tag"],
+      ["learning", "share"],
+    ];
+    for (const args of invalidArgs) {
+      const output = capture();
+      expect(await runCli(args, {
+        cwd: repo,
+        homeDir: home,
+        copilot: tracked.client,
+        vscodeAvailable: async () => { vscodeChecks += 1; return true; },
+        loadMarketplace: async () => { marketplaceLoads += 1; return loadFakeMarketplace(); },
+        out: output.out,
+        err: output.err,
+      })).toBe(2);
+      expect(output.stderr[0]).toContain("ERROR:");
+    }
+    expect(tracked.calls).toEqual([]);
+    expect(vscodeChecks).toBe(0);
+    expect(marketplaceLoads).toBe(0);
+    expect(await snapshotFiles(home)).toEqual([]);
+  }, CLI_PROCESS_TEST_TIMEOUT);
+
+  test("validates command arguments before honoring help or version", async () => {
+    const repo = await createGitRepo();
+    const home = await tempDir("teamai-help-validation-home-");
+    const fake = await createFakeCopilot();
+    const tracked = trackCopilotCalls(fake.client);
+    let marketplaceLoads = 0;
+    let vscodeChecks = 0;
+    const invalidArgs = [
+      ["init", "--bogus", "--help"],
+      ["init", "--role", "--help"],
+      ["init", "--role", "api", "--role", "qa", "--version"],
+      ["--dry-run", "--dry-run"],
+      ["--help", "--dry-run", "--dry-run"],
+      ["--version", "--dry-run", "--dry-run"],
+    ];
+    for (const args of invalidArgs) {
+      const output = capture();
+      expect(await runCli(args, {
+        cwd: repo,
+        homeDir: home,
+        copilot: tracked.client,
+        vscodeAvailable: async () => { vscodeChecks += 1; return true; },
+        loadMarketplace: async () => { marketplaceLoads += 1; return loadFakeMarketplace(); },
+        out: output.out,
+        err: output.err,
+      })).toBe(2);
+      expect(output.stderr[0]).toContain("ERROR:");
+    }
+    const help = capture();
+    expect(await runCli(["init", "--marketplace", TEST_MARKETPLACE_SOURCE, "--role", "api", "--help"], {
+      out: help.out,
+      err: help.err,
+    })).toBe(0);
+    expect(help.stdout.join("\n")).toContain("teamai <command> [options]");
+    const version = capture();
+    expect(await runCli(["--version"], { out: version.out, err: version.err })).toBe(0);
+    expect(version.stdout).toEqual(["0.3.0"]);
+    const dryRunHelp = capture();
+    expect(await runCli(["--dry-run"], { out: dryRunHelp.out, err: dryRunHelp.err })).toBe(0);
+    expect(dryRunHelp.stdout.join("\n")).toContain("teamai <command> [options]");
+    expect(tracked.calls).toEqual([]);
+    expect(vscodeChecks).toBe(0);
+    expect(marketplaceLoads).toBe(0);
+    expect(await snapshotFiles(home)).toEqual([]);
+  }, CLI_PROCESS_TEST_TIMEOUT);
+
+  test("status returns failure when Copilot local state cannot be parsed", async () => {
+    const repo = await createGitRepo();
+    const home = await tempDir("teamai-status-invalid-copilot-state-home-");
+    const fake = await createFakeCopilot();
+    const tracked = trackCopilotCalls(fake.client);
+    await writeGlobalConfig(createConfig({ name: TEST_MARKETPLACE_NAME, source: TEST_MARKETPLACE_SOURCE }), home);
+    const copilotRoot = path.join(home, ".copilot");
+    await mkdir(copilotRoot, { recursive: true });
+    await writeFile(path.join(copilotRoot, "settings.json"), "{ invalid json", "utf8");
+    const output = capture();
+    expect(await runCli(["status"], {
+      cwd: repo,
+      homeDir: home,
+      copilot: tracked.client,
+      out: output.out,
+      err: output.err,
+    })).toBe(1);
+    expect(output.stdout.some((line) => line.includes("Copilot local settings: unavailable"))).toBe(true);
+    expect(output.stderr.some((line) => line.startsWith("ERROR:"))).toBe(true);
+    expect(tracked.calls).toEqual([]);
+  }, CLI_PROCESS_TEST_TIMEOUT);
+
+  test("doctor verifies installed plugin manifest identity before reporting managed skills current", async () => {
+    const repo = await createGitRepo();
+    const home = await tempDir("teamai-doctor-unmaterialized-plugin-home-");
+    const catalogRoot = await tempDir("teamai-doctor-unmaterialized-plugin-catalog-");
+    const skillRoot = path.join(catalogRoot, "plugins", "api", "skills", "api-review");
+    await mkdir(skillRoot, { recursive: true });
+    await writeFile(path.join(skillRoot, "SKILL.md"), "---\nname: api-review\ndescription: Review API changes\n---\n", "utf8");
+    const skill: CatalogSkill = {
+      name: "api-review",
+      description: "Review API changes",
+      sourceType: "plugin",
+      plugin: "api",
+      sourcePath: "plugins/api/skills/api-review",
+      root: skillRoot,
+      owner: "api",
+      tags: [],
+      standalone: true,
+    };
+    const config = createConfig({ name: TEST_MARKETPLACE_NAME, source: TEST_MARKETPLACE_SOURCE });
+    config.role = "api";
+    config.managedSkills = ["api-review"];
+    await writeGlobalConfig(config, home);
+    const copilotRoot = path.join(home, ".copilot");
+    const apiCache = path.join(copilotRoot, "installed-plugins", "marketplace", "api");
+    const commonCache = path.join(copilotRoot, "installed-plugins", "marketplace", "common");
+    await mkdir(apiCache, { recursive: true });
+    await mkdir(commonCache, { recursive: true });
+    await writeFile(path.join(apiCache, "plugin.json"), JSON.stringify({ name: "api", version: "0.9.0" }), "utf8");
+    await writeFile(path.join(commonCache, "plugin.json"), JSON.stringify({ name: "not-common", version: "1.0.0" }), "utf8");
+    await writeFile(path.join(copilotRoot, "config.json"), JSON.stringify({
+      installedPlugins: [
+        { name: "api", marketplace: TEST_MARKETPLACE_NAME, version: "1.0.0", enabled: true, cache_path: apiCache },
+        { name: "common", marketplace: TEST_MARKETPLACE_NAME, version: "1.0.0", enabled: true, cache_path: commonCache },
+      ],
+    }), "utf8");
+    await writeFile(path.join(copilotRoot, "settings.json"), JSON.stringify({
+      enabledPlugins: {
+        ["api@" + TEST_MARKETPLACE_NAME]: true,
+        ["common@" + TEST_MARKETPLACE_NAME]: true,
+      },
+    }), "utf8");
+    const vscodeSettingsPath = path.join(home, "Code", "settings.json");
+    await mkdir(path.dirname(vscodeSettingsPath), { recursive: true });
+    await writeFile(vscodeSettingsPath, JSON.stringify({ "chat.plugins.marketplaces": [TEST_MARKETPLACE_SOURCE] }), "utf8");
+    const fake = await createFakeCopilot();
+    const output = capture();
+    const loadMarketplace = async () => ({
+      ...(await loadFakeMarketplace(catalogRoot)),
+      skills: [skill],
+    });
 
     expect(await runCli(["doctor"], {
       cwd: repo,
       homeDir: home,
       copilot: fake.client,
-      loadMarketplace: loadFakeMarketplace,
+      vscodeSettingsPath,
+      loadMarketplace,
+      out: output.out,
+      err: output.err,
+    })).toBe(0);
+    expect(output.stdout.some((line) =>
+      line.includes("Managed personal Skill availability is unknown") &&
+      line.includes("api@" + TEST_MARKETPLACE_NAME) &&
+      line.includes("common@" + TEST_MARKETPLACE_NAME),
+    )).toBe(true);
+    expect(output.stdout).not.toContain("✓ Managed personal skills: current.");
+  }, CLI_PROCESS_TEST_TIMEOUT);
+
+  test("does not choose fallback when the native Copilot executable fails", async () => {
+    const repo = await createGitRepo();
+    const home = await tempDir("teamai-native-copilot-failure-home-");
+    const fake = await createFakeCopilot();
+    const calls: string[] = [];
+    let vscodeChecks = 0;
+    let marketplaceLoads = 0;
+    const nativeFailure = new Proxy(fake.client, {
+      get(target, key, receiver) {
+        if (key === "version") {
+          return async () => {
+            calls.push("version");
+            throw new Error("native Copilot is installed but rejected --version");
+          };
+        }
+        return Reflect.get(target, key, receiver);
+      },
+    });
+    const output = capture();
+    expect(await runCli(["init", "--marketplace", TEST_MARKETPLACE_SOURCE, "--role", "api"], {
+      cwd: repo,
+      homeDir: home,
+      copilot: nativeFailure,
+      vscodeAvailable: async () => { vscodeChecks += 1; return true; },
+      loadMarketplace: async () => { marketplaceLoads += 1; return loadFakeMarketplace(); },
       out: output.out,
       err: output.err,
     })).toBe(1);
-    expect(output.stdout).toContain("✗ Native MCP inspection: broken MCP declaration");
+    expect(output.stderr.join("\n")).toContain("native Copilot is installed but rejected --version");
+    expect(calls).toEqual(["version"]);
+    expect(vscodeChecks).toBe(0);
+    expect(marketplaceLoads).toBe(0);
+    expect(await snapshotFiles(home)).toEqual([]);
+  }, CLI_PROCESS_TEST_TIMEOUT);
+
+  test("invalid COPILOT_HOME fails before read-only command work", async () => {
+    const prior = process.env.COPILOT_HOME;
+    const repo = await createGitRepo();
+    const home = await tempDir("teamai-invalid-copilot-root-home-");
+    const fake = await createFakeCopilot();
+    const tracked = trackCopilotCalls(fake.client);
+    let marketplaceLoads = 0;
+    process.env.COPILOT_HOME = "relative/copilot";
+    try {
+      const output = capture();
+      expect(await runCli(["status"], {
+        cwd: repo,
+        homeDir: home,
+        copilot: tracked.client,
+        loadMarketplace: async () => { marketplaceLoads += 1; return loadFakeMarketplace(); },
+        out: output.out,
+        err: output.err,
+      })).toBe(1);
+      expect(output.stderr.join("\n")).toContain("COPILOT_HOME must be an absolute directory path.");
+      expect(tracked.calls).toEqual([]);
+      expect(marketplaceLoads).toBe(0);
+      expect(await snapshotFiles(home)).toEqual([]);
+
+      process.env.COPILOT_HOME = path.parse(path.resolve(path.sep)).root;
+      const unsafeRoot = capture();
+      expect(await runCli(["status"], {
+        cwd: repo,
+        homeDir: home,
+        copilot: tracked.client,
+        loadMarketplace: async () => { marketplaceLoads += 1; return loadFakeMarketplace(); },
+        out: unsafeRoot.out,
+        err: unsafeRoot.err,
+      })).toBe(1);
+      expect(unsafeRoot.stderr.join("\n")).toContain("COPILOT_HOME cannot be a filesystem root.");
+      expect(tracked.calls).toEqual([]);
+      expect(marketplaceLoads).toBe(0);
+      expect(await snapshotFiles(home)).toEqual([]);
+    } finally {
+      if (prior === undefined) delete process.env.COPILOT_HOME;
+      else process.env.COPILOT_HOME = prior;
+    }
   }, CLI_PROCESS_TEST_TIMEOUT);
 
   test("init mirrors nested user instructions byte-for-byte and preserves personal files", async () => {
@@ -732,7 +1041,7 @@ describe("CLI integration with fake Copilot executable", () => {
       out: unreadableDoctor.out,
       err: unreadableDoctor.err,
     })).toBe(1);
-    expect(unreadableDoctor.stdout.some((line) => line.includes("Copilot plugin diagnostics failed") && line.includes("Marketplace acquisition failed"))).toBe(true);
+    expect(unreadableDoctor.stdout.some((line) => line.includes("Marketplace/Copilot local diagnostics failed") && line.includes("Marketplace acquisition failed"))).toBe(true);
     expect(await readFile(targetPath)).toEqual(managedContent);
   }, CLI_PROCESS_TEST_TIMEOUT);
 

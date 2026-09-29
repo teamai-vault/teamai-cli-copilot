@@ -1,7 +1,7 @@
 import { readGlobalConfig } from "../config/global.js";
 import path from "node:path";
-import { pluginSpec } from "../copilot/plugins.js";
 import { checkUserInstructionState, discoverMarketplaceUserInstructions, userInstructionTargetRoot } from "../copilot/user-instructions.js";
+import { marketplaceRegistrationMatches, readCopilotState } from "../copilot/user-state.js";
 import { detectProjectIdentity } from "../project/anchors.js";
 import { projectionFor } from "../project/context.js";
 import { partitionPath } from "../project/partition.js";
@@ -23,17 +23,24 @@ export async function statusCommand(context: CommandContext): Promise<void> {
     context.out(`  Role: ${config.role ?? "not set"}`);
     context.out(`  Managed personal skills: ${config.managedSkills?.join(", ") || "none"}`);
     try {
-      const marketplaces = await context.copilot.listMarketplaces(context.cwd);
-      context.out(`  Marketplace registered: ${marketplaces.some((item) => item.name === config.marketplace.name) ? "yes" : "no"}`);
-      if (config.managedPlugins?.length) {
-        const plugins = await context.copilot.listPlugins(context.cwd);
-        for (const desired of config.managedPlugins) {
-          const row = plugins.find((item) => pluginSpec(item) === desired);
-          context.out(`  ${desired}: ${row ? (row.enabled ? "enabled" : "disabled") : "missing"}`);
-        }
+      const { config: copilotConfig, settings } = await readCopilotState(context.homeDir);
+      const marketplace = settings.extraKnownMarketplaces?.[config.marketplace.name];
+      context.out(`  Marketplace registered: ${marketplace
+        ? marketplaceRegistrationMatches(settings, config.marketplace.name, config.marketplace.source) ? "yes (local settings)" : "source differs (local settings)"
+        : "unknown (no local registration)"}`);
+      for (const desired of config.managedPlugins ?? []) {
+        const at = desired.lastIndexOf("@");
+        const name = desired.slice(0, at);
+        const marketplaceName = desired.slice(at + 1);
+        const row = (copilotConfig.installedPlugins ?? []).find((item) => item.name === name && item.marketplace === marketplaceName);
+        const enabled = settings.enabledPlugins?.[desired] ?? row?.enabled;
+        context.out(`  ${desired}: ${row
+          ? typeof enabled === "boolean" ? `configured ${enabled ? "enabled" : "disabled"}; runtime unobserved` : "configured state unknown; runtime unobserved"
+          : "not present in local inventory; runtime unobserved"}`);
       }
     } catch (error) {
-      context.out(`  Copilot: unavailable (${(error as Error).message})`);
+      context.out(`  Copilot local settings: unavailable (${(error as Error).message})`);
+      throw error;
     }
     try {
       const catalog = await context.loadMarketplace(config.marketplace.source, context.cwd);
@@ -57,13 +64,7 @@ export async function statusCommand(context: CommandContext): Promise<void> {
 
   context.out("");
   context.out("Copilot-native capabilities");
-  try {
-    const mcp = await context.copilot.listMcpServers(context.cwd);
-    context.out(`  Native MCP servers: ${mcp.servers.length > 0 ? mcp.servers.map((server) => server.name).join(", ") : "none"}`);
-    for (const error of mcp.errors) context.out(`  MCP inspection error: ${error}`);
-  } catch (error) {
-    context.out(`  Native MCP servers: unavailable (${(error as Error).message})`);
-  }
+  context.out("  Native MCP servers: runtime unobserved (status is read-only)");
   context.out("  Native Plugin Hooks: declaration validation only; runtime inspection unavailable");
 
   const identity = await detectProjectIdentity(context.cwd);

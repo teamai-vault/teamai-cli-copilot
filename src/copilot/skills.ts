@@ -5,6 +5,7 @@ import type { CatalogSkill } from "./catalog.js";
 import type { InstalledPlugin } from "./cli.js";
 import type { ProjectSettings } from "./project-settings.js";
 import { directoriesEqual, pathsEqual, replaceDirectory, withFileLock } from "../utils/fs.js";
+import { copilotHome } from "./user-state.js";
 
 export interface ManagedSkillChange {
   type: "create" | "update" | "remove" | "available-via-plugin";
@@ -12,7 +13,7 @@ export interface ManagedSkillChange {
 }
 
 export function personalSkillsRoot(homeDir: string): string {
-  return path.join(homeDir, ".copilot", "skills");
+  return path.join(copilotHome(homeDir), "skills");
 }
 
 export function personalSkillPath(homeDir: string, name: string): string {

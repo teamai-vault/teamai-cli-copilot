@@ -12,6 +12,8 @@ import { skillContributeCommand } from "./commands/skill-contribute.js";
 import { statusCommand } from "./commands/status.js";
 import { syncCommand } from "./commands/sync.js";
 import { tagsListCommand } from "./commands/tags.js";
+import { assertCopilotHomeMatchesOwnership } from "./copilot/builtin-skill.js";
+import { copilotHome } from "./copilot/user-state.js";
 
 const VERSION = "0.3.0";
 
@@ -43,145 +45,272 @@ function usage(): string {
   ].join("\n");
 }
 
-function optionValue(args: string[], name: string): string | undefined {
-  const index = args.indexOf(name);
-  if (index < 0) return undefined;
-  const value = args[index + 1];
-  if (!value || value.startsWith("--")) throw new Error(`${name} requires a value.`);
-  return value;
-}
+class UsageError extends Error {}
 
-function optionValues(args: string[], name: string): string[] {
-  const values: string[] = [];
-  for (let index = 0; index < args.length; index += 1) {
-    if (args[index] !== name) continue;
-    const value = args[index + 1];
-    if (!value || value.startsWith("--")) throw new Error(`${name} requires a value.`);
-    values.push(value);
-    index += 1;
+type OptionRule = { kind: "boolean" | "single" | "many"; choices?: readonly string[] };
+type ParsedOptions = Map<string, true | string[]>;
+type Invocation = { command: string; subcommand?: string; positionals: string[]; options: ParsedOptions };
+
+const optionRules: Record<string, Record<string, OptionRule>> = {
+  init: { "--marketplace": { kind: "single" }, "--role": { kind: "single" } },
+  "skill list": {
+    "--tag": { kind: "single" },
+    "--owner": { kind: "single" },
+    "--source": { kind: "single", choices: ["plugin", "standalone"] },
+  },
+  "skill install": { "--tag": { kind: "single" }, "--yes": { kind: "boolean" } },
+  "skill contribute": {
+    "--owner": { kind: "single" },
+    "--tags": { kind: "many" },
+    "--target": { kind: "single", choices: ["standalone", "plugin"] },
+    "--plugin": { kind: "single" },
+  },
+  "learning share": {
+    "--project": { kind: "single" },
+    "--shared": { kind: "boolean" },
+    "--tags": { kind: "many" },
+  },
+};
+
+function parseOptions(tokens: string[], rules: Record<string, OptionRule>, command: string): { positionals: string[]; options: ParsedOptions } {
+  const positionals: string[] = [];
+  const options: ParsedOptions = new Map();
+  for (let index = 0; index < tokens.length; index += 1) {
+    const token = tokens[index];
+    if (!token.startsWith("-")) {
+      positionals.push(token);
+      continue;
+    }
+    const equals = token.indexOf("=");
+    const name = equals < 0 ? token : token.slice(0, equals);
+    const inlineValue = equals < 0 ? undefined : token.slice(equals + 1);
+    const rule = rules[name];
+    if (!rule) throw new UsageError(`Unknown option '${name}' for '${command}'.`);
+    if (options.has(name)) throw new UsageError(`${name} may be supplied only once.`);
+    if (rule.kind === "boolean") {
+      if (inlineValue !== undefined) throw new UsageError(`${name} does not take a value.`);
+      options.set(name, true);
+      continue;
+    }
+
+    const values: string[] = [];
+    if (inlineValue !== undefined) {
+      if (!inlineValue) throw new UsageError(`${name} requires a value.`);
+      values.push(inlineValue);
+    }
+    if (rule.kind === "single") {
+      if (values.length === 0) {
+        const value = tokens[index + 1];
+        if (!value || value.startsWith("-")) throw new UsageError(name + " requires a value.");
+        values.push(value);
+        index += 1;
+      }
+    } else {
+      while (index + 1 < tokens.length && !tokens[index + 1].startsWith("-")) {
+        values.push(tokens[index + 1]);
+        index += 1;
+      }
+      if (values.length === 0) throw new UsageError(`${name} requires a value.`);
+    }
+    if (rule.choices && !rule.choices.includes(values[0])) {
+      throw new UsageError(`${name} must be ${rule.choices.join(" or ")}.`);
+    }
+    options.set(name, values);
   }
-  return values;
+  return { positionals, options };
 }
 
-function trailingOptionValues(args: string[], name: string): string[] {
-  const index = args.indexOf(name);
-  if (index < 0) return [];
-  const values: string[] = [];
-  for (let cursor = index + 1; cursor < args.length && !args[cursor].startsWith("--"); cursor += 1) values.push(args[cursor]);
-  if (values.length === 0) throw new Error(`${name} requires a value.`);
-  return values;
+function parseInvocation(argv: string[]): Invocation {
+  const dryRunCount = argv.filter((arg) => arg === "--dry-run").length;
+  if (dryRunCount > 1) throw new UsageError("--dry-run may be supplied only once.");
+  const args = argv.filter((arg) => arg !== "--dry-run");
+  if (args.length === 0) return { command: "help", positionals: [], options: new Map() };
+  if (args[0] === "help") {
+    if (args.length !== 1) throw new UsageError("Use teamai help.");
+    return { command: "help", positionals: [], options: new Map() };
+  }
+
+  if (args.some((arg) => arg === "--product" || arg.startsWith("--product="))) {
+    throw new UsageError(args[0] === "init"
+      ? "--product has been removed.\nUse `teamai projects set <ids...>` inside the target Git repository."
+      : "--product has been removed. Use --project <id>.");
+  }
+  if (args[0] === "init" && args.some((arg) => arg === "--project" || arg.startsWith("--project="))) {
+    throw new UsageError("--project is not supported by init.\nUse `teamai projects set <ids...>` inside the target Git repository.");
+  }
+
+  const command = args[0];
+  let subcommand: string | undefined;
+  let optionKey = command;
+  let optionArgs = args.slice(1);
+  if (["role", "skill", "tags", "learning", "projects"].includes(command)) {
+    subcommand = args[1];
+    if (command === "projects" && subcommand === undefined) subcommand = "list";
+    if (command === "projects" && args[1] === undefined) optionArgs = [];
+    else optionArgs = args.slice(2);
+    optionKey = `${command} ${subcommand ?? ""}`.trim();
+  }
+
+  const supported = ["init", "sync", "role list", "role set", "projects list", "projects set", "learning share", "skill list", "skill show", "skill install", "skill remove", "skill contribute", "tags list", "status", "doctor"];
+  if (!supported.includes(optionKey)) throw new UsageError(`Unknown command or subcommand.\n${usage()}`);
+  const parsed = parseOptions(optionArgs, optionRules[optionKey] ?? {}, optionKey);
+  const positionals = parsed.positionals;
+  const exact = (count: number, form: string) => {
+    if (positionals.length !== count) throw new UsageError(`Use ${form}.`);
+  };
+  const atLeast = (count: number, form: string) => {
+    if (positionals.length < count) throw new UsageError(`Use ${form}.`);
+  };
+
+  switch (optionKey) {
+    case "init": exact(0, "teamai init [--marketplace <source>] [--role <role>]"); break;
+    case "sync": exact(0, "teamai sync"); break;
+    case "role list": exact(0, "teamai role list"); break;
+    case "role set": exact(1, "teamai role set <role>"); break;
+    case "projects list": exact(0, "teamai projects list"); break;
+    case "projects set": break;
+    case "learning share":
+      exact(1, "teamai learning share <file> [--project <id>|--shared] [--tags <tag...>]");
+      if (parsed.options.has("--project") && parsed.options.has("--shared")) throw new UsageError("Use either --project <id> or --shared.");
+      break;
+    case "skill list": exact(0, "teamai skill list [--tag <tag>] [--owner <owner>] [--source plugin|standalone]"); break;
+    case "skill show": exact(1, "teamai skill show <name>"); break;
+    case "skill install": {
+      const hasTag = parsed.options.has("--tag");
+      if ((positionals.length === 0) === !hasTag) throw new UsageError("Use teamai skill install <name...> or teamai skill install --tag <tag>.");
+      break;
+    }
+    case "skill remove": atLeast(1, "teamai skill remove <name...>"); break;
+    case "skill contribute":
+      exact(1, "teamai skill contribute <path> --owner <owner> --target standalone|plugin [--plugin <plugin>]");
+      if (!parsed.options.has("--owner") || !parsed.options.has("--target")) {
+        throw new UsageError("skill contribute requires one --owner and one --target.");
+      }
+      if (option(parsed.options, "--target") === "plugin" && !parsed.options.has("--plugin")) {
+        throw new UsageError("--target plugin requires --plugin <name>.");
+      }
+      if (option(parsed.options, "--target") === "standalone" && parsed.options.has("--plugin")) {
+        throw new UsageError("--plugin is only valid with --target plugin.");
+      }
+      break;
+    case "tags list": exact(0, "teamai tags list"); break;
+    case "status": exact(0, "teamai status"); break;
+    case "doctor": exact(0, "teamai doctor"); break;
+  }
+
+  return { command, subcommand, positionals, options: parsed.options };
+}
+
+function option(options: ParsedOptions, name: string): string | undefined {
+  const value = options.get(name);
+  return Array.isArray(value) ? value[0] : undefined;
+}
+
+function optionValues(options: ParsedOptions, name: string): string[] {
+  const value = options.get(name);
+  return Array.isArray(value) ? value : [];
+}
+
+function hasOption(options: ParsedOptions, name: string): boolean {
+  return options.has(name);
+}
+
+function usesCopilotRoot(invocation: Invocation): boolean {
+  return ["init", "sync", "status", "doctor"].includes(invocation.command) ||
+    (invocation.command === "role" && invocation.subcommand === "set") ||
+    (invocation.command === "skill" && ["list", "show", "install", "remove"].includes(invocation.subcommand ?? ""));
+}
+
+function needsCopilotBackend(invocation: Invocation): boolean {
+  return ["init", "sync"].includes(invocation.command) ||
+    (invocation.command === "role" && invocation.subcommand === "set") ||
+    (invocation.command === "skill" && ["list", "show", "install", "remove"].includes(invocation.subcommand ?? ""));
 }
 
 export async function runCli(argv: string[], overrides: Partial<CommandContext> = {}): Promise<number> {
   const dryRun = argv.includes("--dry-run");
-  const args = argv.filter((arg) => arg !== "--dry-run");
   const context = createCommandContext({ ...overrides, dryRun });
-
-  if (args.length === 0 || args.includes("--help") || args[0] === "help") {
+  if (argv.length === 0) {
     context.out(usage());
-    return 0;
-  }
-  if (args.includes("--version")) {
-    context.out(VERSION);
     return 0;
   }
 
   try {
-    if (args.includes("--product") || args.some((arg) => arg.startsWith("--product="))) {
-      throw new Error(args[0] === "init"
-        ? "--product has been removed.\nUse `teamai projects set <ids...>` inside the target Git repository."
-        : "--product has been removed. Use --project <id>.");
+    if (argv.filter((arg) => arg === "--help").length > 1) throw new UsageError("--help may be supplied only once.");
+    if (argv.filter((arg) => arg === "--version").length > 1) throw new UsageError("--version may be supplied only once.");
+    const showHelp = argv.includes("--help") || argv[0] === "help";
+    const showVersion = argv.includes("--version");
+    const parseArgs = argv.filter((arg) => arg !== "--help" && arg !== "--version");
+    const invocation = parseInvocation(parseArgs);
+    if (showHelp) {
+      context.out(usage());
+      return 0;
     }
-    if (args[0] === "init" && args.some((arg) => arg === "--project" || arg.startsWith("--project="))) {
-      throw new Error("--project is not supported by init.\nUse `teamai projects set <ids...>` inside the target Git repository.");
+    if (showVersion) {
+      context.out(VERSION);
+      return 0;
     }
-    await resolveCopilotBackend(context);
-    switch (args[0]) {
+    if (invocation.command === "help") {
+      context.out(usage());
+      return 0;
+    }
+    if (usesCopilotRoot(invocation)) {
+      copilotHome(context.homeDir);
+      await assertCopilotHomeMatchesOwnership(context.homeDir);
+    }
+    if (needsCopilotBackend(invocation)) await resolveCopilotBackend(context);
+
+    switch (invocation.command) {
       case "init":
-        await initCommand(context, {
-          marketplace: optionValue(args, "--marketplace"),
-          role: optionValue(args, "--role"),
-        });
+        await initCommand(context, { marketplace: option(invocation.options, "--marketplace"), role: option(invocation.options, "--role") });
         return 0;
       case "sync":
         await syncCommand(context);
         return 0;
       case "role":
-        if (args[1] === "list") {
-          await roleListCommand(context);
-          return 0;
-        }
-        if (args[1] === "set" && args[2]) {
-          await roleSetCommand(context, args[2]);
-          return 0;
-        }
-        throw new Error("Use `teamai role list` or `teamai role set <role>`. ");
+        if (invocation.subcommand === "list") await roleListCommand(context);
+        else await roleSetCommand(context, invocation.positionals[0]);
+        return 0;
       case "projects":
-        if (args.length === 1 || args[1] === "list") {
-          await projectsListCommand(context);
-          return 0;
-        }
-        if (args[1] === "set") {
-          await projectsSetCommand(context, args.slice(2));
-          return 0;
-        }
-        throw new Error("Use `teamai projects [list]` or `teamai projects set <ids...>`. ");
+        if (invocation.subcommand === "set") await projectsSetCommand(context, invocation.positionals);
+        else await projectsListCommand(context);
+        return 0;
       case "skill":
-        if (args[1] === "list") {
-          await skillListCommand(context, { tag: optionValue(args, "--tag"), owner: optionValue(args, "--owner"), source: optionValue(args, "--source") });
-          return 0;
+        switch (invocation.subcommand) {
+          case "list":
+            await skillListCommand(context, { tag: option(invocation.options, "--tag"), owner: option(invocation.options, "--owner"), source: option(invocation.options, "--source") });
+            break;
+          case "show":
+            await skillShowCommand(context, invocation.positionals[0]);
+            break;
+          case "install":
+            await skillInstallCommand(context, invocation.positionals, option(invocation.options, "--tag"), hasOption(invocation.options, "--yes"));
+            break;
+          case "remove":
+            await skillRemoveCommand(context, invocation.positionals);
+            break;
+          case "contribute":
+            await skillContributeCommand(context, {
+              path: invocation.positionals[0],
+              owner: option(invocation.options, "--owner")!,
+              tags: optionValues(invocation.options, "--tags"),
+              target: option(invocation.options, "--target") as "standalone" | "plugin",
+              plugin: option(invocation.options, "--plugin"),
+            });
+            break;
         }
-        if (args[1] === "show" && args[2]) {
-          await skillShowCommand(context, args[2]);
-          return 0;
-        }
-        if (args[1] === "install") {
-          const tag = optionValue(args, "--tag");
-          const names = args.slice(2).filter((arg, index, values) => arg !== "--tag" && arg !== "--yes" && values[index - 1] !== "--tag");
-          await skillInstallCommand(context, names, tag, args.includes("--yes"));
-          return 0;
-        }
-        if (args[1] === "remove") {
-          await skillRemoveCommand(context, args.slice(2));
-          return 0;
-        }
-        if (args[1] === "contribute" && args[2] && !args[2].startsWith("--")) {
-          const owners = optionValues(args, "--owner");
-          const targets = optionValues(args, "--target");
-          const plugins = optionValues(args, "--plugin");
-          if (owners.length !== 1 || targets.length !== 1 || plugins.length > 1) {
-            throw new Error("skill contribute requires one --owner and one --target; --plugin may be supplied once.");
-          }
-          if (targets[0] !== "standalone" && targets[0] !== "plugin") throw new Error("--target must be standalone or plugin.");
-          await skillContributeCommand(context, {
-            path: args[2],
-            owner: owners[0],
-            tags: trailingOptionValues(args, "--tags"),
-            target: targets[0],
-            plugin: plugins[0],
-          });
-          return 0;
-        }
-        throw new Error("Use `teamai skill list`, `show`, `install`, `remove`, or `contribute`.");
+        return 0;
       case "tags":
-        if (args[1] === "list") {
-          await tagsListCommand(context);
-          return 0;
-        }
-        throw new Error("Use `teamai tags list`.");
+        await tagsListCommand(context);
+        return 0;
       case "learning":
-        if (args[1] === "share" && args[2] && !args[2].startsWith("--")) {
-          const projects = optionValues(args, "--project");
-          if (projects.length > 1) throw new Error("--project may be supplied once.");
-          await learningShareCommand(context, {
-            file: args[2],
-            project: projects[0],
-            shared: args.includes("--shared"),
-            tags: trailingOptionValues(args, "--tags"),
-          });
-          return 0;
-        }
-        throw new Error("Use `teamai learning share <file> [--project <id>|--shared] [--tags <tag...>]`.");
+        await learningShareCommand(context, {
+          file: invocation.positionals[0],
+          project: option(invocation.options, "--project"),
+          shared: hasOption(invocation.options, "--shared"),
+          tags: optionValues(invocation.options, "--tags"),
+        });
+        return 0;
       case "status":
         await statusCommand(context);
         return 0;
@@ -190,11 +319,11 @@ export async function runCli(argv: string[], overrides: Partial<CommandContext> 
         return result.errors > 0 ? 1 : 0;
       }
       default:
-        throw new Error(`Unknown command '${args[0]}'.\n${usage()}`);
+        throw new UsageError(`Unknown command '${invocation.command}'.\n${usage()}`);
     }
   } catch (error) {
     context.err(`ERROR: ${(error as Error).message}`);
-    return 1;
+    return error instanceof UsageError ? 2 : 1;
   }
 }
 

@@ -189,4 +189,59 @@ describe("VS Code-only Copilot fallback", () => {
     expect(vscode).toContain("// keep");
     expect(vscode.indexOf(marketplace)).toBeLessThan(vscode.indexOf("existing"));
   }, 30_000);
+
+  test("uses one custom COPILOT_HOME for fallback state and generated targets, then rejects a changed root", async () => {
+    const prior = process.env.COPILOT_HOME;
+    const repo = await createGitRepo();
+    const home = await tempDir("teamai-fallback-custom-root-home-");
+    const customRoot = path.join(home, "custom-copilot");
+    const otherRoot = path.join(home, "other-copilot");
+    const marketplace = await createMarketplace();
+    await mkdir(path.join(marketplace, "instructions"), { recursive: true });
+    await writeFile(path.join(marketplace, "instructions", "api.instructions.md"), "api user instructions\n", "utf8");
+    const client = new CopilotClient("teamai-command-that-does-not-exist");
+    const output: string[] = [];
+    const errors: string[] = [];
+    const base = {
+      cwd: repo,
+      homeDir: home,
+      copilot: client,
+      vscodeAvailable: async () => true,
+      loadMarketplace: async (source: string, cwd: string, options?: { homeDir?: string; dryRun?: boolean; refresh?: boolean }) => {
+        const { loadMarketplaceCatalog } = await import("../../src/copilot/catalog.js");
+        return await loadMarketplaceCatalog(source, cwd, { ...options, homeDir: home });
+      },
+      out: (line: string) => output.push(line),
+      err: (line: string) => errors.push(line),
+    };
+    process.env.COPILOT_HOME = customRoot;
+    try {
+      expect(await runCli(["--dry-run", "init", "--marketplace", marketplace, "--role", "api"], base)).toBe(0);
+      expect(output).toContain("WOULD create: " + path.join(customRoot, "skills", "teamai"));
+      expect(output).toContain("WOULD create: " + path.join(customRoot, "instructions", "teamai", "api.instructions.md"));
+      await expect(readFile(path.join(customRoot, "config.json"))).rejects.toMatchObject({ code: "ENOENT" });
+      await expect(readFile(path.join(home, ".copilot", "config.json"))).rejects.toMatchObject({ code: "ENOENT" });
+      expect(await readGlobalConfig(home)).toBeUndefined();
+
+      output.length = 0;
+      expect(await runCli(["init", "--marketplace", marketplace, "--role", "api"], base)).toBe(0);
+      expect(output).toContain("DONE create: " + path.join(customRoot, "skills", "teamai"));
+      expect(output).toContain("DONE create: " + path.join(customRoot, "instructions", "teamai", "api.instructions.md"));
+      expect(JSON.parse(await readFile(path.join(customRoot, "config.json"), "utf8")).installedPlugins.length).toBeGreaterThan(0);
+      expect(await readFile(path.join(customRoot, "skills", "teamai", "SKILL.md"), "utf8")).toContain("Team AI");
+      await expect(readFile(path.join(customRoot, "instructions", "teamai", "api.instructions.md"), "utf8")).resolves.toContain("api user instructions");
+      await expect(readFile(path.join(home, ".copilot", "config.json"))).rejects.toMatchObject({ code: "ENOENT" });
+      expect((await readGlobalConfig(home))?.role).toBe("api");
+
+      process.env.COPILOT_HOME = otherRoot;
+      const mismatch = await runCli(["role", "set", "qa"], base);
+      expect(mismatch).toBe(1);
+      expect(errors.join("\n")).toContain("COPILOT_HOME root mismatch");
+      expect(JSON.parse(await readFile(path.join(customRoot, "config.json"), "utf8")).installedPlugins.length).toBeGreaterThan(0);
+      await expect(readFile(path.join(otherRoot, "config.json"))).rejects.toMatchObject({ code: "ENOENT" });
+    } finally {
+      if (prior === undefined) delete process.env.COPILOT_HOME;
+      else process.env.COPILOT_HOME = prior;
+    }
+  }, 30_000);
 });

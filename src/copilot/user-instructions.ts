@@ -2,6 +2,7 @@ import { constants } from "node:fs";
 import { access, lstat, mkdir, readdir, readFile, realpath, unlink } from "node:fs/promises";
 import path from "node:path";
 import { atomicWriteFile, pathsEqual } from "../utils/fs.js";
+import { copilotHome } from "./user-state.js";
 
 const INSTRUCTION_SUFFIX = ".instructions.md";
 
@@ -29,11 +30,14 @@ export interface UserInstructionState {
 }
 
 export function userInstructionTargetRoot(homeDir: string): string {
-  return path.join(homeDir, ".copilot", "instructions", "teamai");
+  return path.join(copilotHome(homeDir), "instructions", "teamai");
 }
 
-export function userInstructionDisplayPath(relativePath: string): string {
-  return `~/.copilot/instructions/teamai/${relativePath}`;
+export function userInstructionDisplayPath(relativePath: string, homeDir: string): string {
+  if (process.env.COPILOT_HOME === undefined || process.env.COPILOT_HOME.length === 0) {
+    return `~/.copilot/instructions/teamai/${relativePath}`;
+  }
+  return path.join(userInstructionTargetRoot(homeDir), ...relativePath.split(/[\\/]+/));
 }
 
 export async function discoverMarketplaceUserInstructions(marketplaceRoot: string): Promise<ManagedUserInstruction[]> {

@@ -61,6 +61,8 @@ export async function resolveCopilotBackend(context: CommandContext): Promise<vo
       context.copilotMode = "fallback";
     } else if (error instanceof CopilotUnavailableError) {
       context.copilotMode = "unavailable";
+    } else {
+      throw error;
     }
   }
 }

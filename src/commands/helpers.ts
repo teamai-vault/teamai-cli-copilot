@@ -18,13 +18,13 @@ export function printWarnings(warnings: string[], out: (message: string) => void
   for (const warning of warnings) out(`! ${warning}`);
 }
 
-export function printUserInstructionActions(plan: UserInstructionPlan, dryRun: boolean, out: (message: string) => void): void {
+export function printUserInstructionActions(plan: UserInstructionPlan, dryRun: boolean, homeDir: string, out: (message: string) => void): void {
   if (plan.changes.length === 0) {
     out(`Managed user instructions are already converged (${plan.desired.length}).`);
     return;
   }
   for (const change of plan.changes) {
-    out(`${dryRun ? "WOULD" : "DONE"} ${change.type}: ${userInstructionDisplayPath(change.relativePath)}`);
+    out(`${dryRun ? "WOULD" : "DONE"} ${change.type}: ${userInstructionDisplayPath(change.relativePath, homeDir)}`);
   }
 }
 
