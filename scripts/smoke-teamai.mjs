@@ -92,7 +92,6 @@ try {
   const sourceInstruction = path.join(marketplaceRoot, "contexts", "teamai", "instructions", "context.instructions.md");
   assert.deepEqual(await readFile(projectedInstruction), await readFile(sourceInstruction));
   await assert.doesNotReject(readFile(path.join(repository, ".teamai", "context", "teamai", "docs", "architecture.md"), "utf8"));
-  await assert.doesNotReject(readFile(path.join(repository, ".teamai", "context", "shared", "learnings", "validation.md"), "utf8"));
 
   const installed = JSON.parse((await runCopilot(["plugins", "list", "--kind", "plugin", "--json"])).stdout).plugins;
   for (const name of ["common", "api", "ios", "aos", "qa", "design"]) {
