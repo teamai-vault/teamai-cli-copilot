@@ -1,4 +1,5 @@
 import { readGlobalConfig, writeGlobalConfig } from "../config/global.js";
+import { FallbackCopilotClient } from "../copilot/fallback.js";
 import { convergeBuiltInTeamAiSkill } from "../copilot/builtin-skill.js";
 import { convergeUserPlugins, type PlannedAction } from "../copilot/plugins.js";
 import { effectiveEnabledPluginSpecs, materializedEnabledPluginSkillNames, convergeManagedSkills } from "../copilot/skills.js";
@@ -8,6 +9,7 @@ import { registerVsCodeMarketplace } from "../copilot/vscode-settings.js";
 import { copilotDisplayPath } from "../copilot/user-state.js";
 import { refreshPublishedLearningSnapshot } from "../project/published-cache.js";
 import { detectProjectIdentity } from "../project/anchors.js";
+import { loadLogicalProjects, selectedLogicalProjects } from "../project/manifest.js";
 import { convergeLogicalProjectContext, markPublishedLearningComplete, markPublishedLearningPending, projectionFor, withProjection } from "../project/context.js";
 import { readProjectState, withProjectStateLock, type ProjectState } from "../project/state.js";
 import type { CommandContext } from "./context.js";
@@ -138,6 +140,18 @@ export async function syncCommand(context: CommandContext): Promise<void> {
         }
         for (const change of projectChanges) context.out(`${context.dryRun ? "WOULD" : "DONE"} write: ${change}`);
         for (const warning of projectWarnings) context.out(`! ${warning}`);
+        if (context.copilotMode === "fallback" && context.copilot instanceof FallbackCopilotClient) {
+          const selected = selectedLogicalProjects(await loadLogicalProjects(catalog.root, catalog.plugins), snapshotProjection.pendingLogicalProjects ?? snapshotProjection.logicalProjects);
+          for (const plugin of new Set(selected.flatMap((project) => project.plugin ? [project.plugin] : []))) {
+            const spec = `${plugin}@${config.marketplace.name}`;
+            const packageResult = await context.copilot.materializeProjectPlugin(spec, context.cwd, context.dryRun);
+            context.out(packageResult.status === "unavailable"
+              ? `UNAVAILABLE: ${packageResult.reason}`
+              : packageResult.status === "preserved"
+                ? `PRESERVE existing unowned project Plugin package ${spec} at ${packageResult.path}`
+                : `${context.dryRun ? "WOULD" : "DONE"} write: project Plugin package ${spec} to ${packageResult.path}`);
+          }
+        }
       }
     }
     const installed = await context.copilot.listPlugins(context.cwd);

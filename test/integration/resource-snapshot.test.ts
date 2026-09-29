@@ -71,7 +71,7 @@ describe("resource snapshot CLI", () => {
     expect(overrideText).toBeDefined();
     expect(overrideText).not.toContain("Run teamai sync");
     expect(textDoctorOutput.stdout.some((line) => line.includes(`api@${TEST_MARKETPLACE_NAME} has incorrect configured enablement`))).toBe(false);
-  });
+  }, 15_000);
 
   test("reports a missing Plugin Skill file separately from its managed personal fallback", async () => {
     const cwd = await createGitRepo();

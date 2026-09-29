@@ -1,11 +1,12 @@
 import { readGlobalConfig } from "../config/global.js";
+import { FallbackCopilotClient } from "../copilot/fallback.js";
 import path from "node:path";
 import { detectProjectIdentity } from "../project/anchors.js";
 import { convergeLogicalProjectContext, markPublishedLearningComplete, markPublishedLearningPending, projectionFor, withProjection, withoutProjection } from "../project/context.js";
 import { loadLogicalProjects, parseLogicalProjectIds, selectedLogicalProjects } from "../project/manifest.js";
 import { readProjectState, withProjectStateLock, type ProjectState } from "../project/state.js";
 import { readPublishedLearningSnapshot } from "../project/published-cache.js";
-import type { CommandContext } from "./context.js";
+import { resolveCopilotBackend, type CommandContext } from "./context.js";
 
 export async function projectsListCommand(context: CommandContext): Promise<void> {
   const config = await readGlobalConfig(context.homeDir);
@@ -25,6 +26,7 @@ export async function projectsListCommand(context: CommandContext): Promise<void
 }
 
 export async function projectsSetCommand(context: CommandContext, values: string[]): Promise<void> {
+  await resolveCopilotBackend(context);
   const config = await readGlobalConfig(context.homeDir);
   if (!config) throw new Error("Team AI is not initialized. Run `teamai init` first.");
   const identity = await detectProjectIdentity(context.cwd);
@@ -35,7 +37,8 @@ export async function projectsSetCommand(context: CommandContext, values: string
   const catalog = await context.loadMarketplace(config.marketplace.source, context.cwd);
   try {
     if (catalog.name !== config.marketplace.name) throw new Error(`Marketplace name changed from '${config.marketplace.name}' to '${catalog.name}'.`);
-    const selectedIds = selectedLogicalProjects(await loadLogicalProjects(catalog.root, catalog.plugins), ids).map((project) => project.id);
+    const selectedProjects = selectedLogicalProjects(await loadLogicalProjects(catalog.root, catalog.plugins), ids);
+    const selectedIds = selectedProjects.map((project) => project.id);
     const learningCache = selectedIds.length > 0
       ? await readPublishedLearningSnapshot(config.marketplace.source, context.homeDir)
       : undefined;
@@ -56,6 +59,17 @@ export async function projectsSetCommand(context: CommandContext, values: string
       const result = await convergeLogicalProjectContext({ marketplaceRoot: catalog.root, plugins: catalog.plugins, marketplace: config.marketplace, identity, state: stateSnapshot, logicalProjects: selectedIds, publishedLearningRoot, unbind: selectedIds.length === 0, dryRun: true });
       for (const change of result.changes) context.out(`WOULD write: ${change}`);
       for (const warning of result.warnings) context.out(`! ${warning}`);
+      if (context.copilotMode === "fallback" && context.copilot instanceof FallbackCopilotClient) {
+        for (const plugin of new Set(selectedProjects.flatMap((project) => project.plugin ? [project.plugin] : []))) {
+          const spec = `${plugin}@${config.marketplace.name}`;
+          const packageResult = await context.copilot.materializeProjectPlugin(spec, context.cwd, true);
+          context.out(packageResult.status === "unavailable"
+            ? `UNAVAILABLE: ${packageResult.reason}`
+            : packageResult.status === "preserved"
+              ? `PRESERVE existing unowned project Plugin package ${spec} at ${packageResult.path}`
+              : `WOULD write: project Plugin package ${spec} to ${packageResult.path}`);
+        }
+      }
       return;
     }
 
@@ -111,6 +125,17 @@ export async function projectsSetCommand(context: CommandContext, values: string
     }
     for (const change of resultChanges) context.out(`DONE write: ${change}`);
     for (const warning of warnings) context.out(`! ${warning}`);
+    if (context.copilotMode === "fallback" && context.copilot instanceof FallbackCopilotClient) {
+      for (const plugin of new Set(selectedProjects.flatMap((project) => project.plugin ? [project.plugin] : []))) {
+        const spec = `${plugin}@${config.marketplace.name}`;
+        const packageResult = await context.copilot.materializeProjectPlugin(spec, context.cwd);
+        context.out(packageResult.status === "unavailable"
+          ? `UNAVAILABLE: ${packageResult.reason}`
+          : packageResult.status === "preserved"
+            ? `PRESERVE existing unowned project Plugin package ${spec} at ${packageResult.path}`
+            : `DONE write: project Plugin package ${spec} to ${packageResult.path}`);
+      }
+    }
   } finally {
     await catalog.dispose();
   }

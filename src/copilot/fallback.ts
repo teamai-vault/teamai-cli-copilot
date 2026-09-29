@@ -1,7 +1,7 @@
-import { mkdir, readFile, readdir, realpath, rm } from "node:fs/promises";
+import { lstat, mkdir, readFile, readdir, realpath, rm } from "node:fs/promises";
 import path from "node:path";
 import { replaceDirectory } from "../utils/fs.js";
-import { loadMarketplaceCatalog, type MarketplaceCatalog, type MarketplaceLoadOptions } from "./catalog.js";
+import { loadMarketplaceCatalog, TEAM_AI_EXTENSION_NAMESPACE, type MarketplaceCatalog, type MarketplaceLoadOptions } from "./catalog.js";
 import type { CopilotOperations, InstalledPlugin, MarketplacePluginRow, MarketplaceRow, NativeMcpServer } from "./cli.js";
 import {
   installedPluginsRoot,
@@ -132,6 +132,58 @@ export class FallbackCopilotClient implements CopilotOperations {
     if (!current.enabled) await this.disablePlugin(spec);
   }
 
+  async materializeProjectPlugin(spec: string, cwd: string, dryRun = false): Promise<{ path: string; status: "materialized" | "preserved" | "unavailable"; reason?: string }> {
+    const [name, marketplace] = splitSpec(spec);
+    const catalog = await this.catalog(marketplace, cwd);
+    try {
+      const plugin = catalog.plugins.find((item) => item.name === name);
+      if (!plugin || plugin.kind !== "project") throw new Error(`${spec} is not an available project Plugin.`);
+      const target = path.join(installedPluginsRoot(this.homeDir), marketplace, name);
+      const existing = (await readCopilotState(this.homeDir)).config.installedPlugins?.find((item) => item.name === name && item.marketplace === marketplace);
+      if (existing) {
+        if (existing.cache_path && path.resolve(existing.cache_path) === path.resolve(target) && await isProjectPluginPackage(target, name)) {
+          return { path: target, status: "preserved" };
+        }
+        return { path: target, status: "unavailable", reason: `${spec} already has a user-owned installedPlugins record at ${existing.cache_path ?? "an unspecified cache path"}.` };
+      }
+      if (await pathExists(target)) {
+        return await isProjectPluginPackage(target, name)
+          ? { path: target, status: "preserved" }
+          : { path: target, status: "unavailable", reason: `Existing path is not a valid ${spec} package.` };
+      }
+      if (dryRun) return { path: target, status: "materialized" };
+      const safeTarget = await installTarget(installedPluginsRoot(this.homeDir), marketplace, name);
+      try {
+        await updateCopilotState(this.homeDir, async (config, settings) => {
+          if (config.installedPlugins?.some((item) => item.name === name && item.marketplace === marketplace)) {
+            throw new Error("PROJECT_PLUGIN_OWNERSHIP_CONFLICT");
+          }
+          if (await pathExists(safeTarget)) throw new Error("PROJECT_PLUGIN_TARGET_CONFLICT");
+          await replaceDirectory(plugin.root, safeTarget);
+          const enabled = settings.enabledPlugins?.[spec] ?? false;
+          upsertInstalledPlugin(config, settings, {
+            name,
+            marketplace,
+            version: plugin.version,
+            cache_path: safeTarget,
+            enabled,
+          }, this.now().toISOString());
+        });
+      } catch (error) {
+        if (error instanceof Error && error.message === "PROJECT_PLUGIN_OWNERSHIP_CONFLICT") {
+          return { path: safeTarget, status: "unavailable", reason: `${spec} acquired an installedPlugins record during package delivery; preserved it.` };
+        }
+        if (error instanceof Error && error.message === "PROJECT_PLUGIN_TARGET_CONFLICT") {
+          return { path: safeTarget, status: "unavailable", reason: `Package target appeared during delivery; preserved ${safeTarget}.` };
+        }
+        throw error;
+      }
+      return { path: safeTarget, status: "materialized" };
+    } finally {
+      await catalog.dispose();
+    }
+  }
+
   private async setEnabled(spec: string, enabled: boolean): Promise<void> {
     const [name, marketplace] = splitSpec(spec);
     await updateCopilotState(this.homeDir, (config, settings) => setPluginEnabled(config, settings, name, marketplace, enabled));
@@ -142,6 +194,32 @@ export class FallbackCopilotClient implements CopilotOperations {
     const source = settings.extraKnownMarketplaces?.[name]?.source;
     if (!source) throw new Error(`Marketplace ${name} is not registered.`);
     return await this.loadMarketplace(sourceValue(source), cwd);
+  }
+}
+
+async function pathExists(target: string): Promise<boolean> {
+  try {
+    await lstat(target);
+    return true;
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === "ENOENT") return false;
+    throw error;
+  }
+}
+
+async function isProjectPluginPackage(target: string, name: string): Promise<boolean> {
+  try {
+    const info = await lstat(target);
+    if (!info.isDirectory() || info.isSymbolicLink()) return false;
+    const manifest = JSON.parse(await readFile(path.join(target, "plugin.json"), "utf8")) as {
+      name?: unknown;
+      version?: unknown;
+      extensions?: Record<string, { kind?: unknown }>;
+    };
+    return manifest.name === name && typeof manifest.version === "string" && manifest.extensions?.[TEAM_AI_EXTENSION_NAMESPACE]?.kind === "project";
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === "ENOENT" || error instanceof SyntaxError) return false;
+    throw error;
   }
 }
 
