@@ -1,6 +1,6 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { describe, expect, test } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 import { detectProjectIdentity } from "../../src/project/anchors.js";
 import { convergeLogicalProjectContext } from "../../src/project/context.js";
 import { loadLogicalProjects } from "../../src/project/manifest.js";
@@ -41,5 +41,37 @@ describe("Logical Project projection", () => {
     const result = await convergeLogicalProjectContext({ marketplaceRoot: source, plugins: [], marketplace: { name: TEST_MARKETPLACE_NAME, source: TEST_MARKETPLACE_SOURCE }, identity: identity!, logicalProjects: ["payments"], dryRun: true });
     expect(result.changes.some((change) => change.endsWith("payments.instructions.md"))).toBe(true);
     await expect(readFile(path.join(repo, ".github", "instructions", "teamai", "payments", "payments.instructions.md"), "utf8")).rejects.toMatchObject({ code: "ENOENT" });
+  }, 15_000);
+
+  test("reports partial Workspace changes when an injected later write fails", async () => {
+    const repo = await createGitRepo();
+    const source = await marketplace();
+    const identity = await detectProjectIdentity(repo);
+    const excludePath = path.join(repo, ".git", "info", "exclude");
+    await writeFile(excludePath, "# user exclude\n", "utf8");
+    const fs = await import("../../src/utils/fs.js");
+    const write = fs.atomicWriteFile;
+    let calls = 0;
+    const injected = vi.spyOn(fs, "atomicWriteFile").mockImplementation(async (target, contents) => {
+      calls += 1;
+      if (calls === 2) throw new Error("injected second write failure");
+      return write(target, contents);
+    });
+    try {
+      await expect(convergeLogicalProjectContext({
+        marketplaceRoot: source,
+        plugins: [],
+        marketplace: { name: TEST_MARKETPLACE_NAME, source: TEST_MARKETPLACE_SOURCE },
+        identity: identity!,
+        logicalProjects: ["payments"],
+      })).rejects.toThrow("Partial Workspace context update; completed 1 change(s)");
+    } finally {
+      injected.mockRestore();
+    }
+
+    await expect(readFile(path.join(repo, ".github", "instructions", "teamai", "payments", "payments.instructions.md"), "utf8")).resolves.toContain("payments");
+    await expect(readFile(path.join(repo, ".teamai", "context", "shared", "learnings", "shared.md"), "utf8")).rejects.toMatchObject({ code: "ENOENT" });
+    await expect(readFile(path.join(repo, ".github", "instructions", "teamai", "context.instructions.md"), "utf8")).rejects.toMatchObject({ code: "ENOENT" });
+    await expect(readFile(excludePath, "utf8")).resolves.toBe("# user exclude\n");
   }, 15_000);
 });

@@ -1,7 +1,7 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { describe, expect, test } from "vitest";
-import { mergeManagedProjectPlugins, readProjectSettings, writeProjectSettings } from "../../src/copilot/project-settings.js";
+import { mergeManagedProjectPlugins, readProjectSettings } from "../../src/copilot/project-settings.js";
 import { tempDir, TEST_MARKETPLACE_NAME, TEST_MARKETPLACE_SOURCE } from "../helpers/test-utils.js";
 
 describe("repository Copilot settings", () => {
@@ -17,14 +17,12 @@ describe("repository Copilot settings", () => {
 
     const current = await readProjectSettings(root);
     const merged = mergeManagedProjectPlugins(current, { name: TEST_MARKETPLACE_NAME, source: TEST_MARKETPLACE_SOURCE }, ["payments"], []);
-    await writeProjectSettings(root, merged);
-    const persisted = JSON.parse(await readFile(settingsPath, "utf8"));
 
-    expect(persisted.customFutureField).toEqual({ keep: true });
-    expect(persisted.enabledPlugins["user-plugin@other"]).toBe(true);
-    expect(persisted.enabledPlugins[`payments@${TEST_MARKETPLACE_NAME}`]).toBe(true);
-    expect(persisted.extraKnownMarketplaces.other).toBeDefined();
-    expect(persisted.extraKnownMarketplaces[TEST_MARKETPLACE_NAME]).toEqual({
+    expect(merged.customFutureField).toEqual({ keep: true });
+    expect(merged.enabledPlugins?.["user-plugin@other"]).toBe(true);
+    expect(merged.enabledPlugins?.[`payments@${TEST_MARKETPLACE_NAME}`]).toBe(true);
+    expect(merged.extraKnownMarketplaces?.other).toBeDefined();
+    expect(merged.extraKnownMarketplaces?.[TEST_MARKETPLACE_NAME]).toEqual({
       source: { source: "git", url: TEST_MARKETPLACE_SOURCE },
     });
   });

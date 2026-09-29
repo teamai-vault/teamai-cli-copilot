@@ -1,5 +1,6 @@
 import { mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { describe, expect, test } from "vitest";
 import { runCli } from "../../src/cli.js";
 import { readGlobalConfig, writeGlobalConfig } from "../../src/config/global.js";
@@ -7,7 +8,10 @@ import { createConfig } from "../../src/config/schema.js";
 import type { CatalogSkill } from "../../src/copilot/catalog.js";
 import { CopilotClient } from "../../src/copilot/cli.js";
 import { partitionPath } from "../../src/project/partition.js";
+import { projectionKey } from "../../src/project/context.js";
 import { detectProjectIdentity } from "../../src/project/anchors.js";
+import { writeProjectState } from "../../src/project/state.js";
+import { runProcess } from "../../src/utils/process.js";
 import {
   createFakeCopilot,
   createGitRepo,
@@ -83,6 +87,216 @@ describe("CLI integration with fake Copilot executable", () => {
 
     expect(await readGlobalConfig(home)).toBeUndefined();
     expect(output.stderr.some((line) => line.includes("--marketplace <source>"))).toBe(true);
+  }, CLI_PROCESS_TEST_TIMEOUT);
+
+  test("init and sync in an unbound Git workspace leave project state and exclude untouched", async () => {
+    const repo = await createGitRepo();
+    const home = await tempDir("teamai-unbound-project-home-");
+    const fake = await createFakeCopilot();
+    const output = capture();
+    const excludePath = path.join(repo, ".git", "info", "exclude");
+    await writeFile(excludePath, "# user exclude\n", "utf8");
+    const identity = await detectProjectIdentity(repo);
+    const projectStatePath = path.join(partitionPath(identity!.projectAnchor, home), "state.json");
+
+    expect(await runCli(["init", "--marketplace", TEST_MARKETPLACE_SOURCE, "--role", "api"], { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace: loadFakeMarketplace, out: output.out, err: output.err })).toBe(0);
+    expect(await readFile(excludePath, "utf8")).toBe("# user exclude\n");
+    await expect(readFile(projectStatePath, "utf8")).rejects.toMatchObject({ code: "ENOENT" });
+
+    expect(await runCli(["sync"], { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace: loadFakeMarketplace, out: output.out, err: output.err })).toBe(0);
+    expect(await readFile(excludePath, "utf8")).toBe("# user exclude\n");
+    await expect(readFile(projectStatePath, "utf8")).rejects.toMatchObject({ code: "ENOENT" });
+    await expect(readFile(path.join(repo, ".github", "instructions", "teamai", "context.instructions.md"), "utf8")).rejects.toMatchObject({ code: "ENOENT" });
+    await expect(readFile(path.join(repo, ".teamai", "context", "shared", "learnings"), "utf8")).rejects.toMatchObject({ code: "ENOENT" });
+  }, CLI_PROCESS_TEST_TIMEOUT);
+
+  test("projects set rejects a symlink escape before writing any workspace projection", async ({ skip }) => {
+    const repo = await createGitRepo();
+    const home = await tempDir("teamai-project-escape-home-");
+    const marketplace = await tempDir("teamai-project-escape-marketplace-");
+    const external = await tempDir("teamai-project-escape-external-");
+    const excludePath = path.join(repo, ".git", "info", "exclude");
+    const initialExclude = "# user exclude\n";
+    await writeFile(excludePath, initialExclude, "utf8");
+    await mkdir(path.join(marketplace, "manifest"), { recursive: true });
+    await writeFile(path.join(marketplace, "manifest", "projects.yaml"), "version: 1\nprojects:\n  - id: payments\n    name: Payments\n    description: Payment domain\n    owners: [payments]\n", "utf8");
+    await writeFile(path.join(external, "personal.md"), "external user content\n", "utf8");
+    await mkdir(path.join(repo, ".teamai"), { recursive: true });
+    try {
+      await createDirectoryLink(external, path.join(repo, ".teamai", "context"));
+    } catch (error) {
+      if (isPermissionError(error)) return skip();
+      throw error;
+    }
+    const fake = await createFakeCopilot();
+    const output = capture();
+    const loadMarketplace = async () => loadFakeMarketplace(marketplace);
+    expect(await runCli(["init", "--marketplace", TEST_MARKETPLACE_SOURCE, "--role", "api"], { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace, out: output.out, err: output.err })).toBe(0);
+
+    const state = await detectProjectIdentity(repo);
+    const statePath = path.join(partitionPath(state!.projectAnchor, home), "state.json");
+    expect(await runCli(["projects", "set", "payments"], { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace, out: output.out, err: output.err })).toBe(1);
+    expect(output.stderr.join("\n")).toContain("Unsafe Team AI projection path");
+    await expect(readFile(path.join(external, "personal.md"), "utf8")).resolves.toBe("external user content\n");
+    await expect(readFile(excludePath, "utf8")).resolves.toBe(initialExclude);
+    await expect(readFile(path.join(repo, ".github", "instructions", "teamai", "context.instructions.md"), "utf8")).rejects.toMatchObject({ code: "ENOENT" });
+    await expect(readFile(path.join(repo, ".github", "copilot", "settings.json"), "utf8")).rejects.toMatchObject({ code: "ENOENT" });
+    await expect(readFile(statePath, "utf8")).rejects.toMatchObject({ code: "ENOENT" });
+  }, CLI_PROCESS_TEST_TIMEOUT);
+
+  test("projects set rejects a linked Team AI state root before changing Workspace or external files", async ({ skip }) => {
+    const repo = await createGitRepo();
+    const home = await tempDir("teamai-state-escape-home-");
+    const marketplace = await tempDir("teamai-state-escape-marketplace-");
+    const external = await tempDir("teamai-state-escape-external-");
+    const projectsPath = path.join(home, ".teamai", "projects");
+    const excludePath = path.join(repo, ".git", "info", "exclude");
+    const initialExclude = "# user exclude\n";
+    await writeFile(excludePath, initialExclude, "utf8");
+    await mkdir(path.join(marketplace, "manifest"), { recursive: true });
+    await writeFile(path.join(marketplace, "manifest", "projects.yaml"), "version: 1\nprojects:\n  - id: payments\n    name: Payments\n    description: Payment domain\n    owners: [payments]\n", "utf8");
+    await writeFile(path.join(external, "keep.txt"), "outside content\n", "utf8");
+    await mkdir(path.dirname(projectsPath), { recursive: true });
+    try {
+      await createDirectoryLink(external, projectsPath);
+    } catch (error) {
+      if (isPermissionError(error)) return skip();
+      throw error;
+    }
+    const fake = await createFakeCopilot();
+    const output = capture();
+    const loadMarketplace = async () => loadFakeMarketplace(marketplace);
+    expect(await runCli(["init", "--marketplace", TEST_MARKETPLACE_SOURCE, "--role", "api"], { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace, out: output.out, err: output.err })).toBe(0);
+    const identity = await detectProjectIdentity(repo);
+    expect(await runCli(["projects", "set", "payments"], { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace, out: output.out, err: output.err })).toBe(1);
+    expect(output.stderr.join("\n")).toContain("Unsafe Team AI project state path");
+    await expect(readFile(path.join(external, "keep.txt"), "utf8")).resolves.toBe("outside content\n");
+    await expect(readFile(excludePath, "utf8")).resolves.toBe(initialExclude);
+    await expect(readFile(path.join(repo, ".github", "instructions", "teamai", "context.instructions.md"), "utf8")).rejects.toMatchObject({ code: "ENOENT" });
+    await expect(readFile(path.join(repo, ".github", "copilot", "settings.json"), "utf8")).rejects.toMatchObject({ code: "ENOENT" });
+    expect(await readdir(external)).toEqual(["keep.txt"]);
+    expect(identity).toBeDefined();
+  }, CLI_PROCESS_TEST_TIMEOUT);
+
+  test("sync preflights an owned Workspace projection before changing user resources", async ({ skip }) => {
+    const repo = await createGitRepo();
+    const home = await tempDir("teamai-sync-project-preflight-home-");
+    const marketplace = await tempDir("teamai-sync-project-preflight-marketplace-");
+    const external = await tempDir("teamai-sync-project-preflight-external-");
+    const excludePath = path.join(repo, ".git", "info", "exclude");
+    const initialExclude = "# user exclude\n";
+    await writeFile(excludePath, initialExclude, "utf8");
+    await mkdir(path.join(marketplace, "manifest"), { recursive: true });
+    await mkdir(path.join(marketplace, "contexts", "payments", "instructions"), { recursive: true });
+    await writeFile(path.join(marketplace, "manifest", "projects.yaml"), "version: 1\nprojects:\n  - id: payments\n    name: Payments\n    description: Payment domain\n    owners: [payments]\n", "utf8");
+    await writeFile(path.join(marketplace, "contexts", "payments", "instructions", "payments.instructions.md"), "payments\n", "utf8");
+    await writeFile(path.join(external, "personal.md"), "external user content\n", "utf8");
+    await mkdir(path.join(repo, ".teamai"), { recursive: true });
+    try {
+      await createDirectoryLink(external, path.join(repo, ".teamai", "context"));
+    } catch (error) {
+      if (isPermissionError(error)) return skip();
+      throw error;
+    }
+    const identity = await detectProjectIdentity(repo);
+    const config = createConfig({ name: TEST_MARKETPLACE_NAME, source: TEST_MARKETPLACE_SOURCE });
+    config.role = "api";
+    await writeGlobalConfig(config, home);
+    const state = {
+      schemaVersion: 1 as const,
+      workspaceRoot: identity!.workspaceRoot,
+      lastSync: "before-sync",
+      managedPlugins: [],
+      projections: {
+        [projectionKey(identity!.workspaceRoot)]: {
+          workspaceRoot: identity!.workspaceRoot,
+          logicalProjects: ["payments"],
+          managedProjectPlugins: [],
+          instructionRoot: path.join(repo, ".github", "instructions", "teamai"),
+          contextRoot: path.join(repo, ".teamai", "context"),
+        },
+      },
+    };
+    await writeProjectState(identity!.projectAnchor, state, home);
+    const statePath = path.join(partitionPath(identity!.projectAnchor, home), "state.json");
+    const stateBefore = await readFile(statePath, "utf8");
+    const configBefore = await readFile(path.join(home, ".teamai", "config.yaml"), "utf8");
+    const fake = await createFakeCopilot();
+    const copilotBefore = await fake.readState();
+    const output = capture();
+    const loadMarketplace = async () => loadFakeMarketplace(marketplace);
+
+    expect(await runCli(["sync"], { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace, out: output.out, err: output.err })).toBe(1);
+    expect(output.stderr.join("\n")).toContain("Unsafe Team AI projection path");
+    expect(await fake.readState()).toEqual(copilotBefore);
+    await expect(readFile(statePath, "utf8")).resolves.toBe(stateBefore);
+    await expect(readFile(path.join(home, ".teamai", "config.yaml"), "utf8")).resolves.toBe(configBefore);
+    await expect(readFile(path.join(home, ".copilot", "instructions", "teamai", "payments.instructions.md"), "utf8")).rejects.toMatchObject({ code: "ENOENT" });
+    await expect(readdir(path.join(home, ".copilot", "skills", "teamai"))).rejects.toMatchObject({ code: "ENOENT" });
+    await expect(readFile(excludePath, "utf8")).resolves.toBe(initialExclude);
+    await expect(readFile(path.join(external, "personal.md"), "utf8")).resolves.toBe("external user content\n");
+  }, CLI_PROCESS_TEST_TIMEOUT);
+
+  test("sync reports partial user convergence when a later Workspace lock conflicts", async () => {
+    const repo = await createGitRepo();
+    const home = await tempDir("teamai-sync-project-conflict-home-");
+    const marketplace = await tempDir("teamai-sync-project-conflict-marketplace-");
+    await mkdir(path.join(marketplace, "manifest"), { recursive: true });
+    await mkdir(path.join(marketplace, "instructions"), { recursive: true });
+    await mkdir(path.join(marketplace, "contexts", "payments", "instructions"), { recursive: true });
+    await writeFile(path.join(marketplace, "manifest", "projects.yaml"), "version: 1\nprojects:\n  - id: payments\n    name: Payments\n    description: Payment domain\n    owners: [payments]\n", "utf8");
+    await writeFile(path.join(marketplace, "instructions", "global.instructions.md"), "user instruction\n", "utf8");
+    await writeFile(path.join(marketplace, "contexts", "payments", "instructions", "payments.instructions.md"), "payments\n", "utf8");
+    const identity = await detectProjectIdentity(repo);
+    const config = createConfig({ name: TEST_MARKETPLACE_NAME, source: TEST_MARKETPLACE_SOURCE });
+    config.role = "api";
+    await writeGlobalConfig(config, home);
+    const state = {
+      schemaVersion: 1 as const,
+      workspaceRoot: identity!.workspaceRoot,
+      lastSync: "before-sync",
+      managedPlugins: [],
+      projections: {
+        [projectionKey(identity!.workspaceRoot)]: {
+          workspaceRoot: identity!.workspaceRoot,
+          logicalProjects: ["payments"],
+          managedProjectPlugins: [],
+          instructionRoot: path.join(repo, ".github", "instructions", "teamai"),
+          contextRoot: path.join(repo, ".teamai", "context"),
+        },
+      },
+    };
+    await writeProjectState(identity!.projectAnchor, state, home);
+    const statePath = path.join(partitionPath(identity!.projectAnchor, home), "state.json");
+    const stateBefore = await readFile(statePath, "utf8");
+    const excludePath = path.join(repo, ".git", "info", "exclude");
+    const excludeBefore = await readFile(excludePath, "utf8");
+    const fake = await createFakeCopilot({
+      marketplaces: [{ name: TEST_MARKETPLACE_NAME, source: TEST_MARKETPLACE_SOURCE }],
+      plugins: [
+        { name: "common", marketplace: TEST_MARKETPLACE_NAME, enabled: true, source: `live-marketplace:${TEST_MARKETPLACE_NAME}` },
+        { name: "api", marketplace: TEST_MARKETPLACE_NAME, enabled: true, source: `live-marketplace:${TEST_MARKETPLACE_NAME}` },
+      ],
+    });
+    const copilot = Object.create(fake.client) as CopilotClient;
+    const originalListMarketplaces = fake.client.listMarketplaces.bind(fake.client);
+    const projectLock = `${partitionPath(identity!.projectAnchor, home)}.lock`;
+    copilot.listMarketplaces = async (cwd) => {
+      await writeFile(projectLock, "other process lock\n", "utf8");
+      return originalListMarketplaces(cwd);
+    };
+    const output = capture();
+    const loadMarketplace = async () => loadFakeMarketplace(marketplace);
+
+    expect(await runCli(["sync"], { cwd: repo, homeDir: home, copilot, loadMarketplace, out: output.out, err: output.err })).toBe(1);
+    expect(output.stderr.join("\n")).toContain("Partial sync; Workspace update did not complete.");
+    expect(output.stderr.join("\n")).toContain("Project state conflict");
+    await rm(projectLock, { force: true });
+    await expect(readFile(path.join(home, ".copilot", "instructions", "teamai", "global.instructions.md"), "utf8")).resolves.toBe("user instruction\n");
+    await expect(readdir(path.join(home, ".copilot", "skills", "teamai"))).resolves.toContain("SKILL.md");
+    await expect(readFile(statePath, "utf8")).resolves.toBe(stateBefore);
+    await expect(readFile(excludePath, "utf8")).resolves.toBe(excludeBefore);
+    await expect(readFile(path.join(repo, ".github", "instructions", "teamai", "context.instructions.md"), "utf8")).rejects.toMatchObject({ code: "ENOENT" });
   }, CLI_PROCESS_TEST_TIMEOUT);
 
   test("rejects the removed Product option", async () => {
@@ -229,8 +443,9 @@ describe("CLI integration with fake Copilot executable", () => {
     const doctor = capture();
     expect(await runCli(["doctor"], { ...base, out: doctor.out, err: doctor.err })).toBe(0);
     expect(doctor.stdout.some((line) => line.includes("Copilot runtime and native MCP state are unobserved"))).toBe(true);
-    expect(doctor.stdout).toContain("✓ Logical Project context: current.");
+    expect(doctor.stdout).toContain("✓ Logical Project manifest: 0 available, no workspace binding.");
     expect(doctor.stdout.some((line) => line.includes("Managed personal Skill availability is unknown"))).toBe(true);
+    await expect(readFile(statePath, "utf8")).rejects.toMatchObject({ code: "ENOENT" });
 
     const unavailableStatus = capture();
     expect(await runCli(["status"], {
@@ -243,13 +458,6 @@ describe("CLI integration with fake Copilot executable", () => {
     expect(unavailableStatus.stdout).toContain("  Managed personal skills: none");
     expect(unavailableStatus.stdout.some((line) => line.includes("Marketplace cache: unavailable"))).toBe(true);
 
-    const staleState = JSON.parse(await readFile(statePath, "utf8"));
-    const projectionKey = Object.keys(staleState.projections)[0];
-    staleState.projections[projectionKey].managedProjectPlugins = [`payments@${TEST_MARKETPLACE_NAME}`];
-    await writeFile(statePath, `${JSON.stringify(staleState, null, 2)}\n`, "utf8");
-    const staleDoctor = capture();
-    expect(await runCli(["doctor"], { ...base, out: staleDoctor.out, err: staleDoctor.err })).toBe(0);
-    expect(staleDoctor.stdout).toContain("! Logical Project context is stale. Run teamai sync.");
   }, CLI_PROCESS_TEST_TIMEOUT);
 
   test("first-time dry-run discovers metadata without mutating Copilot", async () => {
@@ -373,6 +581,9 @@ describe("CLI integration with fake Copilot executable", () => {
   test("binds Logical Projects only through projects set and removes only owned plugins when switched", async () => {
     const repo = await createGitRepo();
     const home = await tempDir("teamai-logical-project-home-");
+    const excludePath = path.join(repo, ".git", "info", "exclude");
+    const initialExclude = "# user project exclude\n";
+    await writeFile(excludePath, initialExclude, "utf8");
     const marketplace = await tempDir("teamai-logical-project-marketplace-");
     await mkdir(path.join(marketplace, "manifest"), { recursive: true });
     await mkdir(path.join(marketplace, "contexts", "payments", "instructions"), { recursive: true });
@@ -382,6 +593,7 @@ describe("CLI integration with fake Copilot executable", () => {
     await writeFile(path.join(marketplace, "contexts", "payments", "instructions", "payments.instructions.md"), "---\napplyTo: \"**\"\n---\n\npayments\n", "utf8");
     await writeFile(path.join(marketplace, "contexts", "risk", "docs", "risk.md"), "risk\n", "utf8");
     await writeFile(path.join(marketplace, "learnings", "shared", "shared.md"), "shared\n", "utf8");
+    const settingsPath = path.join(repo, ".github", "copilot", "settings.json");
     const loadMarketplace = async () => ({ ...(await loadFakeMarketplace(marketplace)), plugins: [...(await loadFakeMarketplace(marketplace)).plugins, { name: "payments", version: "0.1.0", kind: "project" as const, root: "payments" }] });
     const fake = await createFakeCopilot();
     const output = capture();
@@ -394,6 +606,13 @@ describe("CLI integration with fake Copilot executable", () => {
     expect(await runCli(["init", "--marketplace", TEST_MARKETPLACE_SOURCE, "--role", "api"], { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace, out: output.out, err: output.err })).toBe(0);
     await expect(readFile(path.join(repo, ".github", "copilot", "settings.json"), "utf8")).rejects.toMatchObject({ code: "ENOENT" });
 
+    await mkdir(path.join(repo, ".github", "instructions"), { recursive: true });
+    await writeFile(path.join(repo, ".github", "instructions", "personal.instructions.md"), "personal instruction\n", "utf8");
+    await mkdir(path.join(repo, ".teamai"), { recursive: true });
+    await writeFile(path.join(repo, ".teamai", "notes.md"), "personal note\n", "utf8");
+    await mkdir(path.dirname(settingsPath), { recursive: true });
+    await writeFile(settingsPath, JSON.stringify({ custom: { keep: true }, enabledPlugins: { "user-plugin@other": true } }), "utf8");
+
     expect(await runCli(["projects", "set", "payments,risk"], { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace, out: output.out, err: output.err })).toBe(0);
     await expect(readFile(path.join(repo, ".github", "instructions", "teamai", "payments", "payments.instructions.md"), "utf8")).resolves.toContain("applyTo: \"**\"");
     await expect(readFile(path.join(repo, ".teamai", "context", "risk", "docs", "risk.md"), "utf8")).resolves.toBe("risk\n");
@@ -405,6 +624,41 @@ describe("CLI integration with fake Copilot executable", () => {
     const otherIdentity = await detectProjectIdentity(otherRepo);
     const otherStatePath = path.join(partitionPath(otherIdentity!.projectAnchor, home), "state.json");
     const otherState = await readFile(otherStatePath, "utf8");
+
+    const siblingRepo = path.join(await tempDir("teamai-linked-worktree-parent-"), "sibling");
+    const worktreeResult = await runProcess("git", ["worktree", "add", "-b", "sibling-test", siblingRepo], { cwd: repo });
+    expect(worktreeResult.exitCode).toBe(0);
+    const workerPath = fileURLToPath(new URL("../helpers/project-state-worker.ts", import.meta.url));
+    const viteNodePath = path.join(process.cwd(), "node_modules", "vite-node", "vite-node.mjs");
+    const runProjectSetProcess = (workspace: string, ids: string) => runProcess(process.execPath, [viteNodePath, "--script", workerPath, workspace, home, marketplace, ids], { cwd: workspace });
+    const [mainResult, siblingResult] = await Promise.all([
+      runProjectSetProcess(repo, "payments,risk"),
+      runProjectSetProcess(siblingRepo, "risk"),
+    ]);
+    if (mainResult.exitCode !== 0) {
+      expect(mainResult.exitCode).toBe(1);
+      expect(mainResult.stderr).toContain("Project state conflict");
+      expect((await runProjectSetProcess(repo, "payments,risk")).exitCode).toBe(0);
+    }
+    if (siblingResult.exitCode !== 0) {
+      expect(siblingResult.exitCode).toBe(1);
+      expect(siblingResult.stderr).toContain("Project state conflict");
+      expect((await runProjectSetProcess(siblingRepo, "risk")).exitCode).toBe(0);
+    }
+    const repoIdentity = await detectProjectIdentity(repo);
+    const repoStatePath = path.join(partitionPath(repoIdentity!.projectAnchor, home), "state.json");
+    const siblingIdentity = await detectProjectIdentity(siblingRepo);
+    const stateWithSibling = JSON.parse(await readFile(repoStatePath, "utf8"));
+    expect(stateWithSibling.projections[projectionKey(repoIdentity!.workspaceRoot)].logicalProjects).toEqual(["payments", "risk"]);
+    expect(stateWithSibling.projections[projectionKey(siblingIdentity!.workspaceRoot)].logicalProjects).toEqual(["risk"]);
+
+    const staleState = JSON.parse(await readFile(repoStatePath, "utf8"));
+    staleState.projections[projectionKey(repoIdentity!.workspaceRoot)].managedProjectPlugins.push(`stale@${TEST_MARKETPLACE_NAME}`);
+    await writeFile(repoStatePath, `${JSON.stringify(staleState, null, 2)}\n`, "utf8");
+    const staleDoctor = capture();
+    expect(await runCli(["doctor"], { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace, out: staleDoctor.out, err: staleDoctor.err })).toBe(0);
+    expect(staleDoctor.stdout).toContain("! Logical Project context is stale. Run teamai sync.");
+    expect(JSON.parse(await readFile(repoStatePath, "utf8")).projections[projectionKey(repoIdentity!.workspaceRoot)].managedProjectPlugins).toContain(`stale@${TEST_MARKETPLACE_NAME}`);
 
     await writeFile(path.join(marketplace, "contexts", "payments", "instructions", "payments.instructions.md"), "---\napplyTo: \"**\"\n---\n\npayments v2\n", "utf8");
     expect(await runCli(["sync"], { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace, out: output.out, err: output.err })).toBe(0);
@@ -421,6 +675,40 @@ describe("CLI integration with fake Copilot executable", () => {
 
     expect(await runCli(["projects", "set", "risk"], { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace, out: output.out, err: output.err })).toBe(0);
     await expect(readFile(path.join(repo, ".github", "instructions", "teamai", "payments", "payments.instructions.md"), "utf8")).rejects.toMatchObject({ code: "ENOENT" });
+    const excludeBeforeUnbind = await readFile(excludePath, "utf8");
+    expect(await runCli(["projects", "set"], { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace, out: output.out, err: output.err })).toBe(0);
+    await expect(readFile(path.join(repo, ".teamai", "context", "risk", "docs", "risk.md"), "utf8")).rejects.toMatchObject({ code: "ENOENT" });
+    await expect(readFile(path.join(repo, ".teamai", "context", "shared", "learnings", "shared.md"), "utf8")).rejects.toMatchObject({ code: "ENOENT" });
+    await expect(readFile(path.join(repo, ".github", "instructions", "teamai", "context.instructions.md"), "utf8")).rejects.toMatchObject({ code: "ENOENT" });
+    await expect(readdir(path.join(repo, ".teamai", "context"))).rejects.toMatchObject({ code: "ENOENT" });
+    await expect(readdir(path.join(repo, ".github", "instructions", "teamai"))).rejects.toMatchObject({ code: "ENOENT" });
+    await expect(readFile(path.join(repo, ".github", "instructions", "personal.instructions.md"), "utf8")).resolves.toBe("personal instruction\n");
+    await expect(readFile(path.join(repo, ".teamai", "notes.md"), "utf8")).resolves.toBe("personal note\n");
+    const unboundSettings = JSON.parse(await readFile(settingsPath, "utf8"));
+    expect(unboundSettings.custom).toEqual({ keep: true });
+    expect(unboundSettings.enabledPlugins["user-plugin@other"]).toBe(true);
+    expect(unboundSettings.enabledPlugins["payments@" + TEST_MARKETPLACE_NAME]).toBeUndefined();
+    const unboundState = JSON.parse(await readFile(repoStatePath, "utf8"));
+    expect(Object.keys(unboundState.projections)).toEqual([projectionKey(siblingIdentity!.workspaceRoot)]);
+    await expect(readFile(path.join(siblingRepo, ".teamai", "context", "risk", "docs", "risk.md"), "utf8")).resolves.toBe("risk\n");
+
+    expect(await runCli(["sync"], { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace, out: output.out, err: output.err })).toBe(0);
+    await expect(readFile(path.join(repo, ".github", "instructions", "teamai", "context.instructions.md"), "utf8")).rejects.toMatchObject({ code: "ENOENT" });
+    expect(await readFile(excludePath, "utf8")).toBe(excludeBeforeUnbind);
+    expect(JSON.parse(await readFile(repoStatePath, "utf8")).projections[projectionKey(siblingIdentity!.workspaceRoot)].logicalProjects).toEqual(["risk"]);
+
+    expect(await runCli(["projects", "set", "risk"], { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace, out: output.out, err: output.err })).toBe(0);
+    await expect(readFile(path.join(repo, ".github", "instructions", "teamai", "context.instructions.md"), "utf8")).resolves.toContain("Active Logical Projects: risk");
+    await expect(readFile(path.join(repo, ".teamai", "context", "risk", "docs", "risk.md"), "utf8")).resolves.toBe("risk\n");
+    expect(JSON.parse(await readFile(repoStatePath, "utf8")).projections[projectionKey(siblingIdentity!.workspaceRoot)].logicalProjects).toEqual(["risk"]);
+    expect(await runCli(["projects", "set"], { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace, out: output.out, err: output.err })).toBe(0);
+    await expect(readdir(path.join(repo, ".teamai", "context"))).rejects.toMatchObject({ code: "ENOENT" });
+    await expect(readdir(path.join(repo, ".github", "instructions", "teamai"))).rejects.toMatchObject({ code: "ENOENT" });
+    expect(JSON.parse(await readFile(repoStatePath, "utf8")).projections[projectionKey(siblingIdentity!.workspaceRoot)].logicalProjects).toEqual(["risk"]);
+
+    expect(await runCli(["projects", "set"], { cwd: siblingRepo, homeDir: home, copilot: fake.client, loadMarketplace, out: output.out, err: output.err })).toBe(0);
+    await expect(readFile(repoStatePath, "utf8")).rejects.toMatchObject({ code: "ENOENT" });
+    expect(await readFile(excludePath, "utf8")).toBe(initialExclude);
     expect(JSON.parse(await readFile(path.join(repo, ".github", "copilot", "settings.json"), "utf8")).enabledPlugins[`payments@${TEST_MARKETPLACE_NAME}`]).toBeUndefined();
   }, CLI_PROCESS_TEST_TIMEOUT);
 
