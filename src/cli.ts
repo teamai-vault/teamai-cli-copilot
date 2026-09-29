@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 import { createCommandContext, resolveCopilotBackend, type CommandContext } from "./commands/context.js";
 import { doctorCommand } from "./commands/doctor.js";
 import { initCommand } from "./commands/init.js";
-import { learningShareCommand } from "./commands/learning.js";
+import { learningPendingCommand, learningShareCommand } from "./commands/learning.js";
 import { projectsListCommand, projectsSetCommand } from "./commands/projects.js";
 import { roleListCommand, roleSetCommand } from "./commands/role.js";
 import { skillInstallCommand, skillListCommand, skillRemoveCommand, skillShowCommand } from "./commands/skill.js";
@@ -24,6 +24,7 @@ function usage(): string {
     "  init [--marketplace <source>] [--role api|ios|aos|qa|design]",
     "  projects [list|set <ids...>]",
     "  learning share <file> [--project <id>|--shared] [--tags <tag...>]",
+    "  learning pending [--json]",
     "  sync",
     "  role list",
     "  role set <role>",
@@ -71,6 +72,7 @@ const optionRules: Record<string, Record<string, OptionRule>> = {
   },
   status: { "--resources": { kind: "boolean" }, "--json": { kind: "boolean" } },
   doctor: { "--json": { kind: "boolean" } },
+  "learning pending": { "--json": { kind: "boolean" } },
 };
 
 function parseOptions(tokens: string[], rules: Record<string, OptionRule>, command: string): { positionals: string[]; options: ParsedOptions } {
@@ -152,7 +154,7 @@ function parseInvocation(argv: string[]): Invocation {
     optionKey = `${command} ${subcommand ?? ""}`.trim();
   }
 
-  const supported = ["init", "sync", "role list", "role set", "projects list", "projects set", "learning share", "skill list", "skill show", "skill install", "skill remove", "skill contribute", "tags list", "status", "doctor"];
+  const supported = ["init", "sync", "role list", "role set", "projects list", "projects set", "learning share", "learning pending", "skill list", "skill show", "skill install", "skill remove", "skill contribute", "tags list", "status", "doctor"];
   if (!supported.includes(optionKey)) throw new UsageError(`Unknown command or subcommand.\n${usage()}`);
   const parsed = parseOptions(optionArgs, optionRules[optionKey] ?? {}, optionKey);
   const positionals = parsed.positionals;
@@ -174,6 +176,7 @@ function parseInvocation(argv: string[]): Invocation {
       exact(1, "teamai learning share <file> [--project <id>|--shared] [--tags <tag...>]");
       if (parsed.options.has("--project") && parsed.options.has("--shared")) throw new UsageError("Use either --project <id> or --shared.");
       break;
+    case "learning pending": exact(0, "teamai learning pending [--json]"); break;
     case "skill list": exact(0, "teamai skill list [--tag <tag>] [--owner <owner>] [--source plugin|standalone]"); break;
     case "skill show": exact(1, "teamai skill show <name>"); break;
     case "skill install": {
@@ -228,8 +231,15 @@ function needsCopilotBackend(invocation: Invocation): boolean {
     (invocation.command === "skill" && ["list", "show", "install", "remove"].includes(invocation.subcommand ?? ""));
 }
 
+function requestsLearningPendingJson(argv: string[]): boolean {
+  const args = argv.filter((argument) => argument !== "--dry-run");
+  return args[0] === "learning" && args[1] === "pending" &&
+    args.some((argument) => argument === "--json" || argument.startsWith("--json="));
+}
+
 export async function runCli(argv: string[], overrides: Partial<CommandContext> = {}): Promise<number> {
   const dryRun = argv.includes("--dry-run");
+  const jsonLearningPending = requestsLearningPendingJson(argv);
   const context = createCommandContext({ ...overrides, dryRun });
   if (argv.length === 0) {
     context.out(usage());
@@ -305,7 +315,8 @@ export async function runCli(argv: string[], overrides: Partial<CommandContext> 
         await tagsListCommand(context);
         return 0;
       case "learning":
-        await learningShareCommand(context, {
+        if (invocation.subcommand === "pending") await learningPendingCommand(context, hasOption(invocation.options, "--json"));
+        else await learningShareCommand(context, {
           file: invocation.positionals[0],
           project: option(invocation.options, "--project"),
           shared: hasOption(invocation.options, "--shared"),
@@ -323,17 +334,21 @@ export async function runCli(argv: string[], overrides: Partial<CommandContext> 
         throw new UsageError(`Unknown command '${invocation.command}'.\n${usage()}`);
     }
   } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
     const command = argv.find((arg) => arg !== "--dry-run" && arg !== "--help");
     const jsonOutput = argv.includes("--json") && (command === "status" || command === "doctor");
-    if (jsonOutput) {
+    if (jsonLearningPending) {
+      const code = error instanceof UsageError ? "INVALID_ARGUMENT" : "LEARNING_PENDING_FAILED";
+      context.out(JSON.stringify({ schemaVersion: 1, error: { code, message } }));
+    } else if (jsonOutput) {
       context.out(JSON.stringify({
         schemaVersion: 1,
         error: {
           code: error instanceof UsageError ? "USAGE_ERROR" : "COMMAND_ERROR",
-          message: error instanceof Error ? error.message : String(error),
+          message,
         },
       }));
-    } else context.err(`ERROR: ${(error as Error).message}`);
+    } else context.err(`ERROR: ${message}`);
     return error instanceof UsageError ? 2 : 1;
   }
 }
