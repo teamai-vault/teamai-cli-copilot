@@ -132,6 +132,9 @@ describe("CLI integration with fake Copilot executable", () => {
     const output = capture();
     const loadMarketplace = async () => loadFakeMarketplace(marketplace);
     expect(await runCli(["init", "--marketplace", TEST_MARKETPLACE_SOURCE, "--role", "api"], { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace, out: output.out, err: output.err })).toBe(0);
+    const sync = capture();
+    expect(await runCli(["sync"], { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace, out: sync.out, err: sync.err })).toBe(0);
+    expect(sync.stderr).toEqual([]);
 
     const state = await detectProjectIdentity(repo);
     const statePath = path.join(partitionPath(state!.projectAnchor, home), "state.json");
@@ -167,6 +170,9 @@ describe("CLI integration with fake Copilot executable", () => {
     const output = capture();
     const loadMarketplace = async () => loadFakeMarketplace(marketplace);
     expect(await runCli(["init", "--marketplace", TEST_MARKETPLACE_SOURCE, "--role", "api"], { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace, out: output.out, err: output.err })).toBe(0);
+    const sync = capture();
+    expect(await runCli(["sync"], { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace, out: sync.out, err: sync.err })).toBe(1);
+    expect(sync.stderr.join("\n")).toContain("Unsafe Team AI project state path");
     const identity = await detectProjectIdentity(repo);
     expect(await runCli(["projects", "set", "payments"], { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace, out: output.out, err: output.err })).toBe(1);
     expect(output.stderr.join("\n")).toContain("Unsafe Team AI project state path");
@@ -608,6 +614,7 @@ describe("CLI integration with fake Copilot executable", () => {
 
     expect(await runCli(["init", "--marketplace", TEST_MARKETPLACE_SOURCE, "--role", "api"], { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace, out: output.out, err: output.err })).toBe(0);
     await expect(readFile(path.join(repo, ".github", "copilot", "settings.json"), "utf8")).rejects.toMatchObject({ code: "ENOENT" });
+    expect(await runCli(["sync"], { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace, out: output.out, err: output.err })).toBe(0);
 
     await mkdir(path.join(repo, ".github", "instructions"), { recursive: true });
     await writeFile(path.join(repo, ".github", "instructions", "personal.instructions.md"), "personal instruction\n", "utf8");

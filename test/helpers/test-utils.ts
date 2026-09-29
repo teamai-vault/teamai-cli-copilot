@@ -1,4 +1,4 @@
-import { mkdtemp, readFile, realpath, symlink, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, realpath, rm, symlink, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -8,6 +8,7 @@ import { runProcess } from "../../src/utils/process.js";
 
 export const TEST_MARKETPLACE_NAME = "test-teamai";
 export const TEST_MARKETPLACE_SOURCE = "https://github.com/test-org/teamai-marketplace.git";
+const fakeAuthorityPreparation = new Map<string, Promise<void>>();
 
 export function isPermissionError(error: unknown): boolean {
   return ["EACCES", "EPERM"].includes((error as NodeJS.ErrnoException).code ?? "");
@@ -63,10 +64,21 @@ export async function createFakeCopilot(initial?: Partial<FakeCopilotState>): Pr
   };
 }
 
-export async function loadFakeMarketplace(root = path.join(os.tmpdir(), "teamai-fake-marketplace-without-instructions")): Promise<MarketplaceCatalog> {
+export async function loadFakeMarketplace(root?: string): Promise<MarketplaceCatalog> {
+  const catalogRoot = root && !/^(?:[a-z][a-z0-9+.-]*:\/\/|git@)/i.test(root)
+    ? root
+    : path.join(os.tmpdir(), "teamai-fake-marketplace-without-instructions");
+  const preparationKey = path.resolve(catalogRoot);
+  let preparation = fakeAuthorityPreparation.get(preparationKey);
+  if (!preparation) {
+    preparation = ensureFakePublishedAuthority(catalogRoot);
+    fakeAuthorityPreparation.set(preparationKey, preparation);
+    void preparation.catch(() => fakeAuthorityPreparation.delete(preparationKey));
+  }
+  await preparation;
   return {
     name: TEST_MARKETPLACE_NAME,
-    root,
+    root: catalogRoot,
     plugins: [
       { name: "common", version: "0.1.0", kind: "common", root: "common" },
       { name: "api", version: "0.1.0", kind: "role", root: "api" },
@@ -79,6 +91,51 @@ export async function loadFakeMarketplace(root = path.join(os.tmpdir(), "teamai-
     skills: [],
     dispose: async () => undefined,
   };
+}
+
+async function ensureFakePublishedAuthority(root: string): Promise<void> {
+  await mkdir(root, { recursive: true });
+  const bare = path.join(root, ".teamai-test-authority.git");
+  const bareCheck = await runProcess("git", ["--git-dir", bare, "rev-parse", "--is-bare-repository"], { cwd: root });
+  if (bareCheck.exitCode !== 0 || bareCheck.stdout.trim() !== "true") {
+    const initializedBare = await runProcess("git", ["init", "--bare", bare], { cwd: root });
+    if (initializedBare.exitCode !== 0) throw new Error(initializedBare.stderr);
+  }
+
+  const branch = await runProcess("git", ["ls-remote", bare, "refs/heads/teamai-learnings"], { cwd: root });
+  if (branch.exitCode !== 0) throw new Error(branch.stderr);
+  if (!branch.stdout.trim()) {
+    const seed = await tempDir("teamai-fake-authority-seed-");
+    try {
+      const init = await runProcess("git", ["init", "-b", "teamai-learnings"], { cwd: seed });
+      if (init.exitCode !== 0) throw new Error(init.stderr);
+      await runProcess("git", ["config", "user.email", "teamai@example.invalid"], { cwd: seed });
+      await runProcess("git", ["config", "user.name", "Team AI Test"], { cwd: seed });
+      await writeFile(path.join(seed, "README.md"), "Test published Learnings\n", "utf8");
+      await mkdir(path.join(seed, ".github"), { recursive: true });
+      await writeFile(path.join(seed, ".github", "CODEOWNERS"), "* @teamai\n", "utf8");
+      await mkdir(path.join(seed, "learnings", "shared"), { recursive: true });
+      await writeFile(path.join(seed, "learnings", "shared", "test.md"), "Test published learning\n", "utf8");
+      await runProcess("git", ["add", "."], { cwd: seed });
+      const commit = await runProcess("git", ["commit", "-m", "test published authority"], { cwd: seed });
+      if (commit.exitCode !== 0) throw new Error(commit.stderr);
+      const push = await runProcess("git", ["push", bare, "HEAD:refs/heads/teamai-learnings"], { cwd: seed });
+      if (push.exitCode !== 0) throw new Error(push.stderr);
+    } finally {
+      await rm(seed, { recursive: true, force: true });
+    }
+  }
+
+  const initialized = await runProcess("git", ["rev-parse", "--git-dir"], { cwd: root });
+  if (initialized.exitCode !== 0) {
+    const init = await runProcess("git", ["init", "-b", "main"], { cwd: root });
+    if (init.exitCode !== 0) throw new Error(init.stderr);
+  }
+  const origin = await runProcess("git", ["remote", "get-url", "origin"], { cwd: root });
+  const remote = origin.exitCode === 0
+    ? await runProcess("git", ["remote", "set-url", "origin", bare], { cwd: root })
+    : await runProcess("git", ["remote", "add", "origin", bare], { cwd: root });
+  if (remote.exitCode !== 0) throw new Error(remote.stderr);
 }
 
 export async function createGitRepo(): Promise<string> {

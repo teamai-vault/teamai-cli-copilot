@@ -15,6 +15,7 @@ import { convergeLogicalProjectContext, projectionFor } from "../project/context
 import { loadLogicalProjects, selectedLogicalProjects } from "../project/manifest.js";
 import { partitionPath } from "../project/partition.js";
 import { inspectProjectPartitions, readProjectState } from "../project/state.js";
+import { readPublishedLearningSnapshot, readPublishedLearningSnapshotAt } from "../project/published-cache.js";
 import { executableVersion } from "../utils/process.js";
 import { readTextIfExists } from "../utils/fs.js";
 import type { ResourceDiagnostic } from "../resources/snapshot.js";
@@ -95,6 +96,18 @@ export async function doctorCommand(context: CommandContext, jsonOutput = false)
     fail(`Team AI config is invalid: ${(error as Error).message}`);
   }
 
+  const learningCache = !config
+    ? undefined
+    : jsonOutput
+      ? snapshot?.learningsRevision
+        ? await readPublishedLearningSnapshotAt(config.marketplace.source, context.homeDir, snapshot.learningsRevision)
+        : undefined
+      : await readPublishedLearningSnapshot(config.marketplace.source, context.homeDir);
+  if (config && !jsonOutput) {
+    if (learningCache?.snapshot) ok(`Published Learnings snapshot: ${learningCache.snapshot.revision}.`);
+    else warn(learningCache?.error ?? "Published Learnings snapshot is unavailable. Run `teamai sync` to refresh it.");
+  }
+
   if (config) {
     try {
       ({ config: copilotConfig, settings: copilotSettings } = await readCopilotState(context.homeDir));
@@ -171,6 +184,9 @@ export async function doctorCommand(context: CommandContext, jsonOutput = false)
     }
     const state = await readProjectState(identity.projectAnchor, context.homeDir);
     const projection = projectionFor(state, identity.workspaceRoot);
+    if (projection?.pendingPublishedLearningRevision) {
+      warn(`Workspace Learnings projection to revision ${projection.pendingPublishedLearningRevision} did not complete. Run teamai sync.`);
+    }
     for (const root of [path.join(identity.workspaceRoot, ".github", "instructions", "teamai"), path.join(identity.workspaceRoot, ".teamai", "context")]) {
       try {
         await lstat(root);
@@ -185,19 +201,23 @@ export async function doctorCommand(context: CommandContext, jsonOutput = false)
       try {
         const projects = await loadLogicalProjects(catalogSnapshot.root, catalogSnapshot.plugins);
         if (projection) {
-          selectedLogicalProjects(projects, projection.logicalProjects);
+          const desiredLogicalProjects = projection.pendingLogicalProjects ?? projection.logicalProjects;
+          selectedLogicalProjects(projects, desiredLogicalProjects);
           const result = await convergeLogicalProjectContext({
             marketplaceRoot: catalogSnapshot.root,
             plugins: catalogSnapshot.plugins,
             marketplace: config.marketplace,
             identity,
             state,
-            logicalProjects: projection.logicalProjects,
+            logicalProjects: desiredLogicalProjects,
+            publishedLearningRoot: learningCache?.snapshot?.root,
             dryRun: true,
           });
           const projectionStateChanged = JSON.stringify(result.projection) !== JSON.stringify(projection);
-          if (result.changes.length === 0 && !projectionStateChanged) ok("Logical Project context: current.");
-          else warn("Logical Project context is stale. Run teamai sync.");
+          if (result.changes.length === 0 && !projectionStateChanged) {
+            if (learningCache?.snapshot) ok("Logical Project context: current.");
+            else warn("Logical Project context Learnings are unknown because the published cache is unavailable. Run teamai sync.");
+          } else warn("Logical Project context is stale. Run teamai sync.");
           for (const message of result.warnings) warn(`Logical Project Plugin: ${message}`);
           projectSettings = result.mergedSettings;
         } else {

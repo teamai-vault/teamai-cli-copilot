@@ -6,8 +6,9 @@ import type { InstalledPlugin } from "../copilot/cli.js";
 import { convergeMarketplaceUserInstructions } from "../copilot/user-instructions.js";
 import { registerVsCodeMarketplace } from "../copilot/vscode-settings.js";
 import { copilotDisplayPath } from "../copilot/user-state.js";
+import { refreshPublishedLearningSnapshot } from "../project/published-cache.js";
 import { detectProjectIdentity } from "../project/anchors.js";
-import { convergeLogicalProjectContext, projectionFor, withProjection } from "../project/context.js";
+import { convergeLogicalProjectContext, markPublishedLearningComplete, markPublishedLearningPending, projectionFor, withProjection } from "../project/context.js";
 import { readProjectState, withProjectStateLock, type ProjectState } from "../project/state.js";
 import type { CommandContext } from "./context.js";
 import { printActions, printUserInstructionActions, printWarnings } from "./helpers.js";
@@ -18,24 +19,34 @@ export async function syncCommand(context: CommandContext): Promise<void> {
   const originalConfig = JSON.stringify(config);
   let persistedConfig = originalConfig;
 
-  const catalog = await context.loadMarketplace(config.marketplace.source, context.cwd, { refresh: true });
+  const catalog = await context.loadMarketplace(config.marketplace.source, context.cwd, { refresh: true, dryRun: context.dryRun });
   if (catalog.name !== config.marketplace.name) {
     await catalog.dispose();
     throw new Error(`Configured Marketplace name '${config.marketplace.name}' does not match source manifest '${catalog.name}'.`);
   }
   let converged: Awaited<ReturnType<typeof convergeUserPlugins>>;
   let userInstructions;
+  let publishedSnapshot: Awaited<ReturnType<typeof refreshPublishedLearningSnapshot>> | undefined;
   const persistentUserChanges: string[] = [];
   try {
+    publishedSnapshot = await refreshPublishedLearningSnapshot({
+      marketplaceRoot: catalog.root,
+      plugins: catalog.plugins,
+      source: config.marketplace.source,
+      homeDir: context.homeDir,
+      dryRun: context.dryRun,
+    });
     const identity = await detectProjectIdentity(context.cwd);
     if (identity) {
       const snapshot = await readProjectState(identity.projectAnchor, context.homeDir);
       const projection = projectionFor(snapshot, identity.workspaceRoot);
-      if (projection?.logicalProjects.length) {
+      if (projection && (projection.pendingLogicalProjects ?? projection.logicalProjects).length > 0) {
         const preflight = async (state: ProjectState | undefined) => {
           const active = projectionFor(state, identity.workspaceRoot);
-          if (!active?.logicalProjects.length) return { result: undefined };
-          await convergeLogicalProjectContext({ marketplaceRoot: catalog.root, plugins: catalog.plugins, marketplace: config.marketplace, identity, state, logicalProjects: active.logicalProjects, dryRun: true });
+          if (!active) return { result: undefined };
+          const logicalProjects = active.pendingLogicalProjects ?? active.logicalProjects;
+          if (logicalProjects.length === 0) return { result: undefined };
+          await convergeLogicalProjectContext({ marketplaceRoot: catalog.root, plugins: catalog.plugins, marketplace: config.marketplace, identity, state, logicalProjects, publishedLearningRoot: publishedSnapshot!.root, dryRun: true });
           return { result: undefined };
         };
         if (context.dryRun) await preflight(snapshot);
@@ -75,22 +86,28 @@ export async function syncCommand(context: CommandContext): Promise<void> {
     if (identity) {
       const snapshot = await readProjectState(identity.projectAnchor, context.homeDir);
       const snapshotProjection = projectionFor(snapshot, identity.workspaceRoot);
-      if (snapshotProjection?.logicalProjects.length) {
+      if (snapshotProjection && (snapshotProjection.pendingLogicalProjects ?? snapshotProjection.logicalProjects).length > 0) {
         let projectChanges: string[] = [];
         let projectWarnings: string[] = [];
         let partial = false;
         if (context.dryRun) {
-          const projectContext = await convergeLogicalProjectContext({ marketplaceRoot: catalog.root, plugins: catalog.plugins, marketplace: config.marketplace, identity, state: snapshot, logicalProjects: snapshotProjection.logicalProjects, dryRun: true });
+          const projectContext = await convergeLogicalProjectContext({ marketplaceRoot: catalog.root, plugins: catalog.plugins, marketplace: config.marketplace, identity, state: snapshot, logicalProjects: snapshotProjection.pendingLogicalProjects ?? snapshotProjection.logicalProjects, publishedLearningRoot: publishedSnapshot.root, dryRun: true });
           mergedProjectSettings = projectContext.mergedSettings;
           projectChanges = projectContext.changes;
           projectWarnings = projectContext.warnings;
           context.out("WOULD write: project machine state");
         } else {
           try {
-            const projectContext = await withProjectStateLock(identity.projectAnchor, context.homeDir, async (priorState) => {
+            const projectContext = await withProjectStateLock(identity.projectAnchor, context.homeDir, async (priorState, saveCheckpoint) => {
               const projection = projectionFor(priorState, identity.workspaceRoot);
-              if (!projection?.logicalProjects.length) return { result: undefined };
-              const result = await convergeLogicalProjectContext({ marketplaceRoot: catalog.root, plugins: catalog.plugins, marketplace: config.marketplace, identity, state: priorState, logicalProjects: projection.logicalProjects });
+              if (!projection) return { result: undefined };
+              const logicalProjects = projection.pendingLogicalProjects ?? projection.logicalProjects;
+              if (logicalProjects.length === 0) return { result: undefined };
+              await saveCheckpoint(withProjection(
+                priorState ?? { schemaVersion: 1, workspaceRoot: identity.workspaceRoot, lastSync: context.now().toISOString(), managedPlugins: [] },
+                markPublishedLearningPending(projection, publishedSnapshot!.revision, logicalProjects),
+              ));
+              const result = await convergeLogicalProjectContext({ marketplaceRoot: catalog.root, plugins: catalog.plugins, marketplace: config.marketplace, identity, state: priorState, logicalProjects, publishedLearningRoot: publishedSnapshot!.root });
               mergedProjectSettings = result.mergedSettings;
               projectChanges = result.changes;
               projectWarnings = result.warnings;
@@ -100,7 +117,7 @@ export async function syncCommand(context: CommandContext): Promise<void> {
                 lastSync: context.now().toISOString(),
                 managedPlugins: converged.managedPlugins,
               };
-              const next = withProjection(baseState, result.projection);
+              const next = withProjection(baseState, markPublishedLearningComplete(result.projection, publishedSnapshot!.revision));
               if (result.managedGitExcludeEntries.length > 0) next.managedGitExcludeEntries = result.managedGitExcludeEntries;
               else delete next.managedGitExcludeEntries;
               return { state: next, result };
@@ -111,6 +128,7 @@ export async function syncCommand(context: CommandContext): Promise<void> {
               projectWarnings = [];
             }
           } catch (error) {
+            if ((error as Error).message.includes("Partial Workspace context update")) partial = true;
             if (partial || persistentUserChanges.length > 0) {
               const userWrites = persistentUserChanges.length > 0 ? ` User-scope changes already applied: ${persistentUserChanges.join(", ")}.` : "";
               throw new Error(`Partial sync; Workspace update did not complete.${userWrites} ${(error as Error).message}`);
@@ -148,6 +166,7 @@ export async function syncCommand(context: CommandContext): Promise<void> {
     }
     if (context.dryRun && JSON.stringify(config) !== originalConfig) context.out("WOULD write: ~/.teamai/config.yaml");
   } finally {
+    await publishedSnapshot?.dispose();
     await catalog.dispose();
   }
 }

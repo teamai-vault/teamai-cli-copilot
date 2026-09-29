@@ -1,4 +1,4 @@
-import { lstat } from "node:fs/promises";
+import { lstat, readFile } from "node:fs/promises";
 import path from "node:path";
 import { readGlobalConfig } from "../config/global.js";
 import { inspectBuiltInTeamAiSkill } from "../copilot/builtin-skill.js";
@@ -9,6 +9,7 @@ import { marketplaceRegistrationMatches, readCopilotState } from "../copilot/use
 import { detectProjectIdentity } from "../project/anchors.js";
 import { convergeLogicalProjectContext, projectionFor } from "../project/context.js";
 import { readProjectState } from "../project/state.js";
+import { readPublishedLearningSnapshot, readPublishedLearningSnapshotAt, type PublishedLearningFile } from "../project/published-cache.js";
 import { directoriesEqual, pathsEqual } from "../utils/fs.js";
 import { VERSION } from "../version.js";
 import { computeResourceSnapshot, resourceSourceHash, type ResourceDiagnostic, type ResourceRecordInput, type ResourceSnapshot } from "../resources/snapshot.js";
@@ -22,6 +23,15 @@ export async function collectResourceSnapshot(context: CommandContext): Promise<
   const resources: ResourceRecordInput[] = [];
   const diagnostics: ResourceDiagnostic[] = [];
   let resourceRevision = config?.marketplaceRevision;
+  const learningCache = config ? await readPublishedLearningSnapshot(config.marketplace.source, context.homeDir) : undefined;
+  const learningsRevision = learningCache?.snapshot?.revision;
+  if (config && !learningCache?.snapshot) {
+    diagnostics.push({
+      code: "LEARNINGS_CACHE_UNAVAILABLE",
+      severity: "warning",
+      message: learningCache?.error ?? "Published Learnings snapshot is unavailable. Run `teamai sync` to refresh it.",
+    });
+  }
   let sourceHash = resourceSourceHash(config?.marketplace.source ?? "teamai-cli");
 
   if (!config) {
@@ -168,18 +178,28 @@ export async function collectResourceSnapshot(context: CommandContext): Promise<
       if (identity) {
         const state = await readProjectState(identity.projectAnchor, context.homeDir);
         const projection = projectionFor(state, identity.workspaceRoot);
-        if (projection?.logicalProjects.length) {
+        if (projection && (projection.logicalProjects.length > 0 || (projection.pendingLogicalProjects?.length ?? 0) > 0)) {
+          const desiredLogicalProjects = projection.pendingLogicalProjects ?? projection.logicalProjects;
+          const visibleLogicalProjects = [...new Set([...projection.logicalProjects, ...desiredLogicalProjects])];
+          if (projection.pendingPublishedLearningRevision) {
+            diagnostics.push({
+              code: "LEARNINGS_PROJECTION_INCOMPLETE",
+              severity: "warning",
+              message: `Workspace projection to Projects ${desiredLogicalProjects.join(", ")} and Learnings revision ${projection.pendingPublishedLearningRevision} did not complete. Run teamai sync.`,
+            });
+          }
           const planned = await convergeLogicalProjectContext({
             marketplaceRoot: catalog.root,
             plugins: catalog.plugins,
             marketplace: config.marketplace,
             identity,
             state,
-            logicalProjects: projection.logicalProjects,
+            logicalProjects: desiredLogicalProjects,
+            publishedLearningRoot: learningCache?.snapshot?.root,
             dryRun: true,
           });
           const changes = planned.changes.map((item) => path.resolve(item));
-          for (const id of projection.logicalProjects) {
+          for (const id of visibleLogicalProjects) {
             const instructionRoot = path.join(projection.instructionRoot, id);
             const docsRoot = path.join(projection.contextRoot, id, "docs");
             const instruction = await workspaceProjectionResource("instruction", id, `contexts/${id}/instructions`, instructionRoot, identity.workspaceRoot, sourceHash, catalog.revision, changes);
@@ -190,7 +210,42 @@ export async function collectResourceSnapshot(context: CommandContext): Promise<
           const pointer = path.join(projection.instructionRoot, "context.instructions.md");
           const pointerRecord = await workspaceProjectionResource("instruction", "context-pointer", "contexts/context.instructions.md", pointer, identity.workspaceRoot, sourceHash, catalog.revision, changes, true);
           if (pointerRecord) resources.push(pointerRecord);
+          if (learningCache?.snapshot) {
+            const active = new Set(visibleLogicalProjects);
+            const currentPaths = new Set(learningCache.snapshot.files.map((file) => file.relativePath));
+            for (const file of learningCache.snapshot.files) {
+              if (file.logicalProject !== "shared" && !active.has(file.logicalProject)) continue;
+              const target = workspaceLearningPath(projection.contextRoot, file);
+              resources.push(await learningResource(file, target, "workspace", identity.workspaceRoot, sourceHash, learningCache.snapshot.revision));
+            }
+            if (projection.publishedLearningRevision && projection.publishedLearningRevision !== learningCache.snapshot.revision) {
+              const previousRead = await readPublishedLearningSnapshotAt(config.marketplace.source, context.homeDir, projection.publishedLearningRevision);
+              if (previousRead.snapshot) {
+                for (const file of previousRead.snapshot.files) {
+                  if ((file.logicalProject !== "shared" && !active.has(file.logicalProject)) || currentPaths.has(file.relativePath)) continue;
+                  const stale = await learningResource(file, workspaceLearningPath(projection.contextRoot, file), "workspace", identity.workspaceRoot, sourceHash, previousRead.snapshot.revision);
+                  if (stale.delivery === "missing") continue;
+                  resources.push({
+                    ...stale,
+                    selected: false,
+                    delivery: stale.delivery === "present" ? "stale" : stale.delivery,
+                    reasons: [...(stale.reasons ?? []), "PUBLISHED_SOURCE_REMOVED"],
+                  });
+                }
+              } else {
+                diagnostics.push({
+                  code: "LEARNINGS_PREVIOUS_SNAPSHOT_UNAVAILABLE",
+                  severity: "warning",
+                  message: `Could not verify prior Workspace Learnings revision ${projection.publishedLearningRevision}; run teamai sync.`,
+                });
+              }
+            }
+          }
+        } else if (learningCache?.snapshot) {
+          resources.push(...await userLearningResources(learningCache.snapshot.files, learningCache.snapshot.root, sourceHash, learningCache.snapshot.revision));
         }
+      } else if (learningCache?.snapshot) {
+        resources.push(...await userLearningResources(learningCache.snapshot.files, learningCache.snapshot.root, sourceHash, learningCache.snapshot.revision));
       }
     } finally {
       await catalog.dispose();
@@ -215,9 +270,66 @@ export async function collectResourceSnapshot(context: CommandContext): Promise<
     cliVersion: VERSION,
     scope: identity ? "workspace" : "user",
     resourceRevision,
+    learningsRevision,
     resources,
     diagnostics,
   });
+}
+
+function workspaceLearningPath(contextRoot: string, file: PublishedLearningFile): string {
+  const relativeFile = file.relativePath.split("/").slice(2);
+  return file.logicalProject === "shared"
+    ? path.join(contextRoot, "shared", "learnings", ...relativeFile)
+    : path.join(contextRoot, file.logicalProject, "learnings", ...relativeFile);
+}
+
+async function userLearningResources(
+  files: PublishedLearningFile[],
+  cacheRoot: string,
+  sourceHash: string,
+  revision: string,
+): Promise<ResourceRecordInput[]> {
+  const records: ResourceRecordInput[] = [];
+  for (const file of files.filter((candidate) => candidate.logicalProject === "shared")) {
+    const target = path.join(cacheRoot, ...file.relativePath.split("/"));
+    records.push(await learningResource(file, target, "user", undefined, sourceHash, revision, true));
+  }
+  return records;
+}
+
+async function learningResource(
+  file: PublishedLearningFile,
+  targetPath: string,
+  scope: "user" | "workspace",
+  workspaceKey: string | undefined,
+  sourceHash: string,
+  revision: string,
+  verifiedCacheFile = false,
+): Promise<ResourceRecordInput> {
+  let delivery: ResourceRecordInput["delivery"] = "present";
+  if (!verifiedCacheFile) {
+    try {
+      const info = await lstat(targetPath);
+      if (info.isSymbolicLink() || !info.isFile() || info.nlink > 1) delivery = "collision";
+      else delivery = (await readFile(targetPath)).equals(file.content) ? "present" : "stale";
+    } catch (error) {
+      if ((error as NodeJS.ErrnoException).code === "ENOENT") delivery = "missing";
+      else throw error;
+    }
+  }
+  return {
+    kind: "learning",
+    name: file.relativePath,
+    scope,
+    ...(workspaceKey ? { workspaceKey } : {}),
+    source: { sourceHash, relativePath: file.relativePath, revision, contentHash: file.contentHash },
+    selected: true,
+    owned: true,
+    targetPath,
+    delivery,
+    configuredActive: true,
+    reasons: delivery === "collision" ? ["UNSAFE_TARGET"] : [],
+  };
 }
 
 async function workspaceProjectionResource(

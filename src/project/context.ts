@@ -25,6 +25,17 @@ export function projectionFor(state: ProjectState | undefined, workspaceRoot: st
   return state?.projections?.[projectionKey(workspaceRoot)];
 }
 
+export function markPublishedLearningPending(projection: ProjectProjection, revision: string, logicalProjects = projection.logicalProjects): ProjectProjection {
+  return { ...projection, pendingPublishedLearningRevision: revision, pendingLogicalProjects: [...logicalProjects] };
+}
+
+export function markPublishedLearningComplete(projection: ProjectProjection, revision: string): ProjectProjection {
+  const next = { ...projection, publishedLearningRevision: revision };
+  delete next.pendingPublishedLearningRevision;
+  delete next.pendingLogicalProjects;
+  return next;
+}
+
 export function withProjection(state: ProjectState, projection: ProjectProjection): ProjectState {
   return {
     ...state,
@@ -48,6 +59,7 @@ export async function convergeLogicalProjectContext(options: {
   identity: ProjectIdentity;
   state?: ProjectState;
   logicalProjects: string[];
+  publishedLearningRoot?: string;
   unbind?: boolean;
   dryRun?: boolean;
 }): Promise<{
@@ -167,15 +179,22 @@ export async function convergeLogicalProjectContext(options: {
       path.join(options.marketplaceRoot, "contexts", project.id, "docs"),
       path.join(contextRoot, project.id, "docs"), false, options.marketplaceRoot, operations,
     );
-    await planMirrorTree(
-      path.join(options.marketplaceRoot, "learnings", project.id),
-      path.join(contextRoot, project.id, "learnings"), false, options.marketplaceRoot, operations,
-    );
+    if (options.publishedLearningRoot) {
+      await planMirrorTree(
+        path.join(options.publishedLearningRoot, "learnings", project.id),
+        path.join(contextRoot, project.id, "learnings"), false, options.publishedLearningRoot, operations,
+      );
+    }
   }
-  await planMirrorTree(path.join(options.marketplaceRoot, "learnings", "shared"), path.join(contextRoot, "shared", "learnings"), false, options.marketplaceRoot, operations);
+  if (options.publishedLearningRoot) {
+    await planMirrorTree(path.join(options.publishedLearningRoot, "learnings", "shared"), path.join(contextRoot, "shared", "learnings"), false, options.publishedLearningRoot, operations);
+  }
   const pointer = path.join(instructionRoot, "context.instructions.md");
   const pointerBefore = await readSafeFile(pointer);
-  if (previous && pointerBefore && !pointerBefore.equals(Buffer.from(pointerContents(previous.logicalProjects), "utf8"))) {
+  const ownedPointerStates = previous
+    ? [previous.logicalProjects, ...(previous.pendingLogicalProjects ? [previous.pendingLogicalProjects] : [])]
+    : [];
+  if (pointerBefore && !ownedPointerStates.some((ids) => pointerBefore.equals(Buffer.from(pointerContents(ids), "utf8")))) {
     throw new Error(`Workspace context conflict at ${pointer}`);
   }
   await planFile(pointer, pointerContents(projects.map((project) => project.id)), pointerBefore, operations);

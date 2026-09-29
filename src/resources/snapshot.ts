@@ -49,7 +49,7 @@ export interface ResourceSnapshot {
   cliVersion: string;
   scope: "user" | "workspace";
   resourceRevision: string | null;
-  learningsRevision: null;
+  learningsRevision: string | null;
   resources: ResourceRecord[];
   diagnostics: ResourceDiagnostic[];
 }
@@ -58,6 +58,7 @@ export interface ResourceSnapshotInput {
   cliVersion: string;
   scope: "user" | "workspace";
   resourceRevision?: string;
+  learningsRevision?: string;
   resources: ResourceRecordInput[];
   diagnostics?: ResourceDiagnostic[];
 }
@@ -147,7 +148,7 @@ export function computeResourceSnapshot(input: ResourceSnapshotInput): ResourceS
     cliVersion: input.cliVersion,
     scope: input.scope,
     resourceRevision: input.resourceRevision ?? null,
-    learningsRevision: null,
+    learningsRevision: input.learningsRevision ?? null,
     resources,
     diagnostics,
   };

@@ -1,8 +1,10 @@
 import { readGlobalConfig } from "../config/global.js";
+import path from "node:path";
 import { detectProjectIdentity } from "../project/anchors.js";
-import { convergeLogicalProjectContext, projectionFor, withProjection, withoutProjection } from "../project/context.js";
+import { convergeLogicalProjectContext, markPublishedLearningComplete, markPublishedLearningPending, projectionFor, withProjection, withoutProjection } from "../project/context.js";
 import { loadLogicalProjects, parseLogicalProjectIds, selectedLogicalProjects } from "../project/manifest.js";
 import { readProjectState, withProjectStateLock, type ProjectState } from "../project/state.js";
+import { readPublishedLearningSnapshot } from "../project/published-cache.js";
 import type { CommandContext } from "./context.js";
 
 export async function projectsListCommand(context: CommandContext): Promise<void> {
@@ -27,14 +29,31 @@ export async function projectsSetCommand(context: CommandContext, values: string
   if (!config) throw new Error("Team AI is not initialized. Run `teamai init` first.");
   const identity = await detectProjectIdentity(context.cwd);
   if (!identity) throw new Error("teamai projects set requires a Git repository.");
+  const ids = parseLogicalProjectIds(values);
+  const stateSnapshot = await readProjectState(identity.projectAnchor, context.homeDir);
+  assertNoPendingProjectTransition(projectionFor(stateSnapshot, identity.workspaceRoot));
   const catalog = await context.loadMarketplace(config.marketplace.source, context.cwd);
   try {
     if (catalog.name !== config.marketplace.name) throw new Error(`Marketplace name changed from '${config.marketplace.name}' to '${catalog.name}'.`);
-    const ids = parseLogicalProjectIds(values);
-    selectedLogicalProjects(await loadLogicalProjects(catalog.root, catalog.plugins), ids);
+    const selectedIds = selectedLogicalProjects(await loadLogicalProjects(catalog.root, catalog.plugins), ids).map((project) => project.id);
+    const learningCache = selectedIds.length > 0
+      ? await readPublishedLearningSnapshot(config.marketplace.source, context.homeDir)
+      : undefined;
+    const publishedLearningRoot = learningCache?.snapshot?.root;
+    if (selectedIds.length > 0 && !publishedLearningRoot) {
+      await convergeLogicalProjectContext({
+        marketplaceRoot: catalog.root,
+        plugins: catalog.plugins,
+        marketplace: config.marketplace,
+        identity,
+        state: stateSnapshot,
+        logicalProjects: selectedIds,
+        dryRun: true,
+      });
+      throw new Error(learningCache?.error ?? "Published Learnings cache is unavailable. Run `teamai sync` to refresh it.");
+    }
     if (context.dryRun) {
-      const state = await readProjectState(identity.projectAnchor, context.homeDir);
-      const result = await convergeLogicalProjectContext({ marketplaceRoot: catalog.root, plugins: catalog.plugins, marketplace: config.marketplace, identity, state, logicalProjects: ids, unbind: ids.length === 0, dryRun: true });
+      const result = await convergeLogicalProjectContext({ marketplaceRoot: catalog.root, plugins: catalog.plugins, marketplace: config.marketplace, identity, state: stateSnapshot, logicalProjects: selectedIds, publishedLearningRoot, unbind: selectedIds.length === 0, dryRun: true });
       for (const change of result.changes) context.out(`WOULD write: ${change}`);
       for (const warning of result.warnings) context.out(`! ${warning}`);
       return;
@@ -44,12 +63,34 @@ export async function projectsSetCommand(context: CommandContext, values: string
     let warnings: string[] = [];
     let partial = false;
     try {
-      await withProjectStateLock(identity.projectAnchor, context.homeDir, async (state) => {
-        const result = await convergeLogicalProjectContext({ marketplaceRoot: catalog.root, plugins: catalog.plugins, marketplace: config.marketplace, identity, state, logicalProjects: ids, unbind: ids.length === 0 });
+      await withProjectStateLock(identity.projectAnchor, context.homeDir, async (state, saveCheckpoint) => {
+        const previous = projectionFor(state, identity.workspaceRoot);
+        assertNoPendingProjectTransition(previous);
+        const base: ProjectState = state ?? {
+          schemaVersion: 1,
+          workspaceRoot: identity.workspaceRoot,
+          lastSync: context.now().toISOString(),
+          managedPlugins: config.managedPlugins ?? [],
+        };
+        const learningRevision = learningCache?.snapshot?.revision;
+        if (selectedIds.length > 0) {
+          await convergeLogicalProjectContext({ marketplaceRoot: catalog.root, plugins: catalog.plugins, marketplace: config.marketplace, identity, state, logicalProjects: selectedIds, publishedLearningRoot, dryRun: true });
+        }
+        if (selectedIds.length > 0 && learningRevision) {
+          const pendingProjection = markPublishedLearningPending(previous ?? {
+              workspaceRoot: identity.workspaceRoot,
+              logicalProjects: [],
+              managedProjectPlugins: [],
+              instructionRoot: path.join(identity.workspaceRoot, ".github", "instructions", "teamai"),
+              contextRoot: path.join(identity.workspaceRoot, ".teamai", "context"),
+            }, learningRevision, selectedIds);
+          await saveCheckpoint(withProjection(base, pendingProjection));
+        }
+        const result = await convergeLogicalProjectContext({ marketplaceRoot: catalog.root, plugins: catalog.plugins, marketplace: config.marketplace, identity, state, logicalProjects: selectedIds, publishedLearningRoot, unbind: selectedIds.length === 0 });
         resultChanges = result.changes;
         warnings = result.warnings;
         partial = resultChanges.length > 0;
-        if (ids.length === 0) {
+        if (selectedIds.length === 0) {
           const previous = projectionFor(state, identity.workspaceRoot);
           if (!previous) return { result };
           const next = withoutProjection(state!, identity.workspaceRoot);
@@ -57,18 +98,14 @@ export async function projectsSetCommand(context: CommandContext, values: string
           else delete next.managedGitExcludeEntries;
           return { state: Object.keys(next.projections ?? {}).length === 0 ? null : next, result };
         }
-        const base: ProjectState = state ?? {
-          schemaVersion: 1,
-          workspaceRoot: identity.workspaceRoot,
-          lastSync: context.now().toISOString(),
-          managedPlugins: config.managedPlugins ?? [],
-        };
-        const next = withProjection({ ...base, lastSync: context.now().toISOString() }, result.projection);
+        const finalProjection = learningRevision ? markPublishedLearningComplete(result.projection, learningRevision) : result.projection;
+        const next = withProjection({ ...base, lastSync: context.now().toISOString() }, finalProjection);
         if (result.managedGitExcludeEntries.length > 0) next.managedGitExcludeEntries = result.managedGitExcludeEntries;
         else delete next.managedGitExcludeEntries;
         return { state: next, result };
       });
     } catch (error) {
+      if ((error as Error).message.includes("Partial Workspace context update")) partial = true;
       if (partial) throw new Error(`Partial Workspace project update; project state could not be confirmed. ${(error as Error).message}`);
       throw error;
     }
@@ -77,4 +114,9 @@ export async function projectsSetCommand(context: CommandContext, values: string
   } finally {
     await catalog.dispose();
   }
+}
+
+function assertNoPendingProjectTransition(projection: ReturnType<typeof projectionFor>): void {
+  if (!projection || (projection.pendingPublishedLearningRevision === undefined && projection.pendingLogicalProjects === undefined)) return;
+  throw new Error("An interrupted Logical Project update is pending. Run `teamai sync` before retrying `teamai projects set`.");
 }

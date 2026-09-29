@@ -19,6 +19,9 @@ export interface ProjectProjection {
   managedProjectPlugins: string[];
   instructionRoot: string;
   contextRoot: string;
+  publishedLearningRevision?: string;
+  pendingPublishedLearningRevision?: string;
+  pendingLogicalProjects?: string[];
 }
 
 export interface PartitionDiagnostic {
@@ -49,7 +52,7 @@ export async function writeProjectState(
 export async function withProjectStateLock<T>(
   projectAnchor: string,
   homeDir: string,
-  action: (state: ProjectState | undefined) => Promise<{ state?: ProjectState | null; result: T }>,
+  action: (state: ProjectState | undefined, saveCheckpoint: (state: ProjectState) => Promise<void>) => Promise<{ state?: ProjectState | null; result: T }>,
 ): Promise<T> {
   const root = partitionPath(projectAnchor, homeDir);
   const projectsRoot = path.dirname(root);
@@ -71,19 +74,17 @@ export async function withProjectStateLock<T>(
       }
       const stateContents = await readOptionalFile(statePath);
       const state = stateContents === undefined ? undefined : JSON.parse(stateContents) as ProjectState;
-      const update = await action(state);
+      const saveCheckpoint = async (checkpoint: ProjectState): Promise<void> => {
+        await persistProjectState(projectAnchor, homeDir, root, anchorFile, statePath, checkpoint);
+      };
+      const update = await action(state, saveCheckpoint);
       await assertSafePartitionPath(projectAnchor, homeDir);
       await assertSafeStateFile(anchorFile);
       await assertSafeStateFile(statePath);
       if (update.state === null) {
         await rm(statePath, { force: true });
       } else if (update.state) {
-        await assertSafeDirectoryPath(homeDir, root);
-        await atomicWriteText(anchorFile, `${projectAnchor}\n`);
-        await assertSafePartitionPath(projectAnchor, homeDir);
-        await assertSafeStateFile(anchorFile);
-        await assertSafeStateFile(statePath);
-        await atomicWriteJson(statePath, update.state);
+        await persistProjectState(projectAnchor, homeDir, root, anchorFile, statePath, update.state);
       }
       return update.result;
     });
@@ -93,6 +94,22 @@ export async function withProjectStateLock<T>(
     }
     throw error;
   }
+}
+
+async function persistProjectState(
+  projectAnchor: string,
+  homeDir: string,
+  root: string,
+  anchorFile: string,
+  statePath: string,
+  state: ProjectState,
+): Promise<void> {
+  await assertSafeDirectoryPath(homeDir, root);
+  await atomicWriteText(anchorFile, `${projectAnchor}\n`);
+  await assertSafePartitionPath(projectAnchor, homeDir);
+  await assertSafeStateFile(anchorFile);
+  await assertSafeStateFile(statePath);
+  await atomicWriteJson(statePath, state);
 }
 
 export async function inspectProjectPartitions(homeDir: string): Promise<PartitionDiagnostic[]> {
