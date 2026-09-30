@@ -1,6 +1,7 @@
 import { stat } from "node:fs/promises";
 import path from "node:path";
-import { atomicWriteJson, readJsonIfExists, withFileLock } from "../utils/fs.js";
+import { parse, type ParseError } from "jsonc-parser";
+import { atomicWriteJson, readJsonIfExists, readTextIfExists, withFileLock } from "../utils/fs.js";
 import { marketplaceSourceSetting } from "./project-settings.js";
 
 export interface CopilotInstalledPlugin {
@@ -57,9 +58,20 @@ export function installedPluginsRoot(homeDir: string): string {
 
 export async function readCopilotState(homeDir: string): Promise<{ config: CopilotConfigFile; settings: CopilotSettingsFile }> {
   return {
-    config: (await readJsonIfExists<CopilotConfigFile>(copilotConfigPath(homeDir))) ?? {},
+    config: (await readCopilotConfig(copilotConfigPath(homeDir))) ?? {},
     settings: (await readJsonIfExists<CopilotSettingsFile>(copilotSettingsPath(homeDir))) ?? {},
   };
+}
+
+async function readCopilotConfig(filePath: string): Promise<CopilotConfigFile | undefined> {
+  const contents = await readTextIfExists(filePath);
+  if (contents === undefined) return undefined;
+  const errors: ParseError[] = [];
+  const value = parse(contents, errors, { allowTrailingComma: true }) as CopilotConfigFile | undefined;
+  if (errors.length > 0 || !value || typeof value !== "object" || Array.isArray(value)) {
+    throw new Error(`${filePath} contains invalid JSONC.`);
+  }
+  return value;
 }
 
 export async function updateCopilotState(

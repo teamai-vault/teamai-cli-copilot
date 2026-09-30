@@ -73,6 +73,16 @@ async function createCachedMarketplace(home: string, source: string): Promise<vo
 }
 
 describe("VS Code-only Copilot fallback", () => {
+  test("reads Copilot-managed config.json with a comment header", async () => {
+    const home = await tempDir("teamai-fallback-commented-config-");
+    const configPath = copilotConfigPath(home);
+    await mkdir(path.dirname(configPath), { recursive: true });
+    await writeFile(configPath, '// User settings belong in settings.json.\n// This file is managed automatically.\n{\n  "installedPlugins": []\n}\n', "utf8");
+
+    const client = new FallbackCopilotClient(home, () => new Date("2026-09-15T00:00:00.000Z"));
+    await expect(client.listPlugins()).resolves.toEqual([]);
+  });
+
   test("direct fallback clients read the caller's persistent Marketplace cache", async () => {
     const repo = await createGitRepo();
     const home = await tempDir("teamai-fallback-cache-home-");
