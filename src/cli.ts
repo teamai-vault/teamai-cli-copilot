@@ -5,6 +5,8 @@ import { createCommandContext, resolveCopilotBackend, type CommandContext } from
 import { doctorCommand } from "./commands/doctor.js";
 import { initCommand } from "./commands/init.js";
 import { learningPendingCommand, learningRetryCommand, learningShareCommand } from "./commands/learning.js";
+import { RecallCommandError, recallCommand } from "./commands/recall.js";
+import { RecallInputError } from "./project/recall.js";
 import { projectsListCommand, projectsSetCommand } from "./commands/projects.js";
 import { roleListCommand, roleSetCommand } from "./commands/role.js";
 import { skillInstallCommand, skillListCommand, skillRemoveCommand, skillShowCommand } from "./commands/skill.js";
@@ -26,6 +28,8 @@ function usage(): string {
     "  learning share <file> [--project <id>|--shared] [--tags <tag...>]",
     "  learning pending [--json]",
     "  learning retry <id>",
+    "  recall <query> [--scope auto|user|workspace] [--project <id>] [--limit <n>] [--include-pending] [--json]",
+    "  Example: teamai recall 支付 重试",
     "  sync",
     "  role list",
     "  role set <role>",
@@ -72,6 +76,13 @@ const optionRules: Record<string, Record<string, OptionRule>> = {
     "--tags": { kind: "many" },
   },
   "learning retry": {},
+  recall: {
+    "--scope": { kind: "single", choices: ["auto", "user", "workspace"] },
+    "--project": { kind: "single" },
+    "--limit": { kind: "single" },
+    "--include-pending": { kind: "boolean" },
+    "--json": { kind: "boolean" },
+  },
   status: { "--resources": { kind: "boolean" }, "--json": { kind: "boolean" } },
   doctor: { "--json": { kind: "boolean" } },
   "learning pending": { "--json": { kind: "boolean" } },
@@ -156,7 +167,7 @@ function parseInvocation(argv: string[]): Invocation {
     optionKey = `${command} ${subcommand ?? ""}`.trim();
   }
 
-  const supported = ["init", "sync", "role list", "role set", "projects list", "projects set", "learning share", "learning pending", "learning retry", "skill list", "skill show", "skill install", "skill remove", "skill contribute", "tags list", "status", "doctor"];
+  const supported = ["init", "sync", "role list", "role set", "projects list", "projects set", "learning share", "learning pending", "learning retry", "recall", "skill list", "skill show", "skill install", "skill remove", "skill contribute", "tags list", "status", "doctor"];
   if (!supported.includes(optionKey)) throw new UsageError(`Unknown command or subcommand.\n${usage()}`);
   const parsed = parseOptions(optionArgs, optionRules[optionKey] ?? {}, optionKey);
   const positionals = parsed.positionals;
@@ -185,6 +196,7 @@ function parseInvocation(argv: string[]): Invocation {
         throw new UsageError("Learning operation ID must be a UUID.");
       }
       break;
+    case "recall": atLeast(1, "teamai recall <query> [--scope auto|user|workspace] [--project <id>] [--limit <n>] [--include-pending] [--json]"); break;
     case "skill list": exact(0, "teamai skill list [--tag <tag>] [--owner <owner>] [--source plugin|standalone]"); break;
     case "skill show": exact(1, "teamai skill show <name>"); break;
     case "skill install": {
@@ -245,9 +257,15 @@ function requestsLearningPendingJson(argv: string[]): boolean {
     args.some((argument) => argument === "--json" || argument.startsWith("--json="));
 }
 
+function requestsRecallJson(argv: string[]): boolean {
+  const args = argv.filter((argument) => argument !== "--dry-run");
+  return args[0] === "recall" && args.some((argument) => argument === "--json" || argument.startsWith("--json="));
+}
+
 export async function runCli(argv: string[], overrides: Partial<CommandContext> = {}): Promise<number> {
   const dryRun = argv.includes("--dry-run");
   const jsonLearningPending = requestsLearningPendingJson(argv);
+  const jsonRecall = requestsRecallJson(argv);
   const context = createCommandContext({ ...overrides, dryRun });
   if (argv.length === 0) {
     context.out(usage());
@@ -285,6 +303,16 @@ export async function runCli(argv: string[], overrides: Partial<CommandContext> 
         return 0;
       case "sync":
         await syncCommand(context);
+        return 0;
+      case "recall":
+        await recallCommand(context, {
+          query: invocation.positionals.join(" "),
+          scope: option(invocation.options, "--scope") as "auto" | "user" | "workspace" | undefined,
+          project: option(invocation.options, "--project"),
+          limit: option(invocation.options, "--limit"),
+          includePending: hasOption(invocation.options, "--include-pending"),
+          json: hasOption(invocation.options, "--json"),
+        });
         return 0;
       case "role":
         if (invocation.subcommand === "list") await roleListCommand(context);
@@ -346,7 +374,11 @@ export async function runCli(argv: string[], overrides: Partial<CommandContext> 
     const message = error instanceof Error ? error.message : String(error);
     const command = argv.find((arg) => arg !== "--dry-run" && arg !== "--help");
     const jsonOutput = argv.includes("--json") && (command === "status" || command === "doctor");
-    if (jsonLearningPending) {
+    if (jsonRecall) {
+      const usageError = error instanceof UsageError || error instanceof RecallInputError;
+      const code = usageError ? "INVALID_ARGUMENT" : error instanceof RecallCommandError ? error.code : "RECALL_FAILED";
+      context.out(JSON.stringify({ schemaVersion: 1, error: { code, message } }));
+    } else if (jsonLearningPending) {
       const code = error instanceof UsageError ? "INVALID_ARGUMENT" : "LEARNING_PENDING_FAILED";
       context.out(JSON.stringify({ schemaVersion: 1, error: { code, message } }));
     } else if (jsonOutput) {
@@ -358,7 +390,7 @@ export async function runCli(argv: string[], overrides: Partial<CommandContext> 
         },
       }));
     } else context.err(`ERROR: ${message}`);
-    return error instanceof UsageError ? 2 : 1;
+    return error instanceof UsageError || error instanceof RecallInputError ? 2 : 1;
   }
 }
 

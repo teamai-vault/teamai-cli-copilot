@@ -32,6 +32,15 @@ export interface PublishedLearningSnapshot {
   files: PublishedLearningFile[];
 }
 
+export interface PublishedLearningIndex {
+  sourceHash: string;
+  branch: typeof PUBLISHED_LEARNINGS_BRANCH;
+  revision: string;
+  projectIds?: string[];
+  root: string;
+  files: Array<Omit<PublishedLearningFile, "content">>;
+}
+
 interface SnapshotManifest {
   schemaVersion: 1;
   sourceHash: string;
@@ -46,11 +55,27 @@ export interface PublishedLearningRead {
   error?: string;
 }
 
+export interface PublishedLearningIndexRead {
+  index?: PublishedLearningIndex;
+  error?: string;
+}
+
 export function publishedLearningSourceHash(source: string): string {
   return createHash("sha256").update(source).digest("hex");
 }
 
 export async function readPublishedLearningSnapshot(source: string, homeDir: string): Promise<PublishedLearningRead> {
+  const result = await readPublishedLearningIndex(source, homeDir);
+  if (!result.index) return { error: result.error ?? "Published Learnings snapshot is unavailable. Run `teamai sync` to refresh it." };
+  try {
+    const files = await readPublishedLearningFiles(result.index, result.index.files.map((file) => file.relativePath));
+    return { snapshot: { ...result.index, files } };
+  } catch (error) {
+    return { error: `The cached published Learnings snapshot is unavailable (${safeMessage(error)}). Run \`teamai sync\` to refresh it.` };
+  }
+}
+
+export async function readPublishedLearningIndex(source: string, homeDir: string): Promise<PublishedLearningIndexRead> {
   const sourceHash = publishedLearningSourceHash(source);
   const cacheRoot = cachePath(sourceHash, homeDir);
   try {
@@ -61,11 +86,31 @@ export async function readPublishedLearningSnapshot(source: string, homeDir: str
     if (pointer.schemaVersion !== 1 || pointer.sourceHash !== sourceHash || pointer.branch !== PUBLISHED_LEARNINGS_BRANCH || typeof pointer.revision !== "string" || !SHA.test(pointer.revision)) {
       throw new Error("The current pointer is invalid.");
     }
-    return { snapshot: await readSnapshotDirectory(cacheRoot, sourceHash, pointer.revision) };
+    return { index: await readSnapshotIndexDirectory(cacheRoot, sourceHash, pointer.revision) };
   } catch (error) {
     if ((error as NodeJS.ErrnoException).code === "ENOENT") return { error: "No verified published Learnings snapshot is cached. Run `teamai sync` to refresh it." };
     return { error: `The cached published Learnings snapshot is unavailable (${safeMessage(error)}). Run \`teamai sync\` to refresh it.` };
   }
+}
+
+export async function readPublishedLearningFiles(
+  index: PublishedLearningIndex,
+  relativePaths: string[],
+): Promise<PublishedLearningFile[]> {
+  const byPath = new Map(index.files.map((file) => [file.relativePath, file]));
+  const seen = new Set<string>();
+  const files: PublishedLearningFile[] = [];
+  for (const relativePath of relativePaths) {
+    const entry = byPath.get(relativePath);
+    if (!entry || seen.has(relativePath)) throw new Error(`Published Learning is not present in the verified cache index: '${relativePath}'.`);
+    seen.add(relativePath);
+    const target = path.join(index.root, ...relativePath.split("/"));
+    await assertRegularFile(target);
+    const content = await readFile(target);
+    verifyLearningBytes(relativePath, entry, content);
+    files.push({ ...entry, content });
+  }
+  return files;
 }
 
 export async function readPublishedLearningSnapshotAt(source: string, homeDir: string, revision: string): Promise<PublishedLearningRead> {
@@ -324,6 +369,12 @@ async function writeSnapshotDirectory(
 }
 
 async function readSnapshotDirectory(cacheRoot: string, sourceHash: string, revision: string): Promise<PublishedLearningSnapshot> {
+  const index = await readSnapshotIndexDirectory(cacheRoot, sourceHash, revision);
+  const files = await readPublishedLearningFiles(index, index.files.map((file) => file.relativePath));
+  return { ...index, files };
+}
+
+async function readSnapshotIndexDirectory(cacheRoot: string, sourceHash: string, revision: string): Promise<PublishedLearningIndex> {
   if (!SHA.test(revision)) throw new Error("Published Learnings revision is invalid.");
   const directory = path.join(cacheRoot, "revisions", revision);
   await assertNoSymlinkPath(cacheRoot, directory);
@@ -340,24 +391,43 @@ async function readSnapshotDirectory(cacheRoot: string, sourceHash: string, revi
   )) {
     throw new Error("Published Learnings snapshot has invalid Logical Project IDs.");
   }
-  const contentRoot = path.join(directory, "files");
-  const files = await verifyManifestDirectory(directory, manifest);
-  return { sourceHash, branch: PUBLISHED_LEARNINGS_BRANCH, revision, projectIds: manifest.projectIds, root: contentRoot, files };
+  return await verifyManifestMetadataDirectory(directory, manifest);
 }
 
 async function verifyManifestDirectory(
   directory: string,
   manifest: SnapshotManifest,
 ): Promise<PublishedLearningFile[]> {
+  const index = await verifyManifestMetadataDirectory(directory, manifest);
+  return await readPublishedLearningFiles(index, index.files.map((file) => file.relativePath));
+}
+
+async function verifyManifestMetadataDirectory(
+  directory: string,
+  manifest: SnapshotManifest,
+): Promise<PublishedLearningIndex> {
+  if (manifest.schemaVersion !== 1 || !/^[a-f0-9]{64}$/.test(manifest.sourceHash) || manifest.branch !== PUBLISHED_LEARNINGS_BRANCH || !SHA.test(manifest.revision) || !Array.isArray(manifest.files)) {
+    throw new Error("Published Learnings snapshot metadata is invalid.");
+  }
+  if (manifest.projectIds !== undefined && (
+    !Array.isArray(manifest.projectIds)
+    || manifest.projectIds.some((id) => typeof id !== "string" || id === "shared" || !SAFE_ID.test(id))
+    || new Set(manifest.projectIds).size !== manifest.projectIds.length
+  )) {
+    throw new Error("Published Learnings snapshot has invalid Logical Project IDs.");
+  }
   const allowedProjects = manifest.projectIds ? new Set(manifest.projectIds) : undefined;
   const seen = new Set<string>();
-  const files: PublishedLearningFile[] = [];
+  const files: PublishedLearningIndex["files"] = [];
   let totalBytes = 0;
   const filesRoot = path.join(directory, "files");
   const filesRootInfo = await lstat(filesRoot);
   if (filesRootInfo.isSymbolicLink() || !filesRootInfo.isDirectory()) throw new Error(`Unsafe published Learnings cache directory: ${filesRoot}`);
   const actual = await listRegularFiles(filesRoot);
   for (const entry of manifest.files) {
+    if (!entry || typeof entry.relativePath !== "string" || typeof entry.logicalProject !== "string") {
+      throw new Error("Published Learnings snapshot contains invalid file metadata.");
+    }
     const logicalProject = learningProject(entry.relativePath, allowedProjects);
     if (logicalProject === undefined || logicalProject !== entry.logicalProject || seen.has(entry.relativePath)) {
       throw new Error("Published Learnings snapshot contains invalid or duplicate paths.");
@@ -370,42 +440,53 @@ async function verifyManifestDirectory(
     if (seen.size > MAX_FILES || totalBytes > MAX_TOTAL_BYTES) throw new Error("Published Learnings snapshot exceeds its file or byte limit.");
     const target = path.join(filesRoot, ...entry.relativePath.split("/"));
     await assertRegularFile(target);
-    const content = await readFile(target);
-    if (content.byteLength !== entry.byteLength || sha256(content) !== entry.contentHash) {
-      throw new Error(`Published Learnings snapshot hash verification failed for '${entry.relativePath}'.`);
-    }
-    if (content.includes(0)) throw new Error(`Published Learning snapshot contains binary NUL data at '${entry.relativePath}'.`);
-    try {
-      new TextDecoder("utf-8", { fatal: true }).decode(content);
-    } catch {
-      throw new Error(`Published Learnings snapshot contains non-UTF-8 content at '${entry.relativePath}'.`);
-    }
-    files.push({ ...entry, content });
+    const info = await lstat(target);
+    if (info.size !== entry.byteLength) throw new Error(`Published Learnings snapshot size verification failed for '${entry.relativePath}'.`);
+    files.push({ ...entry });
   }
   if (files.some((file, index) => index > 0 && compare(files[index - 1]!.relativePath, file.relativePath) > 0)) {
     throw new Error("Published Learnings snapshot paths are not sorted.");
   }
   const expected = new Set(seen);
-  if (actual.size !== expected.size || [...actual].some((relativePath) => !expected.has(relativePath))) {
+  if (actual.size !== expected.size || [...actual.keys()].some((relativePath) => !expected.has(relativePath))) {
     throw new Error("Published Learnings snapshot directory does not match its manifest.");
   }
-  return files;
+  return {
+    sourceHash: manifest.sourceHash,
+    branch: PUBLISHED_LEARNINGS_BRANCH,
+    revision: manifest.revision,
+    projectIds: manifest.projectIds,
+    root: filesRoot,
+    files,
+  };
 }
 
-async function listRegularFiles(root: string): Promise<Set<string>> {
-  const files = new Set<string>();
+async function listRegularFiles(root: string): Promise<Map<string, number>> {
+  const files = new Map<string, number>();
   async function walk(directory: string): Promise<void> {
     for (const entry of await readdir(directory, { withFileTypes: true })) {
       const target = path.join(directory, entry.name);
       const info = await lstat(target);
       if (info.isSymbolicLink() || (info.isFile() && info.nlink > 1)) throw new Error(`Unsafe published Learnings cache entry: ${target}`);
       if (info.isDirectory()) await walk(target);
-      else if (info.isFile()) files.add(path.relative(path.join(root, ".."), target).split(path.sep).join("/"));
+      else if (info.isFile()) files.set(path.relative(path.join(root, ".."), target).split(path.sep).join("/"), info.size);
       else throw new Error(`Unsafe published Learnings cache entry: ${target}`);
     }
   }
   await walk(root);
-  return new Set([...files].map((file) => file.slice("files/".length)));
+  return new Map([...files].map(([file, size]) => [file.slice("files/".length), size]));
+}
+
+function verifyLearningBytes(relativePath: string, entry: Omit<PublishedLearningFile, "content">, content: Buffer): void {
+  if (content.byteLength !== entry.byteLength || sha256(content) !== entry.contentHash) {
+    throw new Error(`Published Learnings snapshot hash verification failed for '${relativePath}'.`);
+  }
+  if (content.includes(0)) throw new Error(`Published Learning snapshot contains binary NUL data at '${relativePath}'.`);
+  try {
+    new TextDecoder("utf-8", { fatal: true }).decode(content);
+  } catch {
+    throw new Error(`Published Learnings snapshot contains non-UTF-8 content at '${relativePath}'.`);
+  }
 }
 
 async function assertRegularFile(filePath: string): Promise<void> {

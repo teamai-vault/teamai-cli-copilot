@@ -168,6 +168,7 @@ teamai init [--marketplace <source>] [--role api|ios|aos|qa|design]
 teamai projects [list]
 teamai projects set <ids...>
 teamai learning share <file> [--project <id>|--shared] [--tags <tag...>]
+teamai recall <query> [--scope auto|user|workspace] [--project <id>] [--limit <n>] [--include-pending] [--json]
 teamai skill list [--tag <tag>] [--owner <owner>] [--source plugin|standalone]
 teamai skill show <name>
 teamai skill install <name...>
@@ -185,6 +186,8 @@ teamai doctor
 所有写操作支持全局 `--dry-run`。首次 dry-run 会读取给定 Marketplace 并显示计划中的 Marketplace、Plugin、config 与 project 改动，不产生实际 mutation。
 
 `learning share` 会把提供的 Markdown 正文经由 GitHub PR 加入 `learnings/<project>/`。恰有一个 active Logical Project 时默认选中它，没有 active Project 时写入 `shared`，有多个时必须给出 `--project` 或 `--shared`。贡献流程使用隔离的 bare clone 和 worktree，不会修改当前 Marketplace checkout 或 shared read cache；dry-run 只预览 branch、commit、push 与 PR 步骤。
+
+`recall` 只在本地搜索缓存中的已发布 Learnings 和 active Project docs。当前 Git Workspace 有 active Logical Project 时，`auto` 使用 Workspace scope，否则使用 User scope；User 只搜索 shared Learnings，Workspace 搜索 shared 和 active Project 的 docs/Learnings。`--project` 可把 Workspace scope 缩到一个 active Project。`--include-pending` 只加入符合 source 与 scope 的未完成本地草稿。Recall 不访问网络或模型，也不写入状态。中文可用空格拆分关键词，例如 `teamai recall 支付 重试`；JSON 结果包含实际本地文件、source revision/hash、匹配词、原始行号和 evidence 片段。
 
 ### `teamai sync`
 
@@ -283,7 +286,7 @@ npm test
 
 ## 当前不做
 
-本项目不实现默认 Marketplace、多 Marketplace merge/overlay/precedence、Package Manager、另一套 Agent Runtime、通用 IDE abstraction、自定义 Plugin/Skill/Hook/MCP 格式、文档所列 User/Logical Project 投影之外的 arbitrary 或 generic resource copying/injection、通用 overlay engine、telemetry、dashboard、知识检索或排序，也不创建自定义业务上下文数据库。
+本项目不实现默认 Marketplace、多 Marketplace merge/overlay/precedence、Package Manager、另一套 Agent Runtime、通用 IDE abstraction、自定义 Plugin/Skill/Hook/MCP 格式、文档所列 User/Logical Project 投影之外的 arbitrary 或 generic resource copying/injection、通用 overlay engine、telemetry、dashboard，也不创建自定义业务上下文数据库。
 
 ## 项目文档
 

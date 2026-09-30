@@ -168,6 +168,7 @@ teamai init [--marketplace <source>] [--role api|ios|aos|qa|design]
 teamai projects [list]
 teamai projects set <ids...>
 teamai learning share <file> [--project <id>|--shared] [--tags <tag...>]
+teamai recall <query> [--scope auto|user|workspace] [--project <id>] [--limit <n>] [--include-pending] [--json]
 teamai skill list [--tag <tag>] [--owner <owner>] [--source plugin|standalone]
 teamai skill show <name>
 teamai skill install <name...>
@@ -185,6 +186,8 @@ teamai doctor
 All write commands support the global `--dry-run` option. A first-time dry run can inspect the supplied Marketplace and reports planned Marketplace/plugin/config/project changes without mutating state.
 
 `learning share` adds the supplied Markdown body to `learnings/<project>/` through a GitHub pull request. It defaults to the one active Logical Project, uses `shared` with none, and requires `--project` or `--shared` with several. Contributions use an isolated bare clone and worktree; they never change the active Marketplace checkout or shared read cache. A dry run previews the branch, commit, push, and pull-request steps without performing them.
+
+`recall` searches the cached published Learnings and active Project docs locally. `auto` uses Workspace scope when the current Git workspace has active Logical Projects and User scope otherwise; User scope searches shared Learnings, while Workspace scope searches shared Learnings and active Project docs/Learnings. `--project` narrows Workspace scope to one active Project. `--include-pending` adds only incomplete local drafts that match the source and scope. Recall makes no network or model calls and writes no state. Use whitespace-separated Chinese terms, for example `teamai recall 支付 重试`; JSON results include the local file, source revision/hash, matching terms, original line numbers, and evidence snippet.
 
 ### `teamai sync`
 
@@ -283,7 +286,7 @@ The two E2E scripts create isolated temporary profiles and repositories. `test:e
 
 ## Non-goals
 
-This project does not implement a default Marketplace, multiple-Marketplace merge/overlay/precedence, a package manager, another agent runtime, an IDE abstraction, custom Plugin/Skill/Hook/MCP formats, arbitrary or generic resource copying/injection beyond the documented user and Logical Project projections, a generic overlay engine, telemetry, dashboards, knowledge retrieval/ranking, or a custom business-context database.
+This project does not implement a default Marketplace, multiple-Marketplace merge/overlay/precedence, a package manager, another agent runtime, an IDE abstraction, custom Plugin/Skill/Hook/MCP formats, arbitrary or generic resource copying/injection beyond the documented user and Logical Project projections, a generic overlay engine, telemetry, dashboards, or a custom business-context database.
 
 ## Project documents
 

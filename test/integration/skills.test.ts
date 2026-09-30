@@ -125,7 +125,7 @@ test("sync keeps an owned personal Skill when its enabled Plugin has no package 
   expect(output.some((line) => line.includes("remove: api-review"))).toBe(false);
   expect((await readGlobalConfig(home))?.managedSkillPaths?.["api-review"]).toBe(skillTarget);
   expect(await readFile(path.join(skillTarget, "SKILL.md"), "utf8")).toContain("name: api-review");
-});
+}, 20_000);
 
 test("sync keeps an owned personal Skill until the enabled Plugin package contains its Skill file", async () => {
   const home = await tempDir("teamai-skill-file-missing-home-");

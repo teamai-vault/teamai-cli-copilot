@@ -1,4 +1,4 @@
-import { cp, lstat, mkdir, open, readFile, readdir, rename, rm } from "node:fs/promises";
+import { cp, link, lstat, mkdir, open, readFile, readdir, rename, rm, unlink } from "node:fs/promises";
 import path from "node:path";
 
 export async function pathExists(filePath: string): Promise<boolean> {
@@ -32,6 +32,14 @@ export async function atomicWriteText(filePath: string, contents: string): Promi
 }
 
 export async function atomicWriteFile(filePath: string, contents: Uint8Array): Promise<void> {
+  await atomicWriteFileWithMode(filePath, contents, false);
+}
+
+export async function atomicCreateFile(filePath: string, contents: Uint8Array): Promise<void> {
+  await atomicWriteFileWithMode(filePath, contents, true);
+}
+
+async function atomicWriteFileWithMode(filePath: string, contents: Uint8Array, exclusive: boolean): Promise<void> {
   await mkdir(path.dirname(filePath), { recursive: true });
   const tempPath = path.join(
     path.dirname(filePath),
@@ -46,7 +54,13 @@ export async function atomicWriteFile(filePath: string, contents: Uint8Array): P
         await handle.close();
       }
     });
-    await rename(tempPath, filePath);
+    if (exclusive) {
+      // Linking the completed temporary file is atomic and fails with EEXIST instead of replacing a frozen payload.
+      await link(tempPath, filePath);
+      await unlink(tempPath);
+    } else {
+      await rename(tempPath, filePath);
+    }
   } catch (error) {
     await rm(tempPath, { force: true });
     throw error;

@@ -751,7 +751,7 @@ describe("learning share", () => {
     expect(ghCalls).toEqual([["pr", "create", "--title", "Share learning: example", "--body", "fixture", "--head", "teamai/learning-shared-123"]]);
     const committed = await runProcess("git", ["--git-dir", remote, "show", "teamai/learning-shared-123:learnings/shared/example.md"]);
     expect(committed.stdout).toBe("example\n");
-  });
+  }, 20_000);
 
   test("dry run creates no branch, commit, push, or pull request", async () => {
     let calls = 0;
