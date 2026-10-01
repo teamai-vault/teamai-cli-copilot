@@ -1,4 +1,6 @@
 import { runProcess, type ProcessResult } from "../utils/process.js";
+import os from "node:os";
+import { normalizeLivePluginInventory } from "./user-state.js";
 
 export interface InstalledPlugin {
   name: string;
@@ -9,6 +11,9 @@ export interface InstalledPlugin {
   source?: unknown;
   installedFrom?: unknown;
   cache_path?: string;
+  scope?: string;
+  /** Live catalog discovery without a persisted user installation/enablement choice. */
+  discoveredOnly?: boolean;
 }
 
 export interface MarketplaceRow {
@@ -45,6 +50,8 @@ export interface CopilotOperations {
   enablePlugin(spec: string, cwd?: string): Promise<void>;
   disablePlugin(spec: string, cwd?: string): Promise<void>;
   updatePlugin(spec: string, cwd?: string): Promise<void>;
+  /** A producer-defined install destination, when it can be known before mutation. */
+  pluginInstallIdentity?(spec: string): { cachePath: string; source?: string; installedFrom?: string };
 }
 
 export class CopilotUnavailableError extends Error {}
@@ -84,10 +91,10 @@ export class CopilotClient implements CopilotOperations {
     if (!Array.isArray(parsed.plugins)) {
       throw new Error("copilot plugins list returned an unexpected JSON shape.");
     }
-    return parsed.plugins.map((plugin) => ({
+    return await normalizeLivePluginInventory(parsed.plugins.map((plugin) => ({
       ...plugin,
       marketplace: plugin.marketplace ?? marketplaceFromSource(plugin.source),
-    }));
+    })), os.homedir());
   }
 
   async listMcpServers(cwd?: string): Promise<{ servers: NativeMcpServer[]; errors: string[] }> {

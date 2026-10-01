@@ -1,5 +1,6 @@
-import { afterEach, describe, expect, test, vi } from "vitest";
-import { cp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { afterAll, afterEach, beforeAll, describe, expect, test, vi } from "vitest";
+import { createHash } from "node:crypto";
+import { cp, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { runCli } from "../../src/cli.js";
@@ -102,6 +103,73 @@ function capture() {
 }
 
 describe("published Learnings sync", () => {
+  describe("active role preflight", () => {
+    let workspace: string;
+    let source: string;
+    let setupMs: number;
+    beforeAll(async () => {
+      const started = performance.now();
+      workspace = await tempDir("teamai-role-preflight-cwd-");
+      cleanup.add(workspace);
+      const resource = await tempDir("teamai-role-preflight-source-");
+      cleanup.add(resource);
+      await write(resource, ".github/plugin/marketplace.json", JSON.stringify({ name: "test-teamai", plugins: [
+        { name: "common", version: "0.1.0", source: "plugins/common" },
+        { name: "api", version: "0.1.0", source: "plugins/api" },
+      ] }));
+      for (const [name, kind] of [["common", "common"], ["api", "role"]]) await write(resource, `plugins/${name}/plugin.json`, JSON.stringify({ name, version: "0.1.0", extensions: { "com.company.teamai": { kind } } }));
+      await write(resource, "skills.yaml", "version: 1\nskills: {}\n");
+      await git(resource, ["init", "--quiet"]);
+      await git(resource, ["add", "."]);
+      await git(resource, ["-c", "user.name=Team AI Test", "-c", "user.email=teamai@example.invalid", "commit", "--quiet", "-m", "role preflight fixture"]);
+      source = pathToFileURL(resource).href;
+      setupMs = performance.now() - started;
+    });
+  test("missing active role rejects public sync before native, config, files or cache writes", async () => {
+    const fake = await createFakeCopilot();
+    cleanup.add(path.dirname(fake.statePath));
+    const mutations: string[] = [];
+    for (const method of ["addMarketplace", "removeMarketplace", "installPlugin", "enablePlugin", "disablePlugin", "updatePlugin"] as const) {
+      vi.spyOn(fake.client, method).mockImplementation(async () => { mutations.push(method); throw new Error("unexpected native mutation"); });
+    }
+    async function tree(root: string): Promise<Record<string, string>> {
+      const files: Record<string, string> = {};
+      async function visit(directory: string): Promise<void> {
+        for (const entry of await readdir(directory, { withFileTypes: true })) {
+          const target = path.join(directory, entry.name);
+          if (entry.isDirectory()) { files[path.relative(root, target)] = "directory"; await visit(target); }
+          else files[path.relative(root, target)] = createHash("sha256").update(await readFile(target)).digest("hex");
+        }
+      }
+      await visit(root);
+      return files;
+    }
+    for (const seededCache of [false, true]) {
+      const started = performance.now();
+      const homeDir = await tempDir("teamai-retired-active-role-");
+      cleanup.add(homeDir);
+      if (seededCache) await (await loadMarketplaceCatalog(source, workspace, { homeDir, refresh: true })).dispose();
+      const config = createConfig({ name: "test-teamai", source });
+      config.role = "retired-role";
+      await writeGlobalConfig(config, homeDir);
+      const homeBefore = await tree(homeDir);
+      const workspaceBefore = await tree(workspace);
+      const nativeBefore = await readFile(fake.statePath);
+      const output = capture();
+      const commandStarted = performance.now();
+      expect(await runCli(["sync"], { cwd: workspace, homeDir, copilot: fake.client, ...output })).toBe(1);
+      const commandMs = performance.now() - commandStarted;
+      expect(output.stderr.join("\n")).toContain("Unknown role 'retired-role'");
+      expect(mutations).toEqual([]);
+      expect(await tree(homeDir)).toEqual(homeBefore);
+      expect(await tree(workspace)).toEqual(workspaceBefore);
+      expect(await readFile(fake.statePath)).toEqual(nativeBefore);
+      console.info("T16 timings", JSON.stringify({ setupMs, seededCache, caseSetupMs: commandStarted - started, commandMs, assertionsMs: performance.now() - commandStarted - commandMs }));
+    }
+    vi.restoreAllMocks();
+  }, 20_000);
+  });
+
   test("fake Marketplace fixture preserves an existing local origin", async () => {
     const source = await createGitRepo();
     cleanup.add(source);
@@ -167,83 +235,132 @@ describe("published Learnings sync", () => {
     expect(await readIfExists(fetchHeadPath)).toEqual(fetchHeadBefore);
   }, 60_000);
 
-  test("projects only shared and active Project files from the verified authority branch", async () => {
-    const workspace = await createGitRepo();
-    cleanup.add(workspace);
-    const homeDir = await tempDir("teamai-published-home-");
-    cleanup.add(homeDir);
-    const { source, authorityRevision, learningRepo } = await createMarketplaceRemote();
-    const config = createConfig({ name: "test-teamai", source });
-    config.role = "api";
-    await writeGlobalConfig(config, homeDir);
-    const fake = await createFakeCopilot();
-    cleanup.add(path.dirname(fake.statePath));
-    const options = { cwd: workspace, homeDir, copilot: fake.client };
-    const sync = capture();
-    const bind = capture();
+  describe.sequential("projects only shared and active Project files from the verified authority branch", () => {
+    const scenario = "projects only shared and active Project files from the verified authority branch";
+    const ownedRoots = new Set<string>();
+    let firstPhaseComplete = false;
+    let workspace: string;
+    let homeDir: string;
+    let source: string;
+    let authorityRevision: string;
+    let learningRepo: string;
+    let options: { cwd: string; homeDir: string; copilot: Awaited<ReturnType<typeof createFakeCopilot>>["client"] };
+    let context: string;
 
-    expect(await runCli(["sync"], { ...options, out: sync.out, err: sync.err })).toBe(0);
-    expect(await runCli(["projects", "set", "payments"], { ...options, out: bind.out, err: bind.err })).toBe(0);
+    beforeAll(async () => {
+      const started = performance.now();
+      const priorCleanup = new Set(cleanup);
+      console.info("published phase", JSON.stringify({ scenario, phase: "setup", event: "start" }));
+      try {
+        workspace = await createGitRepo();
+        cleanup.add(workspace);
+        homeDir = await tempDir("teamai-published-home-");
+        cleanup.add(homeDir);
+        ({ source, authorityRevision, learningRepo } = await createMarketplaceRemote());
+        const config = createConfig({ name: "test-teamai", source });
+        config.role = "api";
+        await writeGlobalConfig(config, homeDir);
+        const fake = await createFakeCopilot();
+        cleanup.add(path.dirname(fake.statePath));
+        options = { cwd: workspace, homeDir, copilot: fake.client };
+        context = path.join(workspace, ".teamai", "context");
+      } finally {
+        // Transfer only this setup's registrations; outer afterEach retains other cases.
+        for (const root of cleanup) {
+          if (!priorCleanup.has(root)) { ownedRoots.add(root); cleanup.delete(root); }
+        }
+        console.info("published phase", JSON.stringify({ scenario, phase: "setup", event: "end", elapsedMs: performance.now() - started }));
+      }
+    }, 60_000);
 
-    const context = path.join(workspace, ".teamai", "context");
-    expect(await readFile(path.join(context, "shared", "learnings", "authority.md"), "utf8")).toBe("Shared published evidence\n");
-    expect(await readFile(path.join(context, "payments", "learnings", "retry.md"), "utf8")).toBe("Payments published evidence\n");
-    await expect(readFile(path.join(context, "risk", "learnings", "private-to-scope.md"), "utf8")).rejects.toMatchObject({ code: "ENOENT" });
-    await expect(readFile(path.join(context, "shared", "learnings", "resource-main-only.md"), "utf8")).rejects.toMatchObject({ code: "ENOENT" });
+    afterAll(async () => {
+      vi.restoreAllMocks();
+      await Promise.all([...ownedRoots].map((root) => rm(root, { recursive: true, force: true })));
+      ownedRoots.clear();
+    }, 60_000);
 
-    const status = capture();
-    expect(await runCli(["status", "--json"], { ...options, out: status.out, err: status.err })).toBe(0);
-    const snapshot = JSON.parse(status.stdout.join("\n"));
-    expect(snapshot.learningsRevision).toBe(authorityRevision);
-    expect(snapshot.resources.filter((resource: { kind: string }) => resource.kind === "learning").map((resource: { source: { revision?: string } }) => resource.source.revision))
-      .toEqual([authorityRevision, authorityRevision]);
-    expect(sync.stderr).toEqual([]);
-    expect(bind.stderr).toEqual([]);
-    expect(status.stderr).toEqual([]);
+    test("projects selected Scope and repairs its published cache", async () => {
+      const started = performance.now();
+      console.info("published phase", JSON.stringify({ scenario, phase: "projects selected Scope and repairs its published cache", event: "start" }));
+      try {
+        const sync = capture();
+        const bind = capture();
 
-    const cachedSharedFile = path.join(homeDir, ".teamai", "published-learnings", publishedLearningSourceHash(source), "revisions", authorityRevision, "files", "learnings", "shared", "authority.md");
-    await writeFile(cachedSharedFile, "damaged cache entry\n", "utf8");
-    const repaired = capture();
-    expect(await runCli(["sync"], { ...options, out: repaired.out, err: repaired.err })).toBe(0);
-    expect(await readFile(cachedSharedFile, "utf8")).toBe("Shared published evidence\n");
+        expect(await runCli(["sync"], { ...options, out: sync.out, err: sync.err }), sync.stderr.join("\n")).toBe(0);
+        expect(await runCli(["projects", "set", "payments"], { ...options, out: bind.out, err: bind.err })).toBe(0);
 
-    await write(learningRepo, "learnings/not-in-manifest/unapproved.md", "reject the whole snapshot\n");
-    await git(learningRepo, ["add", "."]);
-    await git(learningRepo, ["commit", "-m", "invalid published authority update"]);
-    await git(learningRepo, ["push", "origin", "HEAD:refs/heads/teamai-learnings"]);
-    const failedRefresh = capture();
-    expect(await runCli(["sync"], { ...options, out: failedRefresh.out, err: failedRefresh.err })).toBe(1);
-    expect(failedRefresh.stderr.join("\n")).toContain("unknown Logical Project 'not-in-manifest'");
-    expect(await readFile(path.join(context, "shared", "learnings", "authority.md"), "utf8")).toBe("Shared published evidence\n");
-    const afterFailure = capture();
-    expect(await runCli(["status", "--json"], { ...options, out: afterFailure.out, err: afterFailure.err })).toBe(0);
-    expect(JSON.parse(afterFailure.stdout.join("\n")).learningsRevision).toBe(authorityRevision);
+        expect(await readFile(path.join(context, "shared", "learnings", "authority.md"), "utf8")).toBe("Shared published evidence\n");
+        expect(await readFile(path.join(context, "payments", "learnings", "retry.md"), "utf8")).toBe("Payments published evidence\n");
+        await expect(readFile(path.join(context, "risk", "learnings", "private-to-scope.md"), "utf8")).rejects.toMatchObject({ code: "ENOENT" });
+        await expect(readFile(path.join(context, "shared", "learnings", "resource-main-only.md"), "utf8")).rejects.toMatchObject({ code: "ENOENT" });
 
-    await rm(path.join(learningRepo, "learnings", "not-in-manifest", "unapproved.md"), { force: true });
-    await writeFile(path.join(learningRepo, "learnings", "shared", "binary.md"), Buffer.from([65, 0, 66]));
-    await git(learningRepo, ["add", "-A"]);
-    await git(learningRepo, ["commit", "-m", "invalid binary authority update"]);
-    await git(learningRepo, ["push", "origin", "HEAD:refs/heads/teamai-learnings"]);
-    const binaryRefresh = capture();
-    expect(await runCli(["sync"], { ...options, out: binaryRefresh.out, err: binaryRefresh.err })).toBe(1);
-    expect(binaryRefresh.stderr.join("\n")).toContain("binary NUL data");
-    expect(await readFile(path.join(context, "shared", "learnings", "authority.md"), "utf8")).toBe("Shared published evidence\n");
-    const afterBinary = capture();
-    expect(await runCli(["status", "--json"], { ...options, out: afterBinary.out, err: afterBinary.err })).toBe(0);
-    expect(JSON.parse(afterBinary.stdout.join("\n")).learningsRevision).toBe(authorityRevision);
+        const status = capture();
+        expect(await runCli(["status", "--json"], { ...options, out: status.out, err: status.err })).toBe(0);
+        const snapshot = JSON.parse(status.stdout.join("\n"));
+        expect(snapshot.learningsRevision).toBe(authorityRevision);
+        expect(snapshot.resources.filter((resource: { kind: string }) => resource.kind === "learning").map((resource: { source: { revision?: string } }) => resource.source.revision))
+          .toEqual([authorityRevision, authorityRevision]);
+        expect(sync.stderr).toEqual([]);
+        expect(bind.stderr).toEqual([]);
+        expect(status.stderr).toEqual([]);
 
-    await rm(path.join(learningRepo, "learnings", "shared", "binary.md"), { force: true });
-    await writeFile(path.join(learningRepo, "learnings", "shared", "oversized.md"), Buffer.alloc(1024 * 1024 + 1, 65));
-    await git(learningRepo, ["add", "-A"]);
-    await git(learningRepo, ["commit", "-m", "oversized authority update"]);
-    await git(learningRepo, ["push", "origin", "HEAD:refs/heads/teamai-learnings"]);
-    const oversizedRefresh = capture();
-    expect(await runCli(["sync"], { ...options, out: oversizedRefresh.out, err: oversizedRefresh.err })).toBe(1);
-    expect(oversizedRefresh.stderr.join("\n")).toContain("exceeds 1 MiB");
-    const afterOversized = capture();
-    expect(await runCli(["status", "--json"], { ...options, out: afterOversized.out, err: afterOversized.err })).toBe(0);
-    expect(JSON.parse(afterOversized.stdout.join("\n")).learningsRevision).toBe(authorityRevision);
-  }, 60_000);
+        const cachedSharedFile = path.join(homeDir, ".teamai", "published-learnings", publishedLearningSourceHash(source), "revisions", authorityRevision, "files", "learnings", "shared", "authority.md");
+        await writeFile(cachedSharedFile, "damaged cache entry\n", "utf8");
+        const repaired = capture();
+        expect(await runCli(["sync"], { ...options, out: repaired.out, err: repaired.err })).toBe(0);
+        expect(await readFile(cachedSharedFile, "utf8")).toBe("Shared published evidence\n");
+        firstPhaseComplete = true;
+      } finally {
+        console.info("published phase", JSON.stringify({ scenario, phase: "projects selected Scope and repairs its published cache", event: "end", elapsedMs: performance.now() - started }));
+      }
+    }, 60_000);
+
+    test("rejects invalid authority updates and preserves last-good files and revision", async () => {
+      const started = performance.now();
+      console.info("published phase", JSON.stringify({ scenario, phase: "rejects invalid authority updates and preserves last-good files and revision", event: "start" }));
+      try {
+        expect(firstPhaseComplete, "The preceding phase must complete before this continuation.").toBe(true);
+        await write(learningRepo, "learnings/not-in-manifest/unapproved.md", "reject the whole snapshot\n");
+        await git(learningRepo, ["add", "."]);
+        await git(learningRepo, ["commit", "-m", "invalid published authority update"]);
+        await git(learningRepo, ["push", "origin", "HEAD:refs/heads/teamai-learnings"]);
+        const failedRefresh = capture();
+        expect(await runCli(["sync"], { ...options, out: failedRefresh.out, err: failedRefresh.err })).toBe(1);
+        expect(failedRefresh.stderr.join("\n")).toContain("unknown Logical Project 'not-in-manifest'");
+        expect(await readFile(path.join(context, "shared", "learnings", "authority.md"), "utf8")).toBe("Shared published evidence\n");
+        const afterFailure = capture();
+        expect(await runCli(["status", "--json"], { ...options, out: afterFailure.out, err: afterFailure.err })).toBe(0);
+        expect(JSON.parse(afterFailure.stdout.join("\n")).learningsRevision).toBe(authorityRevision);
+
+        await rm(path.join(learningRepo, "learnings", "not-in-manifest", "unapproved.md"), { force: true });
+        await writeFile(path.join(learningRepo, "learnings", "shared", "binary.md"), Buffer.from([65, 0, 66]));
+        await git(learningRepo, ["add", "-A"]);
+        await git(learningRepo, ["commit", "-m", "invalid binary authority update"]);
+        await git(learningRepo, ["push", "origin", "HEAD:refs/heads/teamai-learnings"]);
+        const binaryRefresh = capture();
+        expect(await runCli(["sync"], { ...options, out: binaryRefresh.out, err: binaryRefresh.err })).toBe(1);
+        expect(binaryRefresh.stderr.join("\n")).toContain("binary NUL data");
+        expect(await readFile(path.join(context, "shared", "learnings", "authority.md"), "utf8")).toBe("Shared published evidence\n");
+        const afterBinary = capture();
+        expect(await runCli(["status", "--json"], { ...options, out: afterBinary.out, err: afterBinary.err })).toBe(0);
+        expect(JSON.parse(afterBinary.stdout.join("\n")).learningsRevision).toBe(authorityRevision);
+
+        await rm(path.join(learningRepo, "learnings", "shared", "binary.md"), { force: true });
+        await writeFile(path.join(learningRepo, "learnings", "shared", "oversized.md"), Buffer.alloc(1024 * 1024 + 1, 65));
+        await git(learningRepo, ["add", "-A"]);
+        await git(learningRepo, ["commit", "-m", "oversized authority update"]);
+        await git(learningRepo, ["push", "origin", "HEAD:refs/heads/teamai-learnings"]);
+        const oversizedRefresh = capture();
+        expect(await runCli(["sync"], { ...options, out: oversizedRefresh.out, err: oversizedRefresh.err })).toBe(1);
+        expect(oversizedRefresh.stderr.join("\n")).toContain("exceeds 1 MiB");
+        const afterOversized = capture();
+        expect(await runCli(["status", "--json"], { ...options, out: afterOversized.out, err: afterOversized.err })).toBe(0);
+        expect(JSON.parse(afterOversized.stdout.join("\n")).learningsRevision).toBe(authorityRevision);
+      } finally {
+        console.info("published phase", JSON.stringify({ scenario, phase: "rejects invalid authority updates and preserves last-good files and revision", event: "end", elapsedMs: performance.now() - started }));
+      }
+    }, 60_000);
+  });
 
   test("a local Marketplace directory without a usable Git origin fails before sync writes", async () => {
     const repo = await createGitRepo();
@@ -368,115 +485,169 @@ describe("published Learnings sync", () => {
     expect(JSON.parse(finalStatus.stdout.join("\n")).diagnostics.some((item: { code: string }) => item.code === "LEARNINGS_PROJECTION_INCOMPLETE")).toBe(false);
   }, 60_000);
 
-  test("sync resumes an interrupted A-to-B Projects change from the pending target", async () => {
-    const workspace = await createGitRepo();
-    cleanup.add(workspace);
-    const homeDir = await tempDir("teamai-published-project-transition-home-");
-    cleanup.add(homeDir);
-    const { source, authorityRevision } = await createMarketplaceRemote();
-    const config = createConfig({ name: "test-teamai", source });
-    config.role = "api";
-    await writeGlobalConfig(config, homeDir);
-    const fake = await createFakeCopilot();
-    cleanup.add(path.dirname(fake.statePath));
-    const options = { cwd: workspace, homeDir, copilot: fake.client };
+  describe.sequential("sync resumes an interrupted A-to-B Projects change from the pending target", () => {
+    const scenario = "sync resumes an interrupted A-to-B Projects change from the pending target";
+    const ownedRoots = new Set<string>();
+    let firstPhaseComplete = false;
+    let workspace: string;
+    let homeDir: string;
+    let source: string;
+    let authorityRevision: string;
+    let options: { cwd: string; homeDir: string; copilot: Awaited<ReturnType<typeof createFakeCopilot>>["client"] };
+    let riskLearning: string;
+    let contextPointer: string;
+    let identity: Awaited<ReturnType<typeof detectProjectIdentity>>;
 
-    expect(await runCli(["sync"], { ...options, ...capture() })).toBe(0);
-    expect(await runCli(["projects", "set", "payments"], { ...options, ...capture() })).toBe(0);
+    beforeAll(async () => {
+      const started = performance.now();
+      const priorCleanup = new Set(cleanup);
+      console.info("published phase", JSON.stringify({ scenario, phase: "setup", event: "start" }));
+      try {
+        workspace = await createGitRepo();
+        cleanup.add(workspace);
+        homeDir = await tempDir("teamai-published-project-transition-home-");
+        cleanup.add(homeDir);
+        ({ source, authorityRevision } = await createMarketplaceRemote());
+        const config = createConfig({ name: "test-teamai", source });
+        config.role = "api";
+        await writeGlobalConfig(config, homeDir);
+        const fake = await createFakeCopilot();
+        cleanup.add(path.dirname(fake.statePath));
+        options = { cwd: workspace, homeDir, copilot: fake.client };
+      } finally {
+        // Transfer only this setup's registrations; outer afterEach retains other cases.
+        for (const root of cleanup) {
+          if (!priorCleanup.has(root)) { ownedRoots.add(root); cleanup.delete(root); }
+        }
+        console.info("published phase", JSON.stringify({ scenario, phase: "setup", event: "end", elapsedMs: performance.now() - started }));
+      }
+    }, 60_000);
 
-    const riskLearning = path.join(workspace, ".teamai", "context", "risk", "learnings", "private-to-scope.md");
-    const contextPointer = path.join(workspace, ".github", "instructions", "teamai", "context.instructions.md");
-    const projectSettings = path.join(workspace, ".github", "copilot", "settings.json");
-    const identity = await detectProjectIdentity(workspace);
-    const beforeDryRun = await readProjectState(identity!.projectAnchor, homeDir);
-    const dryRun = capture();
-    expect(await runCli(["--dry-run", "projects", "set", "risk"], { ...options, out: dryRun.out, err: dryRun.err })).toBe(0);
-    expect(dryRun.stdout.some((line) => line.startsWith("WOULD write:"))).toBe(true);
-    expect(await readProjectState(identity!.projectAnchor, homeDir)).toEqual(beforeDryRun);
-    await expect(readFile(path.join(workspace, ".teamai", "context", "payments", "learnings", "retry.md"), "utf8")).resolves.toBe("Payments published evidence\n");
-    await expect(readFile(riskLearning, "utf8")).rejects.toMatchObject({ code: "ENOENT" });
+    afterAll(async () => {
+      vi.restoreAllMocks();
+      await Promise.all([...ownedRoots].map((root) => rm(root, { recursive: true, force: true })));
+      ownedRoots.clear();
+    }, 60_000);
 
-    const originalAtomicWrite = fsHelpers.atomicWriteFile;
-    const interruptedWrite = vi.spyOn(fsHelpers, "atomicWriteFile").mockImplementation(async (filePath, contents) => {
-      if (path.resolve(filePath) === path.resolve(projectSettings)) throw new Error("injected project settings interruption");
-      return originalAtomicWrite(filePath, contents);
-    });
-    try {
-      const transition = capture();
-      expect(await runCli(["projects", "set", "risk"], { ...options, out: transition.out, err: transition.err })).toBe(1);
-      expect(transition.stderr.join("\n")).toContain("Partial Workspace project update");
-      expect(transition.stderr.join("\n")).toContain("injected project settings interruption");
-    } finally {
-      interruptedWrite.mockRestore();
-    }
+    test("records the pending target and guards all Projects retries", async () => {
+      const started = performance.now();
+      console.info("published phase", JSON.stringify({ scenario, phase: "records the pending target and guards all Projects retries", event: "start" }));
+      try {
+        expect(await runCli(["sync"], { ...options, ...capture() })).toBe(0);
+        expect(await runCli(["projects", "set", "payments"], { ...options, ...capture() })).toBe(0);
 
-    const checkpointState = await readProjectState(identity!.projectAnchor, homeDir);
-    const checkpoint = projectionFor(checkpointState, identity!.workspaceRoot);
-    expect(checkpoint?.logicalProjects).toEqual(["payments"]);
-    expect(checkpoint?.pendingLogicalProjects).toEqual(["risk"]);
-    expect(checkpoint?.pendingPublishedLearningRevision).toBe(authorityRevision);
-    await expect(readFile(contextPointer, "utf8")).resolves.toContain("Active Logical Projects: risk");
-    await expect(readFile(path.join(workspace, ".teamai", "context", "payments", "learnings", "retry.md"), "utf8")).rejects.toMatchObject({ code: "ENOENT" });
-    await expect(readFile(riskLearning, "utf8")).resolves.toBe("Inactive project evidence\n");
+        riskLearning = path.join(workspace, ".teamai", "context", "risk", "learnings", "private-to-scope.md");
+        contextPointer = path.join(workspace, ".github", "instructions", "teamai", "context.instructions.md");
+        identity = await detectProjectIdentity(workspace);
+        const beforeDryRun = await readProjectState(identity!.projectAnchor, homeDir);
+        const dryRun = capture();
+        expect(await runCli(["--dry-run", "projects", "set", "risk"], { ...options, out: dryRun.out, err: dryRun.err })).toBe(0);
+        expect(dryRun.stdout.some((line) => line.startsWith("WOULD write:"))).toBe(true);
+        expect(await readProjectState(identity!.projectAnchor, homeDir)).toEqual(beforeDryRun);
+        await expect(readFile(path.join(workspace, ".teamai", "context", "payments", "learnings", "retry.md"), "utf8")).resolves.toBe("Payments published evidence\n");
+        await expect(readFile(riskLearning, "utf8")).rejects.toMatchObject({ code: "ENOENT" });
 
-    const settingsBeforeRetries = await readFile(projectSettings, "utf8");
-    const retries = [
-      ["projects", "set", "payments"],
-      ["projects", "set", "payments,risk"],
-      ["projects", "set"],
-      ["--dry-run", "projects", "set", "payments"],
-    ];
-    for (const args of retries) {
-      const rejected = capture();
-      expect(await runCli(args, { ...options, out: rejected.out, err: rejected.err })).toBe(1);
-      expect(rejected.stderr.join("\n")).toContain("Run `teamai sync` before retrying `teamai projects set`");
-      expect(await readProjectState(identity!.projectAnchor, homeDir)).toEqual(checkpointState);
-      await expect(readFile(contextPointer, "utf8")).resolves.toContain("Active Logical Projects: risk");
-      await expect(readFile(path.join(workspace, ".teamai", "context", "payments", "learnings", "retry.md"), "utf8")).rejects.toMatchObject({ code: "ENOENT" });
-      await expect(readFile(riskLearning, "utf8")).resolves.toBe("Inactive project evidence\n");
-      await expect(readFile(projectSettings, "utf8")).resolves.toBe(settingsBeforeRetries);
-    }
+        const originalAtomicWrite = fsHelpers.atomicWriteFile;
+        const interruptedWrite = vi.spyOn(fsHelpers, "atomicWriteFile").mockImplementation(async (filePath, contents) => {
+          if (path.resolve(filePath) === path.resolve(contextPointer)) {
+            await originalAtomicWrite(filePath, contents);
+            throw new Error("injected project context pointer interruption");
+          }
+          return originalAtomicWrite(filePath, contents);
+        });
+        try {
+          const transition = capture();
+          expect(await runCli(["projects", "set", "risk"], { ...options, out: transition.out, err: transition.err })).toBe(1);
+          expect(transition.stderr.join("\n")).toContain("Partial Workspace project update");
+          expect(transition.stderr.join("\n")).toContain("injected project context pointer interruption");
+        } finally {
+          interruptedWrite.mockRestore();
+        }
 
-    const resumed = capture();
-    expect(await runCli(["sync"], { ...options, out: resumed.out, err: resumed.err })).toBe(0);
-    await expect(readFile(path.join(workspace, ".teamai", "context", "payments", "learnings", "retry.md"), "utf8")).rejects.toMatchObject({ code: "ENOENT" });
-    await expect(readFile(riskLearning, "utf8")).resolves.toBe("Inactive project evidence\n");
+        const checkpointState = await readProjectState(identity!.projectAnchor, homeDir);
+        const checkpoint = projectionFor(checkpointState, identity!.workspaceRoot);
+        expect(checkpoint?.logicalProjects).toEqual(["payments"]);
+        expect(checkpoint?.pendingLogicalProjects).toEqual(["risk"]);
+        expect(checkpoint?.pendingPublishedLearningRevision).toBe(authorityRevision);
+        await expect(readFile(contextPointer, "utf8")).resolves.toContain("Active Logical Projects: risk");
+        await expect(readFile(path.join(workspace, ".teamai", "context", "payments", "learnings", "retry.md"), "utf8")).rejects.toMatchObject({ code: "ENOENT" });
+        await expect(readFile(riskLearning, "utf8")).resolves.toBe("Inactive project evidence\n");
 
-    const completedState = await readProjectState(identity!.projectAnchor, homeDir);
-    const completed = projectionFor(completedState, identity!.workspaceRoot);
-    expect(completed?.logicalProjects).toEqual(["risk"]);
-    expect(completed?.publishedLearningRevision).toBe(authorityRevision);
-    expect(completed?.pendingPublishedLearningRevision).toBeUndefined();
-    expect(completed?.pendingLogicalProjects).toBeUndefined();
+        const retries = [
+          ["projects", "set", "payments"],
+          ["projects", "set", "payments,risk"],
+          ["projects", "set"],
+          ["--dry-run", "projects", "set", "payments"],
+        ];
+        for (const args of retries) {
+          const rejected = capture();
+          expect(await runCli(args, { ...options, out: rejected.out, err: rejected.err })).toBe(1);
+          expect(rejected.stderr.join("\n")).toContain("Run `teamai sync` before retrying `teamai projects set`");
+          expect(await readProjectState(identity!.projectAnchor, homeDir)).toEqual(checkpointState);
+          await expect(readFile(contextPointer, "utf8")).resolves.toContain("Active Logical Projects: risk");
+          await expect(readFile(path.join(workspace, ".teamai", "context", "payments", "learnings", "retry.md"), "utf8")).rejects.toMatchObject({ code: "ENOENT" });
+          await expect(readFile(riskLearning, "utf8")).resolves.toBe("Inactive project evidence\n");
+          await expect(readFile(path.join(workspace, ".github", "copilot", "settings.json"), "utf8")).rejects.toMatchObject({ code: "ENOENT" });
+        }
+        firstPhaseComplete = true;
+      } finally {
+        console.info("published phase", JSON.stringify({ scenario, phase: "records the pending target and guards all Projects retries", event: "end", elapsedMs: performance.now() - started }));
+      }
+    }, 60_000);
 
-    const completedPointer = await readFile(contextPointer, "utf8");
-    await writeFile(contextPointer, "user edited pointer\n", "utf8");
-    const tampered = capture();
-    expect(await runCli(["projects", "set", "risk"], { ...options, out: tampered.out, err: tampered.err })).toBe(1);
-    expect(tampered.stderr.join("\n")).toContain("Workspace context conflict");
-    await expect(readFile(contextPointer, "utf8")).resolves.toBe("user edited pointer\n");
+    test("recovers through sync and preserves tamper, switching and unbind behavior", async () => {
+      const started = performance.now();
+      console.info("published phase", JSON.stringify({ scenario, phase: "recovers through sync and preserves tamper, switching and unbind behavior", event: "start" }));
+      try {
+        expect(firstPhaseComplete, "The preceding phase must complete before this continuation.").toBe(true);
+        const resumed = capture();
+        expect(await runCli(["sync"], { ...options, out: resumed.out, err: resumed.err })).toBe(0);
+        await expect(readFile(path.join(workspace, ".teamai", "context", "payments", "learnings", "retry.md"), "utf8")).rejects.toMatchObject({ code: "ENOENT" });
+        await expect(readFile(riskLearning, "utf8")).resolves.toBe("Inactive project evidence\n");
 
-    await writeFile(contextPointer, completedPointer, "utf8");
-    const switchBack = capture();
-    expect(await runCli(["projects", "set", "payments"], { ...options, out: switchBack.out, err: switchBack.err })).toBe(0);
-    await expect(readFile(path.join(workspace, ".teamai", "context", "payments", "learnings", "retry.md"), "utf8")).resolves.toBe("Payments published evidence\n");
-    await expect(readFile(riskLearning, "utf8")).rejects.toMatchObject({ code: "ENOENT" });
-    const switchState = await readProjectState(identity!.projectAnchor, homeDir);
-    expect(projectionFor(switchState, identity!.workspaceRoot)?.logicalProjects).toEqual(["payments"]);
-    expect(projectionFor(switchState, identity!.workspaceRoot)?.pendingLogicalProjects).toBeUndefined();
+        const completedState = await readProjectState(identity!.projectAnchor, homeDir);
+        const completed = projectionFor(completedState, identity!.workspaceRoot);
+        expect(completed?.logicalProjects).toEqual(["risk"]);
+        expect(completed?.publishedLearningRevision).toBe(authorityRevision);
+        expect(completed?.pendingPublishedLearningRevision).toBeUndefined();
+        expect(completed?.pendingLogicalProjects).toBeUndefined();
 
-    const unbound = capture();
-    expect(await runCli(["projects", "set"], { ...options, out: unbound.out, err: unbound.err })).toBe(0);
-    await expect(readFile(path.join(workspace, ".teamai", "context", "payments", "learnings", "retry.md"), "utf8")).rejects.toMatchObject({ code: "ENOENT" });
-    expect(projectionFor(await readProjectState(identity!.projectAnchor, homeDir), identity!.workspaceRoot)).toBeUndefined();
-  }, 60_000);
+        const completedPointer = await readFile(contextPointer, "utf8");
+        await writeFile(contextPointer, "user edited pointer\n", "utf8");
+        const tampered = capture();
+        expect(await runCli(["projects", "set", "risk"], { ...options, out: tampered.out, err: tampered.err })).toBe(1);
+        expect(tampered.stderr.join("\n")).toContain("Workspace context conflict");
+        await expect(readFile(contextPointer, "utf8")).resolves.toBe("user edited pointer\n");
 
-  test("sync recovers a first Project binding after a late settings failure", async () => {
+        await writeFile(contextPointer, completedPointer, "utf8");
+        const switchBack = capture();
+        expect(await runCli(["projects", "set", "payments"], { ...options, out: switchBack.out, err: switchBack.err })).toBe(0);
+        await expect(readFile(path.join(workspace, ".teamai", "context", "payments", "learnings", "retry.md"), "utf8")).resolves.toBe("Payments published evidence\n");
+        await expect(readFile(riskLearning, "utf8")).rejects.toMatchObject({ code: "ENOENT" });
+        const switchState = await readProjectState(identity!.projectAnchor, homeDir);
+        expect(projectionFor(switchState, identity!.workspaceRoot)?.logicalProjects).toEqual(["payments"]);
+        expect(projectionFor(switchState, identity!.workspaceRoot)?.pendingLogicalProjects).toBeUndefined();
+
+        const unbound = capture();
+        expect(await runCli(["projects", "set"], { ...options, out: unbound.out, err: unbound.err })).toBe(0);
+        await expect(readFile(path.join(workspace, ".teamai", "context", "payments", "learnings", "retry.md"), "utf8")).rejects.toMatchObject({ code: "ENOENT" });
+        expect(projectionFor(await readProjectState(identity!.projectAnchor, homeDir), identity!.workspaceRoot)).toBeUndefined();
+      } finally {
+        console.info("published phase", JSON.stringify({ scenario, phase: "recovers through sync and preserves tamper, switching and unbind behavior", event: "end", elapsedMs: performance.now() - started }));
+      }
+    }, 60_000);
+  });
+
+  test("sync recovers a first Project binding after a late context projection failure", async () => {
     const workspace = await createGitRepo();
     cleanup.add(workspace);
     const homeDir = await tempDir("teamai-published-first-binding-home-");
     cleanup.add(homeDir);
-    const { source, authorityRevision } = await createMarketplaceRemote();
+    const { source, resourceRepo, authorityRevision } = await createMarketplaceRemote();
+    await write(resourceRepo, "contexts/payments/docs/guide.md", "Project guide v1\n");
+    await git(resourceRepo, ["add", "."]);
+    await git(resourceRepo, ["commit", "-m", "add Project guide v1"]);
+    await git(resourceRepo, ["push", "origin", "main"]);
     const config = createConfig({ name: "test-teamai", source });
     config.role = "api";
     await writeGlobalConfig(config, homeDir);
@@ -487,17 +658,28 @@ describe("published Learnings sync", () => {
 
     const identity = await detectProjectIdentity(workspace);
     const contextPointer = path.join(workspace, ".github", "instructions", "teamai", "context.instructions.md");
-    const projectSettings = path.join(workspace, ".github", "copilot", "settings.json");
+    const gitExclude = await git(workspace, ["rev-parse", "--path-format=absolute", "--git-path", "info/exclude"]);
     const paymentLearning = path.join(workspace, ".teamai", "context", "payments", "learnings", "retry.md");
+    const paymentDocument = path.join(workspace, ".teamai", "context", "payments", "docs", "guide.md");
+    async function cachedDocumentBytes(): Promise<Buffer> {
+      const catalog = await loadMarketplaceCatalog(source, workspace, { homeDir });
+      try {
+        expect(catalog.revision).toBe(await git(resourceRepo, ["rev-parse", "HEAD"]));
+        return await readFile(path.join(catalog.root, "contexts", "payments", "docs", "guide.md"));
+      } finally {
+        await catalog.dispose();
+      }
+    }
+    const v1Bytes = await cachedDocumentBytes();
     const originalAtomicWrite = fsHelpers.atomicWriteFile;
     const interruptedWrite = vi.spyOn(fsHelpers, "atomicWriteFile").mockImplementation(async (filePath, contents) => {
-      if (path.resolve(filePath) === path.resolve(projectSettings)) throw new Error("injected first-binding settings interruption");
+      if (path.resolve(filePath) === path.resolve(gitExclude)) throw new Error("injected first-binding Git exclude interruption");
       return originalAtomicWrite(filePath, contents);
     });
     try {
       const binding = capture();
       expect(await runCli(["projects", "set", "payments"], { ...options, out: binding.out, err: binding.err })).toBe(1);
-      expect(binding.stderr.join("\n")).toContain("injected first-binding settings interruption");
+      expect(binding.stderr.join("\n")).toContain("injected first-binding Git exclude interruption");
     } finally {
       interruptedWrite.mockRestore();
     }
@@ -509,6 +691,34 @@ describe("published Learnings sync", () => {
     expect(pending?.pendingPublishedLearningRevision).toBe(authorityRevision);
     await expect(readFile(contextPointer, "utf8")).resolves.toContain("Active Logical Projects: payments");
     await expect(readFile(paymentLearning, "utf8")).resolves.toBe("Payments published evidence\n");
+    await expect(readFile(paymentDocument)).resolves.toEqual(v1Bytes);
+    const v1Hash = createHash("sha256").update(v1Bytes).digest("hex");
+    const relativeDocument = ".teamai/context/payments/docs/guide.md";
+    expect(pending?.pendingContextFiles?.some((item) => item.targetPath === relativeDocument && item.contentHash === v1Hash)).toBe(true);
+
+    await write(resourceRepo, "contexts/payments/docs/guide.md", "Project guide v2\n");
+    await git(resourceRepo, ["add", "."]);
+    await git(resourceRepo, ["commit", "-m", "revise Project guide to v2"]);
+    await git(resourceRepo, ["push", "origin", "main"]);
+    const originalAtomicWriteV2 = fsHelpers.atomicWriteFile;
+    const interruptedV2 = vi.spyOn(fsHelpers, "atomicWriteFile").mockImplementation(async (filePath, contents) => {
+      if (path.resolve(filePath) === path.resolve(paymentDocument)) throw new Error("injected v2 Project document interruption");
+      return originalAtomicWriteV2(filePath, contents);
+    });
+    try {
+      const v2Interrupted = capture();
+      expect(await runCli(["sync"], { ...options, out: v2Interrupted.out, err: v2Interrupted.err })).toBe(1);
+      expect(v2Interrupted.stderr.join("\n")).toContain("injected v2 Project document interruption");
+    } finally {
+      interruptedV2.mockRestore();
+    }
+    const v2Pending = projectionFor(await readProjectState(identity!.projectAnchor, homeDir), identity!.workspaceRoot);
+    const v2Bytes = await cachedDocumentBytes();
+    expect(v2Bytes).not.toEqual(v1Bytes);
+    const v2Hash = createHash("sha256").update(v2Bytes).digest("hex");
+    expect(v2Pending?.pendingContextFiles?.some((item) => item.targetPath === relativeDocument && item.contentHash === v1Hash)).toBe(true);
+    expect(v2Pending?.pendingContextFiles?.some((item) => item.targetPath === relativeDocument && item.contentHash === v2Hash)).toBe(true);
+    await expect(readFile(paymentDocument)).resolves.toEqual(v1Bytes);
 
     expect(await runCli(["sync"], { ...options, ...capture() })).toBe(0);
     const completed = projectionFor(await readProjectState(identity!.projectAnchor, homeDir), identity!.workspaceRoot);
@@ -516,5 +726,8 @@ describe("published Learnings sync", () => {
     expect(completed?.publishedLearningRevision).toBe(authorityRevision);
     expect(completed?.pendingPublishedLearningRevision).toBeUndefined();
     expect(completed?.pendingLogicalProjects).toBeUndefined();
-  }, 60_000);
+    expect(completed?.managedContextFiles?.some((item) => item.targetPath === relativeDocument && item.contentHash === v2Hash)).toBe(true);
+    expect(completed?.pendingContextFiles).toBeUndefined();
+    await expect(readFile(paymentDocument)).resolves.toEqual(v2Bytes);
+  }, 180_000);
 });

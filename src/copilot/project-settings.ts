@@ -1,7 +1,6 @@
-import { lstat } from "node:fs/promises";
+import { lstat, readFile } from "node:fs/promises";
 import path from "node:path";
-import { readJsonIfExists } from "../utils/fs.js";
-import type { MarketplaceConfig } from "../config/schema.js";
+import { parse as parseJsonc, type ParseError } from "jsonc-parser";
 
 export interface MarketplaceSetting {
   source: Record<string, string>;
@@ -22,8 +21,16 @@ export function projectSettingsPath(workspaceRoot: string): string {
 export async function readProjectSettings(workspaceRoot: string): Promise<ProjectSettings> {
   await assertSafeProjectSettingsPath(workspaceRoot);
   try {
-    return (await readJsonIfExists<ProjectSettings>(projectSettingsPath(workspaceRoot))) ?? {};
+    const contents = await readFile(projectSettingsPath(workspaceRoot), "utf8");
+    const errors: ParseError[] = [];
+    const parsed = parseJsonc(contents, errors, { allowTrailingComma: false, disallowComments: false });
+    if (errors.length > 0 || !parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+      throw new Error(projectSettingsPath(workspaceRoot) + " contains invalid JSON/JSONC.");
+    }
+    return parsed as ProjectSettings;
   } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === "ENOENT") return {};
+    if (error instanceof Error && error.message.endsWith("contains invalid JSON/JSONC.")) throw error;
     if (error instanceof SyntaxError) {
       throw new Error(`${projectSettingsPath(workspaceRoot)} contains invalid JSON.`);
     }
@@ -39,26 +46,6 @@ export function marketplaceSourceSetting(source: string): MarketplaceSetting {
     return { source: { source: "git", url: source } };
   }
   return { source: { source: "github", repo: source } };
-}
-
-export function mergeManagedProjectPlugins(
-  current: ProjectSettings,
-  marketplace: MarketplaceConfig,
-  projectPlugins: string[],
-  ownedPlugins: string[],
-): ProjectSettings {
-  const desired = new Set(projectPlugins.map((plugin) => `${plugin}@${marketplace.name}`));
-  const owned = new Set(ownedPlugins);
-  const enabledPlugins = { ...(current.enabledPlugins ?? {}) };
-  for (const spec of owned) if (!desired.has(spec) && enabledPlugins[spec] === true) delete enabledPlugins[spec];
-  for (const spec of desired) if (owned.has(spec) || !(spec in enabledPlugins)) enabledPlugins[spec] = true;
-  const ownsNewPlugin = [...desired].some((spec) => owned.has(spec) || !(spec in (current.enabledPlugins ?? {})));
-  if (!ownsNewPlugin && owned.size === 0) return current;
-  return {
-    ...current,
-    ...(ownsNewPlugin ? { extraKnownMarketplaces: { ...(current.extraKnownMarketplaces ?? {}), [marketplace.name]: marketplaceSourceSetting(marketplace.source) } } : {}),
-    enabledPlugins,
-  };
 }
 
 async function assertSafeProjectSettingsPath(workspaceRoot: string): Promise<void> {

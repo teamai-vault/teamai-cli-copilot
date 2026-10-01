@@ -95,7 +95,7 @@ The plugin name does not encode its kind. The CLI reads the shared metadata name
 
 ## Logical Project context and learnings
 
-`teamai init` configures only user scope and never binds Logical Projects. `teamai projects list` reads the catalog; `teamai projects set <ids...>` (repeated or comma-separated IDs) is the only command that changes the current physical Git workspace binding, and `sync` re-converges the saved binding of the current workspace only. Convergence has four scopes: Marketplace Plugin packages and managed user instructions (`init`, `sync`), plus physical-repository Logical Project instructions and physical-repository context/learning files (`projects set`, `sync`).
+`teamai init` configures only user scope and never binds Logical Projects. `teamai projects list` reads the catalog; `teamai projects set <ids...>` (repeated or comma-separated IDs) is the only command that changes the current physical Git workspace binding, and `sync` re-converges the saved binding of the current workspace only. Convergence covers user-level Marketplace Plugins and instructions, plus bound-workspace Logical Project context and manifest-selected Project Plugin components.
 
 Active Project instruction files are mirrored byte-for-byte to `.github/instructions/teamai/<id>/`; project docs and project/shared learnings go to `.teamai/context/`. Team AI writes one `context.instructions.md` pointer with `applyTo: "**"`, plus Git-resolved `info/exclude` entries for only those two reserved roots. It never adopts an occupied reserved path, even if empty, and never rewrites Marketplace source frontmatter. Portable or path-specific `applyTo` matching remains a documented future validation item; no runtime instruction injection is claimed.
 
@@ -138,9 +138,9 @@ Initialization:
 4. installs `common` and every `kind: role` plugin in the catalog;
 5. enables only `common` and the selected role;
 6. stores the selected role, Marketplace identity, and explicit Team AI ownership;
-7. optionally binds Logical Projects and converges their project-scoped context.
+7. writes user-scope state only; bind Logical Projects separately with `teamai projects set`.
 
-Project Plugins are optional executable capabilities. They are declared by a Logical Project manifest and enabled only in the bound physical repository settings.
+An optional `kind: project` Plugin is only a Marketplace source for components selected by `manifest/projects.yaml`. Binding a Logical Project projects its declared Agents to `.github/agents/`, Rules to `.github/instructions/teamai/<id>/`, Skills to `.github/skills/`, Hook declarations and referenced files to `.github/hooks/`, and MCP server entries plus referenced local files to `.mcp.json` and `.teamai/project-components/`. The CLI records exact file/config ownership, rejects unowned target collisions, and removes only those owned entries on unbind. It never installs or enables the Project Plugin in user-level Copilot state. A same-name user Plugin is preserved; consumer isolation and runtime loading remain unobserved until tested in that consumer.
 
 Example persisted config:
 
@@ -191,7 +191,7 @@ All write commands support the global `--dry-run` option. A first-time dry run c
 
 ### `teamai sync`
 
-`sync` means convergence and repair. It installs missing Team AI-owned user plugins, restores enablement, refreshes Marketplace registration, updates VS Code Marketplace registration, refreshes project machine state, and repairs managed personal Skills. It does not copy central Skills, Agents, Instructions, Hooks, or MCP definitions into the project.
+`sync` means convergence and repair. It installs missing Team AI-owned user plugins, restores enablement, refreshes Marketplace registration, updates VS Code Marketplace registration, refreshes project machine state, and repairs managed personal Skills. For a bound workspace, it projects only the compatible components declared by its selected Logical Projects; common and role content remains in native user Plugins.
 
 ### `teamai skill` and `teamai tags`
 
@@ -210,7 +210,7 @@ Changing role keeps all Team AI role plugins installed, enables `common` plus th
 
 ### `teamai status` and `teamai doctor`
 
-`status` reports Marketplace revision, selected Logical Projects, managed personal Skills, Project context, and learning projection. `doctor` reuses dry-run convergence against the locally loaded cache to report stale context, missing or colliding owned Skills, invalid active Project bindings, and optional Plugin inconsistencies without repairing them. Neither command refreshes a remote Marketplace cache. Hook declarations are validated as Marketplace content, but the CLI does not execute Hooks or pretend that unavailable runtime inspection succeeded.
+`status` reports Marketplace revision, selected Logical Projects, projected Project Plugin components, managed personal Skills, Project context, and learning projection. `doctor` reuses dry-run convergence against the locally loaded cache to report stale context, missing or colliding owned components, invalid active Project bindings, and user-level same-name Plugin overrides without repairing them. Neither command refreshes a remote Marketplace cache. Hook and MCP declarations are summarized with runtime unknown until an actual consumer loads them; the CLI does not execute either component.
 
 ## Native Copilot and VS Code-only fallback
 
@@ -242,7 +242,7 @@ User-level Copilot registration is represented by `extraKnownMarketplaces` in `~
 
 Team AI also registers the source in VS Code User Settings under `chat.plugins.marketplaces`. The merge is JSONC-safe: comments, trailing commas, unknown settings, and existing entries are preserved, while the configured source is inserted or moved to index `0`.
 
-Logical Project projections use `.github/instructions/teamai/**` and `.teamai/context/**`; both reserved paths are rejected when unowned. Optional Project Plugin settings are read-modify-written only for explicitly owned entries.
+Logical Project projections use `.github/instructions/teamai/**` and `.teamai/context/**`; both reserved paths are rejected when unowned. Manifest-selected Project Plugin components are written to their native Workspace locations using exact ownership receipts. The optional `kind: project` package is never added to user-level installed Plugins or workspace `enabledPlugins`.
 
 ## Ownership and project state
 
@@ -286,7 +286,7 @@ The two E2E scripts create isolated temporary profiles and repositories. `test:e
 
 ## Non-goals
 
-This project does not implement a default Marketplace, multiple-Marketplace merge/overlay/precedence, a package manager, another agent runtime, an IDE abstraction, custom Plugin/Skill/Hook/MCP formats, arbitrary or generic resource copying/injection beyond the documented user and Logical Project projections, a generic overlay engine, telemetry, dashboards, or a custom business-context database.
+This project does not implement a default Marketplace, multiple-Marketplace merge/overlay/precedence, a package manager, another agent runtime, an IDE abstraction, custom Plugin/Skill/Hook/MCP formats, arbitrary or generic resource copying/injection beyond user instructions and manifest-selected Logical Project components, a generic overlay engine, telemetry, dashboards, or a custom business-context database.
 
 ## Project documents
 

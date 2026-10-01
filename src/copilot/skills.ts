@@ -3,10 +3,9 @@ import path from "node:path";
 import type { TeamAiConfig } from "../config/schema.js";
 import type { CatalogSkill } from "./catalog.js";
 import type { InstalledPlugin } from "./cli.js";
-import type { ProjectSettings } from "./project-settings.js";
 import { inspectPluginDelivery, inspectPluginSkillDelivery, pluginSpec } from "./plugins.js";
 import { directoriesEqual, pathsEqual, replaceDirectory, withFileLock } from "../utils/fs.js";
-import { copilotHome } from "./user-state.js";
+import { copilotHome, installedPluginsRoot } from "./user-state.js";
 
 export interface ManagedSkillChange {
   type: "create" | "update" | "remove" | "available-via-plugin";
@@ -27,21 +26,52 @@ export function enabledPluginSkillNames(skills: CatalogSkill[], enabledPlugins: 
     .map((skill) => skill.name));
 }
 
-export function effectiveEnabledPluginSpecs(installed: InstalledPlugin[], projectSettings?: ProjectSettings): Set<string> {
-  const enabled = new Set(installed.filter((plugin) => plugin.enabled && plugin.marketplace).map((plugin) => `${plugin.name}@${plugin.marketplace}`));
-  for (const [spec, value] of Object.entries(projectSettings?.enabledPlugins ?? {})) {
-    if (value) enabled.add(spec);
-    else enabled.delete(spec);
+export function effectiveEnabledPluginSpecs(installed: InstalledPlugin[]): Set<string> {
+  return new Set(installed.filter((plugin) => plugin.enabled && plugin.marketplace).map((plugin) => `${plugin.name}@${plugin.marketplace}`));
+}
+
+/** Keep workspace-effective Plugin inventory out of global personal Skill decisions. */
+export async function userScopePluginInventory(installed: InstalledPlugin[], homeDir: string): Promise<InstalledPlugin[]> {
+  const root = path.resolve(installedPluginsRoot(homeDir));
+  const selected: InstalledPlugin[] = [];
+  for (const plugin of installed) {
+    if (!plugin.marketplace) continue;
+    const sourceFacts = [plugin.source, plugin.installedFrom].filter((value): value is string => typeof value === "string");
+    if (sourceFacts.some((value) => /^(?:filesystem|workspace|working-directory|project)(?::|$)/i.test(value))) continue;
+    const sourceProvesMarketplace = sourceFacts.some((value) => {
+      const match = /^(?:live-)?marketplace:(.+)$/i.exec(value);
+      return match?.[1] === plugin.marketplace;
+    });
+    const sourceIsAbsent = sourceFacts.length === 0;
+    const expected = path.resolve(root, plugin.marketplace, plugin.name);
+    const relative = path.relative(root, expected);
+    const cachePathWithinFallbackRoot = plugin.cache_path !== undefined && pathsEqual(plugin.cache_path, expected)
+      && relative !== ".." && !relative.startsWith(".." + path.sep) && !path.isAbsolute(relative);
+    const fallbackRecord = sourceIsAbsent && cachePathWithinFallbackRoot
+      && await hasOrdinaryDirectoryPath(root, plugin.marketplace);
+    if (!sourceProvesMarketplace && !fallbackRecord) continue;
+    selected.push(plugin);
   }
-  return enabled;
+  return selected;
+}
+
+async function hasOrdinaryDirectoryPath(root: string, marketplace: string): Promise<boolean> {
+  try {
+    const rootInfo = await lstat(root);
+    if (!rootInfo.isDirectory() || rootInfo.isSymbolicLink()) return false;
+    const marketplaceInfo = await lstat(path.join(root, marketplace));
+    return marketplaceInfo.isDirectory() && !marketplaceInfo.isSymbolicLink();
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === "ENOENT") return false;
+    throw error;
+  }
 }
 
 export async function materializedEnabledPluginSpecs(
   installed: InstalledPlugin[],
-  projectSettings?: ProjectSettings,
   plannedMaterializedSpecs: Iterable<string> = [],
 ): Promise<Set<string>> {
-  const enabled = effectiveEnabledPluginSpecs(installed, projectSettings);
+  const enabled = effectiveEnabledPluginSpecs(installed);
   const materialized = await Promise.all(installed.map(async (plugin) => {
     const spec = pluginSpec(plugin);
     return plugin.marketplace && enabled.has(spec) && await inspectPluginDelivery(plugin) === "present" ? spec : undefined;
@@ -54,10 +84,9 @@ export async function materializedEnabledPluginSkillNames(
   installed: InstalledPlugin[],
   skills: CatalogSkill[],
   marketplace: string,
-  projectSettings?: ProjectSettings,
   plannedMaterializedSpecs: Iterable<string> = [],
 ): Promise<Set<string>> {
-  const enabled = effectiveEnabledPluginSpecs(installed, projectSettings);
+  const enabled = effectiveEnabledPluginSpecs(installed);
   const planned = new Set(plannedMaterializedSpecs);
   const deliveries = await Promise.all(skills.map(async (skill) => {
     if (skill.sourceType !== "plugin" || !skill.plugin) return undefined;

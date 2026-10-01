@@ -95,7 +95,7 @@ Plugin 名称不再编码 kind。CLI 读取统一的 metadata namespace `com.com
 
 ## Logical Project Context 与 Learnings
 
-`teamai init` 只配置 User Scope，不绑定 Logical Project。`teamai projects list` 读取 catalog；`teamai projects set <ids...>`（支持重复传入或逗号分隔 ID）是修改当前 Physical Git workspace 绑定的唯一命令；`sync` 只按当前 workspace 已保存的绑定重新收敛。收敛分为四个 scope：Marketplace Plugin package 与受管理的用户级 instructions（`init`、`sync`），以及 Physical Repository 中的 Logical Project instructions 与 context/learning 文件（`projects set`、`sync`）。
+`teamai init` 只配置 User Scope，不绑定 Logical Project。`teamai projects list` 读取 catalog；`teamai projects set <ids...>`（支持重复传入或逗号分隔 ID）是修改当前 Physical Git workspace 绑定的唯一命令；`sync` 只按当前 workspace 已保存的绑定重新收敛。收敛覆盖用户级 Marketplace Plugin 与 instructions，以及已绑定 Workspace 的 Logical Project context 和 manifest 选中的 Project Plugin components。
 
 active Project instruction 文件按原始字节镜像到 `.github/instructions/teamai/<id>/`；Project docs 与 Project/shared learnings 写入 `.teamai/context/`。Team AI 只写一个 `applyTo: "**"` 的 `context.instructions.md` pointer，并通过 Git 解析后的 `info/exclude` 仅排除这两个 reserved root。即使目录为空，也不会接管未声明 ownership 的 reserved path，也不会改写 Marketplace source frontmatter。portable 或 path-specific `applyTo` 的匹配仍是后续验证事项；当前不宣称 runtime instruction injection。
 
@@ -138,9 +138,9 @@ teamai init --marketplace <source> --role <role>
 4. 安装目录中所有 `kind: role` Plugin 与 `common`；
 5. 只启用 `common` 和当前选择的 Role；
 6. 保存 Role、Marketplace identity 和明确的 Team AI ownership；
-7. 如指定 Logical Project，则投影其上下文并收敛可选 Plugin。
+7. 只写入 User Scope；需要绑定 Logical Project 时另行运行 `teamai projects set`。
 
-Project Plugin 是可选的可执行能力，由 Logical Project manifest 声明，只在绑定的 Physical Project settings 中启用。
+可选 `kind: project` Plugin 只作为 Marketplace source，提供 `manifest/projects.yaml` 选中的 components。绑定 Logical Project 后，声明的 Agent 写入 `.github/agents/`、Rule 写入 `.github/instructions/teamai/<id>/`、Skill 写入 `.github/skills/`、Hook 声明及引用文件写入 `.github/hooks/`，MCP server entries 与引用的本地文件写入 `.mcp.json` 和 `.teamai/project-components/`。CLI 为文件和配置项记录精确 ownership；取消绑定时只移除这些 owned 项，并拒绝覆盖无 ownership 的同名目标。Project Plugin 不会安装或启用到用户级 Copilot state。同名用户 Plugin 会被保留；只有在相应 consumer 中实测后才能确认隔离与 runtime loading。
 
 保存后的配置示例：
 
@@ -191,7 +191,7 @@ teamai doctor
 
 ### `teamai sync`
 
-`sync` 表示 convergence / repair：补齐缺失的 Team AI-owned User Plugin，恢复 enablement，刷新 Marketplace 注册和 VS Code Marketplace 注册，刷新 Project machine state，并修复受管理的 personal Skill。它不会把中央 Skills、Agents、Instructions、Hooks 或 MCP 定义复制进业务 Repo。
+`sync` 表示 convergence / repair：补齐缺失的 Team AI-owned User Plugin，恢复 enablement，刷新 Marketplace 注册和 VS Code Marketplace 注册，刷新 Project machine state，并修复受管理的 personal Skill。已绑定 Workspace 只投射所选 Logical Projects 声明的兼容 components；common 和 role 内容仍由原生 User Plugins 提供。
 
 ### `teamai skill` 与 `teamai tags`
 
@@ -210,7 +210,7 @@ teamai role set qa
 
 ### `teamai status` 与 `teamai doctor`
 
-`status` 输出 Marketplace revision、选中的 Logical Projects、managed personal Skills、Project context 和 Learnings projection。`doctor` 在本地已加载 cache 上复用 dry-run convergence，报告 stale context、缺失或 collision 的 owned Skill、无效 active Project binding 与 optional Plugin 不一致，但不修复它们。两者都不刷新远端 Marketplace cache。Hook 声明可静态校验，但 CLI 不执行 Hook，也不把不可用的 runtime inspection 伪装成成功。
+`status` 输出 Marketplace revision、选中的 Logical Projects、Project Plugin component 投影、managed personal Skills、Project context 和 Learnings projection。`doctor` 在本地已加载 cache 上复用 dry-run convergence，报告 stale context、缺失或 collision 的 owned component、无效 active Project binding 与用户级同名 Plugin override，但不修复它们。两者都不刷新远端 Marketplace cache。Hook 与 MCP 声明会以摘要显示；除非在实际 consumer 中验证，否则 runtime 保持 unknown，CLI 不会执行它们。
 
 ## Native Copilot 与 VS Code-only fallback
 
@@ -242,7 +242,7 @@ User-level Copilot 注册由 `~/.copilot/settings.json` 的 `extraKnownMarketpla
 
 Team AI 同时在 VS Code User Settings 的 `chat.plugins.marketplaces` 中注册 source。合并使用 JSONC-safe 解析：保留 comments、trailing commas、未知 settings 和原有 entries，并将当前 source 插入或移动到数组下标 `0`。
 
-Logical Project 投影使用 `.github/instructions/teamai/**` 和 `.teamai/context/**`；未声明 ownership 时会拒绝覆盖。Project Plugin settings 只会改动 Team AI 明确拥有的条目。
+Logical Project 投影使用 `.github/instructions/teamai/**` 和 `.teamai/context/**`；未声明 ownership 时会拒绝覆盖。manifest 选中的 Project Plugin components 写入各自原生 Workspace 位置并记录精确 ownership；`kind: project` package 不会进入用户级 installed Plugins 或 Workspace `enabledPlugins`。
 
 ## Ownership 与 Project state
 
@@ -286,7 +286,7 @@ npm test
 
 ## 当前不做
 
-本项目不实现默认 Marketplace、多 Marketplace merge/overlay/precedence、Package Manager、另一套 Agent Runtime、通用 IDE abstraction、自定义 Plugin/Skill/Hook/MCP 格式、文档所列 User/Logical Project 投影之外的 arbitrary 或 generic resource copying/injection、通用 overlay engine、telemetry、dashboard，也不创建自定义业务上下文数据库。
+本项目不实现默认 Marketplace、多 Marketplace merge/overlay/precedence、Package Manager、另一套 Agent Runtime、通用 IDE abstraction、自定义 Plugin/Skill/Hook/MCP 格式、User instructions 与 manifest 选中 Logical Project components 之外的 arbitrary 或 generic resource copying/injection、通用 overlay engine、telemetry、dashboard，也不创建自定义业务上下文数据库。
 
 ## 项目文档
 

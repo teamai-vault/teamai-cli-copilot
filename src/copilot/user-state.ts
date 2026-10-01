@@ -3,6 +3,9 @@ import path from "node:path";
 import { parse, type ParseError } from "jsonc-parser";
 import { atomicWriteJson, readJsonIfExists, readTextIfExists, withFileLock } from "../utils/fs.js";
 import { marketplaceSourceSetting } from "./project-settings.js";
+import { loadMarketplaceCatalog, type MarketplaceCatalog } from "./catalog.js";
+import type { InstalledPlugin } from "./cli.js";
+import { pathsEqual } from "../utils/fs.js";
 
 export interface CopilotInstalledPlugin {
   name: string;
@@ -61,6 +64,59 @@ export async function readCopilotState(homeDir: string): Promise<{ config: Copil
     config: (await readCopilotConfig(copilotConfigPath(homeDir))) ?? {},
     settings: (await readJsonIfExists<CopilotSettingsFile>(copilotSettingsPath(homeDir))) ?? {},
   };
+}
+
+/** Native live Marketplace rows describe discoverable packages, including never-installed entries. */
+export async function normalizeLivePluginInventory(installed: InstalledPlugin[], homeDir: string): Promise<InstalledPlugin[]> {
+  if (!installed.some((plugin) => plugin.scope === "user" && typeof plugin.installedFrom === "string" && path.isAbsolute(plugin.installedFrom)
+    && typeof plugin.source === "string" && plugin.source.startsWith("live-marketplace:"))) return installed;
+  const local = await readCopilotState(homeDir);
+  const catalogs = new Map<string, Promise<MarketplaceCatalog>>();
+  try {
+    return await Promise.all(installed.map(async (plugin) => {
+      if (plugin.scope !== "user" || plugin.source !== `live-marketplace:${plugin.marketplace}`
+        || typeof plugin.installedFrom !== "string" || !path.isAbsolute(plugin.installedFrom)) return plugin;
+      const registration = local.settings.extraKnownMarketplaces?.[plugin.marketplace ?? ""]?.source;
+      if (registration?.source !== "directory" || typeof registration.path !== "string" || !pathsEqual(registration.path, plugin.installedFrom)) return plugin;
+      let pending = catalogs.get(plugin.installedFrom);
+      if (!pending) {
+        pending = loadMarketplaceCatalog(plugin.installedFrom, plugin.installedFrom);
+        catalogs.set(plugin.installedFrom, pending);
+      }
+      const catalog = await pending;
+      const declared = catalog.plugins.find((candidate) => candidate.name === plugin.name && candidate.version === plugin.version);
+      if (catalog.name !== plugin.marketplace || !declared) return plugin;
+      const spec = `${plugin.name}@${plugin.marketplace}`;
+      const explicitlyInstalled = local.config.installedPlugins?.some((candidate) => candidate.name === plugin.name && candidate.marketplace === plugin.marketplace);
+      return {
+        ...plugin,
+        cache_path: declared.root,
+        discoveredOnly: !explicitlyInstalled && typeof local.settings.enabledPlugins?.[spec] !== "boolean",
+      };
+    }));
+  } finally {
+    for (const pending of catalogs.values()) await (await pending).dispose();
+  }
+}
+
+/** Read the same persisted live-user facts without invoking the native executable. */
+export function recordedUserPluginInventory(local: { config: CopilotConfigFile; settings: CopilotSettingsFile }, catalog: MarketplaceCatalog): InstalledPlugin[] {
+  const installed: InstalledPlugin[] = (local.config.installedPlugins ?? []).map((plugin) => ({
+    ...plugin,
+    enabled: plugin.enabled ?? local.settings.enabledPlugins?.[`${plugin.name}@${plugin.marketplace}`] ?? false,
+  }));
+  const registration = local.settings.extraKnownMarketplaces?.[catalog.name]?.source;
+  if (registration?.source !== "directory" || typeof registration.path !== "string" || !pathsEqual(registration.path, catalog.root)) return installed;
+  for (const plugin of catalog.plugins) {
+    if (installed.some((candidate) => candidate.name === plugin.name && candidate.marketplace === catalog.name)) continue;
+    const enabled = local.settings.enabledPlugins?.[`${plugin.name}@${catalog.name}`];
+    installed.push({
+      name: plugin.name, marketplace: catalog.name, version: plugin.version, cache_path: plugin.root,
+      enabled: enabled ?? false, discoveredOnly: typeof enabled !== "boolean",
+      scope: "user", source: `live-marketplace:${catalog.name}`, installedFrom: catalog.root,
+    });
+  }
+  return installed;
 }
 
 async function readCopilotConfig(filePath: string): Promise<CopilotConfigFile | undefined> {
@@ -163,7 +219,11 @@ export async function fallbackStateProblems(homeDir: string, managedPlugins: str
 export function marketplaceRegistrationMatches(settings: CopilotSettingsFile, name: string, source: string): boolean {
   const actual = settings.extraKnownMarketplaces?.[name]?.source;
   const expected = marketplaceSourceSetting(source).source;
-  return Boolean(actual && Object.entries(expected).every(([key, value]) => actual[key] === value));
+  return Boolean(actual && Object.entries(expected).every(([key, value]) =>
+    key === "path" && expected.source === "directory" && typeof actual[key] === "string"
+      ? pathsEqual(actual[key], value)
+      : actual[key] === value,
+  ));
 }
 
 async function directoryExists(directory: string): Promise<boolean> {

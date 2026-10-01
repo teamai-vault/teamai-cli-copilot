@@ -27,6 +27,7 @@ export async function roleSetCommand(context: CommandContext, role: string): Pro
       dryRun: context.dryRun,
       cwd: context.cwd,
       resourceRevision: revision,
+      checkpoint: async (checkpoint) => writeGlobalConfig(checkpoint, context.homeDir),
     });
     printActions(converged.actions, context.dryRun, context.out);
     printWarnings(converged.warnings, context.out);

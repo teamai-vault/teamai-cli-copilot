@@ -1,14 +1,17 @@
+import { createHash } from "node:crypto";
 import { lstat, readFile, readdir, rmdir, unlink } from "node:fs/promises";
 import path from "node:path";
+import { applyEdits, modify, parse as parseJsonc, type ParseError } from "jsonc-parser";
 import type { MarketplaceConfig } from "../config/schema.js";
-import { mergeManagedProjectPlugins, projectSettingsPath, readProjectSettings, type ProjectSettings } from "../copilot/project-settings.js";
+import { projectSettingsPath, readProjectSettings, type ProjectSettings } from "../copilot/project-settings.js";
 import type { CatalogPlugin } from "../copilot/catalog.js";
 import { atomicWriteFile, pathsEqual } from "../utils/fs.js";
 import { runProcess } from "../utils/process.js";
 import type { ProjectIdentity } from "./anchors.js";
 import { loadLogicalProjects, selectedLogicalProjects } from "./manifest.js";
 import { normalizeAnchor } from "./partition.js";
-import type { ProjectProjection, ProjectState } from "./state.js";
+import type { ProjectContextFileReceipt, ProjectProjection, ProjectState } from "./state.js";
+import { convergeProjectComponents } from "./components.js";
 
 interface FileChange {
   path: string;
@@ -33,7 +36,39 @@ export function markPublishedLearningComplete(projection: ProjectProjection, rev
   const next = { ...projection, publishedLearningRevision: revision };
   delete next.pendingPublishedLearningRevision;
   delete next.pendingLogicalProjects;
+  delete next.pendingProjectComponents;
   return next;
+}
+
+export function markProjectUpdatePending(
+  current: ProjectProjection,
+  planned: ProjectProjection,
+  logicalProjects: string[],
+  learningRevision?: string,
+): ProjectProjection {
+  return {
+    ...current,
+    pendingLogicalProjects: [...logicalProjects],
+    pendingProjectComponents: mergeReceipts(
+      current.managedProjectComponents,
+      current.pendingProjectComponents,
+      planned.managedProjectComponents,
+    ),
+    pendingContextFiles: mergeReceipts(
+      current.managedContextFiles,
+      current.pendingContextFiles,
+      planned.managedContextFiles,
+    ),
+    ...(learningRevision ? { pendingPublishedLearningRevision: learningRevision } : {}),
+  };
+}
+
+function mergeReceipts<T extends { targetPath: string; contentHash: string }>(...groups: Array<T[] | undefined>): T[] {
+  const receipts = new Map<string, T>();
+  for (const receipt of groups.flatMap((group) => group ?? [])) {
+    receipts.set(`${receipt.targetPath}\0${receipt.contentHash}`, receipt);
+  }
+  return [...receipts.values()];
 }
 
 export function withProjection(state: ProjectState, projection: ProjectProjection): ProjectState {
@@ -59,6 +94,8 @@ export async function convergeLogicalProjectContext(options: {
   identity: ProjectIdentity;
   state?: ProjectState;
   logicalProjects: string[];
+  homeDir?: string;
+  sourceRevision?: string;
   publishedLearningRoot?: string;
   unbind?: boolean;
   dryRun?: boolean;
@@ -76,6 +113,7 @@ export async function convergeLogicalProjectContext(options: {
     workspaceRoot: options.identity.workspaceRoot,
     logicalProjects: [],
     managedProjectPlugins: [],
+    managedContextFiles: [],
     instructionRoot,
     contextRoot,
   };
@@ -103,16 +141,8 @@ export async function convergeLogicalProjectContext(options: {
   await assertOwnedOrMissing(contextRoot, previous?.contextRoot === contextRoot);
 
   const settings = await readProjectSettings(options.identity.workspaceRoot);
-  const desiredPlugins = [...new Set(projects.flatMap((project) => project.plugin ? [project.plugin] : []))];
-  const priorOwnedPlugins = previous?.managedProjectPlugins ?? [];
-  const mergedSettings = mergeManagedProjectPlugins(settings, options.marketplace, desiredPlugins, priorOwnedPlugins);
-  const ownedPlugins = desiredPlugins
-    .map((plugin) => `${plugin}@${options.marketplace.name}`)
-    .filter((spec) => priorOwnedPlugins.includes(spec) || !(spec in (settings.enabledPlugins ?? {})));
-  const warnings = desiredPlugins
-    .map((plugin) => `${plugin}@${options.marketplace.name}`)
-    .filter((spec) => !ownedPlugins.includes(spec) && settings.enabledPlugins?.[spec] === false)
-    .map((spec) => `${spec} is user-owned and disabled; preserving its state.`);
+  const mergedSettings = settings;
+  const warnings: string[] = [];
   const operations: FileChange[] = [];
 
   if (options.unbind) {
@@ -120,14 +150,21 @@ export async function convergeLogicalProjectContext(options: {
     for (const id of previous?.logicalProjects ?? []) {
       const instructionProjectRoot = path.join(instructionRoot, id);
       const contextProjectRoot = path.join(contextRoot, id);
-      await planDirectoryFiles(instructionProjectRoot, operations);
-      await planDirectoryFiles(contextProjectRoot, operations);
       for (const directory of await targetDirectories(instructionProjectRoot)) ownedDirectories.add(directory);
       for (const directory of await targetDirectories(contextProjectRoot)) ownedDirectories.add(directory);
     }
     const sharedRoot = path.join(contextRoot, "shared");
-    await planDirectoryFiles(sharedRoot, operations);
     for (const directory of await targetDirectories(sharedRoot)) ownedDirectories.add(directory);
+    const contextPlan = await planContextFiles({
+      workspaceRoot: options.identity.workspaceRoot,
+      marketplaceRoot: options.marketplaceRoot,
+      projects: [],
+      publishedLearningRoot: undefined,
+      sourceRevision: options.sourceRevision,
+      previousReceipts: mergeReceipts(previous?.managedContextFiles, previous?.pendingContextFiles),
+      operations,
+      unbind: true,
+    });
     const pointer = path.join(instructionRoot, "context.instructions.md");
     const pointerBefore = await readSafeFile(pointer);
     const priorPointer = Buffer.from(pointerContents(previous?.logicalProjects ?? []), "utf8");
@@ -143,7 +180,22 @@ export async function convergeLogicalProjectContext(options: {
       await planFile(exclude.path, after, exclude.before, operations);
       managedGitExcludeEntries = [];
     }
-    await planSettings(options.identity.workspaceRoot, settings, mergedSettings, operations);
+    const componentOptions = {
+      workspaceRoot: options.identity.workspaceRoot,
+      homeDir: options.homeDir ?? process.env.USERPROFILE ?? process.cwd(),
+      marketplaceName: options.marketplace.name,
+      plugins: options.plugins,
+      projects: [],
+      sourceRevision: options.sourceRevision,
+      previousReceipts: previous?.managedProjectComponents,
+      pendingReceipts: previous?.pendingProjectComponents,
+      dryRun: true,
+    };
+    const componentPlan = await convergeProjectComponents(componentOptions);
+    if (!options.dryRun) await convergeProjectComponents({ ...componentOptions, dryRun: false });
+    warnings.push(...componentPlan.warnings);
+    warnings.push(...contextPlan.warnings);
+    warnings.push(...await planRetiredProjectSettings(options.identity.workspaceRoot, previous?.managedProjectPlugins ?? [], settings, operations));
     for (const root of [instructionRoot, contextRoot]) {
       if (await isSafeDirectory(root)) ownedDirectories.add(root);
     }
@@ -153,7 +205,7 @@ export async function convergeLogicalProjectContext(options: {
     const changes = await applyFileChanges(operations, options.dryRun);
     return {
       projection: emptyProjection,
-      changes,
+      changes: [...changes, ...componentPlan.changes],
       warnings,
       mergedSettings,
       managedGitExcludeEntries,
@@ -162,34 +214,26 @@ export async function convergeLogicalProjectContext(options: {
 
   const previousIds = previous?.logicalProjects ?? [];
   const staleOwnedDirectories = new Set<string>();
+  const contextInstructionTargets = new Set<string>();
   for (const id of previousIds.filter((id) => !options.logicalProjects.includes(id))) {
     const instructionProjectRoot = path.join(instructionRoot, id);
     const contextProjectRoot = path.join(contextRoot, id);
-    await planDirectoryFiles(instructionProjectRoot, operations);
-    await planDirectoryFiles(contextProjectRoot, operations);
     for (const directory of await targetDirectories(instructionProjectRoot)) staleOwnedDirectories.add(directory);
     for (const directory of await targetDirectories(contextProjectRoot)) staleOwnedDirectories.add(directory);
   }
-  for (const project of projects) {
-    await planMirrorTree(
-      path.join(options.marketplaceRoot, "contexts", project.id, "instructions"),
-      path.join(instructionRoot, project.id), true, options.marketplaceRoot, operations,
-    );
-    await planMirrorTree(
-      path.join(options.marketplaceRoot, "contexts", project.id, "docs"),
-      path.join(contextRoot, project.id, "docs"), false, options.marketplaceRoot, operations,
-    );
-    if (options.publishedLearningRoot) {
-      await planMirrorTree(
-        path.join(options.publishedLearningRoot, "learnings", project.id),
-        path.join(contextRoot, project.id, "learnings"), false, options.publishedLearningRoot, operations,
-      );
-    }
-  }
-  if (options.publishedLearningRoot) {
-    await planMirrorTree(path.join(options.publishedLearningRoot, "learnings", "shared"), path.join(contextRoot, "shared", "learnings"), false, options.publishedLearningRoot, operations);
-  }
+  const contextPlan = await planContextFiles({
+    workspaceRoot: options.identity.workspaceRoot,
+    marketplaceRoot: options.marketplaceRoot,
+    projects,
+    publishedLearningRoot: options.publishedLearningRoot,
+    sourceRevision: options.sourceRevision,
+    previousReceipts: mergeReceipts(previous?.managedContextFiles, previous?.pendingContextFiles),
+    operations,
+    unbind: false,
+  });
+  for (const target of contextPlan.instructionTargets) contextInstructionTargets.add(target);
   const pointer = path.join(instructionRoot, "context.instructions.md");
+  contextInstructionTargets.add(path.resolve(pointer));
   const pointerBefore = await readSafeFile(pointer);
   const ownedPointerStates = previous
     ? [previous.logicalProjects, ...(previous.pendingLogicalProjects ? [previous.pendingLogicalProjects] : [])]
@@ -207,7 +251,28 @@ export async function convergeLogicalProjectContext(options: {
   await planFile(exclude.path, excludeText, exclude.before, operations);
   const managedGitExcludeEntries = [...new Set([...(options.state?.managedGitExcludeEntries ?? []), ...missing])];
 
-  await planSettings(options.identity.workspaceRoot, settings, mergedSettings, operations);
+  const componentOptions = {
+    workspaceRoot: options.identity.workspaceRoot,
+    homeDir: options.homeDir ?? process.env.USERPROFILE ?? process.cwd(),
+    marketplaceName: options.marketplace.name,
+    plugins: options.plugins,
+    projects,
+    sourceRevision: options.sourceRevision,
+    previousReceipts: previous?.managedProjectComponents,
+    pendingReceipts: previous?.pendingProjectComponents,
+    dryRun: true,
+  };
+  const componentPlan = await convergeProjectComponents(componentOptions);
+  for (const receipt of componentPlan.receipts.filter((item) => item.kind === "instruction")) {
+    const target = path.resolve(options.identity.workspaceRoot, ...receipt.targetPath.split("/"));
+    if (contextInstructionTargets.has(target)) {
+      throw new Error("Logical Project context and Project Plugin Rule target the same Workspace file: " + target);
+    }
+  }
+  if (!options.dryRun) await convergeProjectComponents({ ...componentOptions, dryRun: false });
+  warnings.push(...componentPlan.warnings);
+  warnings.push(...contextPlan.warnings);
+  warnings.push(...await planRetiredProjectSettings(options.identity.workspaceRoot, previous?.managedProjectPlugins ?? [], settings, operations));
   for (const directory of [...staleOwnedDirectories].sort((left, right) => right.length - left.length)) {
     operations.push({ path: directory, removeDirectoryIfEmpty: true });
   }
@@ -216,11 +281,13 @@ export async function convergeLogicalProjectContext(options: {
     projection: {
       workspaceRoot: options.identity.workspaceRoot,
       logicalProjects: projects.map((project) => project.id),
-      managedProjectPlugins: ownedPlugins.sort(),
+      selectedProjectPlugins: componentPlan.projectPlugins,
+      managedProjectComponents: componentPlan.receipts,
+      managedContextFiles: contextPlan.receipts,
       instructionRoot,
       contextRoot,
     },
-    changes,
+    changes: [...changes, ...componentPlan.changes],
     warnings,
     mergedSettings,
     managedGitExcludeEntries,
@@ -254,23 +321,137 @@ async function assertSafeAncestors(target: string, boundary: string): Promise<vo
   }
 }
 
-async function planMirrorTree(
-  sourceRoot: string,
-  targetRoot: string,
-  instructionsOnly: boolean,
-  sourceBoundary: string,
-  operations: FileChange[],
-): Promise<void> {
-  const files = await sourceFiles(sourceRoot, instructionsOnly, sourceBoundary);
-  const installed = await targetFiles(targetRoot);
-  const desired = new Map(files.map((file) => [file.relativePath, file]));
-  for (const [relativePath, content] of installed) {
-    if (desired.has(relativePath)) continue;
-    await planFile(safeTargetPath(targetRoot, relativePath), undefined, content, operations);
+interface DesiredContextFile {
+  receipt: ProjectContextFileReceipt;
+  target: string;
+  content: Buffer;
+}
+
+async function planContextFiles(options: {
+  workspaceRoot: string;
+  marketplaceRoot: string;
+  projects: Array<{ id: string }>;
+  publishedLearningRoot?: string;
+  sourceRevision?: string;
+  previousReceipts: ProjectContextFileReceipt[];
+  operations: FileChange[];
+  unbind: boolean;
+}): Promise<{ receipts: ProjectContextFileReceipt[]; warnings: string[]; instructionTargets: Set<string> }> {
+  const desired = new Map<string, DesiredContextFile>();
+  const instructionTargets = new Set<string>();
+  const warnings: string[] = [];
+  const add = async (
+    kind: ProjectContextFileReceipt["kind"],
+    projectId: string,
+    sourceRoot: string,
+    sourceBoundary: string,
+    targetRoot: string,
+    instructionsOnly: boolean,
+  ) => {
+    for (const file of await sourceFiles(sourceRoot, instructionsOnly, sourceBoundary)) {
+      const target = safeTargetPath(targetRoot, file.relativePath);
+      const absolute = path.resolve(target);
+      const normalized = normalizeAnchor(absolute);
+      const sourcePath = path.relative(sourceBoundary, path.join(sourceRoot, ...file.relativePath.split("/"))).split(path.sep).join("/");
+      const receipt: ProjectContextFileReceipt = {
+        kind,
+        projectIds: [projectId],
+        sourcePath,
+        targetPath: path.relative(options.workspaceRoot, absolute).split(path.sep).join("/"),
+        sourceHash: createHash("sha256").update(file.content).digest("hex"),
+        ...(options.sourceRevision ? { sourceRevision: options.sourceRevision } : {}),
+        contentHash: createHash("sha256").update(file.content).digest("hex"),
+      };
+      if (kind === "instruction") instructionTargets.add(absolute);
+      const previous = desired.get(normalized);
+      if (previous && !previous.content.equals(file.content)) throw new Error(`Logical Project context sources collide at ${absolute}.`);
+      if (previous) {
+        previous.receipt.projectIds = [...new Set([...previous.receipt.projectIds, projectId])].sort();
+      } else {
+        desired.set(normalized, { receipt, target, content: file.content });
+      }
+    }
+  };
+
+  if (!options.unbind) {
+    for (const project of options.projects) {
+      await add(
+        "instruction", project.id,
+        path.join(options.marketplaceRoot, "contexts", project.id, "instructions"), options.marketplaceRoot,
+        path.join(options.workspaceRoot, ".github", "instructions", "teamai", project.id), true,
+      );
+      await add(
+        "document", project.id,
+        path.join(options.marketplaceRoot, "contexts", project.id, "docs"), options.marketplaceRoot,
+        path.join(options.workspaceRoot, ".teamai", "context", project.id, "docs"), false,
+      );
+      if (options.publishedLearningRoot) {
+        await add(
+          "learning", project.id,
+          path.join(options.publishedLearningRoot, "learnings", project.id), options.publishedLearningRoot,
+          path.join(options.workspaceRoot, ".teamai", "context", project.id, "learnings"), false,
+        );
+      }
+    }
+    if (options.publishedLearningRoot) {
+      await add(
+        "learning", "shared",
+        path.join(options.publishedLearningRoot, "learnings", "shared"), options.publishedLearningRoot,
+        path.join(options.workspaceRoot, ".teamai", "context", "shared", "learnings"), false,
+      );
+    }
   }
-  for (const file of files) {
-    await planFile(safeTargetPath(targetRoot, file.relativePath), file.content, installed.get(file.relativePath), operations);
+
+  const oldByTarget = new Map<string, ProjectContextFileReceipt[]>();
+  for (const receipt of options.previousReceipts) {
+    const absolute = path.resolve(options.workspaceRoot, ...receipt.targetPath.split("/"));
+    const normalized = normalizeAnchor(absolute);
+    const values = oldByTarget.get(normalized) ?? [];
+    if (!values.some((item) => item.contentHash === receipt.contentHash)) values.push(receipt);
+    oldByTarget.set(normalized, values);
   }
+
+  const nextReceipts: ProjectContextFileReceipt[] = [];
+  for (const [normalized, file] of desired) {
+    const old = oldByTarget.get(normalized) ?? [];
+    await assertSafeAncestors(path.dirname(file.target), options.workspaceRoot);
+    const current = await readSafeFile(file.target);
+    if (current === undefined) {
+      options.operations.push({ path: file.target, after: file.content });
+      nextReceipts.push(file.receipt);
+      continue;
+    }
+    if (!old.some((receipt) => createHash("sha256").update(current).digest("hex") === receipt.contentHash)) {
+      if (old.length === 0) throw new Error(`Logical Project context target is occupied without Team AI ownership: ${file.target}`);
+      warnings.push(`Preserving user-modified Logical Project context file: ${file.target}`);
+      nextReceipts.push(...old);
+      continue;
+    }
+    if (!current.equals(file.content)) options.operations.push({ path: file.target, before: current, after: file.content });
+    nextReceipts.push(file.receipt);
+  }
+
+  for (const [normalized, old] of oldByTarget) {
+    if (desired.has(normalized)) continue;
+    if (!options.unbind && !options.publishedLearningRoot && old.every((receipt) => receipt.kind === "learning")) {
+      nextReceipts.push(...old);
+      continue;
+    }
+    const target = path.resolve(options.workspaceRoot, ...old[0]!.targetPath.split("/"));
+    await assertSafeAncestors(path.dirname(target), options.workspaceRoot);
+    const current = await readSafeFile(target);
+    if (current === undefined) continue;
+    const contentHash = createHash("sha256").update(current).digest("hex");
+    if (old.some((receipt) => receipt.contentHash === contentHash)) {
+      options.operations.push({ path: target, before: current });
+    } else {
+      warnings.push(`Preserving user-modified Logical Project context file: ${target}`);
+    }
+  }
+
+  const uniqueReceipts = new Map<string, ProjectContextFileReceipt>();
+  for (const receipt of nextReceipts) uniqueReceipts.set(`${normalizeAnchor(path.resolve(options.workspaceRoot, ...receipt.targetPath.split("/")))}\0${receipt.contentHash}`, receipt);
+  return { receipts: [...uniqueReceipts.values()], warnings: [...new Set(warnings)], instructionTargets };
 }
 
 async function sourceFiles(sourceRoot: string, instructionsOnly: boolean, sourceBoundary: string): Promise<Array<{ relativePath: string; content: Buffer }>> {
@@ -298,29 +479,6 @@ async function sourceFiles(sourceRoot: string, instructionsOnly: boolean, source
   }
   await walk(sourceRoot);
   return files.sort((left, right) => left.relativePath.localeCompare(right.relativePath));
-}
-
-async function targetFiles(targetRoot: string): Promise<Map<string, Buffer>> {
-  try {
-    const info = await lstat(targetRoot);
-    if (!info.isDirectory() || info.isSymbolicLink()) throw new Error(`Unsafe Team AI projection path: ${targetRoot}`);
-  } catch (error) {
-    if ((error as NodeJS.ErrnoException).code === "ENOENT") return new Map();
-    throw error;
-  }
-  const files = new Map<string, Buffer>();
-  async function walk(directory: string): Promise<void> {
-    for (const entry of await readdir(directory, { withFileTypes: true })) {
-      const entryPath = path.join(directory, entry.name);
-      const info = await lstat(entryPath);
-      if (info.isSymbolicLink()) throw new Error(`Unsafe Team AI projection path: ${entryPath}`);
-      if (info.isDirectory()) await walk(entryPath);
-      else if (info.isFile() && info.nlink <= 1) files.set(path.relative(targetRoot, entryPath).split(path.sep).join("/"), await readFile(entryPath));
-      else throw new Error(`Unsafe Team AI projection path: ${entryPath}`);
-    }
-  }
-  await walk(targetRoot);
-  return files;
 }
 
 async function targetDirectories(targetRoot: string): Promise<string[]> {
@@ -369,12 +527,6 @@ function safeTargetPath(root: string, relativePath: string): string {
   return target;
 }
 
-async function planDirectoryFiles(root: string, operations: FileChange[]): Promise<void> {
-  for (const [relativePath, content] of await targetFiles(root)) {
-    await planFile(path.join(root, ...relativePath.split("/")), undefined, content, operations);
-  }
-}
-
 async function planFile(filePath: string, desired: Buffer | string | undefined, beforeHint: Buffer | undefined, operations: FileChange[]): Promise<void> {
   const before = await readSafeFile(filePath);
   if (before === undefined ? beforeHint !== undefined : !beforeHint?.equals(before)) throw new Error(`Workspace context conflict at ${filePath}`);
@@ -394,13 +546,6 @@ async function readSafeFile(filePath: string): Promise<Buffer | undefined> {
   }
 }
 
-async function planSettings(workspaceRoot: string, current: ProjectSettings, desired: ProjectSettings, operations: FileChange[]): Promise<void> {
-  if (JSON.stringify(current) === JSON.stringify(desired)) return;
-  const settingsPath = projectSettingsPath(workspaceRoot);
-  const before = await readSafeFile(settingsPath);
-  await planFile(settingsPath, `${JSON.stringify(desired, null, 2)}\n`, before, operations);
-}
-
 async function planGitExclude(workspaceRoot: string): Promise<{ path: string; before?: Buffer }> {
   const resolved = await runProcess("git", ["rev-parse", "--path-format=absolute", "--git-path", "info/exclude"], { cwd: workspaceRoot });
   if (resolved.exitCode !== 0) throw new Error("Could not resolve Git info/exclude.");
@@ -412,6 +557,36 @@ async function planGitExclude(workspaceRoot: string): Promise<{ path: string; be
   if (!pathsEqual(excludePath, expectedPath)) throw new Error(`Unsafe Git info/exclude path: ${excludePath}`);
   await assertSafeAncestors(path.dirname(excludePath), commonDir);
   return { path: excludePath, before: await readSafeFile(excludePath) };
+}
+
+async function planRetiredProjectSettings(
+  workspaceRoot: string,
+  retiredSpecs: string[],
+  settings: ProjectSettings,
+  operations: FileChange[],
+): Promise<string[]> {
+  const owned = [...new Set(retiredSpecs)];
+  if (owned.length === 0) return [];
+  const settingsPath = projectSettingsPath(workspaceRoot);
+  const before = await readSafeFile(settingsPath);
+  if (!before) return [];
+  const current = settings.enabledPlugins ?? {};
+  let text = before.toString("utf8");
+  const errors: ParseError[] = [];
+  const parsed = parseJsonc(text, errors, { allowTrailingComma: false, disallowComments: false }) as ProjectSettings | undefined;
+  if (errors.length > 0 || !parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+    throw new Error(settingsPath + " contains invalid JSON/JSONC.");
+  }
+  const preserved: string[] = [];
+  for (const spec of owned) {
+    if (current[spec] !== true) {
+      if (spec in current) preserved.push("Legacy project Plugin state " + spec + " is user-modified; preserving it.");
+      continue;
+    }
+    text = applyEdits(text, modify(text, ["enabledPlugins", spec], undefined, { formattingOptions: { insertSpaces: true, tabSize: 2 } }));
+  }
+  if (text !== before.toString("utf8")) await planFile(settingsPath, Buffer.from(text, "utf8"), before, operations);
+  return preserved;
 }
 
 function appendLines(current: string, entries: string[]): string {

@@ -1,14 +1,16 @@
 import { lstat, readFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
 import path from "node:path";
+import { parse as parseJsonc, type ParseError } from "jsonc-parser";
 import { readGlobalConfig } from "../config/global.js";
 import { inspectBuiltInTeamAiSkill } from "../copilot/builtin-skill.js";
 import { enabledUserPlugins, inspectPluginSkillDelivery, inspectUserPluginResources } from "../copilot/plugins.js";
 import { personalSkillPath } from "../copilot/skills.js";
 import { checkUserInstructionState, discoverMarketplaceUserInstructions, userInstructionTargetRoot } from "../copilot/user-instructions.js";
-import { marketplaceRegistrationMatches, readCopilotState } from "../copilot/user-state.js";
+import { installedPluginsRoot, marketplaceRegistrationMatches, readCopilotState, recordedUserPluginInventory } from "../copilot/user-state.js";
 import { detectProjectIdentity } from "../project/anchors.js";
 import { convergeLogicalProjectContext, projectionFor } from "../project/context.js";
-import { readProjectState } from "../project/state.js";
+import { readProjectState, type ProjectComponentReceipt } from "../project/state.js";
 import { readPublishedLearningSnapshot, readPublishedLearningSnapshotAt, type PublishedLearningFile } from "../project/published-cache.js";
 import { directoriesEqual, pathsEqual } from "../utils/fs.js";
 import { VERSION } from "../version.js";
@@ -37,6 +39,13 @@ export async function collectResourceSnapshot(context: CommandContext): Promise<
   if (!config) {
     diagnostics.push({ code: "CONFIG_MISSING", severity: "warning", message: "Team AI is not initialized." });
   } else {
+    if (config.pendingPluginMutation) {
+      diagnostics.push({
+        code: "PLUGIN_MUTATION_PENDING",
+        severity: "warning",
+        message: `Copilot Plugin ${config.pendingPluginMutation.action} for ${config.pendingPluginMutation.spec} has a durable pending checkpoint; run teamai sync to reconcile.`,
+      });
+    }
     const local = await readCopilotState(context.homeDir);
     const catalog = await context.loadMarketplace(config.marketplace.source, context.cwd);
     try {
@@ -45,7 +54,7 @@ export async function collectResourceSnapshot(context: CommandContext): Promise<
       }
       sourceHash = resourceSourceHash(config.marketplace.source);
       resourceRevision = catalog.revision ?? config.marketplaceRevision;
-      const installed = local.config.installedPlugins ?? [];
+      const installed = recordedUserPluginInventory(local, catalog);
       const marketplaceRegistration = local.settings.extraKnownMarketplaces?.[config.marketplace.name];
       if (!marketplaceRegistration) {
         diagnostics.push({ code: "MARKETPLACE_NOT_REGISTERED", severity: "warning", message: "Marketplace registration is missing from Copilot settings." });
@@ -178,27 +187,94 @@ export async function collectResourceSnapshot(context: CommandContext): Promise<
       if (identity) {
         const state = await readProjectState(identity.projectAnchor, context.homeDir);
         const projection = projectionFor(state, identity.workspaceRoot);
-        if (projection && (projection.logicalProjects.length > 0 || (projection.pendingLogicalProjects?.length ?? 0) > 0)) {
+        if (projection && (projection.logicalProjects.length > 0 || projection.pendingLogicalProjects !== undefined || projection.pendingProjectComponents !== undefined)) {
           const desiredLogicalProjects = projection.pendingLogicalProjects ?? projection.logicalProjects;
           const visibleLogicalProjects = [...new Set([...projection.logicalProjects, ...desiredLogicalProjects])];
+          const unbind = projection.pendingLogicalProjects !== undefined && desiredLogicalProjects.length === 0;
           if (projection.pendingPublishedLearningRevision) {
             diagnostics.push({
               code: "LEARNINGS_PROJECTION_INCOMPLETE",
               severity: "warning",
-              message: `Workspace projection to Projects ${desiredLogicalProjects.join(", ")} and Learnings revision ${projection.pendingPublishedLearningRevision} did not complete. Run teamai sync.`,
+              message: `Published Learnings projection is pending revision ${projection.pendingPublishedLearningRevision}. Run teamai sync.`,
             });
           }
-          const planned = await convergeLogicalProjectContext({
-            marketplaceRoot: catalog.root,
-            plugins: catalog.plugins,
-            marketplace: config.marketplace,
-            identity,
-            state,
-            logicalProjects: desiredLogicalProjects,
-            publishedLearningRoot: learningCache?.snapshot?.root,
-            dryRun: true,
-          });
-          const changes = planned.changes.map((item) => path.resolve(item));
+          if (projection.pendingLogicalProjects !== undefined || projection.pendingProjectComponents !== undefined) {
+            diagnostics.push({
+              code: "PROJECT_PROJECTION_INCOMPLETE",
+              severity: "warning",
+              message: "Workspace Project projection is pending or incomplete. Run teamai sync.",
+            });
+          }
+          let planned: Awaited<ReturnType<typeof convergeLogicalProjectContext>> | undefined;
+          try {
+            planned = await convergeLogicalProjectContext({
+              marketplaceRoot: catalog.root,
+              plugins: catalog.plugins,
+              marketplace: config.marketplace,
+              identity,
+              state,
+              logicalProjects: desiredLogicalProjects,
+              homeDir: context.homeDir,
+              sourceRevision: catalog.revision,
+              publishedLearningRoot: learningCache?.snapshot?.root,
+              unbind,
+              dryRun: true,
+            });
+          } catch (error) {
+            diagnostics.push({ code: "PROJECT_COMPONENT_PREFLIGHT_FAILED", severity: "error", message: (error as Error).message });
+          }
+          const changes = (planned?.changes ?? []).map((item) => path.resolve(item));
+          const activeReceipts = planned?.projection.managedProjectComponents ?? (unbind ? [] : projection.pendingProjectComponents ?? projection.managedProjectComponents ?? []);
+          const desiredTargets = new Set(activeReceipts.map((receipt) => receipt.targetPath));
+          const oldReceipts = [...(projection.managedProjectComponents ?? []), ...(projection.pendingProjectComponents ?? [])];
+          const componentSummaries = new Map<string, { receipt: ProjectComponentReceipt; selected: boolean; delivery: string }[]>();
+          const componentObservations = new Map<string, Awaited<ReturnType<typeof workspaceComponentResource>>>();
+          const addComponent = async (receipt: ProjectComponentReceipt, selected: boolean, reason?: string) => {
+            const key = `${receipt.targetPath}\0${receipt.contentHash}`;
+            const previous = componentObservations.get(key);
+            if (previous) return;
+            const observation = await workspaceComponentResource(receipt, selected, identity.workspaceRoot, sourceHash, changes, reason);
+            componentObservations.set(key, observation);
+            if (observation.resource) resources.push(observation.resource);
+            else {
+              const summaryKey = `${receipt.plugin}\0${receipt.kind}`;
+              const summary = componentSummaries.get(summaryKey) ?? [];
+              summary.push({ receipt, selected, delivery: observation.delivery });
+              componentSummaries.set(summaryKey, summary);
+            }
+          };
+          for (const receipt of activeReceipts) await addComponent(receipt, true);
+          for (const receipt of oldReceipts) {
+            if (desiredTargets.has(receipt.targetPath)) continue;
+            await addComponent(receipt, false, "No longer selected by this Workspace projection.");
+          }
+          for (const summary of componentSummaries.values()) {
+            const first = summary[0]!;
+            const kind = first.receipt.kind.toUpperCase();
+            const status = [...new Set(summary.map((item) => item.delivery))].sort().join(", ");
+            diagnostics.push({
+              code: `PROJECT_PLUGIN_${first.receipt.kind.toUpperCase()}_DECLARED`,
+              severity: status.includes("collision") || status.includes("stale") ? "warning" : "info",
+              message: `Project Plugin '${first.receipt.plugin}' declares ${kind} component files; ${summary.length} owned declaration(s), delivery ${status}; consumer runtime is unobserved.`,
+            });
+          }
+          const projectPlugins = planned?.projection.selectedProjectPlugins ?? (unbind ? [] : projection.selectedProjectPlugins ?? []);
+          for (const projectPlugin of projectPlugins) {
+            let filesystemPackage = false;
+            try {
+              const packageInfo = await lstat(path.join(installedPluginsRoot(context.homeDir), config.marketplace.name, projectPlugin.plugin));
+              filesystemPackage = packageInfo.isDirectory() || packageInfo.isSymbolicLink();
+            } catch (error) {
+              if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
+            }
+            if (installed.some((plugin) => plugin.name === projectPlugin.plugin && !plugin.discoveredOnly) || filesystemPackage) {
+              diagnostics.push({
+                code: "PROJECT_PLUGIN_USER_OVERRIDE",
+                severity: "warning",
+                message: "User-level Plugin '" + projectPlugin.plugin + "' is preserved; Workspace Project delivery is isolated from user-level installed/enabled Plugin state, and consumer isolation remains runtime-unverified.",
+              });
+            }
+          }
           for (const id of visibleLogicalProjects) {
             const instructionRoot = path.join(projection.instructionRoot, id);
             const docsRoot = path.join(projection.contextRoot, id, "docs");
@@ -330,6 +406,76 @@ async function learningResource(
     configuredActive: true,
     reasons: delivery === "collision" ? ["UNSAFE_TARGET"] : [],
   };
+}
+
+async function workspaceComponentResource(
+  receipt: ProjectComponentReceipt,
+  selected: boolean,
+  workspaceRoot: string,
+  sourceHash: string,
+  plannedChanges: string[],
+  reason?: string,
+): Promise<{ resource?: ResourceRecordInput; delivery: ResourceRecordInput["delivery"] }> {
+  const mcpEntry = receipt.targetPath.startsWith(".mcp.json#mcpServers/");
+  const targetPath = mcpEntry
+    ? path.join(workspaceRoot, ".mcp.json") + receipt.targetPath.slice(".mcp.json".length)
+    : path.resolve(workspaceRoot, ...receipt.targetPath.split("/"));
+  let actualHash: string | undefined;
+  let exists = false;
+  try {
+    if (mcpEntry) {
+      const raw = await readFile(path.join(workspaceRoot, ".mcp.json"), "utf8");
+      const errors: ParseError[] = [];
+      const document = parseJsonc(raw, errors, { allowTrailingComma: false, disallowComments: false }) as { mcpServers?: Record<string, unknown> } | undefined;
+      if (errors.length > 0) exists = true;
+      else if (document?.mcpServers) {
+        const name = receipt.targetPath.slice(".mcp.json#mcpServers/".length);
+        const value = document.mcpServers[name];
+        if (value !== undefined) {
+          exists = true;
+          actualHash = createHash("sha256").update(JSON.stringify(value)).digest("hex");
+        }
+      }
+    } else {
+      const info = await lstat(targetPath);
+      if (!info.isFile() || info.isSymbolicLink() || info.nlink > 1) throw new Error("Unsafe Project component target: " + targetPath);
+      exists = true;
+      actualHash = createHash("sha256").update(await readFile(targetPath)).digest("hex");
+    }
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
+  }
+  const hashMatches = actualHash === receipt.contentHash;
+  const plannedTarget = mcpEntry
+    ? path.resolve(workspaceRoot, ".mcp.json")
+    : path.resolve(targetPath);
+  const planned = plannedChanges.some((change) => path.resolve(change) === plannedTarget);
+  const delivery: ResourceRecordInput["delivery"] = hashMatches
+    ? "present"
+    : exists ? "stale" : planned ? "missing" : "missing";
+  if (receipt.kind === "hook" || receipt.kind === "mcp") return { delivery };
+  return { delivery, resource: {
+    kind: receipt.kind,
+    name: receipt.projectIds.join(",") + ":" + receipt.plugin + ":" + receipt.sourcePath,
+    scope: "workspace",
+    workspaceKey: workspaceRoot,
+    pluginSpec: receipt.plugin,
+    source: {
+      sourceHash,
+      relativePath: receipt.sourcePath,
+      ...(receipt.sourceRevision ? { revision: receipt.sourceRevision } : {}),
+      contentHash: receipt.contentHash,
+    },
+    selected,
+    owned: true,
+    targetPath,
+    delivery,
+    configuredActive: true,
+    reasons: [
+      ...(reason ? [reason] : []),
+      ...(!selected ? ["PROJECT_COMPONENT_RETIRED"] : []),
+    ],
+  } };
 }
 
 async function workspaceProjectionResource(

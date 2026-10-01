@@ -2,7 +2,7 @@
 
 import assert from "node:assert/strict";
 import { execFile } from "node:child_process";
-import { mkdtemp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { lstat, mkdtemp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { promisify } from "node:util";
@@ -49,6 +49,19 @@ function enabledPluginSkill(skills, name, expectedPath) {
   return skill;
 }
 
+async function assertProjectNotInstalled(plugins, userSettings, copilotHome) {
+  // Native inventory includes disabled catalog discoveries before installation.
+  assert.ok(plugins.filter((item) => item.name === "teamai-project").every((item) => item.enabled === false), "Project Plugin source must not be enabled as a user Plugin.");
+  assert.equal(userSettings.enabledPlugins?.["teamai-project@teamai"], undefined, "Project selection must not change user Plugin enablement.");
+  const configText = await readFile(path.join(copilotHome, "config.json"), "utf8").catch((error) => {
+    if (error.code === "ENOENT") return "{}";
+    throw error;
+  });
+  const userConfig = JSON.parse(configText);
+  assert.ok(!(userConfig.installedPlugins ?? []).some((item) => item.name === "teamai-project"), "Project Plugin source must not have a user installation record.");
+  await assert.rejects(lstat(path.join(copilotHome, "installed-plugins", "teamai", "teamai-project")), { code: "ENOENT" }, "Project Plugin source must not have an installed package directory.");
+}
+
 try {
   runRoot = await mkdtemp(path.join(os.tmpdir(), "teamai-real-e2e-"));
   const profile = path.join(runRoot, "profile");
@@ -80,6 +93,7 @@ try {
 
   const cli = path.join(cliRoot, "dist", "cli.js");
   await run(process.execPath, [cli, "init", "--marketplace", marketplaceRoot, "--role", "api"]);
+  await run(process.execPath, [cli, "sync"]);
   await run(process.execPath, [cli, "projects", "set", "teamai"]);
   await run(process.execPath, [cli, "skill", "install", "release-helper"]);
   await run(process.execPath, [cli, "role", "set", "qa"]);
@@ -93,15 +107,45 @@ try {
   assert.deepEqual(await readFile(projectedInstruction), await readFile(sourceInstruction));
   await assert.doesNotReject(readFile(path.join(repository, ".teamai", "context", "teamai", "docs", "architecture.md"), "utf8"));
 
+  const projectPluginPath = path.join(marketplaceRoot, "plugins", "teamai-project");
+  const projectAgent = path.join(repository, ".github", "agents", "teamai-teamai-project-teamai-project-probe.agent.md");
+  const sourceAgent = path.join(projectPluginPath, "com.github.copilot", "agents", "teamai-project-probe.agent.md");
+  assert.deepEqual(await readFile(projectAgent), await readFile(sourceAgent));
+  const projectRule = path.join(repository, ".github", "instructions", "teamai", "teamai", "teamai-project-probe.instructions.md");
+  const sourceRule = path.join(projectPluginPath, "com.github.copilot", "rules", "teamai-project-probe.instructions.md");
+  assert.deepEqual(await readFile(projectRule), await readFile(sourceRule));
+  const projectSkill = path.join(repository, ".github", "skills", "teamai-project-scope-probe", "SKILL.md");
+  const sourceSkill = path.join(projectPluginPath, "skills", "teamai-project-scope-probe", "SKILL.md");
+  assert.deepEqual(await readFile(projectSkill), await readFile(sourceSkill));
+
+  const hookConfig = JSON.parse(await readFile(path.join(repository, ".github", "hooks", "teamai-teamai-teamai-project.json"), "utf8"));
+  const hookRoot = path.join(repository, ".github", "hooks", ".teamai", "teamai", "teamai-project");
+  const hookAsset = path.join(hookRoot, "com.github.copilot", "hooks", "teamai-project-hook-probe.mjs");
+  const hookCommand = String(hookConfig.hooks.sessionStart[0].command).replaceAll("\\", "/");
+  assert.ok(hookCommand.includes(hookAsset.replaceAll("\\", "/")), "Projected Hook must reference its copied workspace script using a native absolute path.");
+  await assert.doesNotReject(readFile(hookAsset, "utf8"));
+
+  const projectMcp = JSON.parse(await readFile(path.join(repository, ".mcp.json"), "utf8"));
+  const projectMcpServer = projectMcp.mcpServers["teamai-project-probe"];
+  const mcpAsset = path.join(repository, ".teamai", "project-components", "teamai", "teamai-project", "mcp-server.mjs");
+  assert.ok(path.isAbsolute(projectMcpServer.args[0]), "Projected MCP server must use an absolute workspace path.");
+  assert.equal(path.resolve(projectMcpServer.args[0]), path.resolve(mcpAsset));
+  assert.equal(path.resolve(projectMcpServer.cwd), path.resolve(path.dirname(mcpAsset)));
+  await assert.doesNotReject(readFile(mcpAsset, "utf8"));
+
   const installed = JSON.parse((await runCopilot(["plugins", "list", "--kind", "plugin", "--json"])).stdout).plugins;
+  const userSettings = JSON.parse(await readFile(path.join(copilotHome, "settings.json"), "utf8"));
   for (const name of ["common", "api", "ios", "aos", "qa", "design"]) {
     assert.ok(installed.some((item) => item.name === name), `${name}@teamai should be installed`);
+    assert.equal(userSettings.enabledPlugins?.[`${name}@teamai`], name === "common" || name === "qa", `${name}@teamai must have an explicit user installation/enablement choice.`);
   }
   assert.equal(installed.find((item) => item.name === "common").enabled, true);
   assert.equal(installed.find((item) => item.name === "qa").enabled, true);
   for (const name of ["api", "ios", "aos", "design"]) {
     assert.equal(installed.find((item) => item.name === name).enabled, false);
   }
+  await assertProjectNotInstalled(installed, userSettings, copilotHome);
+  await assert.rejects(readFile(path.join(repository, ".github", "copilot", "settings.json")), { code: "ENOENT" });
 
   const instructions = JSON.parse((await runCopilot(["plugins", "list", "--kind", "instruction", "--json"])).stdout);
   const contextInstructions = instructions.plugins.filter((item) => item.name === "context.instructions.md" && item.scope === "working-directory" && item.source === "working-directory");
@@ -122,7 +166,7 @@ try {
   const vscodeSettings = JSON.parse(await readFile(path.join(appData, "Code", "User", "settings.json"), "utf8"));
   assert.equal(vscodeSettings["chat.plugins.marketplaces"][0], marketplaceRoot);
 
-  console.log(`Real teamai native Copilot E2E passed on ${process.platform}.`);
+  console.log(`Native common/role Copilot E2E and Project workspace projection passed on ${process.platform}.`);
 } finally {
   if (runRoot) await rm(runRoot, { recursive: true, force: true });
 }

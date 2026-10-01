@@ -4,11 +4,11 @@ import path from "node:path";
 import { readGlobalConfig } from "../config/global.js";
 import { inspectBuiltInTeamAiSkill } from "../copilot/builtin-skill.js";
 import { enabledUserPlugins, pluginSpec, userPlugins } from "../copilot/plugins.js";
-import { convergeManagedSkills, effectiveEnabledPluginSpecs, materializedEnabledPluginSkillNames, materializedEnabledPluginSpecs } from "../copilot/skills.js";
+import { convergeManagedSkills, effectiveEnabledPluginSpecs, materializedEnabledPluginSkillNames, materializedEnabledPluginSpecs, userScopePluginInventory } from "../copilot/skills.js";
 import { readProjectSettings } from "../copilot/project-settings.js";
 import type { MarketplaceCatalog } from "../copilot/catalog.js";
 import { checkUserInstructionState, discoverMarketplaceUserInstructions, userInstructionTargetRoot } from "../copilot/user-instructions.js";
-import { marketplaceRegistrationMatches, readCopilotState } from "../copilot/user-state.js";
+import { marketplaceRegistrationMatches, readCopilotState, recordedUserPluginInventory } from "../copilot/user-state.js";
 import { vscodeMarketplaceIsFirst } from "../copilot/vscode-settings.js";
 import { detectProjectIdentity } from "../project/anchors.js";
 import { convergeLogicalProjectContext, projectionFor } from "../project/context.js";
@@ -92,6 +92,9 @@ export async function doctorCommand(context: CommandContext, jsonOutput = false)
     if (!config) warn("Team AI config is missing. Run `teamai init --marketplace <source> --role <role>`. ");
     else if (!config.role) warn("Team AI role is not configured.");
     else ok(`Team AI config: role=${config.role}`);
+    if (config?.pendingPluginMutation) {
+      warn(`Copilot Plugin ${config.pendingPluginMutation.action} for ${config.pendingPluginMutation.spec} has a durable pending checkpoint; run teamai sync to reconcile.`);
+    }
   } catch (error) {
     fail(`Team AI config is invalid: ${(error as Error).message}`);
   }
@@ -130,7 +133,7 @@ export async function doctorCommand(context: CommandContext, jsonOutput = false)
     }
   }
 
-  let catalogSnapshot: Pick<MarketplaceCatalog, "root" | "plugins" | "skills" | "revision"> | undefined;
+  let catalogSnapshot: Pick<MarketplaceCatalog, "name" | "root" | "plugins" | "skills" | "revision"> | undefined;
   if (config) {
     let catalog: MarketplaceCatalog | undefined;
     try {
@@ -138,13 +141,13 @@ export async function doctorCommand(context: CommandContext, jsonOutput = false)
       if (catalog.name !== config.marketplace.name) {
         throw new Error(`Marketplace name changed from '${config.marketplace.name}' to '${catalog.name}'.`);
       }
-      catalogSnapshot = { root: catalog.root, plugins: catalog.plugins, skills: catalog.skills, revision: catalog.revision };
+      catalogSnapshot = { name: catalog.name, root: catalog.root, plugins: catalog.plugins, skills: catalog.skills, revision: catalog.revision };
       ok(`Marketplace cache/catalog: ${catalog.revision ?? "local source"}.`);
       await reportManagedUserInstructions(catalog.root, context.homeDir, ok, warn, fail);
 
       if (config.role && copilotConfig && copilotSettings) {
         const expectedEnabled = new Set(enabledUserPlugins(config.role, catalog.plugins, config.marketplace.name));
-        const inventory = copilotConfig.installedPlugins ?? [];
+        const inventory = recordedUserPluginInventory({ config: copilotConfig, settings: copilotSettings }, catalog);
         if (inventory.length === 0) {
           warn("Copilot Plugin inventory is not recorded in local settings; installed/runtime state is unobserved.");
         } else {
@@ -154,7 +157,8 @@ export async function doctorCommand(context: CommandContext, jsonOutput = false)
             else {
               const enabled = row.enabled ?? copilotSettings.enabledPlugins?.[desired];
               const owned = (config.managedPlugins ?? []).includes(desired);
-              if (typeof enabled !== "boolean") warn(`${desired} enablement is unknown in local settings.`);
+              if (row.discoveredOnly) warn(`${desired} is discoverable from the registered live Marketplace; no user installation/enablement choice is recorded.`);
+              else if (typeof enabled !== "boolean") warn(`${desired} enablement is unknown in local settings.`);
               else if (!owned && enabled !== expectedEnabled.has(desired)) warn(`${desired} is user-owned and differs from the selected role; preserving the override.`);
               else if (owned && enabled !== expectedEnabled.has(desired)) fail(`${desired} has incorrect configured enablement. Run teamai sync.`);
               else ok(`${desired} is configured ${enabled ? "enabled" : "installed and disabled"}; runtime unobserved.`);
@@ -169,7 +173,6 @@ export async function doctorCommand(context: CommandContext, jsonOutput = false)
     }
   }
 
-  let projectSettings;
   const identity = gitVersion ? await detectProjectIdentity(context.cwd) : undefined;
   if (!identity) {
     warn("Current directory is not inside a Git repository; project checks were skipped.");
@@ -177,7 +180,7 @@ export async function doctorCommand(context: CommandContext, jsonOutput = false)
     ok(`Workspace root: ${identity.workspaceRoot}`);
     if (identity.projectAnchor !== identity.workspaceRoot) ok(`Git worktree anchor: ${identity.projectAnchor}`);
     try {
-      projectSettings = await readProjectSettings(identity.workspaceRoot);
+      await readProjectSettings(identity.workspaceRoot);
       ok("Repository Copilot settings are parseable.");
     } catch (error) {
       fail((error as Error).message);
@@ -210,6 +213,8 @@ export async function doctorCommand(context: CommandContext, jsonOutput = false)
             identity,
             state,
             logicalProjects: desiredLogicalProjects,
+            homeDir: context.homeDir,
+            sourceRevision: catalogSnapshot.revision,
             publishedLearningRoot: learningCache?.snapshot?.root,
             dryRun: true,
           });
@@ -219,7 +224,6 @@ export async function doctorCommand(context: CommandContext, jsonOutput = false)
             else warn("Logical Project context Learnings are unknown because the published cache is unavailable. Run teamai sync.");
           } else warn("Logical Project context is stale. Run teamai sync.");
           for (const message of result.warnings) warn(`Logical Project Plugin: ${message}`);
-          projectSettings = result.mergedSettings;
         } else {
           ok(`Logical Project manifest: ${projects.length} available, no workspace binding.`);
         }
@@ -237,16 +241,16 @@ export async function doctorCommand(context: CommandContext, jsonOutput = false)
 
   if (config && catalogSnapshot) {
     try {
-      if (!copilotConfig || !copilotSettings || !(copilotConfig.installedPlugins?.length)) {
+      const inventory = copilotConfig && copilotSettings
+        ? recordedUserPluginInventory({ config: copilotConfig, settings: copilotSettings }, { ...catalogSnapshot, dispose: async () => {} })
+        : [];
+      if (inventory.length === 0) {
         warn("Managed personal Skill availability is unknown because no local Plugin inventory is recorded.");
       } else {
-        const installed = copilotConfig.installedPlugins.map((plugin) => ({
-          ...plugin,
-          enabled: plugin.enabled ?? copilotSettings.enabledPlugins?.[`${plugin.name}@${plugin.marketplace}`] ?? false,
-        }));
-        const enabledPlugins = effectiveEnabledPluginSpecs(installed, projectSettings);
-        const materializedPlugins = await materializedEnabledPluginSpecs(installed, projectSettings);
-        const unavailable = [...enabledPlugins].filter((spec) => !materializedPlugins.has(spec));
+        const installed = await userScopePluginInventory(inventory, context.homeDir);
+        const enabledPlugins = effectiveEnabledPluginSpecs(installed);
+        const materializedPlugins = await materializedEnabledPluginSpecs(installed);
+        const unavailable = [...effectiveEnabledPluginSpecs(inventory)].filter((spec) => !materializedPlugins.has(spec));
         if (unavailable.length > 0) {
           warn("Managed personal Skill availability is unknown because enabled Plugin package delivery could not be verified: " + unavailable.join(", ") + ".");
         } else {
@@ -254,7 +258,6 @@ export async function doctorCommand(context: CommandContext, jsonOutput = false)
             installed,
             catalogSnapshot.skills,
             config.marketplace.name,
-            projectSettings,
           );
           const skillResult = await convergeManagedSkills(config, catalogSnapshot.skills, enabledPlugins, context.homeDir, {
             dryRun: true,

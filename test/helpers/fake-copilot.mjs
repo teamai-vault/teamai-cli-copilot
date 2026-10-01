@@ -1,4 +1,6 @@
-import { readFile, writeFile } from "node:fs/promises";
+import { cp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { execFileSync } from "node:child_process";
+import path from "node:path";
 
 const [statePath, ...args] = process.argv.slice(2);
 const state = JSON.parse(await readFile(statePath, "utf8"));
@@ -9,6 +11,34 @@ async function save() {
 
 function json(value) {
   process.stdout.write(`${JSON.stringify(value)}\n`);
+}
+
+async function materializePlugin(name, marketplace) {
+  const registered = state.marketplaces.find((item) => item.name === marketplace);
+  let sourceRoot = registered?.source;
+  if (sourceRoot?.startsWith("file://")) {
+    const checkout = path.join(path.dirname(statePath), "marketplaces", marketplace);
+    await mkdir(path.dirname(checkout), { recursive: true });
+    try { await readFile(path.join(checkout, ".github", "plugin", "marketplace.json")); }
+    catch { execFileSync("git", ["clone", "--quiet", sourceRoot, checkout], { windowsHide: true }); }
+    sourceRoot = checkout;
+  }
+  if (!sourceRoot || sourceRoot === "https://github.com/test-org/teamai-marketplace.git") sourceRoot = state.fixtureSourceRoot;
+  let source = path.join(sourceRoot, "plugins", name);
+  try {
+    const manifest = JSON.parse(await readFile(path.join(sourceRoot, ".github", "plugin", "marketplace.json"), "utf8"));
+    const entry = manifest.plugins.find((item) => item.name === name);
+    if (!entry) throw new Error(`Fake Marketplace does not declare ${name}`);
+    source = path.resolve(sourceRoot, entry.source);
+  } catch (error) {
+    if (error.code !== "ENOENT") throw error;
+  }
+  const target = path.join(path.dirname(statePath), "installed-plugins", marketplace, name);
+  await rm(target, { recursive: true, force: true });
+  await mkdir(path.dirname(target), { recursive: true });
+  await cp(source, target, { recursive: true });
+  const manifest = JSON.parse(await readFile(path.join(target, "plugin.json"), "utf8"));
+  return { version: manifest.version, cache_path: target };
 }
 
 if (args[0] === "--version") {
@@ -39,12 +69,13 @@ if (args[0] === "--version") {
 } else if (args[0] === "plugins" && args[1] === "install") {
   const [name, marketplace] = args[2].split("@");
   const existing = state.plugins.find((item) => item.name === name && item.marketplace === marketplace);
+  const delivered = await materializePlugin(name, marketplace);
   if (existing) {
+    Object.assign(existing, delivered);
     existing.enabled = true;
     await save();
   } else {
-    const version = state.catalog[marketplace]?.find((item) => item.name === name)?.version ?? "0.1.0";
-    state.plugins.push({ name, marketplace, version, enabled: true, source: `marketplace:${marketplace}` });
+    state.plugins.push({ name, marketplace, ...delivered, enabled: true, source: `marketplace:${marketplace}` });
     await save();
   }
 } else if (args[0] === "plugins" && args[1] === "enable") {
@@ -61,7 +92,7 @@ if (args[0] === "--version") {
   const [name, marketplace] = args[2].split("@");
   const row = state.plugins.find((item) => item.name === name && (!marketplace || item.marketplace === marketplace));
   if (row) {
-    row.version = state.catalog[row.marketplace]?.find((item) => item.name === row.name)?.version ?? row.version;
+    Object.assign(row, await materializePlugin(row.name, row.marketplace));
   }
   await save();
 } else {

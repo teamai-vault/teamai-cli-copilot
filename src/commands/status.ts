@@ -1,7 +1,8 @@
 import { readGlobalConfig } from "../config/global.js";
 import path from "node:path";
+import { lstat } from "node:fs/promises";
 import { checkUserInstructionState, discoverMarketplaceUserInstructions, userInstructionTargetRoot } from "../copilot/user-instructions.js";
-import { marketplaceRegistrationMatches, readCopilotState } from "../copilot/user-state.js";
+import { installedPluginsRoot, marketplaceRegistrationMatches, readCopilotState } from "../copilot/user-state.js";
 import { detectProjectIdentity } from "../project/anchors.js";
 import { projectionFor } from "../project/context.js";
 import { partitionPath } from "../project/partition.js";
@@ -42,6 +43,9 @@ export async function statusCommand(context: CommandContext, options: { resource
     context.out(`  Marketplace revision: ${config.marketplaceRevision ?? "unknown"}`);
     context.out(`  Role: ${config.role ?? "not set"}`);
     context.out(`  Managed personal skills: ${config.managedSkills?.join(", ") || "none"}`);
+    if (config.pendingPluginMutation) {
+      context.out(`  Copilot Plugin mutation: ${config.pendingPluginMutation.action} ${config.pendingPluginMutation.spec} pending durable readback; run teamai sync to reconcile`);
+    }
     try {
       const { config: copilotConfig, settings } = await readCopilotState(context.homeDir);
       const marketplace = settings.extraKnownMarketplaces?.[config.marketplace.name];
@@ -54,9 +58,9 @@ export async function statusCommand(context: CommandContext, options: { resource
         const marketplaceName = desired.slice(at + 1);
         const row = (copilotConfig.installedPlugins ?? []).find((item) => item.name === name && item.marketplace === marketplaceName);
         const enabled = settings.enabledPlugins?.[desired] ?? row?.enabled;
-        context.out(`  ${desired}: ${row
-          ? typeof enabled === "boolean" ? `configured ${enabled ? "enabled" : "disabled"}; runtime unobserved` : "configured state unknown; runtime unobserved"
-          : "not present in local inventory; runtime unobserved"}`);
+        context.out(`  ${desired}: ${typeof enabled === "boolean"
+          ? `configured ${enabled ? "enabled" : "disabled"}; runtime unobserved`
+          : row ? "configured state unknown; runtime unobserved" : "not present in local inventory; runtime unobserved"}`);
       }
     } catch (error) {
       context.out(`  Copilot local settings: unavailable (${(error as Error).message})`);
@@ -105,7 +109,28 @@ export async function statusCommand(context: CommandContext, options: { resource
   const state = await readProjectState(identity.projectAnchor, context.homeDir);
   const projection = projectionFor(state, identity.workspaceRoot);
   context.out(`  Logical Projects: ${projection?.logicalProjects.join(", ") || "none"}`);
-  context.out(`  Project plugins: ${projection?.managedProjectPlugins.join(", ") || "none"}`);
+  context.out(`  Project plugins: ${projection?.selectedProjectPlugins?.map((item) => item.plugin + "@" + item.version).join(", ") || "none"}`);
+  context.out(`  Project component receipts: ${projection?.managedProjectComponents?.length ?? 0}`);
+  for (const item of projection?.selectedProjectPlugins ?? []) {
+    let packageDetected = false;
+    try {
+      const local = await readCopilotState(context.homeDir);
+      packageDetected = local.config.installedPlugins?.some((plugin) => plugin.name === item.plugin) ?? false;
+    } catch {
+      context.out(`  Project Plugin ${item.plugin}@${item.version}: user-level Plugin state unknown; consumer isolation runtime unobserved.`);
+      continue;
+    }
+    try {
+      const packageInfo = await lstat(path.join(installedPluginsRoot(context.homeDir), config?.marketplace.name ?? "", item.plugin));
+      packageDetected ||= packageInfo.isDirectory() || packageInfo.isSymbolicLink();
+    } catch (error) {
+      if ((error as NodeJS.ErrnoException).code !== "ENOENT") {
+        context.out(`  Project Plugin ${item.plugin}@${item.version}: user-level package inspection failed; consumer isolation runtime unobserved.`);
+        continue;
+      }
+    }
+    context.out(`  Project Plugin ${item.plugin}@${item.version}: ${packageDetected ? "same-name user-level package preserved; " : "Workspace-scoped delivery; "}consumer isolation runtime unobserved.`);
+  }
   context.out(`  Project context: ${projection ? projection.contextRoot : "not initialized"}`);
   context.out(`  Learnings projection: ${projection ? path.join(projection.contextRoot, "shared", "learnings") : "not initialized"}`);
   context.out("");

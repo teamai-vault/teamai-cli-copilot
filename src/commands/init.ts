@@ -32,7 +32,7 @@ export async function initCommand(context: CommandContext, options: InitOptions)
     ].join("\n"));
   }
 
-  const catalog = await context.loadMarketplace(source, context.cwd, { refresh: true });
+  let catalog = await context.loadMarketplace(source, context.cwd, { refresh: true, dryRun: true });
   try {
     context.out(`Marketplace discovered: ${catalog.name}`);
     let role = options.role ?? config?.role;
@@ -41,6 +41,18 @@ export async function initCommand(context: CommandContext, options: InitOptions)
       role = await context.promptRole(catalog.plugins.filter((plugin) => plugin.kind === "role").map((plugin) => plugin.name));
     }
     enabledUserPlugins(role, catalog.plugins, catalog.name);
+    await convergeBuiltInTeamAiSkill(context.homeDir, { dryRun: true });
+    await convergeMarketplaceUserInstructions(catalog.root, context.homeDir, { dryRun: true });
+    if (!context.dryRun) {
+      const preflightCatalog = catalog;
+      try {
+        catalog = await context.loadMarketplace(source, context.cwd, { refresh: true });
+      } finally {
+        await preflightCatalog.dispose();
+      }
+      if (config && config.marketplace.name !== catalog.name) throw new Error(`Configured Marketplace name '${config.marketplace.name}' does not match source manifest '${catalog.name}'.`);
+      enabledUserPlugins(role, catalog.plugins, catalog.name);
+    }
 
     const builtInSkill = await convergeBuiltInTeamAiSkill(context.homeDir, { dryRun: context.dryRun });
     if (builtInSkill.change) {
@@ -70,14 +82,19 @@ export async function initCommand(context: CommandContext, options: InitOptions)
     else delete config.marketplaceRevision;
 
     let converged;
+    let mutationCheckpointed = false;
     try {
       converged = await convergeUserPlugins(context.copilot, config, catalog.plugins, {
         dryRun: context.dryRun,
         cwd: context.cwd,
         resourceRevision: catalog.revision,
+        checkpoint: async (checkpoint) => {
+          await writeGlobalConfig(checkpoint, context.homeDir);
+          mutationCheckpointed = true;
+        },
       });
     } catch (error) {
-      if (marketplaceAdded && !context.dryRun) {
+      if (marketplaceAdded && !context.dryRun && !mutationCheckpointed) {
         try {
           await context.copilot.removeMarketplace(config.marketplace.name, context.cwd);
         } catch (cleanupError) {

@@ -1,7 +1,7 @@
 import os from "node:os";
 import path from "node:path";
 import { parse, stringify } from "yaml";
-import { atomicWriteText, readTextIfExists } from "../utils/fs.js";
+import { atomicWriteText, readTextIfExists, withFileLock } from "../utils/fs.js";
 import { type TeamAiConfig, validateConfig } from "./schema.js";
 
 export function teamAiHome(homeDir = os.homedir()): string {
@@ -25,8 +25,11 @@ export async function writeGlobalConfig(config: TeamAiConfig, homeDir = os.homed
     ...(config.marketplaceRevision ? { marketplaceRevision: config.marketplaceRevision } : {}),
     ...(config.role ? { role: config.role } : {}),
     managedPlugins: config.managedPlugins ?? [],
+    ...(config.pendingPluginMutation ? { pendingPluginMutation: config.pendingPluginMutation } : {}),
+    managedPluginReceipts: config.managedPluginReceipts ?? [],
     managedSkills: config.managedSkills ?? [],
     managedSkillPaths: config.managedSkillPaths ?? {},
   };
-  await atomicWriteText(configPath(homeDir), stringify(ordered));
+  const target = configPath(homeDir);
+  await withFileLock(`${target}.lock`, async () => atomicWriteText(target, stringify(ordered)));
 }

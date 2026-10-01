@@ -2,7 +2,8 @@ import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { afterEach, describe, expect, test } from "vitest";
 import type { CatalogSkill } from "../../src/copilot/catalog.js";
-import { convergeManagedSkills, effectiveEnabledPluginSpecs, materializedEnabledPluginSpecs, personalSkillPath } from "../../src/copilot/skills.js";
+import { convergeManagedSkills, effectiveEnabledPluginSpecs, materializedEnabledPluginSpecs, personalSkillPath, userScopePluginInventory } from "../../src/copilot/skills.js";
+import { installedPluginsRoot } from "../../src/copilot/user-state.js";
 import { tempDir } from "../helpers/test-utils.js";
 
 const cleanup = new Set<string>();
@@ -59,8 +60,37 @@ describe("managed personal skills", () => {
     ], new Set(), home, { materializedPluginSkills: new Set() })).rejects.toThrow("not managed");
   });
 
-  test("uses project settings as effective plugin enablement", () => {
-    expect(effectiveEnabledPluginSpecs([{ name: "api", marketplace: "test", enabled: false }], { enabledPlugins: { "qa@test": true } })).toEqual(new Set(["qa@test"]));
+  test("uses only user-scope Plugin state as effective skill enablement", () => {
+    expect(effectiveEnabledPluginSpecs([{ name: "api", marketplace: "test", enabled: false }])).toEqual(new Set());
+  });
+
+  test("ignores workspace-effective native Plugin inventory for global personal Skills", async () => {
+    const workspace = await tempDir("teamai-skill-workspace-plugin-");
+    const home = await tempDir("teamai-skill-user-plugin-");
+    cleanup.add(workspace);
+    cleanup.add(home);
+    const pluginRow = { name: "common", marketplace: "test", version: "1.0.0", enabled: true };
+    const workspacePackage = path.join(workspace, ".github", "plugins", "test", "common");
+    await mkdir(workspacePackage, { recursive: true });
+    await writeFile(path.join(workspacePackage, "plugin.json"), JSON.stringify({ name: "common", version: "1.0.0" }), "utf8");
+    expect(await userScopePluginInventory([{ ...pluginRow, cache_path: workspacePackage }], home)).toEqual([]);
+
+    const userPackage = path.join(installedPluginsRoot(home), "test", "common");
+    await mkdir(userPackage, { recursive: true });
+    await writeFile(path.join(userPackage, "plugin.json"), JSON.stringify({ name: "common", version: "1.0.0" }), "utf8");
+    await expect(userScopePluginInventory([{ ...pluginRow, cache_path: userPackage }], home)).resolves.toEqual([{ ...pluginRow, cache_path: userPackage }]);
+
+    const nativeCache = path.join(workspace, "native-copilot-cache", "common");
+    await mkdir(nativeCache, { recursive: true });
+    await writeFile(path.join(nativeCache, "plugin.json"), JSON.stringify({ name: "common", version: "1.0.0" }), "utf8");
+    await expect(userScopePluginInventory([{ ...pluginRow, source: "marketplace:test", cache_path: nativeCache }], home))
+      .resolves.toEqual([{ ...pluginRow, source: "marketplace:test", cache_path: nativeCache }]);
+    await expect(userScopePluginInventory([{ ...pluginRow, source: "filesystem", cache_path: userPackage }], home)).resolves.toEqual([]);
+
+    const disabledNativePlugin = { ...pluginRow, enabled: false, source: "marketplace:test", cache_path: nativeCache };
+    const inventory = await userScopePluginInventory([disabledNativePlugin], home);
+    expect(inventory).toEqual([disabledNativePlugin]);
+    expect(effectiveEnabledPluginSpecs(inventory)).toEqual(new Set());
   });
 
   test("keeps an owned personal Skill when its enabled Plugin package is not materialized", async () => {

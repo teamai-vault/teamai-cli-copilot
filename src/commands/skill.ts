@@ -3,9 +3,7 @@ import path from "node:path";
 import { readGlobalConfig, writeGlobalConfig } from "../config/global.js";
 import type { TeamAiConfig } from "../config/schema.js";
 import type { MarketplaceCatalog } from "../copilot/catalog.js";
-import { convergeManagedSkills, effectiveEnabledPluginSpecs, materializedEnabledPluginSkillNames, personalSkillPath } from "../copilot/skills.js";
-import { readProjectSettings } from "../copilot/project-settings.js";
-import { detectProjectIdentity } from "../project/anchors.js";
+import { convergeManagedSkills, effectiveEnabledPluginSpecs, materializedEnabledPluginSkillNames, personalSkillPath, userScopePluginInventory } from "../copilot/skills.js";
 import { promptText } from "../utils/prompt.js";
 import type { CommandContext } from "./context.js";
 
@@ -110,12 +108,10 @@ async function pluginSkillAvailability(context: CommandContext, catalog: Marketp
   enabledPlugins: Set<string>;
   materializedPluginSkills: Set<string>;
 }> {
-  const installed = await context.copilot.listPlugins(context.cwd);
-  const identity = await detectProjectIdentity(context.cwd);
-  const settings = identity ? await readProjectSettings(identity.workspaceRoot) : undefined;
+  const installed = await userScopePluginInventory(await context.copilot.listPlugins(context.cwd), context.homeDir);
   return {
-    enabledPlugins: effectiveEnabledPluginSpecs(installed, settings),
-    materializedPluginSkills: await materializedEnabledPluginSkillNames(installed, catalog.skills, catalog.name, settings),
+    enabledPlugins: effectiveEnabledPluginSpecs(installed),
+    materializedPluginSkills: await materializedEnabledPluginSkillNames(installed, catalog.skills, catalog.name),
   };
 }
 

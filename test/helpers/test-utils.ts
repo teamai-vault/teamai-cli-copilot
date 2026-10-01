@@ -32,6 +32,7 @@ export async function createDirectoryLink(target: string, linkPath: string): Pro
 }
 
 export interface FakeCopilotState {
+  fixtureSourceRoot: string;
   marketplaceName: string;
   marketplaces: Array<{ name: string; source?: string }>;
   plugins: Array<{ name: string; marketplace?: string; version?: string; enabled: boolean; source?: string; cache_path?: string }>;
@@ -49,9 +50,11 @@ export async function createFakeCopilot(initial?: Partial<FakeCopilotState>): Pr
   statePath: string;
   readState: () => Promise<FakeCopilotState>;
 }> {
+  await ensureFakePluginFiles(fakeMarketplaceRoot);
   const directory = await tempDir("teamai-fake-copilot-");
   const statePath = path.join(directory, "state.json");
   const state: FakeCopilotState = {
+    fixtureSourceRoot: initial?.fixtureSourceRoot ?? fakeMarketplaceRoot,
     marketplaceName: initial?.marketplaceName ?? TEST_MARKETPLACE_NAME,
     marketplaces: initial?.marketplaces ?? [],
     plugins: initial?.plugins ?? [],
@@ -70,8 +73,13 @@ export async function createFakeCopilot(initial?: Partial<FakeCopilotState>): Pr
   };
   await writeFile(statePath, `${JSON.stringify(state, null, 2)}\n`, "utf8");
   const helperPath = fileURLToPath(new URL("./fake-copilot.mjs", import.meta.url));
+  const client = new CopilotClient(process.execPath, [helperPath, statePath]);
+  Object.assign(client, { pluginInstallIdentity: (spec: string) => {
+    const [name, marketplace] = spec.split("@");
+    return { cachePath: path.join(directory, "installed-plugins", marketplace, name), source: `marketplace:${marketplace}` };
+  } });
   return {
-    client: new CopilotClient(process.execPath, [helperPath, statePath]),
+    client,
     statePath,
     readState: async () => JSON.parse(await readFile(statePath, "utf8")) as FakeCopilotState,
   };
@@ -82,21 +90,32 @@ export async function loadFakeMarketplace(root?: string): Promise<MarketplaceCat
     ? root
     : fakeMarketplaceRoot;
   await prepareFakePublishedAuthority(catalogRoot);
+  const plugins = await ensureFakePluginFiles(catalogRoot);
   return {
     name: TEST_MARKETPLACE_NAME,
     root: catalogRoot,
-    plugins: [
-      { name: "common", version: "0.1.0", kind: "common", root: "common" },
-      { name: "api", version: "0.1.0", kind: "role", root: "api" },
-      { name: "ios", version: "0.1.0", kind: "role", root: "ios" },
-      { name: "aos", version: "0.1.0", kind: "role", root: "aos" },
-      { name: "qa", version: "0.1.0", kind: "role", root: "qa" },
-      { name: "design", version: "0.1.0", kind: "role", root: "design" },
-      { name: "payments", version: "0.1.0", kind: "project", root: "payments" },
-    ],
+    plugins,
     skills: [],
     dispose: async () => undefined,
   };
+}
+
+async function ensureFakePluginFiles(root: string): Promise<MarketplaceCatalog["plugins"]> {
+  const plugins: MarketplaceCatalog["plugins"] = [];
+  for (const name of ["common", "api", "ios", "aos", "qa", "design", "payments"]) {
+    const kind = name === "common" ? "common" : name === "payments" ? "project" : "role";
+    const pluginRoot = path.join(root, "plugins", name);
+    await mkdir(pluginRoot, { recursive: true });
+    const manifestPath = path.join(pluginRoot, "plugin.json");
+    try {
+      await readFile(manifestPath);
+    } catch (error) {
+      if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
+      await writeFile(manifestPath, JSON.stringify({ name, version: "0.1.0", extensions: { "com.company.teamai": { kind } } }), "utf8");
+    }
+    plugins.push({ name, version: "0.1.0", kind, root: pluginRoot });
+  }
+  return plugins;
 }
 
 export async function prepareFakePublishedAuthority(root: string): Promise<void> {

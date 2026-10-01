@@ -6,6 +6,8 @@ import { runCli } from "../../src/cli.js";
 import { writeGlobalConfig } from "../../src/config/global.js";
 import { copilotConfigPath, copilotSettingsPath } from "../../src/copilot/user-state.js";
 import { personalSkillPath } from "../../src/copilot/skills.js";
+import type { MarketplaceCatalog } from "../../src/copilot/catalog.js";
+import { CopilotClient } from "../../src/copilot/cli.js";
 import { createGitRepo, createFakeCopilot, loadFakeMarketplace, tempDir, TEST_MARKETPLACE_NAME, TEST_MARKETPLACE_SOURCE } from "../helpers/test-utils.js";
 
 function capture() {
@@ -23,8 +25,11 @@ describe("resource snapshot CLI", () => {
     config.managedPlugins = [`api@${TEST_MARKETPLACE_NAME}`];
     await writeGlobalConfig(config, homeDir);
     await mkdir(path.dirname(copilotConfigPath(homeDir)), { recursive: true });
+    const commonCache = path.join(homeDir, "native-plugin-cache", "common");
+    await mkdir(commonCache, { recursive: true });
+    await writeFile(path.join(commonCache, "plugin.json"), JSON.stringify({ name: "common", version: "0.1.0" }), "utf8");
     await writeFile(copilotConfigPath(homeDir), JSON.stringify({ installedPlugins: [
-      { name: "common", marketplace: TEST_MARKETPLACE_NAME, version: "0.1.0", enabled: false },
+      { name: "common", marketplace: TEST_MARKETPLACE_NAME, version: "0.1.0", enabled: false, source: `marketplace:${TEST_MARKETPLACE_NAME}`, cache_path: commonCache },
       { name: "api", marketplace: TEST_MARKETPLACE_NAME, version: "0.1.0", enabled: true },
     ] }), "utf8");
     await writeFile(copilotSettingsPath(homeDir), JSON.stringify({ enabledPlugins: {
@@ -61,6 +66,7 @@ describe("resource snapshot CLI", () => {
     const common = status.resources.find((resource: { pluginSpec?: string }) => resource.pluginSpec === `common@${TEST_MARKETPLACE_NAME}`);
     expect(common.owned).toBe(false);
     expect(common.configuredActive).toBe(false);
+    expect(common.delivery).toBe("present");
     expect(common.reasons).toContain("USER_OVERRIDE");
     const api = status.resources.find((resource: { pluginSpec?: string }) => resource.pluginSpec === `api@${TEST_MARKETPLACE_NAME}`);
     expect(api.owned).toBe(true);
@@ -74,7 +80,8 @@ describe("resource snapshot CLI", () => {
   }, 15_000);
 
   test("reports a missing Plugin Skill file separately from its managed personal fallback", async () => {
-    const cwd = await createGitRepo();
+    const started = performance.now();
+    const cwd = await tempDir("teamai-resource-skill-cwd-");
     const homeDir = await tempDir("teamai-resource-skill-home-");
     const source = await tempDir("teamai-resource-skill-source-");
     const cache = path.join(source, "cache", "api");
@@ -101,17 +108,28 @@ describe("resource snapshot CLI", () => {
       [`common@${TEST_MARKETPLACE_NAME}`]: true,
       [`api@${TEST_MARKETPLACE_NAME}`]: true,
     } }), "utf8");
-    const catalog = {
-      ...(await loadFakeMarketplace(source)),
+    const catalog: MarketplaceCatalog = {
+      name: TEST_MARKETPLACE_NAME, root: source, revision: "fixed-skill-observation-fixture",
+      plugins: [
+        { name: "common", version: "0.1.0", kind: "common", root: path.join(source, "plugins", "common") },
+        { name: "api", version: "0.1.0", kind: "role", root: path.join(source, "plugins", "api") },
+      ],
       skills: [{ name: "api-review", description: "API review", sourceType: "plugin" as const, plugin: "api", sourcePath: "plugins/api/skills/api-review", root: skillRoot, owner: "api", tags: [], standalone: true }],
+      dispose: async () => {},
     };
-    const fake = await createFakeCopilot();
+    const nativeCalls: string[] = [];
+    const client = new CopilotClient("readonly-native-must-not-run");
+    for (const method of ["version", "listPlugins", "listMarketplaces", "addMarketplace", "removeMarketplace", "installPlugin", "enablePlugin", "disablePlugin", "updatePlugin"] as const) {
+      client[method] = async () => { nativeCalls.push(method); throw new Error("readonly native call"); };
+    }
     const output = capture();
+    const setupMs = performance.now() - started;
+    const commandStarted = performance.now();
 
     expect(await runCli(["status", "--json"], {
       cwd,
       homeDir,
-      copilot: fake.client,
+      copilot: client,
       loadMarketplace: async () => catalog,
       out: output.out,
       err: output.err,
@@ -127,6 +145,8 @@ describe("resource snapshot CLI", () => {
     expect(pluginSkill.targetPath).toBe(path.join(cache, "skills", "api-review", "SKILL.md"));
     expect(personalSkill.delivery).toBe("present");
     expect(personalSkill.owned).toBe(true);
+    expect(nativeCalls).toEqual([]);
+    console.info("Snapshot timings", JSON.stringify({ setupMs, commandMs: performance.now() - commandStarted }));
   });
 
   test("JSON usage errors remain a single object on stdout", async () => {

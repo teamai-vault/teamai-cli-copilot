@@ -13,10 +13,47 @@ export interface ProjectState {
   projections?: Record<string, ProjectProjection>;
 }
 
+export type ProjectComponentKind = "agent" | "instruction" | "skill" | "hook" | "mcp";
+
+export interface ProjectComponentReceipt {
+  kind: ProjectComponentKind;
+  projectIds: string[];
+  plugin: string;
+  sourcePath: string;
+  targetPath: string;
+  sourceHash: string;
+  sourceRevision?: string;
+  contentHash: string;
+}
+
+export interface ProjectPluginSource {
+  projectId: string;
+  plugin: string;
+  version: string;
+  sourceHash: string;
+  sourceRevision?: string;
+}
+
+export interface ProjectContextFileReceipt {
+  kind: "instruction" | "document" | "learning";
+  projectIds: string[];
+  sourcePath: string;
+  targetPath: string;
+  sourceHash: string;
+  sourceRevision?: string;
+  contentHash: string;
+}
+
 export interface ProjectProjection {
   workspaceRoot: string;
   logicalProjects: string[];
-  managedProjectPlugins: string[];
+  selectedProjectPlugins?: ProjectPluginSource[];
+  managedProjectComponents?: ProjectComponentReceipt[];
+  pendingProjectComponents?: ProjectComponentReceipt[];
+  managedContextFiles?: ProjectContextFileReceipt[];
+  pendingContextFiles?: ProjectContextFileReceipt[];
+  /** Receipt from the retired workspace enabledPlugins route; used only for exact cleanup. */
+  managedProjectPlugins?: string[];
   instructionRoot: string;
   contextRoot: string;
   publishedLearningRevision?: string;

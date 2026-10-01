@@ -5,12 +5,46 @@ export interface MarketplaceConfig {
   source: string;
 }
 
+export type PluginMutationAction = "install" | "enable" | "disable" | "update";
+
+export interface PluginObservedState {
+  installed: boolean;
+  version?: string;
+  enabled?: boolean;
+  cachePath?: string;
+  manifestHash?: string;
+  source?: string;
+  installedFrom?: string;
+}
+
+export interface PluginMutationJournal {
+  spec: string;
+  action: PluginMutationAction;
+  sourceManifestHash: string;
+  marketplaceSource?: string;
+  expectedBefore: PluginObservedState;
+  expectedAfter: PluginObservedState;
+}
+
+export interface ManagedPluginReceipt {
+  spec: string;
+  manifestHash: string;
+  version: string;
+  enabled: boolean;
+  marketplaceSource?: string;
+  cachePath?: string;
+  source?: string;
+  installedFrom?: string;
+}
+
 export interface TeamAiConfig {
   version: 1;
   marketplace: MarketplaceConfig;
   marketplaceRevision?: string;
   role?: Role;
   managedPlugins?: string[];
+  pendingPluginMutation?: PluginMutationJournal;
+  managedPluginReceipts?: ManagedPluginReceipt[];
   managedSkills?: string[];
   managedSkillPaths?: Record<string, string>;
 }
@@ -20,6 +54,7 @@ export function createConfig(marketplace: MarketplaceConfig): TeamAiConfig {
     version: 1,
     marketplace,
     managedPlugins: [],
+    managedPluginReceipts: [],
     managedSkills: [],
     managedSkillPaths: {},
   };
@@ -36,6 +71,8 @@ export function validateConfig(value: unknown): TeamAiConfig {
     marketplaceRevision?: unknown;
     role?: unknown;
     managedPlugins?: unknown;
+    pendingPluginMutation?: unknown;
+    managedPluginReceipts?: unknown;
     managedSkills?: unknown;
     managedSkillPaths?: unknown;
   };
@@ -59,6 +96,12 @@ export function validateConfig(value: unknown): TeamAiConfig {
   if (candidate.managedPlugins !== undefined && (!Array.isArray(candidate.managedPlugins) || candidate.managedPlugins.some((item) => typeof item !== "string"))) {
     throw new Error("Team AI config managedPlugins must be a string array.");
   }
+  if (candidate.pendingPluginMutation !== undefined && !isPluginMutationJournal(candidate.pendingPluginMutation)) {
+    throw new Error("Team AI config pendingPluginMutation is invalid.");
+  }
+  if (candidate.managedPluginReceipts !== undefined && (!Array.isArray(candidate.managedPluginReceipts) || candidate.managedPluginReceipts.some((item) => !isManagedPluginReceipt(item)))) {
+    throw new Error("Team AI config managedPluginReceipts is invalid.");
+  }
   if (candidate.managedSkills !== undefined && (!Array.isArray(candidate.managedSkills) || candidate.managedSkills.some((item) => typeof item !== "string"))) {
     throw new Error("Team AI config managedSkills must be a string array.");
   }
@@ -75,7 +118,45 @@ export function validateConfig(value: unknown): TeamAiConfig {
     marketplaceRevision: candidate.marketplaceRevision as string | undefined,
     role: candidate.role as Role | undefined,
     managedPlugins: candidate.managedPlugins ?? [],
+    pendingPluginMutation: candidate.pendingPluginMutation as PluginMutationJournal | undefined,
+    managedPluginReceipts: candidate.managedPluginReceipts as ManagedPluginReceipt[] | undefined ?? [],
     managedSkills: candidate.managedSkills ?? [],
     managedSkillPaths: candidate.managedSkillPaths as Record<string, string> | undefined ?? {},
   };
+}
+
+function isPluginMutationJournal(value: unknown): value is PluginMutationJournal {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
+  const candidate = value as Partial<PluginMutationJournal>;
+  return typeof candidate.spec === "string"
+    && (candidate.action === "install" || candidate.action === "enable" || candidate.action === "disable" || candidate.action === "update")
+    && typeof candidate.sourceManifestHash === "string"
+    && (candidate.marketplaceSource === undefined || typeof candidate.marketplaceSource === "string")
+    && isPluginObservedState(candidate.expectedBefore)
+    && isPluginObservedState(candidate.expectedAfter);
+}
+
+function isPluginObservedState(value: unknown): value is PluginObservedState {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
+  const candidate = value as Partial<PluginObservedState>;
+  return typeof candidate.installed === "boolean"
+    && (candidate.version === undefined || typeof candidate.version === "string")
+    && (candidate.enabled === undefined || typeof candidate.enabled === "boolean")
+    && (candidate.cachePath === undefined || typeof candidate.cachePath === "string")
+    && (candidate.manifestHash === undefined || typeof candidate.manifestHash === "string")
+    && (candidate.source === undefined || typeof candidate.source === "string")
+    && (candidate.installedFrom === undefined || typeof candidate.installedFrom === "string");
+}
+
+function isManagedPluginReceipt(value: unknown): value is ManagedPluginReceipt {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
+  const candidate = value as Partial<ManagedPluginReceipt>;
+  return typeof candidate.spec === "string"
+    && typeof candidate.manifestHash === "string"
+    && typeof candidate.version === "string"
+    && typeof candidate.enabled === "boolean"
+    && (candidate.marketplaceSource === undefined || typeof candidate.marketplaceSource === "string")
+    && (candidate.cachePath === undefined || typeof candidate.cachePath === "string")
+    && (candidate.source === undefined || typeof candidate.source === "string")
+    && (candidate.installedFrom === undefined || typeof candidate.installedFrom === "string");
 }
