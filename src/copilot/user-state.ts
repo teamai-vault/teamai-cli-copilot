@@ -1,4 +1,4 @@
-import { stat } from "node:fs/promises";
+import { lstat, readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import { parse, type ParseError } from "jsonc-parser";
 import { atomicWriteJson, readJsonIfExists, readTextIfExists, withFileLock } from "../utils/fs.js";
@@ -6,6 +6,7 @@ import { marketplaceSourceSetting } from "./project-settings.js";
 import { loadMarketplaceCatalog, type MarketplaceCatalog } from "./catalog.js";
 import type { InstalledPlugin } from "./cli.js";
 import { pathsEqual } from "../utils/fs.js";
+import { ensureSafeTargetChain } from "./user-instructions.js";
 
 export interface CopilotInstalledPlugin {
   name: string;
@@ -60,24 +61,56 @@ export function installedPluginsRoot(homeDir: string): string {
 }
 
 export async function readCopilotState(homeDir: string): Promise<{ config: CopilotConfigFile; settings: CopilotSettingsFile }> {
-  return {
+  const settings = await readJsonIfExists<CopilotSettingsFile>(copilotSettingsPath(homeDir));
+  const local: { config: CopilotConfigFile; settings: CopilotSettingsFile } = {
     config: (await readCopilotConfig(copilotConfigPath(homeDir))) ?? {},
-    settings: (await readJsonIfExists<CopilotSettingsFile>(copilotSettingsPath(homeDir))) ?? {},
+    settings: settings === undefined ? {} : settings,
   };
+  if (!isRecord(local.settings)
+    || local.config.installedPlugins !== undefined && (!Array.isArray(local.config.installedPlugins) || local.config.installedPlugins.some((row) => !isRecord(row)
+      || typeof row.name !== "string" || !row.name || typeof row.marketplace !== "string" || !row.marketplace
+      || ["version", "cache_path", "installed_at"].some((key) => row[key] !== undefined && typeof row[key] !== "string")
+      || row.enabled !== undefined && typeof row.enabled !== "boolean"))
+    || local.settings.enabledPlugins !== undefined && (!isRecord(local.settings.enabledPlugins) || Object.values(local.settings.enabledPlugins).some((value) => typeof value !== "boolean"))
+    || local.settings.extraKnownMarketplaces !== undefined && (!isRecord(local.settings.extraKnownMarketplaces) || Object.values(local.settings.extraKnownMarketplaces).some((row) => !isRecord(row) || !isRecord(row.source)
+      || ["source", "path", "url", "repo"].some((key) => row.source[key] !== undefined && typeof row.source[key] !== "string")))) {
+    throw new Error("Copilot persisted state contains invalid required field types.");
+  }
+  return local;
 }
 
 /** Native live Marketplace rows describe discoverable packages, including never-installed entries. */
-export async function normalizeLivePluginInventory(installed: InstalledPlugin[], homeDir: string): Promise<InstalledPlugin[]> {
-  if (!installed.some((plugin) => plugin.scope === "user" && typeof plugin.installedFrom === "string" && path.isAbsolute(plugin.installedFrom)
-    && typeof plugin.source === "string" && plugin.source.startsWith("live-marketplace:"))) return installed;
-  const local = await readCopilotState(homeDir);
+export async function normalizeLivePluginInventory(installed: InstalledPlugin[], homeDir: string, persisted?: { config: CopilotConfigFile; settings: CopilotSettingsFile }): Promise<InstalledPlugin[]> {
+  if (!installed.some((plugin) => plugin.source === "live" || plugin.source === "installed")) return installed;
+  const local = persisted ?? await readCopilotState(homeDir);
   const catalogs = new Map<string, Promise<MarketplaceCatalog>>();
   try {
     return await Promise.all(installed.map(async (plugin) => {
-      if (plugin.scope !== "user" || plugin.source !== `live-marketplace:${plugin.marketplace}`
+      if (plugin.source === "installed") {
+        const registration = local.settings.extraKnownMarketplaces?.[plugin.marketplace ?? ""]?.source;
+        const source = nativeGitMarketplaceSource(registration);
+        if (!source || !plugin.marketplace || !plugin.version) return plugin;
+        const records = local.config.installedPlugins?.filter((record) => record.name === plugin.name && record.marketplace === plugin.marketplace) ?? [];
+        if (records.length !== 1) throw new Error(`Cannot verify native installed Plugin record for '${plugin.name}@${plugin.marketplace}'.`);
+        const record = records[0]!;
+        const target = nativeInstalledPluginTarget(homeDir, plugin.marketplace, plugin.name);
+        await ensureSafeTargetChain(target);
+        if (record.version !== plugin.version || record.enabled !== plugin.enabled || typeof record.cache_path !== "string"
+          || !path.isAbsolute(record.cache_path) || !pathsEqual(record.cache_path, target)) {
+          throw new Error(`Native installed Plugin record source/target conflict for '${plugin.name}@${plugin.marketplace}'.`);
+        }
+        const enabled = local.settings.enabledPlugins?.[`${plugin.name}@${plugin.marketplace}`];
+        if (typeof enabled === "boolean" && enabled !== plugin.enabled) throw new Error(`Native installed Plugin enabled state conflict for '${plugin.name}@${plugin.marketplace}'.`);
+        const info = await lstat(path.join(target, "plugin.json"));
+        if (!info.isFile() || info.isSymbolicLink() || info.nlink > 1) throw new Error(`Unsafe native Plugin manifest for '${plugin.name}@${plugin.marketplace}'.`);
+        const manifest = JSON.parse(await readFile(path.join(target, "plugin.json"), "utf8")) as { name?: unknown; version?: unknown };
+        if (manifest.name !== plugin.name || manifest.version !== plugin.version) throw new Error(`Native Plugin manifest identity conflict for '${plugin.name}@${plugin.marketplace}'.`);
+        return { ...plugin, source: `marketplace:${plugin.marketplace}`, installedFrom: source, cache_path: target, discoveredOnly: false };
+      }
+      if (plugin.source !== "live" || typeof plugin.marketplace !== "string" || !plugin.marketplace
         || typeof plugin.installedFrom !== "string" || !path.isAbsolute(plugin.installedFrom)) return plugin;
       const registration = local.settings.extraKnownMarketplaces?.[plugin.marketplace ?? ""]?.source;
-      if (registration?.source !== "directory" || typeof registration.path !== "string" || !pathsEqual(registration.path, plugin.installedFrom)) return plugin;
+      if (registration?.source !== "directory" || typeof registration.path !== "string" || !path.isAbsolute(registration.path) || !pathsEqual(registration.path, plugin.installedFrom)) return plugin;
       let pending = catalogs.get(plugin.installedFrom);
       if (!pending) {
         pending = loadMarketplaceCatalog(plugin.installedFrom, plugin.installedFrom);
@@ -87,9 +120,12 @@ export async function normalizeLivePluginInventory(installed: InstalledPlugin[],
       const declared = catalog.plugins.find((candidate) => candidate.name === plugin.name && candidate.version === plugin.version);
       if (catalog.name !== plugin.marketplace || !declared) return plugin;
       const spec = `${plugin.name}@${plugin.marketplace}`;
+      const selected = local.settings.enabledPlugins?.[spec];
+      if (typeof selected === "boolean" && selected !== plugin.enabled) throw new Error(`Native live Plugin enabled state conflict for '${spec}'.`);
       const explicitlyInstalled = local.config.installedPlugins?.some((candidate) => candidate.name === plugin.name && candidate.marketplace === plugin.marketplace);
       return {
         ...plugin,
+        source: `live-marketplace:${plugin.marketplace}`,
         cache_path: declared.root,
         discoveredOnly: !explicitlyInstalled && typeof local.settings.enabledPlugins?.[spec] !== "boolean",
       };
@@ -99,24 +135,42 @@ export async function normalizeLivePluginInventory(installed: InstalledPlugin[],
   }
 }
 
+export function nativeGitMarketplaceSource(source: Record<string, string> | undefined): string | undefined {
+  if (source?.source === "git" && typeof source.url === "string" && source.url) return source.url;
+  if (source?.source === "github" && typeof source.repo === "string" && source.repo) return source.repo;
+  return undefined;
+}
+
+/** Current official native producer layout; a planned address does not establish installation or ownership. */
+export function nativeInstalledPluginTarget(homeDir: string, marketplace: string, name: string): string {
+  const segment = /^(?!.*(?:--|\.\.))[a-z0-9](?:[a-z0-9.-]{0,62}[a-z0-9])?$/;
+  if (!segment.test(marketplace) || !segment.test(name)) throw new Error("Native Plugin destination requires safe marketplace and Plugin names.");
+  return path.join(copilotHome(homeDir), "installed-plugins", marketplace, name);
+}
+
 /** Read the same persisted live-user facts without invoking the native executable. */
-export function recordedUserPluginInventory(local: { config: CopilotConfigFile; settings: CopilotSettingsFile }, catalog: MarketplaceCatalog): InstalledPlugin[] {
+export async function recordedUserPluginInventory(local: { config: CopilotConfigFile; settings: CopilotSettingsFile }, catalog: MarketplaceCatalog, homeDir: string): Promise<InstalledPlugin[]> {
   const installed: InstalledPlugin[] = (local.config.installedPlugins ?? []).map((plugin) => ({
     ...plugin,
     enabled: plugin.enabled ?? local.settings.enabledPlugins?.[`${plugin.name}@${plugin.marketplace}`] ?? false,
+    ...(plugin.source === undefined && typeof plugin.source_sha === "string" ? { source: "installed" } : {}),
   }));
   const registration = local.settings.extraKnownMarketplaces?.[catalog.name]?.source;
-  if (registration?.source !== "directory" || typeof registration.path !== "string" || !pathsEqual(registration.path, catalog.root)) return installed;
+  if (registration?.source !== "directory" || typeof registration.path !== "string" || !pathsEqual(registration.path, catalog.root)) return await normalizeLivePluginInventory(installed, homeDir, local);
   for (const plugin of catalog.plugins) {
     if (installed.some((candidate) => candidate.name === plugin.name && candidate.marketplace === catalog.name)) continue;
     const enabled = local.settings.enabledPlugins?.[`${plugin.name}@${catalog.name}`];
     installed.push({
       name: plugin.name, marketplace: catalog.name, version: plugin.version, cache_path: plugin.root,
       enabled: enabled ?? false, discoveredOnly: typeof enabled !== "boolean",
-      scope: "user", source: `live-marketplace:${catalog.name}`, installedFrom: catalog.root,
+      scope: "user", source: `live-marketplace:${catalog.name}`, installedFrom: registration.path,
     });
   }
   return installed;
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return !!value && typeof value === "object" && !Array.isArray(value);
 }
 
 async function readCopilotConfig(filePath: string): Promise<CopilotConfigFile | undefined> {

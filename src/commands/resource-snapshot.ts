@@ -55,7 +55,7 @@ export async function collectResourceSnapshot(context: CommandContext): Promise<
       }
       sourceHash = resourceSourceHash(config.marketplace.source);
       resourceRevision = catalog.revision ?? config.marketplaceRevision;
-      const installed = recordedUserPluginInventory(local, catalog);
+      const installed = await recordedUserPluginInventory(local, catalog, context.homeDir);
       const marketplaceRegistration = local.settings.extraKnownMarketplaces?.[config.marketplace.name];
       if (!marketplaceRegistration) {
         diagnostics.push({ code: "MARKETPLACE_NOT_REGISTERED", severity: "warning", message: "Marketplace registration is missing from Copilot settings." });

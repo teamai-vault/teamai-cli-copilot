@@ -36,7 +36,7 @@ describe("resource snapshot CLI", () => {
       [`common@${TEST_MARKETPLACE_NAME}`]: false,
       [`api@${TEST_MARKETPLACE_NAME}`]: true,
     } }), "utf8");
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, homeDir);
     const overrides = { cwd, homeDir, copilot: fake.client, loadMarketplace: async () => loadFakeMarketplace(), };
     const statusOutput = capture();
     const resourceList = capture();

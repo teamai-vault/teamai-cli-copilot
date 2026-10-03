@@ -69,20 +69,29 @@ try {
   runRoot = await mkdtemp(path.join(os.tmpdir(), "teamai-fallback-e2e-"));
   const profile = path.join(runRoot, "profile");
   const repository = path.join(runRoot, "repository");
+  const copilotHome = path.join(profile, ".copilot");
+  const cacheHome = path.join(profile, ".cache");
   const appData = path.join(profile, "AppData", "Roaming");
   const localAppData = path.join(profile, "AppData", "Local");
-  await Promise.all([repository, appData, localAppData].map((directory) => mkdir(directory, { recursive: true })));
+  const temp = path.join(runRoot, "temp");
+  await Promise.all([repository, copilotHome, cacheHome, appData, localAppData, temp].map((directory) => mkdir(directory, { recursive: true })));
   const gitPath = (await run(process.platform === "win32" ? "where.exe" : "which", ["git"])).stdout.trim().split(/\r?\n/, 1)[0];
   const isolatedEnv = {
     ...process.env,
     HOME: profile,
     USERPROFILE: profile,
+    COPILOT_HOME: copilotHome,
+    COPILOT_CACHE_HOME: cacheHome,
     APPDATA: appData,
     LOCALAPPDATA: localAppData,
+    TEMP: temp,
+    TMP: temp,
   };
+  delete isolatedEnv.COPILOT_GITHUB_TOKEN;
+  delete isolatedEnv.GH_TOKEN;
+  delete isolatedEnv.GITHUB_TOKEN;
   const codePath = await resolveRealCode(isolatedEnv);
   const fallbackEnv = { ...isolatedEnv, PATH: `${path.dirname(codePath)}${path.delimiter}${path.dirname(gitPath)}` };
-  delete fallbackEnv.COPILOT_HOME;
 
   await run("git", ["init", "-b", "main"], { cwd: repository, env: { ...fallbackEnv, PATH: process.env.PATH } });
   await run("git", ["config", "user.email", "teamai@example.invalid"], { cwd: repository, env: { ...fallbackEnv, PATH: process.env.PATH } });
@@ -97,8 +106,8 @@ try {
   await run(process.execPath, [cli, "sync"], { cwd: repository, env: fallbackEnv });
   await run(process.execPath, [cli, "doctor"], { cwd: repository, env: fallbackEnv });
 
-  const configPath = path.join(profile, ".copilot", "config.json");
-  const settingsPath = path.join(profile, ".copilot", "settings.json");
+  const configPath = path.join(copilotHome, "config.json");
+  const settingsPath = path.join(copilotHome, "settings.json");
   const config = JSON.parse(await readFile(configPath, "utf8"));
   const settings = JSON.parse(await readFile(settingsPath, "utf8"));
   assert.equal(config.installedPlugins.length, 6);
@@ -107,18 +116,29 @@ try {
   assert.equal(settings.enabledPlugins["qa@teamai"], true);
   for (const name of ["api", "ios", "aos", "design"]) assert.equal(settings.enabledPlugins[`${name}@teamai`], false);
 
-  const nativeEnv = { ...process.env, HOME: profile, USERPROFILE: profile, APPDATA: appData };
-  delete nativeEnv.COPILOT_HOME;
-  const nativePlugins = JSON.parse((await runCopilot(["plugins", "list", "--kind", "plugin", "--json"], { cwd: repository, env: nativeEnv })).stdout).plugins;
+  const nativeEnv = { ...fallbackEnv, PATH: isolatedEnv.PATH };
+  const runtime = await runCopilot(["--version"], { cwd: repository, env: nativeEnv });
+  await writeFile(path.join(runRoot, "runtime.json"), JSON.stringify({
+    platform: process.platform, arch: process.arch, os: os.release(), node: process.version,
+    workspaceRoot: repository, marketplaceRoot, command: "copilot", argv: ["--version"],
+    stdout: runtime.stdout, stderr: runtime.stderr,
+    profile, copilotHome, cacheHome, appData, localAppData, temp,
+  }, null, 2), "utf8");
+  const nativePlugins = JSON.parse((await runCopilot(["plugin", "list", "--json"], { cwd: repository, env: nativeEnv })).stdout);
+  assert.ok(Array.isArray(nativePlugins), "Native Plugin listing must be an array.");
   for (const name of ["common", "api", "ios", "aos", "qa", "design"]) {
     assert.ok(nativePlugins.some((plugin) => plugin.name === name), `native Copilot should recognize ${name}@teamai`);
   }
   const nativeSkills = JSON.parse((await runCopilot(["skill", "list", "--json"], { cwd: repository, env: nativeEnv })).stdout);
-  const builtInSkill = nativeSkills.find((skill) => skill.name === "teamai" && skill.source === "personal-copilot");
+  assert.ok(Array.isArray(nativeSkills), "Native skill listing must be an array.");
+  const builtInSkill = nativeSkills.find((skill) => skill.name === "teamai" && skill.source === "personal-copilot" && skill.enabled === true && typeof skill.path === "string");
   assert.ok(builtInSkill, "native Copilot should recognize the built-in Team AI Skill");
-  assert.equal(normalizedPath(builtInSkill.path), normalizedPath(path.join(profile, ".copilot", "skills", "teamai")));
+  assert.equal(normalizedPath(builtInSkill.path), normalizedPath(path.join(copilotHome, "skills", "teamai")));
 
   console.log(`Fallback materialization and native Copilot recognition passed on ${process.platform}.`);
 } finally {
-  if (runRoot) await rm(runRoot, { recursive: true, force: true });
+  if (runRoot) {
+    if (process.env.TEAM_AI_E2E_KEEP_ARTIFACTS === "1") console.log(`E2E artifacts retained at ${runRoot}`);
+    else await rm(runRoot, { recursive: true, force: true });
+  }
 }

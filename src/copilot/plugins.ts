@@ -138,6 +138,7 @@ export async function convergeUserPlugins(
   const warnings: string[] = [];
   const enabledSpecs = new Set(enabledUserPlugins(config.role, catalog, config.marketplace.name));
   let owned = new Set(config.managedPlugins ?? []);
+  await client.preparePluginDelivery?.(config.marketplace, catalog, config.managedPluginReceipts ?? [], options.cwd);
   const marketplaces = await client.listMarketplaces(options.cwd);
   let installed = await client.listPlugins(options.cwd);
   if (!options.dryRun && config.pendingPluginMutation) {
@@ -151,6 +152,7 @@ export async function convergeUserPlugins(
       if (!(await client.listMarketplaces(options.cwd)).some((item) => item.name === config.marketplace.name)) {
         throw new Error(`Marketplace '${config.marketplace.name}' was not visible after registration.`);
       }
+      await client.preparePluginDelivery?.(config.marketplace, catalog, config.managedPluginReceipts ?? [], options.cwd);
     }
   }
 
@@ -228,7 +230,13 @@ export async function convergeUserPlugins(
     } catch (error) {
       actionError = error;
     }
-    installed = await client.listPlugins(options.cwd);
+    try {
+      installed = await client.listPlugins(options.cwd);
+    } catch (error) {
+      const diagnostic = error instanceof Error ? error.message : String(error);
+      const cause = actionError instanceof Error ? ` ${actionError.message}` : "";
+      throw new Error(`Partial Copilot ${kind} for '${spec}': readback failed; pending checkpoint retained. ${diagnostic}${cause}`);
+    }
     const observed = await observePlugin(installed, spec);
     if (matchesPluginState(observed, expectedAfter) && sameDeliveryIdentity(observed, expectedAfter)) {
       recordCompletedMutation(config, journal, observed);

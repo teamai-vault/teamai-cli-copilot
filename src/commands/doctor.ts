@@ -158,7 +158,7 @@ export async function doctorCommand(context: CommandContext, jsonOutput = false)
 
       if (config.role && copilotConfig && copilotSettings) {
         const expectedEnabled = new Set(enabledUserPlugins(config.role, catalog.plugins, config.marketplace.name));
-        const inventory = recordedUserPluginInventory({ config: copilotConfig, settings: copilotSettings }, catalog);
+        const inventory = await recordedUserPluginInventory({ config: copilotConfig, settings: copilotSettings }, catalog, context.homeDir);
         if (inventory.length === 0) {
           warn("Copilot Plugin inventory is not recorded in local settings; installed/runtime state is unobserved.");
         } else {
@@ -253,7 +253,7 @@ export async function doctorCommand(context: CommandContext, jsonOutput = false)
   if (config && catalogSnapshot) {
     try {
       const inventory = copilotConfig && copilotSettings
-        ? recordedUserPluginInventory({ config: copilotConfig, settings: copilotSettings }, { ...catalogSnapshot, dispose: async () => {} })
+        ? await recordedUserPluginInventory({ config: copilotConfig, settings: copilotSettings }, { ...catalogSnapshot, dispose: async () => {} }, context.homeDir)
         : [];
       if (inventory.length === 0) {
         warn("Managed personal Skill availability is unknown because no local Plugin inventory is recorded.");

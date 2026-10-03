@@ -260,7 +260,7 @@ describe("learning share", () => {
     const source = await marketplace();
     const body = path.join(repo, "payment-retry.md");
     const staging = await tempDir("teamai-learning-staging-");
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, home);
     await writeFile(body, "Retry only after token refresh.\n", "utf8");
     await writeGlobalConfig(createConfig({ name: TEST_MARKETPLACE_NAME, source }), home);
     await setActiveProjects(repo, home, ["payments.v2"]);
@@ -323,7 +323,7 @@ describe("learning share", () => {
     const repo = await createGitRepo();
     const home = await tempDir("teamai-learning-routing-home-");
     const source = await marketplace();
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, home);
     await writeFile(path.join(repo, "note.md"), "A note.\n", "utf8");
     await writeGlobalConfig(createConfig({ name: TEST_MARKETPLACE_NAME, source }), home);
     const zero = capture();
@@ -462,7 +462,7 @@ describe("learning share", () => {
     const body = Buffer.from("Keep the original CRLF and UTF-8: café.\r\n", "utf8");
     await writeFile(path.join(repo, "note.md"), body);
     await writeGlobalConfig(createConfig({ name: TEST_MARKETPLACE_NAME, source }), home);
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, home);
     const output = capture();
     const ghCalls: string[][] = [];
     let sawDurableRecordBeforeClone = false;

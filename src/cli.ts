@@ -298,7 +298,7 @@ export async function runCli(argv: string[], overrides: Partial<CommandContext> 
       await assertRecallAgentRootMatchesOwnership(context.homeDir);
     }
     if (needsCopilotBackend(invocation)) await resolveCopilotBackend(context);
-
+    if (context.copilotMode === "native" && (invocation.command === "init" || invocation.command === "sync" || invocation.command === "role" && invocation.subcommand === "set")) await context.copilot.validatePluginCommands?.(context.cwd);
     switch (invocation.command) {
       case "init":
         await initCommand(context, { marketplace: option(invocation.options, "--marketplace"), role: option(invocation.options, "--role") });

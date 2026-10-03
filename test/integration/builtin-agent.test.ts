@@ -20,7 +20,7 @@ describe("native builtin Recall Agent public commands", () => {
     cleanup.push(cwd, homeDir);
     const custom = path.join(homeDir, "custom home");
     vi.stubEnv("COPILOT_HOME", custom);
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, homeDir);
     const base = { cwd, homeDir, copilot: fake.client, loadMarketplace: async () => loadFakeMarketplace() };
     const output = capture();
     expect(await runCli(["init", "--marketplace", TEST_MARKETPLACE_SOURCE, "--role", "api"], { ...base, ...output })).toBe(0);
@@ -50,7 +50,7 @@ describe("native builtin Recall Agent public commands", () => {
     const target = builtInRecallAgentTarget(homeDir);
     await mkdir(path.dirname(target), { recursive: true });
     await writeFile(target, "personal Agent\n");
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, homeDir);
     const output = capture();
     expect(await runCli(["init", "--marketplace", TEST_MARKETPLACE_SOURCE, "--role", "api"], {
       cwd, homeDir, copilot: fake.client, loadMarketplace: async () => loadFakeMarketplace(), ...output,
@@ -73,7 +73,7 @@ describe("native builtin Recall Agent public commands", () => {
     await writeFile(path.join(custom, "skills", "personal", "SKILL.md"), "personal Skill");
     await writeFile(path.join(custom, "config.json"), JSON.stringify({ personalConfig: { untouched: true } }));
     await writeFile(path.join(custom, "settings.json"), JSON.stringify({ personalSettings: 42 }));
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, homeDir);
     fake.client.version = async () => { throw new CopilotUnavailableError("fixture native unavailable"); };
     const output = capture();
     expect(await runCli(["init", "--marketplace", TEST_MARKETPLACE_SOURCE, "--role", "api"], {
@@ -90,7 +90,7 @@ describe("native builtin Recall Agent public commands", () => {
   test("native policy failure does not invoke fallback or deliver an Agent", async () => {
     const cwd = await tempDir("teamai-agent-native-fail-cwd-"), homeDir = await tempDir("teamai-agent-native-fail-home-");
     cleanup.push(cwd, homeDir);
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, homeDir);
     fake.client.version = async () => { throw new Error("native enterprise policy denial"); };
     const vscodeAvailable = vi.fn(async () => true);
     const output = capture();

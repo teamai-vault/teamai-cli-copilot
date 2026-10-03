@@ -6,6 +6,12 @@ import { executableVersion } from "../utils/process.js";
 import { promptText, selectRole } from "../utils/prompt.js";
 import { vscodeSettingsPath } from "../copilot/vscode-settings.js";
 import { submitGitHubContribution, type GitHubContributionOptions, type GitHubContributionResult } from "../contribution/github.js";
+import { convergeUserPlugins } from "../copilot/plugins.js";
+import type { TeamAiConfig } from "../config/schema.js";
+import path from "node:path";
+import { withFileLock } from "../utils/fs.js";
+import { copilotHome, readCopilotState } from "../copilot/user-state.js";
+import { ensureSafeTargetChain } from "../copilot/user-instructions.js";
 
 export interface CommandContext {
   cwd: string;
@@ -13,6 +19,7 @@ export interface CommandContext {
   dryRun: boolean;
   copilot: CopilotOperations;
   copilotMode: "native" | "fallback" | "unavailable";
+  copilotRuntime?: string;
   vscodeAvailable: () => Promise<boolean>;
   vscodeSettingsPath: string;
   interactive: boolean;
@@ -33,7 +40,7 @@ export function createCommandContext(overrides: Partial<CommandContext> = {}): C
     cwd: overrides.cwd ?? process.cwd(),
     homeDir,
     dryRun,
-    copilot: overrides.copilot ?? new CopilotClient(),
+    copilot: overrides.copilot ?? new CopilotClient("copilot", [], homeDir, overrides.err ?? ((text) => process.stderr.write(text))),
     copilotMode: overrides.copilotMode ?? "native",
     vscodeAvailable: overrides.vscodeAvailable ?? (async () => (await executableVersion("code", ["--version"])) !== undefined),
     vscodeSettingsPath: overrides.vscodeSettingsPath ?? vscodeSettingsPath(homeDir),
@@ -54,7 +61,7 @@ export function createCommandContext(overrides: Partial<CommandContext> = {}): C
 
 export async function resolveCopilotBackend(context: CommandContext): Promise<void> {
   try {
-    await context.copilot.version();
+    context.copilotRuntime = await context.copilot.version();
   } catch (error) {
     if (error instanceof CopilotUnavailableError && await context.vscodeAvailable()) {
       context.copilot = new FallbackCopilotClient(context.homeDir, context.now, context.loadMarketplace);
@@ -65,4 +72,31 @@ export async function resolveCopilotBackend(context: CommandContext): Promise<vo
       throw error;
     }
   }
+  if (context.copilotMode === "native") await preflightCopilotContract(context);
+}
+
+export async function preflightCopilotContract(context: CommandContext): Promise<void> {
+  if (context.copilotMode !== "native") return;
+  await readCopilotState(context.homeDir);
+  await context.copilot.listMarketplaces(context.cwd);
+  await context.copilot.listPlugins(context.cwd);
+}
+
+export async function preflightUserPluginDelivery(context: CommandContext, config: TeamAiConfig, catalog: MarketplaceCatalog): Promise<void> {
+  if (context.copilotMode !== "native") return;
+  await convergeUserPlugins(context.copilot, config, catalog.plugins, { dryRun: true, cwd: context.cwd, resourceRevision: catalog.revision });
+}
+
+/** Validate before lock creation and repeat under the shared native user-delivery lock. */
+export async function withNativeUserDeliveryLock<T>(context: CommandContext, preflight: () => Promise<void>, deliver: () => Promise<T>, pluginMutations = false): Promise<T> {
+  await preflight();
+  if (context.copilotMode !== "native" || context.dryRun) return await deliver();
+  const root = copilotHome(context.homeDir);
+  await ensureSafeTargetChain(root);
+  return await withFileLock(path.join(root, ".teamai.lock"), async () => {
+    await preflightCopilotContract(context);
+    if (pluginMutations) await context.copilot.validatePluginCommands?.(context.cwd);
+    await preflight();
+    return await deliver();
+  });
 }

@@ -51,9 +51,12 @@ const plugins = [];
 for (const name of ["common", "api"]) {
   const pluginRoot = path.join(source, "plugins", name);
   await mkdir(pluginRoot, { recursive: true });
-  await writeFile(path.join(pluginRoot, "plugin.json"), JSON.stringify({ name, version: "0.1.0" }));
+  await writeFile(path.join(pluginRoot, "plugin.json"), JSON.stringify({ name, version: "0.1.0", extensions: { "com.company.teamai": { kind: name === "common" ? "common" : "role" } } }));
   plugins.push({ name, version: "0.1.0", kind: name === "common" ? "common" : "role", root: pluginRoot });
 }
+await mkdir(path.join(source, ".github", "plugin"), { recursive: true });
+await writeFile(path.join(source, ".github", "plugin", "marketplace.json"), JSON.stringify({ name: "package-fixture", plugins: plugins.map(({ name, version }) => ({ name, version, source: `./plugins/${name}` })) }));
+await writeFile(path.join(source, "skills.yaml"), "version: 1\nskills: {}\n");
 const { runCli } = await import(pathToFileURL(path.join(installed, "dist", "cli.js")).href);
 const { CopilotClient } = await import(pathToFileURL(path.join(installed, "dist", "copilot", "cli.js")).href);
 const helper = fileURLToPath(new URL("./fake-copilot.mjs", import.meta.url));
@@ -68,9 +71,8 @@ for (const custom of [false, true]) {
   await writeFile(personal, "personal neighbor\n");
   const statePath = path.join(home, "fake-native.json");
   await mkdir(home, { recursive: true });
-  await writeFile(statePath, JSON.stringify({ fixtureSourceRoot: source, marketplaceName: "package-fixture", marketplaces: [], plugins: [], mcpServers: [], mcpErrors: [], catalog: { "package-fixture": plugins.map(({ name, version }) => ({ name, version })) } }));
-  const client = new CopilotClient(process.execPath, [helper, statePath]);
-  client.pluginInstallIdentity = (spec) => ({ cachePath: path.join(home, "installed-plugins", "package-fixture", spec.split("@")[0]), source: "marketplace:package-fixture" });
+  await writeFile(statePath, JSON.stringify({ homeDir: home, fixtureSourceRoot: source, marketplaceName: "package-fixture", marketplaces: [], plugins: [], catalog: { "package-fixture": plugins.map(({ name, version }) => ({ name, version })) } }));
+  const client = new CopilotClient(process.execPath, [helper, statePath], home);
   const stdout = [], stderr = [];
   const code = await runCli(["init", "--marketplace", source, "--role", "api"], { cwd, homeDir: home, copilot: client, loadMarketplace: async () => ({ name: "package-fixture", root: source, plugins, skills: [], dispose: async () => {} }), out: (s) => stdout.push(s), err: (s) => stderr.push(s) });
   assert.equal(code, 0, stderr.join("\n"));

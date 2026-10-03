@@ -11,7 +11,7 @@ export function normalizeMarketplaceSource(source: string, cwd: string): string 
 
 export function marketplaceRowMatchesSource(row: MarketplaceRow, source: string): boolean {
   if (typeof row.source !== "string") return false;
-  const registered = row.source.replace(/^(?:GitHub|URL|Local):\s*/, "");
+  const registered = row.source.replace(/^(?:GitHub|URL|Local|Directory):\s*/, "");
   if (process.platform === "win32" && (/^[A-Za-z]:[\\/]/.test(source) || /^[A-Za-z]:[\\/]/.test(registered))) {
     return path.normalize(registered).toLowerCase() === path.normalize(source).toLowerCase();
   }
@@ -42,7 +42,7 @@ export async function resolveMarketplaceConfig(
 
   await client.addMarketplace(source, options.cwd);
   const after = await client.listMarketplaces(options.cwd);
-  if (!after.some((item) => item.name === marketplaceName)) {
+  if (!after.some((item) => item.name === marketplaceName && marketplaceRowMatchesSource(item, source))) {
     throw new Error(`Marketplace '${marketplaceName}' was not visible after registering '${source}'.`);
   }
   return { config: { name: marketplaceName, source }, added: true };

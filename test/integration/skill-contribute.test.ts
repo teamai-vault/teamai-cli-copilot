@@ -66,7 +66,7 @@ test("integration: skill contribute uses an isolated worktree and mocked gh", as
   await writeFile(path.join(source, "SKILL.md"), "---\nname: release-helper\ndescription: Release help\n---\n", "utf8");
   await writeFile(path.join(source, "resources", "note.txt"), "resource\n", "utf8");
   await writeGlobalConfig(createConfig({ name: TEST_MARKETPLACE_NAME, source: remote.root }), home);
-  const fake = await createFakeCopilot();
+  const fake = await createFakeCopilot(undefined, home);
   cleanup.add(path.dirname(fake.statePath));
   const gitConfigRoot = await tempDir("teamai-skill-contribute-git-config-");
   cleanup.add(gitConfigRoot);

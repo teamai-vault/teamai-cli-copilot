@@ -1,7 +1,7 @@
 import { readGlobalConfig, writeGlobalConfig } from "../config/global.js";
 import type { CatalogPlugin } from "../copilot/catalog.js";
 import { convergeUserPlugins, enabledUserPlugins } from "../copilot/plugins.js";
-import type { CommandContext } from "./context.js";
+import { withNativeUserDeliveryLock, type CommandContext } from "./context.js";
 import { printActions, printWarnings } from "./helpers.js";
 
 export async function roleListCommand(context: CommandContext): Promise<void> {
@@ -23,18 +23,24 @@ export async function roleSetCommand(context: CommandContext, role: string): Pro
   try {
     enabledUserPlugins(role, catalog, current.marketplace.name);
     const next = { ...current, role };
-    const converged = await convergeUserPlugins(context.copilot, next, catalog, {
-      dryRun: context.dryRun,
-      cwd: context.cwd,
-      resourceRevision: revision,
-      checkpoint: async (checkpoint) => writeGlobalConfig(checkpoint, context.homeDir),
-    });
-    printActions(converged.actions, context.dryRun, context.out);
-    printWarnings(converged.warnings, context.out);
-    next.managedPlugins = converged.managedPlugins;
-    if (!context.dryRun) await writeGlobalConfig(next, context.homeDir);
-    else context.out("WOULD write: ~/.teamai/config.yaml");
-    context.out(`Role: ${role}`);
+    const preflight = async () => {
+      if (context.copilotMode !== "native") return;
+      await convergeUserPlugins(context.copilot, next, catalog, { dryRun: true, cwd: context.cwd, resourceRevision: revision });
+    };
+    await withNativeUserDeliveryLock(context, preflight, async () => {
+      const converged = await convergeUserPlugins(context.copilot, next, catalog, {
+        dryRun: context.dryRun,
+        cwd: context.cwd,
+        resourceRevision: revision,
+        checkpoint: async (checkpoint) => writeGlobalConfig(checkpoint, context.homeDir),
+      });
+      printActions(converged.actions, context.dryRun, context.out);
+      printWarnings(converged.warnings, context.out);
+      next.managedPlugins = converged.managedPlugins;
+      if (!context.dryRun) await writeGlobalConfig(next, context.homeDir);
+      else context.out("WOULD write: ~/.teamai/config.yaml");
+      context.out(`Role: ${role}`);
+    }, true);
   } finally {
     await dispose();
   }
