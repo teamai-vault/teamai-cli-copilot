@@ -1,5 +1,5 @@
 import { cp, lstat, mkdir, mkdtemp, readFile, realpath, rm, symlink, writeFile } from "node:fs/promises";
-import { rmSync } from "node:fs";
+import { realpathSync, rmSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -13,8 +13,9 @@ export const TEST_MARKETPLACE_NAME = "test-teamai";
 export const TEST_MARKETPLACE_SOURCE = "https://github.com/test-org/teamai-marketplace.git";
 let fakeAuthorityPreparation: Promise<string> | undefined;
 const fakeFixtureId = `${process.pid}-${Date.now()}`;
-const fakeAuthorityRoot = path.join(os.tmpdir(), `teamai-test-authority-${fakeFixtureId}.git`);
-const fakeMarketplaceRoot = path.join(os.tmpdir(), `teamai-fake-marketplace-${fakeFixtureId}`);
+const fakeTempRoot = realpathSync(os.tmpdir());
+const fakeAuthorityRoot = path.join(fakeTempRoot, `teamai-test-authority-${fakeFixtureId}.git`);
+const fakeMarketplaceRoot = path.join(fakeTempRoot, `teamai-fake-marketplace-${fakeFixtureId}`);
 process.once("exit", () => {
   for (const root of [fakeAuthorityRoot, fakeMarketplaceRoot]) {
     try {
