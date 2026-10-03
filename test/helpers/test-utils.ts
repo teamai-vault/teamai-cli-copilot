@@ -13,7 +13,7 @@ export const TEST_MARKETPLACE_NAME = "test-teamai";
 export const TEST_MARKETPLACE_SOURCE = "https://github.com/test-org/teamai-marketplace.git";
 let fakeAuthorityPreparation: Promise<string> | undefined;
 const fakeFixtureId = `${process.pid}-${Date.now()}`;
-const fakeTempRoot = realpathSync(os.tmpdir());
+const fakeTempRoot = realpathSync.native(os.tmpdir());
 const fakeAuthorityRoot = path.join(fakeTempRoot, `teamai-test-authority-${fakeFixtureId}.git`);
 const fakeMarketplaceRoot = path.join(fakeTempRoot, `teamai-fake-marketplace-${fakeFixtureId}`);
 process.once("exit", () => {
