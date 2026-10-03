@@ -15,6 +15,7 @@ import { statusCommand } from "./commands/status.js";
 import { syncCommand } from "./commands/sync.js";
 import { tagsListCommand } from "./commands/tags.js";
 import { assertCopilotHomeMatchesOwnership } from "./copilot/builtin-skill.js";
+import { assertRecallAgentRootMatchesOwnership } from "./copilot/builtin-agent.js";
 import { copilotHome } from "./copilot/user-state.js";
 import { VERSION } from "./version.js";
 
@@ -294,6 +295,7 @@ export async function runCli(argv: string[], overrides: Partial<CommandContext> 
     if (usesCopilotRoot(invocation)) {
       copilotHome(context.homeDir);
       await assertCopilotHomeMatchesOwnership(context.homeDir);
+      await assertRecallAgentRootMatchesOwnership(context.homeDir);
     }
     if (needsCopilotBackend(invocation)) await resolveCopilotBackend(context);
 

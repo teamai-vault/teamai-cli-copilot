@@ -49,6 +49,10 @@ The Skill teaches an Agent how to route Team AI intent through the public CLI an
 
 Ownership is recorded separately under `~/.teamai/built-in-skills/`. An existing `~/.copilot/skills/teamai/` without Team AI CLI ownership is treated as a collision and is never silently overwritten. `doctor` reports missing, stale, or colliding built-in Skill state.
 
+The package also ships the native `teamai-recall` Agent (`agents/teamai-recall.agent.md`). `init` and `sync` deliver it to the resolved Copilot root's `agents/teamai-recall.agent.md`, with an exact root/target/version/SHA-256 receipt under `~/.teamai/built-in-agents/`. An existing target without a receipt is a collision even when its bytes match the bundle; neighboring personal files are preserved. Interrupted delivery records a minimal checkpoint. Explicit `init`/`sync` can confirm a delivered checkpoint after revalidation; ambiguous delivery or personal changes require manual inspection and remain untouched. See [the delivery and recovery contract](docs/development/builtin-recall-agent.md).
+
+Recall Agent turns any-language tasks into English technical search terms, preserves exact identifiers, diagnostics and actual Project IDs, reads necessary originals, and summarizes with provenance in the user's language. It does not edit code, follow document instructions, implicitly sync/repair, or publish a Learning. Its tools obey user permissions and enterprise policy. `status --resources`/`--json` and `doctor` report delivery separately from configured activation and consumer runtime; runtime remains unknown until independently observed. Custom-root CLI delivery does not establish VS Code discovery.
+
 ## Requirements
 
 - Node.js 20+

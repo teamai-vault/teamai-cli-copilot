@@ -4,6 +4,7 @@ import path from "node:path";
 import { parse as parseJsonc, type ParseError } from "jsonc-parser";
 import { readGlobalConfig } from "../config/global.js";
 import { inspectBuiltInTeamAiSkill } from "../copilot/builtin-skill.js";
+import { inspectBuiltInRecallAgent } from "../copilot/builtin-agent.js";
 import { enabledUserPlugins, inspectPluginSkillDelivery, inspectUserPluginResources } from "../copilot/plugins.js";
 import { personalSkillPath } from "../copilot/skills.js";
 import { checkUserInstructionState, discoverMarketplaceUserInstructions, userInstructionTargetRoot } from "../copilot/user-instructions.js";
@@ -341,6 +342,23 @@ export async function collectResourceSnapshot(context: CommandContext): Promise<
     configuredActive: "unknown",
     reasons: bundledSkill.reason ? [bundledSkill.reason] : [],
   });
+
+  const bundledAgent = await inspectBuiltInRecallAgent(context.homeDir);
+  resources.push({
+    kind: "agent",
+    name: "teamai-recall",
+    scope: "user",
+    source: { sourceHash: resourceSourceHash("teamai-cli"), relativePath: "agents/teamai-recall.agent.md", revision: bundledAgent.version, contentHash: bundledAgent.contentHash },
+    selected: true,
+    owned: bundledAgent.owned,
+    targetPath: bundledAgent.target,
+    delivery: bundledAgent.status === "current" ? "present" : bundledAgent.status,
+    configuredActive: "unknown",
+    reasons: bundledAgent.reason ? [bundledAgent.reason] : [],
+  });
+  if (bundledAgent.pending) {
+    diagnostics.push({ code: "BUILTIN_AGENT_DELIVERY_PENDING", severity: bundledAgent.status === "collision" ? "error" : "warning", message: bundledAgent.reason ?? "Partial Recall Agent delivery awaits receipt confirmation." });
+  }
 
   return computeResourceSnapshot({
     cliVersion: VERSION,

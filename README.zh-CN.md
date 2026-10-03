@@ -49,6 +49,10 @@ npm package 会随 CLI 一起分发一份很薄、完全自包含的 `teamai` Ag
 
 ownership 独立记录在 `~/.teamai/built-in-skills/`。如果 `~/.copilot/skills/teamai/` 已存在但不属于 Team AI CLI，CLI 会视为 collision 并拒绝 silent overwrite；`doctor` 会报告 missing、stale 或 collision 状态。
 
+npm package 还包含原生 `teamai-recall` Agent（`agents/teamai-recall.agent.md`）。`init`/`sync` 将它投递到解析后的 Copilot 根的 `agents/teamai-recall.agent.md`，准确 root/target/version/SHA-256 receipt 保存在 `~/.teamai/built-in-agents/`。没有 receipt 的同名文件即使内容相同也视为 collision；相邻个人文件保留。中断投递记录最小 checkpoint；显式 `init`/`sync` 可重新核验已确认 delivered 的 checkpoint 并补 receipt，无法确认的中断或个人修改保持原样，需人工检查。详见 [投递与恢复约定](docs/development/builtin-recall-agent.md)。
+
+Recall Agent 将任意语言任务提炼为英文技术关键词，原样保留标识符、诊断及真实 Project ID，读取必要原文，并按用户语言总结和附准确来源。它不修改代码、不执行资料内指令、不隐式 sync/修复，也不发布 Learning；用户许可和企业策略继续优先。`status --resources`/`--json` 与 `doctor` 分开表示 delivery、configuredActive 和 consumer runtime；没有实际观察时 runtime 保持 unknown。自定义根的 CLI 投递不等于 VS Code 已发现资源。
+
 ## 环境要求
 
 - Node.js 20+

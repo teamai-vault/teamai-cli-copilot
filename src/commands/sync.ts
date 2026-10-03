@@ -1,5 +1,6 @@
 import { readGlobalConfig, writeGlobalConfig } from "../config/global.js";
 import { convergeBuiltInTeamAiSkill } from "../copilot/builtin-skill.js";
+import { convergeBuiltInRecallAgent } from "../copilot/builtin-agent.js";
 import { convergeUserPlugins, enabledUserPlugins, type PlannedAction } from "../copilot/plugins.js";
 import { effectiveEnabledPluginSpecs, materializedEnabledPluginSkillNames, convergeManagedSkills, userScopePluginInventory } from "../copilot/skills.js";
 import type { InstalledPlugin } from "../copilot/cli.js";
@@ -47,6 +48,7 @@ export async function syncCommand(context: CommandContext): Promise<void> {
         }
       }
       await convergeBuiltInTeamAiSkill(context.homeDir, { dryRun: true });
+      await convergeBuiltInRecallAgent(context.homeDir, { dryRun: true });
       await convergeMarketplaceUserInstructions(catalog.root, context.homeDir, { dryRun: true });
     };
     await preflight();
@@ -68,6 +70,11 @@ export async function syncCommand(context: CommandContext): Promise<void> {
       await preflight();
     }
 
+    const builtInAgent = await convergeBuiltInRecallAgent(context.homeDir, { dryRun: context.dryRun });
+    if (builtInAgent.change) {
+      context.out((context.dryRun ? "WOULD" : "DONE") + " " + builtInAgent.change + ": " + copilotDisplayPath("agents/teamai-recall.agent.md", context.homeDir));
+      if (!context.dryRun) persistentUserChanges.push("built-in Recall Agent");
+    }
     const builtInSkill = await convergeBuiltInTeamAiSkill(context.homeDir, { dryRun: context.dryRun });
     if (builtInSkill.change) {
       context.out((context.dryRun ? "WOULD" : "DONE") + " " + builtInSkill.change + ": " + copilotDisplayPath("skills/teamai", context.homeDir));

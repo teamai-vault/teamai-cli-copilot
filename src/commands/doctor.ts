@@ -3,6 +3,7 @@ import { constants } from "node:fs";
 import path from "node:path";
 import { readGlobalConfig } from "../config/global.js";
 import { inspectBuiltInTeamAiSkill } from "../copilot/builtin-skill.js";
+import { inspectBuiltInRecallAgent } from "../copilot/builtin-agent.js";
 import { enabledUserPlugins, pluginSpec, userPlugins } from "../copilot/plugins.js";
 import { convergeManagedSkills, effectiveEnabledPluginSpecs, materializedEnabledPluginSkillNames, materializedEnabledPluginSpecs, userScopePluginInventory } from "../copilot/skills.js";
 import { readProjectSettings } from "../copilot/project-settings.js";
@@ -80,6 +81,16 @@ export async function doctorCommand(context: CommandContext, jsonOutput = false)
     else warn("Built-in Team AI Skill: stale. Run teamai sync.");
   } catch (error) {
     fail("Built-in Team AI Skill diagnostics failed: " + (error as Error).message);
+  }
+
+  try {
+    const agent = await inspectBuiltInRecallAgent(context.homeDir);
+    if (agent.status === "current") ok(`Built-in Recall Agent: current (${agent.version}); consumer runtime unobserved.`);
+    else if (agent.status === "collision") fail(`Built-in Recall Agent collision: ${agent.reason}.`);
+    else if (agent.pending) warn(agent.reason ?? "Partial Recall Agent delivery awaits receipt confirmation.");
+    else warn(`Built-in Recall Agent: ${agent.status}. Run teamai init or teamai sync.`);
+  } catch (error) {
+    fail("Built-in Recall Agent diagnostics failed: " + (error as Error).message);
   }
 
   warn("Copilot runtime and native MCP state are unobserved by this read-only diagnostic.");

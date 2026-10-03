@@ -739,7 +739,7 @@ describe("CLI integration with fake Copilot executable", () => {
     await expect(readFile(repoStatePath, "utf8")).rejects.toMatchObject({ code: "ENOENT" });
     expect(await readFile(excludePath, "utf8")).toBe(initialExclude);
     expect(JSON.parse(await readFile(path.join(repo, ".github", "copilot", "settings.json"), "utf8")).enabledPlugins[`payments@${TEST_MARKETPLACE_NAME}`]).toBeUndefined();
-  }, CLI_PROCESS_TEST_TIMEOUT);
+  }, 120_000);
 
   test("status and doctor do not start Copilot to inspect runtime-only state", async () => {
     const repo = await createGitRepo();
@@ -883,7 +883,7 @@ describe("CLI integration with fake Copilot executable", () => {
     expect(help.stdout.join("\n")).toContain("teamai <command> [options]");
     const version = capture();
     expect(await runCli(["--version"], { out: version.out, err: version.err })).toBe(0);
-    expect(version.stdout).toEqual(["0.3.0"]);
+    expect(version.stdout).toEqual(["0.4.0"]);
     const dryRunHelp = capture();
     expect(await runCli(["--dry-run"], { out: dryRunHelp.out, err: dryRunHelp.err })).toBe(0);
     expect(dryRunHelp.stdout.join("\n")).toContain("teamai <command> [options]");

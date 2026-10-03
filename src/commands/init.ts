@@ -1,6 +1,7 @@
 import { readGlobalConfig, writeGlobalConfig } from "../config/global.js";
 import { createConfig } from "../config/schema.js";
 import { convergeBuiltInTeamAiSkill } from "../copilot/builtin-skill.js";
+import { convergeBuiltInRecallAgent } from "../copilot/builtin-agent.js";
 import { normalizeMarketplaceSource, resolveMarketplaceConfig } from "../copilot/marketplace.js";
 import { convergeUserPlugins, enabledUserPlugins } from "../copilot/plugins.js";
 import { convergeMarketplaceUserInstructions } from "../copilot/user-instructions.js";
@@ -42,6 +43,7 @@ export async function initCommand(context: CommandContext, options: InitOptions)
     }
     enabledUserPlugins(role, catalog.plugins, catalog.name);
     await convergeBuiltInTeamAiSkill(context.homeDir, { dryRun: true });
+    await convergeBuiltInRecallAgent(context.homeDir, { dryRun: true });
     await convergeMarketplaceUserInstructions(catalog.root, context.homeDir, { dryRun: true });
     if (!context.dryRun) {
       const preflightCatalog = catalog;
@@ -54,6 +56,13 @@ export async function initCommand(context: CommandContext, options: InitOptions)
       enabledUserPlugins(role, catalog.plugins, catalog.name);
     }
 
+    // Recheck both reserved targets after source preparation, before the first delivery.
+    await convergeBuiltInRecallAgent(context.homeDir, { dryRun: true });
+    await convergeBuiltInTeamAiSkill(context.homeDir, { dryRun: true });
+    const builtInAgent = await convergeBuiltInRecallAgent(context.homeDir, { dryRun: context.dryRun });
+    if (builtInAgent.change) {
+      context.out((context.dryRun ? "WOULD" : "DONE") + " " + builtInAgent.change + ": " + copilotDisplayPath("agents/teamai-recall.agent.md", context.homeDir));
+    }
     const builtInSkill = await convergeBuiltInTeamAiSkill(context.homeDir, { dryRun: context.dryRun });
     if (builtInSkill.change) {
       context.out((context.dryRun ? "WOULD" : "DONE") + " " + builtInSkill.change + ": " + copilotDisplayPath("skills/teamai", context.homeDir));
