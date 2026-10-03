@@ -4,7 +4,7 @@ import { afterEach, describe, expect, test, vi } from "vitest";
 import { runCli } from "../../src/cli.js";
 import { CopilotUnavailableError } from "../../src/copilot/cli.js";
 import { builtInRecallAgentOwnershipPath, builtInRecallAgentTarget } from "../../src/copilot/builtin-agent.js";
-import { createFakeCopilot, createGitRepo, loadFakeMarketplace, tempDir, TEST_MARKETPLACE_SOURCE } from "../helpers/test-utils.js";
+import { createDirectoryLink, createFakeCopilot, createGitRepo, loadFakeMarketplace, tempDir, TEST_MARKETPLACE_SOURCE } from "../helpers/test-utils.js";
 const cleanup: string[] = [];
 afterEach(async () => {
   vi.unstubAllEnvs();
@@ -61,6 +61,58 @@ describe("native builtin Recall Agent public commands", () => {
     expect((await fake.readState()).plugins).toEqual([]);
     await expect(stat(path.join(homeDir, ".teamai", "config.yaml"))).rejects.toMatchObject({ code: "ENOENT" });
   }, 30_000);
+
+  test.each(["ordinary file", "linked directory"])("init rejects refreshed unsafe instructions (%s) before managed delivery", async (sourceType) => {
+    const cwd = await tempDir("teamai-refresh-cwd-"), homeDir = await tempDir("teamai-refresh-home-");
+    const initialRoot = await tempDir("teamai-refresh-initial-"), refreshedRoot = await tempDir("teamai-refresh-actual-");
+    const external = await tempDir("teamai-refresh-external-");
+    cleanup.push(cwd, homeDir, initialRoot, refreshedRoot, external);
+    const root = path.join(homeDir, ".copilot");
+    vi.stubEnv("COPILOT_HOME", root);
+    const initial = await loadFakeMarketplace(initialRoot), refreshed = await loadFakeMarketplace(refreshedRoot);
+    await mkdir(path.join(initialRoot, "instructions"));
+    await writeFile(path.join(initialRoot, "instructions", "global.instructions.md"), "valid initial instruction\n");
+    const unsafe = path.join(refreshedRoot, "instructions");
+    if (sourceType === "ordinary file") await writeFile(unsafe, "not an instruction directory\n");
+    else {
+      await writeFile(path.join(external, "global.instructions.md"), "external instruction\n");
+      await createDirectoryLink(external, unsafe);
+    }
+    const fake = await createFakeCopilot({ fixtureSourceRoot: refreshedRoot }, homeDir);
+    const loadedRoots: string[] = [];
+    const output = capture();
+    expect(await runCli(["init", "--marketplace", TEST_MARKETPLACE_SOURCE, "--role", "api"], {
+      cwd, homeDir, copilot: fake.client, ...output,
+      loadMarketplace: async (_source, _cwd, options) => {
+        const catalog = options?.dryRun ? initial : refreshed;
+        loadedRoots.push(catalog.root);
+        return catalog;
+      },
+    })).toBe(1);
+    expect(loadedRoots).toEqual([initialRoot, refreshedRoot]);
+    expect(output.stderr.join("\n")).toContain(`Unsafe Marketplace user instructions source '${unsafe}'`);
+    const delivered: Record<string, boolean> = {};
+    for (const [name, target] of Object.entries({
+      agent: path.join(root, "agents", "teamai-recall.agent.md"),
+      skill: path.join(root, "skills", "teamai"),
+      agentReceipt: path.join(homeDir, ".teamai", "built-in-agents", "teamai-recall.json"),
+      agentCheckpoint: path.join(homeDir, ".teamai", "built-in-agents", "teamai-recall.pending.json"),
+      skillReceipt: path.join(homeDir, ".teamai", "built-in-skills", "teamai.json"),
+      instructions: path.join(root, "instructions", "teamai"),
+      teamaiConfig: path.join(homeDir, ".teamai", "config.yaml"),
+      nativeConfig: path.join(root, "config.json"),
+      nativeSettings: path.join(root, "settings.json"),
+    })) {
+      try { await stat(target); delivered[name] = true; }
+      catch (error) {
+        if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
+        delivered[name] = false;
+      }
+    }
+    expect(delivered).toEqual({ agent: false, skill: false, agentReceipt: false, agentCheckpoint: false, skillReceipt: false,
+      instructions: false, teamaiConfig: false, nativeConfig: false, nativeSettings: false });
+    expect(await fake.readState()).toMatchObject({ plugins: [], marketplaces: [] });
+  }, 60_000);
 
   test("fallback delivers to the custom root and preserves personal neighbors and unknown Copilot fields", async () => {
     const cwd = await tempDir("teamai-agent-fallback-cwd-"), homeDir = await tempDir("teamai-agent-fallback-home-");

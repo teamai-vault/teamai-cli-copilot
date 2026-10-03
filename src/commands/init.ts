@@ -64,6 +64,7 @@ export async function initCommand(context: CommandContext, options: InitOptions)
         if (config && config.marketplace.name !== catalog.name) throw new Error(`Configured Marketplace name '${config.marketplace.name}' does not match source manifest '${catalog.name}'.`);
         enabledUserPlugins(role, catalog.plugins, catalog.name);
         await preflightUserPluginDelivery(context, plannedConfig, catalog);
+        await convergeMarketplaceUserInstructions(catalog.root, context.homeDir, { dryRun: true });
       }
 
       // Recheck both reserved targets after source preparation, before the first delivery.
