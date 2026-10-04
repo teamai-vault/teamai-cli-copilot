@@ -138,7 +138,7 @@ export async function recallCommand(context: CommandContext, options: RecallOpti
   for (const file of publishedFiles) {
     const parsed = parseRecallMarkdown(file.content, fallbackTitle(file.relativePath));
     candidates.push({
-      id: `learning:${file.logicalProject}:${path.posix.basename(file.relativePath)}`,
+      id: `learning:${file.logicalProject}:${parsed.id}`,
       type: "learning",
       publication: "published",
       logicalProject: file.logicalProject,
@@ -213,11 +213,11 @@ export async function recallCommand(context: CommandContext, options: RecallOpti
     } catch (error) {
       throw new RecallCommandError("PENDING_CORRUPT", `Pending Learning '${header.id}' payload is not readable Markdown (${safeMessage(error)}).`);
     }
-    if (parsed.title !== header.metadata.title || !sameStrings(parsed.tags, header.metadata.tags)) {
+    if (parsed.id !== operation.id || parsed.title !== header.metadata.title || !sameStrings(parsed.tags, header.metadata.tags)) {
       throw new RecallCommandError("PENDING_CORRUPT", `Pending Learning '${header.id}' metadata does not match its saved payload.`);
     }
     candidates.push({
-      id: `pending:${operation.id}`,
+      id: `learning:${operation.logicalProject}:${parsed.id}`,
       type: "learning",
       publication: "pending",
       logicalProject: operation.logicalProject,

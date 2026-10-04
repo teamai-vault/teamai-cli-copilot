@@ -69,9 +69,9 @@ async function makeFixture(): Promise<{
   await git(learningRoot, ["checkout", "--orphan", "teamai-learnings"]);
   await git(learningRoot, ["rm", "-rf", "."]);
   await put(learningRoot, "README.md", "Published Learnings fixture\n");
-  await put(learningRoot, "learnings/shared/needle.md", "---\ntitle: Shared published needle\ntags: [shared]\n---\nPublished shared needle evidence.\n");
-  await put(learningRoot, "learnings/payments/retry.md", "---\ntitle: Payments published retry\ntags: [payments]\n---\nPublished payments needle evidence.\n");
-  await put(learningRoot, "learnings/risk/inactive.md", "---\ntitle: Inactive needle\ntags: [risk]\n---\nInactive risk needle evidence.\n");
+  await put(learningRoot, "learnings/shared/31a67c90-f875-4dce-9d7d-1812b9bc23ef.md", "---\nid: 31a67c90-f875-4dce-9d7d-1812b9bc23ef\ntitle: Shared published needle\ntags: [shared]\n---\nPublished shared needle evidence.\n");
+  await put(learningRoot, "learnings/payments/8a54f331-4b1e-4a60-8a01-597d358433bd.md", "---\nid: 8a54f331-4b1e-4a60-8a01-597d358433bd\ntitle: Payments published retry\ntags: [payments]\n---\nPublished payments needle evidence.\n");
+  await put(learningRoot, "learnings/risk/88a8bddb-ad61-48ab-8879-c8d736962631.md", "---\nid: 88a8bddb-ad61-48ab-8879-c8d736962631\ntitle: Inactive needle\ntags: [risk]\n---\nInactive risk needle evidence.\n");
   await git(learningRoot, ["remote", "add", "origin", bare]);
   await git(learningRoot, ["add", "-A"]);
   await git(learningRoot, ["commit", "-m", "published learnings fixture"]);
@@ -89,6 +89,18 @@ async function makeFixture(): Promise<{
 
   return { home, workspace, resourceRoot, source, resourceRevision, learningRevision };
 }
+
+test("published Recall reports the verified frontmatter UUID without a filename suffix", async () => {
+  const fixture = await makeFixture();
+  const before = await snapshotDirectory(fixture.home);
+  const output = capture();
+  expect(await runCli(["recall", "needle", "--scope", "user", "--json"], { ...cliOverrides(fixture), ...output })).toBe(0);
+  const hit = JSON.parse(output.stdout.join("\n")).hits[0];
+  expect(hit.id).toBe("learning:shared:31a67c90-f875-4dce-9d7d-1812b9bc23ef");
+  expect(hit.source.relativePath).toBe("learnings/shared/31a67c90-f875-4dce-9d7d-1812b9bc23ef.md");
+  expect(hit.source.revision).toBe(fixture.learningRevision);
+  expect(await snapshotDirectory(fixture.home)).toEqual(before);
+}, 60_000);
 
 async function activateProjects(workspace: string, home: string, logicalProjects: string[]): Promise<void> {
   const identity = await detectProjectIdentity(workspace);
@@ -150,7 +162,7 @@ async function addPending(
     tags: [logicalProject],
   };
   const body = Buffer.from(`Pending needle: ${title}\n`, "utf8");
-  const payload = Buffer.from(`---\ntitle: ${title}\ntags: [${logicalProject}]\n---\n${body.toString("utf8")}`, "utf8");
+  const payload = Buffer.from(`---\nid: ${id}\ntitle: ${title}\ntags: [${logicalProject}]\n---\n${body.toString("utf8")}`, "utf8");
   const contentHash = learningHash(payload);
   const complete = options.complete ?? false;
   const operation: LearningOperation = {
@@ -348,7 +360,7 @@ describe("teamai recall", () => {
     expect(JSON.parse(oversizedDoc.stdout.join("\n")).error.message).toContain("exceeds 1 MiB");
     await writeFile(resourceDoc, originalDoc);
 
-    const riskCachePath = path.join(fixture.home, ".teamai", "published-learnings", publishedLearningSourceHash(fixture.source), "revisions", fixture.learningRevision, "files", "learnings", "risk", "inactive.md");
+    const riskCachePath = path.join(fixture.home, ".teamai", "published-learnings", publishedLearningSourceHash(fixture.source), "revisions", fixture.learningRevision, "files", "learnings", "risk", "88a8bddb-ad61-48ab-8879-c8d736962631.md");
     const intactRisk = await readFile(riskCachePath, "utf8");
     await writeFile(riskCachePath, intactRisk.replace("Inactive", "InactivX"));
     const user = capture();
@@ -407,7 +419,7 @@ describe("teamai recall", () => {
       out: initial.out,
       err: initial.err,
     })).toBe(0);
-    const initialHit = JSON.parse(initial.stdout.join("\n")).hits.find((hit: { id: string }) => hit.id === `pending:${operation.id}`);
+    const initialHit = JSON.parse(initial.stdout.join("\n")).hits.find((hit: { id: string }) => hit.id === `learning:shared:${operation.id}`);
     expect(initialHit).toBeDefined();
     const frozenPayload = Buffer.from(operation.payloadBase64, "base64");
     expect(await readFile(initialHit.file)).toEqual(frozenPayload);
