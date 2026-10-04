@@ -1,7 +1,8 @@
+import { createHash } from "node:crypto";
 import { mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { pathToFileURL } from "node:url";
 import path from "node:path";
-import { afterEach, describe, expect, test } from "vitest";
+import { afterAll, afterEach, beforeAll, describe, expect, test } from "vitest";
 import { runCli } from "../../src/cli.js";
 import { resolveGitHubMarketplaceRemote, submitGitHubContribution } from "../../src/contribution/github.js";
 import { learningHash, learningOutboxDirectory, type LearningOperation } from "../../src/contribution/learning-outbox.js";
@@ -253,7 +254,122 @@ async function retry(fixture: RetryFixture, argv = ["learning", "retry"]): Promi
   return { exitCode, output };
 }
 
+async function uuidJointFixture(logicalProject: string) {
+  const repo = await createGitRepo();
+  cleanup.add(repo);
+  const home = await tempDir("teamai-uuid-producer-");
+  const secondHome = await tempDir("teamai-uuid-consumer-");
+  const secondWorkspace = await createGitRepo();
+  cleanup.add(secondWorkspace);
+  const { remote } = await marketplaceWithLearningRemote();
+  const resource = await tempDir("teamai-uuid-resource-");
+  const authority = await tempDir("teamai-uuid-authority-");
+  const git = async (cwd: string, args: string[]) => {
+    const result = await runProcess("git", args, { cwd });
+    expect(result.exitCode, result.stderr).toBe(0);
+    return result.stdout.trim();
+  };
+  await git(resource, ["clone", "--no-hardlinks", remote, "."]);
+  await git(authority, ["clone", "--no-hardlinks", "--branch", "teamai-learnings", "--single-branch", remote, "."]);
+  const resourceRevision = await git(resource, ["rev-parse", "HEAD"]);
+  const source = "https://github.com/test-org/teamai-marketplace.git";
+  const config = createConfig({ name: TEST_MARKETPLACE_NAME, source });
+  config.role = "api";
+  await writeGlobalConfig(config, home);
+  await writeGlobalConfig(config, secondHome);
+  const fake = await createFakeCopilot({ fixtureSourceRoot: resource }, home);
+  const secondFake = await createFakeCopilot({ fixtureSourceRoot: resource }, secondHome);
+  cleanup.add(path.dirname(fake.statePath));
+  cleanup.add(path.dirname(secondFake.statePath));
+  const loadMarketplace = async () => ({ ...await loadFakeMarketplace(resource), revision: resourceRevision });
+  const producer = { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace };
+  const consumer = { cwd: secondWorkspace, homeDir: secondHome, copilot: secondFake.client, loadMarketplace };
+  const initialSync = capture();
+  expect(await runCli(["sync"], { ...producer, ...initialSync }), initialSync.stderr.join("\n")).toBe(0);
+  if (logicalProject !== "shared") expect(await runCli(["projects", "set", logicalProject], { ...producer, ...capture() })).toBe(0);
+  return { repo, home, authority, producer, consumer, git };
+}
+
 describe("learning share", () => {
+  for (const logicalProject of ["shared", "payments.v2"]) describe.sequential(`keeps ${logicalProject} UUID identity through public share, pending and second-home published Recall`, () => {
+    const ownedRoots = new Set<string>();
+    let fixture: Awaited<ReturnType<typeof uuidJointFixture>>;
+    let operation: LearningOperation;
+    let frozenOutbox: Buffer;
+    let outboxPath: string;
+    let payload: Buffer;
+    let expectedId: string;
+    let expectedHash: string;
+    let firstComplete = false;
+    beforeAll(async () => {
+      const priorCleanup = new Set(cleanup);
+      try { fixture = await uuidJointFixture(logicalProject); }
+      finally {
+        for (const root of cleanup) if (!priorCleanup.has(root)) { ownedRoots.add(root); cleanup.delete(root); }
+      }
+    }, GIT_INTEGRATION_TIMEOUT);
+    afterAll(async () => {
+      await Promise.all([...ownedRoots].map((root) => rm(root, { recursive: true, force: true })));
+    }, GIT_INTEGRATION_TIMEOUT);
+
+    test("public share and pending preserve the same UUID and original body", async () => {
+      const { repo, home, authority, producer, git } = fixture;
+      const body = Buffer.from("NeedleUUID retry after token refresh.\r\n", "utf8");
+      await writeFile(path.join(repo, "reviewed-learning-publication.md"), body);
+      const baseCommit = await git(authority, ["rev-parse", "HEAD"]);
+      const shared = capture();
+      expect(await runCli(["learning", "share", "reviewed-learning-publication.md", ...(logicalProject === "shared" ? ["--shared"] : [])], {
+        ...producer, ...shared,
+        contributeGitHub: async (options) => {
+          await options.prepare(authority);
+          return { branch: options.branch, baseCommit, pullRequestUrl: "https://github.com/test-org/teamai-marketplace/pull/42", planned: [] };
+        },
+      }), shared.stderr.join("\n")).toBe(0);
+      const files = await readdir(learningOutboxDirectory(home));
+      outboxPath = path.join(learningOutboxDirectory(home), files[0]!);
+      frozenOutbox = await readFile(outboxPath);
+      operation = JSON.parse(frozenOutbox.toString("utf8"));
+      expect(operation.id).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/);
+      expect(operation.destination).toBe(`learnings/${logicalProject}/${operation.id}.md`);
+      payload = Buffer.from(operation.payloadBase64, "base64");
+      expectedHash = createHash("sha256").update(payload).digest("hex");
+      expect(operation.contentHash).toBe(expectedHash);
+      expect(payload.subarray(payload.length - body.length)).toEqual(body);
+      expect(payload.toString("utf8")).toContain(`id: ${operation.id}\n`);
+      expect(await readFile(path.join(authority, ...operation.destination.split("/")))).toEqual(payload);
+      expectedId = `learning:${logicalProject}:${operation.id}`;
+      const pending = capture();
+      expect(await runCli(["recall", "NeedleUUID", "--include-pending", "--json"], { ...producer, ...pending }), pending.stderr.join("\n")).toBe(0);
+      expect(JSON.parse(pending.stdout.join("\n")).hits[0]).toMatchObject({ id: expectedId, publication: "pending", source: { relativePath: operation.destination, contentHash: expectedHash } });
+      firstComplete = true;
+    }, GIT_INTEGRATION_TIMEOUT);
+
+    test("second-home published Recall preserves identity, source bytes and the frozen outbox", async () => {
+      expect(firstComplete, "The producer phase must complete before publication.").toBe(true);
+      const { authority, producer, consumer, git } = fixture;
+      // Local Git authority publication is a controlled fixture, not a real reviewed PR.
+      await git(authority, ["-c", "core.autocrlf=false", "add", "-A"]);
+      await git(authority, ["-c", "user.name=Team AI Test", "-c", "user.email=teamai@example.invalid", "-c", "core.autocrlf=false", "commit", "-m", "publish exact Learning payload fixture"]);
+      await git(authority, ["push", "origin", "HEAD:refs/heads/teamai-learnings"]);
+      const revision = await git(authority, ["rev-parse", "HEAD"]);
+      const sync = capture();
+      expect(await runCli(["sync"], { ...consumer, ...sync }), sync.stderr.join("\n")).toBe(0);
+      if (logicalProject !== "shared") expect(await runCli(["projects", "set", logicalProject], { ...consumer, ...capture() })).toBe(0);
+      const recalled = capture();
+      expect(await runCli(["recall", "NeedleUUID", "--json"], { ...consumer, ...recalled }), recalled.stderr.join("\n")).toBe(0);
+      const hit = JSON.parse(recalled.stdout.join("\n")).hits[0];
+      expect(hit).toMatchObject({ id: expectedId, publication: "published", logicalProject, source: { relativePath: operation.destination, revision, contentHash: expectedHash } });
+      expect(await readFile(hit.file)).toEqual(payload);
+      expect(hit.snippet).toBe(payload.toString("utf8").split(/\r\n|\n|\r/).slice(hit.lineStart - 1, hit.lineEnd).join("\n"));
+      expect(await readFile(outboxPath)).toEqual(frozenOutbox);
+      expect(await runCli(["sync"], { ...producer, ...capture() })).toBe(0);
+      const both = capture();
+      expect(await runCli(["recall", "NeedleUUID", "--include-pending", "--json"], { ...producer, ...both }), both.stderr.join("\n")).toBe(0);
+      expect(JSON.parse(both.stdout.join("\n")).hits.map((item: { id: string; publication: string }) => ({ id: item.id, publication: item.publication })))
+        .toEqual([{ id: expectedId, publication: "published" }, { id: expectedId, publication: "pending" }]);
+    }, GIT_INTEGRATION_TIMEOUT);
+  });
+
   test("routes one active project and creates minimal frontmatter in the contribution worktree", async () => {
     const repo = await createGitRepo();
     const home = await tempDir("teamai-learning-home-");
@@ -287,20 +403,21 @@ describe("learning share", () => {
       err: output.err,
     })).toBe(0);
 
-    const shared = await readFile(path.join(staging, "learnings", "payments.v2", "payment-retry.md"), "utf8");
+    const outboxFiles = await readdir(learningOutboxDirectory(home));
+    const operation = JSON.parse(await readFile(path.join(learningOutboxDirectory(home), outboxFiles[0]), "utf8"));
+    const shared = await readFile(path.join(staging, "learnings", "payments.v2", `${operation.id}.md`), "utf8");
+    expect(shared).toContain(`id: ${operation.id}`);
     expect(shared).toContain("title: payment retry");
     expect(shared).toContain("owner: Team AI Test");
     expect(shared).toContain("logicalProject: payments.v2");
     expect(shared).toContain("tags:\n  - payment\n  - retry");
     expect(shared).toContain("Retry only after token refresh.");
-    expect(output.stdout.some((line) => line.includes("learnings/payments.v2/payment-retry.md"))).toBe(true);
+    expect(output.stdout.some((line) => line.includes(`learnings/payments.v2/${operation.id}.md`))).toBe(true);
     expect(contributionBranch).toMatch(/^teamai\/learning-[0-9a-f-]{36}$/);
-    const outboxFiles = await readdir(learningOutboxDirectory(home));
-    const operation = JSON.parse(await readFile(path.join(learningOutboxDirectory(home), outboxFiles[0]), "utf8"));
     expect(operation).toMatchObject({
       remoteIdentity: "test-org/teamai-marketplace",
       logicalProject: "payments.v2",
-      destination: "learnings/payments.v2/payment-retry.md",
+      destination: `learnings/payments.v2/${operation.id}.md`,
       phase: "pr-open",
       status: "ready",
       baseBranch: "teamai-learnings",
@@ -336,7 +453,7 @@ describe("learning share", () => {
       err: zero.err,
     })).toBe(0);
     await expect(readdir(learningOutboxDirectory(home))).rejects.toMatchObject({ code: "ENOENT" });
-    expect(zero.stdout.some((line) => line.includes("learnings/shared/note.md"))).toBe(true);
+    expect(zero.stdout.some((line) => /^WOULD learning share: note\.md -> learnings\/shared\/[0-9a-f-]{36}\.md$/.test(line))).toBe(true);
 
     await setActiveProjects(repo, home, ["payments.v2", "risk"]);
     const multiple = capture();
@@ -360,7 +477,7 @@ describe("learning share", () => {
       out: explicit.out,
       err: explicit.err,
     })).toBe(0);
-    expect(explicit.stdout.some((line) => line.includes("learnings/risk/note.md"))).toBe(true);
+    expect(explicit.stdout.some((line) => /^WOULD learning share: note\.md -> learnings\/risk\/[0-9a-f-]{36}\.md$/.test(line))).toBe(true);
   }, GIT_INTEGRATION_TIMEOUT);
 
   test("learning pending is read-only and rejects its own invalid arguments", async () => {
@@ -505,7 +622,7 @@ describe("learning share", () => {
     expect(operation).toMatchObject({
       remoteIdentity: "test-org/teamai-marketplace",
       logicalProject: "shared",
-      destination: "learnings/shared/note.md",
+      destination: `learnings/shared/${operation.id}.md`,
       baseBranch: "teamai-learnings",
     });
     const payload = Buffer.from(operation.payloadBase64, "base64");
@@ -586,6 +703,22 @@ describe("learning share", () => {
     expect(contributionCalls).toBe(0);
     expect(fixture.counters).toEqual({ pushes: 1, prLists: 0, prCreates: 0 });
     expect(await readFile(outboxPath)).toEqual(before);
+  }, GIT_INTEGRATION_TIMEOUT);
+
+  test("learning retry preserves an existing frozen slug destination without renaming it", async () => {
+    const fixture = await retryFixture("push-before");
+    const outboxPath = path.join(learningOutboxDirectory(fixture.home), `${fixture.operation.id}.json`);
+    const frozen = { ...fixture.operation, fileName: "note.md", destination: "learnings/shared/note.md" };
+    await writeFile(outboxPath, JSON.stringify(frozen));
+    const before = await readFile(outboxPath);
+    const output = capture();
+    expect(await runCli(["--dry-run", "learning", "retry", frozen.id], {
+      cwd: fixture.retryCwd, homeDir: fixture.home, ...output,
+      contributeGitHub: async () => { throw new Error("dry-run must not contribute"); },
+    })).toBe(0);
+    expect(output.stdout.join("\n")).toContain(`WOULD learning payload: ${frozen.destination} sha256:${frozen.contentHash}`);
+    expect(await readFile(outboxPath)).toEqual(before);
+    expect(fixture.counters).toEqual({ pushes: 1, prLists: 0, prCreates: 0 });
   }, GIT_INTEGRATION_TIMEOUT);
 
   test.each(["push", "pr"] as const)("learning retry recovers a lost %s response without repeating it", async (lostResponse) => {

@@ -375,11 +375,11 @@ class JointGh {
   const explicit = await share("explicit-unbound-project", workB, ["--project", "teamai"]);
   assert.equal(shared.logicalProject, "shared"); assert.equal(project.logicalProject, "teamai"); assert.equal(explicit.logicalProject, "teamai");
   const includedA = await query(["recall", "Jointpending", "--include-pending", "--json"]);
-  assert.deepEqual(includedA.hits.map((hit) => hit.id).sort(), [`pending:${project.id}`]);
+  assert.deepEqual(includedA.hits.map((hit) => hit.id).sort(), [`learning:teamai:${project.id}`]);
   const includedUser = await query(["recall", "Jointpending", "--scope", "user", "--include-pending", "--json"], artifactRoot);
-  assert.deepEqual(includedUser.hits.map((hit) => hit.id), [`pending:${shared.id}`]);
+  assert.deepEqual(includedUser.hits.map((hit) => hit.id), [`learning:shared:${shared.id}`]);
   const includedW = await query(["recall", "Jointpending", "--include-pending", "--json"], linked);
-  assert.deepEqual(includedW.hits.map((hit) => hit.id), [`pending:${sibling.id}`]);
+  assert.deepEqual(includedW.hits.map((hit) => hit.id), [`learning:teamai:${sibling.id}`]);
   assert.equal((await query(["recall", "Jointpending", "--json"])).hits.length, 0);
   await verifyHits(includedA, ["shared", "teamai"], learningRevision);
   pass("F07/F08", "Public share persists exact CRLF/body bytes before failure; pending selection obeys source, origin and final Scope.");
@@ -437,10 +437,10 @@ class JointGh {
   const reviewedHit = reviewedRecall.hits.find((hit) => hit.source.relativePath === modified.destination);
   assert.ok(reviewedHit && reviewedHit.publication === "published"); assert.equal(reviewedHit.source.contentHash, hash(reviewedBytes));
   const blockedRecall = await query(["recall", "Jointpending", "--include-pending", "--json"]);
-  assert.ok(blockedRecall.hits.some((hit) => hit.id === `pending:${modified.id}` && hit.publication === "pending"));
-  assert.ok(!blockedRecall.hits.some((hit) => hit.id === `pending:${sibling.id}` || hit.id === `pending:${project.id}`));
+  assert.ok(blockedRecall.hits.some((hit) => hit.id === `learning:shared:${modified.id}` && hit.publication === "pending"));
+  assert.ok(!blockedRecall.hits.some((hit) => hit.id === `learning:teamai:${sibling.id}` || hit.id === `learning:teamai:${project.id}`));
   const userTerminal = await query(["recall", "Jointpending", "--scope", "user", "--include-pending", "--json"], artifactRoot);
-  assert.deepEqual(userTerminal.hits.map((hit) => hit.id), [`pending:${shared.id}`]);
+  assert.deepEqual(userTerminal.hits.map((hit) => hit.id), [`learning:shared:${shared.id}`]);
   await verifyHits(reviewedRecall, ["shared", "teamai"], publishedRevision);
   pass("F07/modified", "Modified authoritative bytes are published evidence; frozen original stays blocked/pending in its origin Scope and is never claimed published by retry.");
   } else await put(dryRunFile, "# Dry run only\nKeep this body.\r\n");

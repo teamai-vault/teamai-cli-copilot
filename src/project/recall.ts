@@ -62,6 +62,7 @@ export function parseRecallQuery(query: string): RecallTerm[] {
 
 export function parseRecallMarkdown(content: Buffer, fallbackTitle: string): {
   text: string;
+  id?: string;
   title: string;
   tags: string[];
   body: string;
@@ -76,6 +77,7 @@ export function parseRecallMarkdown(content: Buffer, fallbackTitle: string): {
   const lines = text.split(/\r\n|\n|\r/);
   let body = text;
   let title: string | undefined;
+  let id: string | undefined;
   let tags: string[] = [];
   if (lines[0]?.trim() === "---") {
     const closing = lines.findIndex((line, index) => index > 0 && (line.trim() === "---" || line.trim() === "..."));
@@ -84,7 +86,8 @@ export function parseRecallMarkdown(content: Buffer, fallbackTitle: string): {
     if (document.errors.length > 0) throw new Error("Recall Markdown frontmatter is invalid YAML.");
     const metadata = document.toJS() as unknown;
     if (metadata !== null && typeof metadata === "object" && !Array.isArray(metadata)) {
-      const record = metadata as { title?: unknown; tags?: unknown };
+      const record = metadata as { id?: unknown; title?: unknown; tags?: unknown };
+      if (typeof record.id === "string") id = record.id;
       if (typeof record.title === "string" && record.title.trim()) title = record.title;
       if (typeof record.tags === "string") tags = record.tags.split(",").map((tag) => tag.trim()).filter(Boolean);
       else if (Array.isArray(record.tags)) tags = record.tags.filter((tag): tag is string => typeof tag === "string");
@@ -92,7 +95,7 @@ export function parseRecallMarkdown(content: Buffer, fallbackTitle: string): {
     body = lines.slice(closing + 1).join("\n");
   }
   if (!title) title = lines.find((line) => /^#\s+\S/.test(line))?.replace(/^#\s+/, "").trim();
-  return { text, title: title || fallbackTitle, tags, body };
+  return { text, ...(id === undefined ? {} : { id }), title: title || fallbackTitle, tags, body };
 }
 
 export function rankRecallCandidates(candidates: RecallCandidate[], terms: RecallTerm[], limit: number): RecallHit[] {

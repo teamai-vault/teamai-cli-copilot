@@ -236,7 +236,7 @@ async function createFakePublishedAuthority(): Promise<string> {
       await mkdir(path.join(seed, ".github"), { recursive: true });
       await writeFile(path.join(seed, ".github", "CODEOWNERS"), "* @teamai\n", "utf8");
       await mkdir(path.join(seed, "learnings", "shared"), { recursive: true });
-      await writeFile(path.join(seed, "learnings", "shared", "test.md"), "Test published learning\n", "utf8");
+      await writeFile(path.join(seed, "learnings", "shared", "5c624d53-d6f2-4645-9225-b52d41e9e6af.md"), "---\nid: 5c624d53-d6f2-4645-9225-b52d41e9e6af\n---\nTest published learning\n", "utf8");
       await runProcess("git", ["add", "."], { cwd: seed });
       const commit = await runProcess("git", ["commit", "-m", "test published authority"], { cwd: seed });
       if (commit.exitCode !== 0) throw new Error(commit.stderr);

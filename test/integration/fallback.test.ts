@@ -443,7 +443,7 @@ describe("VS Code-only Copilot fallback", () => {
         expect(await runCli(["projects", "set", "payments"], base)).toBe(1);
         expect(errors.join("\n")).toContain(malformed === "hook" ? "each event must map to an array" : "expected a server object");
         await expect(readFile(path.join(repo, ".github", "instructions", "teamai", "context.instructions.md"))).rejects.toMatchObject({ code: "ENOENT" });
-        await expect(readFile(path.join(repo, ".teamai", "context", "shared", "learnings", "test.md"))).rejects.toMatchObject({ code: "ENOENT" });
+        await expect(readFile(path.join(repo, ".teamai", "context", "shared", "learnings", "5c624d53-d6f2-4645-9225-b52d41e9e6af.md"))).rejects.toMatchObject({ code: "ENOENT" });
         await expect(readFile(path.join(repo, ".mcp.json"))).rejects.toMatchObject({ code: "ENOENT" });
         await expect(readFile(path.join(repo, ".github", "agents", "payments-payments-probe.agent.md"))).rejects.toMatchObject({ code: "ENOENT" });
       } finally {
@@ -487,7 +487,7 @@ describe("VS Code-only Copilot fallback", () => {
         expect(await runCli(["projects", "set", "payments"], base)).toBe(1);
         expect(errors.join("\n")).toContain("Unsafe Project Plugin source path");
         await expect(readFile(path.join(repo, ".github", "instructions", "teamai", "context.instructions.md"))).rejects.toMatchObject({ code: "ENOENT" });
-        await expect(readFile(path.join(repo, ".teamai", "context", "shared", "learnings", "test.md"))).rejects.toMatchObject({ code: "ENOENT" });
+        await expect(readFile(path.join(repo, ".teamai", "context", "shared", "learnings", "5c624d53-d6f2-4645-9225-b52d41e9e6af.md"))).rejects.toMatchObject({ code: "ENOENT" });
         await expect(readFile(path.join(repo, ".github", "agents", "payments-payments-probe.agent.md"))).rejects.toMatchObject({ code: "ENOENT" });
       } finally {
         await Promise.all([repo, home, marketplace].map((root) => rm(root, { recursive: true, force: true })));

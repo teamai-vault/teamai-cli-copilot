@@ -37,8 +37,9 @@ export async function learningShareCommand(context: CommandContext, options: Lea
     const state = await readProjectState(identity.projectAnchor, context.homeDir);
     const active = projectionFor(state, identity.workspaceRoot)?.logicalProjects ?? [];
     const target = resolveTarget(options, active, await loadLogicalProjects(catalog.root, catalog.plugins));
-    const destination = path.posix.join("learnings", target, learning.name);
     const id = randomUUID();
+    const fileName = `${id}.md`;
+    const destination = path.posix.join("learnings", target, fileName);
     const createdAt = context.now().toISOString();
     const sourceRepo = path.basename(identity.projectAnchor);
     if (!sourceRepo || /[\r\n\0]/.test(sourceRepo)) throw new Error("Workspace repository name is not a safe learning metadata value.");
@@ -62,7 +63,7 @@ export async function learningShareCommand(context: CommandContext, options: Lea
       commitIdentity: gitIdentity,
       ...(catalog.revision ? { resourceRevision: catalog.revision } : {}),
       metadata,
-      fileName: learning.name,
+      fileName,
       logicalProject: target,
       originWorkspaceKey: learningHash(normalizeWorkspace(identity.workspaceRoot)),
       contentHash: learningHash(payload),

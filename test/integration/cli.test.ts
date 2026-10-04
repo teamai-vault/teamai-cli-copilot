@@ -609,7 +609,7 @@ describe("CLI integration with fake Copilot executable", () => {
     await mkdir(path.dirname(skillSource), { recursive: true });
     await writeFile(skillSource, "---\nname: payments-probe\ndescription: Payments workspace probe\n---\n\nPayments component\n", "utf8");
     const projectedSkill = path.join(repo, ".github", "skills", "payments-probe", "SKILL.md");
-    const sharedLearning = path.join(repo, ".teamai", "context", "shared", "learnings", "test.md");
+    const sharedLearning = path.join(repo, ".teamai", "context", "shared", "learnings", "5c624d53-d6f2-4645-9225-b52d41e9e6af.md");
     const fake = await createFakeCopilot(undefined, home);
     const output = capture();
 
@@ -634,7 +634,7 @@ describe("CLI integration with fake Copilot executable", () => {
     await expect(readFile(path.join(repo, ".github", "instructions", "teamai", "payments", "payments.instructions.md"), "utf8")).resolves.toContain("applyTo: \"**\"");
     await expect(readFile(path.join(repo, ".teamai", "context", "risk", "docs", "risk.md"), "utf8")).resolves.toBe("risk\n");
     await expect(readFile(projectedSkill)).resolves.toEqual(await readFile(skillSource));
-    await expect(readFile(sharedLearning, "utf8")).resolves.toBe("Test published learning\n");
+    await expect(readFile(sharedLearning, "utf8")).resolves.toBe("---\nid: 5c624d53-d6f2-4645-9225-b52d41e9e6af\n---\nTest published learning\n");
     await expect(readFile(settingsPath)).resolves.toEqual(personalSettings);
     const settings = JSON.parse(await readFile(path.join(repo, ".github", "copilot", "settings.json"), "utf8"));
     expect(settings.enabledPlugins[`payments@${TEST_MARKETPLACE_NAME}`]).toBeUndefined();
@@ -703,7 +703,7 @@ describe("CLI integration with fake Copilot executable", () => {
     expect(await runCli(["projects", "set", "risk"], { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace, out: output.out, err: output.err })).toBe(0);
     await expect(readFile(path.join(repo, ".github", "instructions", "teamai", "payments", "payments.instructions.md"), "utf8")).rejects.toMatchObject({ code: "ENOENT" });
     await expect(readFile(projectedSkill)).rejects.toMatchObject({ code: "ENOENT" });
-    await expect(readFile(sharedLearning, "utf8")).resolves.toBe("Test published learning\n");
+    await expect(readFile(sharedLearning, "utf8")).resolves.toBe("---\nid: 5c624d53-d6f2-4645-9225-b52d41e9e6af\n---\nTest published learning\n");
     const excludeBeforeUnbind = await readFile(excludePath, "utf8");
     expect(await runCli(["projects", "set"], { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace, out: output.out, err: output.err })).toBe(0);
     await expect(readFile(path.join(repo, ".teamai", "context", "risk", "docs", "risk.md"), "utf8")).rejects.toMatchObject({ code: "ENOENT" });
