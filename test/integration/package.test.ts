@@ -1,4 +1,4 @@
-import { cp, mkdir, readFile, rm, symlink, writeFile } from "node:fs/promises";
+import { cp, mkdir, readFile, rm, symlink, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { describe, expect, test } from "vitest";
@@ -47,13 +47,17 @@ describe("published package", () => {
     expect(packageLock.packages[""]?.version).toBe(packageJson.version);
     expect(cliVersion.stdout.trim()).toBe(packageJson.version);
 
+    // Git installation must prepare its own dependencies. Directory-only ignore
+    // rules do not exclude POSIX symlinks, so remove the borrowed link first.
+    await unlink(path.join(fresh, "node_modules"));
     await writeFile(path.join(fresh, ".gitignore"), "dist/\nnode_modules/\n*.tgz\n", "utf8");
     for (const args of [["init", "-b", "main"], ["config", "user.name", "Package test"], ["config", "user.email", "package@example.invalid"], ["add", "."], ["commit", "-m", "Unbuilt package source"]]) {
       const git = await runProcess("git", args, { cwd: fresh });
       expect(git.exitCode, git.stderr || git.stdout).toBe(0);
     }
-    const trackedDist = await runProcess("git", ["ls-files", "dist"], { cwd: fresh });
-    expect(trackedDist.stdout.trim()).toBe("");
+    const trackedArtifacts = await runProcess("git", ["ls-files", "dist", "node_modules"], { cwd: fresh });
+    expect(trackedArtifacts.exitCode, trackedArtifacts.stderr || trackedArtifacts.stdout).toBe(0);
+    expect(trackedArtifacts.stdout.trim()).toBe("");
     const revision = await runProcess("git", ["rev-parse", "HEAD"], { cwd: fresh });
     expect(revision.exitCode, revision.stderr || revision.stdout).toBe(0);
     const installed = await tempDir("teamai-git-package-install-");
