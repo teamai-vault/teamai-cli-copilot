@@ -138,13 +138,13 @@ function parseOptions(tokens: string[], rules: Record<string, OptionRule>, comma
   return { positionals, options };
 }
 
-function parseInvocation(argv: string[]): Invocation {
+function parseInvocation(argv: string[], helpRequested = false): Invocation {
   const dryRunCount = argv.filter((arg) => arg === "--dry-run").length;
   if (dryRunCount > 1) throw new UsageError("--dry-run may be supplied only once.");
   const args = argv.filter((arg) => arg !== "--dry-run");
   if (args.length === 0) return { command: "help", positionals: [], options: new Map() };
   if (args[0] === "help") {
-    if (args.length !== 1) throw new UsageError("Use teamai help.");
+    if (args.length > 1) parseInvocation(args.slice(1), true);
     return { command: "help", positionals: [], options: new Map() };
   }
 
@@ -161,7 +161,8 @@ function parseInvocation(argv: string[]): Invocation {
   let subcommand: string | undefined;
   let optionKey = command;
   let optionArgs = args.slice(1);
-  if (["role", "skill", "tags", "learning", "projects"].includes(command)) {
+  const hasSubcommands = ["role", "skill", "tags", "learning", "projects"].includes(command);
+  if (hasSubcommands) {
     subcommand = args[1];
     if (command === "projects" && subcommand === undefined) subcommand = "list";
     if (command === "projects" && args[1] === undefined) optionArgs = [];
@@ -170,9 +171,12 @@ function parseInvocation(argv: string[]): Invocation {
   }
 
   const supported = ["init", "sync", "role list", "role set", "projects list", "projects set", "learning share", "learning pending", "learning retry", "recall", "skill list", "skill show", "skill install", "skill remove", "skill contribute", "tags list", "status", "doctor"];
-  if (!supported.includes(optionKey)) throw new UsageError(`Unknown command or subcommand.\n${usage()}`);
+  if (!supported.includes(optionKey) && !(helpRequested && hasSubcommands && subcommand === undefined)) {
+    throw new UsageError(`Unknown command or subcommand.\n${usage()}`);
+  }
   const parsed = parseOptions(optionArgs, optionRules[optionKey] ?? {}, optionKey);
   const positionals = parsed.positionals;
+  if (helpRequested) return { command, subcommand, positionals, options: parsed.options };
   const exact = (count: number, form: string) => {
     if (positionals.length !== count) throw new UsageError(`Use ${form}.`);
   };
@@ -300,7 +304,7 @@ export async function runCli(argv: string[], overrides: Partial<CommandContext> 
     const showHelp = argv.includes("--help") || argv[0] === "help";
     const showVersion = argv.includes("--version");
     const parseArgs = argv.filter((arg) => arg !== "--help" && arg !== "--version");
-    const invocation = parseInvocation(parseArgs);
+    const invocation = parseInvocation(parseArgs, showHelp);
     if (showHelp) {
       out(usage());
       return 0;

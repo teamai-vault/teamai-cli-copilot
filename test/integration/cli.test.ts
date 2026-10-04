@@ -826,6 +826,11 @@ describe("CLI integration with fake Copilot executable", () => {
       ["init", "--marketplace"],
       ["skill", "list", "--tag"],
       ["learning", "share"],
+      ["learning", "retry"],
+      ["recall"],
+      ["role", "set"],
+      ["skill", "show"],
+      ["skill", "contribute"],
     ];
     for (const args of invalidArgs) {
       const output = capture();
@@ -846,7 +851,7 @@ describe("CLI integration with fake Copilot executable", () => {
     expect(await snapshotFiles(home)).toEqual([]);
   }, CLI_PROCESS_TEST_TIMEOUT);
 
-  test("validates command arguments before honoring help or version", async () => {
+  test("validates malformed options before help and business arguments before version", async () => {
     const repo = await createGitRepo();
     const home = await tempDir("teamai-help-validation-home-");
     const fake = await createFakeCopilot(undefined, home);
@@ -855,6 +860,13 @@ describe("CLI integration with fake Copilot executable", () => {
     let vscodeChecks = 0;
     const invalidArgs = [
       ["init", "--bogus", "--help"],
+      ["unknown-command", "--help"],
+      ["help", "unknown-command"],
+      ["recall", "--bogus", "--help"],
+      ["recall", "--scope", "invalid", "--help"],
+      ["recall", "--scope", "auto", "--scope", "user", "--help"],
+      ["recall", "--help", "--help"],
+      ["recall", "--version"],
       ["init", "--role", "--help"],
       ["init", "--role", "api", "--role", "qa", "--version"],
       ["--dry-run", "--dry-run"],
@@ -891,6 +903,72 @@ describe("CLI integration with fake Copilot executable", () => {
     expect(marketplaceLoads).toBe(0);
     expect(await snapshotFiles(home)).toEqual([]);
   }, CLI_PROCESS_TEST_TIMEOUT);
+
+  test("supported command help is text-only without business arguments or runtime access", async () => {
+    const root = await tempDir("teamai-command-help-");
+    const home = path.join(root, "uninitialized-home");
+    const cwd = path.join(root, "uninitialized-workspace");
+    const tracked = trackCopilotCalls(new CopilotClient("must-not-run-copilot", [], home));
+    let marketplaceLoads = 0;
+    let vscodeChecks = 0;
+    let contributions = 0;
+    const overrides = {
+      cwd,
+      homeDir: home,
+      copilot: tracked.client,
+      vscodeAvailable: async () => { vscodeChecks += 1; throw new Error("Help must not probe VS Code."); },
+      loadMarketplace: async () => { marketplaceLoads += 1; throw new Error("Help must not load a Marketplace."); },
+      contributeGitHub: async () => { contributions += 1; throw new Error("Help must not submit a contribution."); },
+    };
+    const commandForms = [
+      ["recall"],
+      ["init"],
+      ["sync"],
+      ["role"],
+      ["role", "list"],
+      ["role", "set"],
+      ["projects"],
+      ["projects", "list"],
+      ["projects", "set"],
+      ["learning"],
+      ["learning", "share"],
+      ["learning", "pending"],
+      ["learning", "retry"],
+      ["skill"],
+      ["skill", "list"],
+      ["skill", "show"],
+      ["skill", "install"],
+      ["skill", "remove"],
+      ["skill", "contribute"],
+      ["tags"],
+      ["tags", "list"],
+      ["status"],
+      ["doctor"],
+    ];
+    for (const command of commandForms) {
+      for (const args of [[...command, "--help"], ["help", ...command]]) {
+        const output = capture();
+        expect(await runCli(args, { ...overrides, out: output.out, err: output.err }), args.join(" ")).toBe(0);
+        expect(output.stderr).toEqual([]);
+        const text = output.stdout.join("\n");
+        expect(text).toContain("recall <query>");
+        expect(text).toContain("--scope auto|user|workspace");
+        expect(() => JSON.parse(text)).toThrow();
+      }
+    }
+    for (const args of [["recall", "--help", "--json"], ["--dry-run", "help", "recall"]]) {
+      const output = capture();
+      expect(await runCli(args, { ...overrides, out: output.out, err: output.err })).toBe(0);
+      expect(output.stderr).toEqual([]);
+      expect(output.stdout.join("\n")).toContain("recall <query>");
+      expect(() => JSON.parse(output.stdout.join("\n"))).toThrow();
+    }
+    expect(tracked.calls).toEqual([]);
+    expect(vscodeChecks).toBe(0);
+    expect(marketplaceLoads).toBe(0);
+    expect(contributions).toBe(0);
+    expect(await readdir(root)).toEqual([]);
+  });
 
   test("status returns failure when Copilot local state cannot be parsed", async () => {
     const repo = await createGitRepo();
