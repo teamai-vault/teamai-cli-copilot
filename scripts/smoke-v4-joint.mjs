@@ -232,7 +232,7 @@ if(kind==='gh'){
   for (const kind of ["git", "gh"]) {
     if (kind === "gh" && process.platform === "win32") continue;
     const file = path.join(bin, kind + (process.platform === "win32" ? ".cmd" : ""));
-    await writeFile(file, process.platform === "win32" ? `@echo off\r\n"${process.execPath}" "${path.join(bin, "seam.mjs")}" ${kind} %*\r\n` : `#!/bin/sh\nexec '${process.execPath}' '${path.join(bin, "seam.mjs")}' ${kind} "$@"\n`, { mode: 0o755 });
+    await writeFile(file, process.platform === "win32" ? `@echo off\r\n"${process.execPath}" "%~dp0seam.mjs" ${kind} %*\r\n` : `#!/bin/sh\nexec '${process.execPath}' '${path.join(bin, "seam.mjs")}' ${kind} "$@"\n`, { mode: 0o755 });
   }
   if (process.platform === "win32") {
     // A real executable preserves multiline argv that cmd.exe would split.
@@ -261,7 +261,8 @@ class JointGh {
     fixture.ghForwarder = { compiler, sourceSha256: hash(forwarder), executableSha256: hash(await readFile(path.join(bin, "gh.exe"))) };
   }
   if (backend === "native" && process.platform === "win32") {
-    await put(path.join(bin, "copilot.cmd"), `@echo off\r\n"${process.execPath}" "${path.join(bin, "seam.mjs")}" native-log %*\r\ncall "${fixture.copilot}" %*\r\n`);
+    const nativeExecutable = fixture.copilotExecutable ?? fixture.copilot;
+    await put(path.join(bin, "copilot.cmd"), `@echo off\r\n"${process.execPath}" "%~dp0seam.mjs" native-log %*\r\n"${nativeExecutable}" --no-auto-update %*\r\n`);
   }
   if (backend === "fallback") {
     await put(path.join(bin, "code.cmd"), `@echo off\r\ncall "${realCode}" %*\r\n`);

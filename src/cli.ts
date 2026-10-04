@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { realpathSync } from "node:fs";
+import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createCommandContext, resolveCopilotBackend, type CommandContext } from "./commands/context.js";
 import { doctorCommand } from "./commands/doctor.js";
@@ -263,13 +264,33 @@ function requestsRecallJson(argv: string[]): boolean {
   return args[0] === "recall" && args.some((argument) => argument === "--json" || argument.startsWith("--json="));
 }
 
+function assertSupportedWindowsPath(directory: string | undefined, label: string): void {
+  if (process.platform !== "win32" || !directory) return;
+  // Product policy: reserve space below legacy Windows/Git path limits.
+  const length = path.resolve(directory).length;
+  if (length > 240) {
+    throw new Error(`${label} is too long for Windows (${length} characters; limit 240). Use a shorter path.`);
+  }
+}
+
+function commandErrorMessage(error: unknown): string {
+  const message = error instanceof Error ? error.message : String(error);
+  const code = (error as NodeJS.ErrnoException | undefined)?.code;
+  if (code === "ENAMETOOLONG" || /Filename too long|\$GIT_DIR'? too big/i.test(message) ||
+      code === "ENOBUFS" && /homedir/i.test(message)) {
+    return `Long paths are not supported. Use a shorter home directory or workspace path. ${message}`;
+  }
+  return message;
+}
+
 export async function runCli(argv: string[], overrides: Partial<CommandContext> = {}): Promise<number> {
   const dryRun = argv.includes("--dry-run");
   const jsonLearningPending = requestsLearningPendingJson(argv);
   const jsonRecall = requestsRecallJson(argv);
-  const context = createCommandContext({ ...overrides, dryRun });
+  const out = overrides.out ?? ((message: string) => console.log(message));
+  const err = overrides.err ?? ((message: string) => console.error(message));
   if (argv.length === 0) {
-    context.out(usage());
+    out(usage());
     return 0;
   }
 
@@ -281,17 +302,22 @@ export async function runCli(argv: string[], overrides: Partial<CommandContext> 
     const parseArgs = argv.filter((arg) => arg !== "--help" && arg !== "--version");
     const invocation = parseInvocation(parseArgs);
     if (showHelp) {
-      context.out(usage());
+      out(usage());
       return 0;
     }
     if (showVersion) {
-      context.out(VERSION);
+      out(VERSION);
       return 0;
     }
     if (invocation.command === "help") {
-      context.out(usage());
+      out(usage());
       return 0;
     }
+    assertSupportedWindowsPath(overrides.cwd ?? process.cwd(), "Workspace path");
+    assertSupportedWindowsPath(overrides.homeDir ?? process.env.USERPROFILE, "Home directory");
+    if (usesCopilotRoot(invocation)) assertSupportedWindowsPath(process.env.COPILOT_HOME, "COPILOT_HOME");
+    const context = createCommandContext({ ...overrides, dryRun });
+    assertSupportedWindowsPath(context.homeDir, "Home directory");
     if (usesCopilotRoot(invocation)) {
       copilotHome(context.homeDir);
       await assertCopilotHomeMatchesOwnership(context.homeDir);
@@ -373,25 +399,25 @@ export async function runCli(argv: string[], overrides: Partial<CommandContext> 
         throw new UsageError(`Unknown command '${invocation.command}'.\n${usage()}`);
     }
   } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
+    const message = commandErrorMessage(error);
     const command = argv.find((arg) => arg !== "--dry-run" && arg !== "--help");
     const jsonOutput = argv.includes("--json") && (command === "status" || command === "doctor");
     if (jsonRecall) {
       const usageError = error instanceof UsageError || error instanceof RecallInputError;
       const code = usageError ? "INVALID_ARGUMENT" : error instanceof RecallCommandError ? error.code : "RECALL_FAILED";
-      context.out(JSON.stringify({ schemaVersion: 1, error: { code, message } }));
+      out(JSON.stringify({ schemaVersion: 1, error: { code, message } }));
     } else if (jsonLearningPending) {
       const code = error instanceof UsageError ? "INVALID_ARGUMENT" : "LEARNING_PENDING_FAILED";
-      context.out(JSON.stringify({ schemaVersion: 1, error: { code, message } }));
+      out(JSON.stringify({ schemaVersion: 1, error: { code, message } }));
     } else if (jsonOutput) {
-      context.out(JSON.stringify({
+      out(JSON.stringify({
         schemaVersion: 1,
         error: {
           code: error instanceof UsageError ? "USAGE_ERROR" : "COMMAND_ERROR",
           message,
         },
       }));
-    } else context.err(`ERROR: ${message}`);
+    } else err(`ERROR: ${message}`);
     return error instanceof UsageError || error instanceof RecallInputError ? 2 : 1;
   }
 }

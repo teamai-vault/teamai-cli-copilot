@@ -14,7 +14,7 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
-    "prepublishOnly": "npm run build",
+    "prepare": "npm run build && node scripts/check-package-bytes.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run --no-file-parallelism",
     "test:unit": "vitest run test/unit --no-file-parallelism",

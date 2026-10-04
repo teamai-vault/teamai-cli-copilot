@@ -20,3 +20,5 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
+      - name: Verify packed CLI entry and bundled delivery
+        run: node test/helpers/verify-builtin-package.mjs "${{ runner.temp }}/teamai-package-check"

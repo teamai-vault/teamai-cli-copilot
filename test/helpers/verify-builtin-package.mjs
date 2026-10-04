@@ -13,13 +13,14 @@ assert(output && path.isAbsolute(output), "An absolute task-owned evidence direc
 await mkdir(output);
 const temp = path.join(output, "temp"), cache = path.join(output, "npm-cache"), install = path.join(output, "install");
 await Promise.all([temp, cache, install].map((p) => mkdir(p)));
-const env = { ...process.env, TEMP: temp, TMP: temp, npm_config_cache: cache };
+const env = { ...process.env, TEMP: temp, TMP: temp, npm_config_cache: cache,
+  PATH: path.join(install, "node_modules", ".bin") + path.delimiter + process.env.PATH };
 function command(name, args, cwd = root) {
   const result = spawn.sync(name, args, { cwd, env, encoding: "utf8", windowsHide: true });
   assert.equal(result.status, 0, `${name} ${args.join(" ")} failed: ${result.stderr}`);
   return result.stdout.trim();
 }
-const packed = JSON.parse(command("npm", ["pack", "--json", "--ignore-scripts", "--pack-destination", output]));
+const packed = JSON.parse(command("npm", ["pack", "--json", "--pack-destination", output]));
 const listing = Array.isArray(packed) ? packed[0] : packed["teamai-cli-copilot"];
 assert(listing?.filename && Array.isArray(listing.files), "Unexpected npm pack JSON shape.");
 const tarball = path.join(output, listing.filename);
@@ -37,6 +38,7 @@ assert.equal(pkg.version, "0.4.0");
 assert.equal(lock.version, "0.4.0");
 assert.equal(lock.packages[""].version, "0.4.0");
 assert.equal(command(process.execPath, [path.join(installed, "dist", "cli.js"), "--version"]), "0.4.0");
+assert.equal(command("teamai", ["--version"], install), pkg.version);
 const skill = await readFile(path.join(installed, "skills", "teamai", "SKILL.md"), "utf8");
 for (const match of skill.matchAll(/\]\((references\/[^)]+)\)/g)) {
   const relative = "skills/teamai/" + match[1];
@@ -92,6 +94,6 @@ for (const custom of [false, true]) {
   if (custom) assert(!(await readdir(home)).includes(".copilot"), "Custom-root delivery wrote a second Copilot root.");
   deliveries.push({ custom, home, copilotRoot, target, receipt, stdout, stderr, backend: "native adapter with test fixture", consumerRuntime: "unknown" });
 }
-const report = { schemaVersion: 1, result: "PASS", platform: process.platform, arch: process.arch, node: process.version, cliVersion: pkg.version, tarball, tarballSha256: createHash("sha256").update(await readFile(tarball)).digest("hex"), files: [...files].sort(), installedFileHashes: referenceHashes, deliveries, consumerRuntime: "unknown" };
+const report = { schemaVersion: 1, result: "PASS", platform: process.platform, arch: process.arch, node: process.version, cliVersion: pkg.version, binVersion: pkg.version, tarball, tarballSha256: createHash("sha256").update(await readFile(tarball)).digest("hex"), files: [...files].sort(), installedFileHashes: referenceHashes, deliveries, consumerRuntime: "unknown" };
 await writeFile(path.join(output, "package-report.json"), JSON.stringify(report, null, 2) + "\n");
 console.log(JSON.stringify({ result: report.result, tarball, tarballSha256: report.tarballSha256, installedCliVersion: pkg.version, deliveryRoots: deliveries.length, consumerRuntime: "unknown" }));
