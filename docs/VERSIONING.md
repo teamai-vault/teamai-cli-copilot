@@ -12,6 +12,8 @@ The CLI version must match in `package.json`, `package-lock.json`, and `teamai -
 
 The bundled `skills/teamai/` Agent Skill has no independent release version. It is part of the CLI package and uses the CLI package version in its ownership record. After a CLI upgrade, the next `teamai init` or `teamai sync` converges the installed built-in Skill to the bundled content.
 
+The native bundled Recall Agent follows the same CLI version. Its independent receipt records the resolved Copilot root, exact Agent file target and content SHA-256. `package:test` checks the actual npm tarball, installs it in an isolated directory, validates references and the public version, and exercises bundled delivery to default/custom roots; it does not claim consumer runtime.
+
 ## Marketplace
 
 The Marketplace metadata version describes the catalog as a whole.

@@ -73,7 +73,7 @@ describe("CLI integration with fake Copilot executable", () => {
   test("first init requires an explicit marketplace source", async () => {
     const repo = await createGitRepo();
     const home = await tempDir("teamai-no-marketplace-home-");
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, home);
     const output = capture();
 
     expect(await runCli(["init", "--role", "api"], {
@@ -92,7 +92,7 @@ describe("CLI integration with fake Copilot executable", () => {
   test("init and sync in an unbound Git workspace leave project state and exclude untouched", async () => {
     const repo = await createGitRepo();
     const home = await tempDir("teamai-unbound-project-home-");
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, home);
     const output = capture();
     const excludePath = path.join(repo, ".git", "info", "exclude");
     await writeFile(excludePath, "# user exclude\n", "utf8");
@@ -128,7 +128,7 @@ describe("CLI integration with fake Copilot executable", () => {
       if (isPermissionError(error)) return skip();
       throw error;
     }
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, home);
     const output = capture();
     const loadMarketplace = async () => loadFakeMarketplace(marketplace);
     expect(await runCli(["init", "--marketplace", TEST_MARKETPLACE_SOURCE, "--role", "api"], { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace, out: output.out, err: output.err })).toBe(0);
@@ -166,7 +166,7 @@ describe("CLI integration with fake Copilot executable", () => {
       if (isPermissionError(error)) return skip();
       throw error;
     }
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, home);
     const output = capture();
     const loadMarketplace = async () => loadFakeMarketplace(marketplace);
     expect(await runCli(["init", "--marketplace", TEST_MARKETPLACE_SOURCE, "--role", "api"], { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace, out: output.out, err: output.err })).toBe(0);
@@ -227,7 +227,7 @@ describe("CLI integration with fake Copilot executable", () => {
     const statePath = path.join(partitionPath(identity!.projectAnchor, home), "state.json");
     const stateBefore = await readFile(statePath, "utf8");
     const configBefore = await readFile(path.join(home, ".teamai", "config.yaml"), "utf8");
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, home);
     const copilotBefore = await fake.readState();
     const output = capture();
     const loadMarketplace = async () => loadFakeMarketplace(marketplace);
@@ -283,7 +283,7 @@ describe("CLI integration with fake Copilot executable", () => {
         { name: "common", marketplace: TEST_MARKETPLACE_NAME, enabled: true, source: `live-marketplace:${TEST_MARKETPLACE_NAME}` },
         { name: "api", marketplace: TEST_MARKETPLACE_NAME, enabled: true, source: `live-marketplace:${TEST_MARKETPLACE_NAME}` },
       ],
-    });
+    }, home);
     const copilot = Object.create(fake.client) as CopilotClient;
     const originalListMarketplaces = fake.client.listMarketplaces.bind(fake.client);
     const projectLock = `${partitionPath(identity!.projectAnchor, home)}.lock`;
@@ -339,7 +339,7 @@ describe("CLI integration with fake Copilot executable", () => {
   test("non-interactive init reports each missing required value", async () => {
     const repo = await createGitRepo();
     const home = await tempDir("teamai-no-role-home-");
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, home);
     const output = capture();
 
     expect(await runCli(["init", "--marketplace", TEST_MARKETPLACE_SOURCE], {
@@ -362,7 +362,7 @@ describe("CLI integration with fake Copilot executable", () => {
     for (const item of cases) {
       const repo = await createGitRepo();
       const home = await tempDir("teamai-interactive-home-");
-      const fake = await createFakeCopilot();
+      const fake = await createFakeCopilot(undefined, home);
       const output = capture();
       let marketplacePrompts = 0;
       let rolePrompts = 0;
@@ -391,7 +391,7 @@ describe("CLI integration with fake Copilot executable", () => {
         { name: "personal-tool", marketplace: "other", version: "9.9.9", enabled: true, source: "user" },
         { name: "api", marketplace: "other", version: "8.8.8", enabled: true, source: "user" },
       ],
-    });
+    }, home);
     const first = capture();
     const base = { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace: loadFakeMarketplace, out: first.out, err: first.err };
 
@@ -440,7 +440,7 @@ describe("CLI integration with fake Copilot executable", () => {
 
     const status = capture();
     expect(await runCli(["status"], { ...base, out: status.out, err: status.err })).toBe(0);
-    expect(status.stdout.some((line) => line.includes(`qa@${TEST_MARKETPLACE_NAME}: not present in local inventory; runtime unobserved`))).toBe(true);
+    expect(status.stdout.some((line) => line.includes(`qa@${TEST_MARKETPLACE_NAME}: configured enabled; runtime unobserved`))).toBe(true);
     expect(status.stdout).toContain("  Marketplace revision: unknown");
     expect(status.stdout).toContain("  Managed personal skills: none");
     expect(status.stdout.some((line) => line.startsWith("  Project context: "))).toBe(true);
@@ -469,7 +469,7 @@ describe("CLI integration with fake Copilot executable", () => {
   test("first-time dry-run discovers metadata without mutating Copilot", async () => {
     const repo = await createGitRepo();
     const home = await tempDir("teamai-dry-home-");
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, home);
     const before = await fake.readState();
     const output = capture();
 
@@ -491,7 +491,7 @@ describe("CLI integration with fake Copilot executable", () => {
   test("refuses a different marketplace source after initialization", async () => {
     const repo = await createGitRepo();
     const home = await tempDir("teamai-switch-home-");
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, home);
     const first = capture();
     const base = { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace: loadFakeMarketplace, out: first.out, err: first.err };
 
@@ -512,7 +512,7 @@ describe("CLI integration with fake Copilot executable", () => {
     const fake = await createFakeCopilot({
       marketplaces: [{ name: TEST_MARKETPLACE_NAME, source: TEST_MARKETPLACE_SOURCE }],
       plugins: [{ name: "api", marketplace: TEST_MARKETPLACE_NAME, version: "0.0.1", enabled: false, source: `marketplace:${TEST_MARKETPLACE_NAME}` }],
-    });
+    }, home);
     const output = capture();
 
     expect(await runCli(["init", "--marketplace", TEST_MARKETPLACE_SOURCE, "--role", "api"], {
@@ -538,7 +538,7 @@ describe("CLI integration with fake Copilot executable", () => {
     const fake = await createFakeCopilot({
       marketplaces: [{ name: TEST_MARKETPLACE_NAME, source: TEST_MARKETPLACE_SOURCE }],
       plugins: [{ name: "api", marketplace: TEST_MARKETPLACE_NAME, version: "0.1.0", enabled: true, source: `marketplace:${TEST_MARKETPLACE_NAME}` }],
-    });
+    }, home);
     const output = capture();
 
     expect(await runCli(["init", "--marketplace", TEST_MARKETPLACE_SOURCE, "--role", "api"], {
@@ -558,20 +558,21 @@ describe("CLI integration with fake Copilot executable", () => {
   test("preserves unowned disabled live-marketplace plugins as role overrides", async () => {
     const repo = await createGitRepo();
     const home = await tempDir("teamai-live-marketplace-home-");
+    const catalog = await loadFakeMarketplace();
     const fake = await createFakeCopilot({
-      marketplaces: [{ name: TEST_MARKETPLACE_NAME, source: TEST_MARKETPLACE_SOURCE }],
+      marketplaces: [{ name: TEST_MARKETPLACE_NAME, source: catalog.root }],
       plugins: [
         { name: "common", marketplace: TEST_MARKETPLACE_NAME, version: "0.1.0", enabled: false, source: `live-marketplace:${TEST_MARKETPLACE_NAME}` },
         { name: "design", marketplace: TEST_MARKETPLACE_NAME, version: "0.1.0", enabled: false, source: `live-marketplace:${TEST_MARKETPLACE_NAME}` },
       ],
-    });
+    }, home);
     const output = capture();
 
-    expect(await runCli(["init", "--marketplace", TEST_MARKETPLACE_SOURCE, "--role", "design"], {
+    expect(await runCli(["init", "--marketplace", catalog.root, "--role", "design"], {
       cwd: repo,
       homeDir: home,
       copilot: fake.client,
-      loadMarketplace: loadFakeMarketplace,
+      loadMarketplace: async () => catalog,
       out: output.out,
       err: output.err,
     })).toBe(0);
@@ -609,7 +610,7 @@ describe("CLI integration with fake Copilot executable", () => {
     await writeFile(skillSource, "---\nname: payments-probe\ndescription: Payments workspace probe\n---\n\nPayments component\n", "utf8");
     const projectedSkill = path.join(repo, ".github", "skills", "payments-probe", "SKILL.md");
     const sharedLearning = path.join(repo, ".teamai", "context", "shared", "learnings", "test.md");
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, home);
     const output = capture();
 
     const rejected = capture();
@@ -739,14 +740,12 @@ describe("CLI integration with fake Copilot executable", () => {
     await expect(readFile(repoStatePath, "utf8")).rejects.toMatchObject({ code: "ENOENT" });
     expect(await readFile(excludePath, "utf8")).toBe(initialExclude);
     expect(JSON.parse(await readFile(path.join(repo, ".github", "copilot", "settings.json"), "utf8")).enabledPlugins[`payments@${TEST_MARKETPLACE_NAME}`]).toBeUndefined();
-  }, CLI_PROCESS_TEST_TIMEOUT);
+  }, 120_000);
 
   test("status and doctor do not start Copilot to inspect runtime-only state", async () => {
     const repo = await createGitRepo();
     const home = await tempDir("teamai-capabilities-home-");
-    const fake = await createFakeCopilot({
-      mcpServers: [{ name: "shared-tools", enabled: true, source: "plugin:test-plugin" }],
-    });
+    const fake = await createFakeCopilot(undefined, home);
     const tracked = trackCopilotCalls(fake.client);
 
     const status = capture();
@@ -777,7 +776,7 @@ describe("CLI integration with fake Copilot executable", () => {
   test("status and doctor leave persistent state unchanged", async () => {
     const repo = await createGitRepo();
     const home = await tempDir("teamai-read-only-home-");
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, home);
     const tracked = trackCopilotCalls(fake.client);
     const output = capture();
 
@@ -817,7 +816,7 @@ describe("CLI integration with fake Copilot executable", () => {
   test("invalid flags fail before backend or Marketplace work and use usage exit code 2", async () => {
     const repo = await createGitRepo();
     const home = await tempDir("teamai-invalid-flags-home-");
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, home);
     const tracked = trackCopilotCalls(fake.client);
     let marketplaceLoads = 0;
     let vscodeChecks = 0;
@@ -850,7 +849,7 @@ describe("CLI integration with fake Copilot executable", () => {
   test("validates command arguments before honoring help or version", async () => {
     const repo = await createGitRepo();
     const home = await tempDir("teamai-help-validation-home-");
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, home);
     const tracked = trackCopilotCalls(fake.client);
     let marketplaceLoads = 0;
     let vscodeChecks = 0;
@@ -883,7 +882,7 @@ describe("CLI integration with fake Copilot executable", () => {
     expect(help.stdout.join("\n")).toContain("teamai <command> [options]");
     const version = capture();
     expect(await runCli(["--version"], { out: version.out, err: version.err })).toBe(0);
-    expect(version.stdout).toEqual(["0.3.0"]);
+    expect(version.stdout).toEqual(["0.4.0"]);
     const dryRunHelp = capture();
     expect(await runCli(["--dry-run"], { out: dryRunHelp.out, err: dryRunHelp.err })).toBe(0);
     expect(dryRunHelp.stdout.join("\n")).toContain("teamai <command> [options]");
@@ -896,7 +895,7 @@ describe("CLI integration with fake Copilot executable", () => {
   test("status returns failure when Copilot local state cannot be parsed", async () => {
     const repo = await createGitRepo();
     const home = await tempDir("teamai-status-invalid-copilot-state-home-");
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, home);
     const tracked = trackCopilotCalls(fake.client);
     await writeGlobalConfig(createConfig({ name: TEST_MARKETPLACE_NAME, source: TEST_MARKETPLACE_SOURCE }), home);
     const copilotRoot = path.join(home, ".copilot");
@@ -959,7 +958,7 @@ describe("CLI integration with fake Copilot executable", () => {
     const vscodeSettingsPath = path.join(home, "Code", "settings.json");
     await mkdir(path.dirname(vscodeSettingsPath), { recursive: true });
     await writeFile(vscodeSettingsPath, JSON.stringify({ "chat.plugins.marketplaces": [TEST_MARKETPLACE_SOURCE] }), "utf8");
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, home);
     const output = capture();
     const loadMarketplace = async () => ({
       ...(await loadFakeMarketplace(catalogRoot)),
@@ -986,7 +985,7 @@ describe("CLI integration with fake Copilot executable", () => {
   test("does not choose fallback when the native Copilot executable fails", async () => {
     const repo = await createGitRepo();
     const home = await tempDir("teamai-native-copilot-failure-home-");
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, home);
     const calls: string[] = [];
     let vscodeChecks = 0;
     let marketplaceLoads = 0;
@@ -1022,7 +1021,7 @@ describe("CLI integration with fake Copilot executable", () => {
     const prior = process.env.COPILOT_HOME;
     const repo = await createGitRepo();
     const home = await tempDir("teamai-invalid-copilot-root-home-");
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, home);
     const tracked = trackCopilotCalls(fake.client);
     let marketplaceLoads = 0;
     process.env.COPILOT_HOME = "relative/copilot";
@@ -1080,7 +1079,7 @@ describe("CLI integration with fake Copilot executable", () => {
     await writeFile(personalPath, personalContent);
     await writeFile(privatePath, privateContent);
     await writeFile(rootPersonalPath, rootPersonalContent);
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, home);
     const output = capture();
 
     expect(await runCli(["init", "--marketplace", TEST_MARKETPLACE_SOURCE, "--role", "api"], {
@@ -1109,7 +1108,7 @@ describe("CLI integration with fake Copilot executable", () => {
     const source = path.join(marketplace, "instructions");
     await mkdir(source, { recursive: true });
     await writeFile(path.join(source, "global.instructions.md"), "v1\n", "utf8");
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, home);
     const loadMarketplace = async () => loadFakeMarketplace(marketplace);
     const base = { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace };
     expect(await runCli(["init", "--marketplace", TEST_MARKETPLACE_SOURCE, "--role", "api"], { ...base, ...capture() })).toBe(0);
@@ -1143,7 +1142,7 @@ describe("CLI integration with fake Copilot executable", () => {
     expect(await runCli(["sync"], { ...base, out: emptied.out, err: emptied.err })).toBe(0);
     await expect(readFile(path.join(target, "stale.instructions.md"))).rejects.toMatchObject({ code: "ENOENT" });
     expect(emptied.stdout).toContain("DONE remove: ~/.copilot/instructions/teamai/stale.instructions.md");
-  }, CLI_PROCESS_TEST_TIMEOUT);
+  }, 120_000);
 
   test("status and doctor report current and stale managed instructions", async () => {
     const repo = await createGitRepo();
@@ -1152,7 +1151,7 @@ describe("CLI integration with fake Copilot executable", () => {
     const source = path.join(marketplace, "instructions");
     await mkdir(source, { recursive: true });
     await writeFile(path.join(source, "global.instructions.md"), "global\n", "utf8");
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, home);
     const loadMarketplace = async () => loadFakeMarketplace(marketplace);
     const base = { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace };
     expect(await runCli(["init", "--marketplace", TEST_MARKETPLACE_SOURCE, "--role", "api"], { ...base, ...capture() })).toBe(0);
@@ -1180,7 +1179,7 @@ describe("CLI integration with fake Copilot executable", () => {
     await writeGlobalConfig(createConfig({ name: TEST_MARKETPLACE_NAME, source: TEST_MARKETPLACE_SOURCE }), home);
     const fake = await createFakeCopilot({
       marketplaces: [{ name: TEST_MARKETPLACE_NAME, source: TEST_MARKETPLACE_SOURCE }],
-    });
+    }, home);
     const output = capture();
 
     expect(await runCli(["status"], {
@@ -1210,7 +1209,7 @@ describe("CLI integration with fake Copilot executable", () => {
     await writeGlobalConfig(config, home);
     const fake = await createFakeCopilot({
       marketplaces: [{ name: TEST_MARKETPLACE_NAME, source: TEST_MARKETPLACE_SOURCE }],
-    });
+    }, home);
     const output = capture();
 
     expect(await runCli(["doctor"], {
@@ -1241,7 +1240,7 @@ describe("CLI integration with fake Copilot executable", () => {
     await writeGlobalConfig(config, home);
     const fake = await createFakeCopilot({
       marketplaces: [{ name: TEST_MARKETPLACE_NAME, source: TEST_MARKETPLACE_SOURCE }],
-    });
+    }, home);
     const base = {
       cwd: repo,
       homeDir: home,
@@ -1307,7 +1306,7 @@ describe("CLI integration with fake Copilot executable", () => {
     await writeGlobalConfig(config, home);
     const fake = await createFakeCopilot({
       marketplaces: [{ name: TEST_MARKETPLACE_NAME, source: TEST_MARKETPLACE_SOURCE }],
-    });
+    }, home);
     const base = {
       cwd: repo,
       homeDir: home,
@@ -1333,7 +1332,7 @@ describe("CLI integration with fake Copilot executable", () => {
     await writeFile(path.join(source, "global.instructions.md"), "managed\n", "utf8");
     const fake = await createFakeCopilot({
       marketplaces: [{ name: TEST_MARKETPLACE_NAME, source: TEST_MARKETPLACE_SOURCE }],
-    });
+    }, home);
     const base = {
       cwd: repo,
       homeDir: home,
@@ -1369,7 +1368,7 @@ describe("CLI integration with fake Copilot executable", () => {
     const source = path.join(marketplace, "instructions");
     await mkdir(source, { recursive: true });
     await writeFile(path.join(source, "global.instructions.md"), "keep me\n", "utf8");
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, home);
     const base = { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace: async () => loadFakeMarketplace(marketplace) };
     expect(await runCli(["init", "--marketplace", TEST_MARKETPLACE_SOURCE, "--role", "api"], { ...base, ...capture() })).toBe(0);
 

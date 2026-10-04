@@ -5,7 +5,7 @@ import type { TeamAiConfig } from "../config/schema.js";
 import type { MarketplaceCatalog } from "../copilot/catalog.js";
 import { convergeManagedSkills, effectiveEnabledPluginSpecs, materializedEnabledPluginSkillNames, personalSkillPath, userScopePluginInventory } from "../copilot/skills.js";
 import { promptText } from "../utils/prompt.js";
-import type { CommandContext } from "./context.js";
+import { withNativeUserDeliveryLock, type CommandContext } from "./context.js";
 
 export async function skillListCommand(context: CommandContext, options: { tag?: string; owner?: string; source?: string }): Promise<void> {
   const { config, catalog } = await configuredCatalog(context);
@@ -57,16 +57,22 @@ export async function skillInstallCommand(context: CommandContext, names: string
       if ((await promptText("? Install selected skills? [y/N]: ")).toLowerCase() !== "y") throw new Error("Skill installation cancelled.");
     }
     const next: TeamAiConfig = { ...config, managedSkills: [...new Set([...(config.managedSkills ?? []), ...selected])].sort() };
-    const availability = await pluginSkillAvailability(context, catalog);
-    const result = await convergeManagedSkills(next, catalog.skills, availability.enabledPlugins, context.homeDir, {
-      dryRun: context.dryRun,
-      materializedPluginSkills: availability.materializedPluginSkills,
+    const preflight = async () => {
+      const availability = await pluginSkillAvailability(context, catalog);
+      await convergeManagedSkills(next, catalog.skills, availability.enabledPlugins, context.homeDir, { dryRun: true, materializedPluginSkills: availability.materializedPluginSkills });
+    };
+    await withNativeUserDeliveryLock(context, preflight, async () => {
+      const availability = await pluginSkillAvailability(context, catalog);
+      const result = await convergeManagedSkills(next, catalog.skills, availability.enabledPlugins, context.homeDir, {
+        dryRun: context.dryRun,
+        materializedPluginSkills: availability.materializedPluginSkills,
+      });
+      next.managedSkillPaths = result.managedSkillPaths;
+      printChanges(result.changes, context);
+      for (const name of result.available) context.out(`AVAILABLE via plugin: ${name}`);
+      if (context.dryRun) context.out("WOULD write: ~/.teamai/config.yaml");
+      else await writeGlobalConfig(next, context.homeDir);
     });
-    next.managedSkillPaths = result.managedSkillPaths;
-    printChanges(result.changes, context);
-    for (const name of result.available) context.out(`AVAILABLE via plugin: ${name}`);
-    if (context.dryRun) context.out("WOULD write: ~/.teamai/config.yaml");
-    else await writeGlobalConfig(next, context.homeDir);
   } finally {
     await catalog.dispose();
   }
@@ -79,15 +85,21 @@ export async function skillRemoveCommand(context: CommandContext, names: string[
     const selected = [...new Set(names)];
     for (const name of selected) if (!catalog.skills.some((skill) => skill.name === name) && !config.managedSkills?.includes(name) && !config.managedSkillPaths?.[name]) throw new Error(`Unknown skill '${name}'.`);
     const next: TeamAiConfig = { ...config, managedSkills: (config.managedSkills ?? []).filter((name) => !selected.includes(name)) };
-    const availability = await pluginSkillAvailability(context, catalog);
-    const result = await convergeManagedSkills(next, catalog.skills, availability.enabledPlugins, context.homeDir, {
-      dryRun: context.dryRun,
-      materializedPluginSkills: availability.materializedPluginSkills,
+    const preflight = async () => {
+      const availability = await pluginSkillAvailability(context, catalog);
+      await convergeManagedSkills(next, catalog.skills, availability.enabledPlugins, context.homeDir, { dryRun: true, materializedPluginSkills: availability.materializedPluginSkills });
+    };
+    await withNativeUserDeliveryLock(context, preflight, async () => {
+      const availability = await pluginSkillAvailability(context, catalog);
+      const result = await convergeManagedSkills(next, catalog.skills, availability.enabledPlugins, context.homeDir, {
+        dryRun: context.dryRun,
+        materializedPluginSkills: availability.materializedPluginSkills,
+      });
+      next.managedSkillPaths = result.managedSkillPaths;
+      printChanges(result.changes, context);
+      if (context.dryRun) context.out("WOULD write: ~/.teamai/config.yaml");
+      else await writeGlobalConfig(next, context.homeDir);
     });
-    next.managedSkillPaths = result.managedSkillPaths;
-    printChanges(result.changes, context);
-    if (context.dryRun) context.out("WOULD write: ~/.teamai/config.yaml");
-    else await writeGlobalConfig(next, context.homeDir);
   } finally {
     await catalog.dispose();
   }

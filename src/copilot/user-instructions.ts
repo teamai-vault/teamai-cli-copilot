@@ -235,7 +235,7 @@ async function ensureTargetRoot(targetRoot: string, create: boolean): Promise<vo
   if (await isLinkLike(targetRoot, info) || !info.isDirectory()) throw unsafeTargetError(targetRoot);
 }
 
-async function ensureSafeTargetChain(targetRoot: string): Promise<void> {
+export async function ensureSafeTargetChain(targetRoot: string): Promise<void> {
   let current = path.resolve(targetRoot);
   while (true) {
     let info;

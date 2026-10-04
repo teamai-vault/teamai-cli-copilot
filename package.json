@@ -1,9 +1,10 @@
 {
   "name": "teamai-cli-copilot",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "type": "module",
   "files": [
     "dist",
+    "agents/teamai-recall.agent.md",
     "skills/teamai",
     "README.md",
     "README.zh-CN.md"
@@ -13,13 +14,14 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
-    "prepublishOnly": "npm run build",
+    "prepare": "npm run build && node scripts/check-package-bytes.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run --no-file-parallelism",
     "test:unit": "vitest run test/unit --no-file-parallelism",
     "test:integration": "vitest run test/integration --no-file-parallelism",
     "test:e2e:copilot": "node scripts/smoke-teamai.mjs",
     "test:e2e:fallback": "node scripts/smoke-fallback.mjs",
+    "package:test": "node test/helpers/verify-builtin-package.mjs",
     "rename:marketplace": "node scripts/rename-marketplace.mjs"
   },
   "engines": {

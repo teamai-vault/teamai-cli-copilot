@@ -3,6 +3,7 @@ import { constants } from "node:fs";
 import path from "node:path";
 import { readGlobalConfig } from "../config/global.js";
 import { inspectBuiltInTeamAiSkill } from "../copilot/builtin-skill.js";
+import { inspectBuiltInRecallAgent } from "../copilot/builtin-agent.js";
 import { enabledUserPlugins, pluginSpec, userPlugins } from "../copilot/plugins.js";
 import { convergeManagedSkills, effectiveEnabledPluginSpecs, materializedEnabledPluginSkillNames, materializedEnabledPluginSpecs, userScopePluginInventory } from "../copilot/skills.js";
 import { readProjectSettings } from "../copilot/project-settings.js";
@@ -82,6 +83,16 @@ export async function doctorCommand(context: CommandContext, jsonOutput = false)
     fail("Built-in Team AI Skill diagnostics failed: " + (error as Error).message);
   }
 
+  try {
+    const agent = await inspectBuiltInRecallAgent(context.homeDir);
+    if (agent.status === "current") ok(`Built-in Recall Agent: current (${agent.version}); consumer runtime unobserved.`);
+    else if (agent.status === "collision") fail(`Built-in Recall Agent collision: ${agent.reason}.`);
+    else if (agent.pending) warn(agent.reason ?? "Partial Recall Agent delivery awaits receipt confirmation.");
+    else warn(`Built-in Recall Agent: ${agent.status}. Run teamai init or teamai sync.`);
+  } catch (error) {
+    fail("Built-in Recall Agent diagnostics failed: " + (error as Error).message);
+  }
+
   warn("Copilot runtime and native MCP state are unobserved by this read-only diagnostic.");
 
   let config;
@@ -147,7 +158,7 @@ export async function doctorCommand(context: CommandContext, jsonOutput = false)
 
       if (config.role && copilotConfig && copilotSettings) {
         const expectedEnabled = new Set(enabledUserPlugins(config.role, catalog.plugins, config.marketplace.name));
-        const inventory = recordedUserPluginInventory({ config: copilotConfig, settings: copilotSettings }, catalog);
+        const inventory = await recordedUserPluginInventory({ config: copilotConfig, settings: copilotSettings }, catalog, context.homeDir);
         if (inventory.length === 0) {
           warn("Copilot Plugin inventory is not recorded in local settings; installed/runtime state is unobserved.");
         } else {
@@ -242,7 +253,7 @@ export async function doctorCommand(context: CommandContext, jsonOutput = false)
   if (config && catalogSnapshot) {
     try {
       const inventory = copilotConfig && copilotSettings
-        ? recordedUserPluginInventory({ config: copilotConfig, settings: copilotSettings }, { ...catalogSnapshot, dispose: async () => {} })
+        ? await recordedUserPluginInventory({ config: copilotConfig, settings: copilotSettings }, { ...catalogSnapshot, dispose: async () => {} }, context.homeDir)
         : [];
       if (inventory.length === 0) {
         warn("Managed personal Skill availability is unknown because no local Plugin inventory is recorded.");

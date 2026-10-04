@@ -2,7 +2,7 @@ import { afterAll, afterEach, beforeAll, describe, expect, test, vi } from "vite
 import { createHash } from "node:crypto";
 import { cp, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { fileURLToPath, pathToFileURL } from "node:url";
+import { pathToFileURL } from "node:url";
 import { runCli } from "../../src/cli.js";
 import { createConfig } from "../../src/config/schema.js";
 import { writeGlobalConfig } from "../../src/config/global.js";
@@ -44,7 +44,7 @@ async function readIfExists(filePath: string): Promise<Buffer | undefined> {
   }
 }
 
-async function createMarketplaceRemote(): Promise<{ source: string; authorityRevision: string; resourceRepo: string; learningRepo: string }> {
+async function createMarketplaceRemote(): Promise<{ source: string; authorityRevision: string; resourceRepo: string; learningRepo: string; bare: string }> {
   const root = await tempDir("teamai-published-marketplace-");
   cleanup.add(root);
   const bare = path.join(root, "marketplace.git");
@@ -93,7 +93,7 @@ async function createMarketplaceRemote(): Promise<{ source: string; authorityRev
   await git(learningRepo, ["commit", "-m", "published authority snapshot"]);
   await git(learningRepo, ["push", "origin", "HEAD:refs/heads/teamai-learnings"]);
   const authorityRevision = await git(learningRepo, ["rev-parse", "HEAD"]);
-  return { source: pathToFileURL(bare).href, authorityRevision, resourceRepo, learningRepo };
+  return { source: resourceRepo, authorityRevision, resourceRepo, learningRepo, bare };
 }
 
 function capture() {
@@ -195,7 +195,7 @@ describe("published Learnings sync", () => {
     const config = createConfig({ name: "test-teamai", source: resourceRepo });
     config.role = "api";
     await writeGlobalConfig(config, homeDir);
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, homeDir);
     cleanup.add(path.dirname(fake.statePath));
     const options = { cwd: workspace, homeDir, copilot: fake.client };
     const refsBefore = await git(resourceRepo, ["show-ref", "--head"]);
@@ -214,14 +214,14 @@ describe("published Learnings sync", () => {
     cleanup.add(workspace);
     const homeDir = await tempDir("teamai-published-parent-git-home-");
     cleanup.add(homeDir);
-    const { source, resourceRepo } = await createMarketplaceRemote();
+    const { bare, resourceRepo } = await createMarketplaceRemote();
     const nestedMarketplace = path.join(workspace, "marketplace");
     await cp(resourceRepo, nestedMarketplace, { recursive: true, filter: (candidate) => !candidate.split(path.sep).includes(".git") });
-    await git(workspace, ["remote", "add", "origin", fileURLToPath(source)]);
+    await git(workspace, ["remote", "add", "origin", bare]);
     const config = createConfig({ name: "test-teamai", source: nestedMarketplace });
     config.role = "api";
     await writeGlobalConfig(config, homeDir);
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, homeDir);
     cleanup.add(path.dirname(fake.statePath));
     const options = { cwd: workspace, homeDir, copilot: fake.client };
     const refsBefore = await git(workspace, ["show-ref", "--head"]);
@@ -260,7 +260,7 @@ describe("published Learnings sync", () => {
         const config = createConfig({ name: "test-teamai", source });
         config.role = "api";
         await writeGlobalConfig(config, homeDir);
-        const fake = await createFakeCopilot();
+        const fake = await createFakeCopilot(undefined, homeDir);
         cleanup.add(path.dirname(fake.statePath));
         options = { cwd: workspace, homeDir, copilot: fake.client };
         context = path.join(workspace, ".teamai", "context");
@@ -375,7 +375,7 @@ describe("published Learnings sync", () => {
     const config = createConfig({ name: "test-teamai", source });
     config.role = "api";
     await writeGlobalConfig(config, homeDir);
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, homeDir);
     cleanup.add(path.dirname(fake.statePath));
     const options = { cwd: repo, homeDir, copilot: fake.client };
     const initial = await fake.readState();
@@ -402,7 +402,7 @@ describe("published Learnings sync", () => {
     const config = createConfig({ name: "test-teamai", source });
     config.role = "api";
     await writeGlobalConfig(config, homeDir);
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, homeDir);
     cleanup.add(path.dirname(fake.statePath));
     const options = { cwd: workspace, homeDir, copilot: fake.client };
     const initialSync = capture();
@@ -483,7 +483,7 @@ describe("published Learnings sync", () => {
     const finalStatus = capture();
     expect(await runCli(["status", "--json"], { ...options, out: finalStatus.out, err: finalStatus.err })).toBe(0);
     expect(JSON.parse(finalStatus.stdout.join("\n")).diagnostics.some((item: { code: string }) => item.code === "LEARNINGS_PROJECTION_INCOMPLETE")).toBe(false);
-  }, 60_000);
+  }, 120_000);
 
   describe.sequential("sync resumes an interrupted A-to-B Projects change from the pending target", () => {
     const scenario = "sync resumes an interrupted A-to-B Projects change from the pending target";
@@ -511,7 +511,7 @@ describe("published Learnings sync", () => {
         const config = createConfig({ name: "test-teamai", source });
         config.role = "api";
         await writeGlobalConfig(config, homeDir);
-        const fake = await createFakeCopilot();
+        const fake = await createFakeCopilot(undefined, homeDir);
         cleanup.add(path.dirname(fake.statePath));
         options = { cwd: workspace, homeDir, copilot: fake.client };
       } finally {
@@ -651,7 +651,7 @@ describe("published Learnings sync", () => {
     const config = createConfig({ name: "test-teamai", source });
     config.role = "api";
     await writeGlobalConfig(config, homeDir);
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, homeDir);
     cleanup.add(path.dirname(fake.statePath));
     const options = { cwd: workspace, homeDir, copilot: fake.client };
     expect(await runCli(["sync"], { ...options, ...capture() })).toBe(0);

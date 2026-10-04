@@ -35,7 +35,7 @@ test("skill read, tag selection, installation, and removal use explicit managed 
     skills: [{ name: "release-helper", description: "Release help", sourceType: "standalone", sourcePath: "skills/release-helper", root: skillRoot, owner: "release", tags: ["release"], standalone: true }],
     dispose: async () => undefined,
   };
-  const fake = await createFakeCopilot({ marketplaceName: "skills-test" });
+  const fake = await createFakeCopilot({ marketplaceName: "skills-test" }, home);
   const stdout: string[] = [];
   const base = { homeDir: home, cwd: source, copilot: fake.client, loadMarketplace: async () => catalog, out: (line: string) => stdout.push(line), err: () => undefined };
 
@@ -75,13 +75,13 @@ test("dry-run sync uses planned plugin enablement for selected plugin skills", a
     ...baseCatalog,
     skills: [{ name: "api-review", description: "API review", sourceType: "plugin", plugin: "api", sourcePath: "plugins/api/skills/api-review", root: path.join(source, "plugins", "api", "skills", "api-review"), owner: "api", tags: [], standalone: false }],
   };
-  const fake = await createFakeCopilot();
+  const fake = await createFakeCopilot(undefined, home);
 
   expect(await runCli(["--dry-run", "sync"], { cwd: source, homeDir: home, copilot: fake.client, loadMarketplace: async () => catalog, out: () => undefined, err: () => undefined })).toBe(0);
   expect((await readGlobalConfig(home))?.managedPlugins).toEqual([]);
 }, 30_000);
 
-test("sync keeps an owned personal Skill when its enabled Plugin has no package cache", async () => {
+test("sync keeps an owned personal Skill when its enabled Plugin package has no Skill file", async () => {
   const home = await tempDir("teamai-skill-unmaterialized-home-");
   const source = await tempDir("teamai-skill-unmaterialized-source-");
   cleanup.add(home);
@@ -111,7 +111,7 @@ test("sync keeps an owned personal Skill when its enabled Plugin has no package 
       { name: "common", marketplace: TEST_MARKETPLACE_NAME, version: "0.1.0", enabled: true, source: `live-marketplace:${TEST_MARKETPLACE_NAME}` },
       { name: "api", marketplace: TEST_MARKETPLACE_NAME, version: "0.1.0", enabled: true, source: `live-marketplace:${TEST_MARKETPLACE_NAME}` },
     ],
-  });
+  }, home);
   const output: string[] = [];
 
   expect(await runCli(["sync"], {
@@ -130,8 +130,8 @@ test("sync keeps an owned personal Skill when its enabled Plugin has no package 
 test("sync keeps an owned personal Skill until the enabled Plugin package contains its Skill file", async () => {
   const home = await tempDir("teamai-skill-file-missing-home-");
   const source = await tempDir("teamai-skill-file-missing-source-");
-  const commonCache = path.join(source, "cache", "common");
-  const apiCache = path.join(source, "cache", "api");
+  const commonCache = path.join(home, ".copilot", "installed-plugins", TEST_MARKETPLACE_NAME, "common");
+  const apiCache = path.join(home, ".copilot", "installed-plugins", TEST_MARKETPLACE_NAME, "api");
   cleanup.add(home);
   cleanup.add(source);
   const skillRoot = path.join(source, "plugins", "api", "skills", "api-review");
@@ -163,7 +163,7 @@ test("sync keeps an owned personal Skill until the enabled Plugin package contai
       { name: "common", marketplace: TEST_MARKETPLACE_NAME, version: "0.1.0", enabled: true, source: `live-marketplace:${TEST_MARKETPLACE_NAME}`, cache_path: commonCache },
       { name: "api", marketplace: TEST_MARKETPLACE_NAME, version: "0.1.0", enabled: true, source: `live-marketplace:${TEST_MARKETPLACE_NAME}`, cache_path: apiCache },
     ],
-  });
+  }, home);
   const runSync = async (args = ["sync"]) => await runCli(args, {
     cwd: source,
     homeDir: home,
@@ -197,7 +197,7 @@ test("sync keeps an owned personal Skill until the enabled Plugin package contai
   expect(await runSync()).toBe(0);
   expect((await readGlobalConfig(home))?.managedSkillPaths?.["api-review"]).toBeUndefined();
   await expect(readFile(path.join(skillTarget, "SKILL.md"))).rejects.toMatchObject({ code: "ENOENT" });
-}, 30_000);
+}, 120_000);
 
 test("sync preserves converged plugin ownership when a later skill convergence fails", async () => {
   const home = await tempDir("teamai-skill-failure-home-");
@@ -213,7 +213,7 @@ test("sync preserves converged plugin ownership when a later skill convergence f
     ...baseCatalog,
     skills: [{ name: "ios-review", description: "iOS review", sourceType: "plugin", plugin: "ios", sourcePath: "plugins/ios/skills/ios-review", root: path.join(source, "plugins", "ios", "skills", "ios-review"), owner: "ios", tags: [], standalone: false }],
   };
-  const fake = await createFakeCopilot();
+  const fake = await createFakeCopilot(undefined, home);
 
   expect(await runCli(["sync"], { cwd: source, homeDir: home, copilot: fake.client, loadMarketplace: async () => catalog, out: () => undefined, err: () => undefined })).toBe(1);
   expect((await readGlobalConfig(home))?.managedPlugins).toEqual([

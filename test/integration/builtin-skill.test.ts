@@ -35,7 +35,7 @@ describe("built-in Team AI Skill CLI convergence", () => {
     const home = await tempDir("teamai-builtin-cli-home-");
     cleanup.add(repo);
     cleanup.add(home);
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, home);
     const loadMarketplace = async () => await loadFakeMarketplace();
     const base = { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace };
 

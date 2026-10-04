@@ -14,6 +14,8 @@ Use this as an intent map, not as a cached CLI manual. Run `teamai <command> --h
 | `teamai tags list` | Browse current Skill tags. |
 | `teamai learning share` | Share a Learning through the supported contribution workflow. |
 | `teamai learning retry <id>` | Resume a saved Learning contribution without creating a new operation. |
+| `teamai learning pending` | Read saved contribution states without submitting them. |
+| `teamai recall <query>` | Search verified local knowledge read-only; the bundled `teamai-recall` Agent can translate a task into English technical search terms and read original evidence. |
 | `teamai status` | Read the current Team AI state summary. |
 | `teamai doctor` | Diagnose inconsistent, stale, missing, or conflicting Team AI-managed state. |
 

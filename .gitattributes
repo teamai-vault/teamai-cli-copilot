@@ -1,0 +1,8 @@
+# Source and shipped text have the same bytes in Windows and macOS checkouts.
+* text=auto eol=lf
+*.cmd text eol=crlf
+*.bat text eol=crlf
+# Published evidence and frozen payloads must retain their original bytes.
+learnings/** -text !eol
+*.tgz -text !eol
+*.zip -text !eol

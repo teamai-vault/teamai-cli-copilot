@@ -14,6 +14,8 @@ import { runProcess } from "../../src/utils/process.js";
 import { createFakeCopilot, createGitRepo, loadFakeMarketplace, tempDir as createTempDir, TEST_MARKETPLACE_NAME } from "../helpers/test-utils.js";
 
 const cleanup = new Set<string>();
+// Includes local Git fixture setup, the first share, remote edits, and retry.
+const GIT_INTEGRATION_TIMEOUT = 60_000;
 
 afterEach(async () => {
   await Promise.all([...cleanup].map(async (target) => await rm(target, { recursive: true, force: true })));
@@ -258,7 +260,7 @@ describe("learning share", () => {
     const source = await marketplace();
     const body = path.join(repo, "payment-retry.md");
     const staging = await tempDir("teamai-learning-staging-");
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, home);
     await writeFile(body, "Retry only after token refresh.\n", "utf8");
     await writeGlobalConfig(createConfig({ name: TEST_MARKETPLACE_NAME, source }), home);
     await setActiveProjects(repo, home, ["payments.v2"]);
@@ -315,13 +317,13 @@ describe("learning share", () => {
       err: pending.err,
     })).toBe(0);
     expect(JSON.parse(pending.stdout[0]).operations[0]).toMatchObject({ id: operation.id, phase: "pr-open", status: "ready" });
-  });
+  }, GIT_INTEGRATION_TIMEOUT);
 
   test("routes zero active projects to shared and requires an explicit target for multiple", async () => {
     const repo = await createGitRepo();
     const home = await tempDir("teamai-learning-routing-home-");
     const source = await marketplace();
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, home);
     await writeFile(path.join(repo, "note.md"), "A note.\n", "utf8");
     await writeGlobalConfig(createConfig({ name: TEST_MARKETPLACE_NAME, source }), home);
     const zero = capture();
@@ -359,7 +361,7 @@ describe("learning share", () => {
       err: explicit.err,
     })).toBe(0);
     expect(explicit.stdout.some((line) => line.includes("learnings/risk/note.md"))).toBe(true);
-  }, 15_000);
+  }, GIT_INTEGRATION_TIMEOUT);
 
   test("learning pending is read-only and rejects its own invalid arguments", async () => {
     const home = await tempDir("teamai-learning-pending-home-");
@@ -402,7 +404,7 @@ describe("learning share", () => {
       error: { code: "LEARNING_PENDING_FAILED", message: "Team AI is not initialized. Run `teamai init` first." },
     })]);
     expect(missingConfig.stderr).toEqual([]);
-  });
+  }, GIT_INTEGRATION_TIMEOUT);
 
   test("invalid learning body and unknown manifest target fail before outbox or contribution", async () => {
     const repo = await createGitRepo();
@@ -426,7 +428,7 @@ describe("learning share", () => {
     expect(await runCli(["learning", "share", "note.md", "--project", "missing"], overrides)).toBe(1);
     expect(contributionCalls).toBe(0);
     await expect(readdir(learningOutboxDirectory(home))).rejects.toMatchObject({ code: "ENOENT" });
-  });
+  }, GIT_INTEGRATION_TIMEOUT);
 
   test("rejects NUL bytes before creating an outbox record or contributing", async () => {
     const repo = await createGitRepo();
@@ -451,7 +453,7 @@ describe("learning share", () => {
     expect(output.stderr[0]).toContain("without NUL bytes");
     expect(contributionCalls).toBe(0);
     await expect(readdir(learningOutboxDirectory(home))).rejects.toMatchObject({ code: "ENOENT" });
-  });
+  }, GIT_INTEGRATION_TIMEOUT);
 
   test.each(["fetch", "missing-base", "push", "pr"] as const)("first share checkpoints %s failures without losing its outbox", async (failure) => {
     const repo = await createGitRepo();
@@ -460,7 +462,7 @@ describe("learning share", () => {
     const body = Buffer.from("Keep the original CRLF and UTF-8: café.\r\n", "utf8");
     await writeFile(path.join(repo, "note.md"), body);
     await writeGlobalConfig(createConfig({ name: TEST_MARKETPLACE_NAME, source }), home);
-    const fake = await createFakeCopilot();
+    const fake = await createFakeCopilot(undefined, home);
     const output = capture();
     const ghCalls: string[][] = [];
     let sawDurableRecordBeforeClone = false;
@@ -550,7 +552,7 @@ describe("learning share", () => {
       status: "retryable-error",
       lastError: { code: failureCode },
     });
-  }, 20_000);
+  }, GIT_INTEGRATION_TIMEOUT);
 
   test("learning retry validates its operation ID and argument count", async () => {
     const home = await tempDir("teamai-learning-retry-args-home-");
@@ -584,7 +586,7 @@ describe("learning share", () => {
     expect(contributionCalls).toBe(0);
     expect(fixture.counters).toEqual({ pushes: 1, prLists: 0, prCreates: 0 });
     expect(await readFile(outboxPath)).toEqual(before);
-  }, 20_000);
+  }, GIT_INTEGRATION_TIMEOUT);
 
   test.each(["push", "pr"] as const)("learning retry recovers a lost %s response without repeating it", async (lostResponse) => {
     const fixture = await retryFixture(lostResponse);
@@ -615,7 +617,7 @@ describe("learning share", () => {
     expect(Buffer.from(updated.payloadBase64, "base64")).toEqual(Buffer.from(fixture.operation.payloadBase64, "base64"));
     expect(await readRemoteFile(fixture, fixture.operation.branch, fixture.operation.destination))
       .toEqual(Buffer.from(fixture.operation.payloadBase64, "base64"));
-  }, 20_000);
+  }, GIT_INTEGRATION_TIMEOUT);
 
   test.each([
     ["same-name fork PR", { headOwner: "attacker" }],
@@ -631,7 +633,7 @@ describe("learning share", () => {
     expect(fixture.counters.prCreates).toBe(before.prCreates);
     const updated = JSON.parse(await readFile(path.join(learningOutboxDirectory(fixture.home), `${fixture.operation.id}.json`), "utf8")) as LearningOperation;
     expect(updated).toMatchObject({ status: "blocked", lastError: { code: "REMOTE_CONTENT_CONFLICT" } });
-  }, 20_000);
+  }, GIT_INTEGRATION_TIMEOUT);
 
   test("learning retry uses frozen SSH source and author from a different directory without Git identity", async () => {
     const fixture = await retryFixture("push-before", "ssh");
@@ -659,7 +661,7 @@ describe("learning share", () => {
       if (previousNoSystem === undefined) delete process.env.GIT_CONFIG_NOSYSTEM;
       else process.env.GIT_CONFIG_NOSYSTEM = previousNoSystem;
     }
-  }, 20_000);
+  }, GIT_INTEGRATION_TIMEOUT);
 
   test("learning retry blocks a same-name branch with different content and never force-pushes", async () => {
     const fixture = await retryFixture("push");
@@ -675,7 +677,7 @@ describe("learning share", () => {
     expect(after.stdout.trim()).toBe(remoteHead.stdout.trim());
     const updated = JSON.parse(await readFile(path.join(learningOutboxDirectory(fixture.home), `${fixture.operation.id}.json`), "utf8")) as LearningOperation;
     expect(updated).toMatchObject({ status: "blocked", lastError: { code: "REMOTE_CONTENT_CONFLICT" } });
-  }, 20_000);
+  }, GIT_INTEGRATION_TIMEOUT);
 
   test.each([
     ["merged exact content", "MERGED", "exact", 0, "published", "complete"],
@@ -707,7 +709,7 @@ describe("learning share", () => {
     }
     if (content === "exact") expect(result.output.stdout.join("\n")).toContain("published");
     if (state === "CLOSED") expect(result.output.stdout.join("\n")).toContain("closed without merging");
-  }, 20_000);
+  }, GIT_INTEGRATION_TIMEOUT);
 
   test("integration: isolated local Git worktree and mocked gh create a branch contribution", async () => {
     const source = await createGitRepo();
@@ -751,7 +753,7 @@ describe("learning share", () => {
     expect(ghCalls).toEqual([["pr", "create", "--title", "Share learning: example", "--body", "fixture", "--head", "teamai/learning-shared-123"]]);
     const committed = await runProcess("git", ["--git-dir", remote, "show", "teamai/learning-shared-123:learnings/shared/example.md"]);
     expect(committed.stdout).toBe("example\n");
-  }, 20_000);
+  }, GIT_INTEGRATION_TIMEOUT);
 
   test("dry run creates no branch, commit, push, or pull request", async () => {
     let calls = 0;
@@ -790,5 +792,5 @@ describe("learning share", () => {
     expect(credentialError).not.toContain("secret");
     const withoutOrigin = await createGitRepo();
     await expect(resolveGitHubMarketplaceRemote(withoutOrigin, withoutOrigin)).rejects.toThrow("has no origin remote");
-  });
+  }, GIT_INTEGRATION_TIMEOUT);
 });

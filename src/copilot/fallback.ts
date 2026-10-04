@@ -2,7 +2,7 @@ import { mkdir, readFile, readdir, realpath } from "node:fs/promises";
 import path from "node:path";
 import { replaceDirectory } from "../utils/fs.js";
 import { loadMarketplaceCatalog, type MarketplaceCatalog, type MarketplaceLoadOptions } from "./catalog.js";
-import type { CopilotOperations, InstalledPlugin, MarketplacePluginRow, MarketplaceRow, NativeMcpServer } from "./cli.js";
+import type { CopilotOperations, InstalledPlugin, MarketplacePluginRow, MarketplaceRow } from "./cli.js";
 import {
   installedPluginsRoot,
   readCopilotState,
@@ -48,21 +48,6 @@ export class FallbackCopilotClient implements CopilotOperations {
       }
     }
     return configured;
-  }
-
-  async listMcpServers(): Promise<{ servers: NativeMcpServer[]; errors: string[] }> {
-    const servers: NativeMcpServer[] = [];
-    const errors: string[] = [];
-    for (const plugin of await this.listPlugins()) {
-      if (!plugin.enabled || typeof plugin.cache_path !== "string") continue;
-      try {
-        const config = JSON.parse(await readFile(path.join(plugin.cache_path, "mcp.json"), "utf8")) as { mcpServers?: Record<string, unknown> };
-        for (const name of Object.keys(config.mcpServers ?? {})) servers.push({ name, source: `plugin:${plugin.name}` });
-      } catch (error) {
-        if ((error as NodeJS.ErrnoException).code !== "ENOENT") errors.push(`${plugin.name}: invalid mcp.json`);
-      }
-    }
-    return { servers, errors };
   }
 
   async listMarketplaces(): Promise<MarketplaceRow[]> {

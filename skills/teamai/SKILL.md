@@ -1,6 +1,6 @@
 ---
 name: teamai
-description: Use Team AI CLI when a user wants to initialize or sync Team AI, change role or Logical Project bindings, discover/install/remove/contribute Team Skills, filter Skills by tag, share a Learning, inspect status, or diagnose Team AI. Route Team AI state changes through public `teamai` commands and consult `--help` for current syntax.
+description: Use Team AI CLI to recall team knowledge, initialize or sync Team AI, change role or Logical Project bindings, manage Team Skills, share a Learning, inspect status, or diagnose Team AI. Route through public `teamai` commands and consult `--help` for current syntax.
 ---
 
 # Team AI
@@ -27,9 +27,13 @@ Use the public `teamai` CLI as the control surface. Translate the user's intent 
 - Discover/install/remove Team Skills -> `teamai skill ...`
 - Browse Skill tags -> `teamai tags ...`
 - Share team experience -> `teamai learning share ...`
+- Find scoped team knowledge -> use the bundled `teamai-recall` Agent when available, or `teamai recall ...` for a direct read-only query
+- Inspect saved contributions -> `teamai learning pending ...`; resume one only when requested -> `teamai learning retry <id>`
 - Inspect health -> `teamai status`, then `teamai doctor` for diagnostics
 
 When exact syntax or flags matter, read [references/commands.md](references/commands.md) and run `teamai <command> --help`. Treat current CLI help as the syntax source of truth.
+
+Recall is optional and evidence-only. Keep the user's Scope, preserve exact IDs and diagnostics, and report missing cache rather than implicitly syncing or contributing. The native Recall Agent owns research and provenance guidance; this Skill only routes public commands.
 
 ## Ownership
 

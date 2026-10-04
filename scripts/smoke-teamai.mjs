@@ -3,6 +3,7 @@
 import assert from "node:assert/strict";
 import { execFile } from "node:child_process";
 import { lstat, mkdtemp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { parse } from "jsonc-parser";
 import os from "node:os";
 import path from "node:path";
 import { promisify } from "node:util";
@@ -36,6 +37,14 @@ function normalizedPath(value) {
   return process.platform === "win32" ? resolved.toLowerCase() : resolved;
 }
 
+function parseNativeConfig(text, label) {
+  const errors = [];
+  const value = parse(text, errors, { allowTrailingComma: true });
+  assert.equal(errors.length, 0, `${label} must contain valid JSONC.`);
+  assert.ok(value && typeof value === "object" && !Array.isArray(value), `${label} must contain an object.`);
+  return value;
+}
+
 function assertSkillPath(skills, name, expected, source, label) {
   assert.ok(Array.isArray(skills), "Native skill listing must be an array.");
   assert.ok(skills.some((skill) => skill.name === name && skill.source === source && skill.enabled === true && typeof skill.path === "string" && normalizedPath(skill.path) === normalizedPath(expected)), `${label} was not discovered at ${expected}`);
@@ -57,7 +66,7 @@ async function assertProjectNotInstalled(plugins, userSettings, copilotHome) {
     if (error.code === "ENOENT") return "{}";
     throw error;
   });
-  const userConfig = JSON.parse(configText);
+  const userConfig = parseNativeConfig(configText, "Native Copilot config.json");
   assert.ok(!(userConfig.installedPlugins ?? []).some((item) => item.name === "teamai-project"), "Project Plugin source must not have a user installation record.");
   await assert.rejects(lstat(path.join(copilotHome, "installed-plugins", "teamai", "teamai-project")), { code: "ENOENT" }, "Project Plugin source must not have an installed package directory.");
 }
@@ -70,7 +79,8 @@ try {
   const cacheHome = path.join(profile, ".cache");
   const appData = path.join(profile, "AppData", "Roaming");
   const localAppData = path.join(profile, "AppData", "Local");
-  await Promise.all([repository, copilotHome, cacheHome, appData, localAppData].map((directory) => mkdir(directory, { recursive: true })));
+  const temp = path.join(runRoot, "temp");
+  await Promise.all([repository, copilotHome, cacheHome, appData, localAppData, temp].map((directory) => mkdir(directory, { recursive: true })));
   env = {
     ...process.env,
     HOME: profile,
@@ -79,10 +89,20 @@ try {
     COPILOT_CACHE_HOME: cacheHome,
     APPDATA: appData,
     LOCALAPPDATA: localAppData,
+    TEMP: temp,
+    TMP: temp,
   };
   delete env.COPILOT_GITHUB_TOKEN;
   delete env.GH_TOKEN;
   delete env.GITHUB_TOKEN;
+
+  const runtime = await runCopilot(["--version"]);
+  await writeFile(path.join(runRoot, "runtime.json"), JSON.stringify({
+    platform: process.platform, arch: process.arch, os: os.release(), node: process.version,
+    workspaceRoot: repository, marketplaceRoot, command: "copilot", argv: ["--version"],
+    stdout: runtime.stdout, stderr: runtime.stderr,
+    profile, copilotHome, cacheHome, appData, localAppData, temp,
+  }, null, 2), "utf8");
 
   await run("git", ["init", "-b", "main"]);
   await run("git", ["config", "user.email", "teamai@example.invalid"]);
@@ -133,8 +153,9 @@ try {
   assert.equal(path.resolve(projectMcpServer.cwd), path.resolve(path.dirname(mcpAsset)));
   await assert.doesNotReject(readFile(mcpAsset, "utf8"));
 
-  const installed = JSON.parse((await runCopilot(["plugins", "list", "--kind", "plugin", "--json"])).stdout).plugins;
-  const userSettings = JSON.parse(await readFile(path.join(copilotHome, "settings.json"), "utf8"));
+  const installed = JSON.parse((await runCopilot(["plugin", "list", "--json"])).stdout);
+  assert.ok(Array.isArray(installed), "Native Plugin listing must be an array.");
+  const userSettings = parseNativeConfig(await readFile(path.join(copilotHome, "settings.json"), "utf8"), "Native Copilot settings.json");
   for (const name of ["common", "api", "ios", "aos", "qa", "design"]) {
     assert.ok(installed.some((item) => item.name === name), `${name}@teamai should be installed`);
     assert.equal(userSettings.enabledPlugins?.[`${name}@teamai`], name === "common" || name === "qa", `${name}@teamai must have an explicit user installation/enablement choice.`);
@@ -147,9 +168,16 @@ try {
   await assertProjectNotInstalled(installed, userSettings, copilotHome);
   await assert.rejects(readFile(path.join(repository, ".github", "copilot", "settings.json")), { code: "ENOENT" });
 
-  const instructions = JSON.parse((await runCopilot(["plugins", "list", "--kind", "instruction", "--json"])).stdout);
-  const contextInstructions = instructions.plugins.filter((item) => item.name === "context.instructions.md" && item.scope === "working-directory" && item.source === "working-directory");
+  const instructions = JSON.parse((await runCopilot(["instruction", "list", "--json"])).stdout);
+  assert.ok(Array.isArray(instructions), "Native instruction listing must be an array.");
+  const contextInstructions = instructions.filter((item) => item.label === "context.instructions.md" && item.location === "working-directory");
   assert.equal(contextInstructions.length, 2, "Native Copilot should list both working-directory context instructions.");
+  for (const target of [path.join(repository, ".github", "instructions", "teamai", "context.instructions.md"), projectedInstruction]) {
+    const matches = contextInstructions.filter((item) => typeof item.sourcePath === "string" && normalizedPath(path.resolve(repository, item.sourcePath)) === normalizedPath(target));
+    assert.equal(matches.length, 1, `Native Copilot should discover exactly one context instruction at ${target}.`);
+    assert.equal(matches[0].type, "vscode", `Context instruction at ${target} must use the native VS Code instruction type.`);
+    assert.equal(matches[0].defaultDisabled, false, `Context instruction at ${target} must be enabled by default.`);
+  }
 
   const skills = JSON.parse((await runCopilot(["skill", "list", "--json"])).stdout);
   assertSkillPath(skills, "teamai", path.join(copilotHome, "skills", "teamai"), "personal-copilot", "Built-in Team AI Skill");
@@ -168,5 +196,8 @@ try {
 
   console.log(`Native common/role Copilot E2E and Project workspace projection passed on ${process.platform}.`);
 } finally {
-  if (runRoot) await rm(runRoot, { recursive: true, force: true });
+  if (runRoot) {
+    if (process.env.TEAM_AI_E2E_KEEP_ARTIFACTS === "1") console.log(`E2E artifacts retained at ${runRoot}`);
+    else await rm(runRoot, { recursive: true, force: true });
+  }
 }
