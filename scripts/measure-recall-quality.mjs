@@ -230,6 +230,7 @@ async function cli(packageRoot, root, output, sourceRevision) {
   await json(path.join(output, "protected-before.json"), before);
   const observations = [];
   const protocols = [];
+  const measurementStart = performance.now();
   for (const args of [["--version"], ["recall", "--help"], ["projects", "list"]]) {
     const result = run(process.execPath, [facts.cli, ...args], prepared.workspace, environment(root, path.join(root, "home")));
     protocols.push(result);
@@ -279,7 +280,8 @@ async function cli(packageRoot, root, output, sourceRevision) {
           requiredGroups: groups, firstThree: hits.slice(0, 3).map((hit, index) => ({
             rank: index + 1, id: hit.id, weak: item.weakSources.includes(hit.id),
           })), firstThreeWeakCandidates: hits.slice(0, 3).filter((hit) => item.weakSources.includes(hit.id)).map((hit) => hit.id),
-          originalReads: 0, finalAnswer: "UNVERIFIED: CLI returns candidates, not a model answer",
+          nativeOriginalReads: "NOT_APPLICABLE", permittedFixtureFileCount: sources.filter((source) => source.allowed).length,
+          cliOriginalFileReadCount: "UNVERIFIED: no instrumentation", finalAnswer: "UNVERIFIED: CLI returns candidates, not a model answer",
           modelCost: "NOT_APPLICABLE", validationCostBreakdown: "UNVERIFIED: only total process elapsedMs is observed" });
       }
     }
@@ -293,6 +295,7 @@ async function cli(packageRoot, root, output, sourceRevision) {
     platform: { platform: process.platform, architecture: process.arch, node: process.version },
     copilotRuntime: "UNVERIFIED: no consumer ran", model: "NOT_APPLICABLE", protocols,
     queryCount: observations.length, totalQueryElapsedMs: observations.reduce((sum, row) => sum + row.elapsedMs, 0),
+    totalMeasurementElapsedMs: Math.round(performance.now() - measurementStart),
     protectedRoots: protection, observations, productAcceptance: "NOT_CLAIMED" };
   await json(path.join(output, "cli-report.json"), result);
   return { output, queryCount: result.queryCount, protectedRoots: protection,
