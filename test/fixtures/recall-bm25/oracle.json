@@ -1,0 +1,460 @@
+{
+  "source": "Explicit scalar substitutions from hand-counted matrices; no product rank/parser/output is imported.",
+  "formula": "score(d,q) = sum_t ln(1+(N-df_t+0.5)/(df_t+0.5)) * ((1.2+1)*tf_t,d)/(tf_t,d+1.2*(1-0.75+0.75*dl_d/avgdl))",
+  "frequency": "NFC/case-normalized non-overlapping substring counts; tf=3*title+2*sum(each tag)+body.",
+  "length": "max(1, normalized whitespace words in title + each tag + body).",
+  "statistics": "N/df/avgdl use full verified allowed candidates before required, query matches or limit.",
+  "expectedSuffixOrder": {
+    "rarity": [
+      1,
+      11,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "mark": [
+      7,
+      1,
+      5,
+      2,
+      3,
+      4,
+      6
+    ],
+    "aa": [
+      10,
+      8,
+      9
+    ],
+    "requiredKeep": [
+      2,
+      1
+    ],
+    "fullStatistics": [
+      2,
+      1
+    ],
+    "single": [
+      1
+    ]
+  },
+  "substitutions": [
+    {
+      "name": "rarity",
+      "N": 12,
+      "averageLength": 85.33333333333333,
+      "df": {
+        "plugin": 10,
+        "load": 10,
+        "ERR_NODE_47": 1
+      },
+      "documents": [
+        {
+          "suffix": 1,
+          "dl": 3,
+          "tf": {
+            "ERR_NODE_47": 3
+          },
+          "scoreByTerm": {
+            "ERR_NODE_47": 4.277951210818922
+          }
+        },
+        {
+          "suffix": 2,
+          "dl": 2,
+          "tf": {
+            "plugin": 3,
+            "load": 3
+          },
+          "scoreByTerm": {
+            "plugin": 0.42443519155916326,
+            "load": 0.42443519155916326
+          }
+        },
+        {
+          "suffix": 3,
+          "dl": 2,
+          "tf": {
+            "plugin": 3,
+            "load": 3
+          },
+          "scoreByTerm": {
+            "plugin": 0.42443519155916326,
+            "load": 0.42443519155916326
+          }
+        },
+        {
+          "suffix": 4,
+          "dl": 2,
+          "tf": {
+            "plugin": 3,
+            "load": 3
+          },
+          "scoreByTerm": {
+            "plugin": 0.42443519155916326,
+            "load": 0.42443519155916326
+          }
+        },
+        {
+          "suffix": 5,
+          "dl": 2,
+          "tf": {
+            "plugin": 3,
+            "load": 3
+          },
+          "scoreByTerm": {
+            "plugin": 0.42443519155916326,
+            "load": 0.42443519155916326
+          }
+        },
+        {
+          "suffix": 6,
+          "dl": 2,
+          "tf": {
+            "plugin": 3,
+            "load": 3
+          },
+          "scoreByTerm": {
+            "plugin": 0.42443519155916326,
+            "load": 0.42443519155916326
+          }
+        },
+        {
+          "suffix": 7,
+          "dl": 2,
+          "tf": {
+            "plugin": 3,
+            "load": 3
+          },
+          "scoreByTerm": {
+            "plugin": 0.42443519155916326,
+            "load": 0.42443519155916326
+          }
+        },
+        {
+          "suffix": 8,
+          "dl": 2,
+          "tf": {
+            "plugin": 3,
+            "load": 3
+          },
+          "scoreByTerm": {
+            "plugin": 0.42443519155916326,
+            "load": 0.42443519155916326
+          }
+        },
+        {
+          "suffix": 9,
+          "dl": 2,
+          "tf": {
+            "plugin": 3,
+            "load": 3
+          },
+          "scoreByTerm": {
+            "plugin": 0.42443519155916326,
+            "load": 0.42443519155916326
+          }
+        },
+        {
+          "suffix": 10,
+          "dl": 2,
+          "tf": {
+            "plugin": 3,
+            "load": 3
+          },
+          "scoreByTerm": {
+            "plugin": 0.42443519155916326,
+            "load": 0.42443519155916326
+          }
+        },
+        {
+          "suffix": 11,
+          "dl": 1002,
+          "tf": {
+            "plugin": 503,
+            "load": 503
+          },
+          "scoreByTerm": {
+            "plugin": 0.45992572754581174,
+            "load": 0.45992572754581174
+          }
+        },
+        {
+          "suffix": 12,
+          "dl": 1,
+          "tf": {},
+          "scoreByTerm": {}
+        }
+      ]
+    },
+    {
+      "name": "fields",
+      "N": 10,
+      "averageLength": 13.1,
+      "df": {
+        "mark": 7,
+        "aa": 3
+      },
+      "documents": [
+        {
+          "suffix": 1,
+          "dl": 3,
+          "tf": {
+            "mark": 3
+          },
+          "scoreByTerm": {
+            "mark": 0.7209560228622452
+          }
+        },
+        {
+          "suffix": 2,
+          "dl": 3,
+          "tf": {
+            "mark": 2
+          },
+          "scoreByTerm": {
+            "mark": 0.6724238020116341
+          }
+        },
+        {
+          "suffix": 3,
+          "dl": 3,
+          "tf": {
+            "mark": 1
+          },
+          "scoreByTerm": {
+            "mark": 0.5594443340101862
+          }
+        },
+        {
+          "suffix": 4,
+          "dl": 3,
+          "tf": {
+            "mark": 1
+          },
+          "scoreByTerm": {
+            "mark": 0.5594443340101862
+          }
+        },
+        {
+          "suffix": 5,
+          "dl": 3,
+          "tf": {
+            "mark": 3
+          },
+          "scoreByTerm": {
+            "mark": 0.7209560228622452
+          }
+        },
+        {
+          "suffix": 6,
+          "dl": 102,
+          "tf": {
+            "mark": 1
+          },
+          "scoreByTerm": {
+            "mark": 0.10142273922650899
+          }
+        },
+        {
+          "suffix": 7,
+          "dl": 4,
+          "tf": {
+            "mark": 4
+          },
+          "scoreByTerm": {
+            "mark": 0.7367152818302001
+          }
+        },
+        {
+          "suffix": 8,
+          "dl": 3,
+          "tf": {
+            "aa": 2
+          },
+          "scoreByTerm": {
+            "aa": 2.01052165763098
+          }
+        },
+        {
+          "suffix": 9,
+          "dl": 4,
+          "tf": {
+            "aa": 2
+          },
+          "scoreByTerm": {
+            "aa": 1.9568759567158338
+          }
+        },
+        {
+          "suffix": 10,
+          "dl": 3,
+          "tf": {
+            "aa": 3
+          },
+          "scoreByTerm": {
+            "aa": 2.1556311567611064
+          }
+        }
+      ]
+    },
+    {
+      "name": "requiredStatistics",
+      "N": 8,
+      "averageLength": 1.625,
+      "df": {
+        "common": 7,
+        "rare": 1
+      },
+      "documents": [
+        {
+          "suffix": 1,
+          "dl": 5,
+          "tf": {
+            "common": 4
+          },
+          "scoreByTerm": {
+            "common": 0.2269595875650534
+          }
+        },
+        {
+          "suffix": 2,
+          "dl": 2,
+          "tf": {
+            "rare": 1
+          },
+          "scoreByTerm": {
+            "rare": 1.6371987482403312
+          }
+        },
+        {
+          "suffix": 3,
+          "dl": 1,
+          "tf": {
+            "common": 3
+          },
+          "scoreByTerm": {
+            "common": 0.3122393128327606
+          }
+        },
+        {
+          "suffix": 4,
+          "dl": 1,
+          "tf": {
+            "common": 3
+          },
+          "scoreByTerm": {
+            "common": 0.3122393128327606
+          }
+        },
+        {
+          "suffix": 5,
+          "dl": 1,
+          "tf": {
+            "common": 3
+          },
+          "scoreByTerm": {
+            "common": 0.3122393128327606
+          }
+        },
+        {
+          "suffix": 6,
+          "dl": 1,
+          "tf": {
+            "common": 3
+          },
+          "scoreByTerm": {
+            "common": 0.3122393128327606
+          }
+        },
+        {
+          "suffix": 7,
+          "dl": 1,
+          "tf": {
+            "common": 3
+          },
+          "scoreByTerm": {
+            "common": 0.3122393128327606
+          }
+        },
+        {
+          "suffix": 8,
+          "dl": 1,
+          "tf": {
+            "common": 3
+          },
+          "scoreByTerm": {
+            "common": 0.3122393128327606
+          }
+        }
+      ]
+    },
+    {
+      "name": "fullStatistics",
+      "N": 3,
+      "averageLength": 47.333333333333336,
+      "df": {
+        "pulse": 2
+      },
+      "documents": [
+        {
+          "suffix": 1,
+          "dl": 2,
+          "tf": {
+            "pulse": 1
+          },
+          "scoreByTerm": {
+            "pulse": 0.772784914612462
+          }
+        },
+        {
+          "suffix": 2,
+          "dl": 40,
+          "tf": {
+            "pulse": 5
+          },
+          "scoreByTerm": {
+            "pulse": 0.8530625945640705
+          }
+        },
+        {
+          "suffix": 3,
+          "dl": 100,
+          "tf": {},
+          "scoreByTerm": {}
+        }
+      ]
+    },
+    {
+      "name": "single",
+      "N": 1,
+      "averageLength": 3,
+      "df": {
+        "whole": 1
+      },
+      "documents": [
+        {
+          "suffix": 1,
+          "dl": 3,
+          "tf": {
+            "whole": 4
+          },
+          "scoreByTerm": {
+            "whole": 0.4868465841491676
+          }
+        }
+      ]
+    }
+  ],
+  "counterfactuals": {
+    "requiredSubsetOnly": "N=2, avgdl=3.5, df(common)=df(rare)=1 reverses keeper order to [1,2]; this is prohibited.",
+    "matchedSubsetOnly": "N=2, avgdl=21 for pulse reverses order to [1,2]; neutral length 100 must remain in full statistics.",
+    "saturationBound": "For any present term, 0 < saturation < 2.2; thus a term contribution < 2.2*IDF. No probabilistic confidence is asserted."
+  }
+}
