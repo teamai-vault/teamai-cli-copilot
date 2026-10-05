@@ -6,6 +6,8 @@ The Agent uses the observed `read` and `execute` aliases. For any-language tasks
 
 ## Evidence reading and provenance
 
+The final answer repeats the complete user-supplied diagnostic text and identifiers verbatim, including when there are no hits or evidence is missing. These user-provided anchors are distinguished from diagnostic text confirmed through an original read.
+
 The consumer's read tool opens the exact local `file` returned by Recall, including legitimate ignored files. Conclusions outside a snippet require reading the relevant original content. Execute remains limited to necessary read-only public Recall/help/status/projects queries; general shell reads, hashes, line counting and arbitrary scripts are outside that allowance.
 
 Before applying a condition, the Agent establishes its formal subject, diagnostic and context from the observed text or an explicit cross-reference. A shared Project, Recall hit or overlapping terms alone does not connect separate incidents. Cross-referenced complementary evidence retains its stated scope. Each condition is attributed to its actual source, with user-confirmed facts distinguished from missing facts or inference; additional prerequisites must not be invented.
