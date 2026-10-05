@@ -1,0 +1,239 @@
+{
+  "rarity": [
+    {
+      "id": "20000000-0000-4000-8000-000000000001",
+      "title": "ERR_NODE_47",
+      "tags": [],
+      "body": "exact anchor\n"
+    },
+    {
+      "id": "20000000-0000-4000-8000-000000000002",
+      "title": "plugin load",
+      "tags": [],
+      "body": ""
+    },
+    {
+      "id": "20000000-0000-4000-8000-000000000003",
+      "title": "plugin load",
+      "tags": [],
+      "body": ""
+    },
+    {
+      "id": "20000000-0000-4000-8000-000000000004",
+      "title": "plugin load",
+      "tags": [],
+      "body": ""
+    },
+    {
+      "id": "20000000-0000-4000-8000-000000000005",
+      "title": "plugin load",
+      "tags": [],
+      "body": ""
+    },
+    {
+      "id": "20000000-0000-4000-8000-000000000006",
+      "title": "plugin load",
+      "tags": [],
+      "body": ""
+    },
+    {
+      "id": "20000000-0000-4000-8000-000000000007",
+      "title": "plugin load",
+      "tags": [],
+      "body": ""
+    },
+    {
+      "id": "20000000-0000-4000-8000-000000000008",
+      "title": "plugin load",
+      "tags": [],
+      "body": ""
+    },
+    {
+      "id": "20000000-0000-4000-8000-000000000009",
+      "title": "plugin load",
+      "tags": [],
+      "body": ""
+    },
+    {
+      "id": "20000000-0000-4000-8000-000000000010",
+      "title": "plugin load",
+      "tags": [],
+      "body": ""
+    },
+    {
+      "id": "20000000-0000-4000-8000-000000000011",
+      "title": "plugin load",
+      "tags": [],
+      "body": "plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load plugin load\n"
+    },
+    {
+      "id": "20000000-0000-4000-8000-000000000012",
+      "title": "background",
+      "tags": [],
+      "body": ""
+    }
+  ],
+  "fields": [
+    {
+      "id": "30000000-0000-4000-8000-000000000001",
+      "title": "mark",
+      "tags": [
+        "padding"
+      ],
+      "body": "padding\n"
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000002",
+      "title": "padding",
+      "tags": [
+        "mark"
+      ],
+      "body": "padding\n"
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000003",
+      "title": "padding",
+      "tags": [
+        "padding"
+      ],
+      "body": "mark\n"
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000004",
+      "title": "padding",
+      "tags": [
+        "padding"
+      ],
+      "body": "mark\n"
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000005",
+      "title": "padding",
+      "tags": [
+        "padding"
+      ],
+      "body": "markmarkmark\n"
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000006",
+      "title": "padding",
+      "tags": [
+        "padding"
+      ],
+      "body": "mark padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding\n"
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000007",
+      "title": "padding",
+      "tags": [
+        "mark",
+        "mark"
+      ],
+      "body": "padding\n"
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000008",
+      "title": "padding",
+      "tags": [
+        "padding"
+      ],
+      "body": "aaaaa\n"
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000009",
+      "title": "padding",
+      "tags": [
+        "padding"
+      ],
+      "body": "aa aa\n"
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000010",
+      "title": "aa",
+      "tags": [
+        "padding"
+      ],
+      "body": "padding\n"
+    }
+  ],
+  "requiredStatistics": [
+    {
+      "id": "40000000-0000-4000-8000-000000000001",
+      "title": "keep",
+      "tags": [],
+      "body": "common common common common\n"
+    },
+    {
+      "id": "40000000-0000-4000-8000-000000000002",
+      "title": "keep",
+      "tags": [],
+      "body": "rare\n"
+    },
+    {
+      "id": "40000000-0000-4000-8000-000000000003",
+      "title": "common",
+      "tags": [],
+      "body": ""
+    },
+    {
+      "id": "40000000-0000-4000-8000-000000000004",
+      "title": "common",
+      "tags": [],
+      "body": ""
+    },
+    {
+      "id": "40000000-0000-4000-8000-000000000005",
+      "title": "common",
+      "tags": [],
+      "body": ""
+    },
+    {
+      "id": "40000000-0000-4000-8000-000000000006",
+      "title": "common",
+      "tags": [],
+      "body": ""
+    },
+    {
+      "id": "40000000-0000-4000-8000-000000000007",
+      "title": "common",
+      "tags": [],
+      "body": ""
+    },
+    {
+      "id": "40000000-0000-4000-8000-000000000008",
+      "title": "common",
+      "tags": [],
+      "body": ""
+    }
+  ],
+  "fullStatistics": [
+    {
+      "id": "50000000-0000-4000-8000-000000000001",
+      "title": "caption",
+      "tags": [],
+      "body": "pulse\n"
+    },
+    {
+      "id": "50000000-0000-4000-8000-000000000002",
+      "title": "caption",
+      "tags": [],
+      "body": "pulse pulse pulse pulse pulse filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler\n"
+    },
+    {
+      "id": "50000000-0000-4000-8000-000000000003",
+      "title": "caption",
+      "tags": [],
+      "body": "filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler filler\n"
+    }
+  ],
+  "single": [
+    {
+      "id": "60000000-0000-4000-8000-000000000001",
+      "title": "whole",
+      "tags": [
+        "same"
+      ],
+      "body": "whole\n"
+    }
+  ]
+}

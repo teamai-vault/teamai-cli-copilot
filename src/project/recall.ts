@@ -105,32 +105,59 @@ export function parseRecallMarkdown(content: Buffer, fallbackTitle: string): {
 }
 
 export function rankRecallCandidates(candidates: RecallCandidate[], terms: RecallTerm[], limit: number, requiredLiterals: string[] = []): RecallHit[] {
+  if (candidates.length === 0) return [];
+  const k1 = 1.2;
+  const b = 0.75;
+  const documents = candidates.map((candidate) => {
+    const title = normalizeSearchText(candidate.title);
+    const tags = candidate.tags.map(normalizeSearchText);
+    const body = normalizeSearchText(candidate.body);
+    const length = Math.max(1, [title, ...tags, body].reduce((total, field) => total + field.trim().split(/\s+/u).filter(Boolean).length, 0));
+    const frequencies = terms.map((term) => 3 * countSubstring(title, term.normalized)
+      + 2 * tags.reduce((total, tag) => total + countSubstring(tag, term.normalized), 0)
+      + countSubstring(body, term.normalized));
+    return { candidate, title, tags, body, length, frequencies };
+  });
+  // Statistics use every verified allowed candidate, before required/query/limit filtering.
+  const averageLength = documents.reduce((total, document) => total + document.length, 0) / documents.length;
+  const idfs = terms.map((_, index) => {
+    const frequency = documents.reduce((total, document) => total + (document.frequencies[index]! > 0 ? 1 : 0), 0);
+    return Math.log1p((documents.length - frequency + 0.5) / (frequency + 0.5));
+  });
   const required = requiredLiterals.map(normalizeSearchText);
   const ranked: Array<{ candidate: RecallCandidate; matchedTerms: RecallTerm[]; score: number }> = [];
-  for (const candidate of candidates) {
-    const title = normalizeSearchText(candidate.title);
-    const tags = normalizeSearchText(candidate.tags.join(" "));
-    const body = normalizeSearchText(candidate.body);
+  for (const document of documents) {
+    const { candidate, title, tags, body, length, frequencies } = document;
     if (required.length > 0) {
-      const individualTags = candidate.tags.map(normalizeSearchText);
-      if (!required.every((literal) => title.includes(literal) || individualTags.some((tag) => tag.includes(literal)) || body.includes(literal))) continue;
+      if (!required.every((literal) => title.includes(literal) || tags.some((tag) => tag.includes(literal)) || body.includes(literal))) continue;
     }
-    const matchedTerms = terms.filter((term) => title.includes(term.normalized) || tags.includes(term.normalized) || body.includes(term.normalized));
+    const matchedTerms = terms.filter((_, index) => frequencies[index]! > 0);
     if (matchedTerms.length === 0) continue;
-    const score = matchedTerms.reduce((total, term) => total
-      + (title.includes(term.normalized) ? 3 : 0)
-      + (tags.includes(term.normalized) ? 2 : 0)
-      + (body.includes(term.normalized) ? 1 : 0), 0);
+    const normalization = k1 * (1 - b + b * length / averageLength);
+    const score = frequencies.reduce((total, frequency, index) => frequency === 0 ? total
+      : total + idfs[index]! * ((k1 + 1) * frequency) / (frequency + normalization), 0);
     ranked.push({ candidate, matchedTerms, score });
   }
   return ranked
-    .sort((left, right) => right.matchedTerms.length - left.matchedTerms.length || right.score - left.score || compare(left.candidate.id, right.candidate.id))
+    .sort((left, right) => right.score - left.score || compare(left.candidate.id, right.candidate.id))
     .slice(0, limit)
     .map(({ candidate, matchedTerms }) => {
       const evidence = evidenceFor(candidate.rawContent, matchedTerms);
       const { tags: _tags, body: _body, rawContent: _rawContent, ...hit } = candidate;
       return { ...hit, matchedTerms: matchedTerms.map((term) => term.display), ...evidence };
     });
+}
+
+function countSubstring(text: string, term: string): number {
+  let count = 0;
+  let offset = 0;
+  while (offset < text.length) {
+    const found = text.indexOf(term, offset);
+    if (found < 0) break;
+    count += 1;
+    offset = found + term.length;
+  }
+  return count;
 }
 
 export async function readVerifiedProjectDocs(options: {

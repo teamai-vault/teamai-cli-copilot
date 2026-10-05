@@ -39,7 +39,7 @@ async function put(root: string, relativePath: string, contents: string | Buffer
   await writeFile(target, contents);
 }
 
-async function makeFixture(extraLearnings: Array<{ id: string; title: string; tags: string[]; body: string }> = []): Promise<{
+async function makeFixture(extraLearnings: Array<{ id: string; title: string; tags: string[]; body: string }> = [], includeStandardLearnings = true): Promise<{
   home: string;
   workspace: string;
   resourceRoot: string;
@@ -69,9 +69,11 @@ async function makeFixture(extraLearnings: Array<{ id: string; title: string; ta
   await git(learningRoot, ["checkout", "--orphan", "teamai-learnings"]);
   await git(learningRoot, ["rm", "-rf", "."]);
   await put(learningRoot, "README.md", "Published Learnings fixture\n");
-  await put(learningRoot, "learnings/shared/31a67c90-f875-4dce-9d7d-1812b9bc23ef.md", "---\nid: 31a67c90-f875-4dce-9d7d-1812b9bc23ef\ntitle: Shared published needle\ntags: [shared]\n---\nPublished shared needle evidence.\n");
-  await put(learningRoot, "learnings/payments/8a54f331-4b1e-4a60-8a01-597d358433bd.md", "---\nid: 8a54f331-4b1e-4a60-8a01-597d358433bd\ntitle: Payments published retry\ntags: [payments]\n---\nPublished payments needle evidence.\n");
-  await put(learningRoot, "learnings/risk/88a8bddb-ad61-48ab-8879-c8d736962631.md", "---\nid: 88a8bddb-ad61-48ab-8879-c8d736962631\ntitle: Inactive needle\ntags: [risk]\n---\nInactive risk needle evidence.\n");
+  if (includeStandardLearnings) {
+    await put(learningRoot, "learnings/shared/31a67c90-f875-4dce-9d7d-1812b9bc23ef.md", "---\nid: 31a67c90-f875-4dce-9d7d-1812b9bc23ef\ntitle: Shared published needle\ntags: [shared]\n---\nPublished shared needle evidence.\n");
+    await put(learningRoot, "learnings/payments/8a54f331-4b1e-4a60-8a01-597d358433bd.md", "---\nid: 8a54f331-4b1e-4a60-8a01-597d358433bd\ntitle: Payments published retry\ntags: [payments]\n---\nPublished payments needle evidence.\n");
+    await put(learningRoot, "learnings/risk/88a8bddb-ad61-48ab-8879-c8d736962631.md", "---\nid: 88a8bddb-ad61-48ab-8879-c8d736962631\ntitle: Inactive needle\ntags: [risk]\n---\nInactive risk needle evidence.\n");
+  }
   for (const learning of extraLearnings) {
     await put(learningRoot, `learnings/shared/${learning.id}.md`, `---\nid: ${learning.id}\ntitle: ${JSON.stringify(learning.title)}\ntags: ${JSON.stringify(learning.tags)}\n---\n${learning.body}`);
   }
@@ -95,6 +97,28 @@ async function makeFixture(extraLearnings: Array<{ id: string; title: string; ta
 
 async function makeLiteralFixture(): Promise<Awaited<ReturnType<typeof makeFixture>>> {
   return makeFixture(JSON.parse(await readFile(new URL("../fixtures/recall-required/literals.json", import.meta.url), "utf8")));
+}
+
+async function makeRankingFixture(name: "rarity" | "fields" | "requiredStatistics" | "fullStatistics" | "single"): Promise<Awaited<ReturnType<typeof makeFixture>>> {
+  const bytes = await readFile(new URL("../fixtures/recall-bm25/corpus.json", import.meta.url));
+  const corpusHash = createHash("sha256").update(bytes).digest("hex");
+  const manifest = name === "rarity" ? process.env.TEAMAI_RECALL_BM25_FIXTURE : undefined;
+  if (manifest) {
+    try {
+      const saved = JSON.parse(await readFile(manifest, "utf8"));
+      expect(saved.corpusHash).toBe(corpusHash);
+      return saved.fixture;
+    } catch (error) {
+      if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
+    }
+  }
+  const fixture = await makeFixture(JSON.parse(bytes.toString("utf8"))[name], false);
+  if (manifest) {
+    await writeFile(manifest, JSON.stringify({ corpusHash, fixture, preservedRoots: [...cleanup] }, null, 2) + "\n", "utf8");
+    // Preserve this one actual corpus/profile for before/after measurements; ordinary test cleanup is unchanged.
+    cleanup.clear();
+  }
+  return fixture;
 }
 
 test("published Recall reports the verified frontmatter UUID without a filename suffix", async () => {
@@ -211,28 +235,116 @@ async function snapshotDirectory(root: string): Promise<Record<string, string>> 
 }
 
 describe("teamai recall", () => {
-  test.skipIf(!process.env.TEAMAI_RECALL_BASELINE_CLI)("required literal defaults match the approved public CLI baseline byte-for-byte", async () => {
-    const { runCli: baselineRunCli } = await import(/* @vite-ignore */ pathToFileURL(process.env.TEAMAI_RECALL_BASELINE_CLI!).href);
-    const fixture = await makeLiteralFixture();
-    await addPending(fixture.home, fixture.source, "shared", "Current shared needle draft", sourceWorkspaceKey(fixture.workspace));
+  test("BM25 ranks a rare anchor above ordinary overlap at limits 5 and 10 on a frozen corpus", async () => {
+    const fixture = await makeRankingFixture("rarity");
     const before = await snapshotDirectory(fixture.home);
-    const argsList = [
-      ["recall", "Plugin not", "--scope", "user", "--json"],
-      ["recall", "Plugin not", "--scope", "user"],
-      ["recall", "needle", "--scope", "workspace", "--project", "payments", "--json"],
-      ["recall", "needle", "--include-pending", "--json"],
-      ["recall", " ", "--json"],
-      ["recall", "needle", "--limit", "21", "--json"],
-    ];
-    for (const args of argsList) {
-      const baseline = capture();
-      const expectedExit = await baselineRunCli(args, { ...cliOverrides(fixture), ...baseline });
-      const actual = capture();
-      const exit = await runCli(args, { ...cliOverrides(fixture), ...actual });
-      console.info(JSON.stringify({ seam: "public CLI baseline comparison", args, expectedExit, exit, baseline: { stdout: baseline.stdout, stderr: baseline.stderr }, actual: { stdout: actual.stdout, stderr: actual.stderr } }));
-      expect({ exit, stdout: actual.stdout, stderr: actual.stderr }).toEqual({ exit: expectedExit, stdout: baseline.stdout, stderr: baseline.stderr });
+    const refs = await git(fixture.resourceRoot, ["show-ref", "--head"]);
+    const results: Array<{ limit: number; hits: Array<{ id: string; file: string; matchedTerms: string[]; source: { contentHash: string }; lineStart: number; lineEnd: number; snippet: string }> }> = [];
+    for (const limit of [undefined, "10", "20"]) {
+      const args = ["recall", "plugin load ERR_NODE_47", "--scope", "user", ...(limit ? ["--limit", limit] : []), "--json"];
+      const output = capture();
+      const start = performance.now();
+      const exit = await runCli(args, { ...cliOverrides(fixture), ...output });
+      const elapsedMs = performance.now() - start;
+      console.info(JSON.stringify({ seam: "BM25 frozen rarity comparison", args, elapsedMs, exit, stdout: output.stdout, stderr: output.stderr }));
+      expect(exit).toBe(0);
+      expect(output.stdout).toHaveLength(1);
+      expect(output.stderr).toEqual([]);
+      const result = JSON.parse(output.stdout[0]!);
+      expect(result).not.toHaveProperty("requiredLiterals");
+      results.push(result);
     }
     expect(await snapshotDirectory(fixture.home)).toEqual(before);
+    expect(await git(fixture.resourceRoot, ["show-ref", "--head"])).toBe(refs);
+    // Literal order is frozen from the independent N=12, df=10/10/1, avgdl=1024/12 matrix.
+    const expected = [1, 11, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((suffix) => "learning:shared:20000000-0000-4000-8000-" + String(suffix).padStart(12, "0"));
+    for (const result of results) expect(result.hits.map((hit) => hit.id)).toEqual(expected.slice(0, result.limit));
+    for (const hit of results[2]!.hits) {
+      expect(hit).not.toHaveProperty("score");
+      const bytes = await readFile(hit.file);
+      expect(hit.source.contentHash).toBe(createHash("sha256").update(bytes).digest("hex"));
+      expect(bytes.toString("utf8").split(/\r\n|\n|\r/).slice(hit.lineStart - 1, hit.lineEnd).join("\n")).toBe(hit.snippet);
+    }
+    expect(results[0]!.hits[0]!.matchedTerms).toEqual(["ERR_NODE_47"]);
+  }, 60_000);
+
+  test("BM25 uses weighted field frequency, non-overlapping substrings, length normalization and stable ties", async () => {
+    const fixture = await makeRankingFixture("fields");
+    const before = await snapshotDirectory(fixture.home);
+    for (const [words, suffixes] of [["mark", [7, 1, 5, 2, 3, 4, 6]], ["mark MARK mark", [7, 1, 5, 2, 3, 4, 6]], ["aa", [10, 8, 9]]] as const) {
+      const args = ["recall", words, "--scope", "user", "--limit", "20", "--json"];
+      const output = capture();
+      const exit = await runCli(args, { ...cliOverrides(fixture), ...output });
+      console.info(JSON.stringify({ seam: "BM25 field/count/length", args, exit, stdout: output.stdout, stderr: output.stderr }));
+      expect(exit).toBe(0);
+      expect(output.stdout).toHaveLength(1);
+      expect(output.stderr).toEqual([]);
+      const result = JSON.parse(output.stdout[0]!);
+      expect(result.hits.map((hit: { id: string }) => hit.id)).toEqual(suffixes.map((suffix) => "learning:shared:30000000-0000-4000-8000-" + String(suffix).padStart(12, "0")));
+      for (const hit of result.hits) expect(hit.matchedTerms).toEqual([words.startsWith("mark") ? "mark" : "aa"]);
+    }
+    expect(await snapshotDirectory(fixture.home)).toEqual(before);
+  }, 60_000);
+
+  test("BM25 statistics retain nonmatching and required-rejected files from the full allowed corpus", async () => {
+    for (const name of ["requiredStatistics", "fullStatistics"] as const) {
+      const fixture = await makeRankingFixture(name);
+      const before = await snapshotDirectory(fixture.home);
+      const query = async (words: string, literals: string[] = [], limit = "20") => {
+        const args = ["recall", words, "--scope", "user", ...literals.flatMap((literal) => ["--require", literal]), "--limit", limit, "--json"];
+        const output = capture();
+        const exit = await runCli(args, { ...cliOverrides(fixture), ...output });
+        console.info(JSON.stringify({ seam: "BM25 full allowed statistics", dataset: name, args, exit, stdout: output.stdout, stderr: output.stderr }));
+        expect(exit).toBe(0);
+        expect(output.stdout).toHaveLength(1);
+        expect(output.stderr).toEqual([]);
+        return JSON.parse(output.stdout[0]!);
+      };
+      const prefix = "learning:shared:" + (name === "requiredStatistics" ? "40000000" : "50000000") + "-0000-4000-8000-";
+      const ids = (suffixes: number[]) => suffixes.map((suffix) => prefix + String(suffix).padStart(12, "0"));
+      if (name === "requiredStatistics") {
+        const full = await query("common rare");
+        expect(full.hits.map((hit: { id: string }) => hit.id)).toEqual(ids([2, 3, 4, 5, 6, 7, 8, 1]));
+        const required = await query("common rare", ["keep"]);
+        expect(required).toMatchObject({ requiredLiterals: ["keep"] });
+        expect(required.hits.map((hit: { id: string }) => hit.id)).toEqual(ids([2, 1]));
+        expect(required.hits.map((hit: { matchedTerms: string[] }) => hit.matchedTerms)).toEqual([["rare"], ["common"]]);
+        expect((await query("common rare", ["keep"], "1")).hits.map((hit: { id: string }) => hit.id)).toEqual(ids([2]));
+        expect((await query("common rare", ["keep", "common"])).hits.map((hit: { id: string }) => hit.id)).toEqual(ids([1]));
+      } else {
+        for (const words of ["pulse", "pulse PULSE pulse"]) expect((await query(words)).hits.map((hit: { id: string }) => hit.id)).toEqual(ids([2, 1]));
+        expect((await query("pulse", [], "1")).hits.map((hit: { id: string }) => hit.id)).toEqual(ids([2]));
+        expect((await query("caption")).hits.map((hit: { id: string }) => hit.id)).toEqual(ids([1, 2, 3]));
+      }
+      expect(await snapshotDirectory(fixture.home)).toEqual(before);
+    }
+  }, 60_000);
+
+  test("BM25 handles single-document, full-frequency and empty allowed corpora deterministically", async () => {
+    const single = await makeRankingFixture("single");
+    const before = await snapshotDirectory(single.home);
+    const results = [];
+    for (const words of ["whole", "whole WHOLE whole"]) {
+      const args = ["recall", words, "--scope", "user", "--json"];
+      const output = capture();
+      const exit = await runCli(args, { ...cliOverrides(single), ...output });
+      console.info(JSON.stringify({ seam: "BM25 single/full-frequency", args, exit, stdout: output.stdout, stderr: output.stderr }));
+      expect(exit).toBe(0);
+      expect(output.stderr).toEqual([]);
+      const result = JSON.parse(output.stdout[0]!);
+      expect(result).toMatchObject({ schemaVersion: 1, limit: 5 });
+      expect(result.hits.map((hit: { id: string; matchedTerms: string[] }) => [hit.id, hit.matchedTerms])).toEqual([["learning:shared:60000000-0000-4000-8000-000000000001", ["whole"]]]);
+      results.push(result.hits);
+    }
+    expect(results[0]).toEqual(results[1]);
+    expect(await snapshotDirectory(single.home)).toEqual(before);
+    const empty = await makeFixture([], false);
+    const emptyBefore = await snapshotDirectory(empty.home);
+    const output = capture();
+    expect(await runCli(["recall", "anything", "--scope", "user", "--require", "literal", "--json"], { ...cliOverrides(empty), ...output })).toBe(0);
+    expect(output.stderr).toEqual([]);
+    expect(JSON.parse(output.stdout[0]!)).toMatchObject({ schemaVersion: 1, limit: 5, requiredLiterals: ["literal"], hits: [] });
+    expect(await snapshotDirectory(empty.home)).toEqual(emptyBefore);
   }, 60_000);
 
   test("required literal matches a complete diagnostic in one field and preserves provenance", async () => {
@@ -241,15 +353,15 @@ describe("teamai recall", () => {
     const baseline = capture();
     expect(await runCli(["recall", "Plugin not", "--scope", "user", "--limit", "20", "--json"], { ...cliOverrides(fixture), ...baseline })).toBe(0);
     const unfiltered = JSON.parse(baseline.stdout[0]!);
-    // Independent weights for suffixes 2,4,6,1,5,7,3,8: 8,7,6,5,4,4,2,1.
+    // Independent full-corpus BM25 matrix: N=9, avgdl=82/9, df(Plugin/not)=8/7.
     // E_PLUGIN_42 also contains the ordinary query substring Plugin; no tokenizer is used.
     expect(unfiltered.hits.map((hit: { id: string }) => hit.id)).toEqual([
-      "learning:shared:10000000-0000-4000-8000-000000000002",
       "learning:shared:10000000-0000-4000-8000-000000000004",
       "learning:shared:10000000-0000-4000-8000-000000000006",
-      "learning:shared:10000000-0000-4000-8000-000000000001",
+      "learning:shared:10000000-0000-4000-8000-000000000002",
       "learning:shared:10000000-0000-4000-8000-000000000005",
       "learning:shared:10000000-0000-4000-8000-000000000007",
+      "learning:shared:10000000-0000-4000-8000-000000000001",
       "learning:shared:10000000-0000-4000-8000-000000000003",
       "learning:shared:10000000-0000-4000-8000-000000000008",
     ]);
@@ -266,8 +378,8 @@ describe("teamai recall", () => {
     expect(result.requiredLiterals).toEqual([literal]);
     const allowedIds = [
       "learning:shared:10000000-0000-4000-8000-000000000006",
-      "learning:shared:10000000-0000-4000-8000-000000000001",
       "learning:shared:10000000-0000-4000-8000-000000000007",
+      "learning:shared:10000000-0000-4000-8000-000000000001",
     ];
     expect(result.hits.map((hit: { id: string }) => hit.id)).toEqual(allowedIds);
     expect(result.hits).toEqual(unfiltered.hits.filter((hit: { id: string }) => allowedIds.includes(hit.id)));
@@ -462,7 +574,8 @@ describe("teamai recall", () => {
         "1-20", "default 5", "--include-pending", "--json",
         "1024 Unicode code points", "32 whitespace-separated terms",
         "NFC", "at least one", "substring",
-        "distinct matched-term count", "3/2/1", "stable ID",
+        "BM25 score", "non-overlapping", "3/2/1", "k1=1.2", "b=0.75", "stable ID",
+        "full verified allowed corpus", "before query/required/limit",
         "Shell quotes", "do not enable phrase matching",
         "--require <literal>", "single tag", "all required literals must match (AND)",
         "not split into words or expanded as regex", "1024 raw Unicode code points total",
@@ -499,11 +612,11 @@ describe("teamai recall", () => {
     };
     const quoted = await query(["shared retry"]);
     expect(await query(["shared", "retry"])).toBe(quoted);
-    // Frozen fixture weights: shared = 3+2+1, doc retry = 3+1, payments retry = 3.
+    // Independent full corpus: N=3, avgdl=32/3, df(shared/retry)=1/2, tf=6/3/4.
     expect(JSON.parse(quoted).hits.map((hit: { id: string; matchedTerms: string[] }) => [hit.id, hit.matchedTerms])).toEqual([
       ["learning:shared:31a67c90-f875-4dce-9d7d-1812b9bc23ef", ["shared"]],
-      ["doc:payments:contexts/payments/docs/retry.md", ["retry"]],
       ["learning:payments:8a54f331-4b1e-4a60-8a01-597d358433bd", ["retry"]],
+      ["doc:payments:contexts/payments/docs/retry.md", ["retry"]],
     ]);
     const chinese = JSON.parse(await query(["支付 重试"]));
     expect(chinese.hits.map((hit: { id: string; matchedTerms: string[] }) => [hit.id, hit.matchedTerms])).toEqual([
