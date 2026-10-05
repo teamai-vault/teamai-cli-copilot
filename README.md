@@ -292,6 +292,8 @@ npm test
 
 The two E2E scripts create isolated temporary profiles and repositories. `test:e2e:copilot` verifies projected instruction bytes and native instruction listing by name/scope/source, plus exact native paths for a real personal Skill and an enabled Plugin Skill. `test:e2e:fallback` requires `TEAM_AI_E2E_CODE_BIN` or a working `code` command, validates it with the isolated profile, then exercises the VS Code-only materializer and native recognition of the materialized state. Resource listing is not proof that a model read ignored docs or applied `applyTo`; that authenticated model-read probe remains unverified. Current implementation status and verification limits are summarized in [`docs/HANDOFF.md`](docs/HANDOFF.md).
 
+The [Recall quality method and fixed baseline](docs/development/recall-quality/README.md) record the original 0.4.0 public CLI and actual Copilot Agent measurements, including observed answer, citation and query failures. Coverage of a supporting source does not establish answer correctness; later candidate comparisons and unrun variants are identified separately.
+
 ## Non-goals
 
 This project does not implement a default Marketplace, multiple-Marketplace merge/overlay/precedence, a package manager, another agent runtime, an IDE abstraction, custom Plugin/Skill/Hook/MCP formats, arbitrary or generic resource copying/injection beyond user instructions and manifest-selected Logical Project components, a generic overlay engine, telemetry, dashboards, or a custom business-context database.

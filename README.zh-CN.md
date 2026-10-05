@@ -292,6 +292,8 @@ npm test
 
 两个 E2E 脚本都会创建隔离的临时 profile 和 Git Repo。`test:e2e:copilot` 验证投影 instruction 的原始字节，以及 native instruction list 的 name/scope/source，并验证真实 personal Skill 与已启用 Plugin Skill 的精确 native path；`test:e2e:fallback` 需要 `TEAM_AI_E2E_CODE_BIN` 或可用的 `code` 命令，并在隔离 profile 中先验证它，再验证 VS Code-only materializer 与 native 对 materialized state 的识别。资源列表不等于模型读取 ignored docs 或应用 `applyTo`；认证 model-read probe 仍未验证。当前实现状态与验证边界见 [`docs/HANDOFF.md`](docs/HANDOFF.md)。
 
+[Recall 固定资料、测量方法与基线](docs/development/recall-quality/README.md)记录了原始 0.4.0 公开 CLI 和实际 Copilot Agent 的结果，保留回答、引用及查询方面的实际失败。支持资料进入候选不等于回答正确；后续候选比较和未运行变体单独标明。
+
 ## 当前不做
 
 本项目不实现默认 Marketplace、多 Marketplace merge/overlay/precedence、Package Manager、另一套 Agent Runtime、通用 IDE abstraction、自定义 Plugin/Skill/Hook/MCP 格式、User instructions 与 manifest 选中 Logical Project components 之外的 arbitrary 或 generic resource copying/injection、通用 overlay engine、telemetry、dashboard，也不创建自定义业务上下文数据库。

@@ -6,3 +6,4 @@ This directory keeps stable design decisions and lessons that are expensive to r
 - [`../HANDOFF.md`](../HANDOFF.md) — current V3 implementation status and verification limits.
 - [`../VERSIONING.md`](../VERSIONING.md) — version ownership and release gates.
 - [`managed-user-instructions.md`](managed-user-instructions.md) — managed instruction ownership, convergence, filesystem safety, and verification boundaries.
+- [`recall-quality/README.md`](recall-quality/README.md) — fixed Recall fixtures and actual original CLI/Agent quality measurements, preserving observed failures and unverified comparisons.
