@@ -1,0 +1,7 @@
+* -text whitespace=trailing-space,space-before-tab,cr-at-eol
+# These five byte-exact raw recipe copies retain their original blank EOF line.
+control-profile-snapshot.mjs.txt whitespace=blank-at-eol,space-before-tab,cr-at-eol,-blank-at-eof
+launch-native-followup.ps1.txt whitespace=blank-at-eol,space-before-tab,cr-at-eol,-blank-at-eof
+prepare-native-followup.mjs.txt whitespace=blank-at-eol,space-before-tab,cr-at-eol,-blank-at-eof
+readback-helper-v1.REJECTED.mjs.txt whitespace=blank-at-eol,space-before-tab,cr-at-eol,-blank-at-eof
+readback-native-observations.mjs.txt whitespace=blank-at-eol,space-before-tab,cr-at-eol,-blank-at-eof

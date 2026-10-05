@@ -1,0 +1,19 @@
+$ErrorActionPreference = 'Stop'
+$nativeOutput = 'F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/c-quality/baseline-native-after-login-v1'
+$nativeEnvironment = Get-Content -LiteralPath "$nativeOutput/environment.json" -Raw -Encoding utf8 | ConvertFrom-Json
+foreach ($nativeProperty in $nativeEnvironment.taskEnvironment.PSObject.Properties) {
+    [Environment]::SetEnvironmentVariable($nativeProperty.Name, [string]$nativeProperty.Value, 'Process')
+}
+$env:PATH = $nativeEnvironment.pathPrepend + [IO.Path]::PathSeparator + $env:PATH
+$nativePlan = Get-Content -LiteralPath "$nativeOutput/C01-session-plan.json" -Raw -Encoding utf8 | ConvertFrom-Json
+Set-Location -LiteralPath $nativePlan.workspace
+# Observe actual --agent selection before submitting the frozen C01 question.
+$nativeArguments = @('--agent', 'teamai-recall', '--session-id', $nativePlan.id, '--log-dir', "$nativeOutput/C01-native-logs", '--usage-output-file', "$nativeOutput/C01-usage.json")
+@{ executable = 'D:/soft/nodejs/node_global/copilot.ps1'; arguments = $nativeArguments; workspace = $nativePlan.workspace; started = [DateTimeOffset]::UtcNow.ToString('o'); firstQuestionHeldForSelection = $true; permissionFlags = 'DEFAULT'; authFilesReadOrCopied = $false } | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath "$nativeOutput/C01-invocation.json" -Encoding utf8NoBOM
+Start-Transcript -LiteralPath "$nativeOutput/C01-terminal.raw.txt" | Out-Null
+try {
+    & 'D:/soft/nodejs/node_global/copilot.ps1' @nativeArguments
+    @{ exitCode = $LASTEXITCODE; finished = [DateTimeOffset]::UtcNow.ToString('o') } | ConvertTo-Json | Set-Content -LiteralPath "$nativeOutput/C01-exit.json" -Encoding utf8NoBOM
+} finally {
+    Stop-Transcript | Out-Null
+}

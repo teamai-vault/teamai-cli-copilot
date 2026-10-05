@@ -1,0 +1,14 @@
+{
+  "id": "5b649b9e-10ed-4637-bfe1-142e665f0834",
+  "label": "C05",
+  "workspace": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01",
+  "home": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home",
+  "agent": "teamai-recall",
+  "questionTurns": [
+    "当前已绑定项目的 AuditMarkerColor 是什么？只回答资料支持的颜色，并给原文出处。"
+  ],
+  "questionHeldUntilRealSelection": true,
+  "oracleSubmitted": false,
+  "keywordsSubmitted": false,
+  "profile": "healthy"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "75fc9cc3-ff24-4229-8e65-2e7ea3b6eee8",
+  "label": "C04",
+  "workspace": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01",
+  "home": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home",
+  "agent": "teamai-recall",
+  "questionTurns": [
+    "BackoffCapMs 的上限和 jitter 方式是什么？项目文档和 shared Learning 若只是复制，别当成两份独立佐证。"
+  ],
+  "questionHeldUntilRealSelection": true,
+  "oracleSubmitted": false,
+  "keywordsSubmitted": false,
+  "profile": "healthy"
+}

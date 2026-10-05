@@ -1,0 +1,527 @@
+{
+  "capture": "Actual native task event projection; original visible fields unchanged, opaque/reasoning/provider/account/session-identity fields excluded",
+  "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.copilot\\session-state\\eaefe745-2292-4520-953d-fc95f60fad01\\events.jsonl",
+  "sourceSha256": "e9c9426fa45514a7421569392eb6cae5dd067d11e031b82169d4f522f703a247",
+  "capturedAt": "2026-10-05T11:46:29.244Z",
+  "events": [
+    {
+      "type": "session.model_change",
+      "id": "5ab07856-a91e-4b55-be59-cf6b231321e8",
+      "timestamp": "2026-10-05T11:43:09.285Z",
+      "parentId": "b9a23243-0a97-4067-b766-e65d01eab7dc",
+      "data": {
+        "cause": "initial_resolution",
+        "source": "automatic",
+        "contextTier": null,
+        "newModel": "auto",
+        "reasoningEffort": null
+      }
+    },
+    {
+      "type": "subagent.selected",
+      "id": "4f334d59-4b48-4048-ac90-b9753ee2e232",
+      "timestamp": "2026-10-05T11:43:07.640Z",
+      "parentId": "7d37d4db-18be-4b56-8e3c-38db2ab91529",
+      "data": {
+        "agentName": "teamai-recall",
+        "agentDisplayName": "teamai-recall",
+        "tools": [
+          "read",
+          "execute"
+        ]
+      }
+    },
+    {
+      "type": "subagent.selected",
+      "id": "b9a23243-0a97-4067-b766-e65d01eab7dc",
+      "timestamp": "2026-10-05T11:43:07.655Z",
+      "parentId": "4f334d59-4b48-4048-ac90-b9753ee2e232",
+      "data": {
+        "agentName": "teamai-recall",
+        "agentDisplayName": "teamai-recall",
+        "tools": [
+          "read",
+          "execute"
+        ]
+      }
+    },
+    {
+      "type": "session.auto_mode_resolved",
+      "id": "2bc0558f-5969-40c9-b3fe-2af27d38fc61",
+      "timestamp": "2026-10-05T11:43:33.058Z",
+      "parentId": "5ab07856-a91e-4b55-be59-cf6b231321e8",
+      "data": {
+        "chosenModel": "gpt-6-luna",
+        "routingMethod": "auto_v2",
+        "fallback": false,
+        "endToEndLatencyMs": 1794.3663999999999
+      }
+    },
+    {
+      "type": "user.message",
+      "id": "9427501c-cf9b-474d-b36f-f6951189d909",
+      "timestamp": "2026-10-05T11:43:33.396Z",
+      "parentId": "2bc0558f-5969-40c9-b3fe-2af27d38fc61",
+      "data": {
+        "content": "这些团队资料有同态加密和密钥轮换方案吗？没有依据就明确说无法支持；cache 不可用时请报告错误。",
+        "interactionId": "59e181f0-553c-4c47-b626-0c5145e9123d",
+        "parentAgentTaskId": "7cdf84e0-1aee-4e8c-88ff-fc686e3d1b36"
+      }
+    },
+    {
+      "type": "assistant.message",
+      "id": "fcd7dff1-2197-4a37-9116-dd264a94ef55",
+      "timestamp": "2026-10-05T11:43:37.047Z",
+      "parentId": "87846dbd-aec9-4971-85b6-30e809705b9b",
+      "data": {
+        "content": "",
+        "model": "gpt-6-luna",
+        "toolRequests": [
+          {
+            "toolCallId": "call_3fHzh6ImklueD0KgYOgbCFAN",
+            "name": "skill",
+            "arguments": {
+              "skill": "teamai"
+            },
+            "type": "function",
+            "intentionSummary": "teamai"
+          }
+        ],
+        "turnId": "0",
+        "interactionId": "59e181f0-553c-4c47-b626-0c5145e9123d"
+      }
+    },
+    {
+      "type": "tool.execution_start",
+      "id": "0755609e-6954-47ff-ae92-c388f25c88bd",
+      "timestamp": "2026-10-05T11:43:37.049Z",
+      "parentId": "fcd7dff1-2197-4a37-9116-dd264a94ef55",
+      "data": {
+        "toolCallId": "call_3fHzh6ImklueD0KgYOgbCFAN",
+        "toolName": "skill",
+        "arguments": {
+          "skill": "teamai"
+        },
+        "model": "gpt-6-luna",
+        "turnId": "0"
+      }
+    },
+    {
+      "type": "tool.execution_complete",
+      "id": "e3b3db6e-1a18-4d1d-8992-93d3cca553b5",
+      "timestamp": "2026-10-05T11:43:37.052Z",
+      "parentId": "0755609e-6954-47ff-ae92-c388f25c88bd",
+      "data": {
+        "toolCallId": "call_3fHzh6ImklueD0KgYOgbCFAN",
+        "success": true,
+        "result": {
+          "content": "Skill \"teamai\" loaded successfully. Follow the instructions in the skill context."
+        },
+        "model": "gpt-6-luna",
+        "turnId": "0",
+        "interactionId": "59e181f0-553c-4c47-b626-0c5145e9123d"
+      }
+    },
+    {
+      "type": "assistant.turn_end",
+      "id": "46b6f96c-9c80-4248-86ee-b778ad0610cc",
+      "timestamp": "2026-10-05T11:43:37.072Z",
+      "parentId": "c873e83e-9c46-46c3-a691-d2c89bd0a464",
+      "data": {
+        "turnId": "0"
+      }
+    },
+    {
+      "type": "assistant.message",
+      "id": "3cb6f5a4-8839-4f29-b08e-03f81bfb41a9",
+      "timestamp": "2026-10-05T11:43:39.951Z",
+      "parentId": "c7ffc0cb-d2ce-4145-8291-7f82c5c4304a",
+      "data": {
+        "content": "",
+        "model": "gpt-6-luna",
+        "toolRequests": [
+          {
+            "toolCallId": "call_G6vO8URGwd1qiFbYTA8g47Dv",
+            "name": "powershell",
+            "arguments": {
+              "command": "teamai recall --help",
+              "description": "Check Team AI recall syntax",
+              "initial_wait": 30
+            },
+            "type": "function",
+            "intentionSummary": "Check Team AI recall syntax",
+            "toolTitle": "Running command"
+          }
+        ],
+        "turnId": "1",
+        "interactionId": "59e181f0-553c-4c47-b626-0c5145e9123d"
+      }
+    },
+    {
+      "type": "tool.execution_start",
+      "id": "29c2bab3-221e-426f-af61-f89dc7f11f3e",
+      "timestamp": "2026-10-05T11:43:39.953Z",
+      "parentId": "3cb6f5a4-8839-4f29-b08e-03f81bfb41a9",
+      "data": {
+        "toolCallId": "call_G6vO8URGwd1qiFbYTA8g47Dv",
+        "toolName": "powershell",
+        "arguments": {
+          "command": "teamai recall --help",
+          "description": "Check Team AI recall syntax",
+          "initial_wait": 30
+        },
+        "model": "gpt-6-luna",
+        "turnId": "1"
+      }
+    },
+    {
+      "type": "permission.requested",
+      "id": "962b153e-3d58-4d25-9fef-fe6425865f11",
+      "timestamp": "2026-10-05T11:43:39.975Z",
+      "parentId": "29c2bab3-221e-426f-af61-f89dc7f11f3e",
+      "data": {
+        "requestId": "65bf08ca-3943-4655-8e69-bf8408b8eca5",
+        "permissionRequest": {
+          "kind": "shell",
+          "toolCallId": "call_G6vO8URGwd1qiFbYTA8g47Dv",
+          "fullCommandText": "teamai recall --help",
+          "shellType": "powershell",
+          "intention": "Check Team AI recall syntax",
+          "commands": [
+            {
+              "identifier": "teamai",
+              "readOnly": false,
+              "allowMatchIdentifier": null
+            }
+          ],
+          "commandSegments": [
+            {
+              "identifier": "teamai",
+              "fullCommandText": "teamai recall --help",
+              "allowMatchIdentifier": null,
+              "staticTokens": [
+                "teamai",
+                "recall",
+                "--help"
+              ],
+              "workingDirectory": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01"
+            }
+          ],
+          "possiblePaths": [
+            "recall"
+          ],
+          "canOfferSessionApproval": true,
+          "possibleUrls": [],
+          "hasWriteFileRedirection": false
+        },
+        "promptRequest": {
+          "kind": "commands",
+          "fullCommandText": "teamai recall --help",
+          "intention": "Check Team AI recall syntax",
+          "commandIdentifiers": [
+            "teamai"
+          ],
+          "canOfferSessionApproval": true,
+          "toolCallId": "call_G6vO8URGwd1qiFbYTA8g47Dv"
+        },
+        "permissionMode": "manual",
+        "agentMode": "interactive"
+      }
+    },
+    {
+      "type": "permission.completed",
+      "id": "93cb2447-7d68-4b5f-98e4-0130bbf60b8c",
+      "timestamp": "2026-10-05T11:44:11.383Z",
+      "parentId": "962b153e-3d58-4d25-9fef-fe6425865f11",
+      "data": {
+        "requestId": "65bf08ca-3943-4655-8e69-bf8408b8eca5",
+        "toolCallId": "call_G6vO8URGwd1qiFbYTA8g47Dv",
+        "result": {
+          "kind": "approved"
+        }
+      }
+    },
+    {
+      "type": "tool.execution_complete",
+      "id": "fcf92b92-be23-48f8-bee6-41edae366cec",
+      "timestamp": "2026-10-05T11:44:16.661Z",
+      "parentId": "93cb2447-7d68-4b5f-98e4-0130bbf60b8c",
+      "data": {
+        "toolCallId": "call_G6vO8URGwd1qiFbYTA8g47Dv",
+        "success": true,
+        "result": {
+          "content": "teamai <command> [options]\n\nCommands:\n  init [--marketplace <source>] [--role api|ios|aos|qa|design]\n  projects [list|set <ids...>]\n  learning share <file> [--project <id>|--shared] [--tags <tag...>]\n  learning pending [--json]\n  learning retry <id>\n  recall <query> [--scope auto|user|workspace] [--project <id>] [--limit <n>] [--include-pending] [--json]\n  Example: teamai recall 支付 重试\n  sync\n  role list\n  role set <role>\n  skill list [--tag <tag>] [--owner <owner>] [--source plugin|standalone]\n  skill show <name>\n  skill install <name...> [--yes]\n  skill install --tag <tag> [--yes]\n  skill remove <name...>\n  skill contribute <path> --owner <owner> [--tags <tag...>] --target standalone|plugin [--plugin <plugin>]\n  tags list\n  status [--resources] [--json]\n  doctor [--json]\n\nGlobal options:\n  --dry-run   Preview writes and Copilot mutations\n  --help      Show help\n  --version   Show version\n<shellId: 0 completed with exit code 0>"
+        },
+        "model": "gpt-6-luna",
+        "turnId": "1",
+        "interactionId": "59e181f0-553c-4c47-b626-0c5145e9123d"
+      }
+    },
+    {
+      "type": "assistant.turn_end",
+      "id": "1e850091-3304-4304-8c19-92b87f2e32b2",
+      "timestamp": "2026-10-05T11:44:16.671Z",
+      "parentId": "fcf92b92-be23-48f8-bee6-41edae366cec",
+      "data": {
+        "turnId": "1"
+      }
+    },
+    {
+      "type": "assistant.message",
+      "id": "d60e5eb8-a3bf-48bd-bce7-1bfb6792eeae",
+      "timestamp": "2026-10-05T11:44:19.327Z",
+      "parentId": "9d69b589-039d-488e-aa66-44543e7ec01d",
+      "data": {
+        "content": "",
+        "model": "gpt-6-luna",
+        "toolRequests": [
+          {
+            "toolCallId": "call_TpyzbNunYoBQTDoLZiWgn9gf",
+            "name": "powershell",
+            "arguments": {
+              "command": "teamai recall \"homomorphic encryption key rotation\" --json",
+              "description": "Search team knowledge for encryption and key rotation",
+              "initial_wait": 30
+            },
+            "type": "function",
+            "intentionSummary": "Search team knowledge for encryption and key rotation",
+            "toolTitle": "Running command"
+          }
+        ],
+        "turnId": "2",
+        "interactionId": "59e181f0-553c-4c47-b626-0c5145e9123d"
+      }
+    },
+    {
+      "type": "tool.execution_start",
+      "id": "f5cc18d9-6389-4d92-b322-3c46275107a5",
+      "timestamp": "2026-10-05T11:44:19.334Z",
+      "parentId": "d60e5eb8-a3bf-48bd-bce7-1bfb6792eeae",
+      "data": {
+        "toolCallId": "call_TpyzbNunYoBQTDoLZiWgn9gf",
+        "toolName": "powershell",
+        "arguments": {
+          "command": "teamai recall \"homomorphic encryption key rotation\" --json",
+          "description": "Search team knowledge for encryption and key rotation",
+          "initial_wait": 30
+        },
+        "model": "gpt-6-luna",
+        "turnId": "2"
+      }
+    },
+    {
+      "type": "permission.requested",
+      "id": "99dcad5c-1df2-4b50-aadd-8faa436d7a92",
+      "timestamp": "2026-10-05T11:44:19.363Z",
+      "parentId": "f5cc18d9-6389-4d92-b322-3c46275107a5",
+      "data": {
+        "requestId": "89529341-3fc1-48c9-b514-783a439ab169",
+        "permissionRequest": {
+          "kind": "shell",
+          "toolCallId": "call_TpyzbNunYoBQTDoLZiWgn9gf",
+          "fullCommandText": "teamai recall \"homomorphic encryption key rotation\" --json",
+          "shellType": "powershell",
+          "intention": "Search team knowledge for encryption and key rotation",
+          "commands": [
+            {
+              "identifier": "teamai",
+              "readOnly": false,
+              "allowMatchIdentifier": null
+            }
+          ],
+          "commandSegments": [
+            {
+              "identifier": "teamai",
+              "fullCommandText": "teamai recall \"homomorphic encryption key rotation\" --json",
+              "allowMatchIdentifier": null,
+              "staticTokens": [
+                "teamai",
+                "recall",
+                "homomorphic encryption key rotation",
+                "--json"
+              ],
+              "workingDirectory": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01"
+            }
+          ],
+          "possiblePaths": [
+            "recall",
+            "homomorphic encryption key rotation"
+          ],
+          "canOfferSessionApproval": true,
+          "possibleUrls": [],
+          "hasWriteFileRedirection": false
+        },
+        "promptRequest": {
+          "kind": "commands",
+          "fullCommandText": "teamai recall \"homomorphic encryption key rotation\" --json",
+          "intention": "Search team knowledge for encryption and key rotation",
+          "commandIdentifiers": [
+            "teamai"
+          ],
+          "canOfferSessionApproval": true,
+          "toolCallId": "call_TpyzbNunYoBQTDoLZiWgn9gf"
+        },
+        "permissionMode": "manual",
+        "agentMode": "interactive"
+      }
+    },
+    {
+      "type": "permission.completed",
+      "id": "58716457-edf4-45bf-a054-699954f937f1",
+      "timestamp": "2026-10-05T11:44:36.961Z",
+      "parentId": "99dcad5c-1df2-4b50-aadd-8faa436d7a92",
+      "data": {
+        "requestId": "89529341-3fc1-48c9-b514-783a439ab169",
+        "toolCallId": "call_TpyzbNunYoBQTDoLZiWgn9gf",
+        "result": {
+          "kind": "approved"
+        }
+      }
+    },
+    {
+      "type": "tool.execution_complete",
+      "id": "11297d07-cff8-4aa1-8be7-96a862f41ded",
+      "timestamp": "2026-10-05T11:44:41.674Z",
+      "parentId": "58716457-edf4-45bf-a054-699954f937f1",
+      "data": {
+        "toolCallId": "call_TpyzbNunYoBQTDoLZiWgn9gf",
+        "success": true,
+        "result": {
+          "content": "{\"schemaVersion\":1,\"error\":{\"code\":\"CACHE_UNAVAILABLE\",\"message\":\"No verified published Learnings snapshot is cached. Run `teamai sync` to refresh it.\"}}\n<shellId: 1 completed with exit code 1>"
+        },
+        "model": "gpt-6-luna",
+        "turnId": "2",
+        "interactionId": "59e181f0-553c-4c47-b626-0c5145e9123d"
+      }
+    },
+    {
+      "type": "assistant.turn_end",
+      "id": "26ec991c-b77f-4ce8-a6c0-0da8a76d1b3c",
+      "timestamp": "2026-10-05T11:44:41.683Z",
+      "parentId": "11297d07-cff8-4aa1-8be7-96a862f41ded",
+      "data": {
+        "turnId": "2"
+      }
+    },
+    {
+      "type": "assistant.message",
+      "id": "dbc321a3-abfc-4152-9d7e-e50b9f7d0b4c",
+      "timestamp": "2026-10-05T11:44:43.930Z",
+      "parentId": "5587c91f-1b4f-46ae-bb43-ad27cb892d4b",
+      "data": {
+        "content": "当前无法判断团队资料是否有同态加密或密钥轮换方案：Recall 返回 `CACHE_UNAVAILABLE`，提示没有已验证的已发布 Learning 快照。**因此目前没有依据支持相关结论。**我没有运行 `teamai sync`。",
+        "model": "gpt-6-luna",
+        "toolRequests": [],
+        "turnId": "3",
+        "interactionId": "59e181f0-553c-4c47-b626-0c5145e9123d"
+      }
+    },
+    {
+      "type": "assistant.turn_end",
+      "id": "a2f935ad-c016-45d7-981b-ee15f169a1f8",
+      "timestamp": "2026-10-05T11:44:43.975Z",
+      "parentId": "dbc321a3-abfc-4152-9d7e-e50b9f7d0b4c",
+      "data": {
+        "turnId": "3"
+      }
+    },
+    {
+      "type": "session.shutdown",
+      "id": "75099106-7d2b-4733-b491-0487ae8d701c",
+      "timestamp": "2026-10-05T11:45:58.872Z",
+      "parentId": "e31d4c02-1e5b-4d78-87e7-5c4a58652ad1",
+      "data": {
+        "shutdownType": "routine",
+        "totalPremiumRequests": 1,
+        "totalNanoAiu": 151807000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 12
+          },
+          "cache_read": {
+            "tokenCount": 23137
+          },
+          "cache_write": {
+            "tokenCount": 8472
+          },
+          "output": {
+            "tokenCount": 453
+          }
+        },
+        "totalApiDurationMs": 9333,
+        "codeChanges": {
+          "linesAdded": 0,
+          "linesRemoved": 0,
+          "filesModified": []
+        },
+        "modelMetrics": {
+          "gpt-6-luna": {
+            "requests": {
+              "count": 4,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 31621,
+              "outputTokens": 453,
+              "cacheReadTokens": 23137,
+              "cacheWriteTokens": 8472,
+              "reasoningTokens": 286
+            },
+            "totalNanoAiu": 151807000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 12
+              },
+              "cache_read": {
+                "tokenCount": 23137
+              },
+              "cache_write": {
+                "tokenCount": 8472
+              },
+              "output": {
+                "tokenCount": 453
+              }
+            }
+          }
+        },
+        "agentMetrics": {
+          "main": {
+            "totalApiDurationMs": 9333,
+            "totalNanoAiu": 151807000,
+            "modelMetrics": {
+              "gpt-6-luna": {
+                "requests": {
+                  "count": 4,
+                  "cost": 1
+                },
+                "usage": {
+                  "inputTokens": 31621,
+                  "outputTokens": 453,
+                  "cacheReadTokens": 23137,
+                  "cacheWriteTokens": 8472,
+                  "reasoningTokens": 286
+                },
+                "totalNanoAiu": 151807000,
+                "tokenDetails": {
+                  "input": {
+                    "tokenCount": 12
+                  },
+                  "cache_read": {
+                    "tokenCount": 23137
+                  },
+                  "cache_write": {
+                    "tokenCount": 8472
+                  },
+                  "output": {
+                    "tokenCount": 453
+                  }
+                }
+              }
+            }
+          }
+        },
+        "currentModel": "gpt-6-luna"
+      }
+    }
+  ]
+}

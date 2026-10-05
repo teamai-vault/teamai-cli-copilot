@@ -1,0 +1,48 @@
+{
+  "method": "Copy only fictional .teamai business configuration/receipt/project/cache, with missing/damaged controls in new homes. No native auth/profile/credential/session/account files are read or copied.",
+  "checks": [
+    {
+      "profile": "missing",
+      "home": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\profiles\\missing",
+      "sourceBusinessRoot": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.teamai",
+      "copiedRelativeFiles": [
+        "built-in-agents/teamai-recall.json",
+        "built-in-skills/teamai.json",
+        "config.yaml",
+        "projects/-cli-customization-.tmp-recall-29-35-runtime-c-native-baseline-v2-workspaces-c01-f42dc00fce522269/anchor",
+        "projects/-cli-customization-.tmp-recall-29-35-runtime-c-native-baseline-v2-workspaces-c01-f42dc00fce522269/state.json"
+      ],
+      "credentialOrNativeAccountFilesCopied": false,
+      "originalDeliveredConsumerRoot": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.copilot",
+      "actualProjectBindingRetained": true,
+      "publishedCache": "ABSENT",
+      "deliberateDelta": null
+    },
+    {
+      "profile": "damaged",
+      "home": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\profiles\\damaged",
+      "sourceBusinessRoot": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.teamai",
+      "copiedRelativeFiles": [
+        "built-in-agents/teamai-recall.json",
+        "built-in-skills/teamai.json",
+        "config.yaml",
+        "projects/-cli-customization-.tmp-recall-29-35-runtime-c-native-baseline-v2-workspaces-c01-f42dc00fce522269/anchor",
+        "projects/-cli-customization-.tmp-recall-29-35-runtime-c-native-baseline-v2-workspaces-c01-f42dc00fce522269/state.json",
+        "published-learnings/7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096/current.json",
+        "published-learnings/7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096/revisions/cf573d619178f5b29773ac7c616a231e789eeb75/files/learnings/atlas-payments/30000000-0000-4000-8000-000000000003.md",
+        "published-learnings/7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096/revisions/cf573d619178f5b29773ac7c616a231e789eeb75/files/learnings/shared/30000000-0000-4000-8000-000000000001.md",
+        "published-learnings/7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096/revisions/cf573d619178f5b29773ac7c616a231e789eeb75/files/learnings/shared/30000000-0000-4000-8000-000000000002.md",
+        "published-learnings/7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096/revisions/cf573d619178f5b29773ac7c616a231e789eeb75/snapshot.json"
+      ],
+      "credentialOrNativeAccountFilesCopied": false,
+      "originalDeliveredConsumerRoot": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.copilot",
+      "actualProjectBindingRetained": true,
+      "publishedCache": "DELIBERATELY_DAMAGED_NEW_COPY",
+      "deliberateDelta": {
+        "target": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\profiles\\damaged\\.teamai\\published-learnings\\7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096\\revisions\\cf573d619178f5b29773ac7c616a231e789eeb75\\files\\learnings\\shared\\30000000-0000-4000-8000-000000000001.md",
+        "beforeSha256": "f8ecf5350cfa9eb068cb2e3aa602f047fde5ab6b362028e363341d90924d0148",
+        "afterSha256": "0df93487427b57c3d03b78ac94830996592fe98555f96a50dcdc6132415df7cf"
+      }
+    }
+  ]
+}

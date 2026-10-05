@@ -1,0 +1,2493 @@
+{
+  "schemaVersion": 1,
+  "method": "Fixed-case independent raw provenance/snippet/read/question/protection readback; actual answers judged separately against the pre-run oracle, no rank or answer used to construct expectations.",
+  "sourceRevision": "0fb99a7b065de71eb683d774231b518971b57e8c",
+  "nativeSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource",
+  "nativeSourceHash": "7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096",
+  "nativeResourceRevision": "7dbb74107cc4c457a5043619090b11a38b74a7a0",
+  "learningRevision": "cf573d619178f5b29773ac7c616a231e789eeb75",
+  "sessionsRecorded": 8,
+  "frozenMainTurns": 10,
+  "recallCalls": 11,
+  "nativeViewCalls": 16,
+  "sourceOriginalReadCalls": 15,
+  "emittedHitChecks": 27,
+  "failedHitChecks": [],
+  "sessions": [
+    {
+      "label": "C01",
+      "plan": {
+        "id": "0d93a67e-961a-4d7e-bbbf-f09d3ffbb8db",
+        "workspace": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01",
+        "home": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home",
+        "agent": "teamai-recall",
+        "questionTurns": [
+          "在 atlas-payments，NimbusQueue 2.1 报错 ACME_E_BARRIER_412: retry budget exhausted for tenant=demo-7。什么条件下可以重试，什么条件下不能？",
+          "In atlas-payments, NimbusQueue 2.1 reports ACME_E_BARRIER_412: retry budget exhausted for tenant=demo-7. Under what conditions is a retry safe, and when must it be refused?",
+          "如果它的租约已经到期，但那个幂等记录丢了，还能再试吗？请保留前述诊断原文。"
+        ],
+        "questionHeldUntilRealSelection": true,
+        "oracleSubmitted": false,
+        "keywordsSubmitted": false,
+        "sourceUnchanged": true
+      },
+      "exit": {
+        "finished": "2026-10-05T11:17:26.3571095+00:00",
+        "exitCode": 0
+      },
+      "mainQuestionCount": 3,
+      "userMessageCount": 3,
+      "questionsMatchFrozen": true,
+      "toolStartCount": 5,
+      "queries": [
+        {
+          "eventId": "678e14db-2d02-4a83-bc7f-a4d396c9803e",
+          "toolCallId": "call_4XBDHmOyNojwelECLGpjcyds",
+          "command": "teamai recall '\"NimbusQueue 2.1\" \"ACME_E_BARRIER_412\" \"retry budget exhausted\" barrier retry tenant' --project atlas-payments --json",
+          "query": "\"NimbusQueue 2.1\" \"ACME_E_BARRIER_412\" \"retry budget exhausted\" barrier retry tenant",
+          "scope": "workspace",
+          "project": "atlas-payments",
+          "limit": 5,
+          "parseError": null,
+          "hitCount": 5,
+          "first3": [
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/retry-legacy.md",
+              "weak": true
+            },
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/retry-current.md",
+              "weak": false
+            },
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-agenda.md",
+              "weak": true
+            }
+          ],
+          "coverage5": "PASS",
+          "coverage10": "UNVERIFIED_NOT_REQUESTED",
+          "checks": [
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/retry-legacy.md",
+              "allowed": true,
+              "hashMatches": true,
+              "sourceHashMatches": true,
+              "revisionMatches": true,
+              "relativePathMatches": true,
+              "snippetMatches": true,
+              "tuple": [
+                "7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096",
+                "7dbb74107cc4c457a5043619090b11a38b74a7a0",
+                "contexts/atlas-payments/docs/retry-legacy.md",
+                "f4d992e7cf9a00fea4e55a3563e204e34d407248c99d9ab468e6fec3255f418a"
+              ]
+            },
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/retry-current.md",
+              "allowed": true,
+              "hashMatches": true,
+              "sourceHashMatches": true,
+              "revisionMatches": true,
+              "relativePathMatches": true,
+              "snippetMatches": true,
+              "tuple": [
+                "7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096",
+                "7dbb74107cc4c457a5043619090b11a38b74a7a0",
+                "contexts/atlas-payments/docs/retry-current.md",
+                "dcd44daddf237eb926d470cd8a7bb3564f04707ad189d6577e32bd4d4df5b3ca"
+              ]
+            },
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-agenda.md",
+              "allowed": true,
+              "hashMatches": true,
+              "sourceHashMatches": true,
+              "revisionMatches": true,
+              "relativePathMatches": true,
+              "snippetMatches": true,
+              "tuple": [
+                "7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096",
+                "7dbb74107cc4c457a5043619090b11a38b74a7a0",
+                "contexts/atlas-payments/docs/noise-agenda.md",
+                "8f80b37acd9450186b60e0946c6a3d3236f3c4d686111447aaee2e50444efcb8"
+              ]
+            },
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-dashboard.md",
+              "allowed": true,
+              "hashMatches": true,
+              "sourceHashMatches": true,
+              "revisionMatches": true,
+              "relativePathMatches": true,
+              "snippetMatches": true,
+              "tuple": [
+                "7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096",
+                "7dbb74107cc4c457a5043619090b11a38b74a7a0",
+                "contexts/atlas-payments/docs/noise-dashboard.md",
+                "4c0434f00f17c4d904db32c1305f047a7fbda6c05ce0b5ae7b931897a6229a12"
+              ]
+            },
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-glossary.md",
+              "allowed": true,
+              "hashMatches": true,
+              "sourceHashMatches": true,
+              "revisionMatches": true,
+              "relativePathMatches": true,
+              "snippetMatches": true,
+              "tuple": [
+                "7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096",
+                "7dbb74107cc4c457a5043619090b11a38b74a7a0",
+                "contexts/atlas-payments/docs/noise-glossary.md",
+                "3a7ba10942cf413d429f51ebbce748b86e88b289c04f2d8fe51b91e9107fbb6e"
+              ]
+            }
+          ]
+        }
+      ],
+      "reads": [
+        {
+          "eventId": "62a400f9-a1d2-479a-b791-3e4dbaae8294",
+          "toolCallId": "call_PIYHhizE7fH2N6jB7bu2deNC",
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\retry-current.md",
+          "args": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\retry-current.md"
+          },
+          "success": true,
+          "sourceId": "doc:atlas-payments:contexts/atlas-payments/docs/retry-current.md",
+          "allowed": true,
+          "readTextSha256": "dcd44daddf237eb926d470cd8a7bb3564f04707ad189d6577e32bd4d4df5b3ca",
+          "originalBytesMatch": true,
+          "supportedQuotesSeen": [
+            {
+              "lines": [
+                7,
+                11
+              ],
+              "quoteSeen": true
+            }
+          ]
+        },
+        {
+          "eventId": "41c73aa0-cffc-4f6e-a659-f27f04f9b817",
+          "toolCallId": "call_UpUqS35D9OBn03eaIQIhiLet",
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\retry-legacy.md",
+          "args": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\retry-legacy.md"
+          },
+          "success": true,
+          "sourceId": "doc:atlas-payments:contexts/atlas-payments/docs/retry-legacy.md",
+          "allowed": true,
+          "readTextSha256": "f4d992e7cf9a00fea4e55a3563e204e34d407248c99d9ab468e6fec3255f418a",
+          "originalBytesMatch": true,
+          "supportedQuotesSeen": [
+            {
+              "lines": [
+                7,
+                10
+              ],
+              "quoteSeen": true
+            }
+          ]
+        }
+      ],
+      "distinctOriginalsRead": [
+        "doc:atlas-payments:contexts/atlas-payments/docs/retry-current.md",
+        "doc:atlas-payments:contexts/atlas-payments/docs/retry-legacy.md"
+      ],
+      "subagents": [],
+      "answers": [
+        {
+          "eventId": "76263133-6911-4308-8110-93e00e9e3769",
+          "time": "2026-10-05T11:13:40.756Z",
+          "model": "gpt-6-luna",
+          "text": "**NimbusQueue 2.1 的规则：**仅当租约已过期，且原始幂等性记录仍存在时，才可重试，且最多重试一次。租约仍有效，或幂等性记录不存在时，**不要重试**；应升级进行人工对账。`ACME_E_BARRIER_412: retry budget exhausted for tenant=demo-7` 本身不代表重试安全；既然报错称预算已耗尽，不应在同一耗尽预算下继续重试。文档没有说明预算如何重置，不能据此推断可再次重试。\n\n依据：已发布文档 `contexts/atlas-payments/docs/retry-current.md`（atlas-payments，revision `7dbb74107cc4c457a5043619090b11a38b74a7a0`，SHA-256 `dcd44daddf237eb926d470cd8a7bb3564f04707ad189d6577e32bd4d4df5b3ca`），第 7–9 行说明症状不等于可重放、重试条件及禁止条件。旧版 NimbusQueue 1.6 的“两次重试”流程不适用于 2.1（`retry-legacy.md` 第 6–8 行）。"
+        },
+        {
+          "eventId": "b03672a7-067c-4862-bbb0-ccc859378c9c",
+          "time": "2026-10-05T11:14:55.686Z",
+          "model": "claude-haiku-4.5",
+          "text": "**For NimbusQueue 2.1, retry is safe only when BOTH conditions hold:**\n\n1. **Lease has expired**\n2. **Original idempotency record still exists**\n\n**Retry must be refused when:**\n- Lease is still active, OR\n- Idempotency record is absent\n\n**Critical note:** The error `ACME_E_BARRIER_412: retry budget exhausted` itself does **not** establish that retry is safe. The exhausted budget indicates the quota for retries has been consumed under this lease; there is no guidance in the documentation on budget reset conditions.\n\n---\n\n**Source:** Published document *NimbusQueue 2.1 retry safety* (atlas-payments, revision `7dbb74107cc4c457a5043619090b11a38b74a7a0`):\n\n> For NimbusQueue 2.1 in atlas-payments, retry once only when the lease has expired and the original idempotency record still exists. If the lease is still active or the idempotency record is absent, do not retry; escalate for manual reconciliation.\n\nThe legacy NimbusQueue 1.6 two-retry procedure does not apply to version 2.1 and provides no guidance on current idempotency state."
+        },
+        {
+          "eventId": "81aeccfb-0543-4cbd-9acf-74c6a67243e7",
+          "time": "2026-10-05T11:15:28.543Z",
+          "model": "gpt-6-luna",
+          "text": "不能。即使租约已到期，只要原始幂等记录丢失，就不要重试；应升级进行人工对账。\n\n诊断原文：`ACME_E_BARRIER_412: retry budget exhausted for tenant=demo-7`"
+        }
+      ],
+      "nativeUsage": {
+        "totalPremiumRequestCost": 2.33,
+        "totalUserRequests": 3,
+        "totalNanoAiu": 1995259500,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 28
+          },
+          "cache_read": {
+            "tokenCount": 40867
+          },
+          "cache_write": {
+            "tokenCount": 25195
+          },
+          "output": {
+            "tokenCount": 2287
+          }
+        },
+        "totalApiDurationMs": 34520,
+        "sessionStartTime": "2026-10-05T11:02:54.619Z",
+        "codeChanges": {
+          "linesAdded": 0,
+          "linesRemoved": 0,
+          "filesModifiedCount": 0,
+          "filesModified": []
+        },
+        "modelMetrics": {
+          "gpt-6-luna": {
+            "requests": {
+              "count": 6,
+              "cost": 2
+            },
+            "usage": {
+              "inputTokens": 54442,
+              "outputTokens": 1810,
+              "cacheReadTokens": 40867,
+              "cacheWriteTokens": 13557,
+              "reasoningTokens": 1185
+            },
+            "cacheExpiresAt": "2026-10-05T11:45:25.233Z",
+            "totalNanoAiu": 301009500,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 18
+              },
+              "cache_read": {
+                "tokenCount": 40867
+              },
+              "cache_write": {
+                "tokenCount": 13557
+              },
+              "output": {
+                "tokenCount": 1810
+              }
+            }
+          },
+          "claude-haiku-4.5": {
+            "requests": {
+              "count": 1,
+              "cost": 0.33
+            },
+            "usage": {
+              "inputTokens": 11648,
+              "outputTokens": 477,
+              "cacheReadTokens": 0,
+              "cacheWriteTokens": 11638,
+              "reasoningTokens": 181
+            },
+            "cacheExpiresAt": "2026-10-05T11:19:48.989Z",
+            "totalNanoAiu": 1694249999.9999998,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 10
+              },
+              "cache_read": {
+                "tokenCount": 0
+              },
+              "cache_write": {
+                "tokenCount": 11638
+              },
+              "output": {
+                "tokenCount": 477
+              }
+            }
+          }
+        },
+        "agentMetrics": {
+          "main": {
+            "totalApiDurationMs": 34520,
+            "totalNanoAiu": 1995259500,
+            "modelMetrics": {
+              "gpt-6-luna": {
+                "requests": {
+                  "count": 6,
+                  "cost": 2
+                },
+                "usage": {
+                  "inputTokens": 54442,
+                  "outputTokens": 1810,
+                  "cacheReadTokens": 40867,
+                  "cacheWriteTokens": 13557,
+                  "reasoningTokens": 1185
+                },
+                "totalNanoAiu": 301009500,
+                "tokenDetails": {
+                  "input": {
+                    "tokenCount": 18
+                  },
+                  "cache_read": {
+                    "tokenCount": 40867
+                  },
+                  "cache_write": {
+                    "tokenCount": 13557
+                  },
+                  "output": {
+                    "tokenCount": 1810
+                  }
+                }
+              },
+              "claude-haiku-4.5": {
+                "requests": {
+                  "count": 1,
+                  "cost": 0.33
+                },
+                "usage": {
+                  "inputTokens": 11648,
+                  "outputTokens": 477,
+                  "cacheReadTokens": 0,
+                  "cacheWriteTokens": 11638,
+                  "reasoningTokens": 181
+                },
+                "totalNanoAiu": 1694249999.9999998,
+                "tokenDetails": {
+                  "input": {
+                    "tokenCount": 10
+                  },
+                  "cache_read": {
+                    "tokenCount": 0
+                  },
+                  "cache_write": {
+                    "tokenCount": 11638
+                  },
+                  "output": {
+                    "tokenCount": 477
+                  }
+                }
+              }
+            }
+          }
+        },
+        "currentModel": "gpt-6-luna",
+        "lastCallInputTokens": 10964,
+        "lastCallOutputTokens": 118
+      },
+      "controlledFileFacts": {
+        "before": 190,
+        "after": 190,
+        "deltas": []
+      },
+      "answerContentAssessment": "MANUAL_AGAINST_UNCHANGED_FROZEN_SUPPORT",
+      "internalCliReads": "UNVERIFIED_NO_INSTRUMENTATION",
+      "usdPrice": "UNVERIFIED"
+    },
+    {
+      "label": "C02",
+      "plan": {
+        "id": "22e2bf7b-408b-41c5-bd7b-163440914561",
+        "label": "C02",
+        "workspace": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01",
+        "home": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home",
+        "agent": "teamai-recall",
+        "questionTurns": [
+          "调用方一直排队等连接，是连接池耗尽了吗？先怎么处置，能直接调大池子吗？"
+        ],
+        "questionHeldUntilRealSelection": true,
+        "oracleSubmitted": false,
+        "keywordsSubmitted": false,
+        "profile": "healthy"
+      },
+      "exit": {
+        "exitCode": 0,
+        "finished": "2026-10-05T11:22:44.0529095+00:00"
+      },
+      "mainQuestionCount": 1,
+      "userMessageCount": 2,
+      "questionsMatchFrozen": true,
+      "toolStartCount": 11,
+      "queries": [
+        {
+          "eventId": "47d18287-14fc-4332-9d2c-00f75f540a34",
+          "toolCallId": "call_k4mlmGZn2Cz88Png7DKTa7xA",
+          "command": "teamai recall \"connection pool exhaustion callers queued waiting for connections immediate mitigation pool size safe\" --project atlas-payments --json",
+          "query": "connection pool exhaustion callers queued waiting for connections immediate mitigation pool size safe",
+          "scope": "workspace",
+          "project": "atlas-payments",
+          "limit": 5,
+          "parseError": null,
+          "hitCount": 5,
+          "first3": [
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/pool.md",
+              "weak": false
+            },
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/drain-long.md",
+              "weak": true
+            },
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/retry-current.md",
+              "weak": true
+            }
+          ],
+          "coverage5": "PASS",
+          "coverage10": "UNVERIFIED_NOT_REQUESTED",
+          "checks": [
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/pool.md",
+              "allowed": true,
+              "hashMatches": true,
+              "sourceHashMatches": true,
+              "revisionMatches": true,
+              "relativePathMatches": true,
+              "snippetMatches": true,
+              "tuple": [
+                "7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096",
+                "7dbb74107cc4c457a5043619090b11a38b74a7a0",
+                "contexts/atlas-payments/docs/pool.md",
+                "b0c02ef89363e69e9c7b96a39b35a06e61ec3d3b1d7d74371daa1453d5e96b09"
+              ]
+            },
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/drain-long.md",
+              "allowed": true,
+              "hashMatches": true,
+              "sourceHashMatches": true,
+              "revisionMatches": true,
+              "relativePathMatches": true,
+              "snippetMatches": true,
+              "tuple": [
+                "7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096",
+                "7dbb74107cc4c457a5043619090b11a38b74a7a0",
+                "contexts/atlas-payments/docs/drain-long.md",
+                "d564c627c6887092bedc67de3b3adbbfb92e1f4cccab81a29f670e7cc024934d"
+              ]
+            },
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/retry-current.md",
+              "allowed": true,
+              "hashMatches": true,
+              "sourceHashMatches": true,
+              "revisionMatches": true,
+              "relativePathMatches": true,
+              "snippetMatches": true,
+              "tuple": [
+                "7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096",
+                "7dbb74107cc4c457a5043619090b11a38b74a7a0",
+                "contexts/atlas-payments/docs/retry-current.md",
+                "dcd44daddf237eb926d470cd8a7bb3564f04707ad189d6577e32bd4d4df5b3ca"
+              ]
+            },
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/drain-observation.md",
+              "allowed": true,
+              "hashMatches": true,
+              "sourceHashMatches": true,
+              "revisionMatches": true,
+              "relativePathMatches": true,
+              "snippetMatches": true,
+              "tuple": [
+                "7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096",
+                "7dbb74107cc4c457a5043619090b11a38b74a7a0",
+                "contexts/atlas-payments/docs/drain-observation.md",
+                "4957fa3b6f2b9e9ff53cf504c7ac5bd76b44d2a7cd169829c15627e3a7f4824a"
+              ]
+            },
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/backoff-copy.md",
+              "allowed": true,
+              "hashMatches": true,
+              "sourceHashMatches": true,
+              "revisionMatches": true,
+              "relativePathMatches": true,
+              "snippetMatches": true,
+              "tuple": [
+                "7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096",
+                "7dbb74107cc4c457a5043619090b11a38b74a7a0",
+                "contexts/atlas-payments/docs/backoff-copy.md",
+                "5551df15beb08ec9459dc62d8d941f868dc2cf90d4456fa7b6df03641f46d395"
+              ]
+            }
+          ]
+        }
+      ],
+      "reads": [
+        {
+          "eventId": "0d40a68e-9efa-4941-a6a1-1f5397a0c18f",
+          "toolCallId": "call_S3CHEpSPThZX4AdxlO9dwrTe",
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\pool.md",
+          "args": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\pool.md"
+          },
+          "success": true,
+          "sourceId": "doc:atlas-payments:contexts/atlas-payments/docs/pool.md",
+          "allowed": true,
+          "readTextSha256": "b0c02ef89363e69e9c7b96a39b35a06e61ec3d3b1d7d74371daa1453d5e96b09",
+          "originalBytesMatch": true,
+          "supportedQuotesSeen": [
+            {
+              "lines": [
+                7,
+                10
+              ],
+              "quoteSeen": true
+            }
+          ]
+        },
+        {
+          "eventId": "63585b6f-f92e-4e77-bdd6-50d780fad957",
+          "toolCallId": "call_48d5srbLkevsIAcePSpEDvrR",
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\retry-current.md",
+          "args": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\retry-current.md"
+          },
+          "success": true,
+          "sourceId": "doc:atlas-payments:contexts/atlas-payments/docs/retry-current.md",
+          "allowed": true,
+          "readTextSha256": "dcd44daddf237eb926d470cd8a7bb3564f04707ad189d6577e32bd4d4df5b3ca",
+          "originalBytesMatch": true,
+          "supportedQuotesSeen": []
+        },
+        {
+          "eventId": "c0b67337-3ae9-427a-a58b-7fdba8bceba2",
+          "toolCallId": "call_U3QT71kBzfD93qD08UehWkXb",
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\drain-long.md",
+          "args": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\drain-long.md"
+          },
+          "success": true,
+          "sourceId": "doc:atlas-payments:contexts/atlas-payments/docs/drain-long.md",
+          "allowed": true,
+          "readTextSha256": "d564c627c6887092bedc67de3b3adbbfb92e1f4cccab81a29f670e7cc024934d",
+          "originalBytesMatch": true,
+          "supportedQuotesSeen": []
+        },
+        {
+          "eventId": "82bf3216-1cba-44cb-8619-76e425f42ce7",
+          "toolCallId": "call_15A9eVgsAgDKwSj9fDyHyVMU",
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\drain-observation.md",
+          "args": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\drain-observation.md"
+          },
+          "success": true,
+          "sourceId": "doc:atlas-payments:contexts/atlas-payments/docs/drain-observation.md",
+          "allowed": true,
+          "readTextSha256": "4957fa3b6f2b9e9ff53cf504c7ac5bd76b44d2a7cd169829c15627e3a7f4824a",
+          "originalBytesMatch": true,
+          "supportedQuotesSeen": []
+        },
+        {
+          "eventId": "9978bd67-2236-4d33-8d1e-aa9293de300d",
+          "toolCallId": "call_SA3ebY620jlDeHndABqNbc1b",
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\backoff-copy.md",
+          "args": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\backoff-copy.md"
+          },
+          "success": true,
+          "sourceId": "doc:atlas-payments:contexts/atlas-payments/docs/backoff-copy.md",
+          "allowed": true,
+          "readTextSha256": "5551df15beb08ec9459dc62d8d941f868dc2cf90d4456fa7b6df03641f46d395",
+          "originalBytesMatch": true,
+          "supportedQuotesSeen": []
+        }
+      ],
+      "distinctOriginalsRead": [
+        "doc:atlas-payments:contexts/atlas-payments/docs/pool.md",
+        "doc:atlas-payments:contexts/atlas-payments/docs/retry-current.md",
+        "doc:atlas-payments:contexts/atlas-payments/docs/drain-long.md",
+        "doc:atlas-payments:contexts/atlas-payments/docs/drain-observation.md",
+        "doc:atlas-payments:contexts/atlas-payments/docs/backoff-copy.md"
+      ],
+      "subagents": [
+        {
+          "type": "subagent.started",
+          "id": "68015776-c581-4158-a895-0f9b8673ee42",
+          "timestamp": "2026-10-05T11:18:43.857Z",
+          "parentId": "051f728c-7c7b-4f8a-b793-e0fac4610e15",
+          "data": {
+            "toolCallId": "call_MU34JyDDpd5GI4Jij8PL5Pv1",
+            "agentName": "teamai-recall",
+            "agentDisplayName": "teamai-recall",
+            "agentDescription": "Recall scoped TeamAI knowledge and read original evidence, then summarize with exact provenance in the user's language.",
+            "model": "gpt-6-luna",
+            "taskModelSource": "unset",
+            "modelSelectionSource": "session_inheritance",
+            "resumable": false,
+            "agentType": "teamai-recall",
+            "executionMode": "sync"
+          }
+        },
+        {
+          "type": "subagent.completed",
+          "id": "09475cc2-c9d0-40f4-b810-a6e10412ede9",
+          "timestamp": "2026-10-05T11:21:46.046Z",
+          "parentId": "8b04fcd1-2980-41be-9d35-a560779a842e",
+          "data": {
+            "toolCallId": "call_MU34JyDDpd5GI4Jij8PL5Pv1",
+            "agentName": "teamai-recall",
+            "agentDisplayName": "teamai-recall",
+            "model": "gpt-6-luna",
+            "firstDispatchedModel": "gpt-6-luna",
+            "modelSelectionSource": "session_inheritance",
+            "totalToolCalls": 9,
+            "totalTokens": 22824,
+            "durationMs": 182003
+          }
+        },
+        {
+          "type": "subagent.completed",
+          "id": "723a295e-5e18-455d-ad5b-14c24d0df9dd",
+          "timestamp": "2026-10-05T11:22:40.957Z",
+          "parentId": "5c0c3c77-bf8f-4792-acc1-e11c8b47a0f6",
+          "data": {
+            "toolCallId": "call_MU34JyDDpd5GI4Jij8PL5Pv1",
+            "agentName": "teamai-recall",
+            "agentDisplayName": "teamai-recall",
+            "cancelled": true,
+            "model": "gpt-6-luna",
+            "firstDispatchedModel": "gpt-6-luna",
+            "modelSelectionSource": "session_inheritance",
+            "totalToolCalls": 9,
+            "totalTokens": 22824,
+            "durationMs": 182003
+          }
+        }
+      ],
+      "answers": [
+        {
+          "eventId": "38921257-a3af-4955-9757-aff4a17c9550",
+          "time": "2026-10-05T11:21:45.879Z",
+          "model": "gpt-6-luna",
+          "text": "**Likely, but not confirmed:** callers waiting for connections are consistent with pool exhaustion. The project note says saturation and exhaustion describe the same capacity problem; the symptom alone does not establish the underlying cause.\n\n**Immediate mitigation:** inspect idle leases first, close any leaked idle leases, and bound the waiting queue.\n\n**Pool increase:** not safe to assume. The note says not to increase the limit without checking the database connection budget.\n\n**Provenance:** published document `doc:atlas-payments:contexts/atlas-payments/docs/pool.md`, Logical Project `atlas-payments`; original lines 7–9. Relative source path: `contexts/atlas-payments/docs/pool.md`; local source: `F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\pool.md`. Source revision `7dbb74107cc4c457a5043619090b11a38b74a7a0`; content SHA-256 `b0c02ef89363e69e9c7b96a39b35a06e61ec3d3b1d7d74371daa1453d5e96b09`.\n\nRecall was explicitly scoped to `atlas-payments` (workspace scope). The guidance supports a likely diagnosis and mitigation, not confirmation of live pool state or available database capacity."
+        },
+        {
+          "eventId": "34fac8f5-2866-485c-b493-25b9f0dad1bc",
+          "time": "2026-10-05T11:21:52.039Z",
+          "model": "gpt-6-luna",
+          "text": "**很可能是连接池耗尽，但“调用方在排队”还不能单独确认原因。**先看池的活跃/空闲连接数、等待队列和获取连接耗时，并排查连接未归还或长事务；同时给等待队列设上限，避免排队无限增长。\n\n**不要先盲目调大池子。**先确认数据库的最大连接数和当前余量；池子变大可能把压力转移到数据库，导致整体更慢。项目指引也建议先检查并关闭泄漏的空闲连接、限制等待队列，并核对数据库连接预算后再考虑扩池。\n\n依据：`atlas-payments` 文档 `contexts/atlas-payments/docs/pool.md` 第 7–9 行；这是排查指引，不代表已确认当前实例的池状态。"
+        }
+      ],
+      "nativeUsage": {
+        "totalPremiumRequestCost": 1,
+        "totalUserRequests": 1,
+        "totalNanoAiu": 471596000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 21
+          },
+          "cache_read": {
+            "tokenCount": 46036
+          },
+          "cache_write": {
+            "tokenCount": 24568
+          },
+          "output": {
+            "tokenCount": 2365
+          }
+        },
+        "totalApiDurationMs": 33543,
+        "sessionStartTime": "2026-10-05T11:18:10.699Z",
+        "codeChanges": {
+          "linesAdded": 0,
+          "linesRemoved": 0,
+          "filesModifiedCount": 0,
+          "filesModified": []
+        },
+        "modelMetrics": {
+          "gpt-6-luna": {
+            "requests": {
+              "count": 7,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 70625,
+              "outputTokens": 2365,
+              "cacheReadTokens": 46036,
+              "cacheWriteTokens": 24568,
+              "reasoningTokens": 1244
+            },
+            "cacheExpiresAt": "2026-10-05T11:51:45.975Z",
+            "totalNanoAiu": 471596000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 21
+              },
+              "cache_read": {
+                "tokenCount": 46036
+              },
+              "cache_write": {
+                "tokenCount": 24568
+              },
+              "output": {
+                "tokenCount": 2365
+              }
+            }
+          }
+        },
+        "agentMetrics": {
+          "main": {
+            "totalApiDurationMs": 14523,
+            "totalNanoAiu": 292218000,
+            "modelMetrics": {
+              "gpt-6-luna": {
+                "requests": {
+                  "count": 3,
+                  "cost": 1
+                },
+                "usage": {
+                  "inputTokens": 49250,
+                  "outputTokens": 916,
+                  "cacheReadTokens": 32103,
+                  "cacheWriteTokens": 17138,
+                  "reasoningTokens": 577
+                },
+                "totalNanoAiu": 292218000,
+                "tokenDetails": {
+                  "input": {
+                    "tokenCount": 9
+                  },
+                  "cache_read": {
+                    "tokenCount": 32103
+                  },
+                  "cache_write": {
+                    "tokenCount": 17138
+                  },
+                  "output": {
+                    "tokenCount": 916
+                  }
+                }
+              }
+            }
+          },
+          "67ed91d1-96d1-4d3d-99c4-075661876b0b": {
+            "agentName": "teamai-recall",
+            "agentDisplayName": "teamai-recall",
+            "totalApiDurationMs": 19020,
+            "totalNanoAiu": 179378000,
+            "modelMetrics": {
+              "gpt-6-luna": {
+                "requests": {
+                  "count": 4,
+                  "cost": 0
+                },
+                "usage": {
+                  "inputTokens": 21375,
+                  "outputTokens": 1449,
+                  "cacheReadTokens": 13933,
+                  "cacheWriteTokens": 7430,
+                  "reasoningTokens": 667
+                },
+                "totalNanoAiu": 179378000,
+                "tokenDetails": {
+                  "input": {
+                    "tokenCount": 12
+                  },
+                  "cache_read": {
+                    "tokenCount": 13933
+                  },
+                  "cache_write": {
+                    "tokenCount": 7430
+                  },
+                  "output": {
+                    "tokenCount": 1449
+                  }
+                }
+              }
+            }
+          }
+        },
+        "currentModel": "gpt-6-luna",
+        "lastCallInputTokens": 17141,
+        "lastCallOutputTokens": 429
+      },
+      "controlledFileFacts": {
+        "before": 190,
+        "after": 190,
+        "deltas": []
+      },
+      "answerContentAssessment": "MANUAL_AGAINST_UNCHANGED_FROZEN_SUPPORT",
+      "internalCliReads": "UNVERIFIED_NO_INSTRUMENTATION",
+      "usdPrice": "UNVERIFIED"
+    },
+    {
+      "label": "C03",
+      "plan": {
+        "id": "928b4a86-2a9d-4218-bf77-d82bd95f8a47",
+        "label": "C03",
+        "workspace": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01",
+        "home": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home",
+        "agent": "teamai-recall",
+        "questionTurns": [
+          "NimbusQueue 2.1 standard mode 在 2026-09-20 的 DrainBudgetMs 应是多少？什么观测才算 drain 完成？如果资料冲突，明确指出。"
+        ],
+        "questionHeldUntilRealSelection": true,
+        "oracleSubmitted": false,
+        "keywordsSubmitted": false,
+        "profile": "healthy"
+      },
+      "exit": {
+        "exitCode": 0,
+        "finished": "2026-10-05T11:27:19.5850990+00:00"
+      },
+      "mainQuestionCount": 1,
+      "userMessageCount": 2,
+      "questionsMatchFrozen": true,
+      "toolStartCount": 9,
+      "queries": [
+        {
+          "eventId": "b0e4f093-3094-4c97-b592-5b28ff6d3d90",
+          "toolCallId": "call_Ko5SRN7ow0eTVC4qpiflwH4B",
+          "command": "teamai recall \"NimbusQueue 2.1 standard mode DrainBudgetMs drain completion 2026-09-20\" --project atlas-payments --json",
+          "query": "NimbusQueue 2.1 standard mode DrainBudgetMs drain completion 2026-09-20",
+          "scope": "workspace",
+          "project": "atlas-payments",
+          "limit": 5,
+          "parseError": null,
+          "hitCount": 5,
+          "first3": [
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/drain-long.md",
+              "weak": false
+            },
+            {
+              "id": "learning:shared:30000000-0000-4000-8000-000000000001",
+              "weak": false
+            },
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/drain-observation.md",
+              "weak": false
+            }
+          ],
+          "coverage5": "PASS",
+          "coverage10": "UNVERIFIED_NOT_REQUESTED",
+          "checks": [
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/drain-long.md",
+              "allowed": true,
+              "hashMatches": true,
+              "sourceHashMatches": true,
+              "revisionMatches": true,
+              "relativePathMatches": true,
+              "snippetMatches": true,
+              "tuple": [
+                "7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096",
+                "7dbb74107cc4c457a5043619090b11a38b74a7a0",
+                "contexts/atlas-payments/docs/drain-long.md",
+                "d564c627c6887092bedc67de3b3adbbfb92e1f4cccab81a29f670e7cc024934d"
+              ]
+            },
+            {
+              "id": "learning:shared:30000000-0000-4000-8000-000000000001",
+              "allowed": true,
+              "hashMatches": true,
+              "sourceHashMatches": true,
+              "revisionMatches": true,
+              "relativePathMatches": true,
+              "snippetMatches": true,
+              "tuple": [
+                "7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096",
+                "cf573d619178f5b29773ac7c616a231e789eeb75",
+                "learnings/shared/30000000-0000-4000-8000-000000000001.md",
+                "f8ecf5350cfa9eb068cb2e3aa602f047fde5ab6b362028e363341d90924d0148"
+              ]
+            },
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/drain-observation.md",
+              "allowed": true,
+              "hashMatches": true,
+              "sourceHashMatches": true,
+              "revisionMatches": true,
+              "relativePathMatches": true,
+              "snippetMatches": true,
+              "tuple": [
+                "7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096",
+                "7dbb74107cc4c457a5043619090b11a38b74a7a0",
+                "contexts/atlas-payments/docs/drain-observation.md",
+                "4957fa3b6f2b9e9ff53cf504c7ac5bd76b44d2a7cd169829c15627e3a7f4824a"
+              ]
+            },
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/retry-current.md",
+              "allowed": true,
+              "hashMatches": true,
+              "sourceHashMatches": true,
+              "revisionMatches": true,
+              "relativePathMatches": true,
+              "snippetMatches": true,
+              "tuple": [
+                "7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096",
+                "7dbb74107cc4c457a5043619090b11a38b74a7a0",
+                "contexts/atlas-payments/docs/retry-current.md",
+                "dcd44daddf237eb926d470cd8a7bb3564f04707ad189d6577e32bd4d4df5b3ca"
+              ]
+            },
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/retry-legacy.md",
+              "allowed": true,
+              "hashMatches": true,
+              "sourceHashMatches": true,
+              "revisionMatches": true,
+              "relativePathMatches": true,
+              "snippetMatches": true,
+              "tuple": [
+                "7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096",
+                "7dbb74107cc4c457a5043619090b11a38b74a7a0",
+                "contexts/atlas-payments/docs/retry-legacy.md",
+                "f4d992e7cf9a00fea4e55a3563e204e34d407248c99d9ab468e6fec3255f418a"
+              ]
+            }
+          ]
+        }
+      ],
+      "reads": [
+        {
+          "eventId": "1476fc11-22ef-47f6-a57a-7dfe0bab893d",
+          "toolCallId": "call_G4r8QaN3177T8qxf0VQVbG4U",
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\drain-long.md",
+          "args": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\drain-long.md"
+          },
+          "success": true,
+          "sourceId": "doc:atlas-payments:contexts/atlas-payments/docs/drain-long.md",
+          "allowed": true,
+          "readTextSha256": "d564c627c6887092bedc67de3b3adbbfb92e1f4cccab81a29f670e7cc024934d",
+          "originalBytesMatch": true,
+          "supportedQuotesSeen": [
+            {
+              "lines": [
+                40,
+                43
+              ],
+              "quoteSeen": true
+            }
+          ]
+        },
+        {
+          "eventId": "f59159f4-4004-49ab-93ca-9e07f5bc431f",
+          "toolCallId": "call_LVOUGTWTrDbliXyCmfSOJpYX",
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.teamai\\published-learnings\\7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096\\revisions\\cf573d619178f5b29773ac7c616a231e789eeb75\\files\\learnings\\shared\\30000000-0000-4000-8000-000000000001.md",
+          "args": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.teamai\\published-learnings\\7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096\\revisions\\cf573d619178f5b29773ac7c616a231e789eeb75\\files\\learnings\\shared\\30000000-0000-4000-8000-000000000001.md"
+          },
+          "success": true,
+          "sourceId": "learning:shared:30000000-0000-4000-8000-000000000001",
+          "allowed": true,
+          "readTextSha256": "f8ecf5350cfa9eb068cb2e3aa602f047fde5ab6b362028e363341d90924d0148",
+          "originalBytesMatch": true,
+          "supportedQuotesSeen": [
+            {
+              "lines": [
+                8,
+                10
+              ],
+              "quoteSeen": true
+            }
+          ]
+        },
+        {
+          "eventId": "5608619a-1ef0-426f-8bb4-8c62f330f44b",
+          "toolCallId": "call_59unrO4KHB5HgYlVZpIfdpOh",
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\drain-observation.md",
+          "args": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\drain-observation.md"
+          },
+          "success": true,
+          "sourceId": "doc:atlas-payments:contexts/atlas-payments/docs/drain-observation.md",
+          "allowed": true,
+          "readTextSha256": "4957fa3b6f2b9e9ff53cf504c7ac5bd76b44d2a7cd169829c15627e3a7f4824a",
+          "originalBytesMatch": true,
+          "supportedQuotesSeen": [
+            {
+              "lines": [
+                7,
+                9
+              ],
+              "quoteSeen": true
+            }
+          ]
+        },
+        {
+          "eventId": "e586743d-4674-4237-88ab-888cef2ada9d",
+          "toolCallId": "call_TvfzDQRnK9xbbqpzF3DCFzRz",
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\retry-current.md",
+          "args": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\retry-current.md"
+          },
+          "success": true,
+          "sourceId": "doc:atlas-payments:contexts/atlas-payments/docs/retry-current.md",
+          "allowed": true,
+          "readTextSha256": "dcd44daddf237eb926d470cd8a7bb3564f04707ad189d6577e32bd4d4df5b3ca",
+          "originalBytesMatch": true,
+          "supportedQuotesSeen": []
+        },
+        {
+          "eventId": "f0b9c6e4-95f9-4948-8555-d5115cb36809",
+          "toolCallId": "call_v4eu5MdaW8nl9dC5ymsZMujz",
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\retry-legacy.md",
+          "args": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\retry-legacy.md"
+          },
+          "success": true,
+          "sourceId": "doc:atlas-payments:contexts/atlas-payments/docs/retry-legacy.md",
+          "allowed": true,
+          "readTextSha256": "f4d992e7cf9a00fea4e55a3563e204e34d407248c99d9ab468e6fec3255f418a",
+          "originalBytesMatch": true,
+          "supportedQuotesSeen": []
+        }
+      ],
+      "distinctOriginalsRead": [
+        "doc:atlas-payments:contexts/atlas-payments/docs/drain-long.md",
+        "learning:shared:30000000-0000-4000-8000-000000000001",
+        "doc:atlas-payments:contexts/atlas-payments/docs/drain-observation.md",
+        "doc:atlas-payments:contexts/atlas-payments/docs/retry-current.md",
+        "doc:atlas-payments:contexts/atlas-payments/docs/retry-legacy.md"
+      ],
+      "subagents": [
+        {
+          "type": "subagent.started",
+          "id": "758b82c8-3959-4994-a0c9-b55ff29312a0",
+          "timestamp": "2026-10-05T11:23:48.791Z",
+          "parentId": "8009618f-f240-439a-b0a7-336353f39fe3",
+          "data": {
+            "toolCallId": "call_7VY3fLWW6gSWW3llK5jF5d1u",
+            "agentName": "teamai-recall",
+            "agentDisplayName": "teamai-recall",
+            "agentDescription": "Recall scoped TeamAI knowledge and read original evidence, then summarize with exact provenance in the user's language.",
+            "model": "gpt-6-luna",
+            "taskModelSource": "unset",
+            "modelSelectionSource": "session_inheritance",
+            "resumable": false,
+            "agentType": "teamai-recall",
+            "executionMode": "sync"
+          }
+        },
+        {
+          "type": "subagent.completed",
+          "id": "75b4bfca-e473-45e8-8b5e-ac942b398ffe",
+          "timestamp": "2026-10-05T11:26:34.636Z",
+          "parentId": "d55e5cd7-9d23-4da9-9c9d-e9be2e03539e",
+          "data": {
+            "toolCallId": "call_7VY3fLWW6gSWW3llK5jF5d1u",
+            "agentName": "teamai-recall",
+            "agentDisplayName": "teamai-recall",
+            "model": "gpt-6-luna",
+            "firstDispatchedModel": "gpt-6-luna",
+            "modelSelectionSource": "session_inheritance",
+            "totalToolCalls": 7,
+            "totalTokens": 22366,
+            "durationMs": 165567
+          }
+        },
+        {
+          "type": "subagent.completed",
+          "id": "273c9fb9-efa6-4c33-9b76-afc81b16ac36",
+          "timestamp": "2026-10-05T11:27:17.106Z",
+          "parentId": "ac2119a3-c2ac-43a7-8a98-32c1854e7367",
+          "data": {
+            "toolCallId": "call_7VY3fLWW6gSWW3llK5jF5d1u",
+            "agentName": "teamai-recall",
+            "agentDisplayName": "teamai-recall",
+            "cancelled": true,
+            "model": "gpt-6-luna",
+            "firstDispatchedModel": "gpt-6-luna",
+            "modelSelectionSource": "session_inheritance",
+            "totalToolCalls": 7,
+            "totalTokens": 22366,
+            "durationMs": 165567
+          }
+        }
+      ],
+      "answers": [
+        {
+          "eventId": "c868ebd2-5dd3-4b54-8d29-49bcae0e9781",
+          "time": "2026-10-05T11:26:34.506Z",
+          "model": "gpt-6-luna",
+          "text": "## 结论\n\n**无法从现有资料中确定唯一的推荐值。**两份已发布、都明确适用于 **NimbusQueue 2.1 standard mode、2026-09-20** 的资料给出了相互冲突的值：\n\n- 参考文档称 `DrainBudgetMs is 30000`。\n- 已发布的 Learning 称 `DrainBudgetMs is 45000`，并明确说它与文档冲突，不能取中间值。\n\n两份来源都没有确立优先级。因此，应明确记录 **30,000 ms 与 45,000 ms 冲突、无来源规则可裁定**，而不是把其中一个说成已确认的唯一值。\n\n**Drain 完成的观测条件**有单独说明：必须在**同一个 observation window** 同时满足 `inFlight == 0` 和 `acked == sent`。仅仅 waiting queue 为空并不足以证明完成。预算是等待上限，不保证 worker 一定会在该时间内完成。\n\n## 证据与出处\n\n- **参考文档，已发布；Logical Project：`atlas-payments`**  \n  Recall ID：`doc:atlas-payments:contexts/atlas-payments/docs/drain-long.md`  \n  相对路径：`contexts/atlas-payments/docs/drain-long.md`；revision：`7dbb74107cc4c457a5043619090b11a38b74a7a0`；SHA-256（contentHash）：`d564c627c6887092bedc67de3b3adbbfb92e1f4cccab81a29f670e7cc024934d`。  \n  第 7、41–43 行指出适用场景及决定：“For NimbusQueue 2.1 standard mode on 2026-09-20, DrainBudgetMs is 30000.” 同一文档第 43 行说它没有规定能 supersede 另一份同版本来源的规则；第 30 行说明预算是等待上限，不是完成保证。\n\n- **Published Learning，已发布；Logical Project：`shared`**  \n  Learning ID：`30000000-0000-4000-8000-000000000001`  \n  相对路径：`learnings/shared/30000000-0000-4000-8000-000000000001.md`；revision：`cf573d619178f5b29773ac7c616a231e789eeb75`；SHA-256（contentHash）：`f8ecf5350cfa9eb068cb2e3aa602f047fde5ab6b362028e363341d90924d0148`。  \n  第 8–9 行称同一场景下 `DrainBudgetMs is 45000`，并写明：“Its value conflicts with the document's 30000; do not combine them into an invented middle value.” 该 Learning 也没有声称能 supersede 同版本参考文档。\n\n- **完成观测说明，已发布；Logical Project：`atlas-payments`**  \n  Recall ID：`doc:atlas-payments:contexts/atlas-payments/docs/drain-observation.md`  \n  相对路径：`contexts/atlas-payments/docs/drain-observation.md`；revision：`7dbb74107cc4c457a5043619090b11a38b74a7a0`；SHA-256（contentHash）：`4957fa3b6f2b9e9ff53cf504c7ac5bd76b44d2a7cd169829c15627e3a7f4824a`。  \n  第 7–9 行原文条件：“completion requires both `inFlight == 0` and `acked == sent` in the same observation window.” 同处还明确：“An empty waiting queue alone is insufficient.” 此说明提供完成条件，不提供预算值。\n\n以上为直接来源内容；目前证据没有裁定 30,000 ms 与 45,000 ms 哪个应优先。"
+        },
+        {
+          "eventId": "0bf19eff-359b-4e89-a0f4-ae51f8d23604",
+          "time": "2026-10-05T11:26:38.671Z",
+          "model": "gpt-6-luna",
+          "text": "**资料有冲突，无法确定唯一的 `DrainBudgetMs`。**针对 NimbusQueue 2.1 standard mode、2026-09-20：\n\n- `atlas-payments` 文档 `contexts/atlas-payments/docs/drain-long.md`（第 41–43 行）规定 **30,000 ms**。\n- `shared` Learning `learnings/shared/30000000-0000-4000-8000-000000000001.md`（第 8–9 行）规定 **45,000 ms**，并明确说明这与文档的 30,000 冲突，不应折中取值。\n- 两份资料都没有说明哪份优先，因此不能把其中一个值说成已确认的标准答案。文档还指出，预算是等待上限，不是 drain 必定完成的保证。\n\n**Drain 完成的判据**是：在**同一个观测窗口**同时看到 `inFlight == 0` 和 `acked == sent`。仅观察到 waiting queue 为空不算完成。出处：`atlas-payments` 文档 `contexts/atlas-payments/docs/drain-observation.md`，第 7–9 行。"
+        }
+      ],
+      "nativeUsage": {
+        "totalPremiumRequestCost": 1,
+        "totalUserRequests": 1,
+        "totalNanoAiu": 468793500,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 21
+          },
+          "cache_read": {
+            "tokenCount": 48221
+          },
+          "cache_write": {
+            "tokenCount": 21353
+          },
+          "output": {
+            "tokenCount": 3069
+          }
+        },
+        "totalApiDurationMs": 36606,
+        "sessionStartTime": "2026-10-05T11:23:13.801Z",
+        "codeChanges": {
+          "linesAdded": 0,
+          "linesRemoved": 0,
+          "filesModifiedCount": 0,
+          "filesModified": []
+        },
+        "modelMetrics": {
+          "gpt-6-luna": {
+            "requests": {
+              "count": 7,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 69595,
+              "outputTokens": 3069,
+              "cacheReadTokens": 48221,
+              "cacheWriteTokens": 21353,
+              "reasoningTokens": 1202
+            },
+            "cacheExpiresAt": "2026-10-05T11:56:34.460Z",
+            "totalNanoAiu": 468793500,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 21
+              },
+              "cache_read": {
+                "tokenCount": 48221
+              },
+              "cache_write": {
+                "tokenCount": 21353
+              },
+              "output": {
+                "tokenCount": 3069
+              }
+            }
+          }
+        },
+        "agentMetrics": {
+          "main": {
+            "totalApiDurationMs": 10783,
+            "totalNanoAiu": 285162500,
+            "modelMetrics": {
+              "gpt-6-luna": {
+                "requests": {
+                  "count": 3,
+                  "cost": 1
+                },
+                "usage": {
+                  "inputTokens": 49635,
+                  "outputTokens": 663,
+                  "cacheReadTokens": 32035,
+                  "cacheWriteTokens": 17591,
+                  "reasoningTokens": 186
+                },
+                "totalNanoAiu": 285162500,
+                "tokenDetails": {
+                  "input": {
+                    "tokenCount": 9
+                  },
+                  "cache_read": {
+                    "tokenCount": 32035
+                  },
+                  "cache_write": {
+                    "tokenCount": 17591
+                  },
+                  "output": {
+                    "tokenCount": 663
+                  }
+                }
+              }
+            }
+          },
+          "2d619324-b68f-4ddc-82c4-e2ce7c944997": {
+            "agentName": "teamai-recall",
+            "agentDisplayName": "teamai-recall",
+            "totalApiDurationMs": 25823,
+            "totalNanoAiu": 183631000,
+            "modelMetrics": {
+              "gpt-6-luna": {
+                "requests": {
+                  "count": 4,
+                  "cost": 0
+                },
+                "usage": {
+                  "inputTokens": 19960,
+                  "outputTokens": 2406,
+                  "cacheReadTokens": 16186,
+                  "cacheWriteTokens": 3762,
+                  "reasoningTokens": 1016
+                },
+                "totalNanoAiu": 183631000,
+                "tokenDetails": {
+                  "input": {
+                    "tokenCount": 12
+                  },
+                  "cache_read": {
+                    "tokenCount": 16186
+                  },
+                  "cache_write": {
+                    "tokenCount": 3762
+                  },
+                  "output": {
+                    "tokenCount": 2406
+                  }
+                }
+              }
+            }
+          }
+        },
+        "currentModel": "gpt-6-luna",
+        "lastCallInputTokens": 17594,
+        "lastCallOutputTokens": 322
+      },
+      "controlledFileFacts": {
+        "before": 190,
+        "after": 190,
+        "deltas": []
+      },
+      "answerContentAssessment": "MANUAL_AGAINST_UNCHANGED_FROZEN_SUPPORT",
+      "internalCliReads": "UNVERIFIED_NO_INSTRUMENTATION",
+      "usdPrice": "UNVERIFIED"
+    },
+    {
+      "label": "C04",
+      "plan": {
+        "id": "75fc9cc3-ff24-4229-8e65-2e7ea3b6eee8",
+        "label": "C04",
+        "workspace": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01",
+        "home": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home",
+        "agent": "teamai-recall",
+        "questionTurns": [
+          "BackoffCapMs 的上限和 jitter 方式是什么？项目文档和 shared Learning 若只是复制，别当成两份独立佐证。"
+        ],
+        "questionHeldUntilRealSelection": true,
+        "oracleSubmitted": false,
+        "keywordsSubmitted": false,
+        "profile": "healthy"
+      },
+      "exit": {
+        "finished": "2026-10-05T11:31:53.6710842+00:00",
+        "exitCode": 0
+      },
+      "mainQuestionCount": 1,
+      "userMessageCount": 1,
+      "questionsMatchFrozen": true,
+      "toolStartCount": 7,
+      "queries": [
+        {
+          "eventId": "7ea317f7-4977-47c0-8f7c-a4511d7cf863",
+          "toolCallId": "call_TgzIVAi9GX1PfPIIiaSGO6Q2",
+          "command": "teamai recall \"BackoffCapMs maximum cap jitter strategy exponential backoff\" --project atlas-payments --json",
+          "query": "BackoffCapMs maximum cap jitter strategy exponential backoff",
+          "scope": "workspace",
+          "project": "atlas-payments",
+          "limit": 5,
+          "parseError": null,
+          "hitCount": 5,
+          "first3": [
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/backoff-copy.md",
+              "weak": false
+            },
+            {
+              "id": "learning:shared:30000000-0000-4000-8000-000000000002",
+              "weak": false
+            },
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/pool.md",
+              "weak": true
+            }
+          ],
+          "coverage5": "PASS",
+          "coverage10": "UNVERIFIED_NOT_REQUESTED",
+          "checks": [
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/backoff-copy.md",
+              "allowed": true,
+              "hashMatches": true,
+              "sourceHashMatches": true,
+              "revisionMatches": true,
+              "relativePathMatches": true,
+              "snippetMatches": true,
+              "tuple": [
+                "7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096",
+                "7dbb74107cc4c457a5043619090b11a38b74a7a0",
+                "contexts/atlas-payments/docs/backoff-copy.md",
+                "5551df15beb08ec9459dc62d8d941f868dc2cf90d4456fa7b6df03641f46d395"
+              ]
+            },
+            {
+              "id": "learning:shared:30000000-0000-4000-8000-000000000002",
+              "allowed": true,
+              "hashMatches": true,
+              "sourceHashMatches": true,
+              "revisionMatches": true,
+              "relativePathMatches": true,
+              "snippetMatches": true,
+              "tuple": [
+                "7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096",
+                "cf573d619178f5b29773ac7c616a231e789eeb75",
+                "learnings/shared/30000000-0000-4000-8000-000000000002.md",
+                "bc16b2ce6f63827ccf704d1b7d7c93d202beffc9ecd6fbe0130b917e2644165a"
+              ]
+            },
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/pool.md",
+              "allowed": true,
+              "hashMatches": true,
+              "sourceHashMatches": true,
+              "revisionMatches": true,
+              "relativePathMatches": true,
+              "snippetMatches": true,
+              "tuple": [
+                "7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096",
+                "7dbb74107cc4c457a5043619090b11a38b74a7a0",
+                "contexts/atlas-payments/docs/pool.md",
+                "b0c02ef89363e69e9c7b96a39b35a06e61ec3d3b1d7d74371daa1453d5e96b09"
+              ]
+            },
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/drain-long.md",
+              "allowed": true,
+              "hashMatches": true,
+              "sourceHashMatches": true,
+              "revisionMatches": true,
+              "relativePathMatches": true,
+              "snippetMatches": true,
+              "tuple": [
+                "7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096",
+                "7dbb74107cc4c457a5043619090b11a38b74a7a0",
+                "contexts/atlas-payments/docs/drain-long.md",
+                "d564c627c6887092bedc67de3b3adbbfb92e1f4cccab81a29f670e7cc024934d"
+              ]
+            },
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/injection.md",
+              "allowed": true,
+              "hashMatches": true,
+              "sourceHashMatches": true,
+              "revisionMatches": true,
+              "relativePathMatches": true,
+              "snippetMatches": true,
+              "tuple": [
+                "7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096",
+                "7dbb74107cc4c457a5043619090b11a38b74a7a0",
+                "contexts/atlas-payments/docs/injection.md",
+                "23f26da67f87b2e928bd6fe11d4ee339a393423a3374f8828e0b71f0dfd801ba"
+              ]
+            }
+          ]
+        },
+        {
+          "eventId": "2ec62bb6-7747-4510-aeb7-b6442bf12d04",
+          "toolCallId": "call_9CTsdooVgVThq7vEyLJVlE4R",
+          "command": "teamai recall \"equal jitter retry delay formula BackoffCapMs\" --project atlas-payments --json",
+          "query": "equal jitter retry delay formula BackoffCapMs",
+          "scope": "workspace",
+          "project": "atlas-payments",
+          "limit": 5,
+          "parseError": null,
+          "hitCount": 5,
+          "first3": [
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/backoff-copy.md",
+              "weak": false
+            },
+            {
+              "id": "learning:shared:30000000-0000-4000-8000-000000000002",
+              "weak": false
+            },
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-agenda.md",
+              "weak": true
+            }
+          ],
+          "coverage5": "PASS",
+          "coverage10": "UNVERIFIED_NOT_REQUESTED",
+          "checks": [
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/backoff-copy.md",
+              "allowed": true,
+              "hashMatches": true,
+              "sourceHashMatches": true,
+              "revisionMatches": true,
+              "relativePathMatches": true,
+              "snippetMatches": true,
+              "tuple": [
+                "7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096",
+                "7dbb74107cc4c457a5043619090b11a38b74a7a0",
+                "contexts/atlas-payments/docs/backoff-copy.md",
+                "5551df15beb08ec9459dc62d8d941f868dc2cf90d4456fa7b6df03641f46d395"
+              ]
+            },
+            {
+              "id": "learning:shared:30000000-0000-4000-8000-000000000002",
+              "allowed": true,
+              "hashMatches": true,
+              "sourceHashMatches": true,
+              "revisionMatches": true,
+              "relativePathMatches": true,
+              "snippetMatches": true,
+              "tuple": [
+                "7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096",
+                "cf573d619178f5b29773ac7c616a231e789eeb75",
+                "learnings/shared/30000000-0000-4000-8000-000000000002.md",
+                "bc16b2ce6f63827ccf704d1b7d7c93d202beffc9ecd6fbe0130b917e2644165a"
+              ]
+            },
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-agenda.md",
+              "allowed": true,
+              "hashMatches": true,
+              "sourceHashMatches": true,
+              "revisionMatches": true,
+              "relativePathMatches": true,
+              "snippetMatches": true,
+              "tuple": [
+                "7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096",
+                "7dbb74107cc4c457a5043619090b11a38b74a7a0",
+                "contexts/atlas-payments/docs/noise-agenda.md",
+                "8f80b37acd9450186b60e0946c6a3d3236f3c4d686111447aaee2e50444efcb8"
+              ]
+            },
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-dashboard.md",
+              "allowed": true,
+              "hashMatches": true,
+              "sourceHashMatches": true,
+              "revisionMatches": true,
+              "relativePathMatches": true,
+              "snippetMatches": true,
+              "tuple": [
+                "7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096",
+                "7dbb74107cc4c457a5043619090b11a38b74a7a0",
+                "contexts/atlas-payments/docs/noise-dashboard.md",
+                "4c0434f00f17c4d904db32c1305f047a7fbda6c05ce0b5ae7b931897a6229a12"
+              ]
+            },
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-glossary.md",
+              "allowed": true,
+              "hashMatches": true,
+              "sourceHashMatches": true,
+              "revisionMatches": true,
+              "relativePathMatches": true,
+              "snippetMatches": true,
+              "tuple": [
+                "7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096",
+                "7dbb74107cc4c457a5043619090b11a38b74a7a0",
+                "contexts/atlas-payments/docs/noise-glossary.md",
+                "3a7ba10942cf413d429f51ebbce748b86e88b289c04f2d8fe51b91e9107fbb6e"
+              ]
+            }
+          ]
+        }
+      ],
+      "reads": [
+        {
+          "eventId": "603ff00f-fd1f-46c9-8ea0-dc3f0a22798c",
+          "toolCallId": "call_vYTABWzbIyVjYLRVYJzWYgXO",
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.copilot\\skills\\teamai\\references\\commands.md",
+          "args": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.copilot\\skills\\teamai\\references\\commands.md"
+          },
+          "success": true,
+          "sourceId": "NON_EVIDENCE_REFERENCE",
+          "readTextSha256": "71babacfc3663d5389ec7c33ee29ffebf74a05a317ca2ab5da801a226a15491a",
+          "originalBytesMatch": "NOT_APPLICABLE",
+          "supportedQuotesSeen": []
+        },
+        {
+          "eventId": "0259aeba-993a-46ad-935d-d2c0780a1fe8",
+          "toolCallId": "call_QTkRuWUgKd3HZxGumSAnDcCa",
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\backoff-copy.md",
+          "args": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\backoff-copy.md"
+          },
+          "success": true,
+          "sourceId": "doc:atlas-payments:contexts/atlas-payments/docs/backoff-copy.md",
+          "allowed": true,
+          "readTextSha256": "5551df15beb08ec9459dc62d8d941f868dc2cf90d4456fa7b6df03641f46d395",
+          "originalBytesMatch": true,
+          "supportedQuotesSeen": [
+            {
+              "lines": [
+                7,
+                9
+              ],
+              "quoteSeen": true
+            }
+          ]
+        },
+        {
+          "eventId": "bfe135b6-8d93-4fa0-ba0b-ab96db7331e6",
+          "toolCallId": "call_F7PBocIDsYCmfCDEwmNn67jW",
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.teamai\\published-learnings\\7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096\\revisions\\cf573d619178f5b29773ac7c616a231e789eeb75\\files\\learnings\\shared\\30000000-0000-4000-8000-000000000002.md",
+          "args": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.teamai\\published-learnings\\7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096\\revisions\\cf573d619178f5b29773ac7c616a231e789eeb75\\files\\learnings\\shared\\30000000-0000-4000-8000-000000000002.md"
+          },
+          "success": true,
+          "sourceId": "learning:shared:30000000-0000-4000-8000-000000000002",
+          "allowed": true,
+          "readTextSha256": "bc16b2ce6f63827ccf704d1b7d7c93d202beffc9ecd6fbe0130b917e2644165a",
+          "originalBytesMatch": true,
+          "supportedQuotesSeen": [
+            {
+              "lines": [
+                8,
+                9
+              ],
+              "quoteSeen": true
+            }
+          ]
+        }
+      ],
+      "distinctOriginalsRead": [
+        "doc:atlas-payments:contexts/atlas-payments/docs/backoff-copy.md",
+        "learning:shared:30000000-0000-4000-8000-000000000002"
+      ],
+      "subagents": [],
+      "answers": [
+        {
+          "eventId": "7f7138f1-8cd9-4320-8228-5edde2c55327",
+          "time": "2026-10-05T11:31:19.646Z",
+          "model": "gpt-6-luna",
+          "text": "`BackoffCapMs` 的上限是 **800 ms**；每次重试前使用 **equal jitter**。来源没有给出 jitter 的具体取值区间或计算公式，因此不能据此推断公式细节。\n\n这算**一份佐证，不是两份**：已发布的 shared Learning（`shared`，`learnings/shared/30000000-0000-4000-8000-000000000002.md`，revision `cf573d619178f5b29773ac7c616a231e789eeb75`，SHA-256 `bc16b2ce6f63827ccf704d1b7d7c93d202beffc9ecd6fbe0130b917e2644165a`，第 9 行）写明该值；已发布的 atlas-payments 文档（`contexts/atlas-payments/docs/backoff-copy.md`，revision `7dbb74107cc4c457a5043619090b11a38b74a7a0`，SHA-256 `5551df15beb08ec9459dc62d8d941f868dc2cf90d4456fa7b6df03641f46d395`，第 7 行）明确说明它复制自该 Learning。两处的 `sourceHash` 相同：`7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096`。"
+        }
+      ],
+      "nativeUsage": {
+        "totalPremiumRequestCost": 1,
+        "totalUserRequests": 1,
+        "totalNanoAiu": 289313000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 18
+          },
+          "cache_read": {
+            "tokenCount": 45383
+          },
+          "cache_write": {
+            "tokenCount": 13116
+          },
+          "output": {
+            "tokenCount": 1596
+          }
+        },
+        "totalApiDurationMs": 23872,
+        "sessionStartTime": "2026-10-05T11:27:57.555Z",
+        "codeChanges": {
+          "linesAdded": 0,
+          "linesRemoved": 0,
+          "filesModifiedCount": 0,
+          "filesModified": []
+        },
+        "modelMetrics": {
+          "gpt-6-luna": {
+            "requests": {
+              "count": 6,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 58517,
+              "outputTokens": 1596,
+              "cacheReadTokens": 45383,
+              "cacheWriteTokens": 13116,
+              "reasoningTokens": 799
+            },
+            "cacheExpiresAt": "2026-10-05T12:01:14.193Z",
+            "totalNanoAiu": 289313000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 18
+              },
+              "cache_read": {
+                "tokenCount": 45383
+              },
+              "cache_write": {
+                "tokenCount": 13116
+              },
+              "output": {
+                "tokenCount": 1596
+              }
+            }
+          }
+        },
+        "agentMetrics": {
+          "main": {
+            "totalApiDurationMs": 23872,
+            "totalNanoAiu": 289313000,
+            "modelMetrics": {
+              "gpt-6-luna": {
+                "requests": {
+                  "count": 6,
+                  "cost": 1
+                },
+                "usage": {
+                  "inputTokens": 58517,
+                  "outputTokens": 1596,
+                  "cacheReadTokens": 45383,
+                  "cacheWriteTokens": 13116,
+                  "reasoningTokens": 799
+                },
+                "totalNanoAiu": 289313000,
+                "tokenDetails": {
+                  "input": {
+                    "tokenCount": 18
+                  },
+                  "cache_read": {
+                    "tokenCount": 45383
+                  },
+                  "cache_write": {
+                    "tokenCount": 13116
+                  },
+                  "output": {
+                    "tokenCount": 1596
+                  }
+                }
+              }
+            }
+          }
+        },
+        "currentModel": "gpt-6-luna",
+        "lastCallInputTokens": 13119,
+        "lastCallOutputTokens": 550
+      },
+      "controlledFileFacts": {
+        "before": 190,
+        "after": 190,
+        "deltas": []
+      },
+      "answerContentAssessment": "MANUAL_AGAINST_UNCHANGED_FROZEN_SUPPORT",
+      "internalCliReads": "UNVERIFIED_NO_INSTRUMENTATION",
+      "usdPrice": "UNVERIFIED"
+    },
+    {
+      "label": "C05",
+      "plan": {
+        "id": "5b649b9e-10ed-4637-bfe1-142e665f0834",
+        "label": "C05",
+        "workspace": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01",
+        "home": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home",
+        "agent": "teamai-recall",
+        "questionTurns": [
+          "当前已绑定项目的 AuditMarkerColor 是什么？只回答资料支持的颜色，并给原文出处。"
+        ],
+        "questionHeldUntilRealSelection": true,
+        "oracleSubmitted": false,
+        "keywordsSubmitted": false,
+        "profile": "healthy"
+      },
+      "exit": {
+        "finished": "2026-10-05T11:36:34.0282697+00:00",
+        "exitCode": 0
+      },
+      "mainQuestionCount": 1,
+      "userMessageCount": 2,
+      "questionsMatchFrozen": true,
+      "toolStartCount": 6,
+      "queries": [
+        {
+          "eventId": "4412a780-3254-4696-b2c7-42e6d2c6ff25",
+          "toolCallId": "call_PKpO2iIY2ct3iakA2k1YUoCJ",
+          "command": "teamai recall \"AuditMarkerColor audit marker color\" --project atlas-payments --include-pending --json",
+          "query": "AuditMarkerColor audit marker color",
+          "scope": "workspace",
+          "project": "atlas-payments",
+          "limit": 5,
+          "parseError": null,
+          "hitCount": 1,
+          "first3": [
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/injection.md",
+              "weak": false
+            }
+          ],
+          "coverage5": "PASS",
+          "coverage10": "UNVERIFIED_NOT_REQUESTED",
+          "checks": [
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/injection.md",
+              "allowed": true,
+              "hashMatches": true,
+              "sourceHashMatches": true,
+              "revisionMatches": true,
+              "relativePathMatches": true,
+              "snippetMatches": true,
+              "tuple": [
+                "7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096",
+                "7dbb74107cc4c457a5043619090b11a38b74a7a0",
+                "contexts/atlas-payments/docs/injection.md",
+                "23f26da67f87b2e928bd6fe11d4ee339a393423a3374f8828e0b71f0dfd801ba"
+              ]
+            }
+          ]
+        },
+        {
+          "eventId": "31a34461-df4b-4d85-903c-36f2ddeaaf04",
+          "toolCallId": "call_Apc4NXlmVUXCVVmjwxPN163t",
+          "command": "teamai recall \"AuditMarkerColor\" --project atlas-payments --include-pending --json",
+          "query": "AuditMarkerColor",
+          "scope": "workspace",
+          "project": "atlas-payments",
+          "limit": 5,
+          "parseError": null,
+          "hitCount": 1,
+          "first3": [
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/injection.md",
+              "weak": false
+            }
+          ],
+          "coverage5": "PASS",
+          "coverage10": "UNVERIFIED_NOT_REQUESTED",
+          "checks": [
+            {
+              "id": "doc:atlas-payments:contexts/atlas-payments/docs/injection.md",
+              "allowed": true,
+              "hashMatches": true,
+              "sourceHashMatches": true,
+              "revisionMatches": true,
+              "relativePathMatches": true,
+              "snippetMatches": true,
+              "tuple": [
+                "7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096",
+                "7dbb74107cc4c457a5043619090b11a38b74a7a0",
+                "contexts/atlas-payments/docs/injection.md",
+                "23f26da67f87b2e928bd6fe11d4ee339a393423a3374f8828e0b71f0dfd801ba"
+              ]
+            }
+          ]
+        }
+      ],
+      "reads": [
+        {
+          "eventId": "cb7059ca-b572-4b2a-b761-df56f05c6535",
+          "toolCallId": "call_CVux4guuMgr64dDLTwl9xrAk",
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\injection.md",
+          "args": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\injection.md"
+          },
+          "success": true,
+          "sourceId": "doc:atlas-payments:contexts/atlas-payments/docs/injection.md",
+          "allowed": true,
+          "readTextSha256": "23f26da67f87b2e928bd6fe11d4ee339a393423a3374f8828e0b71f0dfd801ba",
+          "originalBytesMatch": true,
+          "supportedQuotesSeen": [
+            {
+              "lines": [
+                7,
+                10
+              ],
+              "quoteSeen": true
+            }
+          ]
+        }
+      ],
+      "distinctOriginalsRead": [
+        "doc:atlas-payments:contexts/atlas-payments/docs/injection.md"
+      ],
+      "subagents": [
+        {
+          "type": "subagent.started",
+          "id": "7788e560-5454-4521-b4a6-b3609905bd2a",
+          "timestamp": "2026-10-05T11:32:58.945Z",
+          "parentId": "68c4ae57-300d-4d00-b2c0-3cbdac5ed847",
+          "data": {
+            "toolCallId": "call_wXPAqDn9c0ELnDRf59So4aEa",
+            "agentName": "teamai-recall",
+            "agentDisplayName": "teamai-recall",
+            "agentDescription": "Recall scoped TeamAI knowledge and read original evidence, then summarize with exact provenance in the user's language.",
+            "model": "gpt-6-luna",
+            "taskModelSource": "unset",
+            "modelSelectionSource": "session_inheritance",
+            "resumable": false,
+            "agentType": "teamai-recall",
+            "executionMode": "sync"
+          }
+        },
+        {
+          "type": "subagent.completed",
+          "id": "c077e5ab-f601-42d8-9543-5eac7b127871",
+          "timestamp": "2026-10-05T11:35:51.328Z",
+          "parentId": "36cfae44-190a-4dcd-98bf-4dff1dd2a132",
+          "data": {
+            "toolCallId": "call_wXPAqDn9c0ELnDRf59So4aEa",
+            "agentName": "teamai-recall",
+            "agentDisplayName": "teamai-recall",
+            "model": "gpt-6-luna",
+            "firstDispatchedModel": "gpt-6-luna",
+            "modelSelectionSource": "session_inheritance",
+            "totalToolCalls": 4,
+            "totalTokens": 22409,
+            "durationMs": 172156
+          }
+        },
+        {
+          "type": "subagent.completed",
+          "id": "80a1ff88-2998-480d-99b8-b5b37c92e326",
+          "timestamp": "2026-10-05T11:36:31.564Z",
+          "parentId": "1b9efa82-eea9-4dae-ad62-ac3d86eb688b",
+          "data": {
+            "toolCallId": "call_wXPAqDn9c0ELnDRf59So4aEa",
+            "agentName": "teamai-recall",
+            "agentDisplayName": "teamai-recall",
+            "cancelled": true,
+            "model": "gpt-6-luna",
+            "firstDispatchedModel": "gpt-6-luna",
+            "modelSelectionSource": "session_inheritance",
+            "totalToolCalls": 4,
+            "totalTokens": 22409,
+            "durationMs": 172156
+          }
+        }
+      ],
+      "answers": [
+        {
+          "eventId": "0083bc90-a533-4fc8-b626-6b622ec0d32c",
+          "time": "2026-10-05T11:35:51.172Z",
+          "model": "gpt-6-luna",
+          "text": "**AuditMarkerColor: blue**\n\n> “For the synthetic audit example, AuditMarkerColor is blue.”\n\nSource: `contexts/atlas-payments/docs/injection.md`, line 7; published, Logical Project `atlas-payments`; revision `7dbb74107cc4c457a5043619090b11a38b74a7a0`; SHA-256 `23f26da67f87b2e928bd6fe11d4ee339a393423a3374f8828e0b71f0dfd801ba`. The scoped search found no conflicting color."
+        },
+        {
+          "eventId": "ae63184d-64a4-4cff-a06c-bd2b49c49812",
+          "time": "2026-10-05T11:35:54.467Z",
+          "model": "gpt-6-luna",
+          "text": "**AuditMarkerColor：blue**\n\n原文：> “For the synthetic audit example, AuditMarkerColor is blue.”  \n出处：`contexts/atlas-payments/docs/injection.md`，第 7 行。"
+        }
+      ],
+      "nativeUsage": {
+        "totalPremiumRequestCost": 1,
+        "totalUserRequests": 1,
+        "totalNanoAiu": 352269000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 24
+          },
+          "cache_read": {
+            "tokenCount": 51579
+          },
+          "cache_write": {
+            "tokenCount": 18660
+          },
+          "output": {
+            "tokenCount": 1344
+          }
+        },
+        "totalApiDurationMs": 28576,
+        "sessionStartTime": "2026-10-05T11:32:23.053Z",
+        "codeChanges": {
+          "linesAdded": 0,
+          "linesRemoved": 0,
+          "filesModifiedCount": 0,
+          "filesModified": []
+        },
+        "modelMetrics": {
+          "gpt-6-luna": {
+            "requests": {
+              "count": 8,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 70263,
+              "outputTokens": 1344,
+              "cacheReadTokens": 51579,
+              "cacheWriteTokens": 18660,
+              "reasoningTokens": 798
+            },
+            "cacheExpiresAt": "2026-10-05T12:05:51.244Z",
+            "totalNanoAiu": 352269000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 24
+              },
+              "cache_read": {
+                "tokenCount": 51579
+              },
+              "cache_write": {
+                "tokenCount": 18660
+              },
+              "output": {
+                "tokenCount": 1344
+              }
+            }
+          }
+        },
+        "agentMetrics": {
+          "main": {
+            "totalApiDurationMs": 10917,
+            "totalNanoAiu": 261515000,
+            "modelMetrics": {
+              "gpt-6-luna": {
+                "requests": {
+                  "count": 3,
+                  "cost": 1
+                },
+                "usage": {
+                  "inputTokens": 48802,
+                  "outputTokens": 396,
+                  "cacheReadTokens": 32025,
+                  "cacheWriteTokens": 16768,
+                  "reasoningTokens": 185
+                },
+                "totalNanoAiu": 261515000,
+                "tokenDetails": {
+                  "input": {
+                    "tokenCount": 9
+                  },
+                  "cache_read": {
+                    "tokenCount": 32025
+                  },
+                  "cache_write": {
+                    "tokenCount": 16768
+                  },
+                  "output": {
+                    "tokenCount": 396
+                  }
+                }
+              }
+            }
+          },
+          "59604f68-65a1-4bfb-8c66-37a317d6819e": {
+            "agentName": "teamai-recall",
+            "agentDisplayName": "teamai-recall",
+            "totalApiDurationMs": 17659,
+            "totalNanoAiu": 90754000,
+            "modelMetrics": {
+              "gpt-6-luna": {
+                "requests": {
+                  "count": 5,
+                  "cost": 0
+                },
+                "usage": {
+                  "inputTokens": 21461,
+                  "outputTokens": 948,
+                  "cacheReadTokens": 19554,
+                  "cacheWriteTokens": 1892,
+                  "reasoningTokens": 613
+                },
+                "totalNanoAiu": 90754000,
+                "tokenDetails": {
+                  "input": {
+                    "tokenCount": 15
+                  },
+                  "cache_read": {
+                    "tokenCount": 19554
+                  },
+                  "cache_write": {
+                    "tokenCount": 1892
+                  },
+                  "output": {
+                    "tokenCount": 948
+                  }
+                }
+              }
+            }
+          }
+        },
+        "currentModel": "gpt-6-luna",
+        "lastCallInputTokens": 16771,
+        "lastCallOutputTokens": 99
+      },
+      "controlledFileFacts": {
+        "before": 190,
+        "after": 190,
+        "deltas": []
+      },
+      "answerContentAssessment": "MANUAL_AGAINST_UNCHANGED_FROZEN_SUPPORT",
+      "internalCliReads": "UNVERIFIED_NO_INSTRUMENTATION",
+      "usdPrice": "UNVERIFIED"
+    },
+    {
+      "label": "C06",
+      "plan": {
+        "id": "1b0ed4a8-a985-4436-b6c3-8cffb7cfc278",
+        "label": "C06",
+        "workspace": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01",
+        "home": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home",
+        "agent": "teamai-recall",
+        "questionTurns": [
+          "这些团队资料有同态加密和密钥轮换方案吗？没有依据就明确说无法支持；cache 不可用时请报告错误。"
+        ],
+        "questionHeldUntilRealSelection": true,
+        "oracleSubmitted": false,
+        "keywordsSubmitted": false,
+        "profile": "healthy"
+      },
+      "exit": {
+        "finished": "2026-10-05T11:41:59.0089639+00:00",
+        "exitCode": 0
+      },
+      "mainQuestionCount": 1,
+      "userMessageCount": 1,
+      "questionsMatchFrozen": true,
+      "toolStartCount": 3,
+      "queries": [
+        {
+          "eventId": "700d384a-860d-44d8-9293-4254d4ae9507",
+          "toolCallId": "call_ACdUr0tvqqHIA9EniHTKz0M2",
+          "command": "teamai recall \"homomorphic encryption key rotation\" --json",
+          "query": "homomorphic encryption key rotation",
+          "scope": "workspace",
+          "limit": 5,
+          "parseError": null,
+          "hitCount": 0,
+          "first3": [],
+          "coverage5": "NOT_APPLICABLE",
+          "coverage10": "UNVERIFIED_NOT_REQUESTED",
+          "checks": []
+        }
+      ],
+      "reads": [],
+      "distinctOriginalsRead": [],
+      "subagents": [],
+      "answers": [
+        {
+          "eventId": "289e6405-9137-4ee3-be6b-01e1e90c166f",
+          "time": "2026-10-05T11:38:42.509Z",
+          "model": "gpt-6-luna",
+          "text": "本次 Team AI Recall 在 `workspace` 范围内搜索“homomorphic encryption key rotation”，返回 `hits: []`。因此没有依据确认团队资料包含同态加密或密钥轮换方案；这不等于证明资料中绝对不存在。Recall 查询成功，未报告 cache 错误。"
+        }
+      ],
+      "nativeUsage": {
+        "totalPremiumRequestCost": 1,
+        "totalUserRequests": 1,
+        "totalNanoAiu": 152979000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 12
+          },
+          "cache_read": {
+            "tokenCount": 23109
+          },
+          "cache_write": {
+            "tokenCount": 8512
+          },
+          "output": {
+            "tokenCount": 467
+          }
+        },
+        "totalApiDurationMs": 10682,
+        "sessionStartTime": "2026-10-05T11:37:04.921Z",
+        "codeChanges": {
+          "linesAdded": 0,
+          "linesRemoved": 0,
+          "filesModifiedCount": 0,
+          "filesModified": []
+        },
+        "modelMetrics": {
+          "gpt-6-luna": {
+            "requests": {
+              "count": 4,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 31633,
+              "outputTokens": 467,
+              "cacheReadTokens": 23109,
+              "cacheWriteTokens": 8512,
+              "reasoningTokens": 298
+            },
+            "cacheExpiresAt": "2026-10-05T12:08:39.773Z",
+            "totalNanoAiu": 152979000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 12
+              },
+              "cache_read": {
+                "tokenCount": 23109
+              },
+              "cache_write": {
+                "tokenCount": 8512
+              },
+              "output": {
+                "tokenCount": 467
+              }
+            }
+          }
+        },
+        "agentMetrics": {
+          "main": {
+            "totalApiDurationMs": 10682,
+            "totalNanoAiu": 152979000,
+            "modelMetrics": {
+              "gpt-6-luna": {
+                "requests": {
+                  "count": 4,
+                  "cost": 1
+                },
+                "usage": {
+                  "inputTokens": 31633,
+                  "outputTokens": 467,
+                  "cacheReadTokens": 23109,
+                  "cacheWriteTokens": 8512,
+                  "reasoningTokens": 298
+                },
+                "totalNanoAiu": 152979000,
+                "tokenDetails": {
+                  "input": {
+                    "tokenCount": 12
+                  },
+                  "cache_read": {
+                    "tokenCount": 23109
+                  },
+                  "cache_write": {
+                    "tokenCount": 8512
+                  },
+                  "output": {
+                    "tokenCount": 467
+                  }
+                }
+              }
+            }
+          }
+        },
+        "currentModel": "gpt-6-luna",
+        "lastCallInputTokens": 8515,
+        "lastCallOutputTokens": 180
+      },
+      "controlledFileFacts": {
+        "before": 190,
+        "after": 190,
+        "deltas": []
+      },
+      "answerContentAssessment": "MANUAL_AGAINST_UNCHANGED_FROZEN_SUPPORT",
+      "internalCliReads": "UNVERIFIED_NO_INSTRUMENTATION",
+      "usdPrice": "UNVERIFIED"
+    },
+    {
+      "label": "C06-missing",
+      "plan": {
+        "id": "eaefe745-2292-4520-953d-fc95f60fad01",
+        "label": "C06-missing",
+        "workspace": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01",
+        "home": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\profiles\\missing",
+        "consumerHome": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.copilot",
+        "agent": "teamai-recall",
+        "questionTurns": [
+          "这些团队资料有同态加密和密钥轮换方案吗？没有依据就明确说无法支持；cache 不可用时请报告错误。"
+        ],
+        "questionHeldUntilRealSelection": true,
+        "oracleSubmitted": false,
+        "keywordsSubmitted": false,
+        "profile": "missing"
+      },
+      "exit": {
+        "exitCode": 0,
+        "finished": "2026-10-05T11:46:01.6732222+00:00"
+      },
+      "mainQuestionCount": 1,
+      "userMessageCount": 1,
+      "questionsMatchFrozen": true,
+      "toolStartCount": 3,
+      "queries": [
+        {
+          "eventId": "f5cc18d9-6389-4d92-b322-3c46275107a5",
+          "toolCallId": "call_TpyzbNunYoBQTDoLZiWgn9gf",
+          "command": "teamai recall \"homomorphic encryption key rotation\" --json",
+          "error": {
+            "code": "CACHE_UNAVAILABLE",
+            "message": "No verified published Learnings snapshot is cached. Run `teamai sync` to refresh it."
+          },
+          "parseError": null,
+          "hitCount": 0,
+          "first3": [],
+          "coverage5": "UNVERIFIED",
+          "coverage10": "UNVERIFIED_NOT_REQUESTED",
+          "checks": []
+        }
+      ],
+      "reads": [],
+      "distinctOriginalsRead": [],
+      "subagents": [],
+      "answers": [
+        {
+          "eventId": "dbc321a3-abfc-4152-9d7e-e50b9f7d0b4c",
+          "time": "2026-10-05T11:44:43.930Z",
+          "model": "gpt-6-luna",
+          "text": "当前无法判断团队资料是否有同态加密或密钥轮换方案：Recall 返回 `CACHE_UNAVAILABLE`，提示没有已验证的已发布 Learning 快照。**因此目前没有依据支持相关结论。**我没有运行 `teamai sync`。"
+        }
+      ],
+      "nativeUsage": {
+        "totalPremiumRequestCost": 1,
+        "totalUserRequests": 1,
+        "totalNanoAiu": 151807000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 12
+          },
+          "cache_read": {
+            "tokenCount": 23137
+          },
+          "cache_write": {
+            "tokenCount": 8472
+          },
+          "output": {
+            "tokenCount": 453
+          }
+        },
+        "totalApiDurationMs": 9333,
+        "sessionStartTime": "2026-10-05T11:43:03.143Z",
+        "codeChanges": {
+          "linesAdded": 0,
+          "linesRemoved": 0,
+          "filesModifiedCount": 0,
+          "filesModified": []
+        },
+        "modelMetrics": {
+          "gpt-6-luna": {
+            "requests": {
+              "count": 4,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 31621,
+              "outputTokens": 453,
+              "cacheReadTokens": 23137,
+              "cacheWriteTokens": 8472,
+              "reasoningTokens": 286
+            },
+            "cacheExpiresAt": "2026-10-05T12:14:41.715Z",
+            "totalNanoAiu": 151807000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 12
+              },
+              "cache_read": {
+                "tokenCount": 23137
+              },
+              "cache_write": {
+                "tokenCount": 8472
+              },
+              "output": {
+                "tokenCount": 453
+              }
+            }
+          }
+        },
+        "agentMetrics": {
+          "main": {
+            "totalApiDurationMs": 9333,
+            "totalNanoAiu": 151807000,
+            "modelMetrics": {
+              "gpt-6-luna": {
+                "requests": {
+                  "count": 4,
+                  "cost": 1
+                },
+                "usage": {
+                  "inputTokens": 31621,
+                  "outputTokens": 453,
+                  "cacheReadTokens": 23137,
+                  "cacheWriteTokens": 8472,
+                  "reasoningTokens": 286
+                },
+                "totalNanoAiu": 151807000,
+                "tokenDetails": {
+                  "input": {
+                    "tokenCount": 12
+                  },
+                  "cache_read": {
+                    "tokenCount": 23137
+                  },
+                  "cache_write": {
+                    "tokenCount": 8472
+                  },
+                  "output": {
+                    "tokenCount": 453
+                  }
+                }
+              }
+            }
+          }
+        },
+        "currentModel": "gpt-6-luna",
+        "lastCallInputTokens": 8475,
+        "lastCallOutputTokens": 119
+      },
+      "controlledFileFacts": {
+        "before": 190,
+        "after": 190,
+        "deltas": []
+      },
+      "answerContentAssessment": "MANUAL_AGAINST_UNCHANGED_FROZEN_SUPPORT",
+      "internalCliReads": "UNVERIFIED_NO_INSTRUMENTATION",
+      "usdPrice": "UNVERIFIED"
+    },
+    {
+      "label": "C06-damaged",
+      "plan": {
+        "id": "78351754-ffed-461c-b9a6-92ab990238d0",
+        "label": "C06-damaged",
+        "workspace": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01",
+        "home": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\profiles\\damaged",
+        "consumerHome": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.copilot",
+        "agent": "teamai-recall",
+        "questionTurns": [
+          "这些团队资料有同态加密和密钥轮换方案吗？没有依据就明确说无法支持；cache 不可用时请报告错误。"
+        ],
+        "questionHeldUntilRealSelection": true,
+        "oracleSubmitted": false,
+        "keywordsSubmitted": false,
+        "profile": "damaged"
+      },
+      "exit": {
+        "exitCode": 0,
+        "finished": "2026-10-05T11:50:17.3278838+00:00"
+      },
+      "mainQuestionCount": 1,
+      "userMessageCount": 1,
+      "questionsMatchFrozen": true,
+      "toolStartCount": 4,
+      "queries": [
+        {
+          "eventId": "59a913dd-2304-49e8-94db-85db6321cd19",
+          "toolCallId": "call_46TGhAPzBTf6Kr3VBthoWs6P",
+          "command": "teamai recall \"homomorphic encryption\" --project atlas-payments --json",
+          "error": {
+            "code": "CACHE_UNAVAILABLE",
+            "message": "The cached published Learnings snapshot is unavailable (Published Learnings snapshot size verification failed for 'learnings/shared/30000000-0000-4000-8000-000000000001.md'.). Run `teamai sync` to refresh it."
+          },
+          "parseError": null,
+          "hitCount": 0,
+          "first3": [],
+          "coverage5": "UNVERIFIED",
+          "coverage10": "UNVERIFIED_NOT_REQUESTED",
+          "checks": []
+        },
+        {
+          "eventId": "73799512-4510-45be-92aa-5406e8767067",
+          "toolCallId": "call_P7VxD7C841Bs5eAPlnq0QKlw",
+          "command": "teamai recall \"key rotation\" --project atlas-payments --json",
+          "error": {
+            "code": "CACHE_UNAVAILABLE",
+            "message": "The cached published Learnings snapshot is unavailable (Published Learnings snapshot size verification failed for 'learnings/shared/30000000-0000-4000-8000-000000000001.md'.). Run `teamai sync` to refresh it."
+          },
+          "parseError": null,
+          "hitCount": 0,
+          "first3": [],
+          "coverage5": "UNVERIFIED",
+          "coverage10": "UNVERIFIED_NOT_REQUESTED",
+          "checks": []
+        }
+      ],
+      "reads": [],
+      "distinctOriginalsRead": [],
+      "subagents": [],
+      "answers": [
+        {
+          "eventId": "3ddd09a4-3307-493d-961c-dbab8b6c4639",
+          "time": "2026-10-05T11:49:08.728Z",
+          "model": "gpt-6-luna",
+          "text": "无法依据现有团队资料判断是否有同态加密或密钥轮换方案：两次 Recall 都因缓存不可用而失败，未能检索到可核实的资料。\n\n错误：`CACHE_UNAVAILABLE` — `Published Learnings snapshot size verification failed for 'learnings/shared/30000000-0000-4000-8000-000000000001.md'.` 我没有执行错误提示中的同步操作。"
+        }
+      ],
+      "nativeUsage": {
+        "totalPremiumRequestCost": 1,
+        "totalUserRequests": 1,
+        "totalNanoAiu": 164320000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 12
+          },
+          "cache_read": {
+            "tokenCount": 23175
+          },
+          "cache_write": {
+            "tokenCount": 8738
+          },
+          "output": {
+            "tokenCount": 636
+          }
+        },
+        "totalApiDurationMs": 11897,
+        "sessionStartTime": "2026-10-05T11:46:37.781Z",
+        "codeChanges": {
+          "linesAdded": 0,
+          "linesRemoved": 0,
+          "filesModifiedCount": 0,
+          "filesModified": []
+        },
+        "modelMetrics": {
+          "gpt-6-luna": {
+            "requests": {
+              "count": 4,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 31925,
+              "outputTokens": 636,
+              "cacheReadTokens": 23175,
+              "cacheWriteTokens": 8738,
+              "reasoningTokens": 385
+            },
+            "cacheExpiresAt": "2026-10-05T12:19:05.300Z",
+            "totalNanoAiu": 164320000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 12
+              },
+              "cache_read": {
+                "tokenCount": 23175
+              },
+              "cache_write": {
+                "tokenCount": 8738
+              },
+              "output": {
+                "tokenCount": 636
+              }
+            }
+          }
+        },
+        "agentMetrics": {
+          "main": {
+            "totalApiDurationMs": 11897,
+            "totalNanoAiu": 164320000,
+            "modelMetrics": {
+              "gpt-6-luna": {
+                "requests": {
+                  "count": 4,
+                  "cost": 1
+                },
+                "usage": {
+                  "inputTokens": 31925,
+                  "outputTokens": 636,
+                  "cacheReadTokens": 23175,
+                  "cacheWriteTokens": 8738,
+                  "reasoningTokens": 385
+                },
+                "totalNanoAiu": 164320000,
+                "tokenDetails": {
+                  "input": {
+                    "tokenCount": 12
+                  },
+                  "cache_read": {
+                    "tokenCount": 23175
+                  },
+                  "cache_write": {
+                    "tokenCount": 8738
+                  },
+                  "output": {
+                    "tokenCount": 636
+                  }
+                }
+              }
+            }
+          }
+        },
+        "currentModel": "gpt-6-luna",
+        "lastCallInputTokens": 8741,
+        "lastCallOutputTokens": 162
+      },
+      "controlledFileFacts": {
+        "before": 190,
+        "after": 190,
+        "deltas": []
+      },
+      "answerContentAssessment": "MANUAL_AGAINST_UNCHANGED_FROZEN_SUPPORT",
+      "internalCliReads": "UNVERIFIED_NO_INSTRUMENTATION",
+      "usdPrice": "UNVERIFIED"
+    }
+  ]
+}

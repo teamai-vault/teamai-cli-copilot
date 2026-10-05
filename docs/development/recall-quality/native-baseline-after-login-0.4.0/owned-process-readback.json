@@ -1,0 +1,6 @@
+{
+  "checked": "2026-10-05T11:51:42.7107243+00:00",
+  "method": "Match only the eight task-owned session ids; do not print command lines or touch other processes",
+  "matchingLiveProcesses": [],
+  "allEightLaunchersExit0": true
+}

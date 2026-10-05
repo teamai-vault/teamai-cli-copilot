@@ -1,0 +1,18 @@
+{
+  "workspace": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01",
+  "executable": "D:/soft/nodejs/node_global/copilot.ps1",
+  "authFilesReadOrCopied": false,
+  "arguments": [
+    "--agent",
+    "teamai-recall",
+    "--session-id",
+    "0d93a67e-961a-4d7e-bbbf-f09d3ffbb8db",
+    "--log-dir",
+    "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/c-quality/baseline-native-after-login-v1/C01-native-logs",
+    "--usage-output-file",
+    "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/c-quality/baseline-native-after-login-v1/C01-usage.json"
+  ],
+  "started": "2026-10-05T11:02:49.0021537+00:00",
+  "firstQuestionHeldForSelection": true,
+  "permissionFlags": "DEFAULT"
+}
