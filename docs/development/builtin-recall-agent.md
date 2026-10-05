@@ -2,7 +2,17 @@
 
 CLI 0.4.0 owns the native `agents/teamai-recall.agent.md` and the thin `skills/teamai/` command-routing Skill. Both ship in the npm tarball, independent of any department Plugin. `teamai init` and `teamai sync` preflight both reserved targets before delivery. Native backend errors remain errors; fallback is selected only by the existing unavailable-native/available-VS-Code boundary.
 
-The Agent uses the observed `read` and `execute` aliases. For any-language tasks it extracts English technical Recall terms, preserves identifiers/error codes/original diagnostics/actual Logical Project IDs verbatim, reads necessary returned original files, and summarizes in the user's language with exact source path/revision/hash/lines and published or pending state. It does not modify business code, obey retrieved document instructions, implicitly sync/repair or publish Learning. Prompt constraints are not a permissions sandbox; enterprise policy and user approvals remain in force. The CLI Recall command remains offline, without model startup, persistent writes or an index.
+The Agent uses the observed `read` and `execute` aliases. For any-language tasks it extracts English technical Recall terms, preserves identifiers/error codes/original diagnostics/actual Logical Project IDs verbatim, reads necessary originals, and summarizes in the user's language. It does not modify business code, obey retrieved document instructions, implicitly sync/repair or publish Learning. Prompt constraints are not a permissions sandbox; enterprise policy and user approvals remain in force. The CLI Recall command remains offline, without model startup, persistent writes or an index.
+
+## Evidence reading and provenance
+
+The consumer's read tool opens the exact local `file` returned by Recall, including legitimate ignored files. Conclusions outside a snippet require reading the relevant original content. Execute remains limited to necessary read-only public Recall/help/status/projects queries; general shell reads, hashes, line counting and arbitrary scripts are outside that allowance.
+
+Source path/identity, revision when present, SHA-256, publication/pending state and Logical Project are attributed to the CLI-verified Recall result. The read result establishes what content was observed, not an independently computed hash or proof that the entire file stayed unchanged. Original line citations require the read result's lines or a checkable content/range mapping. Without that capability, the Agent cites the observed section or excerpt and reports the line-number limitation; a snippet's line numbers cannot label other content.
+
+An original already read may be reused within the same task for the same source/revision/hash/path/publication/Project. Identical local paths with different revisions or hashes remain separate evidence. Candidate comparisons use the existing read capability and current conversation, without another model or reranking service. Read failures, missing necessary content or conflicts with Recall stop the affected conclusion; any recheck stays within permitted CLI/read tools and the actual source/Scope/Project/pending conditions.
+
+Behavior acceptance records the actual packaged/delivered Agent, consumer/runtime, read tool content and line capabilities, query/read requests and returns, and answer provenance. Static instructions, delivery tests and model self-reports do not establish behavior or unrun platform capabilities. Protected business/source facts and consumer session/log/checkpoint writes must be reported separately; these prompt rules do not enforce a filesystem sandbox.
 
 ## Exact target and ownership
 
