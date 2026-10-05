@@ -1,0 +1,10 @@
+{
+  "name": "quality",
+  "version": "0.0.0",
+  "description": "Fixture-only quality role",
+  "extensions": {
+    "com.company.teamai": {
+      "kind": "role"
+    }
+  }
+}

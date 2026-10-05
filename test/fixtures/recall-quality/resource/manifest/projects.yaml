@@ -1,0 +1,10 @@
+version: 1
+projects:
+  - id: atlas-payments
+    name: Atlas Payments
+    description: Synthetic queue service
+    owners: [quality]
+  - id: atlas-other
+    name: Atlas Other
+    description: Inactive synthetic context
+    owners: [quality]
