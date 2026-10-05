@@ -1,5 +1,7 @@
 # Original 0.4.0 native baseline: setup recorded, discovery/auth blocked
 
+This is the preserved historical pre-login stage. The [later actual consumer baseline](native-baseline-after-login-0.4.0.md) records successful selection and eight sessions/ten frozen turns after normal human sign-in, with mixed quality PASS/FAIL. Its later observations do not change the failures or zero counters below.
+
 The actual public setup and original Agent delivery passed in the new native v2 profile. The normal Copilot 1.0.91 client could not select `teamai-recall` and required human sign-in. One C01 session was attempted; **zero model queries, native original reads or answers ran**. The remaining seven sessions/nine question turns were not attempted. All ten intended model turns remain unverified. Exit 0 records normal `/exit`, and does not make discovery, answer quality or #30 pass.
 
 The [public CLI baseline](baseline-0.4.0.md) retains both its v1 setup failure and v2 source-coverage results. This native stage adds actual setup/discovery/auth evidence. No native quality, multi-query, Agent ordering, BM25, snippet improvement or final-candidate comparison is claimed.

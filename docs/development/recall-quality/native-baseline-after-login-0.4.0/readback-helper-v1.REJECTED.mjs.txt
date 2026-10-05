@@ -1,0 +1,55 @@
+// Finite C-only readback of already captured native evidence; no model or product execution.
+import fs from 'node:fs';
+import path from 'node:path';
+import {createHash} from 'node:crypto';
+const batch='F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35';
+const out=path.join(batch,'handoffs/c-quality/baseline-native-after-login-v1');
+const wt=path.join(batch,'worktrees/c-quality-30');
+const fixture=path.join(wt,'test/fixtures/recall-quality');
+const cases=JSON.parse(fs.readFileSync(path.join(fixture,'cases.json'),'utf8')).cases;
+const sources=JSON.parse(fs.readFileSync(path.join(fixture,'sources.json'),'utf8'));
+const native=JSON.parse(fs.readFileSync(path.join(batch,'handoffs/c-quality/baseline-native-v2/native-source-before-consumption.json'),'utf8'));
+const sha=b=>createHash('sha256').update(b).digest('hex');
+const read=p=>JSON.parse(fs.readFileSync(path.join(out,p),'utf8'));
+const expected=new Map(sources.map(s=>[s.id,{...s,sha256:sha(fs.readFileSync(path.join(fixture,s.fixturePath)))}]));
+const labels=['C01','C02','C03','C04','C05','C06','C06-missing','C06-damaged'];
+const stats=[];
+for(const label of labels){
+ if(!fs.existsSync(path.join(out,label+'-task-events.json')) || !fs.existsSync(path.join(out,label+'-exit.json')))continue;
+ const e=read(label+'-task-events.json').events;
+ const plan=read(label+'-session-plan.json'), use=read(label+'-usage.json');
+ const c=cases.find(c=>c.id===label.slice(0,3));
+ const starts=e.filter(e=>e.type==='tool.execution_start'), complete=new Map(e.filter(e=>e.type==='tool.execution_complete').map(e=>[e.data.toolCallId,e]));
+ const calls=starts.map(s=>({id:s.id,time:s.timestamp,model:s.data.model,call:s.data.toolCallId,tool:s.data.toolName,args:s.data.arguments,completion:complete.get(s.data.toolCallId)}));
+ const queries=[];
+ for(const call of calls.filter(x=>x.tool==='powershell' && /teamai\\s+recall\\b/.test(x.args.command || '') && !/recall\\s+--help/.test(x.args.command))){
+  const text=call.completion?.data.result?.content ?? '';
+  let response=null,parseError=null;try{response=JSON.parse(text.split(/\\r?\\n<shellId:/)[0]);}catch(err){parseError=err.message;}
+  const hits=response?.hits || [];
+  const checks=hits.map(h=>{
+   const s=expected.get(h.id);
+   const raw=s?fs.readFileSync(path.join(fixture,s.fixturePath)).toString('utf8').split(/\\r?\\n/):[];
+   if(raw.at(-1)==='')raw.pop();
+   return {id:h.id,allowed:s?.allowed===true,hashMatches:s?.sha256===h.source?.contentHash,sourceHashMatches:h.source?.sourceHash===native.sourceHash,revisionMatches:h.source?.revision===(h.type==='doc'?native.sourceRevision:native.learningRevision),relativePathMatches:h.source?.relativePath===s?.relativePath,snippetMatches:raw.slice(h.lineStart-1,h.lineEnd).join('\\n')===h.snippet,tuple:[h.source?.sourceHash,h.source?.revision,h.source?.relativePath,h.source?.contentHash]};
+  });
+  const first3=hits.slice(0,3).map(h=>({id:h.id,weak:c.weakSources.includes(h.id)}));
+  const coverage=limit=>c.requiredEvidenceGroups.length===0?'NOT_APPLICABLE':c.requiredEvidenceGroups.every(group=>group.some(id=>hits.slice(0,limit).some(h=>h.id===id)))?'PASS':'FAIL';
+  queries.push({eventId:call.id,toolCallId:call.call,command:call.args.command,query:response?.query,scope:response?.scope,project:response?.project,limit:response?.limit,error:response?.error,parseError,hitCount:hits.length,first3,coverage5:response?.limit>=5?coverage(5):'UNVERIFIED',coverage10:response?.limit>=10?coverage(10):'UNVERIFIED_NOT_REQUESTED',checks});
+ }
+ const reads=calls.filter(x=>x.tool==='view').map(call=>{
+  const p=(call.args.path||'').replace(/^\\\\\\\\\\?\\\\/,'').replaceAll('\\\\','/');
+  const s=sources.find(s=>p.toLowerCase().endsWith('/'+s.relativePath.toLowerCase()));
+  const text=call.completion?.data.result?.content;
+  return {eventId:call.id,toolCallId:call.call,path:call.args.path,args:call.args,success:call.completion?.data.success,sourceId:s?.id || 'NON_EVIDENCE_REFERENCE',allowed:s?.allowed,readTextSha256:typeof text==='string'?sha(Buffer.from(text)):null,originalBytesMatch:s && typeof text==='string'?sha(Buffer.from(text))===expected.get(s.id).sha256:'NOT_APPLICABLE',supportedQuotesSeen:c.evidence.filter(x=>x.source===s?.id).map(x=>({lines:x.lines,quoteSeen:typeof text==='string' && text.includes(x.quote)}))};
+ });
+ const mainQuestions=e.filter(x=>x.type==='user.message'&&!x.data.parentAgentTaskId);
+ const answers=e.filter(x=>x.type==='assistant.message'&&x.data.content).map(x=>({eventId:x.id,time:x.timestamp,model:x.data.model,text:x.data.content}));
+ const before=read('native-protected-before-'+label+'.json'), after=read('native-protected-after-'+label+'.json');
+ const deltas=[...new Set([...Object.keys(before),...Object.keys(after)])].filter(k=>before[k]!==after[k]).map(k=>({path:k,before:before[k]??'ABSENT',after:after[k]??'ABSENT'}));
+ stats.push({label,plan,exit:read(label+'-exit.json'),mainQuestionCount:mainQuestions.length,userMessageCount:e.filter(x=>x.type==='user.message').length,questionsMatchFrozen:JSON.stringify(mainQuestions.map(x=>x.data.content))===JSON.stringify(plan.questionTurns),toolStartCount:calls.length,queries,reads,distinctOriginalsRead:[...new Set(reads.filter(x=>x.sourceId!=='NON_EVIDENCE_REFERENCE').map(x=>x.sourceId))],subagents:e.filter(x=>x.type==='subagent.started'||x.type==='subagent.completed'),answers,nativeUsage:use,controlledFileFacts:{before:Object.keys(before).length,after:Object.keys(after).length,deltas},answerContentAssessment:'MANUAL_AGAINST_UNCHANGED_FROZEN_SUPPORT',internalCliReads:'UNVERIFIED_NO_INSTRUMENTATION',usdPrice:'UNVERIFIED'});
+}
+const allHits=stats.flatMap(s=>s.queries.flatMap(q=>q.checks));
+const data={schemaVersion:1,method:'Fixed-case independent raw provenance/snippet/read/question/protection readback; actual answers judged separately against the pre-run oracle, no rank or answer used to construct expectations.',sourceRevision:'0fb99a7b065de71eb683d774231b518971b57e8c',nativeSource:native.source,nativeSourceHash:native.sourceHash,nativeResourceRevision:native.sourceRevision,learningRevision:native.learningRevision,sessionsRecorded:stats.length,frozenMainTurns:stats.reduce((n,s)=>n+s.mainQuestionCount,0),recallCalls:stats.reduce((n,s)=>n+s.queries.length,0),nativeViewCalls:stats.reduce((n,s)=>n+s.reads.length,0),sourceOriginalReadCalls:stats.reduce((n,s)=>n+s.reads.filter(r=>r.sourceId!=='NON_EVIDENCE_REFERENCE').length,0),emittedHitChecks:allHits.length,failedHitChecks:allHits.filter(h=>!h.allowed||!h.hashMatches||!h.sourceHashMatches||!h.revisionMatches||!h.relativePathMatches||!h.snippetMatches),sessions:stats};
+fs.writeFileSync(path.join(out,'native-observed-readback.json'),JSON.stringify(data,null,2)+'\\n');
+console.log(JSON.stringify({sessions:data.sessionsRecorded,mainTurns:data.frozenMainTurns,recallCalls:data.recallCalls,viewCalls:data.nativeViewCalls,originalReadCalls:data.sourceOriginalReadCalls,hitChecks:data.emittedHitChecks,failedHitChecks:data.failedHitChecks.length}));
+

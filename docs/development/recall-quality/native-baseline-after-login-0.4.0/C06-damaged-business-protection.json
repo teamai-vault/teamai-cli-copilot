@@ -1,0 +1,7 @@
+{
+  "root": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\profiles\\damaged\\.teamai",
+  "beforeFacts": 10,
+  "afterFacts": 10,
+  "deltas": [],
+  "scope": "Controlled fictional .teamai business files only; no native/account/session/credential files"
+}

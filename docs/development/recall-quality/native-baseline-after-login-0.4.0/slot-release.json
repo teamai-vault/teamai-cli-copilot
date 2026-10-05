@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "slot": "E1-NATIVE-RETRY",
+  "owner": "C",
+  "state": "RELEASED_RUNTIME_ONLY",
+  "candidateRevision": "0fb99a7b065de71eb683d774231b518971b57e8c",
+  "version": "0.4.0",
+  "sessionsCompleted": 8,
+  "frozenQuestionTurnsCompleted": 10,
+  "completions": [
+    {
+      "case": "C01",
+      "sessionId": "0d93a67e-961a-4d7e-bbbf-f09d3ffbb8db",
+      "frozenTurns": 3,
+      "exitCode": 0,
+      "finished": "2026-10-05T19:17:26.3571095+08:00",
+      "eventEvidence": "C01-task-events.json",
+      "usageEvidence": "C01-usage.json"
+    },
+    {
+      "case": "C02",
+      "sessionId": "22e2bf7b-408b-41c5-bd7b-163440914561",
+      "frozenTurns": 1,
+      "exitCode": 0,
+      "finished": "2026-10-05T19:22:44.0529095+08:00",
+      "eventEvidence": "C02-task-events.json",
+      "usageEvidence": "C02-usage.json"
+    },
+    {
+      "case": "C03",
+      "sessionId": "928b4a86-2a9d-4218-bf77-d82bd95f8a47",
+      "frozenTurns": 1,
+      "exitCode": 0,
+      "finished": "2026-10-05T19:27:19.585099+08:00",
+      "eventEvidence": "C03-task-events.json",
+      "usageEvidence": "C03-usage.json"
+    },
+    {
+      "case": "C04",
+      "sessionId": "75fc9cc3-ff24-4229-8e65-2e7ea3b6eee8",
+      "frozenTurns": 1,
+      "exitCode": 0,
+      "finished": "2026-10-05T19:31:53.6710842+08:00",
+      "eventEvidence": "C04-task-events.json",
+      "usageEvidence": "C04-usage.json"
+    },
+    {
+      "case": "C05",
+      "sessionId": "5b649b9e-10ed-4637-bfe1-142e665f0834",
+      "frozenTurns": 1,
+      "exitCode": 0,
+      "finished": "2026-10-05T19:36:34.0282697+08:00",
+      "eventEvidence": "C05-task-events.json",
+      "usageEvidence": "C05-usage.json"
+    },
+    {
+      "case": "C06",
+      "sessionId": "1b0ed4a8-a985-4436-b6c3-8cffb7cfc278",
+      "frozenTurns": 1,
+      "exitCode": 0,
+      "finished": "2026-10-05T19:41:59.0089639+08:00",
+      "eventEvidence": "C06-task-events.json",
+      "usageEvidence": "C06-usage.json"
+    },
+    {
+      "case": "C06-missing",
+      "sessionId": "eaefe745-2292-4520-953d-fc95f60fad01",
+      "frozenTurns": 1,
+      "exitCode": 0,
+      "finished": "2026-10-05T19:46:01.6732222+08:00",
+      "eventEvidence": "C06-missing-task-events.json",
+      "usageEvidence": "C06-missing-usage.json"
+    },
+    {
+      "case": "C06-damaged",
+      "sessionId": "78351754-ffed-461c-b9a6-92ab990238d0",
+      "frozenTurns": 1,
+      "exitCode": 0,
+      "finished": "2026-10-05T19:50:17.3278838+08:00",
+      "eventEvidence": "C06-damaged-task-events.json",
+      "usageEvidence": "C06-damaged-usage.json"
+    }
+  ],
+  "lastNativeExit": "2026-10-05T19:50:17.3278838+08:00",
+  "allLaunchersExited0": true,
+  "ownedProcessReadback": {
+    "checked": "2026-10-05T19:51:42.7107243+08:00",
+    "method": "Match only the eight task-owned session ids; do not print command lines or touch other processes",
+    "matchingLiveProcesses": [],
+    "allEightLaunchersExit0": true
+  },
+  "rawOutput": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/c-quality/baseline-native-after-login-v1",
+  "observedReadback": "native-observed-readback.json",
+  "reportAndScopedCommit": "OFFLINE_WRITING_IN_PROGRESS",
+  "acceptance": "NOT_ASSERTED; C01 anchor/content/citation FAIL and other per-case gaps retained",
+  "furtherConsumerRuns": "UNALLOCATED; awaiting explicit final candidate comparison notice",
+  "expensiveSlotOwnerUpdate": "SUPERVISOR_ONLY"
+}

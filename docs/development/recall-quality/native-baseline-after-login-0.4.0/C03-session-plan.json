@@ -1,0 +1,14 @@
+{
+  "id": "928b4a86-2a9d-4218-bf77-d82bd95f8a47",
+  "label": "C03",
+  "workspace": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01",
+  "home": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home",
+  "agent": "teamai-recall",
+  "questionTurns": [
+    "NimbusQueue 2.1 standard mode 在 2026-09-20 的 DrainBudgetMs 应是多少？什么观测才算 drain 完成？如果资料冲突，明确指出。"
+  ],
+  "questionHeldUntilRealSelection": true,
+  "oracleSubmitted": false,
+  "keywordsSubmitted": false,
+  "profile": "healthy"
+}
