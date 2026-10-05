@@ -146,6 +146,8 @@ async function prepare(packageRoot, root) {
   for (const [kind, branch] of [["resource", "main"], ["published", "teamai-learnings"]]) {
     const target = path.join(root, kind);
     await cp(path.join(fixture, kind), target, { recursive: true, force: false, errorOnExist: true });
+    // Required non-evidence catalog metadata; the frozen originals/queries remain byte-identical.
+    if (kind === "resource") await writeFile(path.join(target, "skills.yaml"), "version: 1\nskills: {}\n", { flag: "wx" });
     mustRun("git", ["init", "-b", branch], target, gitEnv);
     mustRun("git", ["add", "."], target, gitEnv);
     mustRun("git", ["-c", "commit.gpgsign=false", "commit", "-m", "Frozen Recall quality " + kind + " v1"], target, gitEnv);
@@ -170,6 +172,9 @@ async function prepare(packageRoot, root) {
   const { detectProjectIdentity } = await imported("project/anchors.js");
   const { writeProjectState } = await imported("project/state.js");
   const { projectionKey } = await imported("project/context.js");
+  const { loadMarketplaceCatalog } = await imported("copilot/catalog.js");
+  const catalog = await loadMarketplaceCatalog(resource, workspace, { refresh: false, homeDir: path.join(root, "home") });
+  await catalog.dispose();
   const resourceRevision = mustRun("git", ["rev-parse", "HEAD"], resource, gitEnv);
   const learningRevision = mustRun("git", ["rev-parse", "HEAD"], published, gitEnv);
   const identity = await detectProjectIdentity(workspace);
