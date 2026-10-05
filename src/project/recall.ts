@@ -237,30 +237,35 @@ function normalizeSearchText(value: string): string {
 
 function evidenceFor(rawContent: string, matchedTerms: RecallTerm[]): { lineStart: number; lineEnd: number; snippet: string } {
   const lines = rawContent.split(/\r\n|\n|\r/);
-  const matchingLine = lines.findIndex((line) => {
-    const normalized = normalizeSearchText(line);
-    return matchedTerms.some((term) => normalized.includes(term.normalized));
-  });
-  const focus = matchingLine >= 0 ? matchingLine : 0;
-  let first = Math.max(0, focus - 1);
-  let last = Math.min(lines.length - 1, focus + 1);
-  let snippet = lines.slice(first, last + 1).join("\n");
-  while ([...snippet].length > 1200 && (first < focus || last > focus)) {
-    if (last > focus) last -= 1;
-    else first += 1;
-    snippet = lines.slice(first, last + 1).join("\n");
+  const normalizedLines = lines.map(normalizeSearchText);
+  let first = 0;
+  let bestCoverage = 0;
+  for (let start = 0; start <= Math.max(0, lines.length - 3); start += 1) {
+    const window = normalizedLines.slice(start, start + 3).join("\n");
+    const coverage = matchedTerms.filter((term) => window.includes(term.normalized)).length;
+    if (coverage > bestCoverage) {
+      bestCoverage = coverage;
+      first = start;
+    }
   }
-  if ([...snippet].length > 1200) {
-    const line = lines[focus] ?? "";
-    const codepoints = [...line];
-    const normalized = normalizeSearchText(line);
-    const term = matchedTerms.find((candidate) => normalized.includes(candidate.normalized));
-    const matchStart = term ? normalized.indexOf(term.normalized) : 0;
-    const termPosition = rawCodePointOffset(line, normalized, matchStart);
+  // Equal coverage keeps the earliest full window; a derived-title-only hit keeps the opening.
+  let last = Math.min(lines.length - 1, first + 2);
+  let snippet = lines.slice(first, last + 1).join("\n");
+  const codepoints = [...snippet];
+  if (codepoints.length > 1200) {
+    let termPosition = 0;
+    if (bestCoverage > 0) {
+      const focus = normalizedLines.findIndex((line, index) => index >= first && index <= last
+        && matchedTerms.some((term) => line.includes(term.normalized)));
+      const normalized = normalizedLines[focus]!;
+      const matchStart = Math.min(...matchedTerms.map((term) => normalized.indexOf(term.normalized)).filter((offset) => offset >= 0));
+      termPosition = [...lines.slice(first, focus).join("\n")].length + (focus > first ? 1 : 0)
+        + rawCodePointOffset(lines[focus]!, normalized, matchStart);
+    }
     const start = Math.max(0, Math.min(codepoints.length - 1200, termPosition - 600));
     snippet = codepoints.slice(start, start + 1200).join("");
-    first = focus;
-    last = focus;
+    first += codepoints.slice(0, start).filter((point) => point === "\n").length;
+    last = first + [...snippet].filter((point) => point === "\n").length;
   }
   return { lineStart: first + 1, lineEnd: last + 1, snippet };
 }
@@ -272,8 +277,35 @@ function rawCodePointOffset(rawLine: string, normalizedLine: string, normalizedU
   let normalizedOffset = 0;
   const segmenter = new Intl.Segmenter(undefined, { granularity: "grapheme" });
   for (const segment of segmenter.segment(rawLine)) {
-    const segmentLength = [...normalizeSearchText(segment.segment)].length;
-    if (normalizedOffset + segmentLength > normalizedCodePointOffset) return rawOffset;
+    const normalizedSegment = normalizeSearchText(segment.segment);
+    const segmentLength = [...normalizedSegment].length;
+    if (normalizedOffset + segmentLength > normalizedCodePointOffset) {
+      if (normalizedOffset === normalizedCodePointOffset) return rawOffset;
+      // Decomposed scalar origins also locate matches inside a grapheme after canonical reordering.
+      const origins = new Map<string, { offsets: number[]; next: number }>();
+      let rawPosition = 0;
+      for (const point of segment.segment) {
+        for (const part of normalizeSearchText(point).normalize("NFD")) {
+          let entry = origins.get(part);
+          if (!entry) {
+            entry = { offsets: [], next: 0 };
+            origins.set(part, entry);
+          }
+          entry.offsets.push(rawPosition);
+        }
+        rawPosition += 1;
+      }
+      let position = normalizedOffset;
+      for (const point of normalizedSegment) {
+        let origin = Infinity;
+        for (const part of point.normalize("NFD")) {
+          const entry = origins.get(part);
+          if (entry && entry.next < entry.offsets.length) origin = Math.min(origin, entry.offsets[entry.next++]!);
+        }
+        if (position === normalizedCodePointOffset) return rawOffset + (Number.isFinite(origin) ? origin : 0);
+        position += 1;
+      }
+    }
     normalizedOffset += segmentLength;
     rawOffset += [...segment.segment].length;
   }
