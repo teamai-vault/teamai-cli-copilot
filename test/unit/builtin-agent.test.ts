@@ -30,7 +30,7 @@ describe("bundled Recall Agent delivery", () => {
     const bytes = await readFile(target);
     expect(bytes).toEqual(await readFile(builtInRecallAgentSource()));
     expect(JSON.parse(await readFile(builtInRecallAgentOwnershipPath(root), "utf8"))).toMatchObject({
-      schemaVersion: 1, managedBy: "teamai-cli", agent: "teamai-recall", version: "0.4.0",
+      schemaVersion: 1, managedBy: "teamai-cli", agent: "teamai-recall", version: "0.5.0",
       target, copilotRoot: custom, contentHash: createHash("sha256").update(bytes).digest("hex"),
     });
     expect(await readFile(personal, "utf8")).toBe("personal\n");

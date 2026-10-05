@@ -123,6 +123,6 @@ describe("Recall Agent partial delivery recovery", () => {
     receipt.personalExtension = { keep: true };
     await writeFile(file, JSON.stringify(receipt));
     await convergeBuiltInRecallAgent(root);
-    expect(JSON.parse(await readFile(file, "utf8"))).toMatchObject({ version: "0.4.0", personalExtension: { keep: true } });
+    expect(JSON.parse(await readFile(file, "utf8"))).toMatchObject({ version: "0.5.0", personalExtension: { keep: true } });
   });
 });

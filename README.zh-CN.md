@@ -193,6 +193,8 @@ teamai doctor
 
 `recall` 只在本地搜索缓存中的已发布 Learnings 和 active Project docs。当前 Git Workspace 有 active Logical Project 时，`auto` 使用 Workspace scope，否则使用 User scope；User 只搜索 shared Learnings，Workspace 搜索 shared 和 active Project 的 docs/Learnings。`--project` 可把 Workspace scope 缩到一个 active Project。`--include-pending` 只加入符合 source 与 scope 的未完成本地草稿。Learning 的 published 和 pending JSON 结果都使用 `learning:<logicalProject>:<uuid>` 作为 ID（shared Learning 的 logicalProject 为 `shared`），由 `publication` 标明状态。Recall 不访问网络或模型，也不写入状态。中文可用空格拆分关键词，例如 `teamai recall 支付 重试`；JSON 结果包含实际本地文件、source revision/hash、匹配词、原始行号和 evidence 片段。
 
+`teamai recall --help` 无需 query、绑定、知识 cache 或原生运行时即可 exit 0，帮助写入 stdout；即使带 `--json`，help 仍是人可读文本。查询按空白拆词，在 NFC 和大小写归一后做子串匹配，至少一词命中即可；shell 引号只负责传参，不开启短语匹配。query 最多 1024 Unicode code points、去重前最多 32 个空白分词；`--limit` 为 1–20，默认 5。当前词法排序依次比较不同命中词数、title/tag/body 的总权重（3/2/1）和稳定 ID。排名及命中词数不代表答案正确性或语义置信度；Recall Agent 另行读取原文并按相关性筛选/重排。CLI 不翻译，也不提供语义搜索。English-first 是知识贡献约定，中文普通查询继续支持，例如 `teamai recall "Plugin discovery" --scope user` 和 `teamai recall "支付 重试" --limit 5`。
+
 ### `teamai sync`
 
 `sync` 表示 convergence / repair：补齐缺失的 Team AI-owned User Plugin，恢复 enablement，刷新 Marketplace 注册和 VS Code Marketplace 注册，刷新 Project machine state，并修复受管理的 personal Skill。已绑定 Workspace 只投射所选 Logical Projects 声明的兼容 components；common 和 role 内容仍由原生 User Plugins 提供。
