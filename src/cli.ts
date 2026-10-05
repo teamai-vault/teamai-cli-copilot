@@ -30,7 +30,7 @@ function usage(): string {
     "  learning share <file> [--project <id>|--shared] [--tags <tag...>]",
     "  learning pending [--json]",
     "  learning retry <id>",
-    "  recall <query> [--scope auto|user|workspace] [--project <id>] [--limit <n>] [--include-pending] [--json]",
+    "  recall <query> [--scope auto|user|workspace] [--project <id>] [--limit <n>] [--require <literal>] [--include-pending] [--json]",
     "  Example: teamai recall 支付 重试",
     "  sync",
     "  role list",
@@ -63,6 +63,13 @@ function usage(): string {
     "    Match at least one NFC/case-normalized substring in title, tags or body; repeated terms are deduplicated.",
     "    Order by distinct matched-term count, then summed title/tag/body weights (3/2/1), then stable ID.",
     "    Shell quotes pass arguments; they do not enable phrase matching.",
+    "  --require <literal>: require a complete NFC/case-normalized substring in one title, single tag or body.",
+    "    May be repeated; all required literals must match (AND). Use --require=<literal> for a leading '-'.",
+    "    Query still requires at least one matching term; required literals never expand the allowed scope.",
+    "    Literals are not split into words or expanded as regex. Empty/whitespace literals are input errors.",
+    "    Query + required values: at most 1024 raw Unicode code points total, before normalization.",
+    "    Query whitespace terms (before deduplication) + required values: at most 32 items total.",
+    "    Applied original values appear in text and JSON requiredLiterals only when --require is used.",
     "  The CLI does not translate or provide semantic search. Rank and matched-term count are",
     "    not evidence of answer correctness or semantic confidence. The Recall Agent extracts English",
     "    technical terms, reads original evidence, filters/reranks for relevance and answers in the user's language.",
@@ -73,13 +80,14 @@ function usage(): string {
     "  --help returns text before product context or cache access, even with --json and no query.",
     "  Examples:",
     '    teamai recall "Plugin discovery" --scope user',
+    '    teamai recall "Plugin not" --require "Plugin not found: E_PLUGIN_42." --scope user',
     '    teamai recall "支付 重试" --limit 5',
   ].join("\n");
 }
 
 class UsageError extends Error {}
 
-type OptionRule = { kind: "boolean" | "single" | "many"; choices?: readonly string[] };
+type OptionRule = { kind: "boolean" | "single" | "many" | "repeatable"; choices?: readonly string[] };
 type ParsedOptions = Map<string, true | string[]>;
 type Invocation = { command: string; subcommand?: string; positionals: string[]; options: ParsedOptions };
 
@@ -107,6 +115,7 @@ const optionRules: Record<string, Record<string, OptionRule>> = {
     "--scope": { kind: "single", choices: ["auto", "user", "workspace"] },
     "--project": { kind: "single" },
     "--limit": { kind: "single" },
+    "--require": { kind: "repeatable" },
     "--include-pending": { kind: "boolean" },
     "--json": { kind: "boolean" },
   },
@@ -129,7 +138,7 @@ function parseOptions(tokens: string[], rules: Record<string, OptionRule>, comma
     const inlineValue = equals < 0 ? undefined : token.slice(equals + 1);
     const rule = rules[name];
     if (!rule) throw new UsageError(`Unknown option '${name}' for '${command}'.`);
-    if (options.has(name)) throw new UsageError(`${name} may be supplied only once.`);
+    if (options.has(name) && rule.kind !== "repeatable") throw new UsageError(`${name} may be supplied only once.`);
     if (rule.kind === "boolean") {
       if (inlineValue !== undefined) throw new UsageError(`${name} does not take a value.`);
       options.set(name, true);
@@ -141,7 +150,7 @@ function parseOptions(tokens: string[], rules: Record<string, OptionRule>, comma
       if (!inlineValue) throw new UsageError(`${name} requires a value.`);
       values.push(inlineValue);
     }
-    if (rule.kind === "single") {
+    if (rule.kind === "single" || rule.kind === "repeatable") {
       if (values.length === 0) {
         const value = tokens[index + 1];
         if (!value || value.startsWith("-")) throw new UsageError(name + " requires a value.");
@@ -155,10 +164,12 @@ function parseOptions(tokens: string[], rules: Record<string, OptionRule>, comma
       }
       if (values.length === 0) throw new UsageError(`${name} requires a value.`);
     }
+    if (rule.kind === "repeatable" && !values[0].trim()) throw new UsageError(`${name} must contain a non-whitespace literal.`);
     if (rule.choices && !rule.choices.includes(values[0])) {
       throw new UsageError(`${name} must be ${rule.choices.join(" or ")}.`);
     }
-    options.set(name, values);
+    const previous = options.get(name);
+    options.set(name, [...(Array.isArray(previous) ? previous : []), ...values]);
   }
   return { positionals, options };
 }
@@ -367,6 +378,7 @@ export async function runCli(argv: string[], overrides: Partial<CommandContext> 
           scope: option(invocation.options, "--scope") as "auto" | "user" | "workspace" | undefined,
           project: option(invocation.options, "--project"),
           limit: option(invocation.options, "--limit"),
+          requiredLiterals: optionValues(invocation.options, "--require"),
           includePending: hasOption(invocation.options, "--include-pending"),
           json: hasOption(invocation.options, "--json"),
         });

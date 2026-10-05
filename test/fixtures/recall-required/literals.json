@@ -1,0 +1,50 @@
+[
+  {
+    "id": "10000000-0000-4000-8000-000000000001",
+    "title": "Plugin outage",
+    "tags": ["diagnostic"],
+    "body": "Plugin not found: E_PLUGIN_42. BuildGraph.findNode.\n  CAFÉ boundary 🧪  \n"
+  },
+  {
+    "id": "10000000-0000-4000-8000-000000000002",
+    "title": "Plugin notes",
+    "tags": ["diagnostic"],
+    "body": "Plugin is not configured for this workspace.\n"
+  },
+  {
+    "id": "10000000-0000-4000-8000-000000000003",
+    "title": "Loose diagnostic",
+    "tags": ["diagnostic"],
+    "body": "Plugin could not be loaded; found entries contain E_PLUGIN_42. BuildGraph.findNode.\n"
+  },
+  {
+    "id": "10000000-0000-4000-8000-000000000004",
+    "title": "Plugin not",
+    "tags": ["diagnostic"],
+    "body": "found: E_PLUGIN_42. BuildGraph.findNode.\n"
+  },
+  {
+    "id": "10000000-0000-4000-8000-000000000005",
+    "title": "Tagged evidence",
+    "tags": ["Plugin not", "found: E_PLUGIN_42.", "BuildGraph.findNode"],
+    "body": "Unrelated evidence.\n"
+  },
+  {
+    "id": "10000000-0000-4000-8000-000000000006",
+    "title": "Plugin not found: E_PLUGIN_42.",
+    "tags": ["diagnostic"],
+    "body": "BuildGraph.findNode.\nCafé boundary\n"
+  },
+  {
+    "id": "10000000-0000-4000-8000-000000000007",
+    "title": "Tagged exact diagnostic",
+    "tags": ["Plugin not found: E_PLUGIN_42.", "BuildGraph.findNode", "Café boundary"],
+    "body": "Original event.\n"
+  },
+  {
+    "id": "10000000-0000-4000-8000-000000000008",
+    "title": "Anchor only",
+    "tags": ["diagnostic"],
+    "body": "E_PLUGIN_42. BuildGraph.findNode.\n"
+  }
+]

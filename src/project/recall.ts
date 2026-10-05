@@ -43,11 +43,17 @@ export interface RecallHit extends Omit<RecallCandidate, "tags" | "body" | "rawC
 
 export class RecallInputError extends Error {}
 
-export function parseRecallQuery(query: string): RecallTerm[] {
-  if ([...query].length > MAX_QUERY_CODEPOINTS) throw new RecallInputError("Recall query must be at most 1024 Unicode code points.");
+export function parseRecallQuery(query: string, requiredLiterals: string[] = []): RecallTerm[] {
+  if (requiredLiterals.some((literal) => !literal.trim())) throw new RecallInputError("--require must contain a non-whitespace literal.");
+  const codePoints = [...query].length + requiredLiterals.reduce((total, literal) => total + [...literal].length, 0);
+  if (codePoints > MAX_QUERY_CODEPOINTS) throw new RecallInputError(requiredLiterals.length > 0
+    ? "Recall query and required literals must total at most 1024 Unicode code points."
+    : "Recall query must be at most 1024 Unicode code points.");
   const rawTerms = query.normalize("NFC").trim().split(/\s+/u).filter(Boolean);
   if (rawTerms.length === 0) throw new RecallInputError("Recall query must contain at least one non-whitespace term.");
-  if (rawTerms.length > MAX_QUERY_TERMS) throw new RecallInputError("Recall query must contain at most 32 terms.");
+  if (rawTerms.length + requiredLiterals.length > MAX_QUERY_TERMS) throw new RecallInputError(requiredLiterals.length > 0
+    ? "Recall query terms and required literals must total at most 32 items."
+    : "Recall query must contain at most 32 terms.");
   const terms: RecallTerm[] = [];
   const seen = new Set<string>();
   for (const raw of rawTerms) {
@@ -98,12 +104,17 @@ export function parseRecallMarkdown(content: Buffer, fallbackTitle: string): {
   return { text, ...(id === undefined ? {} : { id }), title: title || fallbackTitle, tags, body };
 }
 
-export function rankRecallCandidates(candidates: RecallCandidate[], terms: RecallTerm[], limit: number): RecallHit[] {
+export function rankRecallCandidates(candidates: RecallCandidate[], terms: RecallTerm[], limit: number, requiredLiterals: string[] = []): RecallHit[] {
+  const required = requiredLiterals.map(normalizeSearchText);
   const ranked: Array<{ candidate: RecallCandidate; matchedTerms: RecallTerm[]; score: number }> = [];
   for (const candidate of candidates) {
     const title = normalizeSearchText(candidate.title);
     const tags = normalizeSearchText(candidate.tags.join(" "));
     const body = normalizeSearchText(candidate.body);
+    if (required.length > 0) {
+      const individualTags = candidate.tags.map(normalizeSearchText);
+      if (!required.every((literal) => title.includes(literal) || individualTags.some((tag) => tag.includes(literal)) || body.includes(literal))) continue;
+    }
     const matchedTerms = terms.filter((term) => title.includes(term.normalized) || tags.includes(term.normalized) || body.includes(term.normalized));
     if (matchedTerms.length === 0) continue;
     const score = matchedTerms.reduce((total, term) => total

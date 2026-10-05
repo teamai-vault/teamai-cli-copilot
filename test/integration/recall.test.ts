@@ -39,7 +39,7 @@ async function put(root: string, relativePath: string, contents: string | Buffer
   await writeFile(target, contents);
 }
 
-async function makeFixture(): Promise<{
+async function makeFixture(extraLearnings: Array<{ id: string; title: string; tags: string[]; body: string }> = []): Promise<{
   home: string;
   workspace: string;
   resourceRoot: string;
@@ -72,6 +72,9 @@ async function makeFixture(): Promise<{
   await put(learningRoot, "learnings/shared/31a67c90-f875-4dce-9d7d-1812b9bc23ef.md", "---\nid: 31a67c90-f875-4dce-9d7d-1812b9bc23ef\ntitle: Shared published needle\ntags: [shared]\n---\nPublished shared needle evidence.\n");
   await put(learningRoot, "learnings/payments/8a54f331-4b1e-4a60-8a01-597d358433bd.md", "---\nid: 8a54f331-4b1e-4a60-8a01-597d358433bd\ntitle: Payments published retry\ntags: [payments]\n---\nPublished payments needle evidence.\n");
   await put(learningRoot, "learnings/risk/88a8bddb-ad61-48ab-8879-c8d736962631.md", "---\nid: 88a8bddb-ad61-48ab-8879-c8d736962631\ntitle: Inactive needle\ntags: [risk]\n---\nInactive risk needle evidence.\n");
+  for (const learning of extraLearnings) {
+    await put(learningRoot, `learnings/shared/${learning.id}.md`, `---\nid: ${learning.id}\ntitle: ${JSON.stringify(learning.title)}\ntags: ${JSON.stringify(learning.tags)}\n---\n${learning.body}`);
+  }
   await git(learningRoot, ["remote", "add", "origin", bare]);
   await git(learningRoot, ["add", "-A"]);
   await git(learningRoot, ["commit", "-m", "published learnings fixture"]);
@@ -88,6 +91,10 @@ async function makeFixture(): Promise<{
   await activateProjects(workspace, home, ["payments"]);
 
   return { home, workspace, resourceRoot, source, resourceRevision, learningRevision };
+}
+
+async function makeLiteralFixture(): Promise<Awaited<ReturnType<typeof makeFixture>>> {
+  return makeFixture(JSON.parse(await readFile(new URL("../fixtures/recall-required/literals.json", import.meta.url), "utf8")));
 }
 
 test("published Recall reports the verified frontmatter UUID without a filename suffix", async () => {
@@ -204,8 +211,241 @@ async function snapshotDirectory(root: string): Promise<Record<string, string>> 
 }
 
 describe("teamai recall", () => {
+  test.skipIf(!process.env.TEAMAI_RECALL_BASELINE_CLI)("required literal defaults match the approved public CLI baseline byte-for-byte", async () => {
+    const { runCli: baselineRunCli } = await import(/* @vite-ignore */ pathToFileURL(process.env.TEAMAI_RECALL_BASELINE_CLI!).href);
+    const fixture = await makeLiteralFixture();
+    await addPending(fixture.home, fixture.source, "shared", "Current shared needle draft", sourceWorkspaceKey(fixture.workspace));
+    const before = await snapshotDirectory(fixture.home);
+    const argsList = [
+      ["recall", "Plugin not", "--scope", "user", "--json"],
+      ["recall", "Plugin not", "--scope", "user"],
+      ["recall", "needle", "--scope", "workspace", "--project", "payments", "--json"],
+      ["recall", "needle", "--include-pending", "--json"],
+      ["recall", " ", "--json"],
+      ["recall", "needle", "--limit", "21", "--json"],
+    ];
+    for (const args of argsList) {
+      const baseline = capture();
+      const expectedExit = await baselineRunCli(args, { ...cliOverrides(fixture), ...baseline });
+      const actual = capture();
+      const exit = await runCli(args, { ...cliOverrides(fixture), ...actual });
+      console.info(JSON.stringify({ seam: "public CLI baseline comparison", args, expectedExit, exit, baseline: { stdout: baseline.stdout, stderr: baseline.stderr }, actual: { stdout: actual.stdout, stderr: actual.stderr } }));
+      expect({ exit, stdout: actual.stdout, stderr: actual.stderr }).toEqual({ exit: expectedExit, stdout: baseline.stdout, stderr: baseline.stderr });
+    }
+    expect(await snapshotDirectory(fixture.home)).toEqual(before);
+  }, 60_000);
+
+  test("required literal matches a complete diagnostic in one field and preserves provenance", async () => {
+    const fixture = await makeLiteralFixture();
+    const before = await snapshotDirectory(fixture.home);
+    const baseline = capture();
+    expect(await runCli(["recall", "Plugin not", "--scope", "user", "--limit", "20", "--json"], { ...cliOverrides(fixture), ...baseline })).toBe(0);
+    const unfiltered = JSON.parse(baseline.stdout[0]!);
+    // Independent weights for suffixes 2,4,6,1,5,7,3,8: 8,7,6,5,4,4,2,1.
+    // E_PLUGIN_42 also contains the ordinary query substring Plugin; no tokenizer is used.
+    expect(unfiltered.hits.map((hit: { id: string }) => hit.id)).toEqual([
+      "learning:shared:10000000-0000-4000-8000-000000000002",
+      "learning:shared:10000000-0000-4000-8000-000000000004",
+      "learning:shared:10000000-0000-4000-8000-000000000006",
+      "learning:shared:10000000-0000-4000-8000-000000000001",
+      "learning:shared:10000000-0000-4000-8000-000000000005",
+      "learning:shared:10000000-0000-4000-8000-000000000007",
+      "learning:shared:10000000-0000-4000-8000-000000000003",
+      "learning:shared:10000000-0000-4000-8000-000000000008",
+    ]);
+    expect(unfiltered).not.toHaveProperty("requiredLiterals");
+    const literal = "Plugin not found: E_PLUGIN_42.";
+    const args = ["recall", "Plugin not", "--scope", "user", "--require", literal, "--limit", "20", "--json"];
+    const output = capture();
+    const exit = await runCli(args, { ...cliOverrides(fixture), ...output });
+    console.info(JSON.stringify({ seam: "required diagnostic", args, exit, stdout: output.stdout, stderr: output.stderr }));
+    expect(exit).toBe(0);
+    expect(output.stderr).toEqual([]);
+    expect(output.stdout).toHaveLength(1);
+    const result = JSON.parse(output.stdout[0]!);
+    expect(result.requiredLiterals).toEqual([literal]);
+    const allowedIds = [
+      "learning:shared:10000000-0000-4000-8000-000000000006",
+      "learning:shared:10000000-0000-4000-8000-000000000001",
+      "learning:shared:10000000-0000-4000-8000-000000000007",
+    ];
+    expect(result.hits.map((hit: { id: string }) => hit.id)).toEqual(allowedIds);
+    expect(result.hits).toEqual(unfiltered.hits.filter((hit: { id: string }) => allowedIds.includes(hit.id)));
+    for (const hit of result.hits) {
+      expect(hit.matchedTerms).toEqual(["Plugin", "not"]);
+      expect(hit.source.revision).toBe(fixture.learningRevision);
+      expect(hit.source.contentHash).toBe(createHash("sha256").update(await readFile(hit.file)).digest("hex"));
+    }
+    const human = capture();
+    expect(await runCli(args.filter((arg) => arg !== "--json"), { ...cliOverrides(fixture), ...human })).toBe(0);
+    expect(human.stdout.join("\n")).toContain(`Required literals (all): ${JSON.stringify([literal])}`);
+    expect(await snapshotDirectory(fixture.home)).toEqual(before);
+  }, 60_000);
+
+  test("required literals are AND and preserve Unicode, spaces and punctuation without replacing query", async () => {
+    const fixture = await makeLiteralFixture();
+    const before = await snapshotDirectory(fixture.home);
+    const query = async (literals: string[], words = "Plugin not", json = true) => {
+      const args = ["recall", words, "--scope", "user", ...literals.flatMap((literal, index) =>
+        index === 1 || literal.startsWith("-") ? [`--require=${literal}`] : ["--require", literal]), ...(json ? ["--json"] : [])];
+      const output = capture();
+      const exit = await runCli(args, { ...cliOverrides(fixture), ...output });
+      console.info(JSON.stringify({ seam: "required AND/Unicode", args, exit, stdout: output.stdout, stderr: output.stderr }));
+      expect(exit).toBe(0);
+      expect(output.stderr).toEqual([]);
+      expect(output.stdout).toHaveLength(1);
+      return json ? JSON.parse(output.stdout[0]!) : output.stdout[0]!;
+    };
+    const raw = ["plugin NOT found: e_plugin_42.", "BuildGraph.findNode", " cafe\u0301 boundary 🧪 "];
+    const result = await query(raw);
+    expect(result.requiredLiterals).toEqual(raw);
+    expect(result.hits.map((hit: { id: string }) => hit.id)).toEqual(["learning:shared:10000000-0000-4000-8000-000000000001"]);
+    expect(result.hits[0].matchedTerms).toEqual(["Plugin", "not"]);
+    expect(await query(raw, "Plugin not", false)).toContain(`Required literals (all): ${JSON.stringify(raw)}`);
+    for (const literals of [
+      ["Plugin not found: E_PLUGIN_42.", "BuildGraph.missingNode"],
+      ["E_PLUGIN_42!"],
+      ["Plugin.*found"],
+      ["--help"],
+    ]) {
+      const empty = await query(literals);
+      expect(empty).toMatchObject({ requiredLiterals: literals, hits: [] });
+    }
+    expect(await query(["Anchor only"], "not")).toMatchObject({ requiredLiterals: ["Anchor only"], hits: [] });
+    expect(await query(["never literal"], "Plugin not", false)).toContain('Required literals (all): ["never literal"]');
+    expect(await snapshotDirectory(fixture.home)).toEqual(before);
+  }, 60_000);
+
+  test("required literal input limits count raw code points and items before normalization or deduplication", async () => {
+    const emptyHome = await tempDir("teamai-recall-required-input-");
+    cleanup.add(emptyHome);
+    const invalid = [
+      ["Plugin", "--require", " \t "],
+      ["Plugin", "--require", "\u00a0\u2003"],
+      ["Plugin", "--require="],
+      ["Plugin", "--require"],
+      ["--require", "Plugin"],
+      [" ", "--require", "Plugin"],
+      ["Plugin", "--require", "🧪".repeat(1019)],
+      ["Plugin", "--require", "e\u0301".repeat(510)],
+      ["Plugin", ...Array.from({ length: 32 }, () => ["--require", "Plugin"]).flat()],
+      [Array(31).fill("Plugin").join(" "), "--require", "Plugin", "--require", "Plugin"],
+    ];
+    for (const input of invalid) {
+      const args = ["recall", ...input, "--json"];
+      const output = capture();
+      const exit = await runCli(args, { cwd: emptyHome, homeDir: emptyHome, ...output });
+      console.info(JSON.stringify({ seam: "required raw limits", args, exit, stdout: output.stdout, stderr: output.stderr }));
+      expect(exit).toBe(2);
+      expect(output.stderr).toEqual([]);
+      expect(output.stdout).toHaveLength(1);
+      expect(JSON.parse(output.stdout[0]!)).toMatchObject({ schemaVersion: 1, error: { code: "INVALID_ARGUMENT" } });
+    }
+    const humanError = capture();
+    expect(await runCli(["recall", "Plugin", "--require", " "], { cwd: emptyHome, homeDir: emptyHome, ...humanError })).toBe(2);
+    expect(humanError.stdout).toEqual([]);
+    expect(humanError.stderr[0]).toContain("--require");
+
+    const fixture = await makeLiteralFixture();
+    const before = await snapshotDirectory(fixture.home);
+    const boundaryLiterals = [["🧪".repeat(1018)], ["e\u0301".repeat(509)], Array(31).fill("Plugin")];
+    for (const literals of boundaryLiterals) {
+      const args = ["recall", "Plugin", "--scope", "user", "--limit", "20", ...literals.flatMap((literal) => ["--require", literal]), "--json"];
+      const output = capture();
+      const exit = await runCli(args, { ...cliOverrides(fixture), ...output });
+      console.info(JSON.stringify({ seam: "required raw limit boundary", args, exit, stdout: output.stdout, stderr: output.stderr }));
+      expect(exit).toBe(0);
+      expect(output.stderr).toEqual([]);
+      expect(output.stdout).toHaveLength(1);
+      const result = JSON.parse(output.stdout[0]!);
+      expect(result.requiredLiterals).toEqual(literals);
+      if (literals.length === 31) expect(result.hits).toHaveLength(8);
+      else expect(result.hits).toEqual([]);
+    }
+    expect(await snapshotDirectory(fixture.home)).toEqual(before);
+  }, 60_000);
+
+  test("required literals retain scope and pending boundaries and cannot hide permitted cache damage", async () => {
+    const fixture = await makeFixture();
+    const overrides = cliOverrides(fixture);
+    const current = sourceWorkspaceKey(fixture.workspace);
+    const foreign = sourceWorkspaceKey(`${fixture.workspace}-other`);
+    await addPending(fixture.home, fixture.source, "shared", "Required anchor shared current", current);
+    await addPending(fixture.home, fixture.source, "shared", "Required anchor shared foreign", foreign);
+    await addPending(fixture.home, fixture.source, "shared", "Required anchor other source", current, { otherSource: true });
+    await addPending(fixture.home, fixture.source, "payments", "Required anchor payments current", current);
+    await addPending(fixture.home, fixture.source, "payments", "Required anchor payments foreign", foreign);
+    await addPending(fixture.home, fixture.source, "risk", "Required anchor inactive", current);
+    await addPending(fixture.home, fixture.source, "shared", "Required anchor completed", current, { complete: true });
+    const before = await snapshotDirectory(fixture.home);
+    const resourceRefs = await git(fixture.resourceRoot, ["show-ref", "--head"]);
+    const query = async (scopeArgs: string[], literal = "Required anchor", expectedExit = 0) => {
+      const args = ["recall", "needle", ...scopeArgs, "--require", literal, "--limit", "20", "--json"];
+      const output = capture();
+      const exit = await runCli(args, { ...overrides, ...output });
+      console.info(JSON.stringify({ seam: "required scope/cache", args, exit, stdout: output.stdout, stderr: output.stderr }));
+      expect(exit).toBe(expectedExit);
+      expect(output.stdout).toHaveLength(1);
+      expect(output.stderr).toEqual([]);
+      const result = JSON.parse(output.stdout[0]!);
+      if (expectedExit === 0) expect(result.requiredLiterals).toEqual([literal]);
+      return result;
+    };
+    expect(await query([])).toMatchObject({ scope: "workspace", hits: [] });
+    const user = await query(["--scope", "user", "--include-pending"]);
+    expect(user.hits.map((hit: { title: string }) => hit.title).sort()).toEqual(["Required anchor shared current", "Required anchor shared foreign"]);
+    for (const args of [["--include-pending"], ["--scope", "workspace", "--include-pending"], ["--project", "payments", "--include-pending"]]) {
+      const workspace = await query(args);
+      expect(workspace.hits.map((hit: { title: string }) => hit.title).sort()).toEqual(["Required anchor payments current", "Required anchor shared current"]);
+    }
+    for (const hit of user.hits) {
+      expect(hit).toMatchObject({ publication: "pending", logicalProject: "shared", matchedTerms: ["needle"] });
+      const bytes = await readFile(hit.file);
+      expect(hit.source.contentHash).toBe(createHash("sha256").update(bytes).digest("hex"));
+      expect(bytes.toString("utf8").split(/\r\n|\n|\r/).slice(hit.lineStart - 1, hit.lineEnd).join("\n")).toBe(hit.snippet);
+    }
+    const publishedLiteral = "Published payments needle evidence.";
+    expect((await query(["--scope", "user"], publishedLiteral)).hits).toEqual([]);
+    for (const args of [[], ["--scope", "workspace"], ["--project", "payments"]]) {
+      expect((await query(args, publishedLiteral)).hits.map((hit: { id: string }) => hit.id)).toEqual(["learning:payments:8a54f331-4b1e-4a60-8a01-597d358433bd"]);
+    }
+    expect(await query(["--scope", "user", "--project", "payments"], publishedLiteral, 2)).toMatchObject({ error: { code: "INVALID_ARGUMENT" } });
+    expect(await query(["--project", "risk"], "Inactive", 1)).toMatchObject({ error: { code: "PROJECT_NOT_ACTIVE" } });
+    expect(await snapshotDirectory(fixture.home)).toEqual(before);
+    expect(await git(fixture.resourceRoot, ["show-ref", "--head"])).toBe(resourceRefs);
+
+    const docFile = path.join(fixture.resourceRoot, "contexts", "payments", "docs", "retry.md");
+    const docBytes = await readFile(docFile);
+    await writeFile(docFile, Buffer.from(docBytes.toString("utf8").replace("needle appears", "needlx appears"), "utf8"));
+    expect(await query(["--scope", "workspace"], "never present", 1)).toMatchObject({ error: { code: "RECALL_FAILED" } });
+    await writeFile(docFile, docBytes);
+
+    const cacheFiles = path.join(fixture.home, ".teamai", "published-learnings", publishedLearningSourceHash(fixture.source), "revisions", fixture.learningRevision, "files", "learnings");
+    const riskFile = path.join(cacheFiles, "risk", "88a8bddb-ad61-48ab-8879-c8d736962631.md");
+    const riskBytes = await readFile(riskFile);
+    await writeFile(riskFile, "damaged inactive cache");
+    expect(await query(["--scope", "workspace"], "never present", 1)).toMatchObject({ error: { code: "CACHE_UNAVAILABLE" } });
+    // Index structure verifies every recorded file size; content hashes are checked within scope.
+    await writeFile(riskFile, Buffer.from(riskBytes.toString("utf8").replace("Inactive", "InactivX"), "utf8"));
+    expect((await query(["--scope", "workspace"], publishedLiteral)).hits).toHaveLength(1);
+    await writeFile(riskFile, riskBytes);
+    const sharedFile = path.join(cacheFiles, "shared", "31a67c90-f875-4dce-9d7d-1812b9bc23ef.md");
+    const sharedBytes = await readFile(sharedFile);
+    await writeFile(sharedFile, Buffer.from(sharedBytes.toString("utf8").replace("Published shared", "PublisheX shared"), "utf8"));
+    expect(await query(["--scope", "user"], "never present", 1)).toMatchObject({ error: { code: "CACHE_UNAVAILABLE" } });
+    await writeFile(sharedFile, sharedBytes);
+
+    const pendingFile = user.hits.find((hit: { title: string }) => hit.title === "Required anchor shared current").file;
+    const pendingBytes = await readFile(pendingFile);
+    await writeFile(pendingFile, Buffer.from(pendingBytes.toString("utf8").replace("Pending needle", "PendinX needle"), "utf8"));
+    expect(await query(["--scope", "user", "--include-pending"], "never present", 1)).toMatchObject({ error: { code: "PENDING_CORRUPT" } });
+    await writeFile(pendingFile, pendingBytes);
+    expect(await snapshotDirectory(fixture.home)).toEqual(before);
+    expect(await git(fixture.resourceRoot, ["show-ref", "--head"])).toBe(resourceRefs);
+  }, 60_000);
+
   test("Recall help explains current keyword matching without runtime access", async () => {
-    for (const args of [["recall", "--help", "--json"], ["help", "recall"]]) {
+    for (const args of [["recall", "--help", "--json"], ["help", "recall"], ["recall", "--require", "literal", "--require=second literal", "--help", "--json"]]) {
       const output = capture();
       expect(await runCli(args, {
         out: output.out,
@@ -224,6 +464,9 @@ describe("teamai recall", () => {
         "NFC", "at least one", "substring",
         "distinct matched-term count", "3/2/1", "stable ID",
         "Shell quotes", "do not enable phrase matching",
+        "--require <literal>", "single tag", "all required literals must match (AND)",
+        "not split into words or expanded as regex", "1024 raw Unicode code points total",
+        "before deduplication", "32 items total", "Applied original values", "requiredLiterals",
         "does not translate", "semantic search",
         "not evidence of answer correctness or semantic confidence",
         "Recall Agent", "reads original evidence", "filters/reranks for relevance",
@@ -231,6 +474,13 @@ describe("teamai recall", () => {
         'teamai recall "Plugin discovery"', 'teamai recall "支付 重试"',
       ]) expect(help).toContain(statement);
       expect(() => JSON.parse(help)).toThrow();
+    }
+    for (const args of [["recall", "--require", "--help", "--json"], ["recall", "--require= ", "--help", "--json"]]) {
+      const output = capture();
+      expect(await runCli(args, { ...output, get homeDir(): string { throw new Error("Malformed options must fail before context access."); } })).toBe(2);
+      expect(output.stdout).toHaveLength(1);
+      expect(output.stderr).toEqual([]);
+      expect(JSON.parse(output.stdout[0]!)).toMatchObject({ error: { code: "INVALID_ARGUMENT" } });
     }
   });
 
