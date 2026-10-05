@@ -1,6 +1,6 @@
 # Team AI command map
 
-Use this as an intent map, not as a cached CLI manual. Run `teamai <command> --help` before relying on exact flags.
+Use this as an intent map, not as a cached CLI manual. Run `teamai --help` to read the supported command forms and flags before choosing a command.
 
 | Command | Use it for |
 | --- | --- |

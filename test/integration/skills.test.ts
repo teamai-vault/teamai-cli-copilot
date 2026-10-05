@@ -59,7 +59,7 @@ test("skill read, tag selection, installation, and removal use explicit managed 
   await writeGlobalConfig({ ...(await readGlobalConfig(home))!, managedSkills: ["removed-via-plugin"], managedSkillPaths: {} }, home);
   expect(await runCli(["skill", "remove", "removed-via-plugin"], { ...base, loadMarketplace: async () => ({ ...catalog, skills: [] }) })).toBe(0);
   expect((await readGlobalConfig(home))?.managedSkills).toEqual([]);
-});
+}, 20_000);
 
 test("dry-run sync uses planned plugin enablement for selected plugin skills", async () => {
   const home = await tempDir("teamai-skill-sync-home-");

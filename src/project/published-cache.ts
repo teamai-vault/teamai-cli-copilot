@@ -7,12 +7,14 @@ import { teamAiHome } from "../config/global.js";
 import type { CatalogPlugin } from "../copilot/catalog.js";
 import { atomicWriteJson, pathsEqual, withFileLock } from "../utils/fs.js";
 import { loadLogicalProjects } from "./manifest.js";
+import { parseRecallMarkdown } from "./recall.js";
 
 export const PUBLISHED_LEARNINGS_BRANCH = "teamai-learnings";
 const MAX_FILE_BYTES = 1024 * 1024;
 const MAX_FILES = 5000;
 const MAX_TOTAL_BYTES = 64 * 1024 * 1024;
 const SAFE_ID = /^(?!.*(?:--|\.\.))[a-z0-9](?:[a-z0-9.-]{0,62}[a-z0-9])?$/;
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const SHA = /^[a-f0-9]{40}(?:[a-f0-9]{24})?$/;
 
 export interface PublishedLearningFile {
@@ -292,6 +294,7 @@ async function readAuthorityFiles(root: string, revision: string, projectIds: st
     }
     if (logicalProject !== undefined && content.includes(0)) throw new Error(`Published Learning contains binary NUL data at '${relativePath}'.`);
     if (logicalProject === undefined) continue;
+    verifyLearningIdentity(relativePath, content);
     totalBytes += byteLength;
     files.push({ relativePath, logicalProject, content });
   }
@@ -300,7 +303,7 @@ async function readAuthorityFiles(root: string, revision: string, projectIds: st
 
 function learningProject(relativePath: string, allowedProjects?: ReadonlySet<string>): string | undefined {
   const match = relativePath.match(/^learnings\/([^/]+)\/([^/]+)\.md$/);
-  if (!match || !SAFE_ID.test(match[2]!)) return undefined;
+  if (!match || !UUID.test(match[2]!)) return undefined;
   if (match[1] === "shared") return "shared";
   return SAFE_ID.test(match[1]!) && (!allowedProjects || allowedProjects.has(match[1]!)) ? match[1] : undefined;
 }
@@ -486,6 +489,14 @@ function verifyLearningBytes(relativePath: string, entry: Omit<PublishedLearning
     new TextDecoder("utf-8", { fatal: true }).decode(content);
   } catch {
     throw new Error(`Published Learnings snapshot contains non-UTF-8 content at '${relativePath}'.`);
+  }
+  verifyLearningIdentity(relativePath, content);
+}
+
+function verifyLearningIdentity(relativePath: string, content: Buffer): void {
+  const { id } = parseRecallMarkdown(content, path.posix.basename(relativePath));
+  if (!id || !UUID.test(id) || path.posix.basename(relativePath) !== `${id}.md`) {
+    throw new Error(`Published Learning filename must match its frontmatter UUID id: '${relativePath}'.`);
   }
 }
 
