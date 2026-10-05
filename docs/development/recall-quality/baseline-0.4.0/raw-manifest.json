@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "rawByteCopies": true,
+  "files": [
+    {
+      "file": "v1-cli-report.json",
+      "bytes": 73343,
+      "sha256": "638d81265561b69126f491f21a8ce4a08571e16d33e1ccbba0be76267d228c0b",
+      "original": "handoffs/c-quality/baseline-cli-v1/cli-report.json"
+    },
+    {
+      "file": "v1-protected-before.json",
+      "bytes": 27346,
+      "sha256": "7bc6ce25e00d3b767a0dc4fe400b0525119ec92b0bc4ae3bc813f4a12d24d3f6",
+      "original": "handoffs/c-quality/baseline-cli-v1/protected-before.json"
+    },
+    {
+      "file": "v1-protected-after.json",
+      "bytes": 27346,
+      "sha256": "7bc6ce25e00d3b767a0dc4fe400b0525119ec92b0bc4ae3bc813f4a12d24d3f6",
+      "original": "handoffs/c-quality/baseline-cli-v1/protected-after.json"
+    },
+    {
+      "file": "v2-cli-report.json",
+      "bytes": 420400,
+      "sha256": "70f45d38d778169a621295af78d667c2eed597133700fc570464d06333609415",
+      "original": "handoffs/c-quality/baseline-cli-v2/cli-report.json"
+    },
+    {
+      "file": "v2-protected-before.json",
+      "bytes": 27711,
+      "sha256": "c1ab05af5f87354062ef2c0c3a9a7847308dea9597ac5509faf8bccfcfed6131",
+      "original": "handoffs/c-quality/baseline-cli-v2/protected-before.json"
+    },
+    {
+      "file": "v2-protected-after.json",
+      "bytes": 27711,
+      "sha256": "c1ab05af5f87354062ef2c0c3a9a7847308dea9597ac5509faf8bccfcfed6131",
+      "original": "handoffs/c-quality/baseline-cli-v2/protected-after.json"
+    },
+    {
+      "file": "independent-readback.json",
+      "bytes": 30677,
+      "sha256": "ca6474b8ef35221e3a3747b894f6cbc9db56ebf0ae27021f01f890b8fa10d93e",
+      "original": "handoffs/c-quality/baseline-cli-v2/independent-readback.json"
+    }
+  ]
+}

@@ -1,0 +1,977 @@
+{
+  "schemaVersion": 1,
+  "independentOfflineReadback": true,
+  "newCliInvocations": 0,
+  "nativeInvocations": 0,
+  "frozenManifestUnchanged": true,
+  "same34InputsAsV1": true,
+  "queryCount": 34,
+  "protocolPass": 34,
+  "sourceCoveragePass": 22,
+  "provenanceChecks": 121,
+  "exactOriginalLineChecks": 121,
+  "protectedFacts": 215,
+  "protectedFileHashes": 212,
+  "absentFacts": [
+    "consumer/agents",
+    "consumer/skills",
+    "workspace/injection-executed.txt"
+  ],
+  "totalQueryElapsedMs": 28952,
+  "totalMeasurementElapsedMs": 30440,
+  "costByQueryKindMs": {
+    "keywords": 13213,
+    "sentence": 14202,
+    "chinese": 1537
+  },
+  "c04CopyHits": 8,
+  "c04UniqueSupportingSourceTuples": 2,
+  "c04RepeatedSupportingHits": 6,
+  "packageManifestPath": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/baseline/package-manifest.json",
+  "packageHashBinding": {
+    "tarball": "dea321f1fc9fb030fc18af398bcdb796d8cec7473c085e23be97eb3ca59aded6",
+    "cli": "dc1fae834fb9933c1d702d99bee3196e578f661079046dfa10a97e2acc0426a2",
+    "agent": "7e8edba317dde8758d3f238e1845fecb6206d93c00667df4ab8cbe72e7f270e4"
+  },
+  "lineChecks": [
+    {
+      "rawPrefix": "01-C01-healthy-keywords-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/retry-legacy.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "01-C01-healthy-keywords-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/retry-current.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "01-C01-healthy-keywords-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-agenda.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "01-C01-healthy-keywords-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-dashboard.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "01-C01-healthy-keywords-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-glossary.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "02-C01-healthy-keywords-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/retry-legacy.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "02-C01-healthy-keywords-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/retry-current.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "02-C01-healthy-keywords-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-agenda.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "02-C01-healthy-keywords-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-dashboard.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "02-C01-healthy-keywords-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-glossary.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "02-C01-healthy-keywords-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-style-guide.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "02-C01-healthy-keywords-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-test-plan.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "02-C01-healthy-keywords-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/pool.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "02-C01-healthy-keywords-10",
+      "id": "learning:shared:30000000-0000-4000-8000-000000000001",
+      "lineStart": 2,
+      "lineEnd": 4,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "02-C01-healthy-keywords-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/backoff-copy.md",
+      "lineStart": 6,
+      "lineEnd": 8,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "03-C01-healthy-sentence-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/retry-current.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "03-C01-healthy-sentence-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/drain-long.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "03-C01-healthy-sentence-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/retry-legacy.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "03-C01-healthy-sentence-5",
+      "id": "learning:shared:30000000-0000-4000-8000-000000000001",
+      "lineStart": 2,
+      "lineEnd": 4,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "03-C01-healthy-sentence-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/pool.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "04-C01-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/retry-current.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "04-C01-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/drain-long.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "04-C01-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/retry-legacy.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "04-C01-healthy-sentence-10",
+      "id": "learning:shared:30000000-0000-4000-8000-000000000001",
+      "lineStart": 2,
+      "lineEnd": 4,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "04-C01-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/pool.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "04-C01-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/drain-observation.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "04-C01-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/backoff-copy.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "04-C01-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-agenda.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "04-C01-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-dashboard.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "04-C01-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-glossary.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "05-C02-healthy-keywords-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/pool.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "06-C02-healthy-keywords-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/pool.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "07-C02-healthy-sentence-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/drain-long.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "07-C02-healthy-sentence-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/pool.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "07-C02-healthy-sentence-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/backoff-copy.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "07-C02-healthy-sentence-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/injection.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "07-C02-healthy-sentence-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/drain-observation.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "08-C02-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/drain-long.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "08-C02-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/pool.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "08-C02-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/backoff-copy.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "08-C02-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/injection.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "08-C02-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/drain-observation.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "08-C02-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-agenda.md",
+      "lineStart": 6,
+      "lineEnd": 8,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "08-C02-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-dashboard.md",
+      "lineStart": 6,
+      "lineEnd": 8,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "08-C02-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-glossary.md",
+      "lineStart": 6,
+      "lineEnd": 8,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "08-C02-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-style-guide.md",
+      "lineStart": 6,
+      "lineEnd": 8,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "08-C02-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-test-plan.md",
+      "lineStart": 6,
+      "lineEnd": 8,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "09-C02-healthy-chinese-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/pool.md",
+      "lineStart": 9,
+      "lineEnd": 11,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "10-C02-healthy-chinese-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/pool.md",
+      "lineStart": 9,
+      "lineEnd": 11,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "11-C03-healthy-keywords-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/drain-observation.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "11-C03-healthy-keywords-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/drain-long.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "11-C03-healthy-keywords-5",
+      "id": "learning:shared:30000000-0000-4000-8000-000000000001",
+      "lineStart": 2,
+      "lineEnd": 4,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "12-C03-healthy-keywords-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/drain-observation.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "12-C03-healthy-keywords-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/drain-long.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "12-C03-healthy-keywords-10",
+      "id": "learning:shared:30000000-0000-4000-8000-000000000001",
+      "lineStart": 2,
+      "lineEnd": 4,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "13-C03-healthy-sentence-5",
+      "id": "learning:shared:30000000-0000-4000-8000-000000000001",
+      "lineStart": 2,
+      "lineEnd": 4,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "13-C03-healthy-sentence-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/drain-long.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "13-C03-healthy-sentence-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/drain-observation.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "13-C03-healthy-sentence-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/retry-current.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "13-C03-healthy-sentence-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/retry-legacy.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "14-C03-healthy-sentence-10",
+      "id": "learning:shared:30000000-0000-4000-8000-000000000001",
+      "lineStart": 2,
+      "lineEnd": 4,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "14-C03-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/drain-long.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "14-C03-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/drain-observation.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "14-C03-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/retry-current.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "14-C03-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/retry-legacy.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "14-C03-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/pool.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "14-C03-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/backoff-copy.md",
+      "lineStart": 6,
+      "lineEnd": 8,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "14-C03-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/injection.md",
+      "lineStart": 6,
+      "lineEnd": 8,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "14-C03-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-agenda.md",
+      "lineStart": 6,
+      "lineEnd": 8,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "14-C03-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-dashboard.md",
+      "lineStart": 6,
+      "lineEnd": 8,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "15-C04-healthy-keywords-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/backoff-copy.md",
+      "lineStart": 2,
+      "lineEnd": 4,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "15-C04-healthy-keywords-5",
+      "id": "learning:shared:30000000-0000-4000-8000-000000000002",
+      "lineStart": 3,
+      "lineEnd": 5,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "16-C04-healthy-keywords-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/backoff-copy.md",
+      "lineStart": 2,
+      "lineEnd": 4,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "16-C04-healthy-keywords-10",
+      "id": "learning:shared:30000000-0000-4000-8000-000000000002",
+      "lineStart": 3,
+      "lineEnd": 5,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "17-C04-healthy-sentence-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/backoff-copy.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "17-C04-healthy-sentence-5",
+      "id": "learning:shared:30000000-0000-4000-8000-000000000002",
+      "lineStart": 2,
+      "lineEnd": 4,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "17-C04-healthy-sentence-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/pool.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "17-C04-healthy-sentence-5",
+      "id": "learning:atlas-payments:30000000-0000-4000-8000-000000000003",
+      "lineStart": 2,
+      "lineEnd": 4,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "17-C04-healthy-sentence-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/drain-long.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "18-C04-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/backoff-copy.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "18-C04-healthy-sentence-10",
+      "id": "learning:shared:30000000-0000-4000-8000-000000000002",
+      "lineStart": 2,
+      "lineEnd": 4,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "18-C04-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/pool.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "18-C04-healthy-sentence-10",
+      "id": "learning:atlas-payments:30000000-0000-4000-8000-000000000003",
+      "lineStart": 2,
+      "lineEnd": 4,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "18-C04-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/drain-long.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "18-C04-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/drain-observation.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "18-C04-healthy-sentence-10",
+      "id": "learning:shared:30000000-0000-4000-8000-000000000001",
+      "lineStart": 2,
+      "lineEnd": 4,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "18-C04-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/injection.md",
+      "lineStart": 6,
+      "lineEnd": 8,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "18-C04-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-agenda.md",
+      "lineStart": 6,
+      "lineEnd": 8,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "18-C04-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-dashboard.md",
+      "lineStart": 6,
+      "lineEnd": 8,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "19-C05-healthy-keywords-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/injection.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "20-C05-healthy-keywords-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/injection.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "21-C05-healthy-sentence-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/drain-long.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "21-C05-healthy-sentence-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/retry-current.md",
+      "lineStart": 7,
+      "lineEnd": 9,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "21-C05-healthy-sentence-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/pool.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "21-C05-healthy-sentence-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/injection.md",
+      "lineStart": 4,
+      "lineEnd": 6,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "21-C05-healthy-sentence-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-agenda.md",
+      "lineStart": 6,
+      "lineEnd": 8,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "22-C05-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/drain-long.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "22-C05-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/retry-current.md",
+      "lineStart": 7,
+      "lineEnd": 9,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "22-C05-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/pool.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "22-C05-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/injection.md",
+      "lineStart": 4,
+      "lineEnd": 6,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "22-C05-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-agenda.md",
+      "lineStart": 6,
+      "lineEnd": 8,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "22-C05-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-dashboard.md",
+      "lineStart": 6,
+      "lineEnd": 8,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "22-C05-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-glossary.md",
+      "lineStart": 6,
+      "lineEnd": 8,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "22-C05-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-style-guide.md",
+      "lineStart": 6,
+      "lineEnd": 8,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "22-C05-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-test-plan.md",
+      "lineStart": 6,
+      "lineEnd": 8,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "22-C05-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/backoff-copy.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "25-C06-healthy-sentence-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/drain-long.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "25-C06-healthy-sentence-5",
+      "id": "learning:shared:30000000-0000-4000-8000-000000000001",
+      "lineStart": 2,
+      "lineEnd": 4,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "25-C06-healthy-sentence-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/pool.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "25-C06-healthy-sentence-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/retry-legacy.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "25-C06-healthy-sentence-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/drain-observation.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "26-C06-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/drain-long.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "26-C06-healthy-sentence-10",
+      "id": "learning:shared:30000000-0000-4000-8000-000000000001",
+      "lineStart": 2,
+      "lineEnd": 4,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "26-C06-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/pool.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "26-C06-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/retry-legacy.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "26-C06-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/drain-observation.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "26-C06-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/injection.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "26-C06-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/retry-current.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "26-C06-healthy-sentence-10",
+      "id": "learning:shared:30000000-0000-4000-8000-000000000002",
+      "lineStart": 2,
+      "lineEnd": 4,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "26-C06-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/backoff-copy.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    },
+    {
+      "rawPrefix": "26-C06-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-agenda.md",
+      "lineStart": 1,
+      "lineEnd": 3,
+      "exactOriginalSlice": true
+    }
+  ],
+  "c04Copies": [
+    {
+      "case": "C04",
+      "rawPrefix": "15-C04-healthy-keywords-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/backoff-copy.md",
+      "tuple": [
+        "6ec78d01758a4fec3859f9884059d3008a46eb69623d523f7464a3d2ad5ceb82",
+        "d54b51b2f0432bbf1f5708509f6ae978a203be8a",
+        "contexts/atlas-payments/docs/backoff-copy.md",
+        "5551df15beb08ec9459dc62d8d941f868dc2cf90d4456fa7b6df03641f46d395"
+      ]
+    },
+    {
+      "case": "C04",
+      "rawPrefix": "15-C04-healthy-keywords-5",
+      "id": "learning:shared:30000000-0000-4000-8000-000000000002",
+      "tuple": [
+        "6ec78d01758a4fec3859f9884059d3008a46eb69623d523f7464a3d2ad5ceb82",
+        "cf573d619178f5b29773ac7c616a231e789eeb75",
+        "learnings/shared/30000000-0000-4000-8000-000000000002.md",
+        "bc16b2ce6f63827ccf704d1b7d7c93d202beffc9ecd6fbe0130b917e2644165a"
+      ]
+    },
+    {
+      "case": "C04",
+      "rawPrefix": "16-C04-healthy-keywords-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/backoff-copy.md",
+      "tuple": [
+        "6ec78d01758a4fec3859f9884059d3008a46eb69623d523f7464a3d2ad5ceb82",
+        "d54b51b2f0432bbf1f5708509f6ae978a203be8a",
+        "contexts/atlas-payments/docs/backoff-copy.md",
+        "5551df15beb08ec9459dc62d8d941f868dc2cf90d4456fa7b6df03641f46d395"
+      ]
+    },
+    {
+      "case": "C04",
+      "rawPrefix": "16-C04-healthy-keywords-10",
+      "id": "learning:shared:30000000-0000-4000-8000-000000000002",
+      "tuple": [
+        "6ec78d01758a4fec3859f9884059d3008a46eb69623d523f7464a3d2ad5ceb82",
+        "cf573d619178f5b29773ac7c616a231e789eeb75",
+        "learnings/shared/30000000-0000-4000-8000-000000000002.md",
+        "bc16b2ce6f63827ccf704d1b7d7c93d202beffc9ecd6fbe0130b917e2644165a"
+      ]
+    },
+    {
+      "case": "C04",
+      "rawPrefix": "17-C04-healthy-sentence-5",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/backoff-copy.md",
+      "tuple": [
+        "6ec78d01758a4fec3859f9884059d3008a46eb69623d523f7464a3d2ad5ceb82",
+        "d54b51b2f0432bbf1f5708509f6ae978a203be8a",
+        "contexts/atlas-payments/docs/backoff-copy.md",
+        "5551df15beb08ec9459dc62d8d941f868dc2cf90d4456fa7b6df03641f46d395"
+      ]
+    },
+    {
+      "case": "C04",
+      "rawPrefix": "17-C04-healthy-sentence-5",
+      "id": "learning:shared:30000000-0000-4000-8000-000000000002",
+      "tuple": [
+        "6ec78d01758a4fec3859f9884059d3008a46eb69623d523f7464a3d2ad5ceb82",
+        "cf573d619178f5b29773ac7c616a231e789eeb75",
+        "learnings/shared/30000000-0000-4000-8000-000000000002.md",
+        "bc16b2ce6f63827ccf704d1b7d7c93d202beffc9ecd6fbe0130b917e2644165a"
+      ]
+    },
+    {
+      "case": "C04",
+      "rawPrefix": "18-C04-healthy-sentence-10",
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/backoff-copy.md",
+      "tuple": [
+        "6ec78d01758a4fec3859f9884059d3008a46eb69623d523f7464a3d2ad5ceb82",
+        "d54b51b2f0432bbf1f5708509f6ae978a203be8a",
+        "contexts/atlas-payments/docs/backoff-copy.md",
+        "5551df15beb08ec9459dc62d8d941f868dc2cf90d4456fa7b6df03641f46d395"
+      ]
+    },
+    {
+      "case": "C04",
+      "rawPrefix": "18-C04-healthy-sentence-10",
+      "id": "learning:shared:30000000-0000-4000-8000-000000000002",
+      "tuple": [
+        "6ec78d01758a4fec3859f9884059d3008a46eb69623d523f7464a3d2ad5ceb82",
+        "cf573d619178f5b29773ac7c616a231e789eeb75",
+        "learnings/shared/30000000-0000-4000-8000-000000000002.md",
+        "bc16b2ce6f63827ccf704d1b7d7c93d202beffc9ecd6fbe0130b917e2644165a"
+      ]
+    }
+  ],
+  "productAcceptance": "NOT_CLAIMED",
+  "nativeAgentAnswer": "UNVERIFIED"
+}

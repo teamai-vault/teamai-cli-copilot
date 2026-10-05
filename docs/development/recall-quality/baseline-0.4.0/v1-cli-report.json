@@ -1,0 +1,2054 @@
+{
+  "schemaVersion": 1,
+  "kind": "deterministic-public-cli",
+  "declaredSourceRevision": "0fb99a7b065de71eb683d774231b518971b57e8c",
+  "package": {
+    "packageRoot": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/baseline-installed/node_modules/teamai-cli-copilot",
+    "cli": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+    "cliSha256": "dc1fae834fb9933c1d702d99bee3196e578f661079046dfa10a97e2acc0426a2",
+    "agentSha256": "7e8edba317dde8758d3f238e1845fecb6206d93c00667df4ab8cbe72e7f270e4",
+    "version": "0.4.0",
+    "tarballSha256": "UNVERIFIED: bind this installation to the coordinator package manifest"
+  },
+  "fixture": {
+    "fixtureVersion": "recall-quality-30-v1",
+    "files": [
+      {
+        "path": "cases.json",
+        "bytes": 19293,
+        "sha256": "808a6bc315aed6e298c4f7ae8b829b99212169beb3c00873b1132198ab2e9e5e"
+      },
+      {
+        "path": "published/learnings/atlas-payments/30000000-0000-4000-8000-000000000003.md",
+        "bytes": 264,
+        "sha256": "897f4e5638c943c513001a2b220a79054e987e708383cfbb29dc206d83e30de9"
+      },
+      {
+        "path": "published/learnings/shared/30000000-0000-4000-8000-000000000001.md",
+        "bytes": 392,
+        "sha256": "f8ecf5350cfa9eb068cb2e3aa602f047fde5ab6b362028e363341d90924d0148"
+      },
+      {
+        "path": "published/learnings/shared/30000000-0000-4000-8000-000000000002.md",
+        "bytes": 283,
+        "sha256": "bc16b2ce6f63827ccf704d1b7d7c93d202beffc9ecd6fbe0130b917e2644165a"
+      },
+      {
+        "path": "resource/.github/plugin/marketplace.json",
+        "bytes": 248,
+        "sha256": "e2fb24242f3c17e6d2e75231c6793d7c3a6f75401a91eaeb89ad8e441e1d8ed2"
+      },
+      {
+        "path": "resource/contexts/atlas-other/docs/inactive.md",
+        "bytes": 365,
+        "sha256": "4d44a1cc92a5fa74daae531abfc4131b8e14f31e09ff5ae29300f0f6fcd2ef83"
+      },
+      {
+        "path": "resource/contexts/atlas-payments/docs/backoff-copy.md",
+        "bytes": 355,
+        "sha256": "5551df15beb08ec9459dc62d8d941f868dc2cf90d4456fa7b6df03641f46d395"
+      },
+      {
+        "path": "resource/contexts/atlas-payments/docs/drain-long.md",
+        "bytes": 2940,
+        "sha256": "d564c627c6887092bedc67de3b3adbbfb92e1f4cccab81a29f670e7cc024934d"
+      },
+      {
+        "path": "resource/contexts/atlas-payments/docs/drain-observation.md",
+        "bytes": 342,
+        "sha256": "4957fa3b6f2b9e9ff53cf504c7ac5bd76b44d2a7cd169829c15627e3a7f4824a"
+      },
+      {
+        "path": "resource/contexts/atlas-payments/docs/injection.md",
+        "bytes": 502,
+        "sha256": "23f26da67f87b2e928bd6fe11d4ee339a393423a3374f8828e0b71f0dfd801ba"
+      },
+      {
+        "path": "resource/contexts/atlas-payments/docs/noise-agenda.md",
+        "bytes": 458,
+        "sha256": "8f80b37acd9450186b60e0946c6a3d3236f3c4d686111447aaee2e50444efcb8"
+      },
+      {
+        "path": "resource/contexts/atlas-payments/docs/noise-dashboard.md",
+        "bytes": 470,
+        "sha256": "4c0434f00f17c4d904db32c1305f047a7fbda6c05ce0b5ae7b931897a6229a12"
+      },
+      {
+        "path": "resource/contexts/atlas-payments/docs/noise-glossary.md",
+        "bytes": 466,
+        "sha256": "3a7ba10942cf413d429f51ebbce748b86e88b289c04f2d8fe51b91e9107fbb6e"
+      },
+      {
+        "path": "resource/contexts/atlas-payments/docs/noise-style-guide.md",
+        "bytes": 478,
+        "sha256": "b9e8ee47582f0b9d065adc5378527e9e72cc804ff732be30f9c9fbe9bd613393"
+      },
+      {
+        "path": "resource/contexts/atlas-payments/docs/noise-test-plan.md",
+        "bytes": 470,
+        "sha256": "3d0edbafa134fd570107015a5da48143a6d55e77fbf1db7f31fee3c1544d2004"
+      },
+      {
+        "path": "resource/contexts/atlas-payments/docs/pool.md",
+        "bytes": 477,
+        "sha256": "b0c02ef89363e69e9c7b96a39b35a06e61ec3d3b1d7d74371daa1453d5e96b09"
+      },
+      {
+        "path": "resource/contexts/atlas-payments/docs/retry-current.md",
+        "bytes": 625,
+        "sha256": "dcd44daddf237eb926d470cd8a7bb3564f04707ad189d6577e32bd4d4df5b3ca"
+      },
+      {
+        "path": "resource/contexts/atlas-payments/docs/retry-legacy.md",
+        "bytes": 485,
+        "sha256": "f4d992e7cf9a00fea4e55a3563e204e34d407248c99d9ab468e6fec3255f418a"
+      },
+      {
+        "path": "resource/manifest/projects.yaml",
+        "bytes": 240,
+        "sha256": "6f8405f4d9d945909641b0274581d292261e3cd9ac6f034fdb96e2fd4df35490"
+      },
+      {
+        "path": "resource/plugins/common/plugin.json",
+        "bytes": 182,
+        "sha256": "f6d21b002e1798b9d199e8033f4f2dc53cb5dde1b69e850a1f9b1728a89ab3ff"
+      },
+      {
+        "path": "resource/plugins/quality/plugin.json",
+        "bytes": 170,
+        "sha256": "e07e569b6e8854b29ac8574f845692aed6b8e6455152df1724a22050eadeded0"
+      },
+      {
+        "path": "sources.json",
+        "bytes": 5571,
+        "sha256": "f823b98502ca81d6939408e2e0f3d1aa94c53f1bbfb2aca5f7af9fbdacc8fc59"
+      }
+    ],
+    "rawManifestSha256": "37c2bbb2264b11755d05710ecaba1a3f94d10217cae6c6c556c18abd533fbeb7"
+  },
+  "resourceRevision": "21cce3e7529f728123e8d61d13ad670003886f09",
+  "learningsRevision": "cf573d619178f5b29773ac7c616a231e789eeb75",
+  "sourceHash": "fe0b2dedc4df21b75fc8a62a20622ba77eb348e27ca2fb4cb5e5e65fb00e6829",
+  "scope": "workspace",
+  "logicalProject": "atlas-payments",
+  "platform": {
+    "platform": "win32",
+    "architecture": "x64",
+    "node": "v24.15.0"
+  },
+  "copilotRuntime": "UNVERIFIED: no consumer ran",
+  "model": "NOT_APPLICABLE",
+  "protocols": [
+    {
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "--version"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 1191,
+      "stdout": "0.4.0\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "recall",
+        "--help"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 239,
+      "stdout": "teamai <command> [options]\n\nCommands:\n  init [--marketplace <source>] [--role api|ios|aos|qa|design]\n  projects [list|set <ids...>]\n  learning share <file> [--project <id>|--shared] [--tags <tag...>]\n  learning pending [--json]\n  learning retry <id>\n  recall <query> [--scope auto|user|workspace] [--project <id>] [--limit <n>] [--include-pending] [--json]\n  Example: teamai recall 支付 重试\n  sync\n  role list\n  role set <role>\n  skill list [--tag <tag>] [--owner <owner>] [--source plugin|standalone]\n  skill show <name>\n  skill install <name...> [--yes]\n  skill install --tag <tag> [--yes]\n  skill remove <name...>\n  skill contribute <path> --owner <owner> [--tags <tag...>] --target standalone|plugin [--plugin <plugin>]\n  tags list\n  status [--resources] [--json]\n  doctor [--json]\n\nGlobal options:\n  --dry-run   Preview writes and Copilot mutations\n  --help      Show help\n  --version   Show version\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "projects",
+        "list"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 645,
+      "stdout": "",
+      "stderr": "ERROR: Marketplace skills.yaml is missing.\n"
+    }
+  ],
+  "queryCount": 34,
+  "totalQueryElapsedMs": 23435,
+  "totalMeasurementElapsedMs": 25826,
+  "protectedRoots": "PASS",
+  "observations": [
+    {
+      "case": "C01",
+      "profile": "healthy",
+      "queryKind": "keywords",
+      "query": "ACME_E_BARRIER_412: retry budget exhausted for tenant=demo-7 lease expired idempotency retry",
+      "requestedLimit": 5,
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "recall",
+        "ACME_E_BARRIER_412: retry budget exhausted for tenant=demo-7 lease expired idempotency retry",
+        "--scope",
+        "workspace",
+        "--project",
+        "atlas-payments",
+        "--limit",
+        "5",
+        "--json"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 564,
+      "stdout": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Marketplace skills.yaml is missing.\"}}\n",
+      "stderr": "",
+      "rawPrefix": "01-C01-healthy-keywords-5",
+      "response": {
+        "schemaVersion": 1,
+        "error": {
+          "code": "RECALL_FAILED",
+          "message": "Marketplace skills.yaml is missing."
+        }
+      },
+      "jsonError": {
+        "schemaVersion": 1,
+        "code": "RECALL_FAILED",
+        "message": "Marketplace skills.yaml is missing.",
+        "validSchema": true
+      },
+      "protocol": "FAIL",
+      "provenance": [],
+      "evidenceCoverage": "FAIL",
+      "requiredGroups": [
+        {
+          "alternatives": [
+            "doc:atlas-payments:contexts/atlas-payments/docs/retry-current.md"
+          ],
+          "covered": false
+        }
+      ],
+      "firstThree": [],
+      "firstThreeWeakCandidates": [],
+      "nativeOriginalReads": "NOT_APPLICABLE",
+      "permittedFixtureFileCount": 15,
+      "cliOriginalFileReadCount": "UNVERIFIED: no instrumentation",
+      "finalAnswer": "UNVERIFIED: CLI returns candidates, not a model answer",
+      "modelCost": "NOT_APPLICABLE",
+      "validationCostBreakdown": "UNVERIFIED: only total process elapsedMs is observed"
+    },
+    {
+      "case": "C01",
+      "profile": "healthy",
+      "queryKind": "keywords",
+      "query": "ACME_E_BARRIER_412: retry budget exhausted for tenant=demo-7 lease expired idempotency retry",
+      "requestedLimit": 10,
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "recall",
+        "ACME_E_BARRIER_412: retry budget exhausted for tenant=demo-7 lease expired idempotency retry",
+        "--scope",
+        "workspace",
+        "--project",
+        "atlas-payments",
+        "--limit",
+        "10",
+        "--json"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 557,
+      "stdout": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Marketplace skills.yaml is missing.\"}}\n",
+      "stderr": "",
+      "rawPrefix": "02-C01-healthy-keywords-10",
+      "response": {
+        "schemaVersion": 1,
+        "error": {
+          "code": "RECALL_FAILED",
+          "message": "Marketplace skills.yaml is missing."
+        }
+      },
+      "jsonError": {
+        "schemaVersion": 1,
+        "code": "RECALL_FAILED",
+        "message": "Marketplace skills.yaml is missing.",
+        "validSchema": true
+      },
+      "protocol": "FAIL",
+      "provenance": [],
+      "evidenceCoverage": "FAIL",
+      "requiredGroups": [
+        {
+          "alternatives": [
+            "doc:atlas-payments:contexts/atlas-payments/docs/retry-current.md"
+          ],
+          "covered": false
+        }
+      ],
+      "firstThree": [],
+      "firstThreeWeakCandidates": [],
+      "nativeOriginalReads": "NOT_APPLICABLE",
+      "permittedFixtureFileCount": 15,
+      "cliOriginalFileReadCount": "UNVERIFIED: no instrumentation",
+      "finalAnswer": "UNVERIFIED: CLI returns candidates, not a model answer",
+      "modelCost": "NOT_APPLICABLE",
+      "validationCostBreakdown": "UNVERIFIED: only total process elapsedMs is observed"
+    },
+    {
+      "case": "C01",
+      "profile": "healthy",
+      "queryKind": "sentence",
+      "query": "In atlas-payments, NimbusQueue 2.1 reports ACME_E_BARRIER_412: retry budget exhausted for tenant=demo-7. Under what conditions is a retry safe and when must it be refused?",
+      "requestedLimit": 5,
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "recall",
+        "In atlas-payments, NimbusQueue 2.1 reports ACME_E_BARRIER_412: retry budget exhausted for tenant=demo-7. Under what conditions is a retry safe and when must it be refused?",
+        "--scope",
+        "workspace",
+        "--project",
+        "atlas-payments",
+        "--limit",
+        "5",
+        "--json"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 568,
+      "stdout": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Marketplace skills.yaml is missing.\"}}\n",
+      "stderr": "",
+      "rawPrefix": "03-C01-healthy-sentence-5",
+      "response": {
+        "schemaVersion": 1,
+        "error": {
+          "code": "RECALL_FAILED",
+          "message": "Marketplace skills.yaml is missing."
+        }
+      },
+      "jsonError": {
+        "schemaVersion": 1,
+        "code": "RECALL_FAILED",
+        "message": "Marketplace skills.yaml is missing.",
+        "validSchema": true
+      },
+      "protocol": "FAIL",
+      "provenance": [],
+      "evidenceCoverage": "FAIL",
+      "requiredGroups": [
+        {
+          "alternatives": [
+            "doc:atlas-payments:contexts/atlas-payments/docs/retry-current.md"
+          ],
+          "covered": false
+        }
+      ],
+      "firstThree": [],
+      "firstThreeWeakCandidates": [],
+      "nativeOriginalReads": "NOT_APPLICABLE",
+      "permittedFixtureFileCount": 15,
+      "cliOriginalFileReadCount": "UNVERIFIED: no instrumentation",
+      "finalAnswer": "UNVERIFIED: CLI returns candidates, not a model answer",
+      "modelCost": "NOT_APPLICABLE",
+      "validationCostBreakdown": "UNVERIFIED: only total process elapsedMs is observed"
+    },
+    {
+      "case": "C01",
+      "profile": "healthy",
+      "queryKind": "sentence",
+      "query": "In atlas-payments, NimbusQueue 2.1 reports ACME_E_BARRIER_412: retry budget exhausted for tenant=demo-7. Under what conditions is a retry safe and when must it be refused?",
+      "requestedLimit": 10,
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "recall",
+        "In atlas-payments, NimbusQueue 2.1 reports ACME_E_BARRIER_412: retry budget exhausted for tenant=demo-7. Under what conditions is a retry safe and when must it be refused?",
+        "--scope",
+        "workspace",
+        "--project",
+        "atlas-payments",
+        "--limit",
+        "10",
+        "--json"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 552,
+      "stdout": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Marketplace skills.yaml is missing.\"}}\n",
+      "stderr": "",
+      "rawPrefix": "04-C01-healthy-sentence-10",
+      "response": {
+        "schemaVersion": 1,
+        "error": {
+          "code": "RECALL_FAILED",
+          "message": "Marketplace skills.yaml is missing."
+        }
+      },
+      "jsonError": {
+        "schemaVersion": 1,
+        "code": "RECALL_FAILED",
+        "message": "Marketplace skills.yaml is missing.",
+        "validSchema": true
+      },
+      "protocol": "FAIL",
+      "provenance": [],
+      "evidenceCoverage": "FAIL",
+      "requiredGroups": [
+        {
+          "alternatives": [
+            "doc:atlas-payments:contexts/atlas-payments/docs/retry-current.md"
+          ],
+          "covered": false
+        }
+      ],
+      "firstThree": [],
+      "firstThreeWeakCandidates": [],
+      "nativeOriginalReads": "NOT_APPLICABLE",
+      "permittedFixtureFileCount": 15,
+      "cliOriginalFileReadCount": "UNVERIFIED: no instrumentation",
+      "finalAnswer": "UNVERIFIED: CLI returns candidates, not a model answer",
+      "modelCost": "NOT_APPLICABLE",
+      "validationCostBreakdown": "UNVERIFIED: only total process elapsedMs is observed"
+    },
+    {
+      "case": "C02",
+      "profile": "healthy",
+      "queryKind": "keywords",
+      "query": "connection pool saturation",
+      "requestedLimit": 5,
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "recall",
+        "connection pool saturation",
+        "--scope",
+        "workspace",
+        "--project",
+        "atlas-payments",
+        "--limit",
+        "5",
+        "--json"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 553,
+      "stdout": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Marketplace skills.yaml is missing.\"}}\n",
+      "stderr": "",
+      "rawPrefix": "05-C02-healthy-keywords-5",
+      "response": {
+        "schemaVersion": 1,
+        "error": {
+          "code": "RECALL_FAILED",
+          "message": "Marketplace skills.yaml is missing."
+        }
+      },
+      "jsonError": {
+        "schemaVersion": 1,
+        "code": "RECALL_FAILED",
+        "message": "Marketplace skills.yaml is missing.",
+        "validSchema": true
+      },
+      "protocol": "FAIL",
+      "provenance": [],
+      "evidenceCoverage": "FAIL",
+      "requiredGroups": [
+        {
+          "alternatives": [
+            "doc:atlas-payments:contexts/atlas-payments/docs/pool.md"
+          ],
+          "covered": false
+        }
+      ],
+      "firstThree": [],
+      "firstThreeWeakCandidates": [],
+      "nativeOriginalReads": "NOT_APPLICABLE",
+      "permittedFixtureFileCount": 15,
+      "cliOriginalFileReadCount": "UNVERIFIED: no instrumentation",
+      "finalAnswer": "UNVERIFIED: CLI returns candidates, not a model answer",
+      "modelCost": "NOT_APPLICABLE",
+      "validationCostBreakdown": "UNVERIFIED: only total process elapsedMs is observed"
+    },
+    {
+      "case": "C02",
+      "profile": "healthy",
+      "queryKind": "keywords",
+      "query": "connection pool saturation",
+      "requestedLimit": 10,
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "recall",
+        "connection pool saturation",
+        "--scope",
+        "workspace",
+        "--project",
+        "atlas-payments",
+        "--limit",
+        "10",
+        "--json"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 576,
+      "stdout": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Marketplace skills.yaml is missing.\"}}\n",
+      "stderr": "",
+      "rawPrefix": "06-C02-healthy-keywords-10",
+      "response": {
+        "schemaVersion": 1,
+        "error": {
+          "code": "RECALL_FAILED",
+          "message": "Marketplace skills.yaml is missing."
+        }
+      },
+      "jsonError": {
+        "schemaVersion": 1,
+        "code": "RECALL_FAILED",
+        "message": "Marketplace skills.yaml is missing.",
+        "validSchema": true
+      },
+      "protocol": "FAIL",
+      "provenance": [],
+      "evidenceCoverage": "FAIL",
+      "requiredGroups": [
+        {
+          "alternatives": [
+            "doc:atlas-payments:contexts/atlas-payments/docs/pool.md"
+          ],
+          "covered": false
+        }
+      ],
+      "firstThree": [],
+      "firstThreeWeakCandidates": [],
+      "nativeOriginalReads": "NOT_APPLICABLE",
+      "permittedFixtureFileCount": 15,
+      "cliOriginalFileReadCount": "UNVERIFIED: no instrumentation",
+      "finalAnswer": "UNVERIFIED: CLI returns candidates, not a model answer",
+      "modelCost": "NOT_APPLICABLE",
+      "validationCostBreakdown": "UNVERIFIED: only total process elapsedMs is observed"
+    },
+    {
+      "case": "C02",
+      "profile": "healthy",
+      "queryKind": "sentence",
+      "query": "Callers are queued waiting for connections. Is the pool saturated and should we enlarge it immediately?",
+      "requestedLimit": 5,
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "recall",
+        "Callers are queued waiting for connections. Is the pool saturated and should we enlarge it immediately?",
+        "--scope",
+        "workspace",
+        "--project",
+        "atlas-payments",
+        "--limit",
+        "5",
+        "--json"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 536,
+      "stdout": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Marketplace skills.yaml is missing.\"}}\n",
+      "stderr": "",
+      "rawPrefix": "07-C02-healthy-sentence-5",
+      "response": {
+        "schemaVersion": 1,
+        "error": {
+          "code": "RECALL_FAILED",
+          "message": "Marketplace skills.yaml is missing."
+        }
+      },
+      "jsonError": {
+        "schemaVersion": 1,
+        "code": "RECALL_FAILED",
+        "message": "Marketplace skills.yaml is missing.",
+        "validSchema": true
+      },
+      "protocol": "FAIL",
+      "provenance": [],
+      "evidenceCoverage": "FAIL",
+      "requiredGroups": [
+        {
+          "alternatives": [
+            "doc:atlas-payments:contexts/atlas-payments/docs/pool.md"
+          ],
+          "covered": false
+        }
+      ],
+      "firstThree": [],
+      "firstThreeWeakCandidates": [],
+      "nativeOriginalReads": "NOT_APPLICABLE",
+      "permittedFixtureFileCount": 15,
+      "cliOriginalFileReadCount": "UNVERIFIED: no instrumentation",
+      "finalAnswer": "UNVERIFIED: CLI returns candidates, not a model answer",
+      "modelCost": "NOT_APPLICABLE",
+      "validationCostBreakdown": "UNVERIFIED: only total process elapsedMs is observed"
+    },
+    {
+      "case": "C02",
+      "profile": "healthy",
+      "queryKind": "sentence",
+      "query": "Callers are queued waiting for connections. Is the pool saturated and should we enlarge it immediately?",
+      "requestedLimit": 10,
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "recall",
+        "Callers are queued waiting for connections. Is the pool saturated and should we enlarge it immediately?",
+        "--scope",
+        "workspace",
+        "--project",
+        "atlas-payments",
+        "--limit",
+        "10",
+        "--json"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 609,
+      "stdout": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Marketplace skills.yaml is missing.\"}}\n",
+      "stderr": "",
+      "rawPrefix": "08-C02-healthy-sentence-10",
+      "response": {
+        "schemaVersion": 1,
+        "error": {
+          "code": "RECALL_FAILED",
+          "message": "Marketplace skills.yaml is missing."
+        }
+      },
+      "jsonError": {
+        "schemaVersion": 1,
+        "code": "RECALL_FAILED",
+        "message": "Marketplace skills.yaml is missing.",
+        "validSchema": true
+      },
+      "protocol": "FAIL",
+      "provenance": [],
+      "evidenceCoverage": "FAIL",
+      "requiredGroups": [
+        {
+          "alternatives": [
+            "doc:atlas-payments:contexts/atlas-payments/docs/pool.md"
+          ],
+          "covered": false
+        }
+      ],
+      "firstThree": [],
+      "firstThreeWeakCandidates": [],
+      "nativeOriginalReads": "NOT_APPLICABLE",
+      "permittedFixtureFileCount": 15,
+      "cliOriginalFileReadCount": "UNVERIFIED: no instrumentation",
+      "finalAnswer": "UNVERIFIED: CLI returns candidates, not a model answer",
+      "modelCost": "NOT_APPLICABLE",
+      "validationCostBreakdown": "UNVERIFIED: only total process elapsedMs is observed"
+    },
+    {
+      "case": "C02",
+      "profile": "healthy",
+      "queryKind": "chinese",
+      "query": "连接池耗尽",
+      "requestedLimit": 5,
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "recall",
+        "连接池耗尽",
+        "--scope",
+        "workspace",
+        "--project",
+        "atlas-payments",
+        "--limit",
+        "5",
+        "--json"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 577,
+      "stdout": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Marketplace skills.yaml is missing.\"}}\n",
+      "stderr": "",
+      "rawPrefix": "09-C02-healthy-chinese-5",
+      "response": {
+        "schemaVersion": 1,
+        "error": {
+          "code": "RECALL_FAILED",
+          "message": "Marketplace skills.yaml is missing."
+        }
+      },
+      "jsonError": {
+        "schemaVersion": 1,
+        "code": "RECALL_FAILED",
+        "message": "Marketplace skills.yaml is missing.",
+        "validSchema": true
+      },
+      "protocol": "FAIL",
+      "provenance": [],
+      "evidenceCoverage": "FAIL",
+      "requiredGroups": [
+        {
+          "alternatives": [
+            "doc:atlas-payments:contexts/atlas-payments/docs/pool.md"
+          ],
+          "covered": false
+        }
+      ],
+      "firstThree": [],
+      "firstThreeWeakCandidates": [],
+      "nativeOriginalReads": "NOT_APPLICABLE",
+      "permittedFixtureFileCount": 15,
+      "cliOriginalFileReadCount": "UNVERIFIED: no instrumentation",
+      "finalAnswer": "UNVERIFIED: CLI returns candidates, not a model answer",
+      "modelCost": "NOT_APPLICABLE",
+      "validationCostBreakdown": "UNVERIFIED: only total process elapsedMs is observed"
+    },
+    {
+      "case": "C02",
+      "profile": "healthy",
+      "queryKind": "chinese",
+      "query": "连接池耗尽",
+      "requestedLimit": 10,
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "recall",
+        "连接池耗尽",
+        "--scope",
+        "workspace",
+        "--project",
+        "atlas-payments",
+        "--limit",
+        "10",
+        "--json"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 572,
+      "stdout": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Marketplace skills.yaml is missing.\"}}\n",
+      "stderr": "",
+      "rawPrefix": "10-C02-healthy-chinese-10",
+      "response": {
+        "schemaVersion": 1,
+        "error": {
+          "code": "RECALL_FAILED",
+          "message": "Marketplace skills.yaml is missing."
+        }
+      },
+      "jsonError": {
+        "schemaVersion": 1,
+        "code": "RECALL_FAILED",
+        "message": "Marketplace skills.yaml is missing.",
+        "validSchema": true
+      },
+      "protocol": "FAIL",
+      "provenance": [],
+      "evidenceCoverage": "FAIL",
+      "requiredGroups": [
+        {
+          "alternatives": [
+            "doc:atlas-payments:contexts/atlas-payments/docs/pool.md"
+          ],
+          "covered": false
+        }
+      ],
+      "firstThree": [],
+      "firstThreeWeakCandidates": [],
+      "nativeOriginalReads": "NOT_APPLICABLE",
+      "permittedFixtureFileCount": 15,
+      "cliOriginalFileReadCount": "UNVERIFIED: no instrumentation",
+      "finalAnswer": "UNVERIFIED: CLI returns candidates, not a model answer",
+      "modelCost": "NOT_APPLICABLE",
+      "validationCostBreakdown": "UNVERIFIED: only total process elapsedMs is observed"
+    },
+    {
+      "case": "C03",
+      "profile": "healthy",
+      "queryKind": "keywords",
+      "query": "DrainBudgetMs drain completion",
+      "requestedLimit": 5,
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "recall",
+        "DrainBudgetMs drain completion",
+        "--scope",
+        "workspace",
+        "--project",
+        "atlas-payments",
+        "--limit",
+        "5",
+        "--json"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 543,
+      "stdout": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Marketplace skills.yaml is missing.\"}}\n",
+      "stderr": "",
+      "rawPrefix": "11-C03-healthy-keywords-5",
+      "response": {
+        "schemaVersion": 1,
+        "error": {
+          "code": "RECALL_FAILED",
+          "message": "Marketplace skills.yaml is missing."
+        }
+      },
+      "jsonError": {
+        "schemaVersion": 1,
+        "code": "RECALL_FAILED",
+        "message": "Marketplace skills.yaml is missing.",
+        "validSchema": true
+      },
+      "protocol": "FAIL",
+      "provenance": [],
+      "evidenceCoverage": "FAIL",
+      "requiredGroups": [
+        {
+          "alternatives": [
+            "doc:atlas-payments:contexts/atlas-payments/docs/drain-long.md"
+          ],
+          "covered": false
+        },
+        {
+          "alternatives": [
+            "learning:shared:30000000-0000-4000-8000-000000000001"
+          ],
+          "covered": false
+        },
+        {
+          "alternatives": [
+            "doc:atlas-payments:contexts/atlas-payments/docs/drain-observation.md"
+          ],
+          "covered": false
+        }
+      ],
+      "firstThree": [],
+      "firstThreeWeakCandidates": [],
+      "nativeOriginalReads": "NOT_APPLICABLE",
+      "permittedFixtureFileCount": 15,
+      "cliOriginalFileReadCount": "UNVERIFIED: no instrumentation",
+      "finalAnswer": "UNVERIFIED: CLI returns candidates, not a model answer",
+      "modelCost": "NOT_APPLICABLE",
+      "validationCostBreakdown": "UNVERIFIED: only total process elapsedMs is observed"
+    },
+    {
+      "case": "C03",
+      "profile": "healthy",
+      "queryKind": "keywords",
+      "query": "DrainBudgetMs drain completion",
+      "requestedLimit": 10,
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "recall",
+        "DrainBudgetMs drain completion",
+        "--scope",
+        "workspace",
+        "--project",
+        "atlas-payments",
+        "--limit",
+        "10",
+        "--json"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 585,
+      "stdout": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Marketplace skills.yaml is missing.\"}}\n",
+      "stderr": "",
+      "rawPrefix": "12-C03-healthy-keywords-10",
+      "response": {
+        "schemaVersion": 1,
+        "error": {
+          "code": "RECALL_FAILED",
+          "message": "Marketplace skills.yaml is missing."
+        }
+      },
+      "jsonError": {
+        "schemaVersion": 1,
+        "code": "RECALL_FAILED",
+        "message": "Marketplace skills.yaml is missing.",
+        "validSchema": true
+      },
+      "protocol": "FAIL",
+      "provenance": [],
+      "evidenceCoverage": "FAIL",
+      "requiredGroups": [
+        {
+          "alternatives": [
+            "doc:atlas-payments:contexts/atlas-payments/docs/drain-long.md"
+          ],
+          "covered": false
+        },
+        {
+          "alternatives": [
+            "learning:shared:30000000-0000-4000-8000-000000000001"
+          ],
+          "covered": false
+        },
+        {
+          "alternatives": [
+            "doc:atlas-payments:contexts/atlas-payments/docs/drain-observation.md"
+          ],
+          "covered": false
+        }
+      ],
+      "firstThree": [],
+      "firstThreeWeakCandidates": [],
+      "nativeOriginalReads": "NOT_APPLICABLE",
+      "permittedFixtureFileCount": 15,
+      "cliOriginalFileReadCount": "UNVERIFIED: no instrumentation",
+      "finalAnswer": "UNVERIFIED: CLI returns candidates, not a model answer",
+      "modelCost": "NOT_APPLICABLE",
+      "validationCostBreakdown": "UNVERIFIED: only total process elapsedMs is observed"
+    },
+    {
+      "case": "C03",
+      "profile": "healthy",
+      "queryKind": "sentence",
+      "query": "For NimbusQueue 2.1 standard mode on 2026-09-20, what is DrainBudgetMs and what observation establishes drain completion?",
+      "requestedLimit": 5,
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "recall",
+        "For NimbusQueue 2.1 standard mode on 2026-09-20, what is DrainBudgetMs and what observation establishes drain completion?",
+        "--scope",
+        "workspace",
+        "--project",
+        "atlas-payments",
+        "--limit",
+        "5",
+        "--json"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 700,
+      "stdout": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Marketplace skills.yaml is missing.\"}}\n",
+      "stderr": "",
+      "rawPrefix": "13-C03-healthy-sentence-5",
+      "response": {
+        "schemaVersion": 1,
+        "error": {
+          "code": "RECALL_FAILED",
+          "message": "Marketplace skills.yaml is missing."
+        }
+      },
+      "jsonError": {
+        "schemaVersion": 1,
+        "code": "RECALL_FAILED",
+        "message": "Marketplace skills.yaml is missing.",
+        "validSchema": true
+      },
+      "protocol": "FAIL",
+      "provenance": [],
+      "evidenceCoverage": "FAIL",
+      "requiredGroups": [
+        {
+          "alternatives": [
+            "doc:atlas-payments:contexts/atlas-payments/docs/drain-long.md"
+          ],
+          "covered": false
+        },
+        {
+          "alternatives": [
+            "learning:shared:30000000-0000-4000-8000-000000000001"
+          ],
+          "covered": false
+        },
+        {
+          "alternatives": [
+            "doc:atlas-payments:contexts/atlas-payments/docs/drain-observation.md"
+          ],
+          "covered": false
+        }
+      ],
+      "firstThree": [],
+      "firstThreeWeakCandidates": [],
+      "nativeOriginalReads": "NOT_APPLICABLE",
+      "permittedFixtureFileCount": 15,
+      "cliOriginalFileReadCount": "UNVERIFIED: no instrumentation",
+      "finalAnswer": "UNVERIFIED: CLI returns candidates, not a model answer",
+      "modelCost": "NOT_APPLICABLE",
+      "validationCostBreakdown": "UNVERIFIED: only total process elapsedMs is observed"
+    },
+    {
+      "case": "C03",
+      "profile": "healthy",
+      "queryKind": "sentence",
+      "query": "For NimbusQueue 2.1 standard mode on 2026-09-20, what is DrainBudgetMs and what observation establishes drain completion?",
+      "requestedLimit": 10,
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "recall",
+        "For NimbusQueue 2.1 standard mode on 2026-09-20, what is DrainBudgetMs and what observation establishes drain completion?",
+        "--scope",
+        "workspace",
+        "--project",
+        "atlas-payments",
+        "--limit",
+        "10",
+        "--json"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 542,
+      "stdout": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Marketplace skills.yaml is missing.\"}}\n",
+      "stderr": "",
+      "rawPrefix": "14-C03-healthy-sentence-10",
+      "response": {
+        "schemaVersion": 1,
+        "error": {
+          "code": "RECALL_FAILED",
+          "message": "Marketplace skills.yaml is missing."
+        }
+      },
+      "jsonError": {
+        "schemaVersion": 1,
+        "code": "RECALL_FAILED",
+        "message": "Marketplace skills.yaml is missing.",
+        "validSchema": true
+      },
+      "protocol": "FAIL",
+      "provenance": [],
+      "evidenceCoverage": "FAIL",
+      "requiredGroups": [
+        {
+          "alternatives": [
+            "doc:atlas-payments:contexts/atlas-payments/docs/drain-long.md"
+          ],
+          "covered": false
+        },
+        {
+          "alternatives": [
+            "learning:shared:30000000-0000-4000-8000-000000000001"
+          ],
+          "covered": false
+        },
+        {
+          "alternatives": [
+            "doc:atlas-payments:contexts/atlas-payments/docs/drain-observation.md"
+          ],
+          "covered": false
+        }
+      ],
+      "firstThree": [],
+      "firstThreeWeakCandidates": [],
+      "nativeOriginalReads": "NOT_APPLICABLE",
+      "permittedFixtureFileCount": 15,
+      "cliOriginalFileReadCount": "UNVERIFIED: no instrumentation",
+      "finalAnswer": "UNVERIFIED: CLI returns candidates, not a model answer",
+      "modelCost": "NOT_APPLICABLE",
+      "validationCostBreakdown": "UNVERIFIED: only total process elapsedMs is observed"
+    },
+    {
+      "case": "C04",
+      "profile": "healthy",
+      "queryKind": "keywords",
+      "query": "BackoffCapMs jitter",
+      "requestedLimit": 5,
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "recall",
+        "BackoffCapMs jitter",
+        "--scope",
+        "workspace",
+        "--project",
+        "atlas-payments",
+        "--limit",
+        "5",
+        "--json"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 603,
+      "stdout": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Marketplace skills.yaml is missing.\"}}\n",
+      "stderr": "",
+      "rawPrefix": "15-C04-healthy-keywords-5",
+      "response": {
+        "schemaVersion": 1,
+        "error": {
+          "code": "RECALL_FAILED",
+          "message": "Marketplace skills.yaml is missing."
+        }
+      },
+      "jsonError": {
+        "schemaVersion": 1,
+        "code": "RECALL_FAILED",
+        "message": "Marketplace skills.yaml is missing.",
+        "validSchema": true
+      },
+      "protocol": "FAIL",
+      "provenance": [],
+      "evidenceCoverage": "FAIL",
+      "requiredGroups": [
+        {
+          "alternatives": [
+            "doc:atlas-payments:contexts/atlas-payments/docs/backoff-copy.md",
+            "learning:shared:30000000-0000-4000-8000-000000000002"
+          ],
+          "covered": false
+        }
+      ],
+      "firstThree": [],
+      "firstThreeWeakCandidates": [],
+      "nativeOriginalReads": "NOT_APPLICABLE",
+      "permittedFixtureFileCount": 15,
+      "cliOriginalFileReadCount": "UNVERIFIED: no instrumentation",
+      "finalAnswer": "UNVERIFIED: CLI returns candidates, not a model answer",
+      "modelCost": "NOT_APPLICABLE",
+      "validationCostBreakdown": "UNVERIFIED: only total process elapsedMs is observed"
+    },
+    {
+      "case": "C04",
+      "profile": "healthy",
+      "queryKind": "keywords",
+      "query": "BackoffCapMs jitter",
+      "requestedLimit": 10,
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "recall",
+        "BackoffCapMs jitter",
+        "--scope",
+        "workspace",
+        "--project",
+        "atlas-payments",
+        "--limit",
+        "10",
+        "--json"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 776,
+      "stdout": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Marketplace skills.yaml is missing.\"}}\n",
+      "stderr": "",
+      "rawPrefix": "16-C04-healthy-keywords-10",
+      "response": {
+        "schemaVersion": 1,
+        "error": {
+          "code": "RECALL_FAILED",
+          "message": "Marketplace skills.yaml is missing."
+        }
+      },
+      "jsonError": {
+        "schemaVersion": 1,
+        "code": "RECALL_FAILED",
+        "message": "Marketplace skills.yaml is missing.",
+        "validSchema": true
+      },
+      "protocol": "FAIL",
+      "provenance": [],
+      "evidenceCoverage": "FAIL",
+      "requiredGroups": [
+        {
+          "alternatives": [
+            "doc:atlas-payments:contexts/atlas-payments/docs/backoff-copy.md",
+            "learning:shared:30000000-0000-4000-8000-000000000002"
+          ],
+          "covered": false
+        }
+      ],
+      "firstThree": [],
+      "firstThreeWeakCandidates": [],
+      "nativeOriginalReads": "NOT_APPLICABLE",
+      "permittedFixtureFileCount": 15,
+      "cliOriginalFileReadCount": "UNVERIFIED: no instrumentation",
+      "finalAnswer": "UNVERIFIED: CLI returns candidates, not a model answer",
+      "modelCost": "NOT_APPLICABLE",
+      "validationCostBreakdown": "UNVERIFIED: only total process elapsedMs is observed"
+    },
+    {
+      "case": "C04",
+      "profile": "healthy",
+      "queryKind": "sentence",
+      "query": "What is BackoffCapMs and which jitter policy is documented in the project excerpt and shared Learning?",
+      "requestedLimit": 5,
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "recall",
+        "What is BackoffCapMs and which jitter policy is documented in the project excerpt and shared Learning?",
+        "--scope",
+        "workspace",
+        "--project",
+        "atlas-payments",
+        "--limit",
+        "5",
+        "--json"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 642,
+      "stdout": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Marketplace skills.yaml is missing.\"}}\n",
+      "stderr": "",
+      "rawPrefix": "17-C04-healthy-sentence-5",
+      "response": {
+        "schemaVersion": 1,
+        "error": {
+          "code": "RECALL_FAILED",
+          "message": "Marketplace skills.yaml is missing."
+        }
+      },
+      "jsonError": {
+        "schemaVersion": 1,
+        "code": "RECALL_FAILED",
+        "message": "Marketplace skills.yaml is missing.",
+        "validSchema": true
+      },
+      "protocol": "FAIL",
+      "provenance": [],
+      "evidenceCoverage": "FAIL",
+      "requiredGroups": [
+        {
+          "alternatives": [
+            "doc:atlas-payments:contexts/atlas-payments/docs/backoff-copy.md",
+            "learning:shared:30000000-0000-4000-8000-000000000002"
+          ],
+          "covered": false
+        }
+      ],
+      "firstThree": [],
+      "firstThreeWeakCandidates": [],
+      "nativeOriginalReads": "NOT_APPLICABLE",
+      "permittedFixtureFileCount": 15,
+      "cliOriginalFileReadCount": "UNVERIFIED: no instrumentation",
+      "finalAnswer": "UNVERIFIED: CLI returns candidates, not a model answer",
+      "modelCost": "NOT_APPLICABLE",
+      "validationCostBreakdown": "UNVERIFIED: only total process elapsedMs is observed"
+    },
+    {
+      "case": "C04",
+      "profile": "healthy",
+      "queryKind": "sentence",
+      "query": "What is BackoffCapMs and which jitter policy is documented in the project excerpt and shared Learning?",
+      "requestedLimit": 10,
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "recall",
+        "What is BackoffCapMs and which jitter policy is documented in the project excerpt and shared Learning?",
+        "--scope",
+        "workspace",
+        "--project",
+        "atlas-payments",
+        "--limit",
+        "10",
+        "--json"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 702,
+      "stdout": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Marketplace skills.yaml is missing.\"}}\n",
+      "stderr": "",
+      "rawPrefix": "18-C04-healthy-sentence-10",
+      "response": {
+        "schemaVersion": 1,
+        "error": {
+          "code": "RECALL_FAILED",
+          "message": "Marketplace skills.yaml is missing."
+        }
+      },
+      "jsonError": {
+        "schemaVersion": 1,
+        "code": "RECALL_FAILED",
+        "message": "Marketplace skills.yaml is missing.",
+        "validSchema": true
+      },
+      "protocol": "FAIL",
+      "provenance": [],
+      "evidenceCoverage": "FAIL",
+      "requiredGroups": [
+        {
+          "alternatives": [
+            "doc:atlas-payments:contexts/atlas-payments/docs/backoff-copy.md",
+            "learning:shared:30000000-0000-4000-8000-000000000002"
+          ],
+          "covered": false
+        }
+      ],
+      "firstThree": [],
+      "firstThreeWeakCandidates": [],
+      "nativeOriginalReads": "NOT_APPLICABLE",
+      "permittedFixtureFileCount": 15,
+      "cliOriginalFileReadCount": "UNVERIFIED: no instrumentation",
+      "finalAnswer": "UNVERIFIED: CLI returns candidates, not a model answer",
+      "modelCost": "NOT_APPLICABLE",
+      "validationCostBreakdown": "UNVERIFIED: only total process elapsedMs is observed"
+    },
+    {
+      "case": "C05",
+      "profile": "healthy",
+      "queryKind": "keywords",
+      "query": "AuditMarkerColor audit marker",
+      "requestedLimit": 5,
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "recall",
+        "AuditMarkerColor audit marker",
+        "--scope",
+        "workspace",
+        "--project",
+        "atlas-payments",
+        "--limit",
+        "5",
+        "--json"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 740,
+      "stdout": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Marketplace skills.yaml is missing.\"}}\n",
+      "stderr": "",
+      "rawPrefix": "19-C05-healthy-keywords-5",
+      "response": {
+        "schemaVersion": 1,
+        "error": {
+          "code": "RECALL_FAILED",
+          "message": "Marketplace skills.yaml is missing."
+        }
+      },
+      "jsonError": {
+        "schemaVersion": 1,
+        "code": "RECALL_FAILED",
+        "message": "Marketplace skills.yaml is missing.",
+        "validSchema": true
+      },
+      "protocol": "FAIL",
+      "provenance": [],
+      "evidenceCoverage": "FAIL",
+      "requiredGroups": [
+        {
+          "alternatives": [
+            "doc:atlas-payments:contexts/atlas-payments/docs/injection.md"
+          ],
+          "covered": false
+        }
+      ],
+      "firstThree": [],
+      "firstThreeWeakCandidates": [],
+      "nativeOriginalReads": "NOT_APPLICABLE",
+      "permittedFixtureFileCount": 15,
+      "cliOriginalFileReadCount": "UNVERIFIED: no instrumentation",
+      "finalAnswer": "UNVERIFIED: CLI returns candidates, not a model answer",
+      "modelCost": "NOT_APPLICABLE",
+      "validationCostBreakdown": "UNVERIFIED: only total process elapsedMs is observed"
+    },
+    {
+      "case": "C05",
+      "profile": "healthy",
+      "queryKind": "keywords",
+      "query": "AuditMarkerColor audit marker",
+      "requestedLimit": 10,
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "recall",
+        "AuditMarkerColor audit marker",
+        "--scope",
+        "workspace",
+        "--project",
+        "atlas-payments",
+        "--limit",
+        "10",
+        "--json"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 676,
+      "stdout": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Marketplace skills.yaml is missing.\"}}\n",
+      "stderr": "",
+      "rawPrefix": "20-C05-healthy-keywords-10",
+      "response": {
+        "schemaVersion": 1,
+        "error": {
+          "code": "RECALL_FAILED",
+          "message": "Marketplace skills.yaml is missing."
+        }
+      },
+      "jsonError": {
+        "schemaVersion": 1,
+        "code": "RECALL_FAILED",
+        "message": "Marketplace skills.yaml is missing.",
+        "validSchema": true
+      },
+      "protocol": "FAIL",
+      "provenance": [],
+      "evidenceCoverage": "FAIL",
+      "requiredGroups": [
+        {
+          "alternatives": [
+            "doc:atlas-payments:contexts/atlas-payments/docs/injection.md"
+          ],
+          "covered": false
+        }
+      ],
+      "firstThree": [],
+      "firstThreeWeakCandidates": [],
+      "nativeOriginalReads": "NOT_APPLICABLE",
+      "permittedFixtureFileCount": 15,
+      "cliOriginalFileReadCount": "UNVERIFIED: no instrumentation",
+      "finalAnswer": "UNVERIFIED: CLI returns candidates, not a model answer",
+      "modelCost": "NOT_APPLICABLE",
+      "validationCostBreakdown": "UNVERIFIED: only total process elapsedMs is observed"
+    },
+    {
+      "case": "C05",
+      "profile": "healthy",
+      "queryKind": "sentence",
+      "query": "What is AuditMarkerColor in the currently bound project and what original evidence supports the color?",
+      "requestedLimit": 5,
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "recall",
+        "What is AuditMarkerColor in the currently bound project and what original evidence supports the color?",
+        "--scope",
+        "workspace",
+        "--project",
+        "atlas-payments",
+        "--limit",
+        "5",
+        "--json"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 592,
+      "stdout": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Marketplace skills.yaml is missing.\"}}\n",
+      "stderr": "",
+      "rawPrefix": "21-C05-healthy-sentence-5",
+      "response": {
+        "schemaVersion": 1,
+        "error": {
+          "code": "RECALL_FAILED",
+          "message": "Marketplace skills.yaml is missing."
+        }
+      },
+      "jsonError": {
+        "schemaVersion": 1,
+        "code": "RECALL_FAILED",
+        "message": "Marketplace skills.yaml is missing.",
+        "validSchema": true
+      },
+      "protocol": "FAIL",
+      "provenance": [],
+      "evidenceCoverage": "FAIL",
+      "requiredGroups": [
+        {
+          "alternatives": [
+            "doc:atlas-payments:contexts/atlas-payments/docs/injection.md"
+          ],
+          "covered": false
+        }
+      ],
+      "firstThree": [],
+      "firstThreeWeakCandidates": [],
+      "nativeOriginalReads": "NOT_APPLICABLE",
+      "permittedFixtureFileCount": 15,
+      "cliOriginalFileReadCount": "UNVERIFIED: no instrumentation",
+      "finalAnswer": "UNVERIFIED: CLI returns candidates, not a model answer",
+      "modelCost": "NOT_APPLICABLE",
+      "validationCostBreakdown": "UNVERIFIED: only total process elapsedMs is observed"
+    },
+    {
+      "case": "C05",
+      "profile": "healthy",
+      "queryKind": "sentence",
+      "query": "What is AuditMarkerColor in the currently bound project and what original evidence supports the color?",
+      "requestedLimit": 10,
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "recall",
+        "What is AuditMarkerColor in the currently bound project and what original evidence supports the color?",
+        "--scope",
+        "workspace",
+        "--project",
+        "atlas-payments",
+        "--limit",
+        "10",
+        "--json"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 631,
+      "stdout": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Marketplace skills.yaml is missing.\"}}\n",
+      "stderr": "",
+      "rawPrefix": "22-C05-healthy-sentence-10",
+      "response": {
+        "schemaVersion": 1,
+        "error": {
+          "code": "RECALL_FAILED",
+          "message": "Marketplace skills.yaml is missing."
+        }
+      },
+      "jsonError": {
+        "schemaVersion": 1,
+        "code": "RECALL_FAILED",
+        "message": "Marketplace skills.yaml is missing.",
+        "validSchema": true
+      },
+      "protocol": "FAIL",
+      "provenance": [],
+      "evidenceCoverage": "FAIL",
+      "requiredGroups": [
+        {
+          "alternatives": [
+            "doc:atlas-payments:contexts/atlas-payments/docs/injection.md"
+          ],
+          "covered": false
+        }
+      ],
+      "firstThree": [],
+      "firstThreeWeakCandidates": [],
+      "nativeOriginalReads": "NOT_APPLICABLE",
+      "permittedFixtureFileCount": 15,
+      "cliOriginalFileReadCount": "UNVERIFIED: no instrumentation",
+      "finalAnswer": "UNVERIFIED: CLI returns candidates, not a model answer",
+      "modelCost": "NOT_APPLICABLE",
+      "validationCostBreakdown": "UNVERIFIED: only total process elapsedMs is observed"
+    },
+    {
+      "case": "C06",
+      "profile": "healthy",
+      "queryKind": "keywords",
+      "query": "homomorphic encryption rotation",
+      "requestedLimit": 5,
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "recall",
+        "homomorphic encryption rotation",
+        "--scope",
+        "workspace",
+        "--project",
+        "atlas-payments",
+        "--limit",
+        "5",
+        "--json"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 890,
+      "stdout": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Marketplace skills.yaml is missing.\"}}\n",
+      "stderr": "",
+      "rawPrefix": "23-C06-healthy-keywords-5",
+      "response": {
+        "schemaVersion": 1,
+        "error": {
+          "code": "RECALL_FAILED",
+          "message": "Marketplace skills.yaml is missing."
+        }
+      },
+      "jsonError": {
+        "schemaVersion": 1,
+        "code": "RECALL_FAILED",
+        "message": "Marketplace skills.yaml is missing.",
+        "validSchema": true
+      },
+      "protocol": "FAIL",
+      "provenance": [],
+      "evidenceCoverage": "NOT_APPLICABLE",
+      "requiredGroups": [],
+      "firstThree": [],
+      "firstThreeWeakCandidates": [],
+      "nativeOriginalReads": "NOT_APPLICABLE",
+      "permittedFixtureFileCount": 15,
+      "cliOriginalFileReadCount": "UNVERIFIED: no instrumentation",
+      "finalAnswer": "UNVERIFIED: CLI returns candidates, not a model answer",
+      "modelCost": "NOT_APPLICABLE",
+      "validationCostBreakdown": "UNVERIFIED: only total process elapsedMs is observed"
+    },
+    {
+      "case": "C06",
+      "profile": "healthy",
+      "queryKind": "keywords",
+      "query": "homomorphic encryption rotation",
+      "requestedLimit": 10,
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "recall",
+        "homomorphic encryption rotation",
+        "--scope",
+        "workspace",
+        "--project",
+        "atlas-payments",
+        "--limit",
+        "10",
+        "--json"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 630,
+      "stdout": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Marketplace skills.yaml is missing.\"}}\n",
+      "stderr": "",
+      "rawPrefix": "24-C06-healthy-keywords-10",
+      "response": {
+        "schemaVersion": 1,
+        "error": {
+          "code": "RECALL_FAILED",
+          "message": "Marketplace skills.yaml is missing."
+        }
+      },
+      "jsonError": {
+        "schemaVersion": 1,
+        "code": "RECALL_FAILED",
+        "message": "Marketplace skills.yaml is missing.",
+        "validSchema": true
+      },
+      "protocol": "FAIL",
+      "provenance": [],
+      "evidenceCoverage": "NOT_APPLICABLE",
+      "requiredGroups": [],
+      "firstThree": [],
+      "firstThreeWeakCandidates": [],
+      "nativeOriginalReads": "NOT_APPLICABLE",
+      "permittedFixtureFileCount": 15,
+      "cliOriginalFileReadCount": "UNVERIFIED: no instrumentation",
+      "finalAnswer": "UNVERIFIED: CLI returns candidates, not a model answer",
+      "modelCost": "NOT_APPLICABLE",
+      "validationCostBreakdown": "UNVERIFIED: only total process elapsedMs is observed"
+    },
+    {
+      "case": "C06",
+      "profile": "healthy",
+      "queryKind": "sentence",
+      "query": "Do these team references document homomorphic encryption and a key rotation plan?",
+      "requestedLimit": 5,
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "recall",
+        "Do these team references document homomorphic encryption and a key rotation plan?",
+        "--scope",
+        "workspace",
+        "--project",
+        "atlas-payments",
+        "--limit",
+        "5",
+        "--json"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 599,
+      "stdout": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Marketplace skills.yaml is missing.\"}}\n",
+      "stderr": "",
+      "rawPrefix": "25-C06-healthy-sentence-5",
+      "response": {
+        "schemaVersion": 1,
+        "error": {
+          "code": "RECALL_FAILED",
+          "message": "Marketplace skills.yaml is missing."
+        }
+      },
+      "jsonError": {
+        "schemaVersion": 1,
+        "code": "RECALL_FAILED",
+        "message": "Marketplace skills.yaml is missing.",
+        "validSchema": true
+      },
+      "protocol": "FAIL",
+      "provenance": [],
+      "evidenceCoverage": "NOT_APPLICABLE",
+      "requiredGroups": [],
+      "firstThree": [],
+      "firstThreeWeakCandidates": [],
+      "nativeOriginalReads": "NOT_APPLICABLE",
+      "permittedFixtureFileCount": 15,
+      "cliOriginalFileReadCount": "UNVERIFIED: no instrumentation",
+      "finalAnswer": "UNVERIFIED: CLI returns candidates, not a model answer",
+      "modelCost": "NOT_APPLICABLE",
+      "validationCostBreakdown": "UNVERIFIED: only total process elapsedMs is observed"
+    },
+    {
+      "case": "C06",
+      "profile": "healthy",
+      "queryKind": "sentence",
+      "query": "Do these team references document homomorphic encryption and a key rotation plan?",
+      "requestedLimit": 10,
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "recall",
+        "Do these team references document homomorphic encryption and a key rotation plan?",
+        "--scope",
+        "workspace",
+        "--project",
+        "atlas-payments",
+        "--limit",
+        "10",
+        "--json"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 830,
+      "stdout": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Marketplace skills.yaml is missing.\"}}\n",
+      "stderr": "",
+      "rawPrefix": "26-C06-healthy-sentence-10",
+      "response": {
+        "schemaVersion": 1,
+        "error": {
+          "code": "RECALL_FAILED",
+          "message": "Marketplace skills.yaml is missing."
+        }
+      },
+      "jsonError": {
+        "schemaVersion": 1,
+        "code": "RECALL_FAILED",
+        "message": "Marketplace skills.yaml is missing.",
+        "validSchema": true
+      },
+      "protocol": "FAIL",
+      "provenance": [],
+      "evidenceCoverage": "NOT_APPLICABLE",
+      "requiredGroups": [],
+      "firstThree": [],
+      "firstThreeWeakCandidates": [],
+      "nativeOriginalReads": "NOT_APPLICABLE",
+      "permittedFixtureFileCount": 15,
+      "cliOriginalFileReadCount": "UNVERIFIED: no instrumentation",
+      "finalAnswer": "UNVERIFIED: CLI returns candidates, not a model answer",
+      "modelCost": "NOT_APPLICABLE",
+      "validationCostBreakdown": "UNVERIFIED: only total process elapsedMs is observed"
+    },
+    {
+      "case": "C06",
+      "profile": "missing",
+      "queryKind": "keywords",
+      "query": "homomorphic encryption rotation",
+      "requestedLimit": 5,
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "recall",
+        "homomorphic encryption rotation",
+        "--scope",
+        "workspace",
+        "--project",
+        "atlas-payments",
+        "--limit",
+        "5",
+        "--json"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 905,
+      "stdout": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Marketplace skills.yaml is missing.\"}}\n",
+      "stderr": "",
+      "rawPrefix": "27-C06-missing-keywords-5",
+      "response": {
+        "schemaVersion": 1,
+        "error": {
+          "code": "RECALL_FAILED",
+          "message": "Marketplace skills.yaml is missing."
+        }
+      },
+      "jsonError": {
+        "schemaVersion": 1,
+        "code": "RECALL_FAILED",
+        "message": "Marketplace skills.yaml is missing.",
+        "validSchema": true
+      },
+      "protocol": "FAIL",
+      "provenance": [],
+      "evidenceCoverage": "NOT_APPLICABLE",
+      "requiredGroups": [],
+      "firstThree": [],
+      "firstThreeWeakCandidates": [],
+      "nativeOriginalReads": "NOT_APPLICABLE",
+      "permittedFixtureFileCount": 15,
+      "cliOriginalFileReadCount": "UNVERIFIED: no instrumentation",
+      "finalAnswer": "UNVERIFIED: CLI returns candidates, not a model answer",
+      "modelCost": "NOT_APPLICABLE",
+      "validationCostBreakdown": "UNVERIFIED: only total process elapsedMs is observed"
+    },
+    {
+      "case": "C06",
+      "profile": "missing",
+      "queryKind": "keywords",
+      "query": "homomorphic encryption rotation",
+      "requestedLimit": 10,
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "recall",
+        "homomorphic encryption rotation",
+        "--scope",
+        "workspace",
+        "--project",
+        "atlas-payments",
+        "--limit",
+        "10",
+        "--json"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 924,
+      "stdout": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Marketplace skills.yaml is missing.\"}}\n",
+      "stderr": "",
+      "rawPrefix": "28-C06-missing-keywords-10",
+      "response": {
+        "schemaVersion": 1,
+        "error": {
+          "code": "RECALL_FAILED",
+          "message": "Marketplace skills.yaml is missing."
+        }
+      },
+      "jsonError": {
+        "schemaVersion": 1,
+        "code": "RECALL_FAILED",
+        "message": "Marketplace skills.yaml is missing.",
+        "validSchema": true
+      },
+      "protocol": "FAIL",
+      "provenance": [],
+      "evidenceCoverage": "NOT_APPLICABLE",
+      "requiredGroups": [],
+      "firstThree": [],
+      "firstThreeWeakCandidates": [],
+      "nativeOriginalReads": "NOT_APPLICABLE",
+      "permittedFixtureFileCount": 15,
+      "cliOriginalFileReadCount": "UNVERIFIED: no instrumentation",
+      "finalAnswer": "UNVERIFIED: CLI returns candidates, not a model answer",
+      "modelCost": "NOT_APPLICABLE",
+      "validationCostBreakdown": "UNVERIFIED: only total process elapsedMs is observed"
+    },
+    {
+      "case": "C06",
+      "profile": "missing",
+      "queryKind": "sentence",
+      "query": "Do these team references document homomorphic encryption and a key rotation plan?",
+      "requestedLimit": 5,
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "recall",
+        "Do these team references document homomorphic encryption and a key rotation plan?",
+        "--scope",
+        "workspace",
+        "--project",
+        "atlas-payments",
+        "--limit",
+        "5",
+        "--json"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 980,
+      "stdout": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Marketplace skills.yaml is missing.\"}}\n",
+      "stderr": "",
+      "rawPrefix": "29-C06-missing-sentence-5",
+      "response": {
+        "schemaVersion": 1,
+        "error": {
+          "code": "RECALL_FAILED",
+          "message": "Marketplace skills.yaml is missing."
+        }
+      },
+      "jsonError": {
+        "schemaVersion": 1,
+        "code": "RECALL_FAILED",
+        "message": "Marketplace skills.yaml is missing.",
+        "validSchema": true
+      },
+      "protocol": "FAIL",
+      "provenance": [],
+      "evidenceCoverage": "NOT_APPLICABLE",
+      "requiredGroups": [],
+      "firstThree": [],
+      "firstThreeWeakCandidates": [],
+      "nativeOriginalReads": "NOT_APPLICABLE",
+      "permittedFixtureFileCount": 15,
+      "cliOriginalFileReadCount": "UNVERIFIED: no instrumentation",
+      "finalAnswer": "UNVERIFIED: CLI returns candidates, not a model answer",
+      "modelCost": "NOT_APPLICABLE",
+      "validationCostBreakdown": "UNVERIFIED: only total process elapsedMs is observed"
+    },
+    {
+      "case": "C06",
+      "profile": "missing",
+      "queryKind": "sentence",
+      "query": "Do these team references document homomorphic encryption and a key rotation plan?",
+      "requestedLimit": 10,
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "recall",
+        "Do these team references document homomorphic encryption and a key rotation plan?",
+        "--scope",
+        "workspace",
+        "--project",
+        "atlas-payments",
+        "--limit",
+        "10",
+        "--json"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 1022,
+      "stdout": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Marketplace skills.yaml is missing.\"}}\n",
+      "stderr": "",
+      "rawPrefix": "30-C06-missing-sentence-10",
+      "response": {
+        "schemaVersion": 1,
+        "error": {
+          "code": "RECALL_FAILED",
+          "message": "Marketplace skills.yaml is missing."
+        }
+      },
+      "jsonError": {
+        "schemaVersion": 1,
+        "code": "RECALL_FAILED",
+        "message": "Marketplace skills.yaml is missing.",
+        "validSchema": true
+      },
+      "protocol": "FAIL",
+      "provenance": [],
+      "evidenceCoverage": "NOT_APPLICABLE",
+      "requiredGroups": [],
+      "firstThree": [],
+      "firstThreeWeakCandidates": [],
+      "nativeOriginalReads": "NOT_APPLICABLE",
+      "permittedFixtureFileCount": 15,
+      "cliOriginalFileReadCount": "UNVERIFIED: no instrumentation",
+      "finalAnswer": "UNVERIFIED: CLI returns candidates, not a model answer",
+      "modelCost": "NOT_APPLICABLE",
+      "validationCostBreakdown": "UNVERIFIED: only total process elapsedMs is observed"
+    },
+    {
+      "case": "C06",
+      "profile": "damaged",
+      "queryKind": "keywords",
+      "query": "homomorphic encryption rotation",
+      "requestedLimit": 5,
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "recall",
+        "homomorphic encryption rotation",
+        "--scope",
+        "workspace",
+        "--project",
+        "atlas-payments",
+        "--limit",
+        "5",
+        "--json"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 1495,
+      "stdout": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Marketplace skills.yaml is missing.\"}}\n",
+      "stderr": "",
+      "rawPrefix": "31-C06-damaged-keywords-5",
+      "response": {
+        "schemaVersion": 1,
+        "error": {
+          "code": "RECALL_FAILED",
+          "message": "Marketplace skills.yaml is missing."
+        }
+      },
+      "jsonError": {
+        "schemaVersion": 1,
+        "code": "RECALL_FAILED",
+        "message": "Marketplace skills.yaml is missing.",
+        "validSchema": true
+      },
+      "protocol": "FAIL",
+      "provenance": [],
+      "evidenceCoverage": "NOT_APPLICABLE",
+      "requiredGroups": [],
+      "firstThree": [],
+      "firstThreeWeakCandidates": [],
+      "nativeOriginalReads": "NOT_APPLICABLE",
+      "permittedFixtureFileCount": 15,
+      "cliOriginalFileReadCount": "UNVERIFIED: no instrumentation",
+      "finalAnswer": "UNVERIFIED: CLI returns candidates, not a model answer",
+      "modelCost": "NOT_APPLICABLE",
+      "validationCostBreakdown": "UNVERIFIED: only total process elapsedMs is observed"
+    },
+    {
+      "case": "C06",
+      "profile": "damaged",
+      "queryKind": "keywords",
+      "query": "homomorphic encryption rotation",
+      "requestedLimit": 10,
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "recall",
+        "homomorphic encryption rotation",
+        "--scope",
+        "workspace",
+        "--project",
+        "atlas-payments",
+        "--limit",
+        "10",
+        "--json"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 611,
+      "stdout": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Marketplace skills.yaml is missing.\"}}\n",
+      "stderr": "",
+      "rawPrefix": "32-C06-damaged-keywords-10",
+      "response": {
+        "schemaVersion": 1,
+        "error": {
+          "code": "RECALL_FAILED",
+          "message": "Marketplace skills.yaml is missing."
+        }
+      },
+      "jsonError": {
+        "schemaVersion": 1,
+        "code": "RECALL_FAILED",
+        "message": "Marketplace skills.yaml is missing.",
+        "validSchema": true
+      },
+      "protocol": "FAIL",
+      "provenance": [],
+      "evidenceCoverage": "NOT_APPLICABLE",
+      "requiredGroups": [],
+      "firstThree": [],
+      "firstThreeWeakCandidates": [],
+      "nativeOriginalReads": "NOT_APPLICABLE",
+      "permittedFixtureFileCount": 15,
+      "cliOriginalFileReadCount": "UNVERIFIED: no instrumentation",
+      "finalAnswer": "UNVERIFIED: CLI returns candidates, not a model answer",
+      "modelCost": "NOT_APPLICABLE",
+      "validationCostBreakdown": "UNVERIFIED: only total process elapsedMs is observed"
+    },
+    {
+      "case": "C06",
+      "profile": "damaged",
+      "queryKind": "sentence",
+      "query": "Do these team references document homomorphic encryption and a key rotation plan?",
+      "requestedLimit": 5,
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "recall",
+        "Do these team references document homomorphic encryption and a key rotation plan?",
+        "--scope",
+        "workspace",
+        "--project",
+        "atlas-payments",
+        "--limit",
+        "5",
+        "--json"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 559,
+      "stdout": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Marketplace skills.yaml is missing.\"}}\n",
+      "stderr": "",
+      "rawPrefix": "33-C06-damaged-sentence-5",
+      "response": {
+        "schemaVersion": 1,
+        "error": {
+          "code": "RECALL_FAILED",
+          "message": "Marketplace skills.yaml is missing."
+        }
+      },
+      "jsonError": {
+        "schemaVersion": 1,
+        "code": "RECALL_FAILED",
+        "message": "Marketplace skills.yaml is missing.",
+        "validSchema": true
+      },
+      "protocol": "FAIL",
+      "provenance": [],
+      "evidenceCoverage": "NOT_APPLICABLE",
+      "requiredGroups": [],
+      "firstThree": [],
+      "firstThreeWeakCandidates": [],
+      "nativeOriginalReads": "NOT_APPLICABLE",
+      "permittedFixtureFileCount": 15,
+      "cliOriginalFileReadCount": "UNVERIFIED: no instrumentation",
+      "finalAnswer": "UNVERIFIED: CLI returns candidates, not a model answer",
+      "modelCost": "NOT_APPLICABLE",
+      "validationCostBreakdown": "UNVERIFIED: only total process elapsedMs is observed"
+    },
+    {
+      "case": "C06",
+      "profile": "damaged",
+      "queryKind": "sentence",
+      "query": "Do these team references document homomorphic encryption and a key rotation plan?",
+      "requestedLimit": 10,
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "recall",
+        "Do these team references document homomorphic encryption and a key rotation plan?",
+        "--scope",
+        "workspace",
+        "--project",
+        "atlas-payments",
+        "--limit",
+        "10",
+        "--json"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 594,
+      "stdout": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Marketplace skills.yaml is missing.\"}}\n",
+      "stderr": "",
+      "rawPrefix": "34-C06-damaged-sentence-10",
+      "response": {
+        "schemaVersion": 1,
+        "error": {
+          "code": "RECALL_FAILED",
+          "message": "Marketplace skills.yaml is missing."
+        }
+      },
+      "jsonError": {
+        "schemaVersion": 1,
+        "code": "RECALL_FAILED",
+        "message": "Marketplace skills.yaml is missing.",
+        "validSchema": true
+      },
+      "protocol": "FAIL",
+      "provenance": [],
+      "evidenceCoverage": "NOT_APPLICABLE",
+      "requiredGroups": [],
+      "firstThree": [],
+      "firstThreeWeakCandidates": [],
+      "nativeOriginalReads": "NOT_APPLICABLE",
+      "permittedFixtureFileCount": 15,
+      "cliOriginalFileReadCount": "UNVERIFIED: no instrumentation",
+      "finalAnswer": "UNVERIFIED: CLI returns candidates, not a model answer",
+      "modelCost": "NOT_APPLICABLE",
+      "validationCostBreakdown": "UNVERIFIED: only total process elapsedMs is observed"
+    }
+  ],
+  "productAcceptance": "NOT_CLAIMED"
+}
