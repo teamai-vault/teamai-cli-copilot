@@ -1,6 +1,6 @@
 # Team AI command map
 
-Use this as an intent map, not as a cached CLI manual. Run `teamai --help` to read the supported command forms and flags before choosing a command.
+Use this as an intent map. Consult current public CLI help when syntax is unknown. Recall reuses this task's confirmed, still-valid help and state; repeat inspection only for an actual gap or a change affecting that information.
 
 | Command | Use it for |
 | --- | --- |
@@ -15,7 +15,7 @@ Use this as an intent map, not as a cached CLI manual. Run `teamai --help` to re
 | `teamai learning share` | Share a Learning through the supported contribution workflow. |
 | `teamai learning retry <id>` | Resume a saved Learning contribution without creating a new operation. |
 | `teamai learning pending` | Read saved contribution states without submitting them. |
-| `teamai recall <query>` | Search verified local knowledge read-only; the bundled `teamai-recall` Agent can translate a task into English technical search terms and read original evidence. |
+| `teamai recall <query>` | Search verified local knowledge read-only; the bundled `teamai-recall` Agent handles research and original evidence. Default to `auto` unless the task specifies a permitted Scope; use the actual returned Scope and Project. Preserve explicit unbound Workspace/Project errors without guessing a Project or changing Scope. |
 | `teamai status` | Read the current Team AI state summary. |
 | `teamai doctor` | Diagnose inconsistent, stale, missing, or conflicting Team AI-managed state. |
 

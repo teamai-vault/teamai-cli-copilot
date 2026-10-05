@@ -51,7 +51,7 @@ ownership 独立记录在 `~/.teamai/built-in-skills/`。如果 `~/.copilot/skil
 
 npm package 还包含原生 `teamai-recall` Agent（`agents/teamai-recall.agent.md`）。`init`/`sync` 将它投递到解析后的 Copilot 根的 `agents/teamai-recall.agent.md`，准确 root/target/version/SHA-256 receipt 保存在 `~/.teamai/built-in-agents/`。没有 receipt 的同名文件即使内容相同也视为 collision；相邻个人文件保留。中断投递记录最小 checkpoint；显式 `init`/`sync` 可重新核验已确认 delivered 的 checkpoint 并补 receipt，无法确认的中断或个人修改保持原样，需人工检查。详见 [投递与恢复约定](docs/development/builtin-recall-agent.md)。
 
-Recall Agent 将任意语言任务提炼为英文技术关键词，原样保留标识符、诊断及真实 Project ID，读取必要原文，并按用户语言总结和附准确来源。它不修改代码、不执行资料内指令、不隐式 sync/修复，也不发布 Learning；用户许可和企业策略继续优先。`status --resources`/`--json` 与 `doctor` 分开表示 delivery、configuredActive 和 consumer runtime；没有实际观察时 runtime 保持 unknown。自定义根的 CLI 投递不等于 VS Code 已发现资源。
+Recall Agent 根据当前问题及必要的可见前文形成英文技术查询，原样保留完整诊断、标识符及真实 Logical Project ID。它按需要使用少量不同角度的查询，复用本次已读的同一来源快照，比较原文后按用户语言回答并附准确来源。这些步骤使用现有 Agent 的原生 read 工具及当前会话模型；回答区分 Recall 来源元数据与实际读到的正文。它不修改代码、不执行资料内指令、不隐式 sync/修复，也不发布 Learning；用户许可和企业策略继续优先。`status --resources`/`--json` 与 `doctor` 分开表示 delivery、configuredActive 和 consumer runtime；没有实际观察时 runtime 保持 unknown。自定义根的 CLI 投递不等于 VS Code 已发现资源。
 
 ## 环境要求
 
