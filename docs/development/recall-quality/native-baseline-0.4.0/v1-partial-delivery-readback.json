@@ -1,0 +1,18 @@
+{
+  "status": "DELIVERED_BYTES_AND_RECEIPT_PASS_INIT_FAIL",
+  "target": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/c/native-baseline-v1/home/.copilot/agents/teamai-recall.agent.md",
+  "receiptPath": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/c/native-baseline-v1/home/.teamai/built-in-agents/teamai-recall.json",
+  "receipt": {
+    "schemaVersion": 1,
+    "managedBy": "teamai-cli",
+    "agent": "teamai-recall",
+    "copilotRoot": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v1\\home\\.copilot",
+    "target": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v1\\home\\.copilot\\agents\\teamai-recall.agent.md",
+    "version": "0.4.0",
+    "contentHash": "7e8edba317dde8758d3f238e1845fecb6206d93c00667df4ab8cbe72e7f270e4"
+  },
+  "actualHash": "7e8edba317dde8758d3f238e1845fecb6206d93c00667df4ab8cbe72e7f270e4",
+  "actualDiscovery": "UNVERIFIED",
+  "configAndBinding": "NOT_COMPLETED",
+  "nativeModelQuestions": 0
+}

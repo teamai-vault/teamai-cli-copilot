@@ -1,0 +1,19 @@
+{
+  "arguments": [
+    "--agent",
+    "teamai-recall",
+    "--session-id",
+    "22486ef6-a615-4e26-b5db-37328e776e38",
+    "--log-dir",
+    "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/c-quality/baseline-native-v2/C01-native-logs",
+    "--usage-output-file",
+    "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/c-quality/baseline-native-v2/C01-usage.json",
+    "-i",
+    "在 atlas-payments，NimbusQueue 2.1 报错 ACME_E_BARRIER_412: retry budget exhausted for tenant=demo-7。什么条件下可以重试，什么条件下不能？"
+  ],
+  "executable": "D:/soft/nodejs/node_global/copilot.ps1",
+  "authFilesReadOrCopied": false,
+  "started": "2026-10-05T10:32:29.1960397+00:00",
+  "workspace": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01",
+  "permissionFlags": "DEFAULT"
+}

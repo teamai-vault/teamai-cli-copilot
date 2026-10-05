@@ -1,0 +1,80 @@
+{
+  "status": "INDEPENDENT_READBACK_RECORDED_NATIVE_STILL_FAIL",
+  "previousAssessment": "native-assessment.json retained; its strict snapshot FAIL is real directory creation, but ABSENT fallback label for after is defective",
+  "strictControlledFilesystemEquality": "FAIL_NEW_EMPTY_DIRECTORY",
+  "businessFileContentEquality": "PASS",
+  "sourceAndAuthorityFactsEquality": "PASS",
+  "workspaceGitFactsEquality": "PASS",
+  "rawFactDifferences": [
+    {
+      "key": "home/.copilot/installed-plugins",
+      "before": "ABSENT",
+      "after": "NO_FILE_FACT"
+    }
+  ],
+  "fileContentChanges": [],
+  "newDirectory": {
+    "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.copilot\\installed-plugins",
+    "exists": true,
+    "type": "directory",
+    "fileCount": 0,
+    "creationUtc": "2026-10-05T10:32:36.6884511Z",
+    "linkType": null,
+    "classification": "New empty native platform directory; no content hashes changed"
+  },
+  "platformSessionFiles": {
+    "sessionRoot": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.copilot\\session-state\\22486ef6-a615-4e26-b5db-37328e776e38",
+    "names": [
+      ".workspace-fork.lock",
+      "checkpoints",
+      "files",
+      "research",
+      "workspace.yaml"
+    ],
+    "contentsRead": "NOT_READ",
+    "eventsJsonlPresent": false
+  },
+  "actualNativeSelectedAgent": "FAIL_NOT_FOUND",
+  "actualNativeModelQuestion": "UNVERIFIED_NOT_RUN",
+  "actualHumanLogin": "REQUIRED_NOT_EXECUTED",
+  "observableUsage": {
+    "totalPremiumRequestCost": 0,
+    "totalUserRequests": 0,
+    "totalNanoAiu": 0,
+    "totalApiDurationMs": 0,
+    "sessionStartTime": "2026-10-05T10:32:34.508Z",
+    "codeChanges": {
+      "linesAdded": 0,
+      "linesRemoved": 0,
+      "filesModifiedCount": 0,
+      "filesModified": []
+    },
+    "modelMetrics": {},
+    "agentMetrics": {},
+    "lastCallInputTokens": 0,
+    "lastCallOutputTokens": 0
+  },
+  "nativeSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource",
+  "nativeSourceRevision": "7dbb74107cc4c457a5043619090b11a38b74a7a0",
+  "nativeSourceHash": "7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096",
+  "learningRevision": "cf573d619178f5b29773ac7c616a231e789eeb75",
+  "metadataDelta": {
+    "relativePath": ".github/plugin/marketplace.json",
+    "beforeSha256": "e2fb24242f3c17e6d2e75231c6793d7c3a6f75401a91eaeb89ad8e441e1d8ed2",
+    "afterSha256": "43e6fbbdf7fe39d2a6c5728e5262a14be4c69449fb04e0cdcb3ddbbb6ad84fd7",
+    "before": "{\n  \"name\": \"recall-quality\",\n  \"plugins\": [\n    {\n      \"name\": \"common\",\n      \"version\": \"0.0.0\",\n      \"source\": \"./plugins/common\"\n    },\n    {\n      \"name\": \"quality\",\n      \"version\": \"0.0.0\",\n      \"source\": \"./plugins/quality\"\n    }\n  ]\n}\n",
+    "after": "{\n  \"name\": \"recall-quality\",\n  \"plugins\": [\n    {\n      \"name\": \"common\",\n      \"version\": \"0.0.0\",\n      \"source\": \"./plugins/common\"\n    },\n    {\n      \"name\": \"quality\",\n      \"version\": \"0.0.0\",\n      \"source\": \"./plugins/quality\"\n    }\n  ],\n  \"owner\": {\n    \"name\": \"Recall Quality Fixture\"\n  }\n}\n",
+    "added": {
+      "owner": {
+        "name": "Recall Quality Fixture"
+      }
+    }
+  },
+  "fixtureOriginalChecks": 16,
+  "allowedCountIsDeclaredNotObservedThroughNativeQuery": true,
+  "protectedFixedCLIFacts": {
+    "status": "PASS",
+    "facts": 215
+  },
+  "productAcceptance": "NOT_CLAIMED"
+}

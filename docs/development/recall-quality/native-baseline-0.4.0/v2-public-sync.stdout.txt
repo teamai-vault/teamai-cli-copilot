@@ -1,0 +1,4 @@
+Copilot CLI: GitHub Copilot CLI 1.0.91.
+Run 'copilot update' to check for updates.
+Copilot plugin state is already converged.
+Managed user instructions are already converged (0).
