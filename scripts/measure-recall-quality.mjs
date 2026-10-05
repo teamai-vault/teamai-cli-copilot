@@ -250,9 +250,12 @@ async function cli(packageRoot, root, output, sourceRevision) {
         await writeFile(path.join(output, prefix + ".stderr.txt"), result.stderr, { flag: "wx" });
         let response;
         let parseError;
-        if (result.exitCode === 0) {
-          try { response = JSON.parse(result.stdout); } catch (error) { parseError = error.message; }
-        }
+        try { response = JSON.parse(result.stdout); } catch (error) { parseError = error.message; }
+        const jsonError = response?.error ? {
+          schemaVersion: response.schemaVersion, code: response.error.code, message: response.error.message,
+          validSchema: response.schemaVersion === 1 && typeof response.error === "object" && !Array.isArray(response.error)
+            && typeof response.error.code === "string" && typeof response.error.message === "string",
+        } : undefined;
         const hits = response?.hits ?? [];
         const hitIds = hits.map((hit) => hit.id);
         const groups = item.requiredEvidenceGroups.map((group) => ({ alternatives: group, covered: group.some((id) => hitIds.includes(id)) }));
@@ -270,11 +273,12 @@ async function cli(packageRoot, root, output, sourceRevision) {
             ? "PASS" : "FAIL", verifiedPath, actualHash });
         }
         const protocolPass = result.exitCode === profile.expectedExit
-          && (profile.expectedExit === 0 ? !!response && !parseError && response.scope === "workspace"
+          && (profile.expectedExit === 0 ? !!response && !parseError && response.schemaVersion === 1
+            && !response.error && Array.isArray(response.hits) && response.scope === "workspace"
             && response.project === cases.logicalProject && response.limit === limit
-            : result.stderr.includes(profile.expectedError));
+            : !parseError && jsonError?.validSchema && jsonError.code === profile.expectedError);
         observations.push({ case: item.id, profile: profile.name, queryKind: kind, query, requestedLimit: limit,
-          ...result, rawPrefix: prefix, ...(parseError ? { parseError } : {}), response,
+          ...result, rawPrefix: prefix, ...(parseError ? { parseError } : {}), response, ...(jsonError ? { jsonError } : {}),
           protocol: protocolPass ? "PASS" : "FAIL", provenance,
           evidenceCoverage: groups.length ? (groups.every((group) => group.covered) ? "PASS" : "FAIL") : "NOT_APPLICABLE",
           requiredGroups: groups, firstThree: hits.slice(0, 3).map((hit, index) => ({
