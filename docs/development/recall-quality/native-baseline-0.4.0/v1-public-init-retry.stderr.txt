@@ -1,0 +1,1 @@
+ERROR: Another Team AI operation is already using F:\agent-workspace\multiAgent\teamai-cli-customization\.tmp\recall-29-35\runtime\c\native-baseline-v1\home\.copilot\.teamai.lock

@@ -1,0 +1,138 @@
+{
+  "status": "NATIVE_SELECTION_FAIL_AUTH_REQUIRES_HUMAN_NOT_COMPLETE",
+  "publicSetup": "PASS",
+  "actualDelivery": "PASS",
+  "deliveredAgent": {
+    "target": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.copilot\\agents\\teamai-recall.agent.md",
+    "receiptPath": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.teamai\\built-in-agents\\teamai-recall.json",
+    "receipt": {
+      "schemaVersion": 1,
+      "managedBy": "teamai-cli",
+      "agent": "teamai-recall",
+      "copilotRoot": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.copilot",
+      "target": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.copilot\\agents\\teamai-recall.agent.md",
+      "version": "0.4.0",
+      "contentHash": "7e8edba317dde8758d3f238e1845fecb6206d93c00667df4ab8cbe72e7f270e4"
+    },
+    "actualDeliveredSha256": "7e8edba317dde8758d3f238e1845fecb6206d93c00667df4ab8cbe72e7f270e4",
+    "pendingExists": false
+  },
+  "nativeSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource",
+  "nativeSourceRevision": "7dbb74107cc4c457a5043619090b11a38b74a7a0",
+  "nativeSourceHash": "7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096",
+  "learningRevision": "cf573d619178f5b29773ac7c616a231e789eeb75",
+  "originalByteChecks": 16,
+  "declaredAllowedCount": 15,
+  "actualPublishedCacheChecks": [
+    {
+      "id": "learning:shared:30000000-0000-4000-8000-000000000001",
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.teamai\\published-learnings\\7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096\\revisions\\cf573d619178f5b29773ac7c616a231e789eeb75\\files\\learnings\\shared\\30000000-0000-4000-8000-000000000001.md",
+      "sha256": "f8ecf5350cfa9eb068cb2e3aa602f047fde5ab6b362028e363341d90924d0148",
+      "publication": "published"
+    },
+    {
+      "id": "learning:shared:30000000-0000-4000-8000-000000000002",
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.teamai\\published-learnings\\7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096\\revisions\\cf573d619178f5b29773ac7c616a231e789eeb75\\files\\learnings\\shared\\30000000-0000-4000-8000-000000000002.md",
+      "sha256": "bc16b2ce6f63827ccf704d1b7d7c93d202beffc9ecd6fbe0130b917e2644165a",
+      "publication": "published"
+    },
+    {
+      "id": "learning:atlas-payments:30000000-0000-4000-8000-000000000003",
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.teamai\\published-learnings\\7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096\\revisions\\cf573d619178f5b29773ac7c616a231e789eeb75\\files\\learnings\\atlas-payments\\30000000-0000-4000-8000-000000000003.md",
+      "sha256": "897f4e5638c943c513001a2b220a79054e987e708383cfbb29dc206d83e30de9",
+      "publication": "published"
+    }
+  ],
+  "invocation": {
+    "arguments": [
+      "--agent",
+      "teamai-recall",
+      "--session-id",
+      "22486ef6-a615-4e26-b5db-37328e776e38",
+      "--log-dir",
+      "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/c-quality/baseline-native-v2/C01-native-logs",
+      "--usage-output-file",
+      "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/c-quality/baseline-native-v2/C01-usage.json",
+      "-i",
+      "在 atlas-payments，NimbusQueue 2.1 报错 ACME_E_BARRIER_412: retry budget exhausted for tenant=demo-7。什么条件下可以重试，什么条件下不能？"
+    ],
+    "executable": "D:/soft/nodejs/node_global/copilot.ps1",
+    "authFilesReadOrCopied": false,
+    "started": "2026-10-05T10:32:29.1960397+00:00",
+    "workspace": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01",
+    "permissionFlags": "DEFAULT"
+  },
+  "normalExit": {
+    "finished": "2026-10-05T10:34:40.1617911+00:00",
+    "exitCode": 0
+  },
+  "nativeSessionLaunchAttempts": 1,
+  "frozenQuestionArgumentsPassed": 1,
+  "modelUserRequestsObserved": 0,
+  "selectedAgent": "FAIL_NOT_FOUND",
+  "authentication": "HUMAN_/login_REQUIRED",
+  "toolQueries": "NOT_RUN",
+  "nativeOriginalReads": "NOT_RUN",
+  "finalAnswer": "UNVERIFIED_NOT_RUN",
+  "actualModel": "UNVERIFIED",
+  "usage": {
+    "totalPremiumRequestCost": 0,
+    "totalUserRequests": 0,
+    "totalNanoAiu": 0,
+    "totalApiDurationMs": 0,
+    "sessionStartTime": "2026-10-05T10:32:34.508Z",
+    "codeChanges": {
+      "linesAdded": 0,
+      "linesRemoved": 0,
+      "filesModifiedCount": 0,
+      "filesModified": []
+    },
+    "modelMetrics": {},
+    "agentMetrics": {},
+    "lastCallInputTokens": 0,
+    "lastCallOutputTokens": 0
+  },
+  "usdPrice": "UNVERIFIED",
+  "fixedBaselineProtection": {
+    "status": "PASS",
+    "facts": 215
+  },
+  "nativeControlledProtection": {
+    "status": "FAIL",
+    "factsBefore": 191,
+    "factsAfter": 190,
+    "differences": [
+      {
+        "key": "home/.copilot/installed-plugins",
+        "before": "ABSENT",
+        "after": "ABSENT"
+      }
+    ]
+  },
+  "workspaceGitDifferences": [],
+  "businessDifferences": [
+    {
+      "key": "home/.copilot/installed-plugins",
+      "before": "ABSENT",
+      "after": "ABSENT"
+    }
+  ],
+  "platformSessionFiles": {
+    "sessionRoot": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.copilot\\session-state\\22486ef6-a615-4e26-b5db-37328e776e38",
+    "names": [
+      ".workspace-fork.lock",
+      "checkpoints",
+      "files",
+      "research",
+      "workspace.yaml"
+    ],
+    "contentsRead": "NOT_READ",
+    "eventsJsonlPresent": false
+  },
+  "normalTrust": "Session-only Yes option 1; future-folder option not selected; default tool approvals unchanged",
+  "loginsAttempted": 0,
+  "authFilesReadCopiedPrinted": false,
+  "remainingPlannedModelTurns": "10/10 UNVERIFIED_NOT_RUN",
+  "remainingPlannedSessionLaunches": 7,
+  "productAcceptance": "NOT_CLAIMED"
+}

@@ -1,0 +1,244 @@
+{
+  "status": "SETUP_AND_DELIVERY_PASS_NATIVE_PENDING",
+  "commands": [
+    {
+      "label": "fixed-before",
+      "executable": "D:\\soft\\nodejs\\node.exe",
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\worktrees\\c-quality-30\\scripts\\measure-recall-quality.mjs",
+        "snapshot",
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\baseline-v2",
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-native-v2\\fixed-protected-before.json"
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\worktrees\\c-quality-30",
+      "started": "2026-10-05T10:26:37.309Z",
+      "elapsedMs": 257,
+      "exitCode": 0,
+      "signal": null,
+      "pid": 11604,
+      "error": null
+    },
+    {
+      "label": "workspace-init",
+      "executable": "git",
+      "args": [
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01",
+      "started": "2026-10-05T10:26:41.780Z",
+      "elapsedMs": 105,
+      "exitCode": 0,
+      "signal": null,
+      "pid": 9244,
+      "error": null
+    },
+    {
+      "label": "workspace-add",
+      "executable": "git",
+      "args": [
+        "add",
+        "README.md"
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01",
+      "started": "2026-10-05T10:26:41.887Z",
+      "elapsedMs": 133,
+      "exitCode": 0,
+      "signal": null,
+      "pid": 32440,
+      "error": null
+    },
+    {
+      "label": "workspace-commit",
+      "executable": "git",
+      "args": [
+        "-c",
+        "user.name=Recall Quality",
+        "-c",
+        "user.email=quality@example.invalid",
+        "-c",
+        "commit.gpgsign=false",
+        "commit",
+        "-m",
+        "Synthetic native workspace"
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01",
+      "started": "2026-10-05T10:26:42.022Z",
+      "elapsedMs": 272,
+      "exitCode": 0,
+      "signal": null,
+      "pid": 22688,
+      "error": null
+    },
+    {
+      "label": "resolved-teamai",
+      "executable": "C:/Program Files/PowerShell/7/pwsh.exe",
+      "args": [
+        "-NoProfile",
+        "-Command",
+        "Get-Command teamai | Select-Object Name,Source,CommandType | ConvertTo-Json"
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01",
+      "started": "2026-10-05T10:26:42.296Z",
+      "elapsedMs": 3386,
+      "exitCode": 0,
+      "signal": null,
+      "pid": 27676,
+      "error": null
+    },
+    {
+      "label": "copilot-version",
+      "executable": "C:/Program Files/PowerShell/7/pwsh.exe",
+      "args": [
+        "-NoProfile",
+        "-File",
+        "D:/soft/nodejs/node_global/copilot.ps1",
+        "--version"
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01",
+      "started": "2026-10-05T10:26:45.717Z",
+      "elapsedMs": 6797,
+      "exitCode": 0,
+      "signal": null,
+      "pid": 9268,
+      "error": null
+    },
+    {
+      "label": "copilot-help",
+      "executable": "C:/Program Files/PowerShell/7/pwsh.exe",
+      "args": [
+        "-NoProfile",
+        "-File",
+        "D:/soft/nodejs/node_global/copilot.ps1",
+        "--help"
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01",
+      "started": "2026-10-05T10:26:52.520Z",
+      "elapsedMs": 7527,
+      "exitCode": 0,
+      "signal": null,
+      "pid": 30876,
+      "error": null
+    },
+    {
+      "label": "copilot-environment-help",
+      "executable": "C:/Program Files/PowerShell/7/pwsh.exe",
+      "args": [
+        "-NoProfile",
+        "-File",
+        "D:/soft/nodejs/node_global/copilot.ps1",
+        "help",
+        "environment"
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01",
+      "started": "2026-10-05T10:27:00.054Z",
+      "elapsedMs": 4531,
+      "exitCode": 0,
+      "signal": null,
+      "pid": 31236,
+      "error": null
+    },
+    {
+      "label": "public-version",
+      "executable": "D:\\soft\\nodejs\\node.exe",
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "--version"
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01",
+      "started": "2026-10-05T10:27:04.587Z",
+      "elapsedMs": 309,
+      "exitCode": 0,
+      "signal": null,
+      "pid": 17272,
+      "error": null
+    },
+    {
+      "label": "public-init",
+      "executable": "D:\\soft\\nodejs\\node.exe",
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "init",
+        "--marketplace",
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource",
+        "--role",
+        "quality"
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01",
+      "started": "2026-10-05T10:27:04.898Z",
+      "elapsedMs": 90665,
+      "exitCode": 0,
+      "signal": null,
+      "pid": 17948,
+      "error": null
+    },
+    {
+      "label": "public-sync",
+      "executable": "D:\\soft\\nodejs\\node.exe",
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "sync"
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01",
+      "started": "2026-10-05T10:28:35.564Z",
+      "elapsedMs": 123903,
+      "exitCode": 0,
+      "signal": null,
+      "pid": 28612,
+      "error": null
+    },
+    {
+      "label": "public-projects-set",
+      "executable": "D:\\soft\\nodejs\\node.exe",
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "projects",
+        "set",
+        "atlas-payments"
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01",
+      "started": "2026-10-05T10:30:39.469Z",
+      "elapsedMs": 2961,
+      "exitCode": 0,
+      "signal": null,
+      "pid": 9000,
+      "error": null
+    },
+    {
+      "label": "public-projects-list",
+      "executable": "D:\\soft\\nodejs\\node.exe",
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "projects",
+        "list"
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01",
+      "started": "2026-10-05T10:30:42.434Z",
+      "elapsedMs": 527,
+      "exitCode": 0,
+      "signal": null,
+      "pid": 27792,
+      "error": null
+    },
+    {
+      "label": "fixed-after",
+      "executable": "D:\\soft\\nodejs\\node.exe",
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\worktrees\\c-quality-30\\scripts\\measure-recall-quality.mjs",
+        "snapshot",
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\baseline-v2",
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-native-v2\\fixed-protected-after.json"
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\worktrees\\c-quality-30",
+      "started": "2026-10-05T10:30:43.005Z",
+      "elapsedMs": 522,
+      "exitCode": 0,
+      "signal": null,
+      "pid": 29244,
+      "error": null
+    }
+  ],
+  "fixedBaselineProtection": "PASS",
+  "nativeSession": "UNVERIFIED"
+}

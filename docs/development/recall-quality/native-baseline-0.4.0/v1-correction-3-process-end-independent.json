@@ -1,0 +1,26 @@
+{
+  "status": "PASS_BY_INDEPENDENT_RAW_UTC_JOIN",
+  "startUtc": "2026-10-05T10:02:32.741Z",
+  "endUtc": "2026-10-05T10:08:07.888Z",
+  "snapshotUtc": "2026-10-05T10:12:11.1318933+00:00",
+  "remainingOwnWindowProcesses": [],
+  "laterUnknownProcessesUntouched": [
+    {
+      "ProcessId": 31576,
+      "ParentProcessId": 22968,
+      "Name": "cmd.exe",
+      "creationUtc": "2026-10-05T10:08:41.5418200+00:00"
+    },
+    {
+      "ProcessId": 29684,
+      "ParentProcessId": 22968,
+      "Name": "cmd.exe",
+      "creationUtc": "2026-10-05T10:08:41.9705690+00:00"
+    }
+  ],
+  "localTimeComparison": "NOT_USED",
+  "v2Comparison": "REJECTED_DATETIME_COERCION",
+  "v2EndBeforeStart": true,
+  "cleanup": "Approved Remove-AgentTemp helper removed only empty new C lock after native nodes were absent; unknown processes untouched",
+  "causeOfInitial120SecondTimeout": "UNVERIFIED"
+}
