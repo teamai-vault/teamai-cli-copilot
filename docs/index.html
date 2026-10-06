@@ -15,6 +15,7 @@
   --bg:#fafafa;--surface:#ffffff;--sunken:#f4f4f5;--line:#e4e4e7;--line-strong:#d4d4d8;
   --text:#18181b;--muted:#52525b;--faint:#8b8b94;
   --accent:#15803d;--accent-soft:#dcfce7;--accent-line:#86efac;
+  --local:#b45309;--local-soft:#fef3c7;
   --code-bg:#18181b;--code-text:#e4e4e7;--code-dim:#8b8b94;--code-accent:#4ade80;--code-warn:#fbbf24;
   --r:10px;--r-sm:6px;
   --sans:"Geist Variable",ui-sans-serif,system-ui,-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
@@ -24,6 +25,7 @@
   --bg:#0b0b0d;--surface:#131316;--sunken:#18181b;--line:#27272a;--line-strong:#3f3f46;
   --text:#f4f4f5;--muted:#a1a1aa;--faint:#71717a;
   --accent:#4ade80;--accent-soft:#12291b;--accent-line:#166534;
+  --local:#fbbf24;--local-soft:#2a2108;
   --code-bg:#101012;--code-text:#e4e4e7;--code-dim:#71717a;--code-accent:#4ade80;
 }}
 *{box-sizing:border-box}
@@ -182,6 +184,8 @@ nav.top .btn{height:34px;padding:0 12px}
 .tree li.own{background:var(--accent-soft);color:var(--text);box-shadow:inset 2px 0 0 var(--accent)}
 .tree li.opt{outline:1px dashed var(--accent-line);outline-offset:-1px}
 .tree li.no,.tree li.no span{color:var(--faint)}
+.tree li.loc{background:var(--local-soft);box-shadow:inset 2px 0 0 var(--local)}
+.tree li.loc span b{color:var(--local);font-weight:500}
 .tree li+li{margin-top:2px}
 .i1{margin-left:18px}
 .legend{margin-top:18px;display:flex;gap:22px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
@@ -189,6 +193,7 @@ nav.top .btn{height:34px;padding:0 12px}
 .legend .a{background:var(--accent)}
 .legend .c{border:1px dashed var(--accent)}
 .legend .b{background:var(--line-strong)}
+.legend .l{background:var(--local)}
 
 /* recall */
 .recall{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:40px;align-items:start}
@@ -632,18 +637,18 @@ Managed user instructions are already converged (2).</pre>
         <h3><i class="ph ph-folder-simple"></i>当前 Repo</h3>
         <ol>
           <li>payment-service/</li>
-          <li class="own i1">.github/instructions/teamai/<span>业务 Instructions</span></li>
-          <li class="own i1">.teamai/context/<span>Docs 与 Learnings</span></li>
-          <li class="own opt i1">.github/agents/ · skills/ · hooks/<span>Project Plugin 组件</span></li>
+          <li class="own loc i1">.github/instructions/teamai/<span>业务 Instructions · <b>本地忽略</b></span></li>
+          <li class="own loc i1">.teamai/context/<span>Docs 与 Learnings · <b>本地忽略</b></span></li>
+          <li class="own opt i1">.github/agents/ · skills/ · hooks/<span>Project Plugin 组件 · 是否提交由你决定</span></li>
           <li class="own opt i1">.mcp.json<span>只合并拥有的条目</span></li>
           <li class="own opt i1">.teamai/project-components/<span>MCP 引用文件</span></li>
           <li class="no i1">.github/copilot-instructions.md<span>你自己的</span></li>
           <li class="no i1">src/<span>你自己的</span></li>
-          <li class="own">.git/info/exclude<span>前两个目录不进提交</span></li>
+          <li class="own loc">.git/info/exclude<span>追加两条<b>本地忽略</b>规则，只在本机生效</span></li>
         </ol>
       </div>
     </div>
-    <div class="legend"><span><i class="a"></i>teamai 管理</span><span><i class="c"></i>按需出现</span><span><i class="b"></i>不会触碰</span></div>
+    <div class="legend"><span><i class="a"></i>teamai 管理</span><span><i class="c"></i>按需出现</span><span><i class="b"></i>不会触碰</span><span><i class="l"></i>本地忽略：写入 .git/info/exclude，不出现在 git status，不会被提交</span></div>
   </section>
 
   <section id="recall">
