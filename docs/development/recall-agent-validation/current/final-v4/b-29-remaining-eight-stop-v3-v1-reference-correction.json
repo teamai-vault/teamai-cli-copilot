@@ -1,0 +1,26 @@
+{
+  "status": "REFERENCE_TRANSCRIPTION_CORRECTION_ONLY",
+  "affectedImmutableReady": {
+    "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-29-remaining-eight-stop-v3-v1-ready.json",
+    "bytes": 23968,
+    "sha256": "36a38db52bba86064a31a9bd271a4e64b2ceffae6d2ba3daa9db088780def82b"
+  },
+  "field": "firstTwoAcceptedPointers.rootAcceptance.sha256",
+  "oldMalformedValue": "3eca0c37fe917cb85f1bc98bf5b5fa5b3ed9cc27f55de8f3800e7bada8987cb",
+  "oldLength": 63,
+  "correctValue": "3eca0c37fe917cb85f1bc98bf5b5bfa5b3ed9cc27f55de8f3800e7bada8987cb",
+  "correctLength": 64,
+  "actualReferencedFile": {
+    "path": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/supervisor-b29-stop-two-acceptance.json",
+    "bytes": 4263,
+    "sha256": "3eca0c37fe917cb85f1bc98bf5b5bfa5b3ed9cc27f55de8f3800e7bada8987cb",
+    "meaning": "Targeted identity read to correct our own malformed ready reference only; existing acceptance and accepted native artifacts unchanged"
+  },
+  "actualToolReturn": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-native-29-v3/operator-first-two-reference-correction-identity-tool-return-v1.json",
+  "meaning": "Use this exact 64-character SHA for the existing first-two root acceptance reference. v1 ready, new 369-file case inventory, all native outputs and accepted first-two files are preserved unchanged.",
+  "originalEightBehaviorAcceptance": "ROOT_PENDING",
+  "slotRelease": "ROOT_ONLY_PENDING",
+  "nativeRerun": false,
+  "sourceOrFixtureChange": false,
+  "wholeIssueAcceptance": "NOT_CLAIMED"
+}

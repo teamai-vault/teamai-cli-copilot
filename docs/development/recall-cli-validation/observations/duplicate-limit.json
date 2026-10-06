@@ -1,0 +1,22 @@
+{
+  "name": "duplicate-limit",
+  "args": [
+    "recall",
+    "query",
+    "--limit",
+    "1",
+    "--limit",
+    "2",
+    "--json"
+  ],
+  "home": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall\\empty-home",
+  "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall\\empty-workspace",
+  "noGit": true,
+  "node": "v24.15.0",
+  "startedAt": "2026-10-05T14:31:19.043Z",
+  "finishedAt": "2026-10-05T14:31:19.576Z",
+  "exitCode": 2,
+  "error": null,
+  "stdout": "{\"schemaVersion\":1,\"error\":{\"code\":\"INVALID_ARGUMENT\",\"message\":\"--limit may be supplied only once.\"}}\n",
+  "stderr": ""
+}

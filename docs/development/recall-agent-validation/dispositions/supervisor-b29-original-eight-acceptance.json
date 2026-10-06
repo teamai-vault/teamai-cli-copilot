@@ -1,0 +1,192 @@
+{
+  "result": "ACCEPT_FINITE_ACTUAL_OBSERVATIONS_WITH_QUALITY_AND_ROUTE_LIMITS_RELEASE_E16",
+  "ready": {
+    "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-29-remaining-eight-stop-v3-v1-ready.json",
+    "sha256": "36a38db52bba86064a31a9bd271a4e64b2ceffae6d2ba3daa9db088780def82b"
+  },
+  "indexedArtifacts": 369,
+  "uniqueIdentitiesVerified": 384,
+  "sourceRevision": "4977e40ac7e6d327f63710302bac137177f70193",
+  "manifestSha256": "56f6935e691e87a0d48ede91670e12c22c41004b1fd04323606d14645f8c854e",
+  "agentSha256": "03562f41201196a8272e3fbbd6997f989ba6eceb34bbae99276fe1e4359a0452",
+  "cases": [
+    {
+      "id": "B29-context",
+      "sessionId": "4fc4d36d-4fc6-47dd-bc2b-335c96f53a45",
+      "normalExit": 0,
+      "actualModel": "gpt-6-luna",
+      "queries": 3,
+      "knowledgeOriginals": [
+        "doc:payments-api:contexts/payments-api/docs/40-replay-guard.md",
+        "doc:payments-api:contexts/payments-api/docs/10-display-note.md",
+        "doc:payments-api:contexts/payments-api/docs/80-audit-note.md",
+        "doc:payments-api:contexts/payments-api/docs/90-read-gap.md",
+        "doc:payments-api:contexts/payments-api/docs/70-epoch-policy.md"
+      ],
+      "firstCallerRecallSelected": false,
+      "behavior": "OBSERVATION_WITH_SEPARATE_RECORDED_LIMITS"
+    },
+    {
+      "id": "B29-dedup-conflict",
+      "sessionId": "7609fa9e-a39d-40aa-80ab-011de05e4d07",
+      "normalExit": 0,
+      "actualModel": "gpt-6-luna",
+      "queries": 2,
+      "knowledgeOriginals": [
+        "learning:payments-api:5d631ba1-b2e4-4638-8c45-5207c914ce82",
+        "learning:payments-api:9be813a0-2541-4cf2-b71e-098a7f610e81"
+      ],
+      "firstCallerRecallSelected": true,
+      "behavior": "OBSERVATION_WITH_SEPARATE_RECORDED_LIMITS"
+    },
+    {
+      "id": "B29-none",
+      "sessionId": "d0987d83-55e4-4e14-909b-cd2ada225e0e",
+      "normalExit": 0,
+      "actualModel": "gpt-6-luna",
+      "queries": 1,
+      "knowledgeOriginals": [],
+      "firstCallerRecallSelected": true,
+      "behavior": "OBSERVATION_WITH_SEPARATE_RECORDED_LIMITS"
+    },
+    {
+      "id": "B29-unbound-git",
+      "sessionId": "5cdf78fb-403a-4da5-80fb-9789a5647c0a",
+      "normalExit": 0,
+      "actualModel": "gpt-6-luna",
+      "queries": 1,
+      "knowledgeOriginals": [
+        "learning:shared:11f67190-c1b4-4cb7-a082-188a7dd98f63"
+      ],
+      "firstCallerRecallSelected": true,
+      "behavior": "OBSERVATION_WITH_SEPARATE_RECORDED_LIMITS"
+    },
+    {
+      "id": "B29-non-git",
+      "sessionId": "2e1e2937-866a-45aa-8a12-39a05decd859",
+      "normalExit": 0,
+      "actualModel": "mai-code-1.1-flash",
+      "queries": 1,
+      "knowledgeOriginals": [
+        "learning:shared:11f67190-c1b4-4cb7-a082-188a7dd98f63"
+      ],
+      "firstCallerRecallSelected": true,
+      "behavior": "OBSERVATION_WITH_SEPARATE_RECORDED_LIMITS"
+    },
+    {
+      "id": "B29-explicit-workspace-unbound-git",
+      "sessionId": "59ab6f36-8361-473f-af53-d34ffe15babd",
+      "normalExit": 0,
+      "actualModel": "gpt-6-luna",
+      "queries": 1,
+      "knowledgeOriginals": [],
+      "firstCallerRecallSelected": true,
+      "behavior": "OBSERVATION_WITH_SEPARATE_RECORDED_LIMITS"
+    },
+    {
+      "id": "B29-explicit-project-non-git",
+      "sessionId": "f0adc650-37fd-4b55-b419-ce56dd0b86ad",
+      "normalExit": 0,
+      "actualModel": "gpt-6-luna",
+      "queries": 1,
+      "knowledgeOriginals": [],
+      "firstCallerRecallSelected": true,
+      "behavior": "OBSERVATION_WITH_SEPARATE_RECORDED_LIMITS"
+    },
+    {
+      "id": "B29-supplement-intake",
+      "sessionId": "0b36b895-8c19-44fb-9722-dd8057d83af9",
+      "normalExit": 0,
+      "actualModel": "gpt-6-luna",
+      "queries": 2,
+      "knowledgeOriginals": [
+        "doc:payments-api:contexts/payments-api/docs/63-intake-handoff.md",
+        "doc:payments-api:contexts/payments-api/docs/82-budget-clearance.md"
+      ],
+      "firstCallerRecallSelected": true,
+      "behavior": "OBSERVATION_WITH_SEPARATE_RECORDED_LIMITS"
+    }
+  ],
+  "totalsForNewEight": {
+    "queries": 12,
+    "knowledgeViews": 11,
+    "commandsReferenceViews": 4,
+    "actualReadonlyRecallHelp": [
+      {
+        "case": "B29-context",
+        "actor": "77c0abde-98f2-431d-98c8-aa76140a61c4",
+        "toolCallId": "call_sldS1XomrpUAbTwejD9jp7Bj"
+      },
+      {
+        "case": "B29-unbound-git",
+        "actor": "parent",
+        "toolCallId": "call_hWBZUOVabeSIHRYQ0EZ2aInw"
+      },
+      {
+        "case": "B29-explicit-project-non-git",
+        "actor": "parent",
+        "toolCallId": "call_PFVQOWV7077hvMmdtsJ7z307"
+      }
+    ]
+  },
+  "firstTwo": {
+    "rootAcceptance": {
+      "path": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/supervisor-b29-stop-two-acceptance.json",
+      "bytes": 4263,
+      "sha256": "3eca0c37fe917cb85f1bc98bf5b5bfa5b3ed9cc27f55de8f3800e7bada8987cb",
+      "meaning": "Targeted identity read to correct our own malformed ready reference only; existing acceptance and accepted native artifacts unchanged"
+    },
+    "handoff": {
+      "path": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-29-stop-two-coverage-v3-checkpoint-v1-handoff.md",
+      "bytes": 6101,
+      "sha256": "60d89cd7ccd438e080e07506f41f8e4969066534aee447edac1e503dc4442ecb"
+    },
+    "index": {
+      "path": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-native-29-v3/native-two-coverage-stop-artifact-index.json",
+      "bytes": 36133,
+      "fileCount": 126,
+      "sha256": "6a8a3dd5456e0665295af21c89bdef599f5cd7cacc72f025b1753bcd4993e11d"
+    },
+    "rehashed": false,
+    "overwritten": false
+  },
+  "originalTenNowObserved": true,
+  "suppliedPointerCorrection": {
+    "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-29-remaining-eight-stop-v3-v1-reference-correction.json",
+    "sha256": "b853a7420c0bbe987eb0e6a2d34cb3337ddc1174acc9e2ecd9c9837b4371db40",
+    "initialStrictReadback": "exit1 chunk4e40bb rejected the preserved malformed63-character pointer; existing B correction applied, target bytes unchanged; no native/model rerun"
+  },
+  "operatorClassifierCorrection": "exit1 chunk30a44b found legitimate readonly recall help outside the query inventory. Actual helps are now listed separately; no source, raw observation or paid run changed.",
+  "rootActualAnswerReadback": "Root read all eight actual answers and query/read records. Conditional E4/250ms, opposite C7 rules, scoped no-hit, default User400ms/pending and explicit UNBOUND errors have source support. Intake read63 precedes Q2; new82 was absent from Q1 and supplies C2/K5. Final9ms rule keeps K5 and eligibility unconfirmed, then stops.",
+  "limitations": {
+    "context": "First parent caller followed Agent deselection; ordinary-mode native memo and denied sharing are separate. Later same-model Recall child has actual original reads; full two-turn selected-Agent route is not established.",
+    "precision": "Several initial queries shortened/reformatted the full caller diagnostic. Dedup final drops a period; non-Git final omits explicit source hash/revision/content hash. First-two ZH hash typo and EN parent citation limits remain.",
+    "intake": "Relevant policy was rank2 and read, then grounded query/read of82. Weak first31 was not read; no comparison of those two originals is claimed.",
+    "history": "Original STOP Major, numeric citation FAIL and prior read-gap/injection records remain at their actual identities. No earlier native run is relabelled as current4977."
+  },
+  "protection": {
+    "currentNewRoots": "13 business / 5 Git",
+    "originalRoots": "8 business / 5 Git",
+    "lastSnapshotDelta": 0,
+    "onlyExactStartupPaths": [
+      "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+      "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive"
+    ],
+    "fullStartupBytesPreserved": true,
+    "generatingPid": "NOT_INDEPENDENTLY_OBSERVED",
+    "nativePlatform": "Account/config/session/log roots are separate and not scanned; no whole-platform zero-write claim"
+  },
+  "actualEightLauncherPidsAbsent": [
+    2732,
+    27168,
+    21612,
+    32180,
+    3892,
+    33644,
+    24948,
+    30172
+  ],
+  "productOrWholeTicketPass": "NOT_INFERRED; FINAL_INDEPENDENT_REVIEW_PENDING",
+  "latestUserConstraint": "Freeze the current lightweight Agent, preserve stochastic quality failures, no prompt stacking or repeated sampling for green. Deterministic Scope/filter/input/raw source boundaries remain CLI/script responsibilities.",
+  "acceptedAtUtc": "2026-10-06T03:34:04.072Z"
+}

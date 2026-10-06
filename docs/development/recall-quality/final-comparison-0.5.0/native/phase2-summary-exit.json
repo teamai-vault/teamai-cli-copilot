@@ -1,0 +1,8 @@
+{
+  "phase": "FROZEN_NATIVE_OFFLINE_SUMMARY",
+  "started": "2026-10-06T05:21:31.9274744+00:00",
+  "finished": "2026-10-06T05:21:32.0725690+00:00",
+  "exitCode": 0,
+  "modelCalls": 0,
+  "recipe": "summarize-native-readback.mjs unchanged v4; per-question current selection separately verified"
+}

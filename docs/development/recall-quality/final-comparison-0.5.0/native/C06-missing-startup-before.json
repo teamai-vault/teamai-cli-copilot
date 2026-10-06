@@ -1,0 +1,21 @@
+{
+  "case": "C06-missing",
+  "point": "before",
+  "scope": "Only the two exact ordinary Startup paths for the actual frozen case HOME; no folder exemption or account/config/session identity reads",
+  "files": [
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\final-comparison-v4\\controls\\missing\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+      "status": "ABSENT",
+      "bytes": null,
+      "sha256": null,
+      "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\final-comparison-v4\\controls\\missing\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive",
+      "status": "ABSENT",
+      "bytes": null,
+      "sha256": null,
+      "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+    }
+  ]
+}

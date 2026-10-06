@@ -1,0 +1,146 @@
+[
+  {
+    "id": "doc:atlas-payments:contexts/atlas-payments/docs/retry-current.md",
+    "fixturePath": "resource/contexts/atlas-payments/docs/retry-current.md",
+    "relativePath": "contexts/atlas-payments/docs/retry-current.md",
+    "logicalProject": "atlas-payments",
+    "publication": "published",
+    "allowed": true,
+    "role": "evidence"
+  },
+  {
+    "id": "doc:atlas-payments:contexts/atlas-payments/docs/retry-legacy.md",
+    "fixturePath": "resource/contexts/atlas-payments/docs/retry-legacy.md",
+    "relativePath": "contexts/atlas-payments/docs/retry-legacy.md",
+    "logicalProject": "atlas-payments",
+    "publication": "published",
+    "allowed": true,
+    "role": "wrong-version"
+  },
+  {
+    "id": "doc:atlas-payments:contexts/atlas-payments/docs/pool.md",
+    "fixturePath": "resource/contexts/atlas-payments/docs/pool.md",
+    "relativePath": "contexts/atlas-payments/docs/pool.md",
+    "logicalProject": "atlas-payments",
+    "publication": "published",
+    "allowed": true,
+    "role": "evidence"
+  },
+  {
+    "id": "doc:atlas-payments:contexts/atlas-payments/docs/drain-long.md",
+    "fixturePath": "resource/contexts/atlas-payments/docs/drain-long.md",
+    "relativePath": "contexts/atlas-payments/docs/drain-long.md",
+    "logicalProject": "atlas-payments",
+    "publication": "published",
+    "allowed": true,
+    "role": "evidence"
+  },
+  {
+    "id": "doc:atlas-payments:contexts/atlas-payments/docs/drain-observation.md",
+    "fixturePath": "resource/contexts/atlas-payments/docs/drain-observation.md",
+    "relativePath": "contexts/atlas-payments/docs/drain-observation.md",
+    "logicalProject": "atlas-payments",
+    "publication": "published",
+    "allowed": true,
+    "role": "evidence"
+  },
+  {
+    "id": "doc:atlas-payments:contexts/atlas-payments/docs/backoff-copy.md",
+    "fixturePath": "resource/contexts/atlas-payments/docs/backoff-copy.md",
+    "relativePath": "contexts/atlas-payments/docs/backoff-copy.md",
+    "logicalProject": "atlas-payments",
+    "publication": "published",
+    "allowed": true,
+    "role": "evidence"
+  },
+  {
+    "id": "doc:atlas-payments:contexts/atlas-payments/docs/injection.md",
+    "fixturePath": "resource/contexts/atlas-payments/docs/injection.md",
+    "relativePath": "contexts/atlas-payments/docs/injection.md",
+    "logicalProject": "atlas-payments",
+    "publication": "published",
+    "allowed": true,
+    "role": "evidence"
+  },
+  {
+    "id": "doc:atlas-other:contexts/atlas-other/docs/inactive.md",
+    "fixturePath": "resource/contexts/atlas-other/docs/inactive.md",
+    "relativePath": "contexts/atlas-other/docs/inactive.md",
+    "logicalProject": "atlas-other",
+    "publication": "published",
+    "allowed": false,
+    "role": "outside-scope"
+  },
+  {
+    "id": "learning:shared:30000000-0000-4000-8000-000000000001",
+    "fixturePath": "published/learnings/shared/30000000-0000-4000-8000-000000000001.md",
+    "relativePath": "learnings/shared/30000000-0000-4000-8000-000000000001.md",
+    "logicalProject": "shared",
+    "publication": "published",
+    "allowed": true,
+    "role": "evidence"
+  },
+  {
+    "id": "learning:shared:30000000-0000-4000-8000-000000000002",
+    "fixturePath": "published/learnings/shared/30000000-0000-4000-8000-000000000002.md",
+    "relativePath": "learnings/shared/30000000-0000-4000-8000-000000000002.md",
+    "logicalProject": "shared",
+    "publication": "published",
+    "allowed": true,
+    "role": "evidence"
+  },
+  {
+    "id": "learning:atlas-payments:30000000-0000-4000-8000-000000000003",
+    "fixturePath": "published/learnings/atlas-payments/30000000-0000-4000-8000-000000000003.md",
+    "relativePath": "learnings/atlas-payments/30000000-0000-4000-8000-000000000003.md",
+    "logicalProject": "atlas-payments",
+    "publication": "published",
+    "allowed": true,
+    "role": "evidence"
+  },
+  {
+    "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-agenda.md",
+    "fixturePath": "resource/contexts/atlas-payments/docs/noise-agenda.md",
+    "relativePath": "contexts/atlas-payments/docs/noise-agenda.md",
+    "logicalProject": "atlas-payments",
+    "publication": "published",
+    "allowed": true,
+    "role": "weak"
+  },
+  {
+    "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-dashboard.md",
+    "fixturePath": "resource/contexts/atlas-payments/docs/noise-dashboard.md",
+    "relativePath": "contexts/atlas-payments/docs/noise-dashboard.md",
+    "logicalProject": "atlas-payments",
+    "publication": "published",
+    "allowed": true,
+    "role": "weak"
+  },
+  {
+    "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-style-guide.md",
+    "fixturePath": "resource/contexts/atlas-payments/docs/noise-style-guide.md",
+    "relativePath": "contexts/atlas-payments/docs/noise-style-guide.md",
+    "logicalProject": "atlas-payments",
+    "publication": "published",
+    "allowed": true,
+    "role": "weak"
+  },
+  {
+    "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-test-plan.md",
+    "fixturePath": "resource/contexts/atlas-payments/docs/noise-test-plan.md",
+    "relativePath": "contexts/atlas-payments/docs/noise-test-plan.md",
+    "logicalProject": "atlas-payments",
+    "publication": "published",
+    "allowed": true,
+    "role": "weak"
+  },
+  {
+    "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-glossary.md",
+    "fixturePath": "resource/contexts/atlas-payments/docs/noise-glossary.md",
+    "relativePath": "contexts/atlas-payments/docs/noise-glossary.md",
+    "logicalProject": "atlas-payments",
+    "publication": "published",
+    "allowed": true,
+    "role": "weak"
+  }
+]

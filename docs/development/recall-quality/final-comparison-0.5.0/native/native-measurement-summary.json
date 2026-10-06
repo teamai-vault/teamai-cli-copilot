@@ -1,0 +1,599 @@
+{
+  "schemaVersion": 1,
+  "assessment": "MEASUREMENT_RECORDED; final behavior assessed manually, no issue or product acceptance asserted",
+  "source": "native-observed-readback.json and the eight unchanged native task-event projections/usage/invocation/exit files",
+  "sessions": 8,
+  "frozenTurns": 10,
+  "queries": 12,
+  "successfulQueries": 8,
+  "cacheErrorQueries": 4,
+  "nativeViewCalls": 13,
+  "originalReadCalls": 12,
+  "distinctOriginalsAcrossSessions": 9,
+  "emittedHits": 23,
+  "failedHitChecks": 0,
+  "failedOriginalReadChecks": 0,
+  "toolStarts": 34,
+  "nativeDelegations": 0,
+  "sumNativeProcessElapsedMs": 1647400,
+  "totalUserRequests": 10,
+  "totalPremiumRequestCost": 8.66,
+  "totalNanoAiu": 4039302000,
+  "totalApiDurationMs": 166688,
+  "costInterpretation": "Preserve native field names/units. PremiumRequestCost and NanoAiu are different counters; no USD conversion or extra telemetry.",
+  "internalCliReads": "UNVERIFIED_NO_INSTRUMENTATION",
+  "usdPrice": "UNVERIFIED",
+  "allSelectedBeforeQuestion": true,
+  "allQuestionsFrozen": true,
+  "allControlledFactsEqual": true,
+  "healthyFixedProfileProtection": {
+    "beforeFacts": 215,
+    "afterFacts": 215,
+    "deltas": [],
+    "equal": true,
+    "scope": "Original fixed CLI fixture business/source/refs/cache facts, after all native sessions; not account or native session metadata"
+  },
+  "missingProfileProtection": {
+    "root": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\final-comparison-v4\\controls\\missing\\.teamai",
+    "beforeFacts": 5,
+    "afterFacts": 5,
+    "deltas": [],
+    "scope": "Controlled fictional .teamai business files only; no native/account/session/credential files"
+  },
+  "damagedProfileProtection": {
+    "root": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\final-comparison-v4\\controls\\damaged\\.teamai",
+    "beforeFacts": 10,
+    "afterFacts": 10,
+    "deltas": [],
+    "scope": "Controlled fictional .teamai business files only; no native/account/session/credential files"
+  },
+  "sessionFacts": [
+    {
+      "label": "C01",
+      "sessionId": "0959f296-9f52-4fdb-bae8-8084fdf36417",
+      "sourceEventSha256": "0101b844ada648d18f1e2d79d612bbfc561e5c8d87340f8686d714e59efd25d3",
+      "selectionEvents": [
+        {
+          "id": "ddc6c84f-6e26-4a9d-9e27-643addc4c974",
+          "time": "2026-10-06T04:47:40.556Z",
+          "agentName": "teamai-recall"
+        },
+        {
+          "id": "542713d3-5501-4b83-a154-4adc0040b9b6",
+          "time": "2026-10-06T04:47:40.614Z",
+          "agentName": "teamai-recall"
+        }
+      ],
+      "selectionBeforeFrozenQuestion": true,
+      "route": "SELECTED_AGENT_DIRECT",
+      "delegations": [],
+      "frozenTurns": 3,
+      "queries": 1,
+      "viewCalls": 5,
+      "originalReadCalls": 5,
+      "distinctOriginalsRead": 5,
+      "successfulQueries": 1,
+      "cacheErrorQueries": 0,
+      "nativeLimit10": "UNVERIFIED_NOT_REQUESTED",
+      "emittedHits": 5,
+      "uniqueSourceTuples": 5,
+      "repeatedHitOccurrences": 0,
+      "firstFullSupportingRead": {
+        "sourceId": "doc:atlas-payments:contexts/atlas-payments/docs/retry-legacy.md",
+        "completion": "2026-10-06T04:49:45.406Z"
+      },
+      "queriesAfterSufficientOriginal": [],
+      "originalReadHashFailures": [],
+      "controlledFileFacts": {
+        "before": 190,
+        "after": 190,
+        "deltas": []
+      },
+      "processElapsedMs": 343045,
+      "elapsedIncludes": "Native launch, human approval, observation/capture waits and normal exit; not query-only latency",
+      "totalUserRequests": 3,
+      "totalPremiumRequestCost": 1.6600000000000001,
+      "totalNanoAiu": 2740798000,
+      "totalApiDurationMs": 45263,
+      "modelNames": [
+        "gpt-6-luna",
+        "claude-haiku-4.5"
+      ],
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 32
+        },
+        "cache_read": {
+          "tokenCount": 42416
+        },
+        "cache_write": {
+          "tokenCount": 26943
+        },
+        "output": {
+          "tokenCount": 3345
+        }
+      },
+      "exitCode": 0
+    },
+    {
+      "label": "C02",
+      "sessionId": "310e4936-72d3-47ed-bb19-4fad1869d517",
+      "sourceEventSha256": "b5308ad38e3322b99305d0d8f81d624aad35c081d6d5ca9c6f87dfb061bd3e49",
+      "selectionEvents": [
+        {
+          "id": "0098eb1a-dc0f-46b4-a56d-e5a451529a39",
+          "time": "2026-10-06T04:54:05.252Z",
+          "agentName": "teamai-recall"
+        },
+        {
+          "id": "0569f14a-05f9-4dca-a2be-c6dda32259a7",
+          "time": "2026-10-06T04:54:05.627Z",
+          "agentName": "teamai-recall"
+        },
+        {
+          "id": "eaba3b82-92e5-4587-8076-9be43d9c0c79",
+          "time": "2026-10-06T04:55:43.978Z",
+          "agentName": "teamai-recall"
+        }
+      ],
+      "selectionBeforeFrozenQuestion": true,
+      "route": "SELECTED_AGENT_DIRECT",
+      "delegations": [],
+      "frozenTurns": 1,
+      "queries": 1,
+      "viewCalls": 1,
+      "originalReadCalls": 1,
+      "distinctOriginalsRead": 1,
+      "successfulQueries": 1,
+      "cacheErrorQueries": 0,
+      "nativeLimit10": "UNVERIFIED_NOT_REQUESTED",
+      "emittedHits": 5,
+      "uniqueSourceTuples": 5,
+      "repeatedHitOccurrences": 0,
+      "firstFullSupportingRead": {
+        "sourceId": "doc:atlas-payments:contexts/atlas-payments/docs/pool.md",
+        "completion": "2026-10-06T04:57:07.698Z"
+      },
+      "queriesAfterSufficientOriginal": [],
+      "originalReadHashFailures": [],
+      "controlledFileFacts": {
+        "before": 190,
+        "after": 190,
+        "deltas": []
+      },
+      "processElapsedMs": 222292,
+      "elapsedIncludes": "Native launch, human approval, observation/capture waits and normal exit; not query-only latency",
+      "totalUserRequests": 1,
+      "totalPremiumRequestCost": 1,
+      "totalNanoAiu": 196589500,
+      "totalApiDurationMs": 19306,
+      "modelNames": [
+        "gpt-6-luna"
+      ],
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 12
+        },
+        "cache_read": {
+          "tokenCount": 30682
+        },
+        "cache_write": {
+          "tokenCount": 8343
+        },
+        "output": {
+          "tokenCount": 1230
+        }
+      },
+      "exitCode": 0
+    },
+    {
+      "label": "C03",
+      "sessionId": "33af9d7b-a224-47a3-8248-b3de845ea55c",
+      "sourceEventSha256": "793412505f9301334e353cd618ff0697db339be80c586ec48ababb9544d08530",
+      "selectionEvents": [
+        {
+          "id": "0a01b4c9-a40a-4a36-9388-a76632df51da",
+          "time": "2026-10-06T04:58:22.506Z",
+          "agentName": "teamai-recall"
+        },
+        {
+          "id": "1298409c-31bf-4582-8086-5aba38143375",
+          "time": "2026-10-06T04:58:23.137Z",
+          "agentName": "teamai-recall"
+        },
+        {
+          "id": "e9b2b027-f993-445c-975a-2f002d54bcef",
+          "time": "2026-10-06T04:59:20.668Z",
+          "agentName": "teamai-recall"
+        }
+      ],
+      "selectionBeforeFrozenQuestion": true,
+      "route": "SELECTED_AGENT_DIRECT",
+      "delegations": [],
+      "frozenTurns": 1,
+      "queries": 2,
+      "viewCalls": 3,
+      "originalReadCalls": 3,
+      "distinctOriginalsRead": 3,
+      "successfulQueries": 2,
+      "cacheErrorQueries": 0,
+      "nativeLimit10": "UNVERIFIED_NOT_REQUESTED",
+      "emittedHits": 10,
+      "uniqueSourceTuples": 6,
+      "repeatedHitOccurrences": 4,
+      "firstFullSupportingRead": {
+        "sourceId": "doc:atlas-payments:contexts/atlas-payments/docs/drain-long.md",
+        "completion": "2026-10-06T05:01:02.744Z"
+      },
+      "queriesAfterSufficientOriginal": [],
+      "originalReadHashFailures": [],
+      "controlledFileFacts": {
+        "before": 190,
+        "after": 190,
+        "deltas": []
+      },
+      "processElapsedMs": 225855,
+      "elapsedIncludes": "Native launch, human approval, observation/capture waits and normal exit; not query-only latency",
+      "totalUserRequests": 1,
+      "totalPremiumRequestCost": 1,
+      "totalNanoAiu": 303553500,
+      "totalApiDurationMs": 27188,
+      "modelNames": [
+        "gpt-6-luna"
+      ],
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 15
+        },
+        "cache_read": {
+          "tokenCount": 44041
+        },
+        "cache_write": {
+          "tokenCount": 12377
+        },
+        "output": {
+          "tokenCount": 2093
+        }
+      },
+      "exitCode": 0
+    },
+    {
+      "label": "C04",
+      "sessionId": "748dee5f-e97f-4c59-b6b8-6755742c674b",
+      "sourceEventSha256": "41508d636474abceb4befa59d99fca400be10e41fbe5cc7d8ae7fc20ce95290e",
+      "selectionEvents": [
+        {
+          "id": "a65df1cb-e61a-4ce9-b74e-a9ac4480ff7d",
+          "time": "2026-10-06T05:02:24.453Z",
+          "agentName": "teamai-recall"
+        },
+        {
+          "id": "7433545b-86f9-4ba1-812c-089ad5e63013",
+          "time": "2026-10-06T05:02:25.228Z",
+          "agentName": "teamai-recall"
+        },
+        {
+          "id": "9cf2483c-6265-420d-a48f-916df18b95e3",
+          "time": "2026-10-06T05:03:21.276Z",
+          "agentName": "teamai-recall"
+        }
+      ],
+      "selectionBeforeFrozenQuestion": true,
+      "route": "SELECTED_AGENT_DIRECT",
+      "delegations": [],
+      "frozenTurns": 1,
+      "queries": 1,
+      "viewCalls": 2,
+      "originalReadCalls": 2,
+      "distinctOriginalsRead": 2,
+      "successfulQueries": 1,
+      "cacheErrorQueries": 0,
+      "nativeLimit10": "UNVERIFIED_NOT_REQUESTED",
+      "emittedHits": 2,
+      "uniqueSourceTuples": 2,
+      "repeatedHitOccurrences": 0,
+      "firstFullSupportingRead": {
+        "sourceId": "doc:atlas-payments:contexts/atlas-payments/docs/backoff-copy.md",
+        "completion": "2026-10-06T05:07:08.264Z"
+      },
+      "queriesAfterSufficientOriginal": [],
+      "originalReadHashFailures": [],
+      "controlledFileFacts": {
+        "before": 190,
+        "after": 190,
+        "deltas": []
+      },
+      "processElapsedMs": 330234,
+      "elapsedIncludes": "Native launch, human approval, observation/capture waits and normal exit; not query-only latency",
+      "totalUserRequests": 1,
+      "totalPremiumRequestCost": 1,
+      "totalNanoAiu": 198794000,
+      "totalApiDurationMs": 19843,
+      "modelNames": [
+        "gpt-6-luna"
+      ],
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 12
+        },
+        "cache_read": {
+          "tokenCount": 29824
+        },
+        "cache_write": {
+          "tokenCount": 7696
+        },
+        "output": {
+          "tokenCount": 1453
+        }
+      },
+      "exitCode": 0
+    },
+    {
+      "label": "C05",
+      "sessionId": "f9e182db-a515-41a9-aefd-91c8da1bed19",
+      "sourceEventSha256": "ad0e91b5939907f47d5fb0aa43f5cca70fc1b03d1c39fabb7afecbfff6c3e95d",
+      "selectionEvents": [
+        {
+          "id": "5dbf9709-bf1a-4fc2-9dd7-87f8da8693a3",
+          "time": "2026-10-06T05:08:30.762Z",
+          "agentName": "teamai-recall"
+        },
+        {
+          "id": "fffcd65a-de89-486e-ad7b-7f8ff9760f21",
+          "time": "2026-10-06T05:08:30.792Z",
+          "agentName": "teamai-recall"
+        },
+        {
+          "id": "5bad1a70-9e59-4aa6-acac-a440cf25f2c8",
+          "time": "2026-10-06T05:09:12.408Z",
+          "agentName": "teamai-recall"
+        }
+      ],
+      "selectionBeforeFrozenQuestion": true,
+      "route": "SELECTED_AGENT_DIRECT",
+      "delegations": [],
+      "frozenTurns": 1,
+      "queries": 1,
+      "viewCalls": 2,
+      "originalReadCalls": 1,
+      "distinctOriginalsRead": 1,
+      "successfulQueries": 1,
+      "cacheErrorQueries": 0,
+      "nativeLimit10": "UNVERIFIED_NOT_REQUESTED",
+      "emittedHits": 1,
+      "uniqueSourceTuples": 1,
+      "repeatedHitOccurrences": 0,
+      "firstFullSupportingRead": {
+        "sourceId": "doc:atlas-payments:contexts/atlas-payments/docs/injection.md",
+        "completion": "2026-10-06T05:10:08.460Z"
+      },
+      "queriesAfterSufficientOriginal": [],
+      "originalReadHashFailures": [],
+      "controlledFileFacts": {
+        "before": 190,
+        "after": 190,
+        "deltas": []
+      },
+      "processElapsedMs": 127993,
+      "elapsedIncludes": "Native launch, human approval, observation/capture waits and normal exit; not query-only latency",
+      "totalUserRequests": 1,
+      "totalPremiumRequestCost": 1,
+      "totalNanoAiu": 191275000,
+      "totalApiDurationMs": 15529,
+      "modelNames": [
+        "gpt-6-luna"
+      ],
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 15
+        },
+        "cache_read": {
+          "tokenCount": 42350
+        },
+        "cache_write": {
+          "tokenCount": 9034
+        },
+        "output": {
+          "tokenCount": 717
+        }
+      },
+      "exitCode": 0
+    },
+    {
+      "label": "C06",
+      "sessionId": "e48bf436-1bcf-45a0-b6e4-b186e452ade0",
+      "sourceEventSha256": "32e0af65cf55d80c2ef7767468a5b1d5afbf0bc6c8138fd4135ab709b02c34a7",
+      "selectionEvents": [
+        {
+          "id": "f906eeb9-4aa3-4b03-b426-1da313238ecd",
+          "time": "2026-10-06T05:11:11.797Z",
+          "agentName": "teamai-recall"
+        },
+        {
+          "id": "eaa1d427-7de1-455c-96fa-54647653dc93",
+          "time": "2026-10-06T05:11:11.926Z",
+          "agentName": "teamai-recall"
+        }
+      ],
+      "selectionBeforeFrozenQuestion": true,
+      "route": "SELECTED_AGENT_DIRECT",
+      "delegations": [],
+      "frozenTurns": 1,
+      "queries": 2,
+      "viewCalls": 0,
+      "originalReadCalls": 0,
+      "distinctOriginalsRead": 0,
+      "successfulQueries": 2,
+      "cacheErrorQueries": 0,
+      "nativeLimit10": "UNVERIFIED_NOT_REQUESTED",
+      "emittedHits": 0,
+      "uniqueSourceTuples": 0,
+      "repeatedHitOccurrences": 0,
+      "queriesAfterSufficientOriginal": [],
+      "originalReadHashFailures": [],
+      "controlledFileFacts": {
+        "before": 190,
+        "after": 190,
+        "deltas": []
+      },
+      "processElapsedMs": 158596,
+      "elapsedIncludes": "Native launch, human approval, observation/capture waits and normal exit; not query-only latency",
+      "totalUserRequests": 1,
+      "totalPremiumRequestCost": 1,
+      "totalNanoAiu": 148740500,
+      "totalApiDurationMs": 13900,
+      "modelNames": [
+        "gpt-6-luna"
+      ],
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 9
+        },
+        "cache_read": {
+          "tokenCount": 19888
+        },
+        "cache_write": {
+          "tokenCount": 6929
+        },
+        "output": {
+          "tokenCount": 843
+        }
+      },
+      "exitCode": 0
+    },
+    {
+      "label": "C06-missing",
+      "sessionId": "ed6cec1f-5ba6-4fc1-b92c-d32f46780f56",
+      "sourceEventSha256": "650d312852cb957328eb68102bbcb1ff274baa8aa910677ce819e2119ce5efd6",
+      "selectionEvents": [
+        {
+          "id": "8ba64ce4-8b0f-490d-8e54-8168b0329445",
+          "time": "2026-10-06T05:14:22.941Z",
+          "agentName": "teamai-recall"
+        },
+        {
+          "id": "9bbc47e0-11b1-447a-92eb-c1761e74f9cf",
+          "time": "2026-10-06T05:14:22.984Z",
+          "agentName": "teamai-recall"
+        },
+        {
+          "id": "3414f7c3-9911-4276-82f5-09f3a83c8b27",
+          "time": "2026-10-06T05:14:57.177Z",
+          "agentName": "teamai-recall"
+        }
+      ],
+      "selectionBeforeFrozenQuestion": true,
+      "route": "SELECTED_AGENT_DIRECT",
+      "delegations": [],
+      "frozenTurns": 1,
+      "queries": 2,
+      "viewCalls": 0,
+      "originalReadCalls": 0,
+      "distinctOriginalsRead": 0,
+      "successfulQueries": 0,
+      "cacheErrorQueries": 2,
+      "nativeLimit10": "UNVERIFIED_NOT_REQUESTED",
+      "emittedHits": 0,
+      "uniqueSourceTuples": 0,
+      "repeatedHitOccurrences": 0,
+      "queriesAfterSufficientOriginal": [],
+      "originalReadHashFailures": [],
+      "controlledFileFacts": {
+        "before": 190,
+        "after": 190,
+        "deltas": []
+      },
+      "processElapsedMs": 123335,
+      "elapsedIncludes": "Native launch, human approval, observation/capture waits and normal exit; not query-only latency",
+      "totalUserRequests": 1,
+      "totalPremiumRequestCost": 1,
+      "totalNanoAiu": 132497000,
+      "totalApiDurationMs": 13054,
+      "modelNames": [
+        "gpt-6-luna"
+      ],
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 9
+        },
+        "cache_read": {
+          "tokenCount": 19907
+        },
+        "cache_write": {
+          "tokenCount": 6796
+        },
+        "output": {
+          "tokenCount": 551
+        }
+      },
+      "exitCode": 0
+    },
+    {
+      "label": "C06-damaged",
+      "sessionId": "992e31ee-cc06-427b-b1fa-c427877b6b3c",
+      "sourceEventSha256": "704a85a52633f52e40b1b63dc91a544e2da04b41143df849529f1520d3804330",
+      "selectionEvents": [
+        {
+          "id": "91f7fd26-0dc4-472e-86af-23bd9ea1a9c5",
+          "time": "2026-10-06T05:17:01.248Z",
+          "agentName": "teamai-recall"
+        },
+        {
+          "id": "e6977577-2d25-4ffc-9580-a9849a1f97c9",
+          "time": "2026-10-06T05:17:01.418Z",
+          "agentName": "teamai-recall"
+        },
+        {
+          "id": "ca9ae2c0-432c-4529-9cf3-869c10f088b7",
+          "time": "2026-10-06T05:17:33.467Z",
+          "agentName": "teamai-recall"
+        }
+      ],
+      "selectionBeforeFrozenQuestion": true,
+      "route": "SELECTED_AGENT_DIRECT",
+      "delegations": [],
+      "frozenTurns": 1,
+      "queries": 2,
+      "viewCalls": 0,
+      "originalReadCalls": 0,
+      "distinctOriginalsRead": 0,
+      "successfulQueries": 0,
+      "cacheErrorQueries": 2,
+      "nativeLimit10": "UNVERIFIED_NOT_REQUESTED",
+      "emittedHits": 0,
+      "uniqueSourceTuples": 0,
+      "repeatedHitOccurrences": 0,
+      "queriesAfterSufficientOriginal": [],
+      "originalReadHashFailures": [],
+      "controlledFileFacts": {
+        "before": 190,
+        "after": 190,
+        "deltas": []
+      },
+      "processElapsedMs": 116050,
+      "elapsedIncludes": "Native launch, human approval, observation/capture waits and normal exit; not query-only latency",
+      "totalUserRequests": 1,
+      "totalPremiumRequestCost": 1,
+      "totalNanoAiu": 127054500,
+      "totalApiDurationMs": 12605,
+      "modelNames": [
+        "gpt-6-luna"
+      ],
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 9
+        },
+        "cache_read": {
+          "tokenCount": 19902
+        },
+        "cache_write": {
+          "tokenCount": 6761
+        },
+        "output": {
+          "tokenCount": 451
+        }
+      },
+      "exitCode": 0
+    }
+  ]
+}

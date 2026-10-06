@@ -1,0 +1,10 @@
+version: 1
+projects:
+  - id: payments
+    name: Payments
+    description: Payments domain
+    owners: [payments]
+  - id: risk
+    name: Risk
+    description: Risk domain
+    owners: [risk]

@@ -1,0 +1,103 @@
+{
+  "result": "ACCEPTED_PAUSED_EVIDENCE_AND_NORMAL_ENDS_MAJOR_STOP_FAIL_PRESERVED",
+  "ready": {
+    "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-29-two-coverage-stop-checkpoint-v1-ready.json",
+    "sha256": "4b62e5237e87869a9703e4ea20b9f39ea1bbdce6f7b6c11dca7b61b1e32d736b"
+  },
+  "identitiesVerified": 487,
+  "indexedCurrent": 257,
+  "historicalNewInjection": 105,
+  "historicalE9": 222,
+  "sourceRevision": "8000bae22cf6a3490578e25e1af6b618e73267d5",
+  "manifestSha256": "230cd96d12c06373bde3fb117ae461792f7184b587a4968c85b420cc5957484b",
+  "agentSha256": "7e882003883ea008c30b9c567f77578e318077162ebbba090bcdf901fa27c48f",
+  "cases": [
+    {
+      "caseId": "B29-coverage-zh",
+      "sessionId": "e4c964e0-d784-4139-9f16-e35e72a228cd",
+      "normalExit": 0,
+      "actualQueries": 5,
+      "uniqueReturnedPathReads": 5,
+      "disposition": "FAIL_MAJOR_AC10_STOP_PRESERVED"
+    },
+    {
+      "caseId": "B29-coverage-en",
+      "sessionId": "0c3244b5-2617-40b9-96da-6188b34fd1f5",
+      "normalExit": 0,
+      "actualQueries": 3,
+      "uniqueReturnedPathReads": 2,
+      "disposition": "SUPPORTED_CORE_READ_PROVENANCE_AND_STOP_ONLY_WITH_PARENT_TRANSCRIPT_LIMIT"
+    }
+  ],
+  "stopReject": {
+    "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\supervisor-b29-coverage-zh-stop-reject.json",
+    "bytes": 4879,
+    "sha256": "b2fa0b062cc7e8053790c04a028e16fdc71ce5e53da27ceeac2ce013dd42edf7"
+  },
+  "globalB29Acceptance": "NOT_COMPLETE",
+  "englishLimits": "Child full source tuples; parent omits full tuple metadata after deselection and uses physically valid projection links. No weak-original View or weak-first replay-later promotion demonstrated. Scoped factual/read/stop support only.",
+  "startupOnly": {
+    "sessionId": "c1f4d0ae-6dc1-4d2a-b192-1a0f70d26d74",
+    "normalEnd": 0,
+    "actualCaller": "NOT_RUN",
+    "totalUserRequests": 0,
+    "formalRecorder": "ORIGINAL_ENOENT_1_PRESERVED_NOT_RETRIED",
+    "separateProtection": "ONLY_OPERATOR_SNAPSHOT_NOT_BEHAVIOR"
+  },
+  "remainingCases": [
+    {
+      "caseId": "B29-context",
+      "status": "NOT_RUN"
+    },
+    {
+      "caseId": "B29-dedup-conflict",
+      "status": "NOT_RUN"
+    },
+    {
+      "caseId": "B29-none",
+      "status": "NOT_RUN"
+    },
+    {
+      "caseId": "B29-unbound-git",
+      "status": "NOT_RUN"
+    },
+    {
+      "caseId": "B29-non-git",
+      "status": "NOT_RUN"
+    },
+    {
+      "caseId": "B29-explicit-workspace-unbound-git",
+      "status": "NOT_RUN"
+    },
+    {
+      "caseId": "B29-explicit-project-non-git",
+      "status": "NOT_RUN"
+    },
+    {
+      "caseId": "B29-supplement-intake",
+      "status": "NOT_RUN"
+    }
+  ],
+  "normalLauncherPidsAbsent": [
+    25716,
+    18064,
+    19024
+  ],
+  "sourceWorktrees": "B_AND_INTEGRATION_CLEAN_AT_8000",
+  "protectedCurrentReadback": {
+    "newBusinessRoots": 13,
+    "newGitRoots": 5,
+    "oldBusinessRoots": 8,
+    "oldGitRoots": 5,
+    "deltasSinceFinalCheckpoint": 0,
+    "onlyHistoricalStartupPaths": [
+      "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+      "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive"
+    ],
+    "fullBytesPreserved": true,
+    "generatingPid": "NOT_INDEPENDENTLY_OBSERVED",
+    "nativeAccountConfigSessionLogRoots": "SEPARATE_NOT_SCANNED"
+  },
+  "history": "Original old citation FAIL/read-gap identity/transcript limitation/operator failures, new injection scoped acceptance and Chinese STOP Major remain unchanged. Root checkpoint first guard counted actual recall --help as a fourth search and rejected before snapshots/status writes; original entry/nonzero result retained, classification fixed without rerunning the consumer.",
+  "acceptedAtUtc": "2026-10-06T01:49:17.703Z"
+}

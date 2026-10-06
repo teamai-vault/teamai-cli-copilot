@@ -1,0 +1,24 @@
+[
+  {
+    "agentId": null,
+    "toolCallId": "call_ie61nREiIqfSItVoc21FQrH7",
+    "startedAt": "2026-10-06T02:52:46.115Z",
+    "completedAt": "2026-10-06T02:53:15.983Z",
+    "command": "teamai recall NO_SUCH_RECALL_EVIDENCE_9F34 --json",
+    "success": true,
+    "exitCode": 0,
+    "result": {
+      "schemaVersion": 1,
+      "query": "NO_SUCH_RECALL_EVIDENCE_9F34",
+      "scope": "workspace",
+      "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+      "resourceRevision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+      "learningsRevision": "cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2",
+      "limit": 5,
+      "hits": []
+    },
+    "rawResult": {
+      "content": "{\"schemaVersion\":1,\"query\":\"NO_SUCH_RECALL_EVIDENCE_9F34\",\"scope\":\"workspace\",\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"resourceRevision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"learningsRevision\":\"cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\",\"limit\":5,\"hits\":[]}\n<shellId: 0 completed with exit code 0>"
+    }
+  }
+]

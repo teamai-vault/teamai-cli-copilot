@@ -1,0 +1,130 @@
+[
+  {
+    "agentId": "6ff09f91-64ae-4026-8703-c8867435d92e",
+    "toolCallId": "call_ldZ3dLckxvnqR10adF3ZHp0x",
+    "startedAt": "2026-10-05T19:00:31.114Z",
+    "completedAt": "2026-10-05T19:00:53.975Z",
+    "command": "teamai recall \"READ_GAP_72 LeaseMux incident appendix unavailable\" --project payments-api --json",
+    "success": true,
+    "exitCode": 0,
+    "result": {
+      "schemaVersion": 1,
+      "query": "READ_GAP_72 LeaseMux incident appendix unavailable",
+      "scope": "workspace",
+      "project": "payments-api",
+      "sourceHash": "9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa",
+      "resourceRevision": "1fa6573a20a65b3d1cfea9ba98cacf5d2c5f0c53",
+      "learningsRevision": "2ef6af28a0d3147fabf24613d76f8b33051a1916",
+      "limit": 5,
+      "hits": [
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/90-read-gap.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "LeaseMux incident appendix",
+          "source": {
+            "sourceHash": "9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa",
+            "revision": "1fa6573a20a65b3d1cfea9ba98cacf5d2c5f0c53",
+            "relativePath": "contexts/payments-api/docs/90-read-gap.md",
+            "contentHash": "4ae3a786e26169cf14543b30b7b7225b328f6bd2d1584dd0cf103887719dd4cb"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-preparation-v2\\resource\\contexts\\payments-api\\docs\\90-read-gap.md",
+          "matchedTerms": [
+            "READ_GAP_72",
+            "LeaseMux",
+            "incident",
+            "appendix",
+            "unavailable"
+          ],
+          "lineStart": 5,
+          "lineEnd": 7,
+          "snippet": "# Appendix request\n\nREAD_GAP_72: LeaseMux incident appendix unavailable."
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/80-audit-note.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "LeaseMux audit note",
+          "source": {
+            "sourceHash": "9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa",
+            "revision": "1fa6573a20a65b3d1cfea9ba98cacf5d2c5f0c53",
+            "relativePath": "contexts/payments-api/docs/80-audit-note.md",
+            "contentHash": "26a4e79b81aa1d8aad0751529869a29e638cbc8442d4383f0ff8908e2eb98b58"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-preparation-v2\\resource\\contexts\\payments-api\\docs\\80-audit-note.md",
+          "matchedTerms": [
+            "LeaseMux",
+            "incident",
+            "appendix"
+          ],
+          "lineStart": 6,
+          "lineEnd": 8,
+          "snippet": "\nAUDIT_NOTE_71: LeaseMux evidence boundary reached.\nThe observation confirms only that the appendix was requested. It does not establish that its contents were available."
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/40-replay-guard.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "RetryEnvelope generation lease observations",
+          "source": {
+            "sourceHash": "9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa",
+            "revision": "1fa6573a20a65b3d1cfea9ba98cacf5d2c5f0c53",
+            "relativePath": "contexts/payments-api/docs/40-replay-guard.md",
+            "contentHash": "0e2751160489cddc7dacb81eb626a71581c0e663ed5c936cb7adf857a001ab25"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-preparation-v2\\resource\\contexts\\payments-api\\docs\\40-replay-guard.md",
+          "matchedTerms": [
+            "incident"
+          ],
+          "lineStart": 3,
+          "lineEnd": 5,
+          "snippet": "tags: [RetryEnvelope, reconnect]\n---\n# Incident observation"
+        }
+      ]
+    },
+    "rawResult": {
+      "content": "{\"schemaVersion\":1,\"query\":\"READ_GAP_72 LeaseMux incident appendix unavailable\",\"scope\":\"workspace\",\"project\":\"payments-api\",\"sourceHash\":\"9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa\",\"resourceRevision\":\"1fa6573a20a65b3d1cfea9ba98cacf5d2c5f0c53\",\"learningsRevision\":\"2ef6af28a0d3147fabf24613d76f8b33051a1916\",\"limit\":5,\"hits\":[{\"id\":\"doc:payments-api:contexts/payments-api/docs/90-read-gap.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"LeaseMux incident appendix\",\"source\":{\"sourceHash\":\"9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa\",\"revision\":\"1fa6573a20a65b3d1cfea9ba98cacf5d2c5f0c53\",\"relativePath\":\"contexts/payments-api/docs/90-read-gap.md\",\"contentHash\":\"4ae3a786e26169cf14543b30b7b7225b328f6bd2d1584dd0cf103887719dd4cb\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\native-33-preparation-v2\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\90-read-gap.md\",\"matchedTerms\":[\"READ_GAP_72\",\"LeaseMux\",\"incident\",\"appendix\",\"unavailable\"],\"lineStart\":5,\"lineEnd\":7,\"snippet\":\"# Appendix request\\n\\nREAD_GAP_72: LeaseMux incident appendix unavailable.\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/80-audit-note.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"LeaseMux audit note\",\"source\":{\"sourceHash\":\"9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa\",\"revision\":\"1fa6573a20a65b3d1cfea9ba98cacf5d2c5f0c53\",\"relativePath\":\"contexts/payments-api/docs/80-audit-note.md\",\"contentHash\":\"26a4e79b81aa1d8aad0751529869a29e638cbc8442d4383f0ff8908e2eb98b58\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\native-33-preparation-v2\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\80-audit-note.md\",\"matchedTerms\":[\"LeaseMux\",\"incident\",\"appendix\"],\"lineStart\":6,\"lineEnd\":8,\"snippet\":\"\\nAUDIT_NOTE_71: LeaseMux evidence boundary reached.\\nThe observation confirms only that the appendix was requested. It does not establish that its contents were available.\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/40-replay-guard.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"RetryEnvelope generation lease observations\",\"source\":{\"sourceHash\":\"9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa\",\"revision\":\"1fa6573a20a65b3d1cfea9ba98cacf5d2c5f0c53\",\"relativePath\":\"contexts/payments-api/docs/40-replay-guard.md\",\"contentHash\":\"0e2751160489cddc7dacb81eb626a71581c0e663ed5c936cb7adf857a001ab25\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\native-33-preparation-v2\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\40-replay-guard.md\",\"matchedTerms\":[\"incident\"],\"lineStart\":3,\"lineEnd\":5,\"snippet\":\"tags: [RetryEnvelope, reconnect]\\n---\\n# Incident observation\"}]}\n<shellId: 1 completed with exit code 0>"
+    }
+  },
+  {
+    "agentId": "6ff09f91-64ae-4026-8703-c8867435d92e",
+    "toolCallId": "call_VX4ogjxZSTE7yEn71c03SqWi",
+    "startedAt": "2026-10-05T19:02:13.336Z",
+    "completedAt": "2026-10-05T19:03:32.046Z",
+    "command": "teamai recall \"LeaseMux appendix disposition final\" --project payments-api --json",
+    "success": true,
+    "exitCode": 1,
+    "result": {
+      "schemaVersion": 1,
+      "error": {
+        "code": "RECALL_FAILED",
+        "message": "Project docs for 'payments-api' do not match the configured Marketplace resource revision. Run teamai sync to refresh it."
+      }
+    },
+    "rawResult": {
+      "content": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Project docs for 'payments-api' do not match the configured Marketplace resource revision. Run teamai sync to refresh it.\"}}\n<shellId: 2 completed with exit code 1>"
+    }
+  },
+  {
+    "agentId": "6ff09f91-64ae-4026-8703-c8867435d92e",
+    "toolCallId": "call_pZN92eh21Tn1LaPp8BG62Jy0",
+    "startedAt": "2026-10-05T19:02:13.342Z",
+    "completedAt": "2026-10-05T19:03:32.048Z",
+    "command": "teamai recall \"READ_GAP_72 LeaseMux\" --project payments-api --json",
+    "success": true,
+    "exitCode": 1,
+    "result": {
+      "schemaVersion": 1,
+      "error": {
+        "code": "RECALL_FAILED",
+        "message": "Project docs for 'payments-api' do not match the configured Marketplace resource revision. Run teamai sync to refresh it."
+      }
+    },
+    "rawResult": {
+      "content": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Project docs for 'payments-api' do not match the configured Marketplace resource revision. Run teamai sync to refresh it.\"}}\n<shellId: 3 completed with exit code 1>"
+    }
+  }
+]

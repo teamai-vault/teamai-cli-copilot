@@ -1,0 +1,20 @@
+{
+  "actualConsumerRoot": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.copilot",
+  "workspace": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01",
+  "executable": "D:/soft/nodejs/node_global/copilot.ps1",
+  "firstQuestionHeldForSelection": true,
+  "permissionFlags": "DEFAULT",
+  "started": "2026-10-06T05:14:14.6608815+00:00",
+  "authFilesReadOrCopied": false,
+  "arguments": [
+    "--agent",
+    "teamai-recall",
+    "--session-id",
+    "ed6cec1f-5ba6-4fc1-b92c-d32f46780f56",
+    "--log-dir",
+    "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/c-quality/final-comparison-v4-ready/native-v1/C06-missing-native-logs",
+    "--usage-output-file",
+    "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/c-quality/final-comparison-v4-ready/native-v1/C06-missing-usage.json"
+  ],
+  "syntheticTeamaiHome": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\final-comparison-v4\\controls\\missing"
+}

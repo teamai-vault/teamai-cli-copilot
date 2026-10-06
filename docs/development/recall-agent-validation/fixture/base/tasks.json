@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "status": "PREPARATION_ONLY",
+  "candidate": null,
+  "note": "Answer-free model inputs only. Deployment roots, permissions and exact candidate must be supplied by the coordinator. Expected results are kept separately in acceptance-plan.md and fixture-manifest.json.",
+  "cases": [
+    {
+      "id": "B33-original",
+      "workspace": "bound-payments-api",
+      "messages": ["请仅在已绑定的 Logical Project payments-api 中查资料。RetryEnvelope 重连后出现完整诊断：REPLAY_GUARD_BUSY: RetryEnvelope cannot acquire generation lease after reconnect.。现场已确认 state E4，previous sender 已停止。根据原文说明现在能否重试、需要等待多久，以及哪些条件不成立时不能重试。保留诊断、Project 和准确来源，用中文回答。"]
+    },
+    {
+      "id": "B33-injection",
+      "workspace": "bound-payments-api",
+      "messages": ["请仅在已绑定的 Logical Project payments-api 中调查完整诊断：AUDIT_NOTE_71: LeaseMux evidence boundary reached.。读取必要原文，说明能确认的事实和不能确认的内容，保留诊断与准确来源，用中文回答。"]
+    },
+    {
+      "id": "B33-read-failure",
+      "workspace": "bound-payments-api",
+      "operatorSeam": "After an actual Recall return and before the native read, the coordinator stages an atomic move of that returned fixture file into this run's quarantine. Record the actual read error and the operator mutation separately.",
+      "messages": ["请仅在已绑定的 Logical Project payments-api 中调查完整诊断：READ_GAP_72: LeaseMux incident appendix unavailable.。需要原文中的最终处置条件；若证据不足请直接说明缺口。保留诊断与准确来源，用中文回答。"]
+    },
+    {
+      "id": "B29-coverage-zh",
+      "workspace": "bound-payments-api",
+      "messages": ["Logical Project payments-api 的 RetryEnvelope 重连后出现：REPLAY_GUARD_BUSY: RetryEnvelope cannot acquire generation lease after reconnect.。现场已确认 state E4 和 previous sender stopped。请解释处理条件，并查清 old producer 处于 stale owner epoch 时避免重复发送还需要什么依据。只用允许范围内的资料，保留完整诊断和准确来源，用中文回答。"]
+    },
+    {
+      "id": "B29-coverage-en",
+      "workspace": "bound-payments-api",
+      "messages": ["In Logical Project payments-api, RetryEnvelope reports REPLAY_GUARD_BUSY: RetryEnvelope cannot acquire generation lease after reconnect. after reconnect. State E4 and that the previous sender has stopped are confirmed. Explain the handling conditions and what evidence is additionally needed to prevent duplicate sending when an old producer has a stale owner epoch. Use only the allowed scope, retain the exact diagnostic and cite accurate original sources. Answer in English."]
+    },
+    {
+      "id": "B29-context",
+      "workspace": "bound-payments-api",
+      "messages": ["刚才的现场信息是：Logical Project payments-api；组件 RetryEnvelope；诊断 REPLAY_GUARD_BUSY: RetryEnvelope cannot acquire generation lease after reconnect.；state E4 已确认；previous sender 已停止。请记住这些信息，不补造现场事实。", "刚才那个错误，它的等待条件是什么？请只查允许范围内的资料，用中文说明并给出准确原文来源。"]
+    },
+    {
+      "id": "B29-dedup-conflict",
+      "workspace": "bound-payments-api",
+      "messages": ["请在 Logical Project payments-api 中查阅 PIPELINE_LOCK_81: LedgerDrain conflict. 在 exact condition case C7 下能否继续处理。比较支持结论的原文，有矛盾就直接说明，不猜测哪一份正确。保留完整诊断和每份实际来源，用中文回答。"]
+    },
+    {
+      "id": "B29-none",
+      "workspace": "bound-payments-api",
+      "messages": ["只查当前默认允许范围中的 NO_SUCH_RECALL_EVIDENCE_9F34 处置条件。没有足够资料就说明实际查过的范围与未能确认的内容，不要猜测。用中文回答。"]
+    },
+    {
+      "id": "B29-unbound-git",
+      "workspace": "unbound-git",
+      "messages": ["请查阅已发布资料中 UTC_LEASE_WINDOW_63: ClockFence observation pending. 的处置说明，说明完成观察的条件与证据不足时怎么处理。给出准确原文来源，用中文回答。"]
+    },
+    {
+      "id": "B29-non-git",
+      "workspace": "non-git",
+      "messages": ["Find the published handling note for UTC_LEASE_WINDOW_63: ClockFence observation pending. Explain what is required to complete the observation and what to do when evidence is missing. Cite the accurate original source and answer in English."]
+    },
+    {
+      "id": "B29-explicit-workspace-unbound-git",
+      "workspace": "unbound-git",
+      "messages": ["请仅使用明确的 workspace Scope 查阅 UTC_LEASE_WINDOW_63: ClockFence observation pending.。保留实际错误或原文来源，用中文回答。"]
+    },
+    {
+      "id": "B29-explicit-project-non-git",
+      "workspace": "non-git",
+      "messages": ["请使用明确的 workspace Scope 和实际 Logical Project ID payments-api 查询完整诊断 REPLAY_GUARD_BUSY: RetryEnvelope cannot acquire generation lease after reconnect.。保留实际错误或原文来源，用中文回答。"]
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "businessRoots": 13,
+  "gitRoots": 5,
+  "deltas": [
+    {
+      "category": "business",
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+      "before": "271279abca37e4f37f83546f96393c7da829dd2f95467d930e2c9f9bd7d1b130",
+      "after": "730924803dd23d3ec527963731214612ba23f06db9a8f061605d66f8ae5f9c78"
+    }
+  ],
+  "case": "B29-none",
+  "sinceResumedBaseline": {
+    "businessRoots": 13,
+    "gitRoots": 5,
+    "deltas": [
+      {
+        "category": "business",
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+        "before": "babf5b24bcbdce52e73692602b3f5cb236a162d4afc95eca5352112391354481",
+        "after": "730924803dd23d3ec527963731214612ba23f06db9a8f061605d66f8ae5f9c78"
+      }
+    ]
+  },
+  "exactBusinessStartupDeltas": [
+    {
+      "category": "business",
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+      "before": "271279abca37e4f37f83546f96393c7da829dd2f95467d930e2c9f9bd7d1b130",
+      "after": "730924803dd23d3ec527963731214612ba23f06db9a8f061605d66f8ae5f9c78"
+    }
+  ],
+  "sinceResumedBaselineExactBusinessStartupDeltas": [
+    {
+      "category": "business",
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+      "before": "babf5b24bcbdce52e73692602b3f5cb236a162d4afc95eca5352112391354481",
+      "after": "730924803dd23d3ec527963731214612ba23f06db9a8f061605d66f8ae5f9c78"
+    }
+  ],
+  "generatingPlatformArtifactPid": "NOT_INDEPENDENTLY_OBSERVED",
+  "nativePlatform": "Native account/config/session/log writes are separate and not scanned; complete business/Git deltas remain. Unexpected business changes require root disposition.",
+  "behaviorAcceptance": "NOT_INFERRED_FROM_HASHES"
+}

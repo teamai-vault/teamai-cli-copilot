@@ -1,0 +1,14 @@
+{
+  "sourceRevision": "0fb99a7b065de71eb683d774231b518971b57e8c",
+  "version": "0.4.0",
+  "packageRoot": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot",
+  "cli": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+  "cliSha256": "dc1fae834fb9933c1d702d99bee3196e578f661079046dfa10a97e2acc0426a2",
+  "agent": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\agents\\teamai-recall.agent.md",
+  "agentSha256": "7e8edba317dde8758d3f238e1845fecb6206d93c00667df4ab8cbe72e7f270e4",
+  "tarballSha256": "dea321f1fc9fb030fc18af398bcdb796d8cec7473c085e23be97eb3ca59aded6",
+  "node": "v24.15.0",
+  "platform": "win32",
+  "architecture": "x64",
+  "copilot": "D:/soft/nodejs/node_global/copilot.ps1"
+}

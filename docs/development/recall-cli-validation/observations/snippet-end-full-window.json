@@ -1,0 +1,24 @@
+{
+  "name": "snippet-end-full-window",
+  "args": [
+    "recall",
+    "tailOne tailTwo tailThree",
+    "--scope",
+    "workspace",
+    "--project",
+    "payments",
+    "--limit",
+    "20",
+    "--json"
+  ],
+  "home": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\business-home",
+  "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\a\\temp-35\\teamai-git-gA1pyT",
+  "noGit": false,
+  "node": "v24.15.0",
+  "startedAt": "2026-10-05T14:49:58.483Z",
+  "finishedAt": "2026-10-05T14:50:00.107Z",
+  "exitCode": 0,
+  "error": null,
+  "stdout": "{\"schemaVersion\":1,\"query\":\"tailOne tailTwo tailThree\",\"scope\":\"workspace\",\"project\":\"payments\",\"sourceHash\":\"eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809\",\"resourceRevision\":\"0df6e2919c48f90bb2adf45a35a517d6cd588837\",\"learningsRevision\":\"c4a2b9be3f3b7c947fa564f6ef83160082fde6ab\",\"limit\":20,\"hits\":[{\"id\":\"doc:payments:contexts/payments/docs/snippets/tail.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments\",\"title\":\"tail\",\"source\":{\"sourceHash\":\"eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809\",\"revision\":\"0df6e2919c48f90bb2adf45a35a517d6cd588837\",\"relativePath\":\"contexts/payments/docs/snippets/tail.md\",\"contentHash\":\"c14fb415b6154285f5d4be40c2f05810e48bfd07d2b281ecdb9ebe5b0f739eb5\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\candidates\\\\a-all-b33-c1\\\\compiled-recall-public-fixture-v3\\\\resource\\\\contexts\\\\payments\\\\docs\\\\snippets\\\\tail.md\",\"matchedTerms\":[\"tailOne\",\"tailTwo\",\"tailThree\"],\"lineStart\":3,\"lineEnd\":5,\"snippet\":\"tailOne\\ntailTwo\\ntailThree\"}]}\n",
+  "stderr": ""
+}

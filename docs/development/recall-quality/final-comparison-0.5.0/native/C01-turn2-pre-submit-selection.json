@@ -1,0 +1,15 @@
+{
+  "case": "C01",
+  "beforeFrozenTurn": 2,
+  "observedAt": "2026-10-06T04:51:27.8294848+00:00",
+  "currentSelectionEvent": {
+    "type": "subagent.selected",
+    "id": "542713d3-5501-4b83-a154-4adc0040b9b6",
+    "timestamp": "2026-10-06T04:47:40.614Z",
+    "agentName": "teamai-recall"
+  },
+  "selectedRecall": true,
+  "priorVisibleUserMessages": 1,
+  "uiSelectedRecallSeen": true,
+  "noMenuOrEscSelectionChange": true
+}

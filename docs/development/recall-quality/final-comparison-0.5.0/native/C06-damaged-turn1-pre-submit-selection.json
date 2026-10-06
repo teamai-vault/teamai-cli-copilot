@@ -1,0 +1,11 @@
+{
+  "case": "C06-damaged",
+  "beforeFrozenTurn": 1,
+  "observedAt": "2026-10-06T05:17:41.6405356+00:00",
+  "uiCurrentSelectedAgent": "teamai-recall",
+  "currentFooterVerified": true,
+  "firstQuestionHeldUntilSelection": true,
+  "initialLauncherNoticeAloneUsedAsProof": false,
+  "permission": "Single Yes, no persistent trust",
+  "eventFileExistsBeforeFirstMessage": false
+}

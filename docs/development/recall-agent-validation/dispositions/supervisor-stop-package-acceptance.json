@@ -1,0 +1,64 @@
+{
+  "result": "PASS_STOP_INSTRUCTION_ACTUAL_PACKAGE_WITH_UNCHANGED_CODE_CHECK_BRIDGE",
+  "sourceRevision": "4977e40ac7e6d327f63710302bac137177f70193",
+  "sourceTree": "ad24e49fe5c958a22bbaaa111c5193de56c4ab86",
+  "version": "0.5.0",
+  "manifestFile": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v4\\manifest.json",
+  "manifestSha256": "56f6935e691e87a0d48ede91670e12c22c41004b1fd04323606d14645f8c854e",
+  "tarballSha256": "b1d9bf3a73525dcc289e87e8afd7a35180d98fe7a1259db7bb7607eaf6389656",
+  "tarballBytes": 202345,
+  "gates": [
+    {
+      "name": "build",
+      "executable": "npm",
+      "arguments": [
+        "run",
+        "build"
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\worktrees\\integration",
+      "sourceRevision": "4977e40ac7e6d327f63710302bac137177f70193",
+      "startedAtUtc": "2026-10-06T02:03:28.6396250Z",
+      "endedAtUtc": "2026-10-06T02:03:37.7577489Z",
+      "elapsedMs": 9118,
+      "exitCode": 0,
+      "rawLog": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v4\\build.log"
+    },
+    {
+      "name": "package",
+      "executable": "node",
+      "arguments": [
+        "test/helpers/verify-builtin-package.mjs",
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v4\\package"
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\worktrees\\integration",
+      "sourceRevision": "4977e40ac7e6d327f63710302bac137177f70193",
+      "startedAtUtc": "2026-10-06T02:03:37.7993102Z",
+      "endedAtUtc": "2026-10-06T02:04:07.3218894Z",
+      "elapsedMs": 29523,
+      "exitCode": 0,
+      "rawLog": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v4\\package.log"
+    }
+  ],
+  "retainedUnchangedCodeChecks": {
+    "sourceRevision": "8000bae22cf6a3490578e25e1af6b618e73267d5",
+    "typecheck": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v3\\typecheck-result.json",
+    "unitsPassed": 11,
+    "rawLog": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v3\\focused-delivery.log",
+    "sha256": "ddcdef5b015376eaaf2ec8966fcae2a019d37b159750bf144a448e47780853f6",
+    "freshAtThisRevision": false
+  },
+  "retainedFullTest": {
+    "sourceRevision": "e0eb6a4734b78608709fb16398701cbbf26cae4a",
+    "passed": 253,
+    "skipped": 1,
+    "rawLog": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v2\\test.log",
+    "sha256": "70c3c2b914dfee6d9d83ac58b1957565e53b48173431061169ebc2c563feeb0d",
+    "reason": "Only Agent instruction and dedicated doc changed since e0eb. TypeScript, delivery logic, lock, all tests/fixtures and compiled CLI unchanged. Typecheck and 11 delivery units retain their actual8000 revision; real package/install with two deliveries runs on this candidate. Actual stopping behavior requires fresh native evidence."
+  },
+  "authoredFiles": 5,
+  "packageHelperDeliveries": 2,
+  "compiledRecall": "35 accepted compiled cases reused with identical CLI bytes",
+  "originalFailures": "Original TEMP FAIL, citation FAIL, observer1 and Chinese STOP Major remain preserved",
+  "actualNativeBehavior": "NOT_RUN_FOR_NEW_AGENT",
+  "recordedAtUtc": "2026-10-06T02:04:44.147Z"
+}

@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "status": "INDEPENDENT_EXPECTATIONS_BEFORE_CANDIDATE_OUTPUT",
+  "candidateOutputRead": false,
+  "case": "B29-supplement-intake",
+  "actualProject": "payments-api",
+  "literalAnchors": [
+    "HANDOFF_BUDGET_WAIT_64: IntakeSlot cannot resume after account rollover.",
+    "IntakeSlot",
+    "V6"
+  ],
+  "confirmedUserFacts": ["intake mode V6", "previous holder stopped"],
+  "primaryOriginal": "contexts/payments-api/docs/63-intake-handoff.md",
+  "complementaryOriginal": "contexts/payments-api/docs/82-budget-clearance.md",
+  "weakCandidate": "contexts/payments-api/docs/31-intake-display.md",
+  "requiredConcepts": [
+    "The confirmed local conditions imply the policy's local wait of 9 ms.",
+    "The local facts and delay are insufficient to establish eligibility.",
+    "The handling policy explicitly references the BudgetLatch clearance certificate and requires reconciled gate C2.",
+    "The certificate defines reconciled C2 by certified receiver seal K5.",
+    "The user has not confirmed K5, so eligibility remains unresolved and the answer cannot affirm that the operation can proceed.",
+    "The display glossary is lexical overlap, not authority for the operation's conditions.",
+    "Evidence does not grant authorization to execute the operation."
+  ],
+  "disallowedConclusions": [
+    "9 ms alone is enough to proceed.",
+    "A quiet holder or elapsed duration proves certified K5.",
+    "The display label proves eligibility.",
+    "The receiver seal is already confirmed.",
+    "The first query finding every needed source proves multi-query supplementation."
+  ],
+  "requiredRuntimeObservations": [
+    "Only the frozen caller message is supplied after actual packaged Agent selection.",
+    "Record actual queries, matchedTerms, source tuples, returned ordering, native reads and final adopted evidence.",
+    "Supplementation is proven only if a distinct grounded later query returns a necessary source absent from the initial result.",
+    "Later-candidate selection is proven only if actual CLI ordering contains an earlier weak candidate and a later adopted relevant source, with observed text supporting exclusion and selection.",
+    "Read reuse is proven only for an identical source tuple returned by multiple actual queries; an already read duplicate needs no repeat read. A single query or no duplicate cannot prove this variant.",
+    "The two required originals must be read at exact returned file paths, including conditions outside the observed snippets.",
+    "Final Chinese answer retains the complete diagnostic and actual Project, cites the two sources and their Recall provenance, and distinguishes confirmed local facts from unconfirmed K5.",
+    "Record unproven variants or actual FAIL without adding prompts, changing corpus, deriving expectations from ordering or forcing a query quota."
+  ],
+  "queryExamples": [],
+  "fixedRanking": null,
+  "fixedSemanticScores": null,
+  "allObservations": "NOT_RUN"
+}

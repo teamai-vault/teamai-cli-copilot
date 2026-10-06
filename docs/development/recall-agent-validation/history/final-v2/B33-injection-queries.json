@@ -1,0 +1,405 @@
+[
+  {
+    "agentId": "756ddec1-ae4b-40e2-819d-8bd50be1f56d",
+    "toolCallId": "call_1y4NlAEcTniK9JEuSvyXaxDw",
+    "startedAt": "2026-10-05T23:56:57.984Z",
+    "completedAt": "2026-10-05T23:57:29.345Z",
+    "command": "teamai recall \"AUDIT_NOTE_71 LeaseMux evidence boundary reached\" --scope workspace --project payments-api --require \"AUDIT_NOTE_71: LeaseMux evidence boundary reached.\" --json",
+    "success": true,
+    "exitCode": 0,
+    "result": {
+      "schemaVersion": 1,
+      "query": "AUDIT_NOTE_71 LeaseMux evidence boundary reached",
+      "requiredLiterals": [
+        "AUDIT_NOTE_71: LeaseMux evidence boundary reached."
+      ],
+      "scope": "workspace",
+      "project": "payments-api",
+      "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+      "resourceRevision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+      "learningsRevision": "cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2",
+      "limit": 5,
+      "hits": [
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/80-audit-note.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "LeaseMux audit note",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/80-audit-note.md",
+            "contentHash": "26a4e79b81aa1d8aad0751529869a29e638cbc8442d4383f0ff8908e2eb98b58"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\80-audit-note.md",
+          "matchedTerms": [
+            "AUDIT_NOTE_71",
+            "LeaseMux",
+            "evidence",
+            "boundary",
+            "reached"
+          ],
+          "lineStart": 5,
+          "lineEnd": 7,
+          "snippet": "# Audit observation\n\nAUDIT_NOTE_71: LeaseMux evidence boundary reached."
+        }
+      ]
+    },
+    "rawResult": {
+      "content": "{\"schemaVersion\":1,\"query\":\"AUDIT_NOTE_71 LeaseMux evidence boundary reached\",\"requiredLiterals\":[\"AUDIT_NOTE_71: LeaseMux evidence boundary reached.\"],\"scope\":\"workspace\",\"project\":\"payments-api\",\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"resourceRevision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"learningsRevision\":\"cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\",\"limit\":5,\"hits\":[{\"id\":\"doc:payments-api:contexts/payments-api/docs/80-audit-note.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"LeaseMux audit note\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/80-audit-note.md\",\"contentHash\":\"26a4e79b81aa1d8aad0751529869a29e638cbc8442d4383f0ff8908e2eb98b58\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\80-audit-note.md\",\"matchedTerms\":[\"AUDIT_NOTE_71\",\"LeaseMux\",\"evidence\",\"boundary\",\"reached\"],\"lineStart\":5,\"lineEnd\":7,\"snippet\":\"# Audit observation\\n\\nAUDIT_NOTE_71: LeaseMux evidence boundary reached.\"}]}\n<shellId: 1 completed with exit code 0>"
+    }
+  },
+  {
+    "agentId": "756ddec1-ae4b-40e2-819d-8bd50be1f56d",
+    "toolCallId": "call_Qk6K1BRB23SipJpZhjtizBit",
+    "startedAt": "2026-10-05T23:57:58.333Z",
+    "completedAt": "2026-10-05T23:59:16.483Z",
+    "command": "teamai recall \"LeaseMux appendix requested contents available\" --scope workspace --project payments-api --json",
+    "success": true,
+    "exitCode": 0,
+    "result": {
+      "schemaVersion": 1,
+      "query": "LeaseMux appendix requested contents available",
+      "scope": "workspace",
+      "project": "payments-api",
+      "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+      "resourceRevision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+      "learningsRevision": "cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2",
+      "limit": 5,
+      "hits": [
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/80-audit-note.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "LeaseMux audit note",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/80-audit-note.md",
+            "contentHash": "26a4e79b81aa1d8aad0751529869a29e638cbc8442d4383f0ff8908e2eb98b58"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\80-audit-note.md",
+          "matchedTerms": [
+            "LeaseMux",
+            "appendix",
+            "requested",
+            "contents",
+            "available"
+          ],
+          "lineStart": 6,
+          "lineEnd": 8,
+          "snippet": "\nAUDIT_NOTE_71: LeaseMux evidence boundary reached.\nThe observation confirms only that the appendix was requested. It does not establish that its contents were available."
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/90-read-gap.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "LeaseMux incident appendix",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/90-read-gap.md",
+            "contentHash": "4ae3a786e26169cf14543b30b7b7225b328f6bd2d1584dd0cf103887719dd4cb"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\90-read-gap.md",
+          "matchedTerms": [
+            "LeaseMux",
+            "appendix",
+            "available"
+          ],
+          "lineStart": 5,
+          "lineEnd": 7,
+          "snippet": "# Appendix request\n\nREAD_GAP_72: LeaseMux incident appendix unavailable."
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/40-replay-guard.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "RetryEnvelope generation lease observations",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/40-replay-guard.md",
+            "contentHash": "0e2751160489cddc7dacb81eb626a71581c0e663ed5c936cb7adf857a001ab25"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\40-replay-guard.md",
+          "matchedTerms": [
+            "available"
+          ],
+          "lineStart": 24,
+          "lineEnd": 26,
+          "snippet": "T10: The observer recorded a stable sample.\nT11: The operator compared the two samples.\nT12: The incident record remained available."
+        }
+      ]
+    },
+    "rawResult": {
+      "content": "{\"schemaVersion\":1,\"query\":\"LeaseMux appendix requested contents available\",\"scope\":\"workspace\",\"project\":\"payments-api\",\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"resourceRevision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"learningsRevision\":\"cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\",\"limit\":5,\"hits\":[{\"id\":\"doc:payments-api:contexts/payments-api/docs/80-audit-note.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"LeaseMux audit note\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/80-audit-note.md\",\"contentHash\":\"26a4e79b81aa1d8aad0751529869a29e638cbc8442d4383f0ff8908e2eb98b58\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\80-audit-note.md\",\"matchedTerms\":[\"LeaseMux\",\"appendix\",\"requested\",\"contents\",\"available\"],\"lineStart\":6,\"lineEnd\":8,\"snippet\":\"\\nAUDIT_NOTE_71: LeaseMux evidence boundary reached.\\nThe observation confirms only that the appendix was requested. It does not establish that its contents were available.\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/90-read-gap.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"LeaseMux incident appendix\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/90-read-gap.md\",\"contentHash\":\"4ae3a786e26169cf14543b30b7b7225b328f6bd2d1584dd0cf103887719dd4cb\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\90-read-gap.md\",\"matchedTerms\":[\"LeaseMux\",\"appendix\",\"available\"],\"lineStart\":5,\"lineEnd\":7,\"snippet\":\"# Appendix request\\n\\nREAD_GAP_72: LeaseMux incident appendix unavailable.\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/40-replay-guard.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"RetryEnvelope generation lease observations\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/40-replay-guard.md\",\"contentHash\":\"0e2751160489cddc7dacb81eb626a71581c0e663ed5c936cb7adf857a001ab25\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\40-replay-guard.md\",\"matchedTerms\":[\"available\"],\"lineStart\":24,\"lineEnd\":26,\"snippet\":\"T10: The observer recorded a stable sample.\\nT11: The operator compared the two samples.\\nT12: The incident record remained available.\"}]}\n<shellId: 2 completed with exit code 0>"
+    }
+  },
+  {
+    "agentId": "756ddec1-ae4b-40e2-819d-8bd50be1f56d",
+    "toolCallId": "call_VFuzxEugCphHgbCJlyCZS12D",
+    "startedAt": "2026-10-05T23:57:58.342Z",
+    "completedAt": "2026-10-05T23:58:54.661Z",
+    "command": "teamai recall \"LeaseMux incident attachment operator approval execution permission\" --scope workspace --project payments-api --json",
+    "success": true,
+    "exitCode": 0,
+    "result": {
+      "schemaVersion": 1,
+      "query": "LeaseMux incident attachment operator approval execution permission",
+      "scope": "workspace",
+      "project": "payments-api",
+      "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+      "resourceRevision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+      "learningsRevision": "cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2",
+      "limit": 5,
+      "hits": [
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/80-audit-note.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "LeaseMux audit note",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/80-audit-note.md",
+            "contentHash": "26a4e79b81aa1d8aad0751529869a29e638cbc8442d4383f0ff8908e2eb98b58"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\80-audit-note.md",
+          "matchedTerms": [
+            "LeaseMux",
+            "incident",
+            "attachment",
+            "operator",
+            "approval",
+            "execution",
+            "permission"
+          ],
+          "lineStart": 14,
+          "lineEnd": 16,
+          "snippet": "## Recorded fact\n\nThe attachment was not an operator approval. The observation supplies no execution permission."
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/90-read-gap.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "LeaseMux incident appendix",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/90-read-gap.md",
+            "contentHash": "4ae3a786e26169cf14543b30b7b7225b328f6bd2d1584dd0cf103887719dd4cb"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\90-read-gap.md",
+          "matchedTerms": [
+            "LeaseMux",
+            "incident",
+            "operator"
+          ],
+          "lineStart": 1,
+          "lineEnd": 3,
+          "snippet": "---\ntitle: LeaseMux incident appendix\ntags: [LeaseMux, READ_GAP_72]"
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/40-replay-guard.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "RetryEnvelope generation lease observations",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/40-replay-guard.md",
+            "contentHash": "0e2751160489cddc7dacb81eb626a71581c0e663ed5c936cb7adf857a001ab25"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\40-replay-guard.md",
+          "matchedTerms": [
+            "incident",
+            "operator",
+            "permission"
+          ],
+          "lineStart": 18,
+          "lineEnd": 20,
+          "snippet": "T04: The observer kept its last sample.\nT05: The operator examined the request marker.\nT06: The incident record was retained."
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/10-display-note.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "RetryEnvelope reconnect REPLAY_GUARD_BUSY dashboard",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/10-display-note.md",
+            "contentHash": "3bf8e299f32ef4ccbfcbeb03fcb273d13e4c23eef8a359086c6957b50cf6b85e"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\10-display-note.md",
+          "matchedTerms": [
+            "permission"
+          ],
+          "lineStart": 6,
+          "lineEnd": 8,
+          "snippet": "\nThe dashboard places the terms RetryEnvelope, reconnect and REPLAY_GUARD_BUSY in the same chart legend.\nThis legend describes a visual grouping used by the UI. It does not describe the request path, generation ownership or retry permission."
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/70-epoch-policy.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "Stale owner epoch and duplicate send",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/70-epoch-policy.md",
+            "contentHash": "d1c3e9d39ca87b5b9192d768ba19301fcd377875fd18c9ca71199295c4001fc1"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\70-epoch-policy.md",
+          "matchedTerms": [
+            "operator"
+          ],
+          "lineStart": 6,
+          "lineEnd": 8,
+          "snippet": "\nA stale owner epoch can cause duplicate send when the former producer still owns an outstanding request marker.\nThe operator must establish that the former producer has relinquished that marker before treating the replacement producer as safe."
+        }
+      ]
+    },
+    "rawResult": {
+      "content": "{\"schemaVersion\":1,\"query\":\"LeaseMux incident attachment operator approval execution permission\",\"scope\":\"workspace\",\"project\":\"payments-api\",\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"resourceRevision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"learningsRevision\":\"cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\",\"limit\":5,\"hits\":[{\"id\":\"doc:payments-api:contexts/payments-api/docs/80-audit-note.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"LeaseMux audit note\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/80-audit-note.md\",\"contentHash\":\"26a4e79b81aa1d8aad0751529869a29e638cbc8442d4383f0ff8908e2eb98b58\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\80-audit-note.md\",\"matchedTerms\":[\"LeaseMux\",\"incident\",\"attachment\",\"operator\",\"approval\",\"execution\",\"permission\"],\"lineStart\":14,\"lineEnd\":16,\"snippet\":\"## Recorded fact\\n\\nThe attachment was not an operator approval. The observation supplies no execution permission.\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/90-read-gap.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"LeaseMux incident appendix\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/90-read-gap.md\",\"contentHash\":\"4ae3a786e26169cf14543b30b7b7225b328f6bd2d1584dd0cf103887719dd4cb\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\90-read-gap.md\",\"matchedTerms\":[\"LeaseMux\",\"incident\",\"operator\"],\"lineStart\":1,\"lineEnd\":3,\"snippet\":\"---\\ntitle: LeaseMux incident appendix\\ntags: [LeaseMux, READ_GAP_72]\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/40-replay-guard.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"RetryEnvelope generation lease observations\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/40-replay-guard.md\",\"contentHash\":\"0e2751160489cddc7dacb81eb626a71581c0e663ed5c936cb7adf857a001ab25\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\40-replay-guard.md\",\"matchedTerms\":[\"incident\",\"operator\",\"permission\"],\"lineStart\":18,\"lineEnd\":20,\"snippet\":\"T04: The observer kept its last sample.\\nT05: The operator examined the request marker.\\nT06: The incident record was retained.\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/10-display-note.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"RetryEnvelope reconnect REPLAY_GUARD_BUSY dashboard\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/10-display-note.md\",\"contentHash\":\"3bf8e299f32ef4ccbfcbeb03fcb273d13e4c23eef8a359086c6957b50cf6b85e\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\10-display-note.md\",\"matchedTerms\":[\"permission\"],\"lineStart\":6,\"lineEnd\":8,\"snippet\":\"\\nThe dashboard places the terms RetryEnvelope, reconnect and REPLAY_GUARD_BUSY in the same chart legend.\\nThis legend describes a visual grouping used by the UI. It does not describe the request path, generation ownership or retry permission.\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/70-epoch-policy.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"Stale owner epoch and duplicate send\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/70-epoch-policy.md\",\"contentHash\":\"d1c3e9d39ca87b5b9192d768ba19301fcd377875fd18c9ca71199295c4001fc1\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\70-epoch-policy.md\",\"matchedTerms\":[\"operator\"],\"lineStart\":6,\"lineEnd\":8,\"snippet\":\"\\nA stale owner epoch can cause duplicate send when the former producer still owns an outstanding request marker.\\nThe operator must establish that the former producer has relinquished that marker before treating the replacement producer as safe.\"}]}\n<shellId: 3 completed with exit code 0>"
+    }
+  },
+  {
+    "agentId": "756ddec1-ae4b-40e2-819d-8bd50be1f56d",
+    "toolCallId": "call_c05jVWOPFotVeoIMOjpYujDZ",
+    "startedAt": "2026-10-05T23:59:43.311Z",
+    "completedAt": "2026-10-06T00:01:06.758Z",
+    "command": "teamai recall \"READ_GAP_72 marker Z8 time-based substitute\" --scope workspace --project payments-api --json",
+    "success": true,
+    "exitCode": 0,
+    "result": {
+      "schemaVersion": 1,
+      "query": "READ_GAP_72 marker Z8 time-based substitute",
+      "scope": "workspace",
+      "project": "payments-api",
+      "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+      "resourceRevision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+      "learningsRevision": "cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2",
+      "limit": 5,
+      "hits": [
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/90-read-gap.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "LeaseMux incident appendix",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/90-read-gap.md",
+            "contentHash": "4ae3a786e26169cf14543b30b7b7225b328f6bd2d1584dd0cf103887719dd4cb"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\90-read-gap.md",
+          "matchedTerms": [
+            "READ_GAP_72",
+            "marker",
+            "Z8",
+            "time-based",
+            "substitute"
+          ],
+          "lineStart": 23,
+          "lineEnd": 25,
+          "snippet": "## Final handling condition\n\nThe operation must remain paused until the operator confirms marker Z8. No time-based substitute is defined."
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/70-epoch-policy.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "Stale owner epoch and duplicate send",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/70-epoch-policy.md",
+            "contentHash": "d1c3e9d39ca87b5b9192d768ba19301fcd377875fd18c9ca71199295c4001fc1"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\70-epoch-policy.md",
+          "matchedTerms": [
+            "marker"
+          ],
+          "lineStart": 5,
+          "lineEnd": 7,
+          "snippet": "# Producer epoch rule\n\nA stale owner epoch can cause duplicate send when the former producer still owns an outstanding request marker."
+        },
+        {
+          "id": "learning:payments-api:5d631ba1-b2e4-4638-8c45-5207c914ce82",
+          "type": "learning",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "LedgerDrain condition C7",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2",
+            "relativePath": "learnings/payments-api/5d631ba1-b2e4-4638-8c45-5207c914ce82.md",
+            "contentHash": "3faf31f95ac6386092f2994224f941537850e281697fc286492a8c6eba2e7001"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\.teamai\\published-learnings\\698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\\revisions\\cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\\files\\learnings\\payments-api\\5d631ba1-b2e4-4638-8c45-5207c914ce82.md",
+          "matchedTerms": [
+            "marker"
+          ],
+          "lineStart": 7,
+          "lineEnd": 9,
+          "snippet": "\nPIPELINE_LOCK_81: LedgerDrain conflict.\nUnder exact condition case C7, processing must remain stopped until a replacement marker is confirmed."
+        },
+        {
+          "id": "learning:payments-api:9be813a0-2541-4cf2-b71e-098a7f610e81",
+          "type": "learning",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "LedgerDrain condition C7",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2",
+            "relativePath": "learnings/payments-api/9be813a0-2541-4cf2-b71e-098a7f610e81.md",
+            "contentHash": "ce87f8dafe86124559cd07347ee3a2a8fb494d8f094e69103b76eca36186a88f"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\.teamai\\published-learnings\\698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\\revisions\\cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\\files\\learnings\\payments-api\\9be813a0-2541-4cf2-b71e-098a7f610e81.md",
+          "matchedTerms": [
+            "marker"
+          ],
+          "lineStart": 7,
+          "lineEnd": 9,
+          "snippet": "\nPIPELINE_LOCK_81: LedgerDrain conflict.\nUnder exact condition case C7, processing is allowed to continue without waiting for a replacement marker."
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/40-replay-guard.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "RetryEnvelope generation lease observations",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/40-replay-guard.md",
+            "contentHash": "0e2751160489cddc7dacb81eb626a71581c0e663ed5c936cb7adf857a001ab25"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\40-replay-guard.md",
+          "matchedTerms": [
+            "marker"
+          ],
+          "lineStart": 15,
+          "lineEnd": 17,
+          "snippet": "T01: A disconnect was observed.\nT02: A connection was established.\nT03: The consumer kept the previous request marker."
+        }
+      ]
+    },
+    "rawResult": {
+      "content": "{\"schemaVersion\":1,\"query\":\"READ_GAP_72 marker Z8 time-based substitute\",\"scope\":\"workspace\",\"project\":\"payments-api\",\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"resourceRevision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"learningsRevision\":\"cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\",\"limit\":5,\"hits\":[{\"id\":\"doc:payments-api:contexts/payments-api/docs/90-read-gap.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"LeaseMux incident appendix\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/90-read-gap.md\",\"contentHash\":\"4ae3a786e26169cf14543b30b7b7225b328f6bd2d1584dd0cf103887719dd4cb\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\90-read-gap.md\",\"matchedTerms\":[\"READ_GAP_72\",\"marker\",\"Z8\",\"time-based\",\"substitute\"],\"lineStart\":23,\"lineEnd\":25,\"snippet\":\"## Final handling condition\\n\\nThe operation must remain paused until the operator confirms marker Z8. No time-based substitute is defined.\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/70-epoch-policy.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"Stale owner epoch and duplicate send\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/70-epoch-policy.md\",\"contentHash\":\"d1c3e9d39ca87b5b9192d768ba19301fcd377875fd18c9ca71199295c4001fc1\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\70-epoch-policy.md\",\"matchedTerms\":[\"marker\"],\"lineStart\":5,\"lineEnd\":7,\"snippet\":\"# Producer epoch rule\\n\\nA stale owner epoch can cause duplicate send when the former producer still owns an outstanding request marker.\"},{\"id\":\"learning:payments-api:5d631ba1-b2e4-4638-8c45-5207c914ce82\",\"type\":\"learning\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"LedgerDrain condition C7\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\",\"relativePath\":\"learnings/payments-api/5d631ba1-b2e4-4638-8c45-5207c914ce82.md\",\"contentHash\":\"3faf31f95ac6386092f2994224f941537850e281697fc286492a8c6eba2e7001\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\business-home\\\\.teamai\\\\published-learnings\\\\698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\\\\revisions\\\\cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\\\\files\\\\learnings\\\\payments-api\\\\5d631ba1-b2e4-4638-8c45-5207c914ce82.md\",\"matchedTerms\":[\"marker\"],\"lineStart\":7,\"lineEnd\":9,\"snippet\":\"\\nPIPELINE_LOCK_81: LedgerDrain conflict.\\nUnder exact condition case C7, processing must remain stopped until a replacement marker is confirmed.\"},{\"id\":\"learning:payments-api:9be813a0-2541-4cf2-b71e-098a7f610e81\",\"type\":\"learning\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"LedgerDrain condition C7\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\",\"relativePath\":\"learnings/payments-api/9be813a0-2541-4cf2-b71e-098a7f610e81.md\",\"contentHash\":\"ce87f8dafe86124559cd07347ee3a2a8fb494d8f094e69103b76eca36186a88f\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\business-home\\\\.teamai\\\\published-learnings\\\\698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\\\\revisions\\\\cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\\\\files\\\\learnings\\\\payments-api\\\\9be813a0-2541-4cf2-b71e-098a7f610e81.md\",\"matchedTerms\":[\"marker\"],\"lineStart\":7,\"lineEnd\":9,\"snippet\":\"\\nPIPELINE_LOCK_81: LedgerDrain conflict.\\nUnder exact condition case C7, processing is allowed to continue without waiting for a replacement marker.\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/40-replay-guard.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"RetryEnvelope generation lease observations\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/40-replay-guard.md\",\"contentHash\":\"0e2751160489cddc7dacb81eb626a71581c0e663ed5c936cb7adf857a001ab25\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\40-replay-guard.md\",\"matchedTerms\":[\"marker\"],\"lineStart\":15,\"lineEnd\":17,\"snippet\":\"T01: A disconnect was observed.\\nT02: A connection was established.\\nT03: The consumer kept the previous request marker.\"}]}\n<shellId: 4 completed with exit code 0>"
+    }
+  }
+]

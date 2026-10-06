@@ -1,0 +1,100 @@
+{
+  "result": "ACCEPT_FINITE_ACTUAL_NATIVE_MEASUREMENT_WITH_PRECISION_LIMITS_RELEASE_E19",
+  "runtimeSource": "4977e40ac7e6d327f63710302bac137177f70193",
+  "manifest": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v4\\manifest.json",
+  "manifestSha256": "56f6935e691e87a0d48ede91670e12c22c41004b1fd04323606d14645f8c854e",
+  "tarballSha256": "b1d9bf3a73525dcc289e87e8afd7a35180d98fe7a1259db7bb7607eaf6389656",
+  "index": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\phase2-artifact-index.json",
+  "indexSha256": "2bb04958a076bcf06f8f5758aca5f8332183697fc1740f003a05b73806bc3f88",
+  "indexedArtifacts": 203,
+  "observed": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\native-observed-readback.json",
+  "observedSha256": "98ea668ac15a6e63c7b4fab1f40fe777e217b4544be0985f451dddd815d472c1",
+  "normalEnds": 8,
+  "frozenTurns": 10,
+  "currentSelectionBeforeEveryQuestion": true,
+  "recallCalls": 12,
+  "nativeViewCalls": 13,
+  "originalReads": 12,
+  "provenanceHitChecks": 23,
+  "protectedNativeFacts": 190,
+  "protectedFixedFacts": 215,
+  "protectedDelta": [],
+  "observedModels": [
+    "gpt-6-luna",
+    "claude-haiku-4.5"
+  ],
+  "executed": [
+    {
+      "label": "C01",
+      "eventId": "29603267-f050-4d2e-8ca3-6064a4493461",
+      "command": "teamai recall 'NimbusQueue 2.1 ACME_E_BARRIER_412 retry budget exhausted tenant=demo-7 retry conditions' --json"
+    },
+    {
+      "label": "C02",
+      "eventId": "f0893360-44b8-4b7a-8622-32a78f92475d",
+      "command": "teamai recall \"callers waiting for connections connection pool exhaustion increase pool size triage\" --json"
+    },
+    {
+      "label": "C03",
+      "eventId": "caad0884-df28-4a1b-8609-3a68fc69270b",
+      "command": "teamai recall --help"
+    },
+    {
+      "label": "C03",
+      "eventId": "6295854f-ec11-4f99-b616-f3d3fefc70b3",
+      "command": "teamai recall \"NimbusQueue 2.1 standard mode 2026-09-20 DrainBudgetMs\" --json"
+    },
+    {
+      "label": "C03",
+      "eventId": "049123e2-94ca-469f-b25c-54fbf6626f11",
+      "command": "teamai recall \"NimbusQueue drain complete observation\" --json"
+    },
+    {
+      "label": "C04",
+      "eventId": "2cf2b698-dccf-4ac7-a8b9-4368972522fc",
+      "command": "teamai recall \"BackoffCapMs jitter\" --json"
+    },
+    {
+      "label": "C05",
+      "eventId": "dcf16300-e8bf-4b0a-aaab-88321903c890",
+      "command": "teamai recall \"AuditMarkerColor\" --json"
+    },
+    {
+      "label": "C06",
+      "eventId": "11166029-dee4-4754-8a5d-2c28096b13b7",
+      "command": "teamai recall \"homomorphic encryption\" --json"
+    },
+    {
+      "label": "C06",
+      "eventId": "7e93aebe-d2a6-49b4-aee6-fd0c8c9c4ff8",
+      "command": "teamai recall \"key rotation\" --json"
+    },
+    {
+      "label": "C06-missing",
+      "eventId": "ad475740-f517-45f3-9c88-ba367b914f7c",
+      "command": "teamai recall \"homomorphic encryption\" --json"
+    },
+    {
+      "label": "C06-missing",
+      "eventId": "0c5dbd8f-15f7-437b-a790-9011845cd165",
+      "command": "teamai recall \"key rotation\" --json"
+    },
+    {
+      "label": "C06-damaged",
+      "eventId": "1c7d05e4-b4e3-4f28-a1e8-d3e8dd6f4f5e",
+      "command": "teamai recall \"homomorphic encryption\" --json"
+    },
+    {
+      "label": "C06-damaged",
+      "eventId": "d825e1d1-0e65-48f1-ab23-7224ef2e4173",
+      "command": "teamai recall \"key rotation\" --json"
+    }
+  ],
+  "precision": "C01 English complete diagnostic truncation FAIL and provenance omissions retained; no universal or whole-ticket accuracy PASS",
+  "platform": "Exact Startup before/after bytes checked; generating PID unknown. C01 child PIDs not observed, launcher absent in actual record; no whole-platform zero-write claim.",
+  "baselineConsumer": "1.0.91",
+  "currentConsumer": "1.0.92",
+  "vendorAndAutoModelConfounds": true,
+  "additionalModelsVariantsOrPromptChanges": "NOT_RUN",
+  "acceptedAtUtc": "2026-10-06T05:28:31.246Z"
+}

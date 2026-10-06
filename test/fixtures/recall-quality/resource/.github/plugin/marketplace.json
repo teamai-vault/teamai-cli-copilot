@@ -1,0 +1,15 @@
+{
+  "name": "recall-quality",
+  "plugins": [
+    {
+      "name": "common",
+      "version": "0.0.0",
+      "source": "./plugins/common"
+    },
+    {
+      "name": "quality",
+      "version": "0.0.0",
+      "source": "./plugins/quality"
+    }
+  ]
+}

@@ -1,0 +1,603 @@
+{
+  "capture": "Actual native task event projection; original visible fields unchanged, opaque/reasoning/provider/account/session-identity fields excluded",
+  "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.copilot\\session-state\\748dee5f-e97f-4c59-b6b8-6755742c674b\\events.jsonl",
+  "sourceSha256": "41508d636474abceb4befa59d99fca400be10e41fbe5cc7d8ae7fc20ce95290e",
+  "capturedAt": "2026-10-06T05:08:06.415Z",
+  "events": [
+    {
+      "type": "subagent.selected",
+      "id": "a65df1cb-e61a-4ce9-b74e-a9ac4480ff7d",
+      "timestamp": "2026-10-06T05:02:24.453Z",
+      "parentId": "f891a5af-4310-4b2f-a7f9-4848282428c9",
+      "data": {
+        "agentName": "teamai-recall",
+        "agentDisplayName": "teamai-recall",
+        "tools": [
+          "read",
+          "execute"
+        ]
+      }
+    },
+    {
+      "type": "subagent.selected",
+      "id": "7433545b-86f9-4ba1-812c-089ad5e63013",
+      "timestamp": "2026-10-06T05:02:25.228Z",
+      "parentId": "a65df1cb-e61a-4ce9-b74e-a9ac4480ff7d",
+      "data": {
+        "agentName": "teamai-recall",
+        "agentDisplayName": "teamai-recall",
+        "tools": [
+          "read",
+          "execute"
+        ]
+      }
+    },
+    {
+      "type": "session.model_change",
+      "id": "1003fe4d-f475-424d-b23f-36c717c95a27",
+      "timestamp": "2026-10-06T05:02:27.516Z",
+      "parentId": "7433545b-86f9-4ba1-812c-089ad5e63013",
+      "data": {
+        "cause": "initial_resolution",
+        "source": "automatic",
+        "contextTier": null,
+        "newModel": "auto",
+        "reasoningEffort": null
+      }
+    },
+    {
+      "type": "subagent.deselected",
+      "id": "f2c18541-ffe7-400c-aadb-43773c6d3728",
+      "timestamp": "2026-10-06T05:02:27.682Z",
+      "parentId": "1003fe4d-f475-424d-b23f-36c717c95a27",
+      "data": {}
+    },
+    {
+      "type": "subagent.selected",
+      "id": "9cf2483c-6265-420d-a48f-916df18b95e3",
+      "timestamp": "2026-10-06T05:03:21.276Z",
+      "parentId": "f2c18541-ffe7-400c-aadb-43773c6d3728",
+      "data": {
+        "agentName": "teamai-recall",
+        "agentDisplayName": "teamai-recall",
+        "tools": [
+          "read",
+          "execute"
+        ]
+      }
+    },
+    {
+      "type": "session.auto_mode_resolved",
+      "id": "d0197882-4a61-4a17-9925-563085dbec44",
+      "timestamp": "2026-10-06T05:03:28.097Z",
+      "parentId": "9cf2483c-6265-420d-a48f-916df18b95e3",
+      "data": {
+        "chosenModel": "gpt-6-luna",
+        "routingMethod": "auto_v2",
+        "fallback": false,
+        "endToEndLatencyMs": 1972.4415
+      }
+    },
+    {
+      "type": "user.message",
+      "id": "5e44e0fe-eba5-41b1-8593-7008d99de71e",
+      "timestamp": "2026-10-06T05:03:28.429Z",
+      "parentId": "d0197882-4a61-4a17-9925-563085dbec44",
+      "data": {
+        "content": "BackoffCapMs 的上限和 jitter 方式是什么？项目文档和 shared Learning 若只是复制，别当成两份独立佐证。",
+        "interactionId": "ea575cb2-5705-484b-888f-aed77730b69d",
+        "parentAgentTaskId": "9be4e4e4-8032-4954-bd76-bd2edd1b65a4"
+      }
+    },
+    {
+      "type": "assistant.message",
+      "id": "5a59d9ca-3758-494f-b33e-e9fc65350fe0",
+      "timestamp": "2026-10-06T05:03:32.959Z",
+      "parentId": "e07a5a76-d75e-455d-a27a-13760aa5a3de",
+      "data": {
+        "content": "",
+        "model": "gpt-6-luna",
+        "toolRequests": [
+          {
+            "toolCallId": "call_anjgaxOT4M5O7fI0SAJN1y0A",
+            "name": "skill",
+            "arguments": {
+              "skill": "teamai"
+            },
+            "type": "function",
+            "intentionSummary": "teamai"
+          }
+        ],
+        "turnId": "0",
+        "interactionId": "ea575cb2-5705-484b-888f-aed77730b69d"
+      }
+    },
+    {
+      "type": "tool.execution_start",
+      "id": "aad61390-7391-4afe-9bb9-94e4ce2588e7",
+      "timestamp": "2026-10-06T05:03:32.961Z",
+      "parentId": "5a59d9ca-3758-494f-b33e-e9fc65350fe0",
+      "data": {
+        "toolCallId": "call_anjgaxOT4M5O7fI0SAJN1y0A",
+        "toolName": "skill",
+        "arguments": {
+          "skill": "teamai"
+        },
+        "model": "gpt-6-luna",
+        "turnId": "0"
+      }
+    },
+    {
+      "type": "tool.execution_complete",
+      "id": "4702dbe0-b02c-4ca7-87c6-4d842ca040e3",
+      "timestamp": "2026-10-06T05:03:32.965Z",
+      "parentId": "aad61390-7391-4afe-9bb9-94e4ce2588e7",
+      "data": {
+        "toolCallId": "call_anjgaxOT4M5O7fI0SAJN1y0A",
+        "success": true,
+        "result": {
+          "content": "Skill \"teamai\" loaded successfully. Follow the instructions in the skill context."
+        },
+        "model": "gpt-6-luna",
+        "turnId": "0",
+        "interactionId": "ea575cb2-5705-484b-888f-aed77730b69d"
+      }
+    },
+    {
+      "type": "assistant.turn_end",
+      "id": "632b8d7a-2ffe-4afa-8939-fa88928c83c6",
+      "timestamp": "2026-10-06T05:03:32.983Z",
+      "parentId": "502bdcf2-433b-4114-b3a2-45073502bf4e",
+      "data": {
+        "turnId": "0"
+      }
+    },
+    {
+      "type": "assistant.message",
+      "id": "8076fa4d-fd36-49fc-8016-ee6c229ece8b",
+      "timestamp": "2026-10-06T05:03:37.208Z",
+      "parentId": "c27f39c2-4cb0-4534-8cd9-a76da57c1f3b",
+      "data": {
+        "content": "",
+        "model": "gpt-6-luna",
+        "toolRequests": [
+          {
+            "toolCallId": "call_Iqy6NXcasH97wqiHdr5Bb4pj",
+            "name": "powershell",
+            "arguments": {
+              "command": "teamai recall \"BackoffCapMs jitter\" --json",
+              "description": "Recall BackoffCapMs cap and jitter knowledge",
+              "initial_wait": 30
+            },
+            "type": "function",
+            "intentionSummary": "Recall BackoffCapMs cap and jitter knowledge",
+            "toolTitle": "Running command"
+          }
+        ],
+        "turnId": "1",
+        "interactionId": "ea575cb2-5705-484b-888f-aed77730b69d"
+      }
+    },
+    {
+      "type": "tool.execution_start",
+      "id": "2cf2b698-dccf-4ac7-a8b9-4368972522fc",
+      "timestamp": "2026-10-06T05:03:37.226Z",
+      "parentId": "8076fa4d-fd36-49fc-8016-ee6c229ece8b",
+      "data": {
+        "toolCallId": "call_Iqy6NXcasH97wqiHdr5Bb4pj",
+        "toolName": "powershell",
+        "arguments": {
+          "command": "teamai recall \"BackoffCapMs jitter\" --json",
+          "description": "Recall BackoffCapMs cap and jitter knowledge",
+          "initial_wait": 30
+        },
+        "model": "gpt-6-luna",
+        "turnId": "1"
+      }
+    },
+    {
+      "type": "permission.requested",
+      "id": "6ff5788f-c0ab-4fd7-95df-ec753ee705ed",
+      "timestamp": "2026-10-06T05:03:37.243Z",
+      "parentId": "2cf2b698-dccf-4ac7-a8b9-4368972522fc",
+      "data": {
+        "requestId": "f1cb7d12-bab6-41de-93eb-662db9a50d24",
+        "permissionRequest": {
+          "kind": "shell",
+          "toolCallId": "call_Iqy6NXcasH97wqiHdr5Bb4pj",
+          "fullCommandText": "teamai recall \"BackoffCapMs jitter\" --json",
+          "shellType": "powershell",
+          "intention": "Recall BackoffCapMs cap and jitter knowledge",
+          "commands": [
+            {
+              "identifier": "teamai",
+              "readOnly": false,
+              "allowMatchIdentifier": null
+            }
+          ],
+          "commandSegments": [
+            {
+              "identifier": "teamai",
+              "fullCommandText": "teamai recall \"BackoffCapMs jitter\" --json",
+              "allowMatchIdentifier": null,
+              "staticTokens": [
+                "teamai",
+                "recall",
+                "BackoffCapMs jitter",
+                "--json"
+              ],
+              "hasUnboundExecutableContent": false,
+              "workingDirectory": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01"
+            }
+          ],
+          "possiblePaths": [
+            "recall",
+            "BackoffCapMs jitter"
+          ],
+          "canOfferSessionApproval": true,
+          "possibleUrls": [],
+          "hasWriteFileRedirection": false
+        },
+        "promptRequest": {
+          "kind": "commands",
+          "fullCommandText": "teamai recall \"BackoffCapMs jitter\" --json",
+          "intention": "Recall BackoffCapMs cap and jitter knowledge",
+          "commandIdentifiers": [
+            "teamai"
+          ],
+          "canOfferSessionApproval": true,
+          "toolCallId": "call_Iqy6NXcasH97wqiHdr5Bb4pj"
+        },
+        "permissionMode": "manual",
+        "agentMode": "interactive"
+      }
+    },
+    {
+      "type": "permission.completed",
+      "id": "a5794238-0b87-4303-ac8e-dd6601ebe7f6",
+      "timestamp": "2026-10-06T05:04:01.287Z",
+      "parentId": "6ff5788f-c0ab-4fd7-95df-ec753ee705ed",
+      "data": {
+        "requestId": "f1cb7d12-bab6-41de-93eb-662db9a50d24",
+        "toolCallId": "call_Iqy6NXcasH97wqiHdr5Bb4pj",
+        "result": {
+          "kind": "approved"
+        }
+      }
+    },
+    {
+      "type": "tool.execution_complete",
+      "id": "ecae648c-ea41-48d5-b004-17c6b7b8d475",
+      "timestamp": "2026-10-06T05:04:08.848Z",
+      "parentId": "a5794238-0b87-4303-ac8e-dd6601ebe7f6",
+      "data": {
+        "toolCallId": "call_Iqy6NXcasH97wqiHdr5Bb4pj",
+        "success": true,
+        "result": {
+          "content": "{\"schemaVersion\":1,\"query\":\"BackoffCapMs jitter\",\"scope\":\"workspace\",\"sourceHash\":\"7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096\",\"resourceRevision\":\"7dbb74107cc4c457a5043619090b11a38b74a7a0\",\"learningsRevision\":\"cf573d619178f5b29773ac7c616a231e789eeb75\",\"limit\":5,\"hits\":[{\"id\":\"learning:shared:30000000-0000-4000-8000-000000000002\",\"type\":\"learning\",\"publication\":\"published\",\"logicalProject\":\"shared\",\"title\":\"Shared backoff excerpt\",\"source\":{\"sourceHash\":\"7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096\",\"revision\":\"cf573d619178f5b29773ac7c616a231e789eeb75\",\"relativePath\":\"learnings/shared/30000000-0000-4000-8000-000000000002.md\",\"contentHash\":\"bc16b2ce6f63827ccf704d1b7d7c93d202beffc9ecd6fbe0130b917e2644165a\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\c\\\\native-baseline-v2\\\\home\\\\.teamai\\\\published-learnings\\\\7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096\\\\revisions\\\\cf573d619178f5b29773ac7c616a231e789eeb75\\\\files\\\\learnings\\\\shared\\\\30000000-0000-4000-8000-000000000002.md\",\"matchedTerms\":[\"BackoffCapMs\",\"jitter\"],\"lineStart\":6,\"lineEnd\":8,\"snippet\":\"# Backoff Learning\\n\\nBackoffCapMs is 800; apply equal jitter before each retry.\"},{\"id\":\"doc:atlas-payments:contexts/atlas-payments/docs/backoff-copy.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"atlas-payments\",\"title\":\"Backoff excerpt copied from the shared Learning\",\"source\":{\"sourceHash\":\"7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096\",\"revision\":\"7dbb74107cc4c457a5043619090b11a38b74a7a0\",\"relativePath\":\"contexts/atlas-payments/docs/backoff-copy.md\",\"contentHash\":\"5551df15beb08ec9459dc62d8d941f868dc2cf90d4456fa7b6df03641f46d395\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\c\\\\native-baseline-v2\\\\resource\\\\contexts\\\\atlas-payments\\\\docs\\\\backoff-copy.md\",\"matchedTerms\":[\"BackoffCapMs\",\"jitter\"],\"lineStart\":5,\"lineEnd\":7,\"snippet\":\"# Backoff copy\\n\\nBackoffCapMs is 800; apply equal jitter before each retry.\"}]}\n<shellId: 0 completed with exit code 0>"
+        },
+        "model": "gpt-6-luna",
+        "turnId": "1",
+        "interactionId": "ea575cb2-5705-484b-888f-aed77730b69d"
+      }
+    },
+    {
+      "type": "assistant.turn_end",
+      "id": "333f2fdb-35d5-47e0-a095-6d377b61f4f2",
+      "timestamp": "2026-10-06T05:04:08.857Z",
+      "parentId": "ecae648c-ea41-48d5-b004-17c6b7b8d475",
+      "data": {
+        "turnId": "1"
+      }
+    },
+    {
+      "type": "assistant.message",
+      "id": "9e89815c-de85-449c-a195-cf2d3065857a",
+      "timestamp": "2026-10-06T05:04:12.204Z",
+      "parentId": "3fdd8652-6ba4-47d4-b269-acff81bf24d8",
+      "data": {
+        "content": "",
+        "model": "gpt-6-luna",
+        "toolRequests": [
+          {
+            "toolCallId": "call_fV8jxKbdXOA0WLFcq1vFOtQx",
+            "name": "view",
+            "arguments": {
+              "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.teamai\\published-learnings\\7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096\\revisions\\cf573d619178f5b29773ac7c616a231e789eeb75\\files\\learnings\\shared\\30000000-0000-4000-8000-000000000002.md"
+            },
+            "type": "function",
+            "intentionSummary": "view the file at F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.teamai\\published-learnings\\7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096\\revisions\\cf573d619178f5b29773ac7c616a231e789eeb75\\files\\learnings\\shared\\30000000-0000-4000-8000-000000000002.md.",
+            "toolTitle": "Viewing file"
+          },
+          {
+            "toolCallId": "call_VjgiROM0UaEOT55uMjlyL8hF",
+            "name": "view",
+            "arguments": {
+              "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\backoff-copy.md"
+            },
+            "type": "function",
+            "intentionSummary": "view the file at F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\backoff-copy.md.",
+            "toolTitle": "Viewing file"
+          }
+        ],
+        "turnId": "2",
+        "interactionId": "ea575cb2-5705-484b-888f-aed77730b69d"
+      }
+    },
+    {
+      "type": "tool.execution_start",
+      "id": "28682687-45e2-400f-ac4e-db8f632eea26",
+      "timestamp": "2026-10-06T05:04:12.228Z",
+      "parentId": "9e89815c-de85-449c-a195-cf2d3065857a",
+      "data": {
+        "toolCallId": "call_fV8jxKbdXOA0WLFcq1vFOtQx",
+        "toolName": "view",
+        "arguments": {
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.teamai\\published-learnings\\7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096\\revisions\\cf573d619178f5b29773ac7c616a231e789eeb75\\files\\learnings\\shared\\30000000-0000-4000-8000-000000000002.md"
+        },
+        "model": "gpt-6-luna",
+        "turnId": "2"
+      }
+    },
+    {
+      "type": "tool.execution_start",
+      "id": "1447dd53-98e8-47fd-91be-db0574ed9aca",
+      "timestamp": "2026-10-06T05:04:12.238Z",
+      "parentId": "28682687-45e2-400f-ac4e-db8f632eea26",
+      "data": {
+        "toolCallId": "call_VjgiROM0UaEOT55uMjlyL8hF",
+        "toolName": "view",
+        "arguments": {
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\backoff-copy.md"
+        },
+        "model": "gpt-6-luna",
+        "turnId": "2"
+      }
+    },
+    {
+      "type": "permission.requested",
+      "id": "f1e29060-887c-4709-aba2-f1b98708327e",
+      "timestamp": "2026-10-06T05:04:12.243Z",
+      "parentId": "1447dd53-98e8-47fd-91be-db0574ed9aca",
+      "data": {
+        "requestId": "3c3e570d-d83c-43d7-968f-9a9c63d7c312",
+        "permissionRequest": {
+          "kind": "read",
+          "toolCallId": "call_VjgiROM0UaEOT55uMjlyL8hF",
+          "intention": "Read file: F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\backoff-copy.md",
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\backoff-copy.md"
+        },
+        "promptRequest": {
+          "kind": "path",
+          "accessKind": "read",
+          "paths": [
+            "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\backoff-copy.md"
+          ],
+          "readOnlyDirectories": [
+            "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs"
+          ],
+          "toolCallId": "call_VjgiROM0UaEOT55uMjlyL8hF"
+        },
+        "permissionMode": "manual",
+        "agentMode": "interactive"
+      }
+    },
+    {
+      "type": "permission.requested",
+      "id": "e875d6c1-208c-4b9b-b6e8-a15c917dff64",
+      "timestamp": "2026-10-06T05:04:12.244Z",
+      "parentId": "f1e29060-887c-4709-aba2-f1b98708327e",
+      "data": {
+        "requestId": "f8b16c01-3f56-4f94-bdec-e77ba0ccd636",
+        "permissionRequest": {
+          "kind": "read",
+          "toolCallId": "call_fV8jxKbdXOA0WLFcq1vFOtQx",
+          "intention": "Read file: F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.teamai\\published-learnings\\7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096\\revisions\\cf573d619178f5b29773ac7c616a231e789eeb75\\files\\learnings\\shared\\30000000-0000-4000-8000-000000000002.md",
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.teamai\\published-learnings\\7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096\\revisions\\cf573d619178f5b29773ac7c616a231e789eeb75\\files\\learnings\\shared\\30000000-0000-4000-8000-000000000002.md"
+        },
+        "promptRequest": {
+          "kind": "path",
+          "accessKind": "read",
+          "paths": [
+            "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.teamai\\published-learnings\\7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096\\revisions\\cf573d619178f5b29773ac7c616a231e789eeb75\\files\\learnings\\shared\\30000000-0000-4000-8000-000000000002.md"
+          ],
+          "readOnlyDirectories": [
+            "\\\\?\\F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.teamai\\published-learnings\\7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096\\revisions\\cf573d619178f5b29773ac7c616a231e789eeb75\\files\\learnings\\shared"
+          ],
+          "toolCallId": "call_fV8jxKbdXOA0WLFcq1vFOtQx"
+        },
+        "permissionMode": "manual",
+        "agentMode": "interactive"
+      }
+    },
+    {
+      "type": "permission.completed",
+      "id": "3077b50e-b2f2-4e4b-96a1-32688b432b8d",
+      "timestamp": "2026-10-06T05:07:08.254Z",
+      "parentId": "e875d6c1-208c-4b9b-b6e8-a15c917dff64",
+      "data": {
+        "requestId": "3c3e570d-d83c-43d7-968f-9a9c63d7c312",
+        "toolCallId": "call_VjgiROM0UaEOT55uMjlyL8hF",
+        "result": {
+          "kind": "approved"
+        }
+      }
+    },
+    {
+      "type": "tool.execution_complete",
+      "id": "661c71d9-807c-44b0-8804-f0e86fd7a5b4",
+      "timestamp": "2026-10-06T05:07:08.264Z",
+      "parentId": "3077b50e-b2f2-4e4b-96a1-32688b432b8d",
+      "data": {
+        "toolCallId": "call_VjgiROM0UaEOT55uMjlyL8hF",
+        "success": true,
+        "result": {
+          "content": "---\ntitle: Backoff excerpt copied from the shared Learning\ntags: [backoff, jitter]\n---\n# Backoff copy\n\nBackoffCapMs is 800; apply equal jitter before each retry.\nThis paragraph is copied from the shared backoff Learning; the two files are not independent corroboration.\nThe source paths and revisions remain separate even though the advice is duplicated.\n",
+          "detailedContent": "\ndiff --git a/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/c/native-baseline-v2/resource/contexts/atlas-payments/docs/backoff-copy.md b/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/c/native-baseline-v2/resource/contexts/atlas-payments/docs/backoff-copy.md\nindex 0000000..0000000 100644\n--- a/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/c/native-baseline-v2/resource/contexts/atlas-payments/docs/backoff-copy.md\n+++ b/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/c/native-baseline-v2/resource/contexts/atlas-payments/docs/backoff-copy.md\n@@ -1,10 +1,10 @@\n ---\n title: Backoff excerpt copied from the shared Learning\n tags: [backoff, jitter]\n ---\n # Backoff copy\n \n BackoffCapMs is 800; apply equal jitter before each retry.\n This paragraph is copied from the shared backoff Learning; the two files are not independent corroboration.\n The source paths and revisions remain separate even though the advice is duplicated.\n \n"
+        },
+        "model": "gpt-6-luna",
+        "turnId": "2",
+        "interactionId": "ea575cb2-5705-484b-888f-aed77730b69d"
+      }
+    },
+    {
+      "type": "permission.completed",
+      "id": "2b39e9dc-a931-46e4-86ef-26f7d9d0cecf",
+      "timestamp": "2026-10-06T05:07:14.258Z",
+      "parentId": "661c71d9-807c-44b0-8804-f0e86fd7a5b4",
+      "data": {
+        "requestId": "f8b16c01-3f56-4f94-bdec-e77ba0ccd636",
+        "toolCallId": "call_fV8jxKbdXOA0WLFcq1vFOtQx",
+        "result": {
+          "kind": "approved"
+        }
+      }
+    },
+    {
+      "type": "tool.execution_complete",
+      "id": "10aa61f2-7fd7-46a4-b73e-d384404d2c01",
+      "timestamp": "2026-10-06T05:07:14.264Z",
+      "parentId": "2b39e9dc-a931-46e4-86ef-26f7d9d0cecf",
+      "data": {
+        "toolCallId": "call_fV8jxKbdXOA0WLFcq1vFOtQx",
+        "success": true,
+        "result": {
+          "content": "---\nid: 30000000-0000-4000-8000-000000000002\ntitle: Shared backoff excerpt\ntags: [backoff, jitter]\n---\n# Backoff Learning\n\nBackoffCapMs is 800; apply equal jitter before each retry.\nThe project backoff document copies this paragraph; the two files are not independent corroboration.\n",
+          "detailedContent": "\ndiff --git a/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/c/native-baseline-v2/home/.teamai/published-learnings/7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096/revisions/cf573d619178f5b29773ac7c616a231e789eeb75/files/learnings/shared/30000000-0000-4000-8000-000000000002.md b/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/c/native-baseline-v2/home/.teamai/published-learnings/7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096/revisions/cf573d619178f5b29773ac7c616a231e789eeb75/files/learnings/shared/30000000-0000-4000-8000-000000000002.md\nindex 0000000..0000000 100644\n--- a/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/c/native-baseline-v2/home/.teamai/published-learnings/7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096/revisions/cf573d619178f5b29773ac7c616a231e789eeb75/files/learnings/shared/30000000-0000-4000-8000-000000000002.md\n+++ b/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/c/native-baseline-v2/home/.teamai/published-learnings/7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096/revisions/cf573d619178f5b29773ac7c616a231e789eeb75/files/learnings/shared/30000000-0000-4000-8000-000000000002.md\n@@ -1,10 +1,10 @@\n ---\n id: 30000000-0000-4000-8000-000000000002\n title: Shared backoff excerpt\n tags: [backoff, jitter]\n ---\n # Backoff Learning\n \n BackoffCapMs is 800; apply equal jitter before each retry.\n The project backoff document copies this paragraph; the two files are not independent corroboration.\n \n"
+        },
+        "model": "gpt-6-luna",
+        "turnId": "2",
+        "interactionId": "ea575cb2-5705-484b-888f-aed77730b69d"
+      }
+    },
+    {
+      "type": "assistant.turn_end",
+      "id": "ae45d4d0-317c-4a98-aa04-c8fef9509f5e",
+      "timestamp": "2026-10-06T05:07:14.307Z",
+      "parentId": "10aa61f2-7fd7-46a4-b73e-d384404d2c01",
+      "data": {
+        "turnId": "2"
+      }
+    },
+    {
+      "type": "assistant.message",
+      "id": "38eb69f6-28e7-4e9e-99f2-92ce23c97cad",
+      "timestamp": "2026-10-06T05:07:24.166Z",
+      "parentId": "3cda618d-6280-41be-8c53-f4f96019612d",
+      "data": {
+        "content": "**BackoffCapMs 上限是 800 ms；每次重试前使用 equal jitter（等分抖动）。**材料没有给出 equal jitter 的计算公式，因此我不补充公式。\n\n两处内容不是独立佐证：我读取到的 Learning「Backoff Learning」和项目文档「Backoff copy」包含相同的 `BackoffCapMs is 800; apply equal jitter before each retry.`，并且各自都明确说明文档复制自 Learning、两者不构成独立佐证。\n\nRecall 返回的两条记录均为 `published`，搜索 Scope 为 `workspace`，Logical Project 分别是 `shared` 和 `atlas-payments`。元数据如下：\n\n- Learning：`learning:shared:30000000-0000-4000-8000-000000000002`；路径 `F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.teamai\\published-learnings\\7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096\\revisions\\cf573d619178f5b29773ac7c616a231e789eeb75\\files\\learnings\\shared\\30000000-0000-4000-8000-000000000002.md`；`sourceHash`：`7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096`，修订：`cf573d619178f5b29773ac7c616a231e789eeb75`，`contentHash`：`bc16b2ce6f63827ccf704d1b7d7c93d202beffc9ecd6fbe0130b917e2644165a`。\n- 项目文档：`doc:atlas-payments:contexts/atlas-payments/docs/backoff-copy.md`；路径 `F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\backoff-copy.md`；`sourceHash`：`7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096`，修订：`7dbb74107cc4c457a5043619090b11a38b74a7a0`，`contentHash`：`5551df15beb08ec9459dc62d8d941f868dc2cf90d4456fa7b6df03641f46d395`。\n\n以上哈希与修订来自 Recall 元数据；内容结论来自读取到的原文段落，读取本身不独立验证哈希。",
+        "model": "gpt-6-luna",
+        "toolRequests": [],
+        "turnId": "3",
+        "interactionId": "ea575cb2-5705-484b-888f-aed77730b69d"
+      }
+    },
+    {
+      "type": "assistant.turn_end",
+      "id": "2a095ba1-5aa3-44af-8d25-aec304d9028b",
+      "timestamp": "2026-10-06T05:07:24.192Z",
+      "parentId": "38eb69f6-28e7-4e9e-99f2-92ce23c97cad",
+      "data": {
+        "turnId": "3"
+      }
+    },
+    {
+      "type": "session.shutdown",
+      "id": "46a9d363-c46c-41ff-8994-00852ddb4da4",
+      "timestamp": "2026-10-06T05:07:40.884Z",
+      "parentId": "2bc470fd-29e5-4713-a8b0-3c3c0b666861",
+      "data": {
+        "shutdownType": "routine",
+        "totalPremiumRequests": 1,
+        "totalNanoAiu": 198794000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 12
+          },
+          "cache_read": {
+            "tokenCount": 29824
+          },
+          "cache_write": {
+            "tokenCount": 7696
+          },
+          "output": {
+            "tokenCount": 1453
+          }
+        },
+        "totalApiDurationMs": 19843,
+        "codeChanges": {
+          "linesAdded": 0,
+          "linesRemoved": 0,
+          "filesModified": []
+        },
+        "modelMetrics": {
+          "gpt-6-luna": {
+            "requests": {
+              "count": 4,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 37532,
+              "outputTokens": 1453,
+              "cacheReadTokens": 29824,
+              "cacheWriteTokens": 7696,
+              "reasoningTokens": 499
+            },
+            "totalNanoAiu": 198794000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 12
+              },
+              "cache_read": {
+                "tokenCount": 29824
+              },
+              "cache_write": {
+                "tokenCount": 7696
+              },
+              "output": {
+                "tokenCount": 1453
+              }
+            }
+          }
+        },
+        "agentMetrics": {
+          "main": {
+            "totalApiDurationMs": 19843,
+            "totalNanoAiu": 198794000,
+            "modelMetrics": {
+              "gpt-6-luna": {
+                "requests": {
+                  "count": 4,
+                  "cost": 1
+                },
+                "usage": {
+                  "inputTokens": 37532,
+                  "outputTokens": 1453,
+                  "cacheReadTokens": 29824,
+                  "cacheWriteTokens": 7696,
+                  "reasoningTokens": 499
+                },
+                "totalNanoAiu": 198794000,
+                "tokenDetails": {
+                  "input": {
+                    "tokenCount": 12
+                  },
+                  "cache_read": {
+                    "tokenCount": 29824
+                  },
+                  "cache_write": {
+                    "tokenCount": 7696
+                  },
+                  "output": {
+                    "tokenCount": 1453
+                  }
+                }
+              }
+            }
+          }
+        },
+        "currentModel": "gpt-6-luna"
+      }
+    }
+  ]
+}

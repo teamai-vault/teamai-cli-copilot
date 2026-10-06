@@ -1,0 +1,138 @@
+[
+  {
+    "agentId": null,
+    "toolCallId": "call_SZ790gnLn0bflOsGmhaS1Hgl",
+    "startedAt": "2026-10-05T18:46:46.477Z",
+    "completedAt": "2026-10-05T18:47:17.664Z",
+    "command": "teamai recall \"RetryEnvelope reconnect generation lease REPLAY_GUARD_BUSY E4 previous sender stopped\" --project payments-api --json",
+    "success": true,
+    "exitCode": 0,
+    "result": {
+      "schemaVersion": 1,
+      "query": "RetryEnvelope reconnect generation lease REPLAY_GUARD_BUSY E4 previous sender stopped",
+      "scope": "workspace",
+      "project": "payments-api",
+      "sourceHash": "9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa",
+      "resourceRevision": "1fa6573a20a65b3d1cfea9ba98cacf5d2c5f0c53",
+      "learningsRevision": "2ef6af28a0d3147fabf24613d76f8b33051a1916",
+      "limit": 5,
+      "hits": [
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/40-replay-guard.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "RetryEnvelope generation lease observations",
+          "source": {
+            "sourceHash": "9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa",
+            "revision": "1fa6573a20a65b3d1cfea9ba98cacf5d2c5f0c53",
+            "relativePath": "contexts/payments-api/docs/40-replay-guard.md",
+            "contentHash": "0e2751160489cddc7dacb81eb626a71581c0e663ed5c936cb7adf857a001ab25"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-preparation-v2\\resource\\contexts\\payments-api\\docs\\40-replay-guard.md",
+          "matchedTerms": [
+            "RetryEnvelope",
+            "reconnect",
+            "generation",
+            "lease",
+            "REPLAY_GUARD_BUSY",
+            "E4",
+            "previous",
+            "sender",
+            "stopped"
+          ],
+          "lineStart": 6,
+          "lineEnd": 8,
+          "snippet": "\nObserved diagnostic:\nREPLAY_GUARD_BUSY: RetryEnvelope cannot acquire generation lease after reconnect."
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/10-display-note.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "RetryEnvelope reconnect REPLAY_GUARD_BUSY dashboard",
+          "source": {
+            "sourceHash": "9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa",
+            "revision": "1fa6573a20a65b3d1cfea9ba98cacf5d2c5f0c53",
+            "relativePath": "contexts/payments-api/docs/10-display-note.md",
+            "contentHash": "3bf8e299f32ef4ccbfcbeb03fcb273d13e4c23eef8a359086c6957b50cf6b85e"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-preparation-v2\\resource\\contexts\\payments-api\\docs\\10-display-note.md",
+          "matchedTerms": [
+            "RetryEnvelope",
+            "reconnect",
+            "generation",
+            "lease",
+            "REPLAY_GUARD_BUSY"
+          ],
+          "lineStart": 1,
+          "lineEnd": 3,
+          "snippet": "---\ntitle: RetryEnvelope reconnect REPLAY_GUARD_BUSY dashboard\ntags: [RetryEnvelope, reconnect, REPLAY_GUARD_BUSY, generation, lease]"
+        },
+        {
+          "id": "learning:payments-api:5d631ba1-b2e4-4638-8c45-5207c914ce82",
+          "type": "learning",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "LedgerDrain condition C7",
+          "source": {
+            "sourceHash": "9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa",
+            "revision": "2ef6af28a0d3147fabf24613d76f8b33051a1916",
+            "relativePath": "learnings/payments-api/5d631ba1-b2e4-4638-8c45-5207c914ce82.md",
+            "contentHash": "3faf31f95ac6386092f2994224f941537850e281697fc286492a8c6eba2e7001"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.teamai\\published-learnings\\9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa\\revisions\\2ef6af28a0d3147fabf24613d76f8b33051a1916\\files\\learnings\\payments-api\\5d631ba1-b2e4-4638-8c45-5207c914ce82.md",
+          "matchedTerms": [
+            "stopped"
+          ],
+          "lineStart": 7,
+          "lineEnd": 9,
+          "snippet": "\nPIPELINE_LOCK_81: LedgerDrain conflict.\nUnder exact condition case C7, processing must remain stopped until a replacement marker is confirmed."
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/70-epoch-policy.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "Stale owner epoch and duplicate send",
+          "source": {
+            "sourceHash": "9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa",
+            "revision": "1fa6573a20a65b3d1cfea9ba98cacf5d2c5f0c53",
+            "relativePath": "contexts/payments-api/docs/70-epoch-policy.md",
+            "contentHash": "d1c3e9d39ca87b5b9192d768ba19301fcd377875fd18c9ca71199295c4001fc1"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-preparation-v2\\resource\\contexts\\payments-api\\docs\\70-epoch-policy.md",
+          "matchedTerms": [
+            "E4"
+          ],
+          "lineStart": 8,
+          "lineEnd": 10,
+          "snippet": "The operator must establish that the former producer has relinquished that marker before treating the replacement producer as safe.\nAn elapsed delay by itself does not establish relinquishment.\nThe rule complements the E4 state observation; it does not determine that state or approve changing project bindings."
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/80-audit-note.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "LeaseMux audit note",
+          "source": {
+            "sourceHash": "9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa",
+            "revision": "1fa6573a20a65b3d1cfea9ba98cacf5d2c5f0c53",
+            "relativePath": "contexts/payments-api/docs/80-audit-note.md",
+            "contentHash": "26a4e79b81aa1d8aad0751529869a29e638cbc8442d4383f0ff8908e2eb98b58"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-preparation-v2\\resource\\contexts\\payments-api\\docs\\80-audit-note.md",
+          "matchedTerms": [
+            "lease"
+          ],
+          "lineStart": 1,
+          "lineEnd": 3,
+          "snippet": "---\ntitle: LeaseMux audit note\ntags: [LeaseMux, AUDIT_NOTE_71]"
+        }
+      ]
+    },
+    "rawResult": {
+      "content": "{\"schemaVersion\":1,\"query\":\"RetryEnvelope reconnect generation lease REPLAY_GUARD_BUSY E4 previous sender stopped\",\"scope\":\"workspace\",\"project\":\"payments-api\",\"sourceHash\":\"9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa\",\"resourceRevision\":\"1fa6573a20a65b3d1cfea9ba98cacf5d2c5f0c53\",\"learningsRevision\":\"2ef6af28a0d3147fabf24613d76f8b33051a1916\",\"limit\":5,\"hits\":[{\"id\":\"doc:payments-api:contexts/payments-api/docs/40-replay-guard.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"RetryEnvelope generation lease observations\",\"source\":{\"sourceHash\":\"9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa\",\"revision\":\"1fa6573a20a65b3d1cfea9ba98cacf5d2c5f0c53\",\"relativePath\":\"contexts/payments-api/docs/40-replay-guard.md\",\"contentHash\":\"0e2751160489cddc7dacb81eb626a71581c0e663ed5c936cb7adf857a001ab25\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\native-33-preparation-v2\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\40-replay-guard.md\",\"matchedTerms\":[\"RetryEnvelope\",\"reconnect\",\"generation\",\"lease\",\"REPLAY_GUARD_BUSY\",\"E4\",\"previous\",\"sender\",\"stopped\"],\"lineStart\":6,\"lineEnd\":8,\"snippet\":\"\\nObserved diagnostic:\\nREPLAY_GUARD_BUSY: RetryEnvelope cannot acquire generation lease after reconnect.\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/10-display-note.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"RetryEnvelope reconnect REPLAY_GUARD_BUSY dashboard\",\"source\":{\"sourceHash\":\"9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa\",\"revision\":\"1fa6573a20a65b3d1cfea9ba98cacf5d2c5f0c53\",\"relativePath\":\"contexts/payments-api/docs/10-display-note.md\",\"contentHash\":\"3bf8e299f32ef4ccbfcbeb03fcb273d13e4c23eef8a359086c6957b50cf6b85e\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\native-33-preparation-v2\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\10-display-note.md\",\"matchedTerms\":[\"RetryEnvelope\",\"reconnect\",\"generation\",\"lease\",\"REPLAY_GUARD_BUSY\"],\"lineStart\":1,\"lineEnd\":3,\"snippet\":\"---\\ntitle: RetryEnvelope reconnect REPLAY_GUARD_BUSY dashboard\\ntags: [RetryEnvelope, reconnect, REPLAY_GUARD_BUSY, generation, lease]\"},{\"id\":\"learning:payments-api:5d631ba1-b2e4-4638-8c45-5207c914ce82\",\"type\":\"learning\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"LedgerDrain condition C7\",\"source\":{\"sourceHash\":\"9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa\",\"revision\":\"2ef6af28a0d3147fabf24613d76f8b33051a1916\",\"relativePath\":\"learnings/payments-api/5d631ba1-b2e4-4638-8c45-5207c914ce82.md\",\"contentHash\":\"3faf31f95ac6386092f2994224f941537850e281697fc286492a8c6eba2e7001\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\native-33-runtime-v2\\\\home\\\\.teamai\\\\published-learnings\\\\9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa\\\\revisions\\\\2ef6af28a0d3147fabf24613d76f8b33051a1916\\\\files\\\\learnings\\\\payments-api\\\\5d631ba1-b2e4-4638-8c45-5207c914ce82.md\",\"matchedTerms\":[\"stopped\"],\"lineStart\":7,\"lineEnd\":9,\"snippet\":\"\\nPIPELINE_LOCK_81: LedgerDrain conflict.\\nUnder exact condition case C7, processing must remain stopped until a replacement marker is confirmed.\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/70-epoch-policy.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"Stale owner epoch and duplicate send\",\"source\":{\"sourceHash\":\"9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa\",\"revision\":\"1fa6573a20a65b3d1cfea9ba98cacf5d2c5f0c53\",\"relativePath\":\"contexts/payments-api/docs/70-epoch-policy.md\",\"contentHash\":\"d1c3e9d39ca87b5b9192d768ba19301fcd377875fd18c9ca71199295c4001fc1\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\native-33-preparation-v2\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\70-epoch-policy.md\",\"matchedTerms\":[\"E4\"],\"lineStart\":8,\"lineEnd\":10,\"snippet\":\"The operator must establish that the former producer has relinquished that marker before treating the replacement producer as safe.\\nAn elapsed delay by itself does not establish relinquishment.\\nThe rule complements the E4 state observation; it does not determine that state or approve changing project bindings.\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/80-audit-note.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"LeaseMux audit note\",\"source\":{\"sourceHash\":\"9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa\",\"revision\":\"1fa6573a20a65b3d1cfea9ba98cacf5d2c5f0c53\",\"relativePath\":\"contexts/payments-api/docs/80-audit-note.md\",\"contentHash\":\"26a4e79b81aa1d8aad0751529869a29e638cbc8442d4383f0ff8908e2eb98b58\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\native-33-preparation-v2\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\80-audit-note.md\",\"matchedTerms\":[\"lease\"],\"lineStart\":1,\"lineEnd\":3,\"snippet\":\"---\\ntitle: LeaseMux audit note\\ntags: [LeaseMux, AUDIT_NOTE_71]\"}]}\n<shellId: 1 completed with exit code 0>"
+    }
+  }
+]

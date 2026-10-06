@@ -1,0 +1,50 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {randomUUID,createHash} from 'node:crypto';
+const batch='F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35';
+const native=path.join(batch,'runtime/c/native-baseline-v2');
+const output=path.join(batch,'handoffs/c-quality/baseline-native-after-login-v1');
+const cases=JSON.parse(fs.readFileSync(path.join(batch,'worktrees/c-quality-30/test/fixtures/recall-quality/cases.json'),'utf8')).cases;
+const healthyHome=path.join(native,'home');
+const workspace=path.join(native,'workspaces/C01');
+function writeNew(file,object){fs.writeFileSync(path.join(output,file),JSON.stringify(object,null,2)+'\n',{flag:'wx'});}
+for(const c of cases.filter(c=>c.id!=='C01')) writeNew(c.id+'-session-plan.json',{id:randomUUID(),label:c.id,workspace,home:healthyHome,agent:'teamai-recall',questionTurns:[c.questions[0].text],questionHeldUntilRealSelection:true,oracleSubmitted:false,keywordsSubmitted:false,profile:'healthy'});
+function listFiles(dir,pre=''){
+ const out=[];
+ for(const entry of fs.readdirSync(path.join(dir,pre),{withFileTypes:true}).sort((a,b)=>a.name.localeCompare(b.name))){
+  const rel=path.join(pre,entry.name), st=fs.lstatSync(path.join(dir,rel));
+  if(st.isSymbolicLink()) throw Error('Controlled source link refused');
+  if(st.isDirectory()) out.push(...listFiles(dir,rel)); else if(st.isFile()) out.push(rel);
+ }
+ return out;
+}
+const source=path.join(healthyHome,'.teamai');
+const business=listFiles(source);
+const common=business.filter(f=>f==='config.yaml'||f.startsWith('projects'+path.sep)||f.startsWith('built-in-agents'+path.sep)||f.startsWith('built-in-skills'+path.sep));
+const cache=business.filter(f=>f.startsWith('published-learnings'+path.sep));
+const checks=[];
+for(const profile of ['missing','damaged']){
+ const home=path.join(native,'profiles',profile);
+ if(fs.existsSync(home))throw Error('New synthetic profile already exists: '+home);
+ fs.mkdirSync(home,{recursive:true});
+ const copied=profile==='missing'?common:[...common,...cache];
+ for(const rel of copied){
+  const dest=path.join(home,'.teamai',rel);fs.mkdirSync(path.dirname(dest),{recursive:true});
+  fs.copyFileSync(path.join(source,rel),dest,fs.constants.COPYFILE_EXCL);
+ }
+ let deliberateDelta=null;
+ if(profile==='damaged'){
+  const target=path.join(home,'.teamai/published-learnings/7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096/revisions/cf573d619178f5b29773ac7c616a231e789eeb75/files/learnings/shared/30000000-0000-4000-8000-000000000001.md');
+  const before=fs.readFileSync(target);
+  fs.appendFileSync(target,'\nControlled damaged-cache sentinel.\n');
+  deliberateDelta={target,beforeSha256:createHash('sha256').update(before).digest('hex'),afterSha256:createHash('sha256').update(fs.readFileSync(target)).digest('hex')};
+ }
+ const label='C06-'+profile;
+ writeNew(label+'-session-plan.json',{id:randomUUID(),label,workspace,home,consumerHome:path.join(healthyHome,'.copilot'),agent:'teamai-recall',questionTurns:[cases.find(c=>c.id==='C06').questions[0].text],questionHeldUntilRealSelection:true,oracleSubmitted:false,keywordsSubmitted:false,profile});
+ const facts=Object.fromEntries(listFiles(path.join(home,'.teamai')).map(f=>[f.replaceAll('\\','/'),createHash('sha256').update(fs.readFileSync(path.join(home,'.teamai',f))).digest('hex')]));
+ writeNew(label+'-protected-before.json',facts);
+ checks.push({profile,home,sourceBusinessRoot:source,copiedRelativeFiles:copied.map(f=>f.replaceAll('\\','/')),credentialOrNativeAccountFilesCopied:false,originalDeliveredConsumerRoot:path.join(healthyHome,'.copilot'),actualProjectBindingRetained:true,publishedCache:profile==='missing'?'ABSENT':'DELIBERATELY_DAMAGED_NEW_COPY',deliberateDelta});
+}
+writeNew('control-profile-preparation.json',{method:'Copy only fictional .teamai business configuration/receipt/project/cache, with missing/damaged controls in new homes. No native auth/profile/credential/session/account files are read or copied.',checks});
+console.log(JSON.stringify({prepared:['C02','C03','C04','C05','C06','C06-missing','C06-damaged'],nativeInitOrSyncRepeated:false}));
+

@@ -1,0 +1,297 @@
+{
+  "case": "B33-c1-ignored-learning",
+  "interpretation": "Observed actual session only; behavioral acceptance is a separate root judgment",
+  "candidateRevision": "cc3eff9f19310af2f949f7d42ec4e199cdeada48",
+  "tarballSha256": "b2c7598aa3ad6898dc9a8bf8913a5ad2bf64035b0166d69fe8c26fdb18401a1c",
+  "agentSha256": "9aaaa313fcf27299fc4bc15bae6c2e9ee6aef3b1b8206a4f353592f8a573c119",
+  "sourceHash": "9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa",
+  "sourceRevision": "1fa6573a20a65b3d1cfea9ba98cacf5d2c5f0c53",
+  "publishedRevision": "2ef6af28a0d3147fabf24613d76f8b33051a1916",
+  "sessionId": "171867f9-c3d0-4088-91d3-27748a66b317",
+  "launch": {
+    "case": "B33-c1-ignored-learning",
+    "sessionId": "171867f9-c3d0-4088-91d3-27748a66b317",
+    "executable": "D:/soft/nodejs/node_global/copilot.ps1",
+    "args": [
+      "--agent",
+      "teamai-recall",
+      "--session-id",
+      "171867f9-c3d0-4088-91d3-27748a66b317",
+      "--log-dir",
+      "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-33-correction-2-v1\\B33-c1-ignored-learning-native-logs",
+      "--usage-output-file",
+      "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-33-correction-2-v1\\B33-c1-ignored-learning-usage.json"
+    ],
+    "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-preparation-v2\\workspaces\\bound-payments-api",
+    "launcherPid": 13604,
+    "startedAtUtc": "2026-10-05T19:06:25.5008131Z",
+    "nativeRoot": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.copilot",
+    "businessHome": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-preparation-v2\\workspaces\\bound-payments-api\\.teamai\\context\\b33-c2-ignored-business-home",
+    "candidateRevision": "cc3eff9f19310af2f949f7d42ec4e199cdeada48",
+    "sourceHash": "9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa",
+    "agentSha256": "9aaaa313fcf27299fc4bc15bae6c2e9ee6aef3b1b8206a4f353592f8a573c119",
+    "modelOverride": null,
+    "questionHeldForActualSelection": true,
+    "permissionFlags": "DEFAULT",
+    "taskMessages": "Only frozen case messages after actual selection; no oracle/rank/path list",
+    "parentChildRoute": "Same delivered teamai-recall with unset/inherited model is allowed"
+  },
+  "end": {
+    "case": "B33-c1-ignored-learning",
+    "sessionId": "171867f9-c3d0-4088-91d3-27748a66b317",
+    "launcherPid": 13604,
+    "exitCode": 0,
+    "endedAtUtc": "2026-10-05T19:12:37.8018985Z",
+    "meaning": "Normal process end only; record actual events/answer separately. Restore real read-gap source before post protection."
+  },
+  "nativeEvents": {
+    "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.copilot\\session-state\\171867f9-c3d0-4088-91d3-27748a66b317\\events.jsonl",
+    "bytes": 184381,
+    "sha256": "66c6c9e602043a1bd57f0929a7c5272a06eb15811747c80fc33d459dc24a18cb",
+    "preservedInOriginalSession": true
+  },
+  "capturedModel": "gpt-6-luna",
+  "frozenQuestionExactMatch": true,
+  "parentUserMessageCount": 1,
+  "delegatedUserMessageCount": 0,
+  "answerCount": 1,
+  "selectedAgents": [
+    {
+      "timestamp": "2026-10-05T19:06:34.049Z",
+      "data": {
+        "agentName": "teamai-recall",
+        "agentDisplayName": "teamai-recall",
+        "tools": [
+          "read",
+          "execute"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-10-05T19:06:34.095Z",
+      "data": {
+        "agentName": "teamai-recall",
+        "agentDisplayName": "teamai-recall",
+        "tools": [
+          "read",
+          "execute"
+        ]
+      }
+    }
+  ],
+  "nativeChildRoutes": [],
+  "actualRecallQueries": 1,
+  "originalReads": 1,
+  "allViewFilesReturned": true,
+  "ignoredReturnedFiles": [
+    {
+      "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-preparation-v2\\workspaces\\bound-payments-api\\.teamai\\context\\b33-c2-ignored-business-home\\.teamai\\published-learnings\\9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa\\revisions\\2ef6af28a0d3147fabf24613d76f8b33051a1916\\files\\learnings\\shared\\11f67190-c1b4-4cb7-a082-188a7dd98f63.md",
+      "operatorCommand": {
+        "executable": "git",
+        "args": [
+          "check-ignore",
+          "-v",
+          "--",
+          "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-preparation-v2\\workspaces\\bound-payments-api\\.teamai\\context\\b33-c2-ignored-business-home\\.teamai\\published-learnings\\9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa\\revisions\\2ef6af28a0d3147fabf24613d76f8b33051a1916\\files\\learnings\\shared\\11f67190-c1b4-4cb7-a082-188a7dd98f63.md"
+        ],
+        "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-preparation-v2\\workspaces\\bound-payments-api"
+      },
+      "exitCode": 0,
+      "stdout": ".git/info/exclude:8:/.teamai/context/\t\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\native-33-preparation-v2\\\\workspaces\\\\bound-payments-api\\\\.teamai\\\\context\\\\b33-c2-ignored-business-home\\\\.teamai\\\\published-learnings\\\\9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa\\\\revisions\\\\2ef6af28a0d3147fabf24613d76f8b33051a1916\\\\files\\\\learnings\\\\shared\\\\11f67190-c1b4-4cb7-a082-188a7dd98f63.md\"\n",
+      "stderr": "",
+      "error": null,
+      "actuallyIgnored": true,
+      "nativeReads": [
+        {
+          "agentId": null,
+          "toolCallId": "call_W55kpbDB5ckP9SIsZikvoGnl",
+          "startedAt": "2026-10-05T19:08:38.635Z",
+          "completedAt": "2026-10-05T19:08:58.253Z",
+          "arguments": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-preparation-v2\\workspaces\\bound-payments-api\\.teamai\\context\\b33-c2-ignored-business-home\\.teamai\\published-learnings\\9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa\\revisions\\2ef6af28a0d3147fabf24613d76f8b33051a1916\\files\\learnings\\shared\\11f67190-c1b4-4cb7-a082-188a7dd98f63.md"
+          },
+          "exactReturnedFile": true,
+          "success": true,
+          "result": {
+            "content": "---\nid: 11f67190-c1b4-4cb7-a082-188a7dd98f63\ntitle: ClockFence observation window\ntags: [ClockFence, UTC_LEASE_WINDOW_63]\n---\n# ClockFence observation\n\nUTC_LEASE_WINDOW_63: ClockFence observation pending.\nFor a confirmed UTC sample interval of 400 ms, compare the preceding sample and the current sample before marking the observation complete.\nIf either sample is missing, leave the observation pending. This describes an observation state; the Learning itself is published.\n",
+            "detailedContent": "\ndiff --git a/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/b/native-33-preparation-v2/workspaces/bound-payments-api/.teamai/context/b33-c2-ignored-business-home/.teamai/published-learnings/9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa/revisions/2ef6af28a0d3147fabf24613d76f8b33051a1916/files/learnings/shared/11f67190-c1b4-4cb7-a082-188a7dd98f63.md b/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/b/native-33-preparation-v2/workspaces/bound-payments-api/.teamai/context/b33-c2-ignored-business-home/.teamai/published-learnings/9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa/revisions/2ef6af28a0d3147fabf24613d76f8b33051a1916/files/learnings/shared/11f67190-c1b4-4cb7-a082-188a7dd98f63.md\nindex 0000000..0000000 100644\n--- a/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/b/native-33-preparation-v2/workspaces/bound-payments-api/.teamai/context/b33-c2-ignored-business-home/.teamai/published-learnings/9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa/revisions/2ef6af28a0d3147fabf24613d76f8b33051a1916/files/learnings/shared/11f67190-c1b4-4cb7-a082-188a7dd98f63.md\n+++ b/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/b/native-33-preparation-v2/workspaces/bound-payments-api/.teamai/context/b33-c2-ignored-business-home/.teamai/published-learnings/9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa/revisions/2ef6af28a0d3147fabf24613d76f8b33051a1916/files/learnings/shared/11f67190-c1b4-4cb7-a082-188a7dd98f63.md\n@@ -1,11 +1,11 @@\n ---\n id: 11f67190-c1b4-4cb7-a082-188a7dd98f63\n title: ClockFence observation window\n tags: [ClockFence, UTC_LEASE_WINDOW_63]\n ---\n # ClockFence observation\n \n UTC_LEASE_WINDOW_63: ClockFence observation pending.\n For a confirmed UTC sample interval of 400 ms, compare the preceding sample and the current sample before marking the observation complete.\n If either sample is missing, leave the observation pending. This describes an observation state; the Learning itself is published.\n \n"
+          },
+          "nativeBodySha256": "0360cd3086cb8d79b0ae92f2d9a8cce1b4eb8c2fa9739e755e50560ba0a230a2"
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "sessionStartTime": 1791227189967,
+    "totalApiDurationMs": 25675,
+    "totalNanoAiu": 281330500,
+    "totalPremiumRequests": 1,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 15
+      },
+      "cache_read": {
+        "tokenCount": 37018
+      },
+      "cache_write": {
+        "tokenCount": 12257
+      },
+      "output": {
+        "tokenCount": 1819
+      }
+    },
+    "currentModel": "gpt-6-luna",
+    "modelMetrics": {
+      "gpt-6-luna": {
+        "requests": {
+          "count": 5,
+          "cost": 1
+        },
+        "usage": {
+          "inputTokens": 49290,
+          "outputTokens": 1819,
+          "cacheReadTokens": 37018,
+          "cacheWriteTokens": 12257,
+          "reasoningTokens": 1035
+        },
+        "totalNanoAiu": 281330500,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 15
+          },
+          "cache_read": {
+            "tokenCount": 37018
+          },
+          "cache_write": {
+            "tokenCount": 12257
+          },
+          "output": {
+            "tokenCount": 1819
+          }
+        }
+      }
+    },
+    "codeChanges": {
+      "linesAdded": 0,
+      "linesRemoved": 0,
+      "filesModified": []
+    },
+    "modelCalls": 1,
+    "wallMs": 372301,
+    "usageOutput": {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-33-correction-2-v1\\B33-c1-ignored-learning-usage.json",
+      "sha256": "1bf40312ac00ff116884f71cf0e7c0f2d8727add402d1e96c1549f7fac636141"
+    }
+  },
+  "counts": {
+    "session.start": 1,
+    "session.model_change": 1,
+    "subagent.selected": 2,
+    "session.auto_mode_resolved": 1,
+    "user.message": 1,
+    "model.turn_started": 1,
+    "model.model_call_started": 1,
+    "system.message": 1,
+    "assistant.turn_start": 5,
+    "model.captured_assignment_context": 1,
+    "model.model_call_success": 1,
+    "model.message": 1,
+    "model.response": 1,
+    "model.turn_ended": 1,
+    "model.messages_snapshot": 1,
+    "assistant.message": 5,
+    "tool.execution_start": 4,
+    "tool.execution_complete": 4,
+    "skill.invoked": 1,
+    "skill.context_delivered_ref": 1,
+    "assistant.turn_end": 5,
+    "permission.requested": 3,
+    "permission.completed": 3,
+    "session.usage_checkpoint": 1,
+    "session.shutdown": 1
+  },
+  "protection": {
+    "businessRoots": 8,
+    "gitRoots": 5,
+    "deltas": [
+      {
+        "category": "business",
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-preparation-v2\\workspaces\\bound-payments-api\\.teamai\\context\\b33-c2-ignored-business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+        "before": "ABSENT",
+        "after": "fe9d3951ab6eac00dc942411c93dbbd3ab5205b4e7def92d0dfdd6f6eadb0e41"
+      }
+    ],
+    "case": "B33-c1-ignored-learning",
+    "sinceSetup": {
+      "businessRoots": 8,
+      "gitRoots": 5,
+      "deltas": [
+        {
+          "category": "business",
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-preparation-v2\\workspaces\\bound-payments-api\\.teamai\\context\\b33-c2-ignored-business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+          "before": "ABSENT",
+          "after": "fe9d3951ab6eac00dc942411c93dbbd3ab5205b4e7def92d0dfdd6f6eadb0e41"
+        }
+      ]
+    },
+    "knownPlatformArtifact": {
+      "priorFile": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-preparation-v2\\workspaces\\bound-payments-api\\.teamai\\context\\b33-c1-ignored-business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+      "priorBytes": 71564,
+      "priorSha256": "bfd23a9f7b617b485980d70c584fd8595b0bc9c60ab85bc49efaa3cbb029c082",
+      "futureExactFile": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-preparation-v2\\workspaces\\bound-payments-api\\.teamai\\context\\b33-c2-ignored-business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+      "policy": "Keep complete protected raw snapshots/deltas. Only this exact PowerShell startup optimization path may be separately classified as a native platform artifact; preserve bytes/hash and do not blanket-ignore AppData. Generating PID is not inferred."
+    },
+    "exactPlatformArtifactDeltas": [
+      {
+        "category": "business",
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-preparation-v2\\workspaces\\bound-payments-api\\.teamai\\context\\b33-c2-ignored-business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+        "before": "ABSENT",
+        "after": "fe9d3951ab6eac00dc942411c93dbbd3ab5205b4e7def92d0dfdd6f6eadb0e41"
+      }
+    ],
+    "sinceSetupExactPlatformArtifactDeltas": [
+      {
+        "category": "business",
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-preparation-v2\\workspaces\\bound-payments-api\\.teamai\\context\\b33-c2-ignored-business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+        "before": "ABSENT",
+        "after": "fe9d3951ab6eac00dc942411c93dbbd3ab5205b4e7def92d0dfdd6f6eadb0e41"
+      }
+    ],
+    "generatingPlatformArtifactPid": "NOT_INDEPENDENTLY_OBSERVED",
+    "nativePlatform": "Consumer-owned account/config/session/log writes are separate; no platform directory scan. Raw deltas remain complete; only the exact planned startup profile is separately listed",
+    "behaviorAcceptance": "NOT_INFERRED_FROM_HASHES"
+  },
+  "outputs": [
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-33-correction-2-v1\\B33-c1-ignored-learning-observable-events.jsonl",
+      "bytes": 35939,
+      "sha256": "0a584099d9f98c841103fef0199f930b11fdf6e318a5b802dfad232e43c91823"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-33-correction-2-v1\\B33-c1-ignored-learning-queries.json",
+      "bytes": 14987,
+      "sha256": "7b6493837e30565d283e71e8fd99c82ade9779fa3fe11a6098e7eac653f5f50b"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-33-correction-2-v1\\B33-c1-ignored-learning-reads.json",
+      "bytes": 3472,
+      "sha256": "64bef0c285fcbf403dce5364b3feabefec6c63f705529862ecfe3d09def52d9f"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-33-correction-2-v1\\B33-c1-ignored-learning-answer.md",
+      "bytes": 1503,
+      "sha256": "3a46152645a3e53dd46bb7d2365697b3e2f347aca0b384d1788e7dcc52ee36d2"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-33-correction-2-v1\\B33-c1-ignored-learning-metrics.json",
+      "bytes": 1406,
+      "sha256": "5e8b170f061db31a076d7b9178f466918f760658410caf3e71d76aef23d49c29"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-33-correction-2-v1\\B33-c1-ignored-learning-ignored-return-proof.json",
+      "bytes": 5544,
+      "sha256": "0c4757bc93cb99ae9d03394d03f6f6cd550dfe049baef351de6f85887f63c42f"
+    }
+  ],
+  "excluded": "Authentication/account files, model reasoning, provider request snapshots and opaque provider data are not copied by this recorder"
+}

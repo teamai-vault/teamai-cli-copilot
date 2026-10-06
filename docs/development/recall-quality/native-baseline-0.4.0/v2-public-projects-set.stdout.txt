@@ -1,0 +1,17 @@
+DONE write: F:\agent-workspace\multiAgent\teamai-cli-customization\.tmp\recall-29-35\runtime\c\native-baseline-v2\workspaces\C01\.teamai\context\atlas-payments\docs\backoff-copy.md
+DONE write: F:\agent-workspace\multiAgent\teamai-cli-customization\.tmp\recall-29-35\runtime\c\native-baseline-v2\workspaces\C01\.teamai\context\atlas-payments\docs\drain-long.md
+DONE write: F:\agent-workspace\multiAgent\teamai-cli-customization\.tmp\recall-29-35\runtime\c\native-baseline-v2\workspaces\C01\.teamai\context\atlas-payments\docs\drain-observation.md
+DONE write: F:\agent-workspace\multiAgent\teamai-cli-customization\.tmp\recall-29-35\runtime\c\native-baseline-v2\workspaces\C01\.teamai\context\atlas-payments\docs\injection.md
+DONE write: F:\agent-workspace\multiAgent\teamai-cli-customization\.tmp\recall-29-35\runtime\c\native-baseline-v2\workspaces\C01\.teamai\context\atlas-payments\docs\noise-agenda.md
+DONE write: F:\agent-workspace\multiAgent\teamai-cli-customization\.tmp\recall-29-35\runtime\c\native-baseline-v2\workspaces\C01\.teamai\context\atlas-payments\docs\noise-dashboard.md
+DONE write: F:\agent-workspace\multiAgent\teamai-cli-customization\.tmp\recall-29-35\runtime\c\native-baseline-v2\workspaces\C01\.teamai\context\atlas-payments\docs\noise-glossary.md
+DONE write: F:\agent-workspace\multiAgent\teamai-cli-customization\.tmp\recall-29-35\runtime\c\native-baseline-v2\workspaces\C01\.teamai\context\atlas-payments\docs\noise-style-guide.md
+DONE write: F:\agent-workspace\multiAgent\teamai-cli-customization\.tmp\recall-29-35\runtime\c\native-baseline-v2\workspaces\C01\.teamai\context\atlas-payments\docs\noise-test-plan.md
+DONE write: F:\agent-workspace\multiAgent\teamai-cli-customization\.tmp\recall-29-35\runtime\c\native-baseline-v2\workspaces\C01\.teamai\context\atlas-payments\docs\pool.md
+DONE write: F:\agent-workspace\multiAgent\teamai-cli-customization\.tmp\recall-29-35\runtime\c\native-baseline-v2\workspaces\C01\.teamai\context\atlas-payments\docs\retry-current.md
+DONE write: F:\agent-workspace\multiAgent\teamai-cli-customization\.tmp\recall-29-35\runtime\c\native-baseline-v2\workspaces\C01\.teamai\context\atlas-payments\docs\retry-legacy.md
+DONE write: F:\agent-workspace\multiAgent\teamai-cli-customization\.tmp\recall-29-35\runtime\c\native-baseline-v2\workspaces\C01\.teamai\context\atlas-payments\learnings\30000000-0000-4000-8000-000000000003.md
+DONE write: F:\agent-workspace\multiAgent\teamai-cli-customization\.tmp\recall-29-35\runtime\c\native-baseline-v2\workspaces\C01\.teamai\context\shared\learnings\30000000-0000-4000-8000-000000000001.md
+DONE write: F:\agent-workspace\multiAgent\teamai-cli-customization\.tmp\recall-29-35\runtime\c\native-baseline-v2\workspaces\C01\.teamai\context\shared\learnings\30000000-0000-4000-8000-000000000002.md
+DONE write: F:\agent-workspace\multiAgent\teamai-cli-customization\.tmp\recall-29-35\runtime\c\native-baseline-v2\workspaces\C01\.github\instructions\teamai\context.instructions.md
+DONE write: F:\agent-workspace\multiAgent\teamai-cli-customization\.tmp\recall-29-35\runtime\c\native-baseline-v2\workspaces\C01\.git\info\exclude

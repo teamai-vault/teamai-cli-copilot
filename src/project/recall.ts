@@ -43,11 +43,17 @@ export interface RecallHit extends Omit<RecallCandidate, "tags" | "body" | "rawC
 
 export class RecallInputError extends Error {}
 
-export function parseRecallQuery(query: string): RecallTerm[] {
-  if ([...query].length > MAX_QUERY_CODEPOINTS) throw new RecallInputError("Recall query must be at most 1024 Unicode code points.");
+export function parseRecallQuery(query: string, requiredLiterals: string[] = []): RecallTerm[] {
+  if (requiredLiterals.some((literal) => !literal.trim())) throw new RecallInputError("--require must contain a non-whitespace literal.");
+  const codePoints = [...query].length + requiredLiterals.reduce((total, literal) => total + [...literal].length, 0);
+  if (codePoints > MAX_QUERY_CODEPOINTS) throw new RecallInputError(requiredLiterals.length > 0
+    ? "Recall query and required literals must total at most 1024 Unicode code points."
+    : "Recall query must be at most 1024 Unicode code points.");
   const rawTerms = query.normalize("NFC").trim().split(/\s+/u).filter(Boolean);
   if (rawTerms.length === 0) throw new RecallInputError("Recall query must contain at least one non-whitespace term.");
-  if (rawTerms.length > MAX_QUERY_TERMS) throw new RecallInputError("Recall query must contain at most 32 terms.");
+  if (rawTerms.length + requiredLiterals.length > MAX_QUERY_TERMS) throw new RecallInputError(requiredLiterals.length > 0
+    ? "Recall query terms and required literals must total at most 32 items."
+    : "Recall query must contain at most 32 terms.");
   const terms: RecallTerm[] = [];
   const seen = new Set<string>();
   for (const raw of rawTerms) {
@@ -98,28 +104,60 @@ export function parseRecallMarkdown(content: Buffer, fallbackTitle: string): {
   return { text, ...(id === undefined ? {} : { id }), title: title || fallbackTitle, tags, body };
 }
 
-export function rankRecallCandidates(candidates: RecallCandidate[], terms: RecallTerm[], limit: number): RecallHit[] {
-  const ranked: Array<{ candidate: RecallCandidate; matchedTerms: RecallTerm[]; score: number }> = [];
-  for (const candidate of candidates) {
+export function rankRecallCandidates(candidates: RecallCandidate[], terms: RecallTerm[], limit: number, requiredLiterals: string[] = []): RecallHit[] {
+  if (candidates.length === 0) return [];
+  const k1 = 1.2;
+  const b = 0.75;
+  const documents = candidates.map((candidate) => {
     const title = normalizeSearchText(candidate.title);
-    const tags = normalizeSearchText(candidate.tags.join(" "));
+    const tags = candidate.tags.map(normalizeSearchText);
     const body = normalizeSearchText(candidate.body);
-    const matchedTerms = terms.filter((term) => title.includes(term.normalized) || tags.includes(term.normalized) || body.includes(term.normalized));
+    const length = Math.max(1, [title, ...tags, body].reduce((total, field) => total + field.trim().split(/\s+/u).filter(Boolean).length, 0));
+    const frequencies = terms.map((term) => 3 * countSubstring(title, term.normalized)
+      + 2 * tags.reduce((total, tag) => total + countSubstring(tag, term.normalized), 0)
+      + countSubstring(body, term.normalized));
+    return { candidate, title, tags, body, length, frequencies };
+  });
+  // Statistics use every verified allowed candidate, before required/query/limit filtering.
+  const averageLength = documents.reduce((total, document) => total + document.length, 0) / documents.length;
+  const idfs = terms.map((_, index) => {
+    const frequency = documents.reduce((total, document) => total + (document.frequencies[index]! > 0 ? 1 : 0), 0);
+    return Math.log1p((documents.length - frequency + 0.5) / (frequency + 0.5));
+  });
+  const required = requiredLiterals.map(normalizeSearchText);
+  const ranked: Array<{ candidate: RecallCandidate; matchedTerms: RecallTerm[]; score: number }> = [];
+  for (const document of documents) {
+    const { candidate, title, tags, body, length, frequencies } = document;
+    if (required.length > 0) {
+      if (!required.every((literal) => title.includes(literal) || tags.some((tag) => tag.includes(literal)) || body.includes(literal))) continue;
+    }
+    const matchedTerms = terms.filter((_, index) => frequencies[index]! > 0);
     if (matchedTerms.length === 0) continue;
-    const score = matchedTerms.reduce((total, term) => total
-      + (title.includes(term.normalized) ? 3 : 0)
-      + (tags.includes(term.normalized) ? 2 : 0)
-      + (body.includes(term.normalized) ? 1 : 0), 0);
+    const normalization = k1 * (1 - b + b * length / averageLength);
+    const score = frequencies.reduce((total, frequency, index) => frequency === 0 ? total
+      : total + idfs[index]! * ((k1 + 1) * frequency) / (frequency + normalization), 0);
     ranked.push({ candidate, matchedTerms, score });
   }
   return ranked
-    .sort((left, right) => right.matchedTerms.length - left.matchedTerms.length || right.score - left.score || compare(left.candidate.id, right.candidate.id))
+    .sort((left, right) => right.score - left.score || compare(left.candidate.id, right.candidate.id))
     .slice(0, limit)
     .map(({ candidate, matchedTerms }) => {
       const evidence = evidenceFor(candidate.rawContent, matchedTerms);
       const { tags: _tags, body: _body, rawContent: _rawContent, ...hit } = candidate;
       return { ...hit, matchedTerms: matchedTerms.map((term) => term.display), ...evidence };
     });
+}
+
+function countSubstring(text: string, term: string): number {
+  let count = 0;
+  let offset = 0;
+  while (offset < text.length) {
+    const found = text.indexOf(term, offset);
+    if (found < 0) break;
+    count += 1;
+    offset = found + term.length;
+  }
+  return count;
 }
 
 export async function readVerifiedProjectDocs(options: {
@@ -199,30 +237,35 @@ function normalizeSearchText(value: string): string {
 
 function evidenceFor(rawContent: string, matchedTerms: RecallTerm[]): { lineStart: number; lineEnd: number; snippet: string } {
   const lines = rawContent.split(/\r\n|\n|\r/);
-  const matchingLine = lines.findIndex((line) => {
-    const normalized = normalizeSearchText(line);
-    return matchedTerms.some((term) => normalized.includes(term.normalized));
-  });
-  const focus = matchingLine >= 0 ? matchingLine : 0;
-  let first = Math.max(0, focus - 1);
-  let last = Math.min(lines.length - 1, focus + 1);
-  let snippet = lines.slice(first, last + 1).join("\n");
-  while ([...snippet].length > 1200 && (first < focus || last > focus)) {
-    if (last > focus) last -= 1;
-    else first += 1;
-    snippet = lines.slice(first, last + 1).join("\n");
+  const normalizedLines = lines.map(normalizeSearchText);
+  let first = 0;
+  let bestCoverage = 0;
+  for (let start = 0; start <= Math.max(0, lines.length - 3); start += 1) {
+    const window = normalizedLines.slice(start, start + 3).join("\n");
+    const coverage = matchedTerms.filter((term) => window.includes(term.normalized)).length;
+    if (coverage > bestCoverage) {
+      bestCoverage = coverage;
+      first = start;
+    }
   }
-  if ([...snippet].length > 1200) {
-    const line = lines[focus] ?? "";
-    const codepoints = [...line];
-    const normalized = normalizeSearchText(line);
-    const term = matchedTerms.find((candidate) => normalized.includes(candidate.normalized));
-    const matchStart = term ? normalized.indexOf(term.normalized) : 0;
-    const termPosition = rawCodePointOffset(line, normalized, matchStart);
+  // Equal coverage keeps the earliest full window; a derived-title-only hit keeps the opening.
+  let last = Math.min(lines.length - 1, first + 2);
+  let snippet = lines.slice(first, last + 1).join("\n");
+  const codepoints = [...snippet];
+  if (codepoints.length > 1200) {
+    let termPosition = 0;
+    if (bestCoverage > 0) {
+      const focus = normalizedLines.findIndex((line, index) => index >= first && index <= last
+        && matchedTerms.some((term) => line.includes(term.normalized)));
+      const normalized = normalizedLines[focus]!;
+      const matchStart = Math.min(...matchedTerms.map((term) => normalized.indexOf(term.normalized)).filter((offset) => offset >= 0));
+      termPosition = [...lines.slice(first, focus).join("\n")].length + (focus > first ? 1 : 0)
+        + rawCodePointOffset(lines[focus]!, normalized, matchStart);
+    }
     const start = Math.max(0, Math.min(codepoints.length - 1200, termPosition - 600));
     snippet = codepoints.slice(start, start + 1200).join("");
-    first = focus;
-    last = focus;
+    first += codepoints.slice(0, start).filter((point) => point === "\n").length;
+    last = first + [...snippet].filter((point) => point === "\n").length;
   }
   return { lineStart: first + 1, lineEnd: last + 1, snippet };
 }
@@ -234,8 +277,35 @@ function rawCodePointOffset(rawLine: string, normalizedLine: string, normalizedU
   let normalizedOffset = 0;
   const segmenter = new Intl.Segmenter(undefined, { granularity: "grapheme" });
   for (const segment of segmenter.segment(rawLine)) {
-    const segmentLength = [...normalizeSearchText(segment.segment)].length;
-    if (normalizedOffset + segmentLength > normalizedCodePointOffset) return rawOffset;
+    const normalizedSegment = normalizeSearchText(segment.segment);
+    const segmentLength = [...normalizedSegment].length;
+    if (normalizedOffset + segmentLength > normalizedCodePointOffset) {
+      if (normalizedOffset === normalizedCodePointOffset) return rawOffset;
+      // Decomposed scalar origins also locate matches inside a grapheme after canonical reordering.
+      const origins = new Map<string, { offsets: number[]; next: number }>();
+      let rawPosition = 0;
+      for (const point of segment.segment) {
+        for (const part of normalizeSearchText(point).normalize("NFD")) {
+          let entry = origins.get(part);
+          if (!entry) {
+            entry = { offsets: [], next: 0 };
+            origins.set(part, entry);
+          }
+          entry.offsets.push(rawPosition);
+        }
+        rawPosition += 1;
+      }
+      let position = normalizedOffset;
+      for (const point of normalizedSegment) {
+        let origin = Infinity;
+        for (const part of point.normalize("NFD")) {
+          const entry = origins.get(part);
+          if (entry && entry.next < entry.offsets.length) origin = Math.min(origin, entry.offsets[entry.next++]!);
+        }
+        if (position === normalizedCodePointOffset) return rawOffset + (Number.isFinite(origin) ? origin : 0);
+        position += 1;
+      }
+    }
     normalizedOffset += segmentLength;
     rawOffset += [...segment.segment].length;
   }

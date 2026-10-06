@@ -1,0 +1,24 @@
+{
+  "name": "snippet-derived-title-only",
+  "args": [
+    "recall",
+    "DERIVEDONLY",
+    "--scope",
+    "workspace",
+    "--project",
+    "payments",
+    "--limit",
+    "20",
+    "--json"
+  ],
+  "home": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\business-home",
+  "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\a\\temp-35\\teamai-git-gA1pyT",
+  "noGit": false,
+  "node": "v24.15.0",
+  "startedAt": "2026-10-05T14:50:14.745Z",
+  "finishedAt": "2026-10-05T14:50:16.717Z",
+  "exitCode": 0,
+  "error": null,
+  "stdout": "{\"schemaVersion\":1,\"query\":\"DERIVEDONLY\",\"scope\":\"workspace\",\"project\":\"payments\",\"sourceHash\":\"eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809\",\"resourceRevision\":\"0df6e2919c48f90bb2adf45a35a517d6cd588837\",\"learningsRevision\":\"c4a2b9be3f3b7c947fa564f6ef83160082fde6ab\",\"limit\":20,\"hits\":[{\"id\":\"doc:payments:contexts/payments/docs/snippets/derivedOnly.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments\",\"title\":\"derivedOnly\",\"source\":{\"sourceHash\":\"eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809\",\"revision\":\"0df6e2919c48f90bb2adf45a35a517d6cd588837\",\"relativePath\":\"contexts/payments/docs/snippets/derivedOnly.md\",\"contentHash\":\"0dc9e7df4e6be0990006207227149a4ca87363d43b8d357dd1e2403c89cef6d9\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\candidates\\\\a-all-b33-c1\\\\compiled-recall-public-fixture-v3\\\\resource\\\\contexts\\\\payments\\\\docs\\\\snippets\\\\derivedOnly.md\",\"matchedTerms\":[\"DERIVEDONLY\"],\"lineStart\":1,\"lineEnd\":3,\"snippet\":\"Original opening\\nStill only original text\\nThird context\"}]}\n",
+  "stderr": ""
+}

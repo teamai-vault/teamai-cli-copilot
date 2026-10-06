@@ -1,0 +1,21 @@
+[
+  {
+    "agentId": null,
+    "toolCallId": "call_wCk2DxhXSDESDJmACJn2Dmvn",
+    "startedAt": "2026-10-06T03:06:44.920Z",
+    "completedAt": "2026-10-06T03:06:59.428Z",
+    "command": "teamai recall \"UTC_LEASE_WINDOW_63: ClockFence observation pending.\" --scope workspace --json",
+    "success": true,
+    "exitCode": 1,
+    "result": {
+      "schemaVersion": 1,
+      "error": {
+        "code": "UNBOUND_WORKSPACE",
+        "message": "Workspace Recall requires an active Logical Project binding. Run `teamai projects set <id>` first."
+      }
+    },
+    "rawResult": {
+      "content": "{\"schemaVersion\":1,\"error\":{\"code\":\"UNBOUND_WORKSPACE\",\"message\":\"Workspace Recall requires an active Logical Project binding. Run `teamai projects set <id>` first.\"}}\n<shellId: 0 completed with exit code 1>"
+    }
+  }
+]

@@ -1,0 +1,257 @@
+{
+  "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource",
+  "sourceHash": "7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096",
+  "sourceRevision": "7dbb74107cc4c457a5043619090b11a38b74a7a0",
+  "authority": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\origin.git",
+  "learningRevision": "cf573d619178f5b29773ac7c616a231e789eeb75",
+  "metadataDelta": {
+    "relativePath": ".github/plugin/marketplace.json",
+    "beforeSha256": "e2fb24242f3c17e6d2e75231c6793d7c3a6f75401a91eaeb89ad8e441e1d8ed2",
+    "afterSha256": "43e6fbbdf7fe39d2a6c5728e5262a14be4c69449fb04e0cdcb3ddbbb6ad84fd7",
+    "before": "{\n  \"name\": \"recall-quality\",\n  \"plugins\": [\n    {\n      \"name\": \"common\",\n      \"version\": \"0.0.0\",\n      \"source\": \"./plugins/common\"\n    },\n    {\n      \"name\": \"quality\",\n      \"version\": \"0.0.0\",\n      \"source\": \"./plugins/quality\"\n    }\n  ]\n}\n",
+    "after": "{\n  \"name\": \"recall-quality\",\n  \"plugins\": [\n    {\n      \"name\": \"common\",\n      \"version\": \"0.0.0\",\n      \"source\": \"./plugins/common\"\n    },\n    {\n      \"name\": \"quality\",\n      \"version\": \"0.0.0\",\n      \"source\": \"./plugins/quality\"\n    }\n  ],\n  \"owner\": {\n    \"name\": \"Recall Quality Fixture\"\n  }\n}\n",
+    "added": {
+      "owner": {
+        "name": "Recall Quality Fixture"
+      }
+    }
+  },
+  "originalChecks": [
+    {
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/retry-current.md",
+      "relativePath": "contexts/atlas-payments/docs/retry-current.md",
+      "allowed": true,
+      "logicalProject": "atlas-payments",
+      "sha256": "dcd44daddf237eb926d470cd8a7bb3564f04707ad189d6577e32bd4d4df5b3ca"
+    },
+    {
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/retry-legacy.md",
+      "relativePath": "contexts/atlas-payments/docs/retry-legacy.md",
+      "allowed": true,
+      "logicalProject": "atlas-payments",
+      "sha256": "f4d992e7cf9a00fea4e55a3563e204e34d407248c99d9ab468e6fec3255f418a"
+    },
+    {
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/pool.md",
+      "relativePath": "contexts/atlas-payments/docs/pool.md",
+      "allowed": true,
+      "logicalProject": "atlas-payments",
+      "sha256": "b0c02ef89363e69e9c7b96a39b35a06e61ec3d3b1d7d74371daa1453d5e96b09"
+    },
+    {
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/drain-long.md",
+      "relativePath": "contexts/atlas-payments/docs/drain-long.md",
+      "allowed": true,
+      "logicalProject": "atlas-payments",
+      "sha256": "d564c627c6887092bedc67de3b3adbbfb92e1f4cccab81a29f670e7cc024934d"
+    },
+    {
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/drain-observation.md",
+      "relativePath": "contexts/atlas-payments/docs/drain-observation.md",
+      "allowed": true,
+      "logicalProject": "atlas-payments",
+      "sha256": "4957fa3b6f2b9e9ff53cf504c7ac5bd76b44d2a7cd169829c15627e3a7f4824a"
+    },
+    {
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/backoff-copy.md",
+      "relativePath": "contexts/atlas-payments/docs/backoff-copy.md",
+      "allowed": true,
+      "logicalProject": "atlas-payments",
+      "sha256": "5551df15beb08ec9459dc62d8d941f868dc2cf90d4456fa7b6df03641f46d395"
+    },
+    {
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/injection.md",
+      "relativePath": "contexts/atlas-payments/docs/injection.md",
+      "allowed": true,
+      "logicalProject": "atlas-payments",
+      "sha256": "23f26da67f87b2e928bd6fe11d4ee339a393423a3374f8828e0b71f0dfd801ba"
+    },
+    {
+      "id": "doc:atlas-other:contexts/atlas-other/docs/inactive.md",
+      "relativePath": "contexts/atlas-other/docs/inactive.md",
+      "allowed": false,
+      "logicalProject": "atlas-other",
+      "sha256": "4d44a1cc92a5fa74daae531abfc4131b8e14f31e09ff5ae29300f0f6fcd2ef83"
+    },
+    {
+      "id": "learning:shared:30000000-0000-4000-8000-000000000001",
+      "relativePath": "learnings/shared/30000000-0000-4000-8000-000000000001.md",
+      "allowed": true,
+      "logicalProject": "shared",
+      "sha256": "f8ecf5350cfa9eb068cb2e3aa602f047fde5ab6b362028e363341d90924d0148"
+    },
+    {
+      "id": "learning:shared:30000000-0000-4000-8000-000000000002",
+      "relativePath": "learnings/shared/30000000-0000-4000-8000-000000000002.md",
+      "allowed": true,
+      "logicalProject": "shared",
+      "sha256": "bc16b2ce6f63827ccf704d1b7d7c93d202beffc9ecd6fbe0130b917e2644165a"
+    },
+    {
+      "id": "learning:atlas-payments:30000000-0000-4000-8000-000000000003",
+      "relativePath": "learnings/atlas-payments/30000000-0000-4000-8000-000000000003.md",
+      "allowed": true,
+      "logicalProject": "atlas-payments",
+      "sha256": "897f4e5638c943c513001a2b220a79054e987e708383cfbb29dc206d83e30de9"
+    },
+    {
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-agenda.md",
+      "relativePath": "contexts/atlas-payments/docs/noise-agenda.md",
+      "allowed": true,
+      "logicalProject": "atlas-payments",
+      "sha256": "8f80b37acd9450186b60e0946c6a3d3236f3c4d686111447aaee2e50444efcb8"
+    },
+    {
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-dashboard.md",
+      "relativePath": "contexts/atlas-payments/docs/noise-dashboard.md",
+      "allowed": true,
+      "logicalProject": "atlas-payments",
+      "sha256": "4c0434f00f17c4d904db32c1305f047a7fbda6c05ce0b5ae7b931897a6229a12"
+    },
+    {
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-style-guide.md",
+      "relativePath": "contexts/atlas-payments/docs/noise-style-guide.md",
+      "allowed": true,
+      "logicalProject": "atlas-payments",
+      "sha256": "b9e8ee47582f0b9d065adc5378527e9e72cc804ff732be30f9c9fbe9bd613393"
+    },
+    {
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-test-plan.md",
+      "relativePath": "contexts/atlas-payments/docs/noise-test-plan.md",
+      "allowed": true,
+      "logicalProject": "atlas-payments",
+      "sha256": "3d0edbafa134fd570107015a5da48143a6d55e77fbf1db7f31fee3c1544d2004"
+    },
+    {
+      "id": "doc:atlas-payments:contexts/atlas-payments/docs/noise-glossary.md",
+      "relativePath": "contexts/atlas-payments/docs/noise-glossary.md",
+      "allowed": true,
+      "logicalProject": "atlas-payments",
+      "sha256": "3a7ba10942cf413d429f51ebbce748b86e88b289c04f2d8fe51b91e9107fbb6e"
+    }
+  ],
+  "unchangedResourceFiles": [
+    "resource/contexts/atlas-other/docs/inactive.md",
+    "resource/contexts/atlas-payments/docs/backoff-copy.md",
+    "resource/contexts/atlas-payments/docs/drain-long.md",
+    "resource/contexts/atlas-payments/docs/drain-observation.md",
+    "resource/contexts/atlas-payments/docs/injection.md",
+    "resource/contexts/atlas-payments/docs/noise-agenda.md",
+    "resource/contexts/atlas-payments/docs/noise-dashboard.md",
+    "resource/contexts/atlas-payments/docs/noise-glossary.md",
+    "resource/contexts/atlas-payments/docs/noise-style-guide.md",
+    "resource/contexts/atlas-payments/docs/noise-test-plan.md",
+    "resource/contexts/atlas-payments/docs/pool.md",
+    "resource/contexts/atlas-payments/docs/retry-current.md",
+    "resource/contexts/atlas-payments/docs/retry-legacy.md",
+    "resource/manifest/projects.yaml",
+    "resource/plugins/common/plugin.json",
+    "resource/plugins/quality/plugin.json"
+  ],
+  "frozenManifestSha256": "37c2bbb2264b11755d05710ecaba1a3f94d10217cae6c6c556c18abd533fbeb7",
+  "sourceOperations": [
+    {
+      "args": [
+        "init",
+        "-b",
+        "main"
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource",
+      "exitCode": 0,
+      "stdout": "Initialized empty Git repository in F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/c/native-baseline-v2/resource/.git/\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "add",
+        "."
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "-c",
+        "commit.gpgsign=false",
+        "commit",
+        "-m",
+        "Native setup owner metadata for frozen Recall quality"
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource",
+      "exitCode": 0,
+      "stdout": "[main (root-commit) 7dbb741] Native setup owner metadata for frozen Recall quality\n 18 files changed, 207 insertions(+)\n create mode 100644 .github/plugin/marketplace.json\n create mode 100644 contexts/atlas-other/docs/inactive.md\n create mode 100644 contexts/atlas-payments/docs/backoff-copy.md\n create mode 100644 contexts/atlas-payments/docs/drain-long.md\n create mode 100644 contexts/atlas-payments/docs/drain-observation.md\n create mode 100644 contexts/atlas-payments/docs/injection.md\n create mode 100644 contexts/atlas-payments/docs/noise-agenda.md\n create mode 100644 contexts/atlas-payments/docs/noise-dashboard.md\n create mode 100644 contexts/atlas-payments/docs/noise-glossary.md\n create mode 100644 contexts/atlas-payments/docs/noise-style-guide.md\n create mode 100644 contexts/atlas-payments/docs/noise-test-plan.md\n create mode 100644 contexts/atlas-payments/docs/pool.md\n create mode 100644 contexts/atlas-payments/docs/retry-current.md\n create mode 100644 contexts/atlas-payments/docs/retry-legacy.md\n create mode 100644 manifest/projects.yaml\n create mode 100644 plugins/common/plugin.json\n create mode 100644 plugins/quality/plugin.json\n create mode 100644 skills.yaml\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource",
+      "exitCode": 0,
+      "stdout": "7dbb74107cc4c457a5043619090b11a38b74a7a0\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "clone",
+        "--bare",
+        "--no-hardlinks",
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource",
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\origin.git"
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "Cloning into bare repository 'F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\origin.git'...\ndone.\n"
+    },
+    {
+      "args": [
+        "fetch",
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\baseline-v2\\origin.git",
+        "teamai-learnings:refs/heads/teamai-learnings"
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\origin.git",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "From F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\baseline-v2\\origin\n * [new branch]      teamai-learnings -> teamai-learnings\n"
+    },
+    {
+      "args": [
+        "remote",
+        "add",
+        "origin",
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\origin.git"
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "rev-parse",
+        "refs/heads/teamai-learnings"
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\origin.git",
+      "exitCode": 0,
+      "stdout": "cf573d619178f5b29773ac7c616a231e789eeb75\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "rev-parse",
+        "refs/heads/main"
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\origin.git",
+      "exitCode": 0,
+      "stdout": "7dbb74107cc4c457a5043619090b11a38b74a7a0\n",
+      "stderr": ""
+    }
+  ],
+  "activeLogicalProject": "atlas-payments",
+  "allowedCount": 15,
+  "expectedAnswersModified": false
+}

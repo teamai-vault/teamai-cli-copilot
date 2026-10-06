@@ -1,0 +1,260 @@
+{
+  "case": "B29-unbound-git",
+  "interpretation": "Observed actual session only; behavioral acceptance is a separate root judgment",
+  "candidateRevision": "4977e40ac7e6d327f63710302bac137177f70193",
+  "tarballSha256": "b1d9bf3a73525dcc289e87e8afd7a35180d98fe7a1259db7bb7607eaf6389656",
+  "agentSha256": "03562f41201196a8272e3fbbd6997f989ba6eceb34bbae99276fe1e4359a0452",
+  "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+  "sourceRevision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+  "publishedRevision": "cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2",
+  "sessionId": "5cdf78fb-403a-4da5-80fb-9789a5647c0a",
+  "launch": {
+    "case": "B29-unbound-git",
+    "sessionId": "5cdf78fb-403a-4da5-80fb-9789a5647c0a",
+    "executable": "D:/soft/nodejs/node_global/copilot.ps1",
+    "args": [
+      "--agent",
+      "teamai-recall",
+      "--session-id",
+      "5cdf78fb-403a-4da5-80fb-9789a5647c0a",
+      "--log-dir",
+      "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-unbound-git-native-logs",
+      "--usage-output-file",
+      "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-unbound-git-usage.json"
+    ],
+    "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\workspaces\\unbound",
+    "launcherPid": 32180,
+    "startedAtUtc": "2026-10-06T02:54:42.5054925Z",
+    "nativeRoot": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.copilot",
+    "businessHome": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home",
+    "candidateRevision": "4977e40ac7e6d327f63710302bac137177f70193",
+    "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+    "agentSha256": "03562f41201196a8272e3fbbd6997f989ba6eceb34bbae99276fe1e4359a0452",
+    "modelOverride": null,
+    "questionHeldForActualSelection": true,
+    "permissionFlags": "DEFAULT",
+    "taskMessages": "Only frozen case messages after actual selection; no oracle/rank/path list",
+    "parentChildRoute": "Same delivered teamai-recall with unset/inherited model is allowed",
+    "frozenGuard": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\29-native-execution-v4\\..\\29-native-preparation-v5"
+  },
+  "end": {
+    "case": "B29-unbound-git",
+    "sessionId": "5cdf78fb-403a-4da5-80fb-9789a5647c0a",
+    "launcherPid": 32180,
+    "exitCode": 0,
+    "endedAtUtc": "2026-10-06T03:00:54.5510233Z",
+    "meaning": "Normal process end only; record actual events/answer separately. Restore real read-gap source before post protection."
+  },
+  "nativeEvents": {
+    "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.copilot\\session-state\\5cdf78fb-403a-4da5-80fb-9789a5647c0a\\events.jsonl",
+    "bytes": 192013,
+    "sha256": "c955b74fb4f74bc85901b76023aa0e6947dcb102cf1acc36cfd4f38a17e385f3",
+    "preservedInOriginalSession": true
+  },
+  "capturedModel": "gpt-6-luna",
+  "frozenQuestionExactMatch": true,
+  "parentUserMessageCount": 1,
+  "delegatedUserMessageCount": 0,
+  "answerCount": 1,
+  "selectedAgents": [
+    {
+      "timestamp": "2026-10-06T02:54:51.226Z",
+      "data": {
+        "agentName": "teamai-recall",
+        "agentDisplayName": "teamai-recall",
+        "tools": [
+          "read",
+          "execute"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-10-06T02:54:51.263Z",
+      "data": {
+        "agentName": "teamai-recall",
+        "agentDisplayName": "teamai-recall",
+        "tools": [
+          "read",
+          "execute"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-10-06T02:55:28.463Z",
+      "data": {
+        "agentName": "teamai-recall",
+        "agentDisplayName": "teamai-recall",
+        "tools": [
+          "read",
+          "execute"
+        ]
+      }
+    }
+  ],
+  "nativeChildRoutes": [],
+  "actualRecallQueries": 1,
+  "originalReads": 2,
+  "allViewFilesReturned": false,
+  "metrics": {
+    "sessionStartTime": 1791255286601,
+    "totalApiDurationMs": 19984,
+    "totalNanoAiu": 241284000,
+    "totalPremiumRequests": 1,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 15
+      },
+      "cache_read": {
+        "tokenCount": 44434
+      },
+      "cache_write": {
+        "tokenCount": 10296
+      },
+      "output": {
+        "tokenCount": 1360
+      }
+    },
+    "currentModel": "gpt-6-luna",
+    "modelMetrics": {
+      "gpt-6-luna": {
+        "requests": {
+          "count": 5,
+          "cost": 1
+        },
+        "usage": {
+          "inputTokens": 54745,
+          "outputTokens": 1360,
+          "cacheReadTokens": 44434,
+          "cacheWriteTokens": 10296,
+          "reasoningTokens": 425
+        },
+        "totalNanoAiu": 241284000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 15
+          },
+          "cache_read": {
+            "tokenCount": 44434
+          },
+          "cache_write": {
+            "tokenCount": 10296
+          },
+          "output": {
+            "tokenCount": 1360
+          }
+        }
+      }
+    },
+    "codeChanges": {
+      "linesAdded": 0,
+      "linesRemoved": 0,
+      "filesModified": []
+    },
+    "modelCalls": 1,
+    "wallMs": 372046,
+    "usageOutput": {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-unbound-git-usage.json",
+      "sha256": "a6247ec7fc79b8fe76e659be94cd8137b7969f34195c2164ac6c8b16fbce4394"
+    }
+  },
+  "counts": {
+    "session.start": 1,
+    "subagent.selected": 3,
+    "subagent.deselected": 1,
+    "session.model_change": 1,
+    "session.auto_mode_resolved": 1,
+    "user.message": 1,
+    "model.turn_started": 1,
+    "model.model_call_started": 1,
+    "system.message": 1,
+    "assistant.turn_start": 5,
+    "model.captured_assignment_context": 1,
+    "model.model_call_success": 1,
+    "model.message": 1,
+    "model.response": 1,
+    "model.turn_ended": 1,
+    "model.messages_snapshot": 1,
+    "assistant.message": 5,
+    "tool.execution_start": 5,
+    "tool.execution_complete": 5,
+    "skill.invoked": 1,
+    "skill.context_delivered_ref": 1,
+    "assistant.turn_end": 5,
+    "permission.requested": 3,
+    "permission.completed": 3,
+    "session.usage_checkpoint": 1,
+    "session.shutdown": 1
+  },
+  "protection": {
+    "businessRoots": 13,
+    "gitRoots": 5,
+    "deltas": [
+      {
+        "category": "business",
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+        "before": "730924803dd23d3ec527963731214612ba23f06db9a8f061605d66f8ae5f9c78",
+        "after": "09782394c99bd9f2c92047b23b3a58b1f37cd9c5be6c20d4c2ed311132332f3e"
+      }
+    ],
+    "case": "B29-unbound-git",
+    "sinceResumedBaseline": {
+      "businessRoots": 13,
+      "gitRoots": 5,
+      "deltas": [
+        {
+          "category": "business",
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+          "before": "babf5b24bcbdce52e73692602b3f5cb236a162d4afc95eca5352112391354481",
+          "after": "09782394c99bd9f2c92047b23b3a58b1f37cd9c5be6c20d4c2ed311132332f3e"
+        }
+      ]
+    },
+    "exactBusinessStartupDeltas": [
+      {
+        "category": "business",
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+        "before": "730924803dd23d3ec527963731214612ba23f06db9a8f061605d66f8ae5f9c78",
+        "after": "09782394c99bd9f2c92047b23b3a58b1f37cd9c5be6c20d4c2ed311132332f3e"
+      }
+    ],
+    "sinceResumedBaselineExactBusinessStartupDeltas": [
+      {
+        "category": "business",
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+        "before": "babf5b24bcbdce52e73692602b3f5cb236a162d4afc95eca5352112391354481",
+        "after": "09782394c99bd9f2c92047b23b3a58b1f37cd9c5be6c20d4c2ed311132332f3e"
+      }
+    ],
+    "generatingPlatformArtifactPid": "NOT_INDEPENDENTLY_OBSERVED",
+    "nativePlatform": "Native account/config/session/log writes are separate and not scanned; complete business/Git deltas remain. Unexpected business changes require root disposition.",
+    "behaviorAcceptance": "NOT_INFERRED_FROM_HASHES"
+  },
+  "outputs": [
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-unbound-git-observable-events.jsonl",
+      "bytes": 49896,
+      "sha256": "34bacd092d94cabab1cef90f9b310ef2790f06c710bcc12897471a0c0d0f6ac1"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-unbound-git-queries.json",
+      "bytes": 3404,
+      "sha256": "ea318da33d22a792c22d15d258f5f58b5fb364215769fed6d15cb31a324bf245"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-unbound-git-reads.json",
+      "bytes": 22084,
+      "sha256": "47b757317beb58e6f6bb334297e5bfdd6cf1ad3966687e0932a83a9f0971a766"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-unbound-git-answer.md",
+      "bytes": 1819,
+      "sha256": "c15b57c830bd490e87cf95f9c2cb90ba17a5e9b877664464e8b14001326f4c9c"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-unbound-git-metrics.json",
+      "bytes": 1384,
+      "sha256": "9918211125209a93c09a7da34fe520b5c612a537fa9049deb7518c5a2763b189"
+    }
+  ],
+  "excluded": "Authentication/account files, model reasoning, provider request snapshots and opaque provider data are not copied by this recorder"
+}

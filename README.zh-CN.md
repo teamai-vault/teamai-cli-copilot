@@ -51,7 +51,7 @@ ownership 独立记录在 `~/.teamai/built-in-skills/`。如果 `~/.copilot/skil
 
 npm package 还包含原生 `teamai-recall` Agent（`agents/teamai-recall.agent.md`）。`init`/`sync` 将它投递到解析后的 Copilot 根的 `agents/teamai-recall.agent.md`，准确 root/target/version/SHA-256 receipt 保存在 `~/.teamai/built-in-agents/`。没有 receipt 的同名文件即使内容相同也视为 collision；相邻个人文件保留。中断投递记录最小 checkpoint；显式 `init`/`sync` 可重新核验已确认 delivered 的 checkpoint 并补 receipt，无法确认的中断或个人修改保持原样，需人工检查。详见 [投递与恢复约定](docs/development/builtin-recall-agent.md)。
 
-Recall Agent 将任意语言任务提炼为英文技术关键词，原样保留标识符、诊断及真实 Project ID，读取必要原文，并按用户语言总结和附准确来源。它不修改代码、不执行资料内指令、不隐式 sync/修复，也不发布 Learning；用户许可和企业策略继续优先。`status --resources`/`--json` 与 `doctor` 分开表示 delivery、configuredActive 和 consumer runtime；没有实际观察时 runtime 保持 unknown。自定义根的 CLI 投递不等于 VS Code 已发现资源。
+Recall Agent 根据当前问题及必要的可见前文形成英文技术查询，原样保留完整诊断、标识符及真实 Logical Project ID。它按需要使用少量不同角度的查询，复用本次已读的同一来源快照，比较原文后按用户语言回答并附准确来源。这些步骤使用现有 Agent 的原生 read 工具及当前会话模型；回答区分 Recall 来源元数据与实际读到的正文。它不修改代码、不执行资料内指令、不隐式 sync/修复，也不发布 Learning；用户许可和企业策略继续优先。`status --resources`/`--json` 与 `doctor` 分开表示 delivery、configuredActive 和 consumer runtime；没有实际观察时 runtime 保持 unknown。自定义根的 CLI 投递不等于 VS Code 已发现资源。
 
 ## 环境要求
 
@@ -172,7 +172,7 @@ teamai init [--marketplace <source>] [--role api|ios|aos|qa|design]
 teamai projects [list]
 teamai projects set <ids...>
 teamai learning share <file> [--project <id>|--shared] [--tags <tag...>]
-teamai recall <query> [--scope auto|user|workspace] [--project <id>] [--limit <n>] [--include-pending] [--json]
+teamai recall <query> [--scope auto|user|workspace] [--project <id>] [--limit <n>] [--require <literal>] [--include-pending] [--json]
 teamai skill list [--tag <tag>] [--owner <owner>] [--source plugin|standalone]
 teamai skill show <name>
 teamai skill install <name...>
@@ -192,6 +192,12 @@ teamai doctor
 `learning share` 会把提供的 Markdown 正文经由 GitHub PR 加入 `learnings/<project>/<uuid>.md`。生成的 UUID 同时用作 frontmatter `id` 和已保存的 operation ID。恰有一个 active Logical Project 时默认选中它，没有 active Project 时写入 `shared`，有多个时必须给出 `--project` 或 `--shared`。贡献流程使用隔离的 bare clone 和 worktree，不会修改当前 Marketplace checkout 或 shared read cache；dry-run 只预览 branch、commit、push 与 PR 步骤。
 
 `recall` 只在本地搜索缓存中的已发布 Learnings 和 active Project docs。当前 Git Workspace 有 active Logical Project 时，`auto` 使用 Workspace scope，否则使用 User scope；User 只搜索 shared Learnings，Workspace 搜索 shared 和 active Project 的 docs/Learnings。`--project` 可把 Workspace scope 缩到一个 active Project。`--include-pending` 只加入符合 source 与 scope 的未完成本地草稿。Learning 的 published 和 pending JSON 结果都使用 `learning:<logicalProject>:<uuid>` 作为 ID（shared Learning 的 logicalProject 为 `shared`），由 `publication` 标明状态。Recall 不访问网络或模型，也不写入状态。中文可用空格拆分关键词，例如 `teamai recall 支付 重试`；JSON 结果包含实际本地文件、source revision/hash、匹配词、原始行号和 evidence 片段。
+
+Recall snippet 在原文连续行中选择不同 query 词覆盖最多的窗口，同分取最早位置，最多 3 行、1200 Unicode code points。过长窗口截取真实连续原文，并报告对应行号；仅派生标题命中时保留开头窗口。文件 ID、排名、source revision 和全文 hash 不变，matchedTerms 仍表示文件级匹配，即使短 snippet 没展示全部词。snippet 是检索提示，片段之外的结论仍须读取原文。
+
+`teamai recall --help` 无需 query、绑定、知识 cache 或原生运行时即可 exit 0，帮助写入 stdout；即使带 `--json`，help 仍是人可读文本。查询按空白拆词，在 NFC 和大小写归一后做子串匹配，至少一词命中即可；shell 引号只负责传参，不开启短语匹配。未使用 required 时，query 最多 1024 Unicode code points、去重前最多 32 个空白分词；`--limit` 为 1–20，默认 5。结果按内存中的子串 BM25 分数降序排列，同分按稳定 ID 排序。title、单个 tag、body 的不重叠连续子串次数使用 3/2/1 权重，并作词频饱和与空白词数长度归一（k1=1.2，b=0.75）。语料统计来自完整已核验允许集合，在 query、required 和 limit 过滤前计算；required 仍是硬条件。排名及命中词数不代表答案正确性或语义置信度；Recall Agent 另行读取原文并按相关性筛选/重排。CLI 不翻译，也不提供语义搜索。English-first 是知识贡献约定，中文普通查询继续支持，例如 `teamai recall "Plugin discovery" --scope user` 和 `teamai recall "支付 重试" --limit 5`。
+
+确需字面条件时，可用 `teamai recall "Plugin not" --require "Plugin not found: E_PLUGIN_42." --scope user`。`--require <literal>` 可重复指定，所有 literal 都必须满足（AND）；每个完整 literal 经 NFC 和大小写归一后，须连续出现在一个 title、单个 tag 或 body 中，不拆词、不跨字段或 tags 拼接，也不作正则扩展。query 仍必填且至少一词命中。query 与全部原始 required 值合计最多 1024 Unicode code points；query 去重前的空白词数加 required 值数量合计最多 32 项，重复 literal 逐项计数。空值、仅空白、缺值和超限均为输入错误；以 `-` 开头的 literal 使用 `--require=<literal>`。text 显示实际应用的原文值；仅在使用参数时，JSON 增加保留调用顺序和原文的顶层 `requiredLiterals`，`matchedTerms` 仍只表示 query 命中的词。required 不能扩大已核验的 source/scope/pending 集合，也不能掩盖 cache 错误；provenance、原始 hash、路径/行号和 evidence 合同不变。字面过滤不代表理解诊断关联、否定或因果。
 
 ### `teamai sync`
 
@@ -287,6 +293,8 @@ npm test
 ```
 
 两个 E2E 脚本都会创建隔离的临时 profile 和 Git Repo。`test:e2e:copilot` 验证投影 instruction 的原始字节，以及 native instruction list 的 name/scope/source，并验证真实 personal Skill 与已启用 Plugin Skill 的精确 native path；`test:e2e:fallback` 需要 `TEAM_AI_E2E_CODE_BIN` 或可用的 `code` 命令，并在隔离 profile 中先验证它，再验证 VS Code-only materializer 与 native 对 materialized state 的识别。资源列表不等于模型读取 ignored docs 或应用 `applyTo`；认证 model-read probe 仍未验证。当前实现状态与验证边界见 [`docs/HANDOFF.md`](docs/HANDOFF.md)。
+
+[Recall 固定资料、测量方法与基线](docs/development/recall-quality/README.md)记录了原始 0.4.0 公开 CLI 和实际 Copilot Agent 的结果，保留回答、引用及查询方面的实际失败。支持资料进入候选不等于回答正确；后续候选比较和未运行变体单独标明。
 
 ## 当前不做
 

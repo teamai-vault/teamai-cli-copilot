@@ -30,7 +30,7 @@ describe("native builtin Recall Agent public commands", () => {
     const receipt = JSON.parse(await readFile(receiptFile, "utf8"));
     await writeFile(receiptFile, JSON.stringify({ ...receipt, version: "0.3.0", extra: "preserved" }));
     expect(await runCli(["sync"], { ...base, ...capture() })).toBe(0);
-    expect(JSON.parse(await readFile(receiptFile, "utf8"))).toMatchObject({ version: "0.4.0", extra: "preserved" });
+    expect(JSON.parse(await readFile(receiptFile, "utf8"))).toMatchObject({ version: "0.5.0", extra: "preserved" });
     const before = (await stat(target)).mtimeMs;
     const status = capture(), doctor = capture();
     expect(await runCli(["status", "--json"], { ...base, ...status })).toBe(0);

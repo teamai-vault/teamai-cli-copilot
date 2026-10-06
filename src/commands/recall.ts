@@ -28,6 +28,7 @@ export interface RecallOptions {
   scope?: "auto" | "user" | "workspace";
   project?: string;
   limit?: string;
+  requiredLiterals?: string[];
   includePending?: boolean;
   json?: boolean;
 }
@@ -40,7 +41,8 @@ export class RecallCommandError extends Error {
 
 export async function recallCommand(context: CommandContext, options: RecallOptions): Promise<void> {
   const query = options.query;
-  const terms = parseRecallQuery(query);
+  const requiredLiterals = options.requiredLiterals ?? [];
+  const terms = parseRecallQuery(query, requiredLiterals);
   const limit = parseLimit(options.limit);
   const requestedScope = options.scope ?? "auto";
   if (options.project && !PROJECT_ID.test(options.project)) throw new RecallInputError("--project must be a safe Logical Project ID.");
@@ -237,11 +239,12 @@ export async function recallCommand(context: CommandContext, options: RecallOpti
   if (candidates.length > MAX_RECALL_FILES || sumBytes(candidates.map((candidate) => Buffer.byteLength(candidate.rawContent, "utf8"))) > MAX_RECALL_BYTES) {
     throw new RecallCommandError("CORPUS_TOO_LARGE", "Recall corpus exceeds its 5000-file or 64 MiB limit.");
   }
-  const hits = rankRecallCandidates(candidates, terms, limit);
+  const hits = rankRecallCandidates(candidates, terms, limit, requiredLiterals);
   if (options.json) {
     context.out(JSON.stringify({
       schemaVersion: 1,
       query,
+      ...(requiredLiterals.length > 0 ? { requiredLiterals } : {}),
       scope: scope.kind,
       ...(scope.kind === "workspace" && options.project ? { project: options.project } : {}),
       sourceHash,
@@ -252,7 +255,7 @@ export async function recallCommand(context: CommandContext, options: RecallOpti
     }));
     return;
   }
-  context.out(renderRecallText(query, scope.kind, hits));
+  context.out(renderRecallText(query, scope.kind, hits, requiredLiterals));
 }
 
 async function resolveScope(
@@ -314,9 +317,10 @@ function safeMessage(error: unknown): string {
   return "verification failed";
 }
 
-function renderRecallText(query: string, scope: "user" | "workspace", hits: ReturnType<typeof rankRecallCandidates>): string {
-  if (hits.length === 0) return `No Recall matches for ${JSON.stringify(query)} in ${scope} scope.`;
-  const lines = [`Recall found ${hits.length} result(s) in ${scope} scope for ${JSON.stringify(query)}.`];
+function renderRecallText(query: string, scope: "user" | "workspace", hits: ReturnType<typeof rankRecallCandidates>, requiredLiterals: string[]): string {
+  const required = requiredLiterals.length > 0 ? `\nRequired literals (all): ${JSON.stringify(requiredLiterals)}` : "";
+  if (hits.length === 0) return `No Recall matches for ${JSON.stringify(query)} in ${scope} scope.${required}`;
+  const lines = [`Recall found ${hits.length} result(s) in ${scope} scope for ${JSON.stringify(query)}.${required}`];
   hits.forEach((hit, index) => {
     lines.push(
       "",

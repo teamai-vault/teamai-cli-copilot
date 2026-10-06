@@ -1,0 +1,84 @@
+{
+  "preparationIndexed": 31,
+  "phase1Indexed": 99,
+  "indexedMismatches": [],
+  "pins": [
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\artifact-index.json",
+      "expected": "a2b4f179a53fb8e6c8398c37c4cc1164a6a3fa376c939ef234b08429c3e2f124",
+      "actual": "a2b4f179a53fb8e6c8398c37c4cc1164a6a3fa376c939ef234b08429c3e2f124",
+      "matches": true
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\phase1-artifact-index.json",
+      "expected": "6d48708c45160a5917c057cb16fb67b3ed20fbf1bc4f664486e814b4a1538087",
+      "actual": "6d48708c45160a5917c057cb16fb67b3ed20fbf1bc4f664486e814b4a1538087",
+      "matches": true
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\slots\\E19-C30-native-v4-plan.json",
+      "expected": "6654cc9263725f45671a26ae2337f92e462ce9489a561165fd05565e0ea0d36e",
+      "actual": "6654cc9263725f45671a26ae2337f92e462ce9489a561165fd05565e0ea0d36e",
+      "matches": true
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v4\\manifest.json",
+      "expected": "56f6935e691e87a0d48ede91670e12c22c41004b1fd04323606d14645f8c854e",
+      "actual": "56f6935e691e87a0d48ede91670e12c22c41004b1fd04323606d14645f8c854e",
+      "matches": true
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\supervisor-c-final-v4-full-owned-delivery-acceptance.json",
+      "expected": "650bf28c7fc6dfcf72c31b3a462e8dccbd35b6eb1733acaa369ccad203f3fad5",
+      "actual": "650bf28c7fc6dfcf72c31b3a462e8dccbd35b6eb1733acaa369ccad203f3fad5",
+      "matches": true
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\supervisor-c-final-v4-normal-preflight-acceptance.json",
+      "expected": "30a86ccdf6f8970b38dc07998e4ea459e2065101287048be5ce7f7993da2f5f9",
+      "actual": "30a86ccdf6f8970b38dc07998e4ea459e2065101287048be5ce7f7993da2f5f9",
+      "matches": true
+    }
+  ],
+  "package": [
+    {
+      "kind": "tarball",
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v4\\package\\teamai-cli-copilot-0.5.0.tgz",
+      "actual": "b1d9bf3a73525dcc289e87e8afd7a35180d98fe7a1259db7bb7607eaf6389656",
+      "matches": true
+    },
+    {
+      "kind": "CLI",
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v4\\package\\install\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+      "actual": "79f64b93f5b477254d1f6697348603740d13bb7e1b5b33f8a5c75fa7447c20be",
+      "matches": true
+    },
+    {
+      "kind": "Agent",
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v4\\package\\install\\node_modules\\teamai-cli-copilot\\agents\\teamai-recall.agent.md",
+      "actual": "03562f41201196a8272e3fbbd6997f989ba6eceb34bbae99276fe1e4359a0452",
+      "matches": true
+    },
+    {
+      "kind": "Skill",
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v4\\package\\install\\node_modules\\teamai-cli-copilot\\skills\\teamai\\SKILL.md",
+      "actual": "15b0a7e1a44dc95942d06ec36c2a8b301d6406fe06c8b6fe422b72dfc932f295",
+      "matches": true
+    },
+    {
+      "kind": "commands",
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v4\\package\\install\\node_modules\\teamai-cli-copilot\\skills\\teamai\\references\\commands.md",
+      "actual": "e2ae88156b20cbad6baadf7b489ef5a8d1782b9f33f10bc5dc5f9cdc0a524fc4",
+      "matches": true
+    }
+  ],
+  "cHead": "c73d27a6c33e9bdd4ad91150f3facb8a661a8ee8",
+  "cBranch": "task/recall-30-c",
+  "worktree": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\worktrees\\c-quality-30",
+  "worktreeClean": true,
+  "frozenFixtureTree": "d185a284718659d296afa2f93cea7f225bfb41b5",
+  "fixtureMatches": true,
+  "historicalBaselineOutputs": "NOT_OVERWRITTEN",
+  "sourceOrPromptOrOracleEdits": 0,
+  "extraNativeModelRuns": 0
+}

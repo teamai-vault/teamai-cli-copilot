@@ -1,0 +1,8 @@
+{
+  "case": "B33-read-failure",
+  "sessionId": "f2f003fb-1b6f-4092-909d-b610965cb677",
+  "launcherPid": 3212,
+  "exitCode": 0,
+  "endedAtUtc": "2026-10-05T23:35:25.9163660Z",
+  "meaning": "Normal process end only; record actual events/answer separately. Restore real read-gap source before post protection."
+}

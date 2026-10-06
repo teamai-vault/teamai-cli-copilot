@@ -1,0 +1,12 @@
+{
+  "businessRoots": 8,
+  "gitRoots": 5,
+  "deltas": [],
+  "sinceNativePreflight": {
+    "businessRoots": 8,
+    "gitRoots": 5,
+    "deltas": []
+  },
+  "nativePlatform": "Existing account/config/session roots not scanned; old 8 business and 5 Git roots fully hashed",
+  "operatorAction": "Protection only, not original-read evidence"
+}

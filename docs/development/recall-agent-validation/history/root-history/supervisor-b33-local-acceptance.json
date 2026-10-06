@@ -1,0 +1,37 @@
+{
+  "result": "ACCEPTED_LOCAL_33_STAGE_FOR_29_BASELINE",
+  "acceptedAtUtc": "2026-10-05T20:36:10.055Z",
+  "integration": "b2a81308e779b8b6941aae845c30d889c58536eb",
+  "handoff": {
+    "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-33-correction-3-native-final.md",
+    "sha256": "96048a438f6ce6c6dd1dd432bc57aab8dc40dfcee092c344c579a70b934cf638"
+  },
+  "evidence": [
+    "supervisor-b33-correction2-native-check.json",
+    "supervisor-b33-correction3-native-check.json",
+    "supervisor-b33-correction3-own-process-check.json"
+  ],
+  "publicExecute": 2,
+  "completeDiagnosticInFinal": true,
+  "disposition": "Actual ignored Learning final now preserves the complete diagnostic, exact payments-api/shared distinction, full returned source/revision/sourceHash/contentHash/publication and accurate unique read section. The missing preceding sample makes observation pending while Learning is published. Full original includes supporting L9-L10 beyond the L6-L8 snippet; no independent read hash claim. Earlier actual original/injection/real ENOENT and exact restore remain at their recorded candidate/version.",
+  "nonblockingFindings": [
+    "Imprecise no-line-numbers wording: current View detailedContent permits original line mapping; accurate unique section and condition are given, with no invented line range. Prior independent line-capability review treats this as Minor.",
+    "Historical parent forwarding omitted some metadata retained in the same-Agent child; prior independent failed-read route review records Minor, not a dedicated reranker."
+  ],
+  "limitations": [
+    "Only the affected ignored case was rerun on 1.0.92. Earlier cases retain their exact 1.0.91 package/version identities.",
+    "Same-path revision/hash-change and optional span cases, VS Code and other native platforms remain UNVERIFIED.",
+    "Local acceptance does not close the issue or replace final whole-batch review/delivery/CI."
+  ],
+  "historicalFailRejectRetained": true,
+  "rawProtectionDeltas": [
+    {
+      "category": "business",
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-preparation-v2\\workspaces\\bound-payments-api\\.teamai\\context\\b33-c3-ignored-business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+      "before": "ABSENT",
+      "after": "2b934b897eb7b05a0c399d06863781108a0b985b6c62f0bc0010fab91efc9b3c"
+    }
+  ],
+  "protectedKnowledgeGitChanges": 0,
+  "ticket29": "READY_FOR_SCOPED_DISPATCH"
+}

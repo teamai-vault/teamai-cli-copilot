@@ -1,0 +1,133 @@
+{
+  "totalPremiumRequestCost": 1,
+  "totalUserRequests": 1,
+  "totalNanoAiu": 352269000,
+  "tokenDetails": {
+    "input": {
+      "tokenCount": 24
+    },
+    "cache_read": {
+      "tokenCount": 51579
+    },
+    "cache_write": {
+      "tokenCount": 18660
+    },
+    "output": {
+      "tokenCount": 1344
+    }
+  },
+  "totalApiDurationMs": 28576,
+  "sessionStartTime": "2026-10-05T11:32:23.053Z",
+  "codeChanges": {
+    "linesAdded": 0,
+    "linesRemoved": 0,
+    "filesModifiedCount": 0,
+    "filesModified": []
+  },
+  "modelMetrics": {
+    "gpt-6-luna": {
+      "requests": {
+        "count": 8,
+        "cost": 1
+      },
+      "usage": {
+        "inputTokens": 70263,
+        "outputTokens": 1344,
+        "cacheReadTokens": 51579,
+        "cacheWriteTokens": 18660,
+        "reasoningTokens": 798
+      },
+      "cacheExpiresAt": "2026-10-05T12:05:51.244Z",
+      "totalNanoAiu": 352269000,
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 24
+        },
+        "cache_read": {
+          "tokenCount": 51579
+        },
+        "cache_write": {
+          "tokenCount": 18660
+        },
+        "output": {
+          "tokenCount": 1344
+        }
+      }
+    }
+  },
+  "agentMetrics": {
+    "main": {
+      "totalApiDurationMs": 10917,
+      "totalNanoAiu": 261515000,
+      "modelMetrics": {
+        "gpt-6-luna": {
+          "requests": {
+            "count": 3,
+            "cost": 1
+          },
+          "usage": {
+            "inputTokens": 48802,
+            "outputTokens": 396,
+            "cacheReadTokens": 32025,
+            "cacheWriteTokens": 16768,
+            "reasoningTokens": 185
+          },
+          "totalNanoAiu": 261515000,
+          "tokenDetails": {
+            "input": {
+              "tokenCount": 9
+            },
+            "cache_read": {
+              "tokenCount": 32025
+            },
+            "cache_write": {
+              "tokenCount": 16768
+            },
+            "output": {
+              "tokenCount": 396
+            }
+          }
+        }
+      }
+    },
+    "59604f68-65a1-4bfb-8c66-37a317d6819e": {
+      "agentName": "teamai-recall",
+      "agentDisplayName": "teamai-recall",
+      "totalApiDurationMs": 17659,
+      "totalNanoAiu": 90754000,
+      "modelMetrics": {
+        "gpt-6-luna": {
+          "requests": {
+            "count": 5,
+            "cost": 0
+          },
+          "usage": {
+            "inputTokens": 21461,
+            "outputTokens": 948,
+            "cacheReadTokens": 19554,
+            "cacheWriteTokens": 1892,
+            "reasoningTokens": 613
+          },
+          "totalNanoAiu": 90754000,
+          "tokenDetails": {
+            "input": {
+              "tokenCount": 15
+            },
+            "cache_read": {
+              "tokenCount": 19554
+            },
+            "cache_write": {
+              "tokenCount": 1892
+            },
+            "output": {
+              "tokenCount": 948
+            }
+          }
+        }
+      }
+    }
+  },
+  "currentModel": "gpt-6-luna",
+  "lastCallInputTokens": 16771,
+  "lastCallOutputTokens": 99
+}

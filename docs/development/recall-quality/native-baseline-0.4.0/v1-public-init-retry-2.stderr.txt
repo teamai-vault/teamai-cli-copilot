@@ -1,0 +1,1 @@
+ERROR: copilot plugin marketplace add F:\agent-workspace\multiAgent\teamai-cli-customization\.tmp\recall-29-35\runtime\c\baseline-v2\resource failed (1): Failed to add marketplace: Error: Request plugins.marketplaces.add failed with message: Invalid marketplace.json: owner: Required

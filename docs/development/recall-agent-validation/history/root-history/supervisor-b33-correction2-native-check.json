@@ -1,0 +1,144 @@
+{
+  "result": "PASS_EVIDENCE_IDENTITY_BEHAVIOR_DISPOSITION_PENDING",
+  "checkedAtUtc": "2026-10-05T19:27:32.279Z",
+  "candidate": {
+    "sourceRevision": "cc3eff9f19310af2f949f7d42ec4e199cdeada48",
+    "sourceTree": "6248bdf575c7605d658b81e047494763eb30477e",
+    "version": "0.5.0",
+    "tarball": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c2\\package\\teamai-cli-copilot-0.5.0.tgz",
+    "tarballBytes": 200454,
+    "tarballSha256": "b2c7598aa3ad6898dc9a8bf8913a5ad2bf64035b0166d69fe8c26fdb18401a1c",
+    "packageRoot": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c2\\installed\\node_modules\\teamai-cli-copilot",
+    "cliSha256": "79f64b93f5b477254d1f6697348603740d13bb7e1b5b33f8a5c75fa7447c20be",
+    "agentSha256": "9aaaa313fcf27299fc4bc15bae6c2e9ee6aef3b1b8206a4f353592f8a573c119",
+    "build": "PASS",
+    "packInstall": "PASS",
+    "authoredBytes": "PASS",
+    "compiledRecall": "REUSED_IDENTICAL_CLI_BYTES",
+    "compiledEvidence": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\supervisor-compiled-candidate-check.json",
+    "compiledReuseReason": "Correction changes only Agent and its dedicated documentation; installed CLI bytes exactly match the 35 accepted compiled cases at 740f5d0",
+    "nativeBehavior": "UNVERIFIED",
+    "createdAtUtc": "2026-10-05T18:13:06.6100687+00:00"
+  },
+  "rawIndexedArtifacts": 109,
+  "identitiesChecked": 127,
+  "totals": {
+    "queries": 9,
+    "successfulQueries": 7,
+    "failedQueries": 2,
+    "publicExecute": 13,
+    "successfulReads": 8,
+    "failedReads": 1,
+    "hitChecks": 24,
+    "nativeChildRoutes": 2
+  },
+  "cases": [
+    {
+      "id": "B33-original",
+      "sessionId": "1d360e1c-2d21-4225-8e3c-f623a7de9bc0",
+      "actualModel": "gpt-6-luna",
+      "modelOverride": null,
+      "normalExit": 0,
+      "originalProtectionDeltas": [],
+      "answerLayers": [
+        {
+          "id": "b4a08d9d-cd21-45ca-ae01-03473a792915",
+          "agentId": null,
+          "sha256": "f20f3d4c9bce5d164d286bace1bc56b0c760dd0209c4747bdabd640ce5fec928"
+        }
+      ]
+    },
+    {
+      "id": "B33-injection",
+      "sessionId": "5695eab5-4ff8-4638-b81f-d986b5aec79f",
+      "actualModel": "gpt-6-luna",
+      "modelOverride": null,
+      "normalExit": 0,
+      "originalProtectionDeltas": [],
+      "answerLayers": [
+        {
+          "id": "0d48456d-6e5a-4e5e-a79b-1e2728bd78c9",
+          "agentId": "264f8a7e-f743-4073-bc2c-4ddb6d0a6729",
+          "sha256": "2271fa4b59ff6f89d17c280bf7824b9bf79f79707e76e5905aa9e1b1c882d4c2"
+        },
+        {
+          "id": "e5ca021b-0408-457c-b114-4752b9ac1ca9",
+          "agentId": null,
+          "sha256": "9db26d126de5f2771344b9ff1905caa58236216b34044419768e7b2d59a54709"
+        }
+      ]
+    },
+    {
+      "id": "B33-read-failure",
+      "sessionId": "10e8cf9f-6e47-4476-9b8d-ee64d9b314ef",
+      "actualModel": "gpt-6-luna",
+      "modelOverride": null,
+      "normalExit": 0,
+      "originalProtectionDeltas": [],
+      "answerLayers": [
+        {
+          "id": "4aefbaaf-1e02-4860-9447-176ef6784bfb",
+          "agentId": "6ff09f91-64ae-4026-8703-c8867435d92e",
+          "sha256": "f36831b412ccfbebf6543572ef763eea7bcdc285ec75fe166ae1fe794f81e3b3"
+        },
+        {
+          "id": "1399dcdd-2ede-45db-b450-7ed23d6f8bf3",
+          "agentId": null,
+          "sha256": "9e9429c93dfc74a6cb3bc1177abb8d7762c461a5ddf6a0378015612341e276e3"
+        }
+      ]
+    },
+    {
+      "id": "B33-c1-ignored-learning",
+      "sessionId": "171867f9-c3d0-4088-91d3-27748a66b317",
+      "actualModel": "gpt-6-luna",
+      "modelOverride": null,
+      "normalExit": 0,
+      "originalProtectionDeltas": [
+        {
+          "category": "business",
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-preparation-v2\\workspaces\\bound-payments-api\\.teamai\\context\\b33-c2-ignored-business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+          "before": "ABSENT",
+          "after": "fe9d3951ab6eac00dc942411c93dbbd3ab5205b4e7def92d0dfdd6f6eadb0e41"
+        }
+      ],
+      "answerLayers": [
+        {
+          "id": "0af96803-37aa-4a81-966b-9aa7429d47f3",
+          "agentId": null,
+          "sha256": "f290a2a25ffb8755e4a4690076ca6a8da91615f6cf9edcf9cd111c0fd2d301ba"
+        }
+      ]
+    }
+  ],
+  "genuineReadFailureAndExactRestore": true,
+  "actualIgnoredReturnedFileAndRead": true,
+  "protectedBusinessRoots": 8,
+  "protectedGitRoots": 5,
+  "originalProtectionDeltas": [
+    {
+      "category": "business",
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-preparation-v2\\workspaces\\bound-payments-api\\.teamai\\context\\b33-c2-ignored-business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+      "before": "ABSENT",
+      "after": "fe9d3951ab6eac00dc942411c93dbbd3ab5205b4e7def92d0dfdd6f6eadb0e41"
+    }
+  ],
+  "currentSinceFinalDeltas": 0,
+  "exactPlatformArtifact": {
+    "prior": {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-preparation-v2\\workspaces\\bound-payments-api\\.teamai\\context\\b33-c1-ignored-business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+      "bytes": 71564,
+      "sha256": "bfd23a9f7b617b485980d70c584fd8595b0bc9c60ab85bc49efaa3cbb029c082"
+    },
+    "current": {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-preparation-v2\\workspaces\\bound-payments-api\\.teamai\\context\\b33-c2-ignored-business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+      "bytes": 71572,
+      "sha256": "fe9d3951ab6eac00dc942411c93dbbd3ab5205b4e7def92d0dfdd6f6eadb0e41"
+    },
+    "generatingPid": "NOT_INDEPENDENTLY_OBSERVED",
+    "policy": "Keep complete protected raw snapshots/deltas. Only this exact PowerShell startup optimization path may be separately classified as a native platform artifact; preserve bytes/hash and do not blanket-ignore AppData. Generating PID is not inferred."
+  },
+  "issue33Acceptance": "PENDING_DIAGNOSTIC_FIDELITY_DISPOSITION",
+  "issue29": "LOCKED",
+  "historicalFailuresRetained": true
+}

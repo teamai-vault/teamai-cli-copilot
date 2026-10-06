@@ -1,0 +1,94 @@
+{
+  "result": "PASS_CITATION_FOCUSED_GATES_ACTUAL_PACKAGE_WITH_UNCHANGED_CLI_BRIDGE",
+  "sourceRevision": "8000bae22cf6a3490578e25e1af6b618e73267d5",
+  "sourceTree": "52d2654f7e7db6b880409a066d0351dbbf16f5f8",
+  "version": "0.5.0",
+  "manifestFile": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v3\\manifest.json",
+  "manifestSha256": "230cd96d12c06373bde3fb117ae461792f7184b587a4968c85b420cc5957484b",
+  "tarballSha256": "0405aa659147c2199f518cc4b4a59778fdb9882589666f45bce2e11dec261857",
+  "tarballBytes": 202259,
+  "gates": [
+    {
+      "name": "typecheck",
+      "executable": "npm",
+      "arguments": [
+        "run",
+        "typecheck"
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\worktrees\\integration",
+      "sourceRevision": "8000bae22cf6a3490578e25e1af6b618e73267d5",
+      "startedAtUtc": "2026-10-06T00:41:09.8813036Z",
+      "endedAtUtc": "2026-10-06T00:41:22.3115761Z",
+      "elapsedMs": 12430,
+      "exitCode": 0,
+      "rawLog": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v3\\typecheck.log"
+    },
+    {
+      "name": "focused-delivery",
+      "executable": "node",
+      "arguments": [
+        "node_modules/vitest/vitest.mjs",
+        "run",
+        "test/unit/builtin-agent.test.ts",
+        "test/unit/builtin-agent-failure.test.ts",
+        "--no-file-parallelism"
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\worktrees\\integration",
+      "sourceRevision": "8000bae22cf6a3490578e25e1af6b618e73267d5",
+      "startedAtUtc": "2026-10-06T00:41:22.3508624Z",
+      "endedAtUtc": "2026-10-06T00:41:35.8679057Z",
+      "elapsedMs": 13517,
+      "exitCode": 0,
+      "rawLog": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v3\\focused-delivery.log"
+    },
+    {
+      "name": "build",
+      "executable": "npm",
+      "arguments": [
+        "run",
+        "build"
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\worktrees\\integration",
+      "sourceRevision": "8000bae22cf6a3490578e25e1af6b618e73267d5",
+      "startedAtUtc": "2026-10-06T00:41:35.8728670Z",
+      "endedAtUtc": "2026-10-06T00:41:39.2728785Z",
+      "elapsedMs": 3400,
+      "exitCode": 0,
+      "rawLog": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v3\\build.log"
+    },
+    {
+      "name": "package",
+      "executable": "node",
+      "arguments": [
+        "test/helpers/verify-builtin-package.mjs",
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v3\\package"
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\worktrees\\integration",
+      "sourceRevision": "8000bae22cf6a3490578e25e1af6b618e73267d5",
+      "startedAtUtc": "2026-10-06T00:41:39.2762675Z",
+      "endedAtUtc": "2026-10-06T00:42:12.0574102Z",
+      "elapsedMs": 32781,
+      "exitCode": 0,
+      "rawLog": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v3\\package.log"
+    }
+  ],
+  "focusedTests": {
+    "passed": 11,
+    "rawLog": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v3\\focused-delivery.log",
+    "sha256": "ddcdef5b015376eaaf2ec8966fcae2a019d37b159750bf144a448e47780853f6"
+  },
+  "retainedFullTest": {
+    "sourceRevision": "e0eb6a4734b78608709fb16398701cbbf26cae4a",
+    "passed": 253,
+    "skipped": 1,
+    "rawLog": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v2\\test.log",
+    "sha256": "70c3c2b914dfee6d9d83ac58b1957565e53b48173431061169ebc2c563feeb0d",
+    "reason": "Exact two-file prompt/doc citation correction; CLI production source, lock, all tests/fixtures and compiled CLI bytes unchanged. Affected Agent delivery unit tests and real package deliveries rerun on this candidate; actual citation policy requires new native retest."
+  },
+  "authoredFiles": 5,
+  "packageHelperDeliveries": 2,
+  "compiledRecall": "35 accepted compiled cases reused with identical CLI bytes",
+  "originalFailures": "All original TEMP FAIL, citation FAIL and observer1 remain preserved",
+  "actualNativeBehavior": "NOT_RUN_FOR_NEW_AGENT",
+  "recordedAtUtc": "2026-10-06T00:43:40.321Z"
+}

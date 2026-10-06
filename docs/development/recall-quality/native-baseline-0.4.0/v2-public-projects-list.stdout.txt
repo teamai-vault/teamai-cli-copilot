@@ -1,0 +1,2 @@
+* atlas-payments | quality
+  atlas-other | quality

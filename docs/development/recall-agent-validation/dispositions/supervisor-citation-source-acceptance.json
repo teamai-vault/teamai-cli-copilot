@@ -1,0 +1,32 @@
+{
+  "result": "PASS_SCOPED_CITATION_SOURCE_ONLY",
+  "readyFile": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-citation-correction-1-source-ready.json",
+  "readySha256": "d3f5f36ced36abeffe18e850a1a075207111df231a239f783a6aff59c2d6e961",
+  "base": "e0eb6a4734b78608709fb16398701cbbf26cae4a",
+  "target": "8000bae22cf6a3490578e25e1af6b618e73267d5",
+  "tree": "52d2654f7e7db6b880409a066d0351dbbf16f5f8",
+  "verifiedUniqueArtifacts": 83,
+  "changedFiles": [
+    "agents/teamai-recall.agent.md",
+    "docs/development/builtin-recall-agent.md"
+  ],
+  "sourceIdentities": [
+    {
+      "file": "agents/teamai-recall.agent.md",
+      "bytes": 9036,
+      "sha256": "7e882003883ea008c30b9c567f77578e318077162ebbba090bcdf901fa27c48f"
+    },
+    {
+      "file": "docs/development/builtin-recall-agent.md",
+      "bytes": 12794,
+      "sha256": "55b01e07dc6f560cf961298e7d6ac1fc4f03b01b843354cbff106227f93b6f6b"
+    }
+  ],
+  "frontmatterAndOtherLinesUnchanged": true,
+  "sharedDelta": "NONE",
+  "sourceCorrectionPass": 1,
+  "runtimeBehavior": "NOT_RUN_FOR_NEW_AGENT",
+  "originalCitationFail": "PRESERVED",
+  "integratedBy": "Root normal fast-forward; no reset",
+  "recordedAtUtc": "2026-10-06T00:40:50.305Z"
+}

@@ -1,0 +1,62 @@
+{
+  "sessionStartTime": 1791255717608,
+  "totalApiDurationMs": 12251,
+  "totalNanoAiu": 411564000,
+  "totalPremiumRequests": 1,
+  "tokenDetails": {
+    "input": {
+      "tokenCount": 8615
+    },
+    "cache_read": {
+      "tokenCount": 17152
+    },
+    "cache_write": {
+      "tokenCount": 0
+    },
+    "output": {
+      "tokenCount": 1708
+    }
+  },
+  "currentModel": "mai-code-1.1-flash",
+  "modelMetrics": {
+    "mai-code-1.1-flash": {
+      "requests": {
+        "count": 3,
+        "cost": 1
+      },
+      "usage": {
+        "inputTokens": 25767,
+        "outputTokens": 1708,
+        "cacheReadTokens": 17152,
+        "cacheWriteTokens": 0,
+        "reasoningTokens": 1024
+      },
+      "totalNanoAiu": 411564000,
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 8615
+        },
+        "cache_read": {
+          "tokenCount": 17152
+        },
+        "cache_write": {
+          "tokenCount": 0
+        },
+        "output": {
+          "tokenCount": 1708
+        }
+      }
+    }
+  },
+  "codeChanges": {
+    "linesAdded": 0,
+    "linesRemoved": 0,
+    "filesModified": []
+  },
+  "modelCalls": 1,
+  "wallMs": 152451,
+  "usageOutput": {
+    "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-non-git-usage.json",
+    "sha256": "b19592e51bd7001e729736b28911b96dd82766dad6d70652b40cdd4a8a368a90"
+  }
+}

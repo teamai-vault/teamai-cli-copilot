@@ -1,0 +1,91 @@
+{
+  "status": "ACTUAL_PUBLIC_SETUP_FAIL_NATIVE_QUESTIONS_UNVERIFIED",
+  "fixedBaselineFacts": 215,
+  "fixedBaselineProtection": "PASS",
+  "publicInitAttempts": [
+    {
+      "label": "public-init",
+      "executable": "D:\\soft\\nodejs\\node.exe",
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "init",
+        "--marketplace",
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\baseline-v2\\resource",
+        "--role",
+        "quality"
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v1\\workspaces\\C01",
+      "started": "2026-10-05T10:02:32.741Z",
+      "elapsedMs": 120021,
+      "exitCode": null,
+      "signal": "SIGTERM",
+      "error": "spawnSync D:\\soft\\nodejs\\node.exe ETIMEDOUT"
+    },
+    {
+      "label": "public-init-retry",
+      "executable": "D:\\soft\\nodejs\\node.exe",
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "init",
+        "--marketplace",
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\baseline-v2\\resource",
+        "--role",
+        "quality"
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v1\\workspaces\\C01",
+      "started": "2026-10-05T10:07:24.709Z",
+      "elapsedMs": 43179,
+      "exitCode": 1,
+      "signal": null,
+      "pid": 11676,
+      "error": null
+    },
+    {
+      "label": "public-init-retry-2",
+      "executable": "D:\\soft\\nodejs\\node.exe",
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "init",
+        "--marketplace",
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\baseline-v2\\resource",
+        "--role",
+        "quality"
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v1\\workspaces\\C01",
+      "started": "2026-10-05T10:14:28.487Z",
+      "elapsedMs": 104134,
+      "exitCode": 1,
+      "signal": null,
+      "pid": 29464,
+      "error": null
+    }
+  ],
+  "publicInitProcessElapsedSumMs": 267334,
+  "deliveredAgent": {
+    "status": "DELIVERED_BYTES_AND_RECEIPT_PASS_INIT_FAIL",
+    "target": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/c/native-baseline-v1/home/.copilot/agents/teamai-recall.agent.md",
+    "receiptPath": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/c/native-baseline-v1/home/.teamai/built-in-agents/teamai-recall.json",
+    "receipt": {
+      "schemaVersion": 1,
+      "managedBy": "teamai-cli",
+      "agent": "teamai-recall",
+      "copilotRoot": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v1\\home\\.copilot",
+      "target": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v1\\home\\.copilot\\agents\\teamai-recall.agent.md",
+      "version": "0.4.0",
+      "contentHash": "7e8edba317dde8758d3f238e1845fecb6206d93c00667df4ab8cbe72e7f270e4"
+    },
+    "actualHash": "7e8edba317dde8758d3f238e1845fecb6206d93c00667df4ab8cbe72e7f270e4",
+    "actualDiscovery": "UNVERIFIED",
+    "configAndBinding": "NOT_COMPLETED",
+    "nativeModelQuestions": 0
+  },
+  "setupDelta": "proposed-native-marketplace.json adds owner.name only, fixed source untouched",
+  "nativeSessionsStarted": 0,
+  "nativeQuestionTurnsSubmitted": 0,
+  "nativeToolQueries": "UNVERIFIED_NOT_RUN",
+  "nativeReads": "UNVERIFIED_NOT_RUN",
+  "nativeFinalAnswers": "UNVERIFIED_NOT_RUN",
+  "modelTokensPrice": "UNVERIFIED",
+  "pendingCoordinatorSourceDirection": true,
+  "productAcceptance": "NOT_CLAIMED"
+}

@@ -1,0 +1,8 @@
+{
+  "case": "B33-injection",
+  "sessionId": "8c1e933c-c909-42be-b82c-f312b2b5c4e3",
+  "launcherPid": 21264,
+  "exitCode": 0,
+  "endedAtUtc": "2026-10-06T00:04:36.5947685Z",
+  "meaning": "Normal process end only; record actual events/answer separately. Restore real read-gap source before post protection."
+}

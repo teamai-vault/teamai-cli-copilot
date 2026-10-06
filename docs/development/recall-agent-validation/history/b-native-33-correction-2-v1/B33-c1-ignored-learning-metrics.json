@@ -1,0 +1,62 @@
+{
+  "sessionStartTime": 1791227189967,
+  "totalApiDurationMs": 25675,
+  "totalNanoAiu": 281330500,
+  "totalPremiumRequests": 1,
+  "tokenDetails": {
+    "input": {
+      "tokenCount": 15
+    },
+    "cache_read": {
+      "tokenCount": 37018
+    },
+    "cache_write": {
+      "tokenCount": 12257
+    },
+    "output": {
+      "tokenCount": 1819
+    }
+  },
+  "currentModel": "gpt-6-luna",
+  "modelMetrics": {
+    "gpt-6-luna": {
+      "requests": {
+        "count": 5,
+        "cost": 1
+      },
+      "usage": {
+        "inputTokens": 49290,
+        "outputTokens": 1819,
+        "cacheReadTokens": 37018,
+        "cacheWriteTokens": 12257,
+        "reasoningTokens": 1035
+      },
+      "totalNanoAiu": 281330500,
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 15
+        },
+        "cache_read": {
+          "tokenCount": 37018
+        },
+        "cache_write": {
+          "tokenCount": 12257
+        },
+        "output": {
+          "tokenCount": 1819
+        }
+      }
+    }
+  },
+  "codeChanges": {
+    "linesAdded": 0,
+    "linesRemoved": 0,
+    "filesModified": []
+  },
+  "modelCalls": 1,
+  "wallMs": 372301,
+  "usageOutput": {
+    "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-33-correction-2-v1\\B33-c1-ignored-learning-usage.json",
+    "sha256": "1bf40312ac00ff116884f71cf0e7c0f2d8727add402d1e96c1549f7fac636141"
+  }
+}

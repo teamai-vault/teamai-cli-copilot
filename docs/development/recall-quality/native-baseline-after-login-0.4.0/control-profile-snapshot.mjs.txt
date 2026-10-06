@@ -1,0 +1,23 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {createHash} from 'node:crypto';
+const profile=process.argv[2];
+if(!['missing','damaged'].includes(profile))throw Error('Expected one fixed C06 profile');
+const batch='F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35';
+const root=path.join(batch,'runtime/c/native-baseline-v2/profiles',profile,'.teamai');
+const output=path.join(batch,'handoffs/c-quality/baseline-native-after-login-v1');
+function files(dir,pre=''){
+ const result=[];
+ for(const e of fs.readdirSync(path.join(dir,pre),{withFileTypes:true}).sort((a,b)=>a.name.localeCompare(b.name))){
+  const rel=path.join(pre,e.name),s=fs.lstatSync(path.join(dir,rel));if(s.isSymbolicLink())throw Error('Controlled link refused');
+  if(s.isDirectory())result.push(...files(dir,rel));else if(s.isFile())result.push(rel);
+ }
+ return result;
+}
+const facts=Object.fromEntries(files(root).map(f=>[f.split(path.sep).join('/'),createHash('sha256').update(fs.readFileSync(path.join(root,f))).digest('hex')]));
+const before=JSON.parse(fs.readFileSync(path.join(output,'C06-'+profile+'-protected-before.json'),'utf8'));
+const deltas=[...new Set([...Object.keys(before),...Object.keys(facts)])].filter(k=>before[k]!==facts[k]).map(k=>({path:k,before:before[k]??'ABSENT',after:facts[k]??'ABSENT'}));
+fs.writeFileSync(path.join(output,'C06-'+profile+'-protected-after.json'),JSON.stringify(facts,null,2)+'\n',{flag:'wx'});
+fs.writeFileSync(path.join(output,'C06-'+profile+'-business-protection.json'),JSON.stringify({root,beforeFacts:Object.keys(before).length,afterFacts:Object.keys(facts).length,deltas,scope:'Controlled fictional .teamai business files only; no native/account/session/credential files'},null,2)+'\n',{flag:'wx'});
+console.log(JSON.stringify({profile,facts:Object.keys(facts).length,deltas:deltas.length}));
+

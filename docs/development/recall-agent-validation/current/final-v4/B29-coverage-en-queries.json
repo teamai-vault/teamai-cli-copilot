@@ -1,0 +1,332 @@
+[
+  {
+    "agentId": "ef46931d-2c77-4ac0-9d7f-8e11dd3715fc",
+    "toolCallId": "call_LJHrpiTP9ZhHmVlWyT5fEDR8",
+    "startedAt": "2026-10-06T02:20:20.679Z",
+    "completedAt": "2026-10-06T02:21:01.328Z",
+    "command": "teamai recall \"RetryEnvelope REPLAY_GUARD_BUSY generation lease reconnect\" --require \"REPLAY_GUARD_BUSY: RetryEnvelope cannot acquire generation lease after reconnect.\" --scope workspace --project payments-api --json",
+    "success": true,
+    "exitCode": 0,
+    "result": {
+      "schemaVersion": 1,
+      "query": "RetryEnvelope REPLAY_GUARD_BUSY generation lease reconnect",
+      "requiredLiterals": [
+        "REPLAY_GUARD_BUSY: RetryEnvelope cannot acquire generation lease after reconnect."
+      ],
+      "scope": "workspace",
+      "project": "payments-api",
+      "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+      "resourceRevision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+      "learningsRevision": "cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2",
+      "limit": 5,
+      "hits": [
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/40-replay-guard.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "RetryEnvelope generation lease observations",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/40-replay-guard.md",
+            "contentHash": "0e2751160489cddc7dacb81eb626a71581c0e663ed5c936cb7adf857a001ab25"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\40-replay-guard.md",
+          "matchedTerms": [
+            "RetryEnvelope",
+            "REPLAY_GUARD_BUSY",
+            "generation",
+            "lease",
+            "reconnect"
+          ],
+          "lineStart": 6,
+          "lineEnd": 8,
+          "snippet": "\nObserved diagnostic:\nREPLAY_GUARD_BUSY: RetryEnvelope cannot acquire generation lease after reconnect."
+        }
+      ]
+    },
+    "rawResult": {
+      "content": "{\"schemaVersion\":1,\"query\":\"RetryEnvelope REPLAY_GUARD_BUSY generation lease reconnect\",\"requiredLiterals\":[\"REPLAY_GUARD_BUSY: RetryEnvelope cannot acquire generation lease after reconnect.\"],\"scope\":\"workspace\",\"project\":\"payments-api\",\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"resourceRevision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"learningsRevision\":\"cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\",\"limit\":5,\"hits\":[{\"id\":\"doc:payments-api:contexts/payments-api/docs/40-replay-guard.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"RetryEnvelope generation lease observations\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/40-replay-guard.md\",\"contentHash\":\"0e2751160489cddc7dacb81eb626a71581c0e663ed5c936cb7adf857a001ab25\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\40-replay-guard.md\",\"matchedTerms\":[\"RetryEnvelope\",\"REPLAY_GUARD_BUSY\",\"generation\",\"lease\",\"reconnect\"],\"lineStart\":6,\"lineEnd\":8,\"snippet\":\"\\nObserved diagnostic:\\nREPLAY_GUARD_BUSY: RetryEnvelope cannot acquire generation lease after reconnect.\"}]}\n<shellId: 1 completed with exit code 0>"
+    }
+  },
+  {
+    "agentId": "ef46931d-2c77-4ac0-9d7f-8e11dd3715fc",
+    "toolCallId": "call_y4GA8QPLTM8AHjeekPNxrDWa",
+    "startedAt": "2026-10-06T02:20:20.681Z",
+    "completedAt": "2026-10-06T02:20:42.096Z",
+    "command": "teamai recall \"RetryEnvelope E4 previous sender stopped owner epoch stale duplicate sending\" --scope workspace --project payments-api --json",
+    "success": true,
+    "exitCode": 0,
+    "result": {
+      "schemaVersion": 1,
+      "query": "RetryEnvelope E4 previous sender stopped owner epoch stale duplicate sending",
+      "scope": "workspace",
+      "project": "payments-api",
+      "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+      "resourceRevision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+      "learningsRevision": "cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2",
+      "limit": 5,
+      "hits": [
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/70-epoch-policy.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "Stale owner epoch and duplicate send",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/70-epoch-policy.md",
+            "contentHash": "d1c3e9d39ca87b5b9192d768ba19301fcd377875fd18c9ca71199295c4001fc1"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\70-epoch-policy.md",
+          "matchedTerms": [
+            "E4",
+            "owner",
+            "epoch",
+            "stale",
+            "duplicate"
+          ],
+          "lineStart": 1,
+          "lineEnd": 3,
+          "snippet": "---\ntitle: Stale owner epoch and duplicate send\ntags: [epoch, duplicate]"
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/40-replay-guard.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "RetryEnvelope generation lease observations",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/40-replay-guard.md",
+            "contentHash": "0e2751160489cddc7dacb81eb626a71581c0e663ed5c936cb7adf857a001ab25"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\40-replay-guard.md",
+          "matchedTerms": [
+            "RetryEnvelope",
+            "E4",
+            "previous",
+            "sender",
+            "stopped",
+            "owner",
+            "epoch",
+            "stale",
+            "duplicate"
+          ],
+          "lineStart": 8,
+          "lineEnd": 10,
+          "snippet": "REPLAY_GUARD_BUSY: RetryEnvelope cannot acquire generation lease after reconnect.\n\nThe incident field for an old producer is stale owner epoch. Its duplicate-send rule is documented separately."
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/10-display-note.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "RetryEnvelope reconnect REPLAY_GUARD_BUSY dashboard",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/10-display-note.md",
+            "contentHash": "3bf8e299f32ef4ccbfcbeb03fcb273d13e4c23eef8a359086c6957b50cf6b85e"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\10-display-note.md",
+          "matchedTerms": [
+            "RetryEnvelope",
+            "owner"
+          ],
+          "lineStart": 6,
+          "lineEnd": 8,
+          "snippet": "\nThe dashboard places the terms RetryEnvelope, reconnect and REPLAY_GUARD_BUSY in the same chart legend.\nThis legend describes a visual grouping used by the UI. It does not describe the request path, generation ownership or retry permission."
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/63-intake-handoff.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "IntakeSlot handling policy",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/63-intake-handoff.md",
+            "contentHash": "fe9b9fd2e6d6fc27230482718a546bac406883d4551040a74c8e4ac71ce88a7c"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\63-intake-handoff.md",
+          "matchedTerms": [
+            "previous",
+            "stopped"
+          ],
+          "lineStart": 7,
+          "lineEnd": 9,
+          "snippet": "HANDOFF_BUDGET_WAIT_64: IntakeSlot cannot resume after account rollover.\n\nFor intake mode V6, after the previous holder has stopped, the local wait is 9 ms. If either fact is unconfirmed or false, this note defines no alternative wait and does not establish eligibility."
+        },
+        {
+          "id": "learning:payments-api:5d631ba1-b2e4-4638-8c45-5207c914ce82",
+          "type": "learning",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "LedgerDrain condition C7",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2",
+            "relativePath": "learnings/payments-api/5d631ba1-b2e4-4638-8c45-5207c914ce82.md",
+            "contentHash": "3faf31f95ac6386092f2994224f941537850e281697fc286492a8c6eba2e7001"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\.teamai\\published-learnings\\698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\\revisions\\cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\\files\\learnings\\payments-api\\5d631ba1-b2e4-4638-8c45-5207c914ce82.md",
+          "matchedTerms": [
+            "stopped"
+          ],
+          "lineStart": 7,
+          "lineEnd": 9,
+          "snippet": "\nPIPELINE_LOCK_81: LedgerDrain conflict.\nUnder exact condition case C7, processing must remain stopped until a replacement marker is confirmed."
+        }
+      ]
+    },
+    "rawResult": {
+      "content": "{\"schemaVersion\":1,\"query\":\"RetryEnvelope E4 previous sender stopped owner epoch stale duplicate sending\",\"scope\":\"workspace\",\"project\":\"payments-api\",\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"resourceRevision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"learningsRevision\":\"cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\",\"limit\":5,\"hits\":[{\"id\":\"doc:payments-api:contexts/payments-api/docs/70-epoch-policy.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"Stale owner epoch and duplicate send\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/70-epoch-policy.md\",\"contentHash\":\"d1c3e9d39ca87b5b9192d768ba19301fcd377875fd18c9ca71199295c4001fc1\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\70-epoch-policy.md\",\"matchedTerms\":[\"E4\",\"owner\",\"epoch\",\"stale\",\"duplicate\"],\"lineStart\":1,\"lineEnd\":3,\"snippet\":\"---\\ntitle: Stale owner epoch and duplicate send\\ntags: [epoch, duplicate]\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/40-replay-guard.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"RetryEnvelope generation lease observations\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/40-replay-guard.md\",\"contentHash\":\"0e2751160489cddc7dacb81eb626a71581c0e663ed5c936cb7adf857a001ab25\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\40-replay-guard.md\",\"matchedTerms\":[\"RetryEnvelope\",\"E4\",\"previous\",\"sender\",\"stopped\",\"owner\",\"epoch\",\"stale\",\"duplicate\"],\"lineStart\":8,\"lineEnd\":10,\"snippet\":\"REPLAY_GUARD_BUSY: RetryEnvelope cannot acquire generation lease after reconnect.\\n\\nThe incident field for an old producer is stale owner epoch. Its duplicate-send rule is documented separately.\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/10-display-note.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"RetryEnvelope reconnect REPLAY_GUARD_BUSY dashboard\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/10-display-note.md\",\"contentHash\":\"3bf8e299f32ef4ccbfcbeb03fcb273d13e4c23eef8a359086c6957b50cf6b85e\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\10-display-note.md\",\"matchedTerms\":[\"RetryEnvelope\",\"owner\"],\"lineStart\":6,\"lineEnd\":8,\"snippet\":\"\\nThe dashboard places the terms RetryEnvelope, reconnect and REPLAY_GUARD_BUSY in the same chart legend.\\nThis legend describes a visual grouping used by the UI. It does not describe the request path, generation ownership or retry permission.\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/63-intake-handoff.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"IntakeSlot handling policy\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/63-intake-handoff.md\",\"contentHash\":\"fe9b9fd2e6d6fc27230482718a546bac406883d4551040a74c8e4ac71ce88a7c\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\63-intake-handoff.md\",\"matchedTerms\":[\"previous\",\"stopped\"],\"lineStart\":7,\"lineEnd\":9,\"snippet\":\"HANDOFF_BUDGET_WAIT_64: IntakeSlot cannot resume after account rollover.\\n\\nFor intake mode V6, after the previous holder has stopped, the local wait is 9 ms. If either fact is unconfirmed or false, this note defines no alternative wait and does not establish eligibility.\"},{\"id\":\"learning:payments-api:5d631ba1-b2e4-4638-8c45-5207c914ce82\",\"type\":\"learning\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"LedgerDrain condition C7\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\",\"relativePath\":\"learnings/payments-api/5d631ba1-b2e4-4638-8c45-5207c914ce82.md\",\"contentHash\":\"3faf31f95ac6386092f2994224f941537850e281697fc286492a8c6eba2e7001\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\business-home\\\\.teamai\\\\published-learnings\\\\698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\\\\revisions\\\\cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\\\\files\\\\learnings\\\\payments-api\\\\5d631ba1-b2e4-4638-8c45-5207c914ce82.md\",\"matchedTerms\":[\"stopped\"],\"lineStart\":7,\"lineEnd\":9,\"snippet\":\"\\nPIPELINE_LOCK_81: LedgerDrain conflict.\\nUnder exact condition case C7, processing must remain stopped until a replacement marker is confirmed.\"}]}\n<shellId: 2 completed with exit code 0>"
+    }
+  },
+  {
+    "agentId": "ef46931d-2c77-4ac0-9d7f-8e11dd3715fc",
+    "toolCallId": "call_3pEuj2gciFRJ6U95cbKJVjIx",
+    "startedAt": "2026-10-06T02:20:20.683Z",
+    "completedAt": "2026-10-06T02:20:52.505Z",
+    "command": "teamai recall \"generation lease old producer stale owner epoch reconnect retry handling\" --scope workspace --project payments-api --json",
+    "success": true,
+    "exitCode": 0,
+    "result": {
+      "schemaVersion": 1,
+      "query": "generation lease old producer stale owner epoch reconnect retry handling",
+      "scope": "workspace",
+      "project": "payments-api",
+      "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+      "resourceRevision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+      "learningsRevision": "cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2",
+      "limit": 5,
+      "hits": [
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/40-replay-guard.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "RetryEnvelope generation lease observations",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/40-replay-guard.md",
+            "contentHash": "0e2751160489cddc7dacb81eb626a71581c0e663ed5c936cb7adf857a001ab25"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\40-replay-guard.md",
+          "matchedTerms": [
+            "generation",
+            "lease",
+            "old",
+            "producer",
+            "stale",
+            "owner",
+            "epoch",
+            "reconnect",
+            "retry"
+          ],
+          "lineStart": 8,
+          "lineEnd": 10,
+          "snippet": "REPLAY_GUARD_BUSY: RetryEnvelope cannot acquire generation lease after reconnect.\n\nThe incident field for an old producer is stale owner epoch. Its duplicate-send rule is documented separately."
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/70-epoch-policy.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "Stale owner epoch and duplicate send",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/70-epoch-policy.md",
+            "contentHash": "d1c3e9d39ca87b5b9192d768ba19301fcd377875fd18c9ca71199295c4001fc1"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\70-epoch-policy.md",
+          "matchedTerms": [
+            "producer",
+            "stale",
+            "owner",
+            "epoch"
+          ],
+          "lineStart": 5,
+          "lineEnd": 7,
+          "snippet": "# Producer epoch rule\n\nA stale owner epoch can cause duplicate send when the former producer still owns an outstanding request marker."
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/10-display-note.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "RetryEnvelope reconnect REPLAY_GUARD_BUSY dashboard",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/10-display-note.md",
+            "contentHash": "3bf8e299f32ef4ccbfcbeb03fcb273d13e4c23eef8a359086c6957b50cf6b85e"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\10-display-note.md",
+          "matchedTerms": [
+            "generation",
+            "lease",
+            "owner",
+            "reconnect",
+            "retry"
+          ],
+          "lineStart": 1,
+          "lineEnd": 3,
+          "snippet": "---\ntitle: RetryEnvelope reconnect REPLAY_GUARD_BUSY dashboard\ntags: [RetryEnvelope, reconnect, REPLAY_GUARD_BUSY, generation, lease]"
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/63-intake-handoff.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "IntakeSlot handling policy",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/63-intake-handoff.md",
+            "contentHash": "fe9b9fd2e6d6fc27230482718a546bac406883d4551040a74c8e4ac71ce88a7c"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\63-intake-handoff.md",
+          "matchedTerms": [
+            "old",
+            "handling"
+          ],
+          "lineStart": 1,
+          "lineEnd": 3,
+          "snippet": "---\ntitle: IntakeSlot handling policy\ntags: [IntakeSlot, handoff]"
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/90-read-gap.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "LeaseMux incident appendix",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/90-read-gap.md",
+            "contentHash": "4ae3a786e26169cf14543b30b7b7225b328f6bd2d1584dd0cf103887719dd4cb"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\90-read-gap.md",
+          "matchedTerms": [
+            "lease",
+            "handling"
+          ],
+          "lineStart": 6,
+          "lineEnd": 8,
+          "snippet": "\nREAD_GAP_72: LeaseMux incident appendix unavailable.\nAn appendix contains the final handling condition."
+        }
+      ]
+    },
+    "rawResult": {
+      "content": "{\"schemaVersion\":1,\"query\":\"generation lease old producer stale owner epoch reconnect retry handling\",\"scope\":\"workspace\",\"project\":\"payments-api\",\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"resourceRevision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"learningsRevision\":\"cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\",\"limit\":5,\"hits\":[{\"id\":\"doc:payments-api:contexts/payments-api/docs/40-replay-guard.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"RetryEnvelope generation lease observations\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/40-replay-guard.md\",\"contentHash\":\"0e2751160489cddc7dacb81eb626a71581c0e663ed5c936cb7adf857a001ab25\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\40-replay-guard.md\",\"matchedTerms\":[\"generation\",\"lease\",\"old\",\"producer\",\"stale\",\"owner\",\"epoch\",\"reconnect\",\"retry\"],\"lineStart\":8,\"lineEnd\":10,\"snippet\":\"REPLAY_GUARD_BUSY: RetryEnvelope cannot acquire generation lease after reconnect.\\n\\nThe incident field for an old producer is stale owner epoch. Its duplicate-send rule is documented separately.\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/70-epoch-policy.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"Stale owner epoch and duplicate send\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/70-epoch-policy.md\",\"contentHash\":\"d1c3e9d39ca87b5b9192d768ba19301fcd377875fd18c9ca71199295c4001fc1\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\70-epoch-policy.md\",\"matchedTerms\":[\"producer\",\"stale\",\"owner\",\"epoch\"],\"lineStart\":5,\"lineEnd\":7,\"snippet\":\"# Producer epoch rule\\n\\nA stale owner epoch can cause duplicate send when the former producer still owns an outstanding request marker.\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/10-display-note.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"RetryEnvelope reconnect REPLAY_GUARD_BUSY dashboard\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/10-display-note.md\",\"contentHash\":\"3bf8e299f32ef4ccbfcbeb03fcb273d13e4c23eef8a359086c6957b50cf6b85e\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\10-display-note.md\",\"matchedTerms\":[\"generation\",\"lease\",\"owner\",\"reconnect\",\"retry\"],\"lineStart\":1,\"lineEnd\":3,\"snippet\":\"---\\ntitle: RetryEnvelope reconnect REPLAY_GUARD_BUSY dashboard\\ntags: [RetryEnvelope, reconnect, REPLAY_GUARD_BUSY, generation, lease]\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/63-intake-handoff.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"IntakeSlot handling policy\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/63-intake-handoff.md\",\"contentHash\":\"fe9b9fd2e6d6fc27230482718a546bac406883d4551040a74c8e4ac71ce88a7c\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\63-intake-handoff.md\",\"matchedTerms\":[\"old\",\"handling\"],\"lineStart\":1,\"lineEnd\":3,\"snippet\":\"---\\ntitle: IntakeSlot handling policy\\ntags: [IntakeSlot, handoff]\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/90-read-gap.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"LeaseMux incident appendix\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/90-read-gap.md\",\"contentHash\":\"4ae3a786e26169cf14543b30b7b7225b328f6bd2d1584dd0cf103887719dd4cb\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\90-read-gap.md\",\"matchedTerms\":[\"lease\",\"handling\"],\"lineStart\":6,\"lineEnd\":8,\"snippet\":\"\\nREAD_GAP_72: LeaseMux incident appendix unavailable.\\nAn appendix contains the final handling condition.\"}]}\n<shellId: 3 completed with exit code 0>"
+    }
+  }
+]

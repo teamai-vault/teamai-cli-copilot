@@ -1,0 +1,79 @@
+{
+  "result": "ACCEPT_TWO_ACTUAL_CASE_OBSERVATIONS_WITH_PRECISION_LIMITS_CONTINUE_ORIGINAL_EIGHT",
+  "ready": {
+    "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-29-stop-two-coverage-v3-checkpoint-v1-ready.json",
+    "sha256": "1f7009ddceaebc16c936c769e26780aaf24cdc32cd5818c82effcbccc2484336"
+  },
+  "indexedArtifacts": 126,
+  "uniqueIdentitiesVerified": 128,
+  "sourceRevision": "4977e40ac7e6d327f63710302bac137177f70193",
+  "manifestSha256": "56f6935e691e87a0d48ede91670e12c22c41004b1fd04323606d14645f8c854e",
+  "agentSha256": "03562f41201196a8272e3fbbd6997f989ba6eceb34bbae99276fe1e4359a0452",
+  "cases": [
+    {
+      "caseId": "B29-coverage-zh",
+      "sessionId": "e7339469-a2f9-4dbd-ad61-06f00db057de",
+      "normalEnd": 0,
+      "queries": 3,
+      "views": 4,
+      "knowledgeOriginals": [
+        "doc:payments-api:contexts/payments-api/docs/40-replay-guard.md",
+        "doc:payments-api:contexts/payments-api/docs/70-epoch-policy.md",
+        "doc:payments-api:contexts/payments-api/docs/10-display-note.md"
+      ],
+      "originalReadOnlyScope": "workspace/payments-api/published",
+      "model": "gpt-6-luna",
+      "behavioralDisposition": "OBSERVED_CORE_EVIDENCE_COMPARISON_AND_STOP_WITH_RECORDED_PRECISION_LIMIT"
+    },
+    {
+      "caseId": "B29-coverage-en",
+      "sessionId": "7cff9c8a-e87c-432a-b252-d22e51cbf0b1",
+      "normalEnd": 0,
+      "queries": 3,
+      "views": 3,
+      "knowledgeOriginals": [
+        "doc:payments-api:contexts/payments-api/docs/40-replay-guard.md",
+        "doc:payments-api:contexts/payments-api/docs/70-epoch-policy.md",
+        "doc:payments-api:contexts/payments-api/docs/90-read-gap.md"
+      ],
+      "originalReadOnlyScope": "workspace/payments-api/published",
+      "model": "gpt-6-luna",
+      "behavioralDisposition": "OBSERVED_CORE_EVIDENCE_COMPARISON_AND_STOP_WITH_RECORDED_PRECISION_LIMIT"
+    }
+  ],
+  "rootOriginalAnswerReadback": "Root read both actual answers and their query/read records. Full diagnostic, E4 and stopped-sender 250ms rule, former-producer outstanding-marker relinquishment condition are supported by originals40/70; no invented proof signal. Both stop after reads.",
+  "actualWeakFirst": "ZH initial query: weak10 rank1, genuine40 rank2. Read10/40/70, adopt40/70 and reject weak10 as authority. Original supplementary clue case is still separate.",
+  "precisionLimits": {
+    "zh": "70 contentHash final answer has63 characters and omits one a. Returned CLI metadata and actual read have the correct64-character hash. Original answer unchanged.",
+    "en": "Child exact tuples and original paths; parent omits tuple fields and two relative citation links do not resolve from actual cwd. Original answer unchanged."
+  },
+  "historicalFailures": "Original8000 Chinese STOP Major and prior citation/read-gap results remain at their actual identities. No global model accuracy/PASS inferred; no unrun case accepted.",
+  "protectedReadback": {
+    "currentNewRoots": "13 business / 5 Git",
+    "originalRoots": "8 business / 5 Git",
+    "deltasSinceCheckpoint": 0,
+    "onlyStartupPaths": [
+      "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+      "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive"
+    ],
+    "fullBytesPreserved": true,
+    "generatingPid": "NOT_INDEPENDENTLY_OBSERVED",
+    "nativePlatform": "Account/config/session/log roots separate and not scanned"
+  },
+  "actualLauncherPidsAbsent": [
+    23376,
+    16236
+  ],
+  "remainingOriginalEight": [
+    "B29-context",
+    "B29-dedup-conflict",
+    "B29-none",
+    "B29-unbound-git",
+    "B29-non-git",
+    "B29-explicit-workspace-unbound-git",
+    "B29-explicit-project-non-git",
+    "B29-supplement-intake"
+  ],
+  "latestUserConstraint": "Current Agent frozen. Measure lightweight stochastic quality; no prompt stacking or repeat sampling for green. Only material correctness/permission failures warrant correction.",
+  "acceptedAtUtc": "2026-10-06T02:31:59.499Z"
+}

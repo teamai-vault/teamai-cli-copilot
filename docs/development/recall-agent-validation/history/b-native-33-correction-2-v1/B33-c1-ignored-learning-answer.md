@@ -1,0 +1,5 @@
+Event 0af96803-37aa-4a81-966b-9aa7429d47f3; agentId=parent
+
+目前**不能完成观察**：现场已确认当前 sample 存在，但 preceding sample 缺失。Learning 明确规定，对于确认的 400 ms UTC sample interval，须比较 preceding sample 与 current sample；任一缺失时，观察保持 pending（原文第 9–10 行）。因此，此处资料状态是 **published**，观察状态是 **pending**，两者不同。
+
+来源由 Recall 在 `scope=workspace`、`project=payments-api` 下检索；该 Learning 的逻辑项目标记为 **shared**，并非 `payments-api` 专属。来源身份：`ClockFence observation window`，ID `11f67190-c1b4-4cb7-a082-188a7dd98f63`；原文路径：`F:\agent-workspace\multiAgent\teamai-cli-customization\.tmp\recall-29-35\runtime\b\native-33-preparation-v2\workspaces\bound-payments-api\.teamai\context\b33-c2-ignored-business-home\.teamai\published-learnings\9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa\revisions\2ef6af28a0d3147fabf24613d76f8b33051a1916\files\learnings\shared\11f67190-c1b4-4cb7-a082-188a7dd98f63.md`。Recall 元数据标记其发布状态为 `published`，revision 为 `2ef6af28a0d3147fabf24613d76f8b33051a1916`，内容 SHA-256 为 `0360cd3086cb8d79b0ae92f2d9a8cce1b4eb8c2fa9739e755e50560ba0a230a2`，sourceHash 为 `9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa`。原文读取确认了上述诊断与规则；读取本身未独立计算哈希，也不能证明文件整体未变化。

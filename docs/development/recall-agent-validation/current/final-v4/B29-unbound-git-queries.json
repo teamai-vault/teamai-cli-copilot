@@ -1,0 +1,47 @@
+[
+  {
+    "agentId": null,
+    "toolCallId": "call_LYAo29AnfZUJ9ErHvI85yZUd",
+    "startedAt": "2026-10-06T02:59:40.134Z",
+    "completedAt": "2026-10-06T02:59:58.693Z",
+    "command": "teamai recall \"UTC_LEASE_WINDOW_63 ClockFence observation pending\" --json",
+    "success": true,
+    "exitCode": 0,
+    "result": {
+      "schemaVersion": 1,
+      "query": "UTC_LEASE_WINDOW_63 ClockFence observation pending",
+      "scope": "user",
+      "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+      "learningsRevision": "cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2",
+      "limit": 5,
+      "hits": [
+        {
+          "id": "learning:shared:11f67190-c1b4-4cb7-a082-188a7dd98f63",
+          "type": "learning",
+          "publication": "published",
+          "logicalProject": "shared",
+          "title": "ClockFence observation window",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2",
+            "relativePath": "learnings/shared/11f67190-c1b4-4cb7-a082-188a7dd98f63.md",
+            "contentHash": "0360cd3086cb8d79b0ae92f2d9a8cce1b4eb8c2fa9739e755e50560ba0a230a2"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\.teamai\\published-learnings\\698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\\revisions\\cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\\files\\learnings\\shared\\11f67190-c1b4-4cb7-a082-188a7dd98f63.md",
+          "matchedTerms": [
+            "UTC_LEASE_WINDOW_63",
+            "ClockFence",
+            "observation",
+            "pending"
+          ],
+          "lineStart": 6,
+          "lineEnd": 8,
+          "snippet": "# ClockFence observation\n\nUTC_LEASE_WINDOW_63: ClockFence observation pending."
+        }
+      ]
+    },
+    "rawResult": {
+      "content": "{\"schemaVersion\":1,\"query\":\"UTC_LEASE_WINDOW_63 ClockFence observation pending\",\"scope\":\"user\",\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"learningsRevision\":\"cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\",\"limit\":5,\"hits\":[{\"id\":\"learning:shared:11f67190-c1b4-4cb7-a082-188a7dd98f63\",\"type\":\"learning\",\"publication\":\"published\",\"logicalProject\":\"shared\",\"title\":\"ClockFence observation window\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\",\"relativePath\":\"learnings/shared/11f67190-c1b4-4cb7-a082-188a7dd98f63.md\",\"contentHash\":\"0360cd3086cb8d79b0ae92f2d9a8cce1b4eb8c2fa9739e755e50560ba0a230a2\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\business-home\\\\.teamai\\\\published-learnings\\\\698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\\\\revisions\\\\cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\\\\files\\\\learnings\\\\shared\\\\11f67190-c1b4-4cb7-a082-188a7dd98f63.md\",\"matchedTerms\":[\"UTC_LEASE_WINDOW_63\",\"ClockFence\",\"observation\",\"pending\"],\"lineStart\":6,\"lineEnd\":8,\"snippet\":\"# ClockFence observation\\n\\nUTC_LEASE_WINDOW_63: ClockFence observation pending.\"}]}\n<shellId: 1 completed with exit code 0>"
+    }
+  }
+]

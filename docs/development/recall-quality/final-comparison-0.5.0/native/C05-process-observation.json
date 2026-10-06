@@ -1,0 +1,26 @@
+{
+  "case": "C05",
+  "observedAt": "2026-10-06T05:08:36.7857553+00:00",
+  "launcherPid": 23840,
+  "processes": [
+    {
+      "pid": 23840,
+      "parentPid": 13340,
+      "name": "pwsh.exe",
+      "creationDate": "2026-10-06T05:08:18.2487960Z"
+    },
+    {
+      "pid": 33656,
+      "parentPid": 23840,
+      "name": "node.exe",
+      "creationDate": "2026-10-06T05:08:20.7080960Z"
+    },
+    {
+      "pid": 33032,
+      "parentPid": 33656,
+      "name": "copilot.exe",
+      "creationDate": "2026-10-06T05:08:20.7799880Z"
+    }
+  ],
+  "scope": "Only launcher and descendants PID/parent/name/start, no command lines/environment/account fields"
+}

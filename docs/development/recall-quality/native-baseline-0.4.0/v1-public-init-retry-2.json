@@ -1,0 +1,19 @@
+{
+  "label": "public-init-retry-2",
+  "executable": "D:\\soft\\nodejs\\node.exe",
+  "args": [
+    "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\baseline-installed\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+    "init",
+    "--marketplace",
+    "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\baseline-v2\\resource",
+    "--role",
+    "quality"
+  ],
+  "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v1\\workspaces\\C01",
+  "started": "2026-10-05T10:14:28.487Z",
+  "elapsedMs": 104134,
+  "exitCode": 1,
+  "signal": null,
+  "pid": 29464,
+  "error": null
+}

@@ -30,7 +30,7 @@ function usage(): string {
     "  learning share <file> [--project <id>|--shared] [--tags <tag...>]",
     "  learning pending [--json]",
     "  learning retry <id>",
-    "  recall <query> [--scope auto|user|workspace] [--project <id>] [--limit <n>] [--include-pending] [--json]",
+    "  recall <query> [--scope auto|user|workspace] [--project <id>] [--limit <n>] [--require <literal>] [--include-pending] [--json]",
     "  Example: teamai recall 支付 重试",
     "  sync",
     "  role list",
@@ -49,12 +49,50 @@ function usage(): string {
     "  --dry-run   Preview writes and Copilot mutations",
     "  --help      Show help",
     "  --version   Show version",
+    "",
+    "Recall:",
+    "  Search verified cached published Learnings and active Project docs locally, read-only.",
+    "  --scope auto (default): Workspace scope if the current Git Workspace has active Logical Projects;",
+    "    otherwise User scope. --scope user: shared Learnings only, without --project.",
+    "  --scope workspace: shared Learnings and active Project docs/Learnings; requires a bound Git Workspace.",
+    "  --project <id>: narrow Workspace scope to one active Logical Project; auto also requires a binding.",
+    "  --limit <n>: 1-20 results, default 5. --json: machine-readable results or errors.",
+    "  --include-pending: include incomplete local drafts matching the current source and scope.",
+    "    Workspace drafts must originate in this Workspace; User shared drafts may originate anywhere.",
+    "  Query: 1-32 whitespace-separated terms, at most 1024 Unicode code points before normalization.",
+    "    Match at least one NFC/case-normalized substring in title, tags or body; repeated terms are deduplicated.",
+    "    Order by in-memory substring BM25 score (descending), then stable ID.",
+    "    Weighted non-overlapping title/each tag/body frequency (3/2/1), with saturation/length normalization",
+    "    (k1=1.2, b=0.75). N/df/avgdl use the full verified allowed corpus before query/required/limit filters.",
+    "    Shell quotes pass arguments; they do not enable phrase matching.",
+    "  --require <literal>: require a complete NFC/case-normalized substring in one title, single tag or body.",
+    "    May be repeated; all required literals must match (AND). Use --require=<literal> for a leading '-'.",
+    "    Query still requires at least one matching term; required literals never expand the allowed scope.",
+    "    Literals are not split into words or expanded as regex. Empty/whitespace literals are input errors.",
+    "    Query + required values: at most 1024 raw Unicode code points total, before normalization.",
+    "    Query whitespace terms (before deduplication) + required values: at most 32 items total.",
+    "    Applied original values appear in text and JSON requiredLiterals only when --require is used.",
+    "  The CLI does not translate or provide semantic search. Rank and matched-term count are",
+    "    not evidence of answer correctness or semantic confidence. The Recall Agent extracts English",
+    "    technical terms, reads original evidence, filters/reranks for relevance and answers in the user's language.",
+    "  English-first is a knowledge contribution convention; Chinese query terms remain supported.",
+    "  Corpus limits: 5000 files, 64 MiB total, 1 MiB per file. All permitted files must verify, even with no hits.",
+    "  Results include source revision/hash, original line numbers and a snippet of at most 3 lines/1200 code points.",
+    "    Choose the consecutive original window covering most distinct actual query terms; ties use the earliest position.",
+    "    A derived-title-only match keeps the opening; long windows are clipped as continuous raw text.",
+    "    Snippets are retrieval hints; conclusions outside them require reading the original evidence.",
+    "  Recall makes no network or model calls, writes no persistent state and never refreshes or repairs the cache.",
+    "  --help returns text before product context or cache access, even with --json and no query.",
+    "  Examples:",
+    '    teamai recall "Plugin discovery" --scope user',
+    '    teamai recall "Plugin not" --require "Plugin not found: E_PLUGIN_42." --scope user',
+    '    teamai recall "支付 重试" --limit 5',
   ].join("\n");
 }
 
 class UsageError extends Error {}
 
-type OptionRule = { kind: "boolean" | "single" | "many"; choices?: readonly string[] };
+type OptionRule = { kind: "boolean" | "single" | "many" | "repeatable"; choices?: readonly string[] };
 type ParsedOptions = Map<string, true | string[]>;
 type Invocation = { command: string; subcommand?: string; positionals: string[]; options: ParsedOptions };
 
@@ -82,6 +120,7 @@ const optionRules: Record<string, Record<string, OptionRule>> = {
     "--scope": { kind: "single", choices: ["auto", "user", "workspace"] },
     "--project": { kind: "single" },
     "--limit": { kind: "single" },
+    "--require": { kind: "repeatable" },
     "--include-pending": { kind: "boolean" },
     "--json": { kind: "boolean" },
   },
@@ -104,7 +143,7 @@ function parseOptions(tokens: string[], rules: Record<string, OptionRule>, comma
     const inlineValue = equals < 0 ? undefined : token.slice(equals + 1);
     const rule = rules[name];
     if (!rule) throw new UsageError(`Unknown option '${name}' for '${command}'.`);
-    if (options.has(name)) throw new UsageError(`${name} may be supplied only once.`);
+    if (options.has(name) && rule.kind !== "repeatable") throw new UsageError(`${name} may be supplied only once.`);
     if (rule.kind === "boolean") {
       if (inlineValue !== undefined) throw new UsageError(`${name} does not take a value.`);
       options.set(name, true);
@@ -116,7 +155,7 @@ function parseOptions(tokens: string[], rules: Record<string, OptionRule>, comma
       if (!inlineValue) throw new UsageError(`${name} requires a value.`);
       values.push(inlineValue);
     }
-    if (rule.kind === "single") {
+    if (rule.kind === "single" || rule.kind === "repeatable") {
       if (values.length === 0) {
         const value = tokens[index + 1];
         if (!value || value.startsWith("-")) throw new UsageError(name + " requires a value.");
@@ -130,10 +169,12 @@ function parseOptions(tokens: string[], rules: Record<string, OptionRule>, comma
       }
       if (values.length === 0) throw new UsageError(`${name} requires a value.`);
     }
+    if (rule.kind === "repeatable" && !values[0].trim()) throw new UsageError(`${name} must contain a non-whitespace literal.`);
     if (rule.choices && !rule.choices.includes(values[0])) {
       throw new UsageError(`${name} must be ${rule.choices.join(" or ")}.`);
     }
-    options.set(name, values);
+    const previous = options.get(name);
+    options.set(name, [...(Array.isArray(previous) ? previous : []), ...values]);
   }
   return { positionals, options };
 }
@@ -342,6 +383,7 @@ export async function runCli(argv: string[], overrides: Partial<CommandContext> 
           scope: option(invocation.options, "--scope") as "auto" | "user" | "workspace" | undefined,
           project: option(invocation.options, "--project"),
           limit: option(invocation.options, "--limit"),
+          requiredLiterals: optionValues(invocation.options, "--require"),
           includePending: hasOption(invocation.options, "--include-pending"),
           json: hasOption(invocation.options, "--json"),
         });

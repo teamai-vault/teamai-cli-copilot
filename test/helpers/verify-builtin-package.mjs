@@ -34,10 +34,10 @@ command("npm", ["install", "--ignore-scripts", "--no-audit", "--no-fund", tarbal
 const installed = path.join(install, "node_modules", "teamai-cli-copilot");
 const pkg = JSON.parse(await readFile(path.join(installed, "package.json"), "utf8"));
 const lock = JSON.parse(await readFile(path.join(root, "package-lock.json"), "utf8"));
-assert.equal(pkg.version, "0.4.0");
-assert.equal(lock.version, "0.4.0");
-assert.equal(lock.packages[""].version, "0.4.0");
-assert.equal(command(process.execPath, [path.join(installed, "dist", "cli.js"), "--version"]), "0.4.0");
+assert.equal(pkg.version, "0.5.0");
+assert.equal(lock.version, "0.5.0");
+assert.equal(lock.packages[""].version, "0.5.0");
+assert.equal(command(process.execPath, [path.join(installed, "dist", "cli.js"), "--version"]), "0.5.0");
 assert.equal(command("teamai", ["--version"], install), pkg.version);
 const skill = await readFile(path.join(installed, "skills", "teamai", "SKILL.md"), "utf8");
 for (const match of skill.matchAll(/\]\((references\/[^)]+)\)/g)) {
@@ -53,11 +53,11 @@ const plugins = [];
 for (const name of ["common", "api"]) {
   const pluginRoot = path.join(source, "plugins", name);
   await mkdir(pluginRoot, { recursive: true });
-  await writeFile(path.join(pluginRoot, "plugin.json"), JSON.stringify({ name, version: "0.1.0", extensions: { "com.company.teamai": { kind: name === "common" ? "common" : "role" } } }));
+  await writeFile(path.join(pluginRoot, "plugin.json"), JSON.stringify({ $schema: "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json", name, version: "0.1.0", extensions: { "com.company.teamai": { kind: name === "common" ? "common" : "role" } } }));
   plugins.push({ name, version: "0.1.0", kind: name === "common" ? "common" : "role", root: pluginRoot });
 }
 await mkdir(path.join(source, ".github", "plugin"), { recursive: true });
-await writeFile(path.join(source, ".github", "plugin", "marketplace.json"), JSON.stringify({ name: "package-fixture", plugins: plugins.map(({ name, version }) => ({ name, version, source: `./plugins/${name}` })) }));
+await writeFile(path.join(source, ".github", "plugin", "marketplace.json"), JSON.stringify({ name: "package-fixture", owner: { name: "Recall Package Fixture" }, plugins: plugins.map(({ name, version }) => ({ name, version, source: `./plugins/${name}` })) }));
 await writeFile(path.join(source, "skills.yaml"), "version: 1\nskills: {}\n");
 const { runCli } = await import(pathToFileURL(path.join(installed, "dist", "cli.js")).href);
 const { CopilotClient } = await import(pathToFileURL(path.join(installed, "dist", "copilot", "cli.js")).href);
@@ -84,7 +84,7 @@ for (const custom of [false, true]) {
   const receipt = JSON.parse(await readFile(path.join(home, ".teamai", "built-in-agents", "teamai-recall.json"), "utf8"));
   assert.equal(receipt.target, target);
   assert.equal(receipt.copilotRoot, copilotRoot);
-  assert.equal(receipt.version, "0.4.0");
+  assert.equal(receipt.version, "0.5.0");
   assert.equal(receipt.contentHash, createHash("sha256").update(bytes).digest("hex"));
   assert.equal(await readFile(personal, "utf8"), "personal neighbor\n");
   const bundledSkillRoot = path.join(installed, "skills", "teamai");

@@ -1,0 +1,212 @@
+{
+  "schemaVersion": 1,
+  "sourceRevision": "0fb99a7b065de71eb683d774231b518971b57e8c",
+  "artifactType": "Actual native setup/discovery/auth stage; model turns unrun",
+  "copies": [
+    {
+      "file": "v1-public-init.json",
+      "bytes": 742,
+      "sha256": "c300d259c1783d0f2c9581c7bbe007a6783a26e0a0c934f15b1d425cc17558fd",
+      "original": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-native-v1\\public-init.json"
+    },
+    {
+      "file": "v1-public-init.stdout.txt",
+      "bytes": 39,
+      "sha256": "b624209485bbe6030e71ceed844f26993d00b2f3888a6be61d4a15b833c4a4ea",
+      "original": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-native-v1\\public-init.stdout.txt"
+    },
+    {
+      "file": "v1-public-init.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-native-v1\\public-init.stderr.txt"
+    },
+    {
+      "file": "v1-public-init-retry.json",
+      "bytes": 711,
+      "sha256": "c91cd5e056d9e24c6556d7162267fac06bbad1eeee9a92a66e9e431d81f11362",
+      "original": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-native-v1\\public-init-retry.json"
+    },
+    {
+      "file": "v1-public-init-retry.stdout.txt",
+      "bytes": 39,
+      "sha256": "b624209485bbe6030e71ceed844f26993d00b2f3888a6be61d4a15b833c4a4ea",
+      "original": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-native-v1\\public-init-retry.stdout.txt"
+    },
+    {
+      "file": "v1-public-init-retry.stderr.txt",
+      "bytes": 179,
+      "sha256": "b0eb8bfbef1f6bcf94d037cd144ed7f6687f24d5812e94da31834c9b56515166",
+      "original": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-native-v1\\public-init-retry.stderr.txt"
+    },
+    {
+      "file": "v1-public-init-retry-2.json",
+      "bytes": 714,
+      "sha256": "27921fc3c609b7a69120fd7187d07caee9ebbf316137c7f87aa191f5c21c8d0f",
+      "original": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-native-v1\\public-init-retry-2.json"
+    },
+    {
+      "file": "v1-public-init-retry-2.stdout.txt",
+      "bytes": 424,
+      "sha256": "ecb2be615bf9b80fbf43b37dae77d3d352356978b31e2a202e2f054bc5e26e9f",
+      "original": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-native-v1\\public-init-retry-2.stdout.txt"
+    },
+    {
+      "file": "v1-public-init-retry-2.stderr.txt",
+      "bytes": 284,
+      "sha256": "48d976aee9c52377b18c3174f63967a352a3fa66728666100d0946be389ad544",
+      "original": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-native-v1\\public-init-retry-2.stderr.txt"
+    },
+    {
+      "file": "v1-setup-assessment.json",
+      "bytes": 4189,
+      "sha256": "ee0e92f4b2a6c71c296d4dcbd1ff4a0995d4275686d150d1335022870bc36ab0",
+      "original": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-native-v1\\setup-assessment.json"
+    },
+    {
+      "file": "v1-partial-delivery-readback.json",
+      "bytes": 1117,
+      "sha256": "b68f011a93095eca8f7429817640a6ffd1f118a3f420888a1b6b923be43874cb",
+      "original": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-native-v1\\partial-delivery-readback.json"
+    },
+    {
+      "file": "v1-correction-3-process-end-independent.json",
+      "bytes": 874,
+      "sha256": "2d7858f864e24e3a1079e2057e36d621a9368e65f521cefedc5660d57a941e35",
+      "original": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-native-v1\\correction-3-process-end-independent.json"
+    },
+    {
+      "file": "v1-correction-3-cleanup.json",
+      "bytes": 54,
+      "sha256": "b3c3db549cac9fc4142d00ab37a01634e9e4b47dc4e73436b8ffe730c1f1440b",
+      "original": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-native-v1\\correction-3-cleanup.json"
+    },
+    {
+      "file": "v2-package-facts.json",
+      "bytes": 984,
+      "sha256": "c02a785e4b2ca36159a3b72359144889c9758e40304ea8b06ad01b2f18e2f1cc",
+      "original": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-native-v2\\package-facts.json"
+    },
+    {
+      "file": "v2-native-source-before-consumption.json",
+      "bytes": 12667,
+      "sha256": "327c8fd7dc56213ee359ce8d59a9ccda50ca54ac2c72bb21209a8d9890cbfe77",
+      "original": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-native-v2\\native-source-before-consumption.json"
+    },
+    {
+      "file": "v2-actual-delivery-readback.json",
+      "bytes": 1017,
+      "sha256": "a60fc1bf102d87c7bfb80429817564a1b604f3c4298934952146d3f4601ec8bc",
+      "original": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-native-v2\\actual-delivery-readback.json"
+    },
+    {
+      "file": "v2-setup-summary.json",
+      "bytes": 8748,
+      "sha256": "3c346909f37cc668ad7b62525390cc785183a91c07e9fa970ebef89622806c61",
+      "original": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-native-v2\\setup-summary.json"
+    },
+    {
+      "file": "v2-public-init.stdout.txt",
+      "bytes": 624,
+      "sha256": "5fe460a5ea2ea33ea942318e2f5b6cd0f71861fabc8bc470aa00bcc4bf5c7257",
+      "original": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-native-v2\\public-init.stdout.txt"
+    },
+    {
+      "file": "v2-public-init.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-native-v2\\public-init.stderr.txt"
+    },
+    {
+      "file": "v2-public-sync.stdout.txt",
+      "bytes": 179,
+      "sha256": "aee0add4beda9f09eec3764ff06ce6d3a99d050aa12ca2a412637194945d4640",
+      "original": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-native-v2\\public-sync.stdout.txt"
+    },
+    {
+      "file": "v2-public-sync.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-native-v2\\public-sync.stderr.txt"
+    },
+    {
+      "file": "v2-public-projects-set.stdout.txt",
+      "bytes": 3120,
+      "sha256": "fba0a7737bbd7d101348b88f70a845bef65aea4ae8efad6fd6a5e155327211d0",
+      "original": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-native-v2\\public-projects-set.stdout.txt"
+    },
+    {
+      "file": "v2-public-projects-list.stdout.txt",
+      "bytes": 51,
+      "sha256": "d4c6f61cb6a9afd1d1f57c41a2d972b130f5041dbb4889101b55f13b20a9a670",
+      "original": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-native-v2\\public-projects-list.stdout.txt"
+    },
+    {
+      "file": "v2-C01-invocation.json",
+      "bytes": 952,
+      "sha256": "20bf2d77791a48b22eaecfda6a20105c8b5f1568b04d50a92934616a217e7657",
+      "original": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-native-v2\\C01-invocation.json"
+    },
+    {
+      "file": "v2-C01-native-pty-chunks.json",
+      "bytes": 13197,
+      "sha256": "1a178869093cc06b176bd1b716a52529b629b0f1537d3aab3bdee3f6b6fd4f12",
+      "original": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-native-v2\\C01-native-pty-chunks.json"
+    },
+    {
+      "file": "v2-C01-exit.json",
+      "bytes": 75,
+      "sha256": "7fb17b00b5e640655269a6c0e3200d375d0cdb7c0371a31b80582ef215a3f1fb",
+      "original": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-native-v2\\C01-exit.json"
+    },
+    {
+      "file": "v2-C01-usage.json",
+      "bytes": 381,
+      "sha256": "557e47e62cebeef6d6e22fda40e1b3fe6385aa333eef2cc7cb8f61a92f930b86",
+      "original": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-native-v2\\C01-usage.json"
+    },
+    {
+      "file": "v2-native-assessment.json",
+      "bytes": 6417,
+      "sha256": "3ded9e9b33a081d3f5d308f4f26df49b9b6795fa19bfbc448e7d26ff9ab276b3",
+      "original": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-native-v2\\native-assessment.json"
+    },
+    {
+      "file": "v2-native-independent-readback.json",
+      "bytes": 3618,
+      "sha256": "bad7560e9d6868096515b53d8f3ea1ab01a0b8ad14494b9b3d0767521dab0eb6",
+      "original": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-native-v2\\native-independent-readback.json"
+    },
+    {
+      "file": "v2-native-directory-readback.json",
+      "bytes": 384,
+      "sha256": "fff4739ae57de14af58b6c15cbcc2e3f5865b8b1334e2338a2d9adb2cdeb89a1",
+      "original": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-native-v2\\native-directory-readback.json"
+    },
+    {
+      "file": "v2-native-protected-after-setup.json",
+      "bytes": 24408,
+      "sha256": "b7826c25690e22dcbad3400fe3a96c6b228a5f081c0016f88eca3a4228138b73",
+      "original": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-native-v2\\native-protected-after-setup.json"
+    },
+    {
+      "file": "v2-native-protected-after-C01.json",
+      "bytes": 24361,
+      "sha256": "837dbdc614569c928b679a672bd123f28ca10d66660f222e8fc24b455a1431bd",
+      "original": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-native-v2\\native-protected-after-C01.json"
+    },
+    {
+      "file": "v2-fixed-protected-before.json",
+      "bytes": 27711,
+      "sha256": "c1ab05af5f87354062ef2c0c3a9a7847308dea9597ac5509faf8bccfcfed6131",
+      "original": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-native-v2\\fixed-protected-before.json"
+    },
+    {
+      "file": "v2-fixed-protected-after-C01.json",
+      "bytes": 27711,
+      "sha256": "c1ab05af5f87354062ef2c0c3a9a7847308dea9597ac5509faf8bccfcfed6131",
+      "original": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-native-v2\\fixed-protected-after-C01.json"
+    }
+  ],
+  "terminalAndDefaultLogs": "Retained only at original F raw output locations; credential/account configuration excluded"
+}

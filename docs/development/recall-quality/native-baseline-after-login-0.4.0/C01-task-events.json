@@ -1,0 +1,875 @@
+{
+  "capture": "Actual native task event projection; original visible fields unchanged, opaque/reasoning/provider/account/session-identity fields excluded",
+  "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.copilot\\session-state\\0d93a67e-961a-4d7e-bbbf-f09d3ffbb8db\\events.jsonl",
+  "sourceSha256": "7e3e3a668bfc984f41fe5d494ca4092a9b3e7d605c5e87f3041bf74c5a0972ce",
+  "capturedAt": "2026-10-05T11:27:48.847Z",
+  "events": [
+    {
+      "type": "session.model_change",
+      "id": "08d2555f-7c22-4451-8952-0722d497dd8a",
+      "timestamp": "2026-10-05T11:03:01.203Z",
+      "parentId": "3f571f52-2de6-4638-ad8a-36b4fd59e58e",
+      "data": {
+        "cause": "initial_resolution",
+        "source": "automatic",
+        "contextTier": null,
+        "newModel": "auto",
+        "reasoningEffort": null
+      }
+    },
+    {
+      "type": "subagent.selected",
+      "id": "fc60da2c-93a6-41e0-a787-04b60c704ba3",
+      "timestamp": "2026-10-05T11:02:59.956Z",
+      "parentId": "4cd32999-aecd-4423-a6ee-e05d5d60629b",
+      "data": {
+        "agentName": "teamai-recall",
+        "agentDisplayName": "teamai-recall",
+        "tools": [
+          "read",
+          "execute"
+        ]
+      }
+    },
+    {
+      "type": "subagent.selected",
+      "id": "3f571f52-2de6-4638-ad8a-36b4fd59e58e",
+      "timestamp": "2026-10-05T11:02:59.966Z",
+      "parentId": "fc60da2c-93a6-41e0-a787-04b60c704ba3",
+      "data": {
+        "agentName": "teamai-recall",
+        "agentDisplayName": "teamai-recall",
+        "tools": [
+          "read",
+          "execute"
+        ]
+      }
+    },
+    {
+      "type": "session.auto_mode_resolved",
+      "id": "627abb67-e585-4ee5-9cab-a03733491f83",
+      "timestamp": "2026-10-05T11:05:21.746Z",
+      "parentId": "08d2555f-7c22-4451-8952-0722d497dd8a",
+      "data": {
+        "chosenModel": "gpt-6-luna",
+        "routingMethod": "auto_v2",
+        "fallback": false,
+        "endToEndLatencyMs": 2044.0098
+      }
+    },
+    {
+      "type": "user.message",
+      "id": "1cf1a4b7-771e-4d32-b526-90dcb1f64ec7",
+      "timestamp": "2026-10-05T11:05:22.093Z",
+      "parentId": "627abb67-e585-4ee5-9cab-a03733491f83",
+      "data": {
+        "content": "在 atlas-payments，NimbusQueue 2.1 报错 ACME_E_BARRIER_412: retry budget exhausted for tenant=demo-7。什么条件下可以重试，什么条件下不能？",
+        "interactionId": "ceb01cc3-81ae-4d54-a973-e25bc5b94928",
+        "parentAgentTaskId": "f13a7a69-8f3c-4791-951c-f9d40ac49168"
+      }
+    },
+    {
+      "type": "assistant.message",
+      "id": "e438d07f-753d-4be8-a15a-c9b25d99dd7b",
+      "timestamp": "2026-10-05T11:05:25.814Z",
+      "parentId": "12df795e-9951-4e3f-9baa-d855a8e264b8",
+      "data": {
+        "content": "",
+        "model": "gpt-6-luna",
+        "toolRequests": [
+          {
+            "toolCallId": "call_1fk4zKlfWZ87uVaodlBVqB6Y",
+            "name": "skill",
+            "arguments": {
+              "skill": "teamai"
+            },
+            "type": "function",
+            "intentionSummary": "teamai"
+          }
+        ],
+        "turnId": "0",
+        "interactionId": "ceb01cc3-81ae-4d54-a973-e25bc5b94928"
+      }
+    },
+    {
+      "type": "tool.execution_start",
+      "id": "d8b52742-417d-49f4-bf9e-ffc505040456",
+      "timestamp": "2026-10-05T11:05:25.817Z",
+      "parentId": "e438d07f-753d-4be8-a15a-c9b25d99dd7b",
+      "data": {
+        "toolCallId": "call_1fk4zKlfWZ87uVaodlBVqB6Y",
+        "toolName": "skill",
+        "arguments": {
+          "skill": "teamai"
+        },
+        "model": "gpt-6-luna",
+        "turnId": "0"
+      }
+    },
+    {
+      "type": "tool.execution_complete",
+      "id": "7c869513-4949-4c83-9837-5096d47a91fa",
+      "timestamp": "2026-10-05T11:05:25.821Z",
+      "parentId": "d8b52742-417d-49f4-bf9e-ffc505040456",
+      "data": {
+        "toolCallId": "call_1fk4zKlfWZ87uVaodlBVqB6Y",
+        "success": true,
+        "result": {
+          "content": "Skill \"teamai\" loaded successfully. Follow the instructions in the skill context."
+        },
+        "model": "gpt-6-luna",
+        "turnId": "0",
+        "interactionId": "ceb01cc3-81ae-4d54-a973-e25bc5b94928"
+      }
+    },
+    {
+      "type": "assistant.turn_end",
+      "id": "3c510a57-3971-4433-bd5c-7fe800f8c58d",
+      "timestamp": "2026-10-05T11:05:25.837Z",
+      "parentId": "6c12cdf4-9b92-4b44-adb2-696bb75e09e1",
+      "data": {
+        "turnId": "0"
+      }
+    },
+    {
+      "type": "assistant.message",
+      "id": "e41fd548-69e7-44c5-aac5-6dc8741b8cff",
+      "timestamp": "2026-10-05T11:05:29.375Z",
+      "parentId": "d185fcaf-3ce9-454f-b12d-014dcb4f7701",
+      "data": {
+        "content": "",
+        "model": "gpt-6-luna",
+        "toolRequests": [
+          {
+            "toolCallId": "call_mzEQ2AdNdpA1sDZZNTEJmxdy",
+            "name": "powershell",
+            "arguments": {
+              "command": "teamai recall --help",
+              "description": "Check Team AI recall command syntax"
+            },
+            "type": "function",
+            "intentionSummary": "Check Team AI recall command syntax",
+            "toolTitle": "Running command"
+          }
+        ],
+        "turnId": "1",
+        "interactionId": "ceb01cc3-81ae-4d54-a973-e25bc5b94928"
+      }
+    },
+    {
+      "type": "tool.execution_start",
+      "id": "b4f93572-0e9b-4f4b-ba1a-9d2095044d1f",
+      "timestamp": "2026-10-05T11:05:29.392Z",
+      "parentId": "e41fd548-69e7-44c5-aac5-6dc8741b8cff",
+      "data": {
+        "toolCallId": "call_mzEQ2AdNdpA1sDZZNTEJmxdy",
+        "toolName": "powershell",
+        "arguments": {
+          "command": "teamai recall --help",
+          "description": "Check Team AI recall command syntax"
+        },
+        "model": "gpt-6-luna",
+        "turnId": "1"
+      }
+    },
+    {
+      "type": "permission.requested",
+      "id": "346d823e-e046-464c-b7f7-76be8585d401",
+      "timestamp": "2026-10-05T11:05:29.416Z",
+      "parentId": "b4f93572-0e9b-4f4b-ba1a-9d2095044d1f",
+      "data": {
+        "requestId": "3c74e9ed-b912-47dd-9c01-5f79c93449dd",
+        "permissionRequest": {
+          "kind": "shell",
+          "toolCallId": "call_mzEQ2AdNdpA1sDZZNTEJmxdy",
+          "fullCommandText": "teamai recall --help",
+          "shellType": "powershell",
+          "intention": "Check Team AI recall command syntax",
+          "commands": [
+            {
+              "identifier": "teamai",
+              "readOnly": false,
+              "allowMatchIdentifier": null
+            }
+          ],
+          "commandSegments": [
+            {
+              "identifier": "teamai",
+              "fullCommandText": "teamai recall --help",
+              "allowMatchIdentifier": null,
+              "staticTokens": [
+                "teamai",
+                "recall",
+                "--help"
+              ],
+              "workingDirectory": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01"
+            }
+          ],
+          "possiblePaths": [
+            "recall"
+          ],
+          "canOfferSessionApproval": true,
+          "possibleUrls": [],
+          "hasWriteFileRedirection": false
+        },
+        "promptRequest": {
+          "kind": "commands",
+          "fullCommandText": "teamai recall --help",
+          "intention": "Check Team AI recall command syntax",
+          "commandIdentifiers": [
+            "teamai"
+          ],
+          "canOfferSessionApproval": true,
+          "toolCallId": "call_mzEQ2AdNdpA1sDZZNTEJmxdy"
+        },
+        "permissionMode": "manual",
+        "agentMode": "interactive"
+      }
+    },
+    {
+      "type": "permission.completed",
+      "id": "8d4b5f9a-faf9-4842-bb10-0132d23ae447",
+      "timestamp": "2026-10-05T11:11:14.512Z",
+      "parentId": "346d823e-e046-464c-b7f7-76be8585d401",
+      "data": {
+        "requestId": "3c74e9ed-b912-47dd-9c01-5f79c93449dd",
+        "toolCallId": "call_mzEQ2AdNdpA1sDZZNTEJmxdy",
+        "result": {
+          "kind": "approved"
+        }
+      }
+    },
+    {
+      "type": "tool.execution_complete",
+      "id": "d0e2b827-1510-47a2-b855-a17df4cafbfe",
+      "timestamp": "2026-10-05T11:11:20.395Z",
+      "parentId": "8d4b5f9a-faf9-4842-bb10-0132d23ae447",
+      "data": {
+        "toolCallId": "call_mzEQ2AdNdpA1sDZZNTEJmxdy",
+        "success": true,
+        "result": {
+          "content": "teamai <command> [options]\n\nCommands:\n  init [--marketplace <source>] [--role api|ios|aos|qa|design]\n  projects [list|set <ids...>]\n  learning share <file> [--project <id>|--shared] [--tags <tag...>]\n  learning pending [--json]\n  learning retry <id>\n  recall <query> [--scope auto|user|workspace] [--project <id>] [--limit <n>] [--include-pending] [--json]\n  Example: teamai recall 支付 重试\n  sync\n  role list\n  role set <role>\n  skill list [--tag <tag>] [--owner <owner>] [--source plugin|standalone]\n  skill show <name>\n  skill install <name...> [--yes]\n  skill install --tag <tag> [--yes]\n  skill remove <name...>\n  skill contribute <path> --owner <owner> [--tags <tag...>] --target standalone|plugin [--plugin <plugin>]\n  tags list\n  status [--resources] [--json]\n  doctor [--json]\n\nGlobal options:\n  --dry-run   Preview writes and Copilot mutations\n  --help      Show help\n  --version   Show version\n<shellId: 0 completed with exit code 0>"
+        },
+        "model": "gpt-6-luna",
+        "turnId": "1",
+        "interactionId": "ceb01cc3-81ae-4d54-a973-e25bc5b94928"
+      }
+    },
+    {
+      "type": "assistant.turn_end",
+      "id": "173eae9f-e8b7-49a3-93e2-b32c9e102d22",
+      "timestamp": "2026-10-05T11:11:20.400Z",
+      "parentId": "d0e2b827-1510-47a2-b855-a17df4cafbfe",
+      "data": {
+        "turnId": "1"
+      }
+    },
+    {
+      "type": "assistant.message",
+      "id": "536b1bf9-9add-49b6-a1bb-8d6c7e99237a",
+      "timestamp": "2026-10-05T11:11:25.615Z",
+      "parentId": "3086d410-b9c7-4e36-9abd-1ef040c640da",
+      "data": {
+        "content": "",
+        "model": "gpt-6-luna",
+        "toolRequests": [
+          {
+            "toolCallId": "call_4XBDHmOyNojwelECLGpjcyds",
+            "name": "powershell",
+            "arguments": {
+              "command": "teamai recall '\"NimbusQueue 2.1\" \"ACME_E_BARRIER_412\" \"retry budget exhausted\" barrier retry tenant' --project atlas-payments --json",
+              "description": "Recall Atlas Payments guidance for NimbusQueue barrier retries",
+              "initial_wait": 120
+            },
+            "type": "function",
+            "intentionSummary": "Recall Atlas Payments guidance for NimbusQueue barrier retries",
+            "toolTitle": "Running command"
+          }
+        ],
+        "turnId": "2",
+        "interactionId": "ceb01cc3-81ae-4d54-a973-e25bc5b94928"
+      }
+    },
+    {
+      "type": "tool.execution_start",
+      "id": "678e14db-2d02-4a83-bc7f-a4d396c9803e",
+      "timestamp": "2026-10-05T11:11:25.617Z",
+      "parentId": "536b1bf9-9add-49b6-a1bb-8d6c7e99237a",
+      "data": {
+        "toolCallId": "call_4XBDHmOyNojwelECLGpjcyds",
+        "toolName": "powershell",
+        "arguments": {
+          "command": "teamai recall '\"NimbusQueue 2.1\" \"ACME_E_BARRIER_412\" \"retry budget exhausted\" barrier retry tenant' --project atlas-payments --json",
+          "description": "Recall Atlas Payments guidance for NimbusQueue barrier retries",
+          "initial_wait": 120
+        },
+        "model": "gpt-6-luna",
+        "turnId": "2"
+      }
+    },
+    {
+      "type": "permission.requested",
+      "id": "76c8d50f-4490-48c7-99e1-984f2c4e8ff7",
+      "timestamp": "2026-10-05T11:11:25.639Z",
+      "parentId": "678e14db-2d02-4a83-bc7f-a4d396c9803e",
+      "data": {
+        "requestId": "fe6de2f3-82b4-4488-a695-1b0a855b076c",
+        "permissionRequest": {
+          "kind": "shell",
+          "toolCallId": "call_4XBDHmOyNojwelECLGpjcyds",
+          "fullCommandText": "teamai recall '\"NimbusQueue 2.1\" \"ACME_E_BARRIER_412\" \"retry budget exhausted\" barrier retry tenant' --project atlas-payments --json",
+          "shellType": "powershell",
+          "intention": "Recall Atlas Payments guidance for NimbusQueue barrier retries",
+          "commands": [
+            {
+              "identifier": "teamai",
+              "readOnly": false,
+              "allowMatchIdentifier": null
+            }
+          ],
+          "commandSegments": [
+            {
+              "identifier": "teamai",
+              "fullCommandText": "teamai recall '\"NimbusQueue 2.1\" \"ACME_E_BARRIER_412\" \"retry budget exhausted\" barrier retry tenant' --project atlas-payments --json",
+              "allowMatchIdentifier": null,
+              "staticTokens": [
+                "teamai",
+                "recall",
+                "\"NimbusQueue 2.1\" \"ACME_E_BARRIER_412\" \"retry budget exhausted\" barrier retry tenant",
+                "--project",
+                "atlas-payments",
+                "--json"
+              ],
+              "workingDirectory": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01"
+            }
+          ],
+          "possiblePaths": [
+            "recall",
+            "atlas-payments"
+          ],
+          "canOfferSessionApproval": true,
+          "possibleUrls": [],
+          "hasWriteFileRedirection": false
+        },
+        "promptRequest": {
+          "kind": "commands",
+          "fullCommandText": "teamai recall '\"NimbusQueue 2.1\" \"ACME_E_BARRIER_412\" \"retry budget exhausted\" barrier retry tenant' --project atlas-payments --json",
+          "intention": "Recall Atlas Payments guidance for NimbusQueue barrier retries",
+          "commandIdentifiers": [
+            "teamai"
+          ],
+          "canOfferSessionApproval": true,
+          "toolCallId": "call_4XBDHmOyNojwelECLGpjcyds"
+        },
+        "permissionMode": "manual",
+        "agentMode": "interactive"
+      }
+    },
+    {
+      "type": "permission.completed",
+      "id": "a26d3314-3483-412a-bdbf-237986487c7b",
+      "timestamp": "2026-10-05T11:12:03.142Z",
+      "parentId": "76c8d50f-4490-48c7-99e1-984f2c4e8ff7",
+      "data": {
+        "requestId": "fe6de2f3-82b4-4488-a695-1b0a855b076c",
+        "toolCallId": "call_4XBDHmOyNojwelECLGpjcyds",
+        "result": {
+          "kind": "approved"
+        }
+      }
+    },
+    {
+      "type": "tool.execution_complete",
+      "id": "288d2514-e6cc-437e-bf0e-bc8a1a61d5bb",
+      "timestamp": "2026-10-05T11:12:08.261Z",
+      "parentId": "a26d3314-3483-412a-bdbf-237986487c7b",
+      "data": {
+        "toolCallId": "call_4XBDHmOyNojwelECLGpjcyds",
+        "success": true,
+        "result": {
+          "content": "{\"schemaVersion\":1,\"query\":\"\\\"NimbusQueue 2.1\\\" \\\"ACME_E_BARRIER_412\\\" \\\"retry budget exhausted\\\" barrier retry tenant\",\"scope\":\"workspace\",\"project\":\"atlas-payments\",\"sourceHash\":\"7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096\",\"resourceRevision\":\"7dbb74107cc4c457a5043619090b11a38b74a7a0\",\"learningsRevision\":\"cf573d619178f5b29773ac7c616a231e789eeb75\",\"limit\":5,\"hits\":[{\"id\":\"doc:atlas-payments:contexts/atlas-payments/docs/retry-legacy.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"atlas-payments\",\"title\":\"Legacy retry error request queue worker lease handbook\",\"source\":{\"sourceHash\":\"7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096\",\"revision\":\"7dbb74107cc4c457a5043619090b11a38b74a7a0\",\"relativePath\":\"contexts/atlas-payments/docs/retry-legacy.md\",\"contentHash\":\"f4d992e7cf9a00fea4e55a3563e204e34d407248c99d9ab468e6fec3255f418a\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\c\\\\native-baseline-v2\\\\resource\\\\contexts\\\\atlas-payments\\\\docs\\\\retry-legacy.md\",\"matchedTerms\":[\"budget\",\"barrier\",\"retry\",\"tenant\"],\"lineStart\":1,\"lineEnd\":3,\"snippet\":\"---\\ntitle: Legacy retry error request queue worker lease handbook\\ntags: [retry, error, request, queue, worker, lease, expired, idempotency]\"},{\"id\":\"doc:atlas-payments:contexts/atlas-payments/docs/retry-current.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"atlas-payments\",\"title\":\"NimbusQueue 2.1 retry safety\",\"source\":{\"sourceHash\":\"7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096\",\"revision\":\"7dbb74107cc4c457a5043619090b11a38b74a7a0\",\"relativePath\":\"contexts/atlas-payments/docs/retry-current.md\",\"contentHash\":\"dcd44daddf237eb926d470cd8a7bb3564f04707ad189d6577e32bd4d4df5b3ca\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\c\\\\native-baseline-v2\\\\resource\\\\contexts\\\\atlas-payments\\\\docs\\\\retry-current.md\",\"matchedTerms\":[\"budget\",\"barrier\",\"retry\",\"tenant\"],\"lineStart\":1,\"lineEnd\":3,\"snippet\":\"---\\ntitle: NimbusQueue 2.1 retry safety\\ntags: [queue, lease]\"},{\"id\":\"doc:atlas-payments:contexts/atlas-payments/docs/noise-agenda.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"atlas-payments\",\"title\":\"Retry error request queue worker lease idempotency agenda\",\"source\":{\"sourceHash\":\"7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096\",\"revision\":\"7dbb74107cc4c457a5043619090b11a38b74a7a0\",\"relativePath\":\"contexts/atlas-payments/docs/noise-agenda.md\",\"contentHash\":\"8f80b37acd9450186b60e0946c6a3d3236f3c4d686111447aaee2e50444efcb8\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\c\\\\native-baseline-v2\\\\resource\\\\contexts\\\\atlas-payments\\\\docs\\\\noise-agenda.md\",\"matchedTerms\":[\"retry\"],\"lineStart\":1,\"lineEnd\":3,\"snippet\":\"---\\ntitle: Retry error request queue worker lease idempotency agenda\\ntags: [retry, error, request, queue, worker, lease, expired, idempotency]\"},{\"id\":\"doc:atlas-payments:contexts/atlas-payments/docs/noise-dashboard.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"atlas-payments\",\"title\":\"Retry error request queue worker lease idempotency dashboard\",\"source\":{\"sourceHash\":\"7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096\",\"revision\":\"7dbb74107cc4c457a5043619090b11a38b74a7a0\",\"relativePath\":\"contexts/atlas-payments/docs/noise-dashboard.md\",\"contentHash\":\"4c0434f00f17c4d904db32c1305f047a7fbda6c05ce0b5ae7b931897a6229a12\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\c\\\\native-baseline-v2\\\\resource\\\\contexts\\\\atlas-payments\\\\docs\\\\noise-dashboard.md\",\"matchedTerms\":[\"retry\"],\"lineStart\":1,\"lineEnd\":3,\"snippet\":\"---\\ntitle: Retry error request queue worker lease idempotency dashboard\\ntags: [retry, error, request, queue, worker, lease, expired, idempotency]\"},{\"id\":\"doc:atlas-payments:contexts/atlas-payments/docs/noise-glossary.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"atlas-payments\",\"title\":\"Retry error request queue worker lease idempotency glossary\",\"source\":{\"sourceHash\":\"7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096\",\"revision\":\"7dbb74107cc4c457a5043619090b11a38b74a7a0\",\"relativePath\":\"contexts/atlas-payments/docs/noise-glossary.md\",\"contentHash\":\"3a7ba10942cf413d429f51ebbce748b86e88b289c04f2d8fe51b91e9107fbb6e\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\c\\\\native-baseline-v2\\\\resource\\\\contexts\\\\atlas-payments\\\\docs\\\\noise-glossary.md\",\"matchedTerms\":[\"retry\"],\"lineStart\":1,\"lineEnd\":3,\"snippet\":\"---\\ntitle: Retry error request queue worker lease idempotency glossary\\ntags: [retry, error, request, queue, worker, lease, expired, idempotency]\"}]}\n<shellId: 1 completed with exit code 0>"
+        },
+        "model": "gpt-6-luna",
+        "turnId": "2",
+        "interactionId": "ceb01cc3-81ae-4d54-a973-e25bc5b94928"
+      }
+    },
+    {
+      "type": "assistant.turn_end",
+      "id": "903ad3b1-b6d4-4ac1-af81-7a7c48cd8320",
+      "timestamp": "2026-10-05T11:12:08.266Z",
+      "parentId": "288d2514-e6cc-437e-bf0e-bc8a1a61d5bb",
+      "data": {
+        "turnId": "2"
+      }
+    },
+    {
+      "type": "assistant.message",
+      "id": "00440017-d883-4281-a4a3-7bbf3cd87ec1",
+      "timestamp": "2026-10-05T11:12:11.944Z",
+      "parentId": "3c19d98e-e3dc-479c-be8a-2f7775e4f0a3",
+      "data": {
+        "content": "",
+        "model": "gpt-6-luna",
+        "toolRequests": [
+          {
+            "toolCallId": "call_PIYHhizE7fH2N6jB7bu2deNC",
+            "name": "view",
+            "arguments": {
+              "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\retry-current.md"
+            },
+            "type": "function",
+            "intentionSummary": "view the file at F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\retry-current.md.",
+            "toolTitle": "Viewing file"
+          },
+          {
+            "toolCallId": "call_UpUqS35D9OBn03eaIQIhiLet",
+            "name": "view",
+            "arguments": {
+              "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\retry-legacy.md"
+            },
+            "type": "function",
+            "intentionSummary": "view the file at F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\retry-legacy.md.",
+            "toolTitle": "Viewing file"
+          }
+        ],
+        "turnId": "3",
+        "interactionId": "ceb01cc3-81ae-4d54-a973-e25bc5b94928"
+      }
+    },
+    {
+      "type": "tool.execution_start",
+      "id": "62a400f9-a1d2-479a-b791-3e4dbaae8294",
+      "timestamp": "2026-10-05T11:12:11.953Z",
+      "parentId": "00440017-d883-4281-a4a3-7bbf3cd87ec1",
+      "data": {
+        "toolCallId": "call_PIYHhizE7fH2N6jB7bu2deNC",
+        "toolName": "view",
+        "arguments": {
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\retry-current.md"
+        },
+        "model": "gpt-6-luna",
+        "turnId": "3"
+      }
+    },
+    {
+      "type": "tool.execution_start",
+      "id": "41c73aa0-cffc-4f6e-a659-f27f04f9b817",
+      "timestamp": "2026-10-05T11:12:11.963Z",
+      "parentId": "62a400f9-a1d2-479a-b791-3e4dbaae8294",
+      "data": {
+        "toolCallId": "call_UpUqS35D9OBn03eaIQIhiLet",
+        "toolName": "view",
+        "arguments": {
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\retry-legacy.md"
+        },
+        "model": "gpt-6-luna",
+        "turnId": "3"
+      }
+    },
+    {
+      "type": "permission.requested",
+      "id": "cf95fed8-d11b-4c80-8e8c-a4c940f9b538",
+      "timestamp": "2026-10-05T11:12:11.967Z",
+      "parentId": "41c73aa0-cffc-4f6e-a659-f27f04f9b817",
+      "data": {
+        "requestId": "e1ec045f-cae1-4dc3-96f1-0238fc631a52",
+        "permissionRequest": {
+          "kind": "read",
+          "toolCallId": "call_PIYHhizE7fH2N6jB7bu2deNC",
+          "intention": "Read file: F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\retry-current.md",
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\retry-current.md"
+        },
+        "promptRequest": {
+          "kind": "path",
+          "accessKind": "read",
+          "paths": [
+            "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\retry-current.md"
+          ],
+          "readOnlyDirectories": [
+            "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs"
+          ],
+          "toolCallId": "call_PIYHhizE7fH2N6jB7bu2deNC"
+        },
+        "permissionMode": "manual",
+        "agentMode": "interactive"
+      }
+    },
+    {
+      "type": "permission.requested",
+      "id": "88576c91-96ac-4310-a575-0830b6c68ae5",
+      "timestamp": "2026-10-05T11:12:11.967Z",
+      "parentId": "cf95fed8-d11b-4c80-8e8c-a4c940f9b538",
+      "data": {
+        "requestId": "8d85d80b-a370-447b-8034-24b1ed027a1c",
+        "permissionRequest": {
+          "kind": "read",
+          "toolCallId": "call_UpUqS35D9OBn03eaIQIhiLet",
+          "intention": "Read file: F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\retry-legacy.md",
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\retry-legacy.md"
+        },
+        "promptRequest": {
+          "kind": "path",
+          "accessKind": "read",
+          "paths": [
+            "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\retry-legacy.md"
+          ],
+          "readOnlyDirectories": [
+            "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs"
+          ],
+          "toolCallId": "call_UpUqS35D9OBn03eaIQIhiLet"
+        },
+        "permissionMode": "manual",
+        "agentMode": "interactive"
+      }
+    },
+    {
+      "type": "permission.completed",
+      "id": "53d0ccfa-7942-4baa-a9df-43d3f47d660d",
+      "timestamp": "2026-10-05T11:13:21.826Z",
+      "parentId": "88576c91-96ac-4310-a575-0830b6c68ae5",
+      "data": {
+        "requestId": "e1ec045f-cae1-4dc3-96f1-0238fc631a52",
+        "toolCallId": "call_PIYHhizE7fH2N6jB7bu2deNC",
+        "result": {
+          "kind": "approved"
+        }
+      }
+    },
+    {
+      "type": "permission.completed",
+      "id": "d702db36-2ce3-4890-8231-e2388f0ad4ea",
+      "timestamp": "2026-10-05T11:13:27.928Z",
+      "parentId": "53d0ccfa-7942-4baa-a9df-43d3f47d660d",
+      "data": {
+        "requestId": "8d85d80b-a370-447b-8034-24b1ed027a1c",
+        "toolCallId": "call_UpUqS35D9OBn03eaIQIhiLet",
+        "result": {
+          "kind": "approved"
+        }
+      }
+    },
+    {
+      "type": "tool.execution_complete",
+      "id": "f808af7e-d345-4950-9daa-857aec961449",
+      "timestamp": "2026-10-05T11:13:27.936Z",
+      "parentId": "d702db36-2ce3-4890-8231-e2388f0ad4ea",
+      "data": {
+        "toolCallId": "call_PIYHhizE7fH2N6jB7bu2deNC",
+        "success": true,
+        "result": {
+          "content": "---\ntitle: NimbusQueue 2.1 retry safety\ntags: [queue, lease]\n---\n# NimbusQueue 2.1\n\nDiagnostic: `ACME_E_BARRIER_412: retry budget exhausted for tenant=demo-7`.\nA lease-expiry symptom does not establish that every failed request can be replayed.\nFor NimbusQueue 2.1 in atlas-payments, retry once only when the lease has expired and the original idempotency record still exists.\nIf the lease is still active or the idempotency record is absent, do not retry; escalate for manual reconciliation.\nKeep the original diagnostic and tenant token verbatim in incident notes.\nThis note supports no unconditional retry recommendation.\n",
+          "detailedContent": "\ndiff --git a/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/c/native-baseline-v2/resource/contexts/atlas-payments/docs/retry-current.md b/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/c/native-baseline-v2/resource/contexts/atlas-payments/docs/retry-current.md\nindex 0000000..0000000 100644\n--- a/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/c/native-baseline-v2/resource/contexts/atlas-payments/docs/retry-current.md\n+++ b/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/c/native-baseline-v2/resource/contexts/atlas-payments/docs/retry-current.md\n@@ -1,13 +1,13 @@\n ---\n title: NimbusQueue 2.1 retry safety\n tags: [queue, lease]\n ---\n # NimbusQueue 2.1\n \n Diagnostic: `ACME_E_BARRIER_412: retry budget exhausted for tenant=demo-7`.\n A lease-expiry symptom does not establish that every failed request can be replayed.\n For NimbusQueue 2.1 in atlas-payments, retry once only when the lease has expired and the original idempotency record still exists.\n If the lease is still active or the idempotency record is absent, do not retry; escalate for manual reconciliation.\n Keep the original diagnostic and tenant token verbatim in incident notes.\n This note supports no unconditional retry recommendation.\n \n"
+        },
+        "model": "gpt-6-luna",
+        "turnId": "3",
+        "interactionId": "ceb01cc3-81ae-4d54-a973-e25bc5b94928"
+      }
+    },
+    {
+      "type": "tool.execution_complete",
+      "id": "858eb535-d244-4a86-809b-cece28bad4ff",
+      "timestamp": "2026-10-05T11:13:27.963Z",
+      "parentId": "f808af7e-d345-4950-9daa-857aec961449",
+      "data": {
+        "toolCallId": "call_UpUqS35D9OBn03eaIQIhiLet",
+        "success": true,
+        "result": {
+          "content": "---\ntitle: Legacy retry error request queue worker lease handbook\ntags: [retry, error, request, queue, worker, lease, expired, idempotency]\n---\n# Legacy NimbusQueue 1.6\n\nDiagnostic: `ACME_E_BARRIER_412: retry budget exhausted for tenant=demo-7`.\nNimbusQueue 1.6 used a two-retry procedure after a worker timeout.\nThis archived procedure applies only to NimbusQueue 1.6 and is not a recommendation for NimbusQueue 2.1.\nIt does not establish whether a current idempotency record exists.\n",
+          "detailedContent": "\ndiff --git a/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/c/native-baseline-v2/resource/contexts/atlas-payments/docs/retry-legacy.md b/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/c/native-baseline-v2/resource/contexts/atlas-payments/docs/retry-legacy.md\nindex 0000000..0000000 100644\n--- a/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/c/native-baseline-v2/resource/contexts/atlas-payments/docs/retry-legacy.md\n+++ b/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/c/native-baseline-v2/resource/contexts/atlas-payments/docs/retry-legacy.md\n@@ -1,11 +1,11 @@\n ---\n title: Legacy retry error request queue worker lease handbook\n tags: [retry, error, request, queue, worker, lease, expired, idempotency]\n ---\n # Legacy NimbusQueue 1.6\n \n Diagnostic: `ACME_E_BARRIER_412: retry budget exhausted for tenant=demo-7`.\n NimbusQueue 1.6 used a two-retry procedure after a worker timeout.\n This archived procedure applies only to NimbusQueue 1.6 and is not a recommendation for NimbusQueue 2.1.\n It does not establish whether a current idempotency record exists.\n \n"
+        },
+        "model": "gpt-6-luna",
+        "turnId": "3",
+        "interactionId": "ceb01cc3-81ae-4d54-a973-e25bc5b94928"
+      }
+    },
+    {
+      "type": "assistant.turn_end",
+      "id": "a7da392f-c848-4f87-84e1-e5ad3f320c54",
+      "timestamp": "2026-10-05T11:13:27.971Z",
+      "parentId": "858eb535-d244-4a86-809b-cece28bad4ff",
+      "data": {
+        "turnId": "3"
+      }
+    },
+    {
+      "type": "assistant.message",
+      "id": "f8b81d3e-5149-4158-8a18-66e21a39e9d4",
+      "timestamp": "2026-10-05T11:13:40.751Z",
+      "parentId": "25afb814-d9cb-474c-a9f7-c8195a3b7ecd",
+      "data": {
+        "content": "",
+        "model": "gpt-6-luna",
+        "toolRequests": [],
+        "turnId": "4",
+        "interactionId": "ceb01cc3-81ae-4d54-a973-e25bc5b94928"
+      }
+    },
+    {
+      "type": "assistant.message",
+      "id": "76263133-6911-4308-8110-93e00e9e3769",
+      "timestamp": "2026-10-05T11:13:40.756Z",
+      "parentId": "f8b81d3e-5149-4158-8a18-66e21a39e9d4",
+      "data": {
+        "content": "**NimbusQueue 2.1 的规则：**仅当租约已过期，且原始幂等性记录仍存在时，才可重试，且最多重试一次。租约仍有效，或幂等性记录不存在时，**不要重试**；应升级进行人工对账。`ACME_E_BARRIER_412: retry budget exhausted for tenant=demo-7` 本身不代表重试安全；既然报错称预算已耗尽，不应在同一耗尽预算下继续重试。文档没有说明预算如何重置，不能据此推断可再次重试。\n\n依据：已发布文档 `contexts/atlas-payments/docs/retry-current.md`（atlas-payments，revision `7dbb74107cc4c457a5043619090b11a38b74a7a0`，SHA-256 `dcd44daddf237eb926d470cd8a7bb3564f04707ad189d6577e32bd4d4df5b3ca`），第 7–9 行说明症状不等于可重放、重试条件及禁止条件。旧版 NimbusQueue 1.6 的“两次重试”流程不适用于 2.1（`retry-legacy.md` 第 6–8 行）。",
+        "model": "gpt-6-luna",
+        "toolRequests": [],
+        "turnId": "4",
+        "interactionId": "ceb01cc3-81ae-4d54-a973-e25bc5b94928"
+      }
+    },
+    {
+      "type": "assistant.turn_end",
+      "id": "503c52c5-c106-45e2-bf5b-38bf431516e8",
+      "timestamp": "2026-10-05T11:13:40.791Z",
+      "parentId": "76263133-6911-4308-8110-93e00e9e3769",
+      "data": {
+        "turnId": "4"
+      }
+    },
+    {
+      "type": "session.auto_mode_resolved",
+      "id": "54246d13-f496-4228-9b35-f2629d8a3224",
+      "timestamp": "2026-10-05T11:14:48.588Z",
+      "parentId": "478bd3fa-0e32-44d3-a0fd-85f00dd3a125",
+      "data": {
+        "chosenModel": "claude-haiku-4.5",
+        "routingMethod": "hydra",
+        "fallback": false,
+        "endToEndLatencyMs": 199
+      }
+    },
+    {
+      "type": "user.message",
+      "id": "a571bc86-cc32-485e-af7b-6a594291bda8",
+      "timestamp": "2026-10-05T11:14:48.938Z",
+      "parentId": "54246d13-f496-4228-9b35-f2629d8a3224",
+      "data": {
+        "content": "In atlas-payments, NimbusQueue 2.1 reports ACME_E_BARRIER_412: retry budget exhausted for tenant=demo-7. Under what conditions is a retry safe, and when must it be refused?",
+        "interactionId": "db5f782c-4d96-4efe-8b22-5e005d9814d1",
+        "parentAgentTaskId": "24819506-8ed5-4df0-bec0-75e9a8a27ed6"
+      }
+    },
+    {
+      "type": "assistant.message",
+      "id": "b03672a7-067c-4862-bbb0-ccc859378c9c",
+      "timestamp": "2026-10-05T11:14:55.686Z",
+      "parentId": "926c056e-513f-4b16-be35-7264f3a69955",
+      "data": {
+        "content": "**For NimbusQueue 2.1, retry is safe only when BOTH conditions hold:**\n\n1. **Lease has expired**\n2. **Original idempotency record still exists**\n\n**Retry must be refused when:**\n- Lease is still active, OR\n- Idempotency record is absent\n\n**Critical note:** The error `ACME_E_BARRIER_412: retry budget exhausted` itself does **not** establish that retry is safe. The exhausted budget indicates the quota for retries has been consumed under this lease; there is no guidance in the documentation on budget reset conditions.\n\n---\n\n**Source:** Published document *NimbusQueue 2.1 retry safety* (atlas-payments, revision `7dbb74107cc4c457a5043619090b11a38b74a7a0`):\n\n> For NimbusQueue 2.1 in atlas-payments, retry once only when the lease has expired and the original idempotency record still exists. If the lease is still active or the idempotency record is absent, do not retry; escalate for manual reconciliation.\n\nThe legacy NimbusQueue 1.6 two-retry procedure does not apply to version 2.1 and provides no guidance on current idempotency state.",
+        "model": "claude-haiku-4.5",
+        "toolRequests": [],
+        "turnId": "0",
+        "interactionId": "db5f782c-4d96-4efe-8b22-5e005d9814d1"
+      }
+    },
+    {
+      "type": "assistant.turn_end",
+      "id": "d7cdabd1-e8f4-46da-9163-b60cfcb2e709",
+      "timestamp": "2026-10-05T11:14:55.714Z",
+      "parentId": "b03672a7-067c-4862-bbb0-ccc859378c9c",
+      "data": {
+        "turnId": "0"
+      }
+    },
+    {
+      "type": "session.auto_mode_resolved",
+      "id": "ddec20b1-2e84-40a3-925f-2255b595ae02",
+      "timestamp": "2026-10-05T11:15:24.860Z",
+      "parentId": "6fb4b552-393b-4e5e-905a-78555701f94a",
+      "data": {
+        "chosenModel": "gpt-6-luna",
+        "routingMethod": "auto_v2",
+        "fallback": false,
+        "endToEndLatencyMs": 2349.3113000000003
+      }
+    },
+    {
+      "type": "user.message",
+      "id": "3161846d-ea53-49fa-82f8-10477586db18",
+      "timestamp": "2026-10-05T11:15:25.191Z",
+      "parentId": "ddec20b1-2e84-40a3-925f-2255b595ae02",
+      "data": {
+        "content": "如果它的租约已经到期，但那个幂等记录丢了，还能再试吗？请保留前述诊断原文。",
+        "interactionId": "64f9c23f-95de-4404-9394-4dfafd499915",
+        "parentAgentTaskId": "bce648e8-9389-448b-bc27-0c9719a3c527"
+      }
+    },
+    {
+      "type": "assistant.message",
+      "id": "81aeccfb-0543-4cbd-9acf-74c6a67243e7",
+      "timestamp": "2026-10-05T11:15:28.543Z",
+      "parentId": "809c7964-1baf-47a7-a17d-098eaedc01be",
+      "data": {
+        "content": "不能。即使租约已到期，只要原始幂等记录丢失，就不要重试；应升级进行人工对账。\n\n诊断原文：`ACME_E_BARRIER_412: retry budget exhausted for tenant=demo-7`",
+        "model": "gpt-6-luna",
+        "toolRequests": [],
+        "turnId": "0",
+        "interactionId": "64f9c23f-95de-4404-9394-4dfafd499915"
+      }
+    },
+    {
+      "type": "assistant.turn_end",
+      "id": "2e5a2dfc-2c7b-46da-ba45-c1ff0e288cfe",
+      "timestamp": "2026-10-05T11:15:28.590Z",
+      "parentId": "81aeccfb-0543-4cbd-9acf-74c6a67243e7",
+      "data": {
+        "turnId": "0"
+      }
+    },
+    {
+      "type": "session.shutdown",
+      "id": "bc0aae44-be35-4c06-8150-1d44f5bc819c",
+      "timestamp": "2026-10-05T11:17:22.915Z",
+      "parentId": "51968214-de00-4551-b3a0-3733068223c9",
+      "data": {
+        "shutdownType": "routine",
+        "totalPremiumRequests": 2.33,
+        "totalNanoAiu": 1995259500,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 28
+          },
+          "cache_read": {
+            "tokenCount": 40867
+          },
+          "cache_write": {
+            "tokenCount": 25195
+          },
+          "output": {
+            "tokenCount": 2287
+          }
+        },
+        "totalApiDurationMs": 34520,
+        "codeChanges": {
+          "linesAdded": 0,
+          "linesRemoved": 0,
+          "filesModified": []
+        },
+        "modelMetrics": {
+          "gpt-6-luna": {
+            "requests": {
+              "count": 6,
+              "cost": 2
+            },
+            "usage": {
+              "inputTokens": 54442,
+              "outputTokens": 1810,
+              "cacheReadTokens": 40867,
+              "cacheWriteTokens": 13557,
+              "reasoningTokens": 1185
+            },
+            "totalNanoAiu": 301009500,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 18
+              },
+              "cache_read": {
+                "tokenCount": 40867
+              },
+              "cache_write": {
+                "tokenCount": 13557
+              },
+              "output": {
+                "tokenCount": 1810
+              }
+            }
+          },
+          "claude-haiku-4.5": {
+            "requests": {
+              "count": 1,
+              "cost": 0.33
+            },
+            "usage": {
+              "inputTokens": 11648,
+              "outputTokens": 477,
+              "cacheReadTokens": 0,
+              "cacheWriteTokens": 11638,
+              "reasoningTokens": 181
+            },
+            "totalNanoAiu": 1694249999.9999998,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 10
+              },
+              "cache_read": {
+                "tokenCount": 0
+              },
+              "cache_write": {
+                "tokenCount": 11638
+              },
+              "output": {
+                "tokenCount": 477
+              }
+            }
+          }
+        },
+        "agentMetrics": {
+          "main": {
+            "totalApiDurationMs": 34520,
+            "totalNanoAiu": 1995259500,
+            "modelMetrics": {
+              "gpt-6-luna": {
+                "requests": {
+                  "count": 6,
+                  "cost": 2
+                },
+                "usage": {
+                  "inputTokens": 54442,
+                  "outputTokens": 1810,
+                  "cacheReadTokens": 40867,
+                  "cacheWriteTokens": 13557,
+                  "reasoningTokens": 1185
+                },
+                "totalNanoAiu": 301009500,
+                "tokenDetails": {
+                  "input": {
+                    "tokenCount": 18
+                  },
+                  "cache_read": {
+                    "tokenCount": 40867
+                  },
+                  "cache_write": {
+                    "tokenCount": 13557
+                  },
+                  "output": {
+                    "tokenCount": 1810
+                  }
+                }
+              },
+              "claude-haiku-4.5": {
+                "requests": {
+                  "count": 1,
+                  "cost": 0.33
+                },
+                "usage": {
+                  "inputTokens": 11648,
+                  "outputTokens": 477,
+                  "cacheReadTokens": 0,
+                  "cacheWriteTokens": 11638,
+                  "reasoningTokens": 181
+                },
+                "totalNanoAiu": 1694249999.9999998,
+                "tokenDetails": {
+                  "input": {
+                    "tokenCount": 10
+                  },
+                  "cache_read": {
+                    "tokenCount": 0
+                  },
+                  "cache_write": {
+                    "tokenCount": 11638
+                  },
+                  "output": {
+                    "tokenCount": 477
+                  }
+                }
+              }
+            }
+          }
+        },
+        "currentModel": "gpt-6-luna"
+      }
+    }
+  ]
+}

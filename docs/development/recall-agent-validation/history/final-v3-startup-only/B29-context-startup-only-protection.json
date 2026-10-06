@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "status": "STARTUP_ONLY_PROTECTION_OBSERVATION_NOT_NATIVE_CONTEXT_CASE",
+  "caseId": "B29-context",
+  "request": {
+    "case": "B29-context",
+    "sessionId": "c1f4d0ae-6dc1-4d2a-b192-1a0f70d26d74",
+    "executable": "D:/soft/nodejs/node_global/copilot.ps1",
+    "args": [
+      "--agent",
+      "teamai-recall",
+      "--session-id",
+      "c1f4d0ae-6dc1-4d2a-b192-1a0f70d26d74",
+      "--log-dir",
+      "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-context-native-logs",
+      "--usage-output-file",
+      "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-context-usage.json"
+    ],
+    "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\workspaces\\bound",
+    "launcherPid": 19024,
+    "startedAtUtc": "2026-10-06T01:29:05.0953517Z",
+    "nativeRoot": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.copilot",
+    "businessHome": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home",
+    "candidateRevision": "8000bae22cf6a3490578e25e1af6b618e73267d5",
+    "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+    "agentSha256": "7e882003883ea008c30b9c567f77578e318077162ebbba090bcdf901fa27c48f",
+    "modelOverride": null,
+    "questionHeldForActualSelection": true,
+    "permissionFlags": "DEFAULT",
+    "taskMessages": "Only frozen case messages after actual selection; no oracle/rank/path list",
+    "parentChildRoute": "Same delivered teamai-recall with unset/inherited model is allowed",
+    "frozenGuard": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\29-native-execution-v3\\..\\29-native-preparation-v4"
+  },
+  "end": {
+    "case": "B29-context",
+    "sessionId": "c1f4d0ae-6dc1-4d2a-b192-1a0f70d26d74",
+    "launcherPid": 19024,
+    "exitCode": 0,
+    "endedAtUtc": "2026-10-06T01:30:19.9836201Z",
+    "meaning": "Normal process end only; record actual events/answer separately. Restore real read-gap source before post protection."
+  },
+  "contextCallerSubmitted": false,
+  "caseBehavior": "NOT_RUN",
+  "nativeEvents": "NOT_CREATED_BY_CONSUMER",
+  "nativeUsage": {
+    "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-context-usage.json",
+    "sha256": "ab462ba2bdb4aebcbec0c18832282f101e2c68799c3033f3082952f380adc6e9",
+    "actual": {
+      "totalPremiumRequestCost": 0,
+      "totalUserRequests": 0,
+      "totalNanoAiu": 0,
+      "totalApiDurationMs": 0,
+      "sessionStartTime": "2026-10-06T01:29:09.433Z",
+      "codeChanges": {
+        "linesAdded": 0,
+        "linesRemoved": 0,
+        "filesModifiedCount": 0,
+        "filesModified": []
+      },
+      "modelMetrics": {},
+      "agentMetrics": {},
+      "lastCallInputTokens": 0,
+      "lastCallOutputTokens": 0
+    }
+  },
+  "nativeApiCount": "ACTUAL_NATIVE_USAGE: totalUserRequests0, API duration0, cost0, empty model metrics",
+  "nativePty": "Ordinary selection/session-only trust then /exit; no user task input; UI0 AIC",
+  "formalRecorder": {
+    "exitCode": 1,
+    "error": "ENOENT actual absent events.jsonl",
+    "file": "B29-context-record-tool-return.json",
+    "notRetried": true
+  },
+  "formalAfterObserver": "NOT_RUN_MISSING_NATIVE_RECORDER_OUTPUT; separate original snapshot exports used only for startup protection",
+  "operatorProtectionFirstAttempt": "Rejected before snapshots because it incorrectly expected the ordinary usage file absent; original source/nonzero output retained; actual usage is not rewritten",
+  "newProtected": {
+    "businessRoots": 13,
+    "gitRoots": 5,
+    "deltas": [
+      {
+        "category": "business",
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+        "before": "0dff3bfb03d90b9f8f2bb1ca996415e5cb8a1f9eff5f96775c294fe936eada7c",
+        "after": "babf5b24bcbdce52e73692602b3f5cb236a162d4afc95eca5352112391354481"
+      }
+    ]
+  },
+  "sinceResumedBaseline": {
+    "businessRoots": 13,
+    "gitRoots": 5,
+    "deltas": [
+      {
+        "category": "business",
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+        "before": "e17f77be2d81f8e9fb362a3176166c8aa1425f8b6f2cd18622d51b068b850a94",
+        "after": "babf5b24bcbdce52e73692602b3f5cb236a162d4afc95eca5352112391354481"
+      }
+    ]
+  },
+  "oldProtected": {
+    "businessRoots": 8,
+    "gitRoots": 5,
+    "deltas": []
+  },
+  "oldSincePreflight": {
+    "businessRoots": 8,
+    "gitRoots": 5,
+    "deltas": []
+  },
+  "startup": [
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+      "bytes": 62684,
+      "sha256": "babf5b24bcbdce52e73692602b3f5cb236a162d4afc95eca5352112391354481",
+      "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-context-startup-only-after-startup-profile.bin",
+      "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive",
+      "bytes": 64,
+      "sha256": "a7de5177c68a64bd48b36d49e2853799f4ebcfa8e4761f7cc472f333dc5f65cf",
+      "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-context-startup-only-after-windows-startup-profile.bin",
+      "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+    }
+  ],
+  "sourceOriginalReadEvidence": false,
+  "behaviorAcceptance": "NOT_RUN",
+  "allOtherNewProtectedChanges": 0,
+  "generatingPlatformPid": "NOT_INDEPENDENTLY_OBSERVED",
+  "pausedAtRootInstruction": true
+}
