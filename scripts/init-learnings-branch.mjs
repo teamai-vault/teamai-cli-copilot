@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { randomUUID } from "node:crypto";
+import { realpathSync } from "node:fs";
 import { lstat, mkdtemp, mkdir, rm } from "node:fs/promises";
 import { spawn } from "node:child_process";
 import os from "node:os";
@@ -89,7 +90,7 @@ function assertNoGitNamespace() {
   }
 }
 
-function runGit(args, options = {}) {
+export function runGit(args, options = {}) {
   return new Promise((resolve, reject) => {
     const child = spawn("git", args, {
       cwd: options.cwd ?? process.cwd(),
@@ -99,13 +100,20 @@ function runGit(args, options = {}) {
     });
     let stdout = "";
     let stderr = "";
+    let stdinError;
     child.stdout.setEncoding("utf8");
     child.stderr.setEncoding("utf8");
     child.stdout.on("data", (chunk) => (stdout += chunk));
     child.stderr.on("data", (chunk) => (stderr += chunk));
+    child.stdin.on("error", (error) => { stdinError = error; });
     child.on("error", reject);
-    child.on("close", (code) => resolve({ exitCode: code ?? 1, stdout, stderr }));
-    child.stdin.end(options.input ?? "");
+    child.on("close", (code) => {
+      // Git can close stdin early. Wait for its status and all diagnostic output.
+      if (stdinError && code === 0) reject(stdinError);
+      else resolve({ exitCode: code ?? 1, stdout, stderr });
+    });
+    if (options.input) child.stdin.end(options.input);
+    else child.stdin.end();
   });
 }
 
@@ -324,8 +332,11 @@ async function main() {
   }
 }
 
-main().catch((error) => {
-  const message = error instanceof Error ? error.message : String(error);
-  console.error(`ERROR: ${message}`);
-  process.exitCode = error instanceof UsageError ? 2 : 1;
-});
+const isMain = process.argv[1] && realpathSync(fileURLToPath(import.meta.url)) === realpathSync(process.argv[1]);
+if (isMain) {
+  main().catch((error) => {
+    const message = error instanceof Error ? error.message : String(error);
+    console.error(`ERROR: ${message}`);
+    process.exitCode = error instanceof UsageError ? 2 : 1;
+  });
+}
