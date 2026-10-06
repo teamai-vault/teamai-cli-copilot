@@ -2,7 +2,14 @@ name: CI
 
 on:
   push:
+    branches: [main, teamai-v4]
+    tags: ['**']
   pull_request:
+
+# Superseded PR revisions can stop; every delivery push keeps its own evidence.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: true
 
 jobs:
   test:
@@ -18,7 +25,14 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run typecheck
-      - run: npm test
+      - run: npm run test:ci -- --reporter=default --reporter=json --outputFile.json=test-results/vitest.json
+      - name: Upload test timings and failures
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: vitest-${{ matrix.os }}-attempt-${{ github.run_attempt }}
+          path: test-results/vitest.json
+          retention-days: 14
       - run: npm run build
       - name: Verify packed CLI entry and bundled delivery
         run: node test/helpers/verify-builtin-package.mjs "${{ runner.temp }}/teamai-package-check"

@@ -306,7 +306,7 @@ describe("CLI integration with fake Copilot executable", () => {
   }, CLI_PROCESS_TEST_TIMEOUT);
 
   test("rejects the removed Product option", async () => {
-    const repo = await createGitRepo();
+    const repo = await tempDir("teamai-removed-product-cwd-");
     const output = capture();
     expect(await runCli(["init", "--product=payments"], { cwd: repo, out: output.out, err: output.err })).toBe(2);
     expect(output.stderr.join("\n")).toContain("ERROR: --product has been removed.\nUse `teamai projects set <ids...>` inside the target Git repository.");
@@ -492,10 +492,12 @@ describe("CLI integration with fake Copilot executable", () => {
     const repo = await createGitRepo();
     const home = await tempDir("teamai-switch-home-");
     const fake = await createFakeCopilot(undefined, home);
-    const first = capture();
-    const base = { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace: loadFakeMarketplace, out: first.out, err: first.err };
-
-    expect(await runCli(["init", "--marketplace", TEST_MARKETPLACE_SOURCE, "--role", "api"], base)).toBe(0);
+    const config = createConfig({ name: TEST_MARKETPLACE_NAME, source: TEST_MARKETPLACE_SOURCE });
+    config.role = "api";
+    await writeGlobalConfig(config, home);
+    const configPath = path.join(home, ".teamai", "config.yaml");
+    const configBefore = await readFile(configPath);
+    const base = { cwd: repo, homeDir: home, copilot: fake.client, loadMarketplace: loadFakeMarketplace };
 
     const next = capture();
     expect(await runCli(["init", "--marketplace", "https://github.com/other-org/other-marketplace.git"], {
@@ -504,6 +506,7 @@ describe("CLI integration with fake Copilot executable", () => {
       err: next.err,
     })).toBe(1);
     expect(next.stderr.some((line) => line.includes("Refusing to switch Marketplace during init"))).toBe(true);
+    expect(await readFile(configPath)).toEqual(configBefore);
   }, CLI_PROCESS_TEST_TIMEOUT);
 
   test("does not claim or mutate a pre-existing user-owned Team AI role plugin", async () => {
@@ -814,10 +817,9 @@ describe("CLI integration with fake Copilot executable", () => {
   }, CLI_PROCESS_TEST_TIMEOUT);
 
   test("invalid flags fail before backend or Marketplace work and use usage exit code 2", async () => {
-    const repo = await createGitRepo();
+    const repo = await tempDir("teamai-invalid-flags-cwd-");
     const home = await tempDir("teamai-invalid-flags-home-");
-    const fake = await createFakeCopilot(undefined, home);
-    const tracked = trackCopilotCalls(fake.client);
+    const tracked = trackCopilotCalls(new CopilotClient("must-not-run-copilot", [], home));
     let marketplaceLoads = 0;
     let vscodeChecks = 0;
     const invalidArgs = [
@@ -852,10 +854,9 @@ describe("CLI integration with fake Copilot executable", () => {
   }, CLI_PROCESS_TEST_TIMEOUT);
 
   test("validates malformed options before help and business arguments before version", async () => {
-    const repo = await createGitRepo();
+    const repo = await tempDir("teamai-help-validation-cwd-");
     const home = await tempDir("teamai-help-validation-home-");
-    const fake = await createFakeCopilot(undefined, home);
-    const tracked = trackCopilotCalls(fake.client);
+    const tracked = trackCopilotCalls(new CopilotClient("must-not-run-copilot", [], home));
     let marketplaceLoads = 0;
     let vscodeChecks = 0;
     const invalidArgs = [
@@ -1097,10 +1098,9 @@ describe("CLI integration with fake Copilot executable", () => {
 
   test("invalid COPILOT_HOME fails before read-only command work", async () => {
     const prior = process.env.COPILOT_HOME;
-    const repo = await createGitRepo();
+    const repo = await tempDir("teamai-invalid-copilot-root-cwd-");
     const home = await tempDir("teamai-invalid-copilot-root-home-");
-    const fake = await createFakeCopilot(undefined, home);
-    const tracked = trackCopilotCalls(fake.client);
+    const tracked = trackCopilotCalls(new CopilotClient("must-not-run-copilot", [], home));
     let marketplaceLoads = 0;
     process.env.COPILOT_HOME = "relative/copilot";
     try {

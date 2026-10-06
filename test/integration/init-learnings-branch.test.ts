@@ -89,12 +89,24 @@ async function runBootstrap(
   apply = false,
   extraEnv: NodeJS.ProcessEnv = {},
 ) {
-  return await runProcess(process.execPath, [
+  const args = [
     scriptPath,
     "--marketplace",
     source,
     ...(apply ? ["--apply"] : []),
-  ], { cwd: checkout, env: scriptEnv(tempParent, extraEnv) });
+  ];
+  const result = await runProcess(process.execPath, args, { cwd: checkout, env: scriptEnv(tempParent, extraEnv) });
+  return {
+    ...result,
+    diagnostics: [
+      `command: ${[process.execPath, ...args].map((arg) => JSON.stringify(arg)).join(" ")}`,
+      `cwd: ${checkout}`,
+      `temp directory: ${tempParent}`,
+      `exit code: ${result.exitCode}`,
+      `stdout:\n${result.stdout}`,
+      `stderr:\n${result.stderr}`,
+    ].join("\n"),
+  };
 }
 
 describe("Learnings branch bootstrap tool", () => {
@@ -105,7 +117,7 @@ describe("Learnings branch bootstrap tool", () => {
 
     const result = await runBootstrap(remote, checkout, tempParent);
 
-    expect(result.exitCode).toBe(0);
+    expect(result.exitCode, result.diagnostics).toBe(0);
     expect(result.stdout).toContain("Preview");
     expect(result.stdout).toContain("teamai-learnings");
     expect(await remoteRefs(remote)).toEqual(refsBefore);
@@ -120,7 +132,7 @@ describe("Learnings branch bootstrap tool", () => {
 
     const result = await runBootstrap(remote, checkout, tempParent, true);
 
-    expect(result.exitCode).toBe(0);
+    expect(result.exitCode, result.diagnostics).toBe(0);
     const newRef = await git(["--git-dir", remote, "rev-list", "--parents", "-n", "1", BRANCH_REF]);
     expect(newRef.split(" ")).toHaveLength(1);
     expect(await remoteRefs(remote)).toEqual([...refsBefore, `${BRANCH_REF} ${newRef}`].sort());
@@ -136,14 +148,14 @@ describe("Learnings branch bootstrap tool", () => {
     const checkoutBefore = await checkoutState(checkout, userFile);
 
     const preview = await runBootstrap(remote, nonGitCwd, tempParent);
-    expect(preview.exitCode).toBe(0);
+    expect(preview.exitCode, preview.diagnostics).toBe(0);
     expect(preview.stdout).toContain("Preview");
     expect(await remoteRefs(remote)).toEqual(refsBefore);
     expect(await checkoutState(checkout, userFile)).toEqual(checkoutBefore);
     expect(await readdir(tempParent)).toEqual([]);
 
     const apply = await runBootstrap(remote, nonGitCwd, tempParent, true);
-    expect(apply.exitCode).toBe(0);
+    expect(apply.exitCode, apply.diagnostics).toBe(0);
     const rootCommit = await git(["--git-dir", remote, "rev-list", "--parents", "-n", "1", BRANCH_REF]);
     expect(rootCommit.split(" ")).toHaveLength(1);
     expect(await remoteRefs(remote)).toEqual([...refsBefore, `${BRANCH_REF} ${rootCommit}`].sort());
@@ -163,7 +175,7 @@ describe("Learnings branch bootstrap tool", () => {
 
     for (const apply of [false, true]) {
       const result = await runBootstrap(checkout, checkout, tempParent, apply, injectedConfig);
-      expect(result.exitCode).not.toBe(0);
+      expect(result.exitCode, result.diagnostics).not.toBe(0);
       expect(`${result.stdout}\n${result.stderr}`).toContain("must be a bare repository");
       expect(await remoteRefs(remote)).toEqual(refsBefore);
       expect(await checkoutState(checkout, userFile)).toEqual(checkoutBefore);
@@ -178,7 +190,7 @@ describe("Learnings branch bootstrap tool", () => {
 
     const result = await runBootstrap(remote, checkout, tempParent, true);
 
-    expect(result.exitCode).not.toBe(0);
+    expect(result.exitCode, result.diagnostics).not.toBe(0);
     expect(`${result.stdout}\n${result.stderr}`).toContain("already exists");
     expect(await remoteRefs(remote)).toEqual(refsBefore);
     expect(await checkoutState(checkout, userFile)).toEqual(checkoutBefore);
@@ -197,8 +209,9 @@ describe("Learnings branch bootstrap tool", () => {
       runBootstrap(remote, checkout, secondTemp, true),
     ]);
 
-    expect(results.filter((result) => result.exitCode === 0)).toHaveLength(1);
-    expect(results.filter((result) => result.exitCode !== 0)).toHaveLength(1);
+    const diagnostics = results.map((result) => result.diagnostics).join("\n\n");
+    expect(results.filter((result) => result.exitCode === 0), diagnostics).toHaveLength(1);
+    expect(results.filter((result) => result.exitCode !== 0), diagnostics).toHaveLength(1);
     const newRef = await git(["--git-dir", remote, "rev-list", "--parents", "-n", "1", BRANCH_REF]);
     expect(newRef.split(" ")).toHaveLength(1);
     expect(await remoteRefs(remote)).toEqual([...refsBefore, `${BRANCH_REF} ${newRef}`].sort());
@@ -228,7 +241,7 @@ describe("Learnings branch bootstrap tool", () => {
 
     for (const apply of [false, true]) {
       const result = await runBootstrap(remote, checkout, tempParent, apply);
-      expect(result.exitCode).toBe(0);
+      expect(result.exitCode, result.diagnostics).toBe(0);
       if (apply) {
         const rootCommit = await git(["--git-dir", remote, "rev-list", "--parents", "-n", "1", BRANCH_REF]);
         expect(rootCommit.split(" ")).toHaveLength(1);
@@ -271,7 +284,7 @@ describe("Learnings branch bootstrap tool", () => {
 
       for (const apply of [false, true]) {
         const result = await runBootstrap(remote, checkout, tempParent, apply, extraEnv);
-        expect(result.exitCode).not.toBe(0);
+        expect(result.exitCode, result.diagnostics).not.toBe(0);
         expect(`${result.stdout}\n${result.stderr}`).toMatch(/resolution|GIT_NAMESPACE/);
         expect(await remoteRefs(remote)).toEqual(targetRefsBefore);
         expect(await remoteRefs(wrongRemote)).toEqual(wrongRefsBefore);
@@ -304,7 +317,7 @@ describe("Learnings branch bootstrap tool", () => {
       GIT_CONFIG_VALUE_2: hooksPath,
     });
 
-    expect(result.exitCode).not.toBe(0);
+    expect(result.exitCode, result.diagnostics).not.toBe(0);
     expect(await remoteRefs(remote)).toEqual([...refsBefore, `${BRANCH_REF} ${competingSha}`].sort());
     expect(await checkoutState(checkout, userFile)).toEqual(checkoutBefore);
     expect(await readdir(tempParent)).toEqual([]);

@@ -1,6 +1,6 @@
 import { afterAll, afterEach, beforeAll, describe, expect, test, vi } from "vitest";
 import { createHash } from "node:crypto";
-import { cp, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
+import { mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { runCli } from "../../src/cli.js";
@@ -44,6 +44,28 @@ async function readIfExists(filePath: string): Promise<Buffer | undefined> {
   }
 }
 
+async function writeMarketplaceResources(root: string): Promise<void> {
+  await write(root, ".github/plugin/marketplace.json", JSON.stringify({
+    name: "test-teamai",
+    plugins: [
+      { name: "common", version: "0.1.0", source: "./plugins/common" },
+      { name: "api", version: "0.1.0", source: "./plugins/api" },
+      { name: "payments", version: "0.1.0", source: "./plugins/payments" },
+    ],
+  }, null, 2));
+  for (const [name, kind] of [["common", "common"], ["api", "role"], ["payments", "project"]]) {
+    await write(root, `plugins/${name}/plugin.json`, JSON.stringify({
+      name,
+      version: "0.1.0",
+      extensions: { "com.company.teamai": { kind } },
+    }, null, 2));
+  }
+  await write(root, "skills.yaml", "version: 1\nskills: {}\n");
+  await write(root, "manifest/projects.yaml", "version: 1\nprojects:\n  - id: payments\n    name: Payments\n    description: Payments\n    owners: [payments]\n    plugin: payments\n  - id: risk\n    name: Risk\n    description: Risk\n    owners: [risk]\n");
+  await write(root, "learnings/shared/resource-main-only.md", "wrong source\n");
+  await write(root, "learnings/payments/resource-main-only.md", "wrong project source\n");
+}
+
 async function createMarketplaceRemote(): Promise<{ source: string; authorityRevision: string; resourceRepo: string; learningRepo: string; bare: string }> {
   const root = await tempDir("teamai-published-marketplace-");
   cleanup.add(root);
@@ -60,25 +82,7 @@ async function createMarketplaceRemote(): Promise<{ source: string; authorityRev
     await git(repo, ["remote", "add", "origin", bare]);
   }
 
-  await write(resourceRepo, ".github/plugin/marketplace.json", JSON.stringify({
-    name: "test-teamai",
-    plugins: [
-      { name: "common", version: "0.1.0", source: "./plugins/common" },
-      { name: "api", version: "0.1.0", source: "./plugins/api" },
-      { name: "payments", version: "0.1.0", source: "./plugins/payments" },
-    ],
-  }, null, 2));
-  for (const [name, kind] of [["common", "common"], ["api", "role"], ["payments", "project"]]) {
-    await write(resourceRepo, `plugins/${name}/plugin.json`, JSON.stringify({
-      name,
-      version: "0.1.0",
-      extensions: { "com.company.teamai": { kind } },
-    }, null, 2));
-  }
-  await write(resourceRepo, "skills.yaml", "version: 1\nskills: {}\n");
-  await write(resourceRepo, "manifest/projects.yaml", "version: 1\nprojects:\n  - id: payments\n    name: Payments\n    description: Payments\n    owners: [payments]\n    plugin: payments\n  - id: risk\n    name: Risk\n    description: Risk\n    owners: [risk]\n");
-  await write(resourceRepo, "learnings/shared/resource-main-only.md", "wrong source\n");
-  await write(resourceRepo, "learnings/payments/resource-main-only.md", "wrong project source\n");
+  await writeMarketplaceResources(resourceRepo);
   await git(resourceRepo, ["add", "."]);
   await git(resourceRepo, ["commit", "-m", "resource branch"]);
   await git(resourceRepo, ["push", "origin", "main"]);
@@ -329,9 +333,11 @@ describe("published Learnings sync", () => {
     cleanup.add(workspace);
     const homeDir = await tempDir("teamai-published-parent-git-home-");
     cleanup.add(homeDir);
-    const { bare, resourceRepo } = await createMarketplaceRemote();
+    const bare = await tempDir("teamai-published-parent-origin-");
+    cleanup.add(bare);
+    await git(bare, ["init", "--bare"]);
     const nestedMarketplace = path.join(workspace, "marketplace");
-    await cp(resourceRepo, nestedMarketplace, { recursive: true, filter: (candidate) => !candidate.split(path.sep).includes(".git") });
+    await writeMarketplaceResources(nestedMarketplace);
     await git(workspace, ["remote", "add", "origin", bare]);
     const config = createConfig({ name: "test-teamai", source: nestedMarketplace });
     config.role = "api";
@@ -482,11 +488,9 @@ describe("published Learnings sync", () => {
     cleanup.add(repo);
     const homeDir = await tempDir("teamai-published-no-origin-home-");
     cleanup.add(homeDir);
-    const { resourceRepo } = await createMarketplaceRemote();
     const source = path.join(await tempDir("teamai-published-local-marketplace-"), "local-marketplace");
     cleanup.add(path.dirname(source));
-    await cp(resourceRepo, source, { recursive: true, filter: (candidate) => !candidate.split(path.sep).includes(".git") });
-    await rm(path.join(source, ".git"), { recursive: true, force: true });
+    await writeMarketplaceResources(source);
     const config = createConfig({ name: "test-teamai", source });
     config.role = "api";
     await writeGlobalConfig(config, homeDir);
