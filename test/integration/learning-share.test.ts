@@ -5,14 +5,14 @@ import path from "node:path";
 import { afterAll, afterEach, beforeAll, describe, expect, test } from "vitest";
 import { runCli } from "../../src/cli.js";
 import { resolveGitHubMarketplaceRemote, submitGitHubContribution } from "../../src/contribution/github.js";
-import { learningHash, learningOutboxDirectory, type LearningOperation } from "../../src/contribution/learning-outbox.js";
+import { createLearningOperation, learningHash, learningOutboxDirectory, type LearningOperation } from "../../src/contribution/learning-outbox.js";
 import { writeGlobalConfig } from "../../src/config/global.js";
 import { createConfig } from "../../src/config/schema.js";
 import { detectProjectIdentity } from "../../src/project/anchors.js";
 import { projectionKey } from "../../src/project/context.js";
 import { writeProjectState } from "../../src/project/state.js";
 import { runProcess } from "../../src/utils/process.js";
-import { createFakeCopilot, createGitRepo, loadFakeMarketplace, tempDir as createTempDir, TEST_MARKETPLACE_NAME } from "../helpers/test-utils.js";
+import { createFakeCopilot, createGitRepo, loadFakeMarketplace, tempDir as createTempDir, TEST_MARKETPLACE_NAME, TEST_MARKETPLACE_SOURCE } from "../helpers/test-utils.js";
 
 const cleanup = new Set<string>();
 // Includes local Git fixture setup, the first share, remote edits, and retry.
@@ -93,6 +93,51 @@ async function marketplaceWithLearningRemote(): Promise<{ root: string; remote: 
   await git(["checkout", "main"]);
   await git(["remote", "set-url", "origin", "https://github.com/test-org/teamai-marketplace.git"]);
   return { root, remote, baseCommit };
+}
+
+// Dry-run consumes an already-frozen outbox record; remote recovery uses retryFixture below.
+async function frozenRetryFixture() {
+  const home = await tempDir("teamai-learning-frozen-retry-home-");
+  const retryCwd = await tempDir("teamai-learning-frozen-retry-cwd-");
+  const id = "00000000-0000-4000-8000-000000000001";
+  const body = Buffer.from("Keep this exact learning.\r\n", "utf8");
+  const prefix = Buffer.from([
+    "---", `id: ${id}`, "title: note", "owner: Retry User", "logicalProject: shared",
+    "sourceRepo: consumer", "createdAt: 2026-09-22T00:00:00.000Z", "tags: []", "---", "", "",
+  ].join("\n"), "utf8");
+  const payload = Buffer.concat([prefix, body]);
+  const contentHash = learningHash(payload);
+  const operation: LearningOperation = {
+    schemaVersion: 1,
+    id,
+    sourceHash: learningHash(TEST_MARKETPLACE_SOURCE),
+    remoteIdentity: "test-org/teamai-marketplace",
+    sourceRemote: TEST_MARKETPLACE_SOURCE,
+    commitIdentity: { name: "Retry User", email: "retry@example.invalid" },
+    metadata: {
+      id, title: "note", owner: "Retry User", logicalProject: "shared",
+      sourceRepo: "consumer", createdAt: "2026-09-22T00:00:00.000Z", tags: [],
+    },
+    fileName: `${id}.md`,
+    logicalProject: "shared",
+    originWorkspaceKey: learningHash(retryCwd),
+    contentHash,
+    bodyBase64: body.toString("base64"),
+    payloadBase64: payload.toString("base64"),
+    destination: `learnings/shared/${id}.md`,
+    branch: `teamai/learning-${id}`,
+    baseBranch: "teamai-learnings",
+    baseCommit: "a".repeat(40),
+    pullRequestTitle: "teamai: share learning note",
+    pullRequestBody: `Share learning note.\n\nOperation ID: ${id}\nPayload SHA-256: ${contentHash}`,
+    phase: "queued",
+    status: "retryable-error",
+    lastError: { code: "BRANCH_PUSH_FAILED", message: "The contribution branch push was not confirmed." },
+  };
+  await writeGlobalConfig(createConfig({ name: TEST_MARKETPLACE_NAME, source: TEST_MARKETPLACE_SOURCE }), home);
+  await createLearningOperation(home, operation);
+  const payloadPath = path.join(home, ".teamai", "outbox", "learning-payloads", `${id}.md`);
+  return { home, retryCwd, operation, payloadPath, payload };
 }
 
 interface RetryFixture {
@@ -195,7 +240,7 @@ async function retryFixture(initialFailure: "push" | "pr" | "push-before", trans
     out: output.out,
     err: output.err,
   });
-  expect(exitCode).toBe(1);
+  expect(exitCode, [...output.stderr, ...output.stdout].join("\n")).toBe(1);
   const files = await readdir(learningOutboxDirectory(home));
   expect(files).toHaveLength(1);
   const operation = JSON.parse(await readFile(path.join(learningOutboxDirectory(home), files[0]), "utf8")) as LearningOperation;
@@ -482,8 +527,7 @@ describe("learning share", () => {
 
   test("learning pending is read-only and rejects its own invalid arguments", async () => {
     const home = await tempDir("teamai-learning-pending-home-");
-    const source = await marketplace();
-    await writeGlobalConfig(createConfig({ name: TEST_MARKETPLACE_NAME, source }), home);
+    await writeGlobalConfig(createConfig({ name: TEST_MARKETPLACE_NAME, source: TEST_MARKETPLACE_SOURCE }), home);
     const output = capture();
 
     expect(await runCli(["learning", "pending", "--json"], { homeDir: home, cwd: process.cwd(), out: output.out, err: output.err })).toBe(0);
@@ -683,7 +727,7 @@ describe("learning share", () => {
   });
 
   test("learning retry dry-run previews the frozen operation without reading or writing remotely", async () => {
-    const fixture = await retryFixture("push");
+    const fixture = await frozenRetryFixture();
     const outboxPath = path.join(learningOutboxDirectory(fixture.home), `${fixture.operation.id}.json`);
     const before = await readFile(outboxPath);
     const output = capture();
@@ -701,24 +745,26 @@ describe("learning share", () => {
     expect(exitCode).toBe(0);
     expect(output.stdout.join("\n")).toContain(fixture.operation.destination);
     expect(contributionCalls).toBe(0);
-    expect(fixture.counters).toEqual({ pushes: 1, prLists: 0, prCreates: 0 });
     expect(await readFile(outboxPath)).toEqual(before);
+    expect(await readFile(fixture.payloadPath)).toEqual(fixture.payload);
   }, GIT_INTEGRATION_TIMEOUT);
 
   test("learning retry preserves an existing frozen slug destination without renaming it", async () => {
-    const fixture = await retryFixture("push-before");
+    const fixture = await frozenRetryFixture();
     const outboxPath = path.join(learningOutboxDirectory(fixture.home), `${fixture.operation.id}.json`);
     const frozen = { ...fixture.operation, fileName: "note.md", destination: "learnings/shared/note.md" };
     await writeFile(outboxPath, JSON.stringify(frozen));
     const before = await readFile(outboxPath);
     const output = capture();
+    let contributionCalls = 0;
     expect(await runCli(["--dry-run", "learning", "retry", frozen.id], {
       cwd: fixture.retryCwd, homeDir: fixture.home, ...output,
-      contributeGitHub: async () => { throw new Error("dry-run must not contribute"); },
-    })).toBe(0);
+      contributeGitHub: async () => { contributionCalls += 1; throw new Error("dry-run must not contribute"); },
+    }), [...output.stderr, ...output.stdout].join("\n")).toBe(0);
     expect(output.stdout.join("\n")).toContain(`WOULD learning payload: ${frozen.destination} sha256:${frozen.contentHash}`);
     expect(await readFile(outboxPath)).toEqual(before);
-    expect(fixture.counters).toEqual({ pushes: 1, prLists: 0, prCreates: 0 });
+    expect(await readFile(fixture.payloadPath)).toEqual(fixture.payload);
+    expect(contributionCalls).toBe(0);
   }, GIT_INTEGRATION_TIMEOUT);
 
   test.each(["push", "pr"] as const)("learning retry recovers a lost %s response without repeating it", async (lostResponse) => {

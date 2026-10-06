@@ -33,9 +33,11 @@ The CI gate is sequential:
 
 ```bash
 npm run typecheck
-npm test
+npm run test:ci
 npm run build
 ```
+
+CI uses at most two isolated fork workers; tests within each file remain sequential. Local `npm test`, `test:unit`, and `test:integration` retain serial file execution for debugging under load. Keep the worker bound and isolation when changing CI scheduling: tests mutate process environment and start many Git/Node subprocesses.
 
 Run the real product checks after building when Marketplace packaging, plugin convergence, or either Copilot backend changes:
 

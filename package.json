@@ -17,6 +17,7 @@
     "prepare": "npm run build && node scripts/check-package-bytes.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run --no-file-parallelism",
+    "test:ci": "vitest run --pool=forks --maxWorkers=2 --minWorkers=1",
     "test:unit": "vitest run test/unit --no-file-parallelism",
     "test:integration": "vitest run test/integration --no-file-parallelism",
     "test:e2e:copilot": "node scripts/smoke-teamai.mjs",
