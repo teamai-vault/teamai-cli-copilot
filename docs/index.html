@@ -4,18 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Team AI CLI</title>
-<meta name="description" content="teamai 把部门 Marketplace 里的 Copilot Plugins、Instructions 和 Skills 同步到你的机器和你的 Repo。">
+<meta name="description" content="teamai 把部门 Marketplace 里的 Copilot Plugins、Instructions、Skills 和团队经验同步到你的机器和你的 Repo，并支持本地召回与回馈。">
 <meta name="color-scheme" content="light dark">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/geist@5/index.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/geist-mono@5/index.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
 <style>
-/* Tokens: one neutral family (zinc), one accent (green = "converged"). Radius system: panels 10px, chips 6px. */
+/* Tokens: one neutral family (zinc), one accent (green = "converged"). Radius: panels 10px, chips 6px. */
 :root{
   --bg:#fafafa;--surface:#ffffff;--sunken:#f4f4f5;--line:#e4e4e7;--line-strong:#d4d4d8;
-  --text:#18181b;--muted:#52525b;--faint:#a1a1aa;
+  --text:#18181b;--muted:#52525b;--faint:#8b8b94;
   --accent:#15803d;--accent-soft:#dcfce7;--accent-line:#86efac;
-  --code-bg:#18181b;--code-text:#e4e4e7;--code-dim:#71717a;--code-accent:#4ade80;
+  --code-bg:#18181b;--code-text:#e4e4e7;--code-dim:#8b8b94;--code-accent:#4ade80;--code-warn:#fbbf24;
   --r:10px;--r-sm:6px;
   --sans:"Geist Variable",ui-sans-serif,system-ui,-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
   --mono:"Geist Mono Variable",ui-monospace,SFMono-Regular,Consolas,"Microsoft YaHei",monospace;
@@ -27,95 +27,108 @@
   --code-bg:#101012;--code-text:#e4e4e7;--code-dim:#71717a;--code-accent:#4ade80;
 }}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:72px}
 body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
 a{color:inherit}
 code,pre,kbd{font-family:var(--mono)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
 .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
-section{padding:96px 0;border-top:1px solid var(--line)}
+section{padding:104px 0;border-top:1px solid var(--line)}
 h1,h2,h3{margin:0;letter-spacing:-.02em;font-weight:650}
 h2{font-size:clamp(28px,3.4vw,40px);line-height:1.15}
-h3{font-size:18px;line-height:1.35}
-.lede{margin:14px 0 0;color:var(--muted);font-size:17px;max-width:62ch}
+h3{font-size:17px;line-height:1.35}
+.lede{margin:14px 0 0;color:var(--muted);font-size:17px;max-width:60ch}
+.lede code,.muted code{color:var(--text);font-size:.9em}
 .head{margin-bottom:48px}
 .ph{font-size:1.1em;vertical-align:-.15em}
 
 /* nav */
-nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-nav .wrap{display:flex;align-items:center;gap:28px;height:60px}
+nav.top{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav.top .wrap{display:flex;align-items:center;gap:28px;height:60px}
 .brand{font-family:var(--mono);font-weight:600;text-decoration:none;display:flex;align-items:center;gap:8px}
 .brand i{color:var(--accent)}
-.links{display:flex;gap:22px;margin-left:auto;font-size:14px}
-.links a{color:var(--muted);text-decoration:none}
-.links a:hover{color:var(--text)}
+.brand small{font-weight:400;color:var(--faint);font-size:12px}
+.links{display:flex;gap:20px;margin-left:auto;font-size:14px}
+.links a{color:var(--muted);text-decoration:none;position:relative}
+.links a:hover,.links a.on{color:var(--text)}
+.links a.on::after{content:"";position:absolute;left:0;right:0;bottom:-19px;height:2px;background:var(--accent)}
 .btn{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:var(--r-sm);font-size:14px;font-weight:550;text-decoration:none;border:1px solid var(--line-strong);background:var(--surface);color:var(--text);white-space:nowrap;transition:transform .15s,border-color .15s}
 .btn:hover{border-color:var(--text)}
 .btn:active{transform:translateY(1px)}
 .btn.primary{background:var(--text);color:var(--bg);border-color:var(--text)}
-nav .btn{height:34px;padding:0 12px}
+nav.top .btn{height:34px;padding:0 12px}
 
 /* hero */
-.hero{padding:88px 0 96px;border-top:0;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:64px;align-items:center}
-.hero h1{font-size:clamp(32px,4.2vw,48px);line-height:1.12;letter-spacing:-.03em}
+.hero{padding:88px 0 104px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:center}
+.hero h1{font-size:clamp(34px,4.4vw,52px);line-height:1.1;letter-spacing:-.035em}
 .hero h1 em{font-style:normal;color:var(--accent)}
-.hero p{margin:22px 0 32px;color:var(--muted);font-size:18px;max-width:40ch}
+.hero p{margin:22px 0 32px;color:var(--muted);font-size:18px;max-width:34ch}
 .ctas{display:flex;gap:12px;flex-wrap:wrap}
 
-/* hero diagram */
-.map{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
-.node{border:1px solid var(--line-strong);border-radius:var(--r);background:var(--surface);padding:18px 20px}
-.node .k{font-family:var(--mono);font-size:12px;color:var(--faint)}
-.node b{display:block;font-size:17px;margin:4px 0 10px;font-weight:600}
-.node ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
-.node li{font-size:12.5px;font-family:var(--mono);padding:2px 8px;border-radius:var(--r-sm);background:var(--sunken);color:var(--muted)}
-.node.src{grid-column:1/-1;border-style:dashed}
-.wire{position:relative;height:74px}
-.wire::before{content:"";position:absolute;left:50%;top:0;bottom:8px;border-left:1.5px solid var(--accent)}
-.wire::after{content:"";position:absolute;left:calc(50% - 5px);bottom:2px;border:5px solid transparent;border-top:7px solid var(--accent);border-bottom:0}
-.wire code{position:absolute;left:50%;top:50%;transform:translate(-50%,-60%);font-size:12.5px;background:var(--bg);border:1px solid var(--accent-line);color:var(--accent);padding:2px 8px;border-radius:var(--r-sm);white-space:nowrap}
-
-/* three commands */
-.rows{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);overflow:hidden}
-.row{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) minmax(0,1.4fr);gap:24px;align-items:center;padding:26px 28px}
-.row+.row{border-top:1px solid var(--line)}
-.row code{font-size:clamp(17px,2vw,21px);font-weight:500}
-.row code span{color:var(--faint)}
-.row .say{font-size:19px;font-weight:600}
-.row .what{color:var(--muted);font-size:14.5px}
-.scope{display:inline-block;font-family:var(--mono);font-size:11.5px;color:var(--accent);margin-bottom:4px}
-
-/* quick start */
-.steps{display:grid;gap:14px}
-.step{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr);gap:32px;align-items:start;padding:28px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
-.step h3{display:flex;align-items:center;gap:10px}
-.step h3 i{color:var(--accent);font-size:20px}
-.step p{margin:8px 0 0;color:var(--muted);font-size:14.5px}
-.term{margin:0;background:var(--code-bg);color:var(--code-text);border-radius:var(--r);padding:18px 20px;font-size:13px;line-height:1.7;overflow-x:auto;white-space:pre}
-.term .c{color:var(--code-accent)}
+/* terminal */
+.term{position:relative;margin:0;background:var(--code-bg);color:var(--code-text);border-radius:var(--r);padding:18px 20px;font-size:13px;line-height:1.75;overflow-x:auto;white-space:pre}
+.term .c{color:var(--code-accent);user-select:none}
 .term .d{color:var(--code-dim)}
-.cap{margin:8px 0 0;font-size:12px;color:var(--faint)}
+.term .ok{color:var(--code-accent)}
+.term .warn{color:var(--code-warn)}
+.term .hl{color:#fff}
+@media (prefers-color-scheme:dark){.term .hl{color:#fafafa}}
+.copy{position:absolute;top:10px;right:10px;width:30px;height:30px;display:grid;place-items:center;border-radius:var(--r-sm);border:1px solid #3f3f46;background:#27272a;color:#a1a1aa;cursor:pointer;opacity:0;transition:opacity .15s,color .15s}
+.term:hover .copy,.copy:focus-visible{opacity:1}
+.copy:hover{color:#fafafa}
+.copy.done{color:var(--code-accent);opacity:1}
+@media (hover:none){.copy{opacity:1}}
+.cap{margin:10px 0 0;font-size:12.5px;color:var(--faint)}
 
-/* files */
-.trees{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.tree{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);padding:24px 26px}
-.tree h3{display:flex;align-items:center;gap:10px;margin-bottom:16px}
-.tree h3 i{color:var(--muted)}
-.tree ol{list-style:none;margin:0;padding:0;font-family:var(--mono);font-size:13.5px}
-.tree li{display:flex;justify-content:space-between;gap:16px;padding:6px 10px;border-radius:var(--r-sm)}
-.tree li span{font-family:var(--sans);font-size:12.5px;color:var(--muted);text-align:right}
-.tree li.own{background:var(--accent-soft);color:var(--text);box-shadow:inset 2px 0 0 var(--accent)}
-.tree li.no{color:var(--faint)}
-.tree li.no span{color:var(--faint)}
-.i1{margin-left:18px}
-.legend{margin-top:18px;display:flex;gap:22px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
-.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
-.legend .a{background:var(--accent)}
-.legend .b{background:var(--line-strong)}
-.tree li.opt{background:transparent;outline:1px dashed var(--accent-line);outline-offset:-1px}
-.legend .c{border:1px dashed var(--accent)}
+.hero .term{font-size:13.5px;padding:22px 24px}
+.hero .loop{display:block;margin-top:14px;font-size:13px;color:var(--faint);font-family:var(--mono)}
+.hero .loop b{color:var(--accent);font-weight:500}
 
-/* glossary: two groups mirroring the hero diagram */
+/* architecture */
+.diagram{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);padding:28px;overflow-x:auto}
+.diagram svg{display:block;width:100%;min-width:760px;height:auto}
+.dg-box{fill:var(--surface);stroke:var(--line-strong);stroke-width:1.2}
+.dg-sunk{fill:var(--sunken);stroke:none}
+.dg-src{fill:var(--surface);stroke:var(--line-strong);stroke-width:1.2;stroke-dasharray:5 4}
+.dg-core{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.4}
+.dg-k{font:500 11px var(--mono);fill:var(--faint)}
+.dg-t{font:600 16px var(--sans);fill:var(--text)}
+.dg-m{font:12px var(--mono);fill:var(--muted)}
+.dg-s{font:12px var(--sans);fill:var(--muted)}
+.dg-a{font:500 12px var(--mono);fill:var(--accent)}
+.dg-wire{fill:none;stroke:var(--accent);stroke-width:1.5}
+.dg-back{fill:none;stroke:var(--faint);stroke-width:1.3;stroke-dasharray:4 4}
+.dg-head{fill:var(--accent)}
+.dg-headb{fill:var(--faint)}
+.dg-pill{fill:var(--bg);stroke:var(--accent-line)}
+@media (prefers-reduced-motion:no-preference){
+  .dg-wire.flow{stroke-dasharray:6 5;animation:dash 1.6s linear infinite}
+  @keyframes dash{to{stroke-dashoffset:-22}}
+}
+.keys{display:flex;gap:22px;flex-wrap:wrap;margin-top:18px;font-size:13px;color:var(--muted)}
+.keys span{display:inline-flex;align-items:center;gap:8px}
+.keys i{display:inline-block;width:22px;border-top:1.5px solid var(--accent)}
+.keys i.b{border-top:1.5px dashed var(--faint)}
+
+/* marketplace mapping */
+.maps{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);overflow:hidden}
+.band{display:flex;align-items:center;gap:8px;padding:10px 24px;background:var(--sunken);font-size:13px;color:var(--muted);font-weight:550}
+.band i{color:var(--accent)}
+.m{display:grid;grid-template-columns:minmax(0,1.15fr) 120px minmax(0,1fr);gap:16px;align-items:center;padding:12px 24px;font-size:13px}
+.m+.m{border-top:1px dashed var(--line)}
+.m code:first-child{color:var(--text)}
+.m code:last-child{color:var(--muted)}
+.m em{font-style:normal;font-family:var(--mono);font-size:11.5px;color:var(--accent);white-space:nowrap}
+.m em::after{content:" \2192"}
+.m.sub code:first-child{color:var(--muted);padding-left:18px}
+.m.back em{color:var(--faint)}
+.m.back em::after{content:""}
+.m.back em::before{content:"\2190 "}
+#market .cap{margin-top:16px;font-size:13px}
+#market .cap code{color:var(--text)}
+#market .lede a{color:var(--text);text-underline-offset:3px}
+
+/* glossary */
 .gloss{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
 .gset{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);padding:24px 26px}
 .gset h3{display:flex;align-items:center;gap:10px;font-size:15px;color:var(--muted);font-weight:550;margin-bottom:6px}
@@ -128,12 +141,81 @@ nav .btn{height:34px;padding:0 12px}
 .gset dd{margin:0;color:var(--muted);font-size:14px}
 .gset dd code{font-size:12.5px;color:var(--text)}
 
+/* three commands */
+.rows{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);overflow:hidden}
+.row{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) minmax(0,1.4fr);gap:24px;align-items:center;padding:26px 28px}
+.row+.row{border-top:1px solid var(--line)}
+.row code{font-size:clamp(17px,2vw,21px);font-weight:500}
+.row code span{color:var(--faint)}
+.row .say{font-size:19px;font-weight:600}
+.row .what{color:var(--muted);font-size:14.5px}
+.scope{display:inline-block;font-family:var(--mono);font-size:11.5px;color:var(--accent);margin-bottom:4px}
+
+/* sync pipeline */
+.pipe{margin-top:56px;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,2fr);gap:40px;align-items:start}
+.pipe p{margin:10px 0 0;color:var(--muted);font-size:14.5px}
+.stages{list-style:none;margin:0;padding:0;counter-reset:s;display:grid;gap:0}
+.stages li{counter-increment:s;display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:14px;align-items:baseline;padding:12px 0;position:relative}
+.stages li::before{content:counter(s);font-family:var(--mono);font-size:12px;color:var(--faint);text-align:right}
+.stages li+li{border-top:1px dashed var(--line)}
+.stages b{font-weight:550;font-size:14.5px}
+.stages span{font-family:var(--mono);font-size:12px;color:var(--muted);text-align:right}
+.stages li.gate b{color:var(--accent)}
+.stages li.ws{background:linear-gradient(90deg,var(--sunken),transparent)}
+
+/* quick start */
+.steps{display:grid;gap:14px}
+.step{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr);gap:32px;align-items:start;padding:28px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+.step h3{display:flex;align-items:center;gap:10px}
+.step h3 i{color:var(--accent);font-size:20px}
+.step p{margin:8px 0 0;color:var(--muted);font-size:14.5px}
+.step p code{color:var(--text);font-size:.9em}
+
+/* files */
+.trees{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.tree{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);padding:24px 26px}
+.tree h3{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.tree h3 i{color:var(--muted)}
+.tree ol{list-style:none;margin:0;padding:0;font-family:var(--mono);font-size:13px}
+.tree li{display:flex;justify-content:space-between;gap:16px;padding:5px 10px;border-radius:var(--r-sm)}
+.tree li span{font-family:var(--sans);font-size:12.5px;color:var(--muted);text-align:right;flex-shrink:0}
+.tree li.own{background:var(--accent-soft);color:var(--text);box-shadow:inset 2px 0 0 var(--accent)}
+.tree li.opt{outline:1px dashed var(--accent-line);outline-offset:-1px}
+.tree li.no,.tree li.no span{color:var(--faint)}
+.tree li+li{margin-top:2px}
+.i1{margin-left:18px}
+.legend{margin-top:18px;display:flex;gap:22px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.legend .a{background:var(--accent)}
+.legend .c{border:1px dashed var(--accent)}
+.legend .b{background:var(--line-strong)}
+
+/* recall */
+.recall{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:40px;align-items:start}
+.matrix{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);overflow:hidden;font-size:14px}
+.matrix table{width:100%;border-collapse:collapse}
+.matrix th,.matrix td{padding:13px 16px;text-align:left}
+.matrix thead th{font-family:var(--mono);font-size:12.5px;font-weight:500;color:var(--muted);background:var(--sunken)}
+.matrix thead th small{display:block;font-family:var(--sans);color:var(--faint);font-weight:400}
+.matrix tbody tr+tr td{border-top:1px solid var(--line)}
+.matrix td:first-child{color:var(--text)}
+.matrix td:not(:first-child){text-align:center;width:24%}
+.matrix th:not(:first-child){text-align:center}
+.matrix .y{color:var(--accent);font-size:18px}
+.matrix .n{color:var(--line-strong);font-size:18px}
+.matrix .opt{font-family:var(--mono);font-size:11.5px;color:var(--muted);white-space:nowrap}
+.facts{display:grid;gap:18px;margin-top:26px}
+.facts div{padding-left:16px;border-left:2px solid var(--line-strong)}
+.facts div:first-child{border-left-color:var(--accent)}
+.facts b{font-weight:600;font-size:15px}
+.facts p{margin:4px 0 0;color:var(--muted);font-size:14px}
+.facts code,.notes code,.lede code{color:var(--text);font-size:.9em;white-space:nowrap}
+
 /* roles */
 .roles{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:center}
 .plugrow{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 22px}
-.plug{font-family:var(--mono);font-size:13.5px;padding:8px 14px;border-radius:var(--r-sm);border:1px dashed var(--line-strong);color:var(--faint)}
+.plug{font-family:var(--mono);font-size:13.5px;padding:8px 14px;border-radius:var(--r-sm);border:1px dashed var(--line-strong);color:var(--faint);transition:all .3s}
 .plug.on{border:1px solid var(--accent);color:var(--text);background:var(--accent-soft)}
-.plug.on::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-right:8px;vertical-align:middle}
 .label{font-size:13px;color:var(--muted)}
 .label code{color:var(--text)}
 
@@ -141,6 +223,7 @@ nav .btn{height:34px;padding:0 12px}
 .bento{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px}
 .tile{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);padding:26px;display:flex;flex-direction:column;gap:14px}
 .tile p{margin:0;color:var(--muted);font-size:14.5px}
+.tile p code{color:var(--text);font-size:.9em}
 .t-wide{grid-column:span 4}
 .t-side{grid-column:span 2;background:var(--sunken)}
 .t-half{grid-column:span 3}
@@ -155,9 +238,28 @@ nav .btn{height:34px;padding:0 12px}
 .chips{display:flex;gap:6px;flex-wrap:wrap}
 .chip{font-family:var(--mono);font-size:12.5px;padding:3px 9px;border-radius:var(--r-sm);background:var(--surface);border:1px solid var(--accent-line)}
 .chip.miss{border-style:dashed;border-color:var(--line-strong);color:var(--faint);background:transparent}
-.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:13.5px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:13.5px;margin:0}
 .kv dt{font-family:var(--mono);color:var(--text)}
 .kv dd{margin:0;color:var(--muted)}
+.kv dd code{color:var(--text);font-size:.9em}
+
+/* contribution state machine */
+.sm{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);padding:30px 28px}
+.sm-track{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;position:relative}
+.sm-node{position:relative;padding-top:30px}
+.sm-node::before{content:"";position:absolute;top:8px;left:0;right:0;border-top:1.5px solid var(--line-strong)}
+.sm-node:first-child::before{left:9px}
+.sm-node:last-child::before{right:auto;width:9px}
+.sm-node::after{content:"";position:absolute;top:2px;left:3px;width:12px;height:12px;border-radius:50%;background:var(--surface);border:1.5px solid var(--accent)}
+.sm-node.end::after{background:var(--accent)}
+.sm-node code{font-size:13px;font-weight:500}
+.sm-node p{margin:4px 14px 0 0;color:var(--muted);font-size:13px}
+.sm-fork{display:flex;flex-direction:column;gap:6px}
+.sm-fork code.x{color:var(--faint)}
+.sm-foot{margin-top:28px;padding-top:22px;border-top:1px dashed var(--line);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;font-size:14px;color:var(--muted)}
+.sm-foot b{color:var(--text);font-weight:550}
+.sm-foot code{color:var(--text);font-size:.9em}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
 
 /* health */
 .health{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:40px;align-items:start}
@@ -165,24 +267,14 @@ nav .btn{height:34px;padding:0 12px}
 .notes div{padding-left:18px;border-left:2px solid var(--line-strong)}
 .notes div:first-child{border-left-color:var(--accent)}
 .notes p{margin:6px 0 0;color:var(--muted);font-size:14.5px}
-.term .ok{color:var(--code-accent)}
-.term .warn{color:#fbbf24}
-
-/* contribute flow */
-.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line);border-radius:var(--r);background:var(--surface);overflow:hidden}
-.flow div{padding:24px 22px;position:relative}
-.flow div+div{border-left:1px solid var(--line)}
-.flow div+div::before{content:"";position:absolute;left:-6px;top:50%;width:10px;height:10px;background:var(--surface);border-top:1px solid var(--line);border-right:1px solid var(--line);transform:translateY(-50%) rotate(45deg)}
-.flow i{font-size:22px;color:var(--accent)}
-.flow b{display:block;margin:10px 0 4px;font-weight:600}
-.flow span{font-size:13.5px;color:var(--muted)}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.notes code{color:var(--text);font-size:.9em}
 
 /* command reference */
 .ref{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px 56px}
-.ref h3{font-size:14px;color:var(--muted);font-weight:550;margin-bottom:10px}
+.ref h3{font-size:14px;color:var(--muted);font-weight:550;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.ref h3 i{color:var(--accent)}
 .ref dl{margin:0}
-.ref dt{font-family:var(--mono);font-size:14px;padding-top:12px}
+.ref dt{font-family:var(--mono);font-size:13.5px;padding-top:12px}
 .ref dd{margin:2px 0 0;color:var(--muted);font-size:14px;padding-bottom:12px;border-bottom:1px solid var(--line)}
 .ref dl div:last-child dd{border-bottom:0}
 .tip{margin-top:48px;padding:18px 22px;border-radius:var(--r);background:var(--sunken);font-size:14.5px;color:var(--muted);display:flex;gap:12px;align-items:flex-start}
@@ -191,45 +283,69 @@ nav .btn{height:34px;padding:0 12px}
 
 footer{border-top:1px solid var(--line);padding:40px 0 56px;font-size:14px;color:var(--muted)}
 footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
-footer nav{position:static;background:none;border:0;backdrop-filter:none;display:flex;gap:20px;flex-wrap:wrap}
+footer nav{display:flex;gap:20px;flex-wrap:wrap}
 footer a{color:var(--muted);text-decoration:none}
 footer a:hover{color:var(--text)}
 
+/* reveal: progressive enhancement, content visible without JS */
+@media (prefers-reduced-motion:no-preference){
+  .js .rv{opacity:0;transform:translateY(14px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+  .js .rv.in{opacity:1;transform:none}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
 @media (max-width:900px){
-  .hero,.roles,.health,.trees,.two,.gloss{grid-template-columns:minmax(0,1fr)}
-  .hero{gap:48px;padding:56px 0 64px}
+  .hero,.roles,.health,.trees,.two,.gloss,.recall,.pipe,.sm-foot{grid-template-columns:minmax(0,1fr)}
+  .hero{gap:40px;padding:56px 0 72px}
   .row{grid-template-columns:minmax(0,1fr);gap:6px}
   .step{grid-template-columns:minmax(0,1fr);gap:18px}
   .bento{grid-template-columns:minmax(0,1fr)}
   .t-wide,.t-side,.t-half{grid-column:auto}
-  .flow{grid-template-columns:minmax(0,1fr)}
-  .flow div+div{border-left:0;border-top:1px solid var(--line)}
-  .flow div+div::before{left:28px;top:-6px;transform:rotate(135deg)}
+  .sm-track{grid-template-columns:minmax(0,1fr);gap:4px}
+  .sm-node{padding:0 0 14px 30px}
+  .sm-node::before{top:14px;bottom:-4px;left:8px;right:auto;border-top:0;border-left:1.5px solid var(--line-strong)}
+  .sm-node:first-child::before{left:8px}
+  .sm-node:last-child::before{display:none}
+  .sm-node::after{top:4px;left:2px}
   .ref{grid-template-columns:minmax(0,1fr)}
-  section{padding:64px 0}
+  section{padding:72px 0}
+  .links{gap:14px}
 }
+@media (max-width:980px){.links{display:none}nav.top .btn{margin-left:auto}}
 @media (max-width:640px){
-  .links{display:none}
-  nav .btn{margin-left:auto}
   .wrap{padding:0 16px}
+  .diagram{padding:16px}
   .skl td:nth-child(3){display:none}
   .gset{padding:20px}
   .gset dl div{grid-template-columns:minmax(0,1fr);gap:4px}
+  .tree{padding:20px 16px}
+  .tree li{flex-direction:column;gap:0}
+  .tree li span{text-align:left}
+  .stages li{grid-template-columns:22px minmax(0,1fr)}
+  .stages span{grid-column:2;text-align:left}
+  .matrix th,.matrix td{padding:11px 8px}
+  .matrix .opt{font-size:10px}
+  .m{grid-template-columns:minmax(0,1fr);gap:2px;padding:12px 16px}
+  .band{padding:10px 16px}
+  .m code{overflow-wrap:anywhere}
 }
 </style>
 </head>
 <body>
 
-<nav>
+<nav class="top" aria-label="页面导航">
   <div class="wrap">
-    <a class="brand" href="#top"><i class="ph ph-terminal-window"></i>teamai</a>
+    <a class="brand" href="#top"><i class="ph ph-terminal-window"></i>teamai <small>0.4.0</small></a>
     <div class="links">
-      <a href="#terms">术语</a>
-      <a href="#model">概念</a>
+      <a href="#arch">架构</a>
+      <a href="#market">Marketplace</a>
+      <a href="#model">命令</a>
       <a href="#start">上手</a>
       <a href="#files">文件</a>
+      <a href="#recall">召回</a>
       <a href="#skills">Skills</a>
-      <a href="#commands">命令</a>
+      <a href="#share">贡献</a>
+      <a href="#commands">参考</a>
     </div>
     <a class="btn" href="https://github.com/teamai-vault/teamai-cli-copilot"><i class="ph ph-github-logo"></i>GitHub</a>
   </div>
@@ -240,104 +356,223 @@ footer a:hover{color:var(--text)}
   <header class="hero">
     <div>
       <h1>团队的 Copilot 配置，<br>一条命令<em>同步到位</em>。</h1>
-      <p>部门 Marketplace 定义 Plugins、Instructions 和 Skills。teamai 把它们装到你的机器和你的 Repo，并保持最新。</p>
+      <p>Marketplace 定义 Plugins、Instructions、Skills 和团队经验。teamai 把它们装到你的机器和 Repo，并保持收敛。</p>
       <div class="ctas">
         <a class="btn primary" href="#start">3 分钟上手<i class="ph ph-arrow-down"></i></a>
-        <a class="btn" href="https://github.com/teamai-vault/teamai-cli-copilot#readme">阅读 README</a>
+        <a class="btn" href="#arch">看架构</a>
       </div>
     </div>
-
-    <div class="map" role="img" aria-label="Marketplace 通过 init 和 sync 同步到你的机器，通过 projects set 和 sync 同步到当前 Repo">
-      <div class="node src">
-        <div class="k">owner/repo</div>
-        <b>部门 Marketplace</b>
-        <ul><li>plugins</li><li>instructions</li><li>skills</li><li>contexts</li><li>learnings</li></ul>
-      </div>
-      <div class="wire"><code>init · sync</code></div>
-      <div class="wire"><code>projects set · sync</code></div>
-      <div class="node">
-        <div class="k">User Scope</div>
-        <b>你的机器</b>
-        <ul><li>Role</li><li>Plugins</li><li>Instructions</li><li>Skills</li></ul>
-      </div>
-      <div class="node">
-        <div class="k">Physical Project</div>
-        <b>当前 Repo</b>
-        <ul><li>业务 Context</li><li>Docs</li><li>Learnings</li></ul>
-      </div>
+    <div>
+<pre class="term"><span class="c">$</span> teamai init --marketplace &lt;owner/repo&gt; --role api
+<span class="c">$</span> cd payment-service
+<span class="c">$</span> teamai projects set payments
+<span class="c">$</span> teamai sync
+<span class="c">$</span> teamai recall 支付 重试</pre>
+      <span class="loop">设置一次 <b>init</b>，绑定一次 <b>projects set</b>，之后只需 <b>sync</b>。</span>
     </div>
   </header>
 
+  <section id="arch">
+    <div class="head rv">
+      <h2>一张图看懂。</h2>
+      <p class="lede">Marketplace 是唯一内容源。CLI 只做控制面：通过 Copilot 原生命令管理 Plugins，把其余内容按归属写到两个范围。</p>
+    </div>
+    <div class="diagram rv" role="img" aria-label="架构图：部门 Marketplace 的 main 分支与 teamai-learnings 分支被 teamai CLI 读取，CLI 通过原生 Copilot CLI 或 VS Code fallback 写入用户范围，并把业务上下文写入当前 Repo；learning share 和 skill contribute 通过 gh PR 回到 Marketplace。">
+      <svg viewBox="0 0 1060 540" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="dg-head"/></marker>
+          <marker id="ahb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="dg-headb"/></marker>
+        </defs>
+
+        <!-- Marketplace -->
+        <rect x="10" y="20" width="290" height="440" rx="10" class="dg-src"/>
+        <text x="32" y="50" class="dg-k">owner/repo</text>
+        <text x="32" y="72" class="dg-t">部门 Marketplace</text>
+        <rect x="26" y="90" width="258" height="250" rx="8" class="dg-sunk"/>
+        <text x="42" y="114" class="dg-a">main</text>
+        <text x="42" y="142" class="dg-m">.github/plugin/marketplace.json</text>
+        <text x="42" y="168" class="dg-m">plugins/&lt;name&gt;/</text>
+        <text x="62" y="188" class="dg-s">common · 5 个 role · project</text>
+        <text x="42" y="214" class="dg-m">instructions/**</text>
+        <text x="42" y="240" class="dg-m">skills/ + skills.yaml</text>
+        <text x="42" y="266" class="dg-m">manifest/projects.yaml</text>
+        <text x="42" y="292" class="dg-m">contexts/&lt;id&gt;/</text>
+        <text x="62" y="312" class="dg-s">instructions/ 与 docs/</text>
+        <rect x="26" y="356" width="258" height="88" rx="8" class="dg-sunk"/>
+        <text x="42" y="380" class="dg-a">teamai-learnings</text>
+        <text x="42" y="406" class="dg-m">learnings/&lt;project&gt;/</text>
+        <text x="62" y="426" class="dg-s">&lt;uuid&gt;.md，经 PR 发布</text>
+
+        <!-- CLI -->
+        <rect x="390" y="150" width="270" height="200" rx="10" class="dg-core"/>
+        <text x="412" y="180" class="dg-k">npm · bin</text>
+        <text x="412" y="202" class="dg-t">teamai CLI</text>
+        <text x="412" y="230" class="dg-m">init · sync · projects set</text>
+        <text x="412" y="252" class="dg-m">recall · learning · skill</text>
+        <line x1="412" y1="270" x2="638" y2="270" stroke="var(--accent-line)"/>
+        <text x="412" y="294" class="dg-s">CopilotOperations</text>
+        <text x="412" y="316" class="dg-m">copilot plugins …</text>
+        <text x="412" y="336" class="dg-s">无 copilot 时用 VS Code fallback</text>
+
+        <!-- User scope -->
+        <rect x="750" y="20" width="300" height="230" rx="10" class="dg-box"/>
+        <text x="772" y="50" class="dg-k">User Scope</text>
+        <text x="772" y="72" class="dg-t">你的机器</text>
+        <text x="772" y="102" class="dg-m">~/.copilot/</text>
+        <text x="792" y="124" class="dg-s">Plugins：common + 1 个 role 启用</text>
+        <text x="792" y="146" class="dg-m">instructions/teamai/</text>
+        <text x="792" y="168" class="dg-m">skills/teamai/</text>
+        <text x="792" y="190" class="dg-m">agents/teamai-recall.agent.md</text>
+        <text x="772" y="220" class="dg-m">~/.teamai/</text>
+        <text x="792" y="238" class="dg-s">config · 回执 · Learnings 快照</text>
+
+        <!-- Workspace -->
+        <rect x="750" y="290" width="300" height="230" rx="10" class="dg-box"/>
+        <text x="772" y="320" class="dg-k">Physical Project</text>
+        <text x="772" y="342" class="dg-t">当前 Repo</text>
+        <text x="772" y="372" class="dg-m">.github/instructions/teamai/</text>
+        <text x="772" y="396" class="dg-m">.teamai/context/</text>
+        <text x="792" y="416" class="dg-s">Docs 与 Learnings</text>
+        <text x="772" y="442" class="dg-m">.github/agents|skills|hooks/</text>
+        <text x="772" y="464" class="dg-m">.mcp.json</text>
+        <text x="772" y="494" class="dg-s">后两行：仅当 Project Plugin 声明组件</text>
+
+        <!-- wires -->
+        <path d="M300 240 H382" class="dg-wire flow" marker-end="url(#ah)"/>
+        <rect x="306" y="214" width="70" height="20" rx="5" class="dg-pill"/>
+        <text x="341" y="228" text-anchor="middle" class="dg-a">fetch</text>
+        <path d="M300 400 C340 400 340 300 382 300" class="dg-wire flow" marker-end="url(#ah)"/>
+
+        <path d="M660 200 C705 200 705 135 742 135" class="dg-wire flow" marker-end="url(#ah)"/>
+        <rect x="668" y="150" width="78" height="20" rx="5" class="dg-pill"/>
+        <text x="707" y="164" text-anchor="middle" class="dg-a">init sync</text>
+        <path d="M660 300 C705 300 705 405 742 405" class="dg-wire flow" marker-end="url(#ah)"/>
+        <rect x="660" y="364" width="94" height="20" rx="5" class="dg-pill"/>
+        <text x="707" y="378" text-anchor="middle" class="dg-a">projects set</text>
+
+        <path d="M525 350 V500 H170 V452" class="dg-back" marker-end="url(#ahb)"/>
+        <text x="540" y="490" class="dg-s">learning share / skill contribute</text>
+        <text x="540" y="510" class="dg-m">隔离 worktree → gh PR</text>
+      </svg>
+    </div>
+    <div class="keys"><span><i></i>读取与收敛</span><span><i class="b"></i>贡献回流，Marketplace 维护者审核</span></div>
+  </section>
+
+  <section id="market">
+    <div class="head rv">
+      <h2>Marketplace 里的每个目录，去了哪里。</h2>
+      <p class="lede">CLI 和 Marketplace 是两个独立仓库，靠目录约定对接。维护者只改 Marketplace，CLI 按下表消费。参考实现见 <a href="https://github.com/teamai-vault/teamai-marketplace">teamai-marketplace</a>。</p>
+    </div>
+    <div class="maps rv">
+      <div class="band"><i class="ph ph-desktop"></i>你的机器</div>
+      <div class="m"><code>.github/plugin/marketplace.json</code><em>注册</em><code>Copilot 与 VS Code 的 Marketplace 设置</code></div>
+      <div class="m"><code>plugins/&lt;name&gt;/plugin.json</code><em>install · enable</em><code>~/.copilot/installed-plugins/</code></div>
+      <div class="m sub"><code>skills/ · com.github.copilot/{agents,rules,hooks}</code><em>原生加载</em><code>随 Plugin 生效，CLI 不拆包</code></div>
+      <div class="m"><code>instructions/**/*.instructions.md</code><em>逐字节镜像</em><code>~/.copilot/instructions/teamai/</code></div>
+      <div class="m"><code>skills/&lt;name&gt;/ + skills.yaml</code><em>skill install</em><code>~/.copilot/skills/&lt;name&gt;/</code></div>
+      <div class="band"><i class="ph ph-folder-simple"></i>当前 Repo</div>
+      <div class="m"><code>manifest/projects.yaml</code><em>projects set</em><code>~/.teamai/projects/&lt;anchor&gt;/</code></div>
+      <div class="m"><code>contexts/&lt;id&gt;/instructions/</code><em>镜像</em><code>.github/instructions/teamai/&lt;id&gt;/</code></div>
+      <div class="m"><code>contexts/&lt;id&gt;/docs/</code><em>镜像</em><code>.teamai/context/&lt;id&gt;/docs/</code></div>
+      <div class="m"><code>plugins/&lt;project&gt;/</code><em>组件投射</em><code>.github/agents|skills|hooks/ · .mcp.json</code></div>
+      <div class="band"><i class="ph ph-git-branch"></i>teamai-learnings 分支</div>
+      <div class="m"><code>learnings/&lt;project|shared&gt;/&lt;uuid&gt;.md</code><em>快照 · 投射</em><code>~/.teamai/published-learnings/ · .teamai/context/</code></div>
+      <div class="m back"><code>learning share</code><em>PR</em><code>learnings/&lt;project&gt;/&lt;uuid&gt;.md</code></div>
+    </div>
+    <p class="cap">Plugin 的类型只看 <code>plugin.json</code> 里的 <code>extensions.com.company.teamai.kind</code>，不看名字。project Plugin 只在 <code>projects.yaml</code> 用 <code>plugin:</code> 引用时才被消费。</p>
+  </section>
+
   <section id="terms">
-    <div class="head">
+    <div class="head rv">
       <h2>先认识几个词。</h2>
       <p class="lede">分两组记：跟人走的装到你的机器，跟业务走的装到 Repo。</p>
     </div>
-    <div class="gloss">
+    <div class="gloss rv">
       <div class="gset">
         <h3><i class="ph ph-desktop"></i>跟人走 · 你的机器</h3>
         <dl>
-          <div><dt>Marketplace<small>部门仓库</small></dt><dd>一个 Git 仓库，部门共同维护。Plugins、Skills、Instructions、业务 Context 都放在这里，改动走 PR。</dd></div>
-          <div><dt>Plugin<small>Agent Plugin</small></dt><dd>Copilot 的扩展包，可以打包 Skills、Agents、MCP Servers 和 Hooks。按用途分 <code>common</code>、<code>role</code>、<code>project</code> 三类。</dd></div>
+          <div><dt>Marketplace<small>部门仓库</small></dt><dd>一个 Git 仓库，部门共同维护。CLI 不内置任何 Marketplace，每个用户用 <code>init</code> 指定一个。</dd></div>
+          <div><dt>Plugin<small>Agent Plugin</small></dt><dd>Copilot 原生扩展包。按 <code>extensions.com.company.teamai.kind</code> 分为 <code>common</code>、<code>role</code>、<code>project</code>。</dd></div>
           <div><dt>Role<small>你的岗位</small></dt><dd><code>api</code>、<code>ios</code>、<code>aos</code>、<code>qa</code>、<code>design</code> 之一。决定启用哪个 role Plugin。</dd></div>
-          <div><dt>Skill<small>按需加载的能力</small></dt><dd>一个 <code>SKILL.md</code> 目录。Copilot 遇到相关任务时才读取。可以随 Plugin 提供，也可以单独安装。</dd></div>
-          <div><dt>Instructions<small>常驻规则</small></dt><dd><code>*.instructions.md</code> 文件，Copilot 按 <code>applyTo</code> 自动带进对话。部门级的镜像到 <code>~/.copilot/instructions/teamai/</code>。</dd></div>
+          <div><dt>Skill<small>按需加载的能力</small></dt><dd>一个 <code>SKILL.md</code> 目录。随 Plugin 提供，或作为 standalone 单独安装。</dd></div>
+          <div><dt>Instructions<small>常驻规则</small></dt><dd><code>*.instructions.md</code>。部门级的逐字节镜像到 <code>~/.copilot/instructions/teamai/</code>。</dd></div>
+          <div><dt>Recall Agent<small>内置</small></dt><dd>随 CLI 分发的 <code>teamai-recall</code> Agent。只读检索团队知识，带出处回答，不改代码。</dd></div>
         </dl>
       </div>
       <div class="gset">
         <h3><i class="ph ph-folder-simple"></i>跟业务走 · 当前 Repo</h3>
         <dl>
-          <div><dt>Logical Project<small>业务项目</small></dt><dd>业务意义上的项目，比如 <code>payments</code>，在 Marketplace 的 <code>manifest/projects.yaml</code> 里声明。一个业务可以横跨多个 Repo。</dd></div>
-          <div><dt>Physical Project<small>本地 Repo</small></dt><dd>你本地的一个 Git 工作区。用 <code>projects set</code> 绑定到一个或多个 Logical Project。</dd></div>
-          <div><dt>Context<small>业务上下文</small></dt><dd>某个 Logical Project 的 Instructions 和文档。绑定后写入 Repo，Copilot 在这个 Repo 里就懂这块业务。</dd></div>
-          <div><dt>Learning<small>团队经验</small></dt><dd>一篇排障或踩坑记录，按 Logical Project 或 <code>shared</code> 归档。用 <code>learning share</code> 提交回 Marketplace。</dd></div>
-          <div><dt>Project Plugin<small>可选</small></dt><dd>只有业务需要自己的 Skills 或 MCP 时才有。Marketplace 在 <code>projects.yaml</code> 里用 <code>plugin:</code> 声明，绑定时自动在 Repo 的 <code>.github/copilot/settings.json</code> 启用，不需要手动开关。</dd></div>
+          <div><dt>Logical Project<small>业务项目</small></dt><dd>业务意义上的项目，如 <code>payments</code>，在 <code>manifest/projects.yaml</code> 声明。可以横跨多个 Repo。</dd></div>
+          <div><dt>Physical Project<small>本地 Repo</small></dt><dd>你本地的一个 Git 工作区。用 <code>projects set</code> 绑定一个或多个 Logical Project。</dd></div>
+          <div><dt>Context<small>业务上下文</small></dt><dd>Logical Project 的 Instructions 和 Docs。绑定后写入 Repo，Copilot 在这里就懂这块业务。</dd></div>
+          <div><dt>Learning<small>团队经验</small></dt><dd>一篇排障或踩坑记录。经 PR 合入 <code>teamai-learnings</code> 分支后成为已发布内容。</dd></div>
+          <div><dt>Project Plugin<small>可选</small></dt><dd>只是组件来源。CLI 把 manifest 选中的 Agents、Rules、Skills、Hooks、MCP 投射到 Repo 的原生位置，<b>不会</b>安装或启用这个包。</dd></div>
         </dl>
       </div>
     </div>
   </section>
 
   <section id="model">
-    <div class="head">
+    <div class="head rv">
       <h2>只需要记住三个命令。</h2>
       <p class="lede">每个命令只管一个范围。</p>
     </div>
-    <div class="rows">
+    <div class="rows rv">
       <div class="row">
         <code>teamai init</code>
         <div class="say">我是谁</div>
-        <div><span class="scope">你的机器</span><div class="what">Marketplace、Role、用户级 Instructions、内置的 teamai Skill。只做一次。</div></div>
+        <div><span class="scope">你的机器</span><div class="what">Marketplace、Role、用户级 Instructions、内置 Skill 与 Recall Agent。只做一次，从不绑定 Repo。</div></div>
       </div>
       <div class="row">
         <code>teamai projects set <span>&lt;ids&gt;</span></code>
-        <div class="say">这个 Repo 是做什么的</div>
-        <div><span class="scope">当前 Repo</span><div class="what">绑定一个或多个 Logical Project，立即写入对应的业务上下文。</div></div>
+        <div class="say">这个 Repo 做什么</div>
+        <div><span class="scope">当前 Repo</span><div class="what">绑定一个或多个 Logical Project，立即写入业务上下文和声明的组件。</div></div>
       </div>
       <div class="row">
         <code>teamai sync</code>
         <div class="say">更新到最新</div>
-        <div><span class="scope">你的机器 + 当前 Repo</span><div class="what">刷新 Marketplace，按已声明的状态重新收敛。不会扫描机器上的其他 Repo。</div></div>
+        <div><span class="scope">你的机器 + 当前 Repo</span><div class="what">刷新 Marketplace，按已声明的状态重新收敛并修复。不扫描机器上的其他 Repo。</div></div>
       </div>
+    </div>
+
+    <div class="pipe rv">
+      <div>
+        <h3>一次 sync 做了什么</h3>
+        <p>先整体预检，任何一步不通过就不写入。之后每一步都只动 teamai 拥有的东西。</p>
+      </div>
+      <ol class="stages">
+        <li><b>刷新 Marketplace 与已发布 Learnings 快照</b><span>main + teamai-learnings</span></li>
+        <li class="gate"><b>预检全部收敛计划</b><span>dry-run</span></li>
+        <li><b>内置 Recall Agent</b><span>agents/teamai-recall.agent.md</span></li>
+        <li><b>内置 teamai Skill</b><span>skills/teamai/</span></li>
+        <li><b>用户级 Instructions 镜像</b><span>instructions/teamai/</span></li>
+        <li><b>Plugins 安装与启用</b><span>copilot plugins …</span></li>
+        <li><b>VS Code Marketplace 注册</b><span>chat.plugins.marketplaces</span></li>
+        <li class="ws"><b>当前 Repo 的 Context、组件与 Learnings</b><span>仅当已绑定</span></li>
+        <li><b>已安装的个人 Skills</b><span>~/.copilot/skills/</span></li>
+      </ol>
     </div>
   </section>
 
   <section id="start">
-    <div class="head">
+    <div class="head rv">
       <h2>从零到可用。</h2>
-      <p class="lede">需要 Node.js 20+、Git，以及 GitHub Copilot CLI（没有时使用 VS Code 作为 fallback）。下面的输出来自真实运行，只做了节选。</p>
+      <p class="lede">需要 Node.js 20+ 和 Git。Plugins 收敛需要 GitHub Copilot CLI（<code>copilot</code>），没有时回退到 VS Code（<code>code</code>）。</p>
     </div>
     <div class="steps">
-      <div class="step">
+      <div class="step rv">
         <div><h3><i class="ph ph-download-simple"></i>安装</h3><p>目前从源码安装，<code>npm link</code> 后即可全局使用 <code>teamai</code>。</p></div>
-        <pre class="term"><span class="c">$</span> git clone https://github.com/teamai-vault/teamai-cli-copilot.git
+<pre class="term"><span class="c">$</span> git clone https://github.com/teamai-vault/teamai-cli-copilot.git
 <span class="c">$</span> cd teamai-cli-copilot
-<span class="c">$</span> npm install &amp;&amp; npm run build &amp;&amp; npm link</pre>
+<span class="c">$</span> npm install &amp;&amp; npm run build &amp;&amp; npm link
+<span class="c">$</span> teamai --version</pre>
       </div>
-      <div class="step">
-        <div><h3><i class="ph ph-user-circle"></i>初始化自己</h3><p>指定部门 Marketplace 和你的 Role。Plugins 全部安装，只启用 common 和你的 Role。</p></div>
+      <div class="step rv">
+        <div><h3><i class="ph ph-user-circle"></i>初始化自己</h3><p>所有 role Plugin 都会安装，只启用 common 和你的 Role。非交互环境必须同时给出两个参数。</p></div>
         <div>
 <pre class="term"><span class="c">$</span> teamai init --marketplace &lt;owner/repo&gt; --role api
 Marketplace discovered: teamai
+DONE create: ~/.copilot/agents/teamai-recall.agent.md
 DONE create: ~/.copilot/skills/teamai
 DONE plugin-install: common@teamai
 DONE plugin-install: api@teamai
@@ -345,23 +580,25 @@ DONE plugin-install: ios@teamai
 DONE plugin-disable: ios@teamai
 <span class="d">...</span>
 DONE create: ~/.copilot/instructions/teamai/global.instructions.md</pre>
+          <p class="cap">输出为节选。不确定时先加 <code>--dry-run</code>。</p>
         </div>
       </div>
-      <div class="step">
-        <div><h3><i class="ph ph-git-branch"></i>绑定 Repo</h3><p>进入业务 Repo，告诉 teamai 它属于哪个 Logical Project。内容立即就位，并自动加入 Git exclude。</p></div>
+      <div class="step rv">
+        <div><h3><i class="ph ph-git-branch"></i>绑定 Repo</h3><p>进入业务 Repo，告诉 teamai 它属于哪个 Logical Project。可以多个，空格或逗号分隔。</p></div>
         <div>
 <pre class="term"><span class="c">$</span> cd payment-service
-<span class="c">$</span> teamai projects set teamai
-DONE write: .github/instructions/teamai/teamai/context.instructions.md
-DONE write: .teamai/context/teamai/docs/architecture.md
-DONE write: .teamai/context/shared/learnings/validation.md
+<span class="c">$</span> teamai projects list
+<span class="c">$</span> teamai projects set payments
+DONE write: .github/instructions/teamai/payments/context.instructions.md
+DONE write: .teamai/context/payments/docs/architecture.md
+DONE write: .teamai/context/shared/learnings/&lt;uuid&gt;.md
 DONE write: .git/info/exclude</pre>
-          <p class="cap">路径已缩短为相对 Repo 根目录。</p>
+          <p class="cap">路径已缩短为相对 Repo 根目录。两个保留目录自动加入 Git exclude。</p>
         </div>
       </div>
-      <div class="step">
-        <div><h3><i class="ph ph-arrows-clockwise"></i>保持最新</h3><p>团队更新了 Plugins、文档或 Skills 之后，在 Repo 里跑一次 sync。</p></div>
-        <pre class="term"><span class="c">$</span> teamai sync
+      <div class="step rv">
+        <div><h3><i class="ph ph-arrows-clockwise"></i>保持最新</h3><p>团队更新了 Plugins、文档、Skills 或 Learnings 之后，在 Repo 里跑一次。已收敛时不写任何东西。</p></div>
+<pre class="term"><span class="c">$</span> teamai sync
 Copilot plugin state is already converged.
 Managed user instructions are already converged (2).</pre>
       </div>
@@ -369,22 +606,26 @@ Managed user instructions are already converged (2).</pre>
   </section>
 
   <section id="files">
-    <div class="head">
+    <div class="head rv">
       <h2>它会写到哪里。</h2>
-      <p class="lede">teamai 只管理高亮的路径。你自己的 Instructions、Skills 和 Repo 文件保持原样，路径被占用时会拒绝覆盖。</p>
+      <p class="lede">只管理高亮的路径，并为每一处写入记录所有权回执。路径已被别人占用时直接拒绝，不会覆盖。</p>
     </div>
-    <div class="trees">
+    <div class="trees rv">
       <div class="tree">
         <h3><i class="ph ph-desktop"></i>你的机器</h3>
         <ol>
-          <li>~/.copilot/</li>
+          <li>~/.copilot/ <span>可用 COPILOT_HOME 改根</span></li>
+          <li class="own i1">installed-plugins/<span>原生 Copilot 管理</span></li>
+          <li class="own i1">instructions/teamai/<span>部门 Instructions</span></li>
           <li class="own i1">skills/teamai/<span>内置 Skill</span></li>
-          <li class="own i1">skills/release-helper/<span>你安装的 Team Skill</span></li>
-          <li class="own i1">instructions/teamai/<span>部门 Instructions 镜像</span></li>
+          <li class="own i1">agents/teamai-recall.agent.md<span>内置 Agent</span></li>
+          <li class="own opt i1">skills/release-helper/<span>你装的 Team Skill</span></li>
           <li class="no i1">instructions/my-notes.md<span>你自己的</span></li>
           <li>~/.teamai/</li>
           <li class="own i1">config.yaml<span>Marketplace、Role、所有权</span></li>
-          <li class="own i1">projects/&lt;repo&gt;/<span>每个 Repo 的绑定</span></li>
+          <li class="own i1">built-in-skills/ · built-in-agents/<span>交付回执</span></li>
+          <li class="own i1">published-learnings/<span>只读快照</span></li>
+          <li class="own i1">projects/&lt;anchor&gt;/<span>每个 Repo 的绑定</span></li>
         </ol>
       </div>
       <div class="tree">
@@ -393,7 +634,9 @@ Managed user instructions are already converged (2).</pre>
           <li>payment-service/</li>
           <li class="own i1">.github/instructions/teamai/<span>业务 Instructions</span></li>
           <li class="own i1">.teamai/context/<span>Docs 与 Learnings</span></li>
-          <li class="own opt i1">.github/copilot/settings.json<span>可选，见 <a href="#terms">Project Plugin</a></span></li>
+          <li class="own opt i1">.github/agents/ · skills/ · hooks/<span>Project Plugin 组件</span></li>
+          <li class="own opt i1">.mcp.json<span>只合并拥有的条目</span></li>
+          <li class="own opt i1">.teamai/project-components/<span>MCP 引用文件</span></li>
           <li class="no i1">.github/copilot-instructions.md<span>你自己的</span></li>
           <li class="no i1">src/<span>你自己的</span></li>
           <li class="own">.git/info/exclude<span>前两个目录不进提交</span></li>
@@ -403,13 +646,55 @@ Managed user instructions are already converged (2).</pre>
     <div class="legend"><span><i class="a"></i>teamai 管理</span><span><i class="c"></i>按需出现</span><span><i class="b"></i>不会触碰</span></div>
   </section>
 
+  <section id="recall">
+    <div class="head rv">
+      <h2>先查团队经验，再动手。</h2>
+      <p class="lede"><code>teamai recall</code> 在本地缓存里检索已发布 Learnings 和当前 Project 的 Docs。不联网，不调用模型，不写状态。</p>
+    </div>
+    <div class="recall">
+      <div class="rv">
+        <div class="matrix">
+          <table>
+            <thead><tr><th>检索内容</th><th>user<small>未绑定 Repo</small></th><th>workspace<small>已绑定 Repo</small></th></tr></thead>
+            <tbody>
+              <tr><td>shared Learnings</td><td><i class="ph ph-check y" aria-label="包含"></i></td><td><i class="ph ph-check y" aria-label="包含"></i></td></tr>
+              <tr><td>Project Learnings</td><td><i class="ph ph-minus n" aria-label="不包含"></i></td><td><i class="ph ph-check y" aria-label="包含"></i></td></tr>
+              <tr><td>Project Docs</td><td><i class="ph ph-minus n" aria-label="不包含"></i></td><td><i class="ph ph-check y" aria-label="包含"></i></td></tr>
+              <tr><td>本地未发布草稿</td><td><span class="opt">--include-pending</span></td><td><span class="opt">--include-pending</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="facts">
+          <div><b>scope 默认 auto</b><p>当前 Repo 有绑定就用 workspace，否则用 user。<code>--project</code> 收窄到一个 Project。</p></div>
+          <div><b>每条结果都有出处</b><p>本地文件、source revision、SHA-256、原始行号和 evidence 片段。<code>--json</code> 给脚本用。</p></div>
+          <div><b>交给 Agent</b><p>在 Copilot 里直接问 <code>teamai-recall</code>。它会把问题转成英文技术词，保留原始报错和 ID，用你的语言带出处回答。</p></div>
+        </div>
+      </div>
+<pre class="term rv"><span class="c">$</span> teamai recall 支付 重试
+Recall found 2 result(s) in workspace scope for "支付 重试".
+
+<span class="hl">[1] learning · published · payments · 回调超时后的重复扣款</span>
+<span class="d">Source:</span> learnings/payments/&lt;uuid&gt;.md @ 9c41e2a
+<span class="d">File:</span> ~/.teamai/published-learnings/&lt;hash&gt;/learnings/payments/&lt;uuid&gt;.md
+<span class="d">SHA-256:</span> 5f0d…e81a
+<span class="d">Lines:</span> 12-19
+<span class="d">Matched terms:</span> 支付, 重试
+⟦evidence⟧
+重试前先用幂等键查询订单状态…
+⟦/evidence⟧
+
+<span class="hl">[2] doc · published · payments · 支付网关接入说明</span>
+<span class="d">...</span></pre>
+    </div>
+  </section>
+
   <section id="roles">
     <div class="roles">
-      <div>
+      <div class="rv">
         <h2>切换 Role，不用重装。</h2>
-        <p class="lede">所有 Role Plugin 都已安装。teamai 只启用 common 加上你选的那一个，切换只是换一个开关。</p>
+        <p class="lede">所有 role Plugin 都已安装。teamai 只启用 common 加上你选的那一个，切换只是换开关。你自己装的同名 Plugin 不会被接管。</p>
       </div>
-      <div>
+      <div class="rv">
         <div class="label"><code>--role api</code></div>
         <div class="plugrow">
           <span class="plug on">common</span><span class="plug on">api</span><span class="plug">ios</span><span class="plug">aos</span><span class="plug">qa</span><span class="plug">design</span>
@@ -423,10 +708,10 @@ Managed user instructions are already converged (2).</pre>
   </section>
 
   <section id="skills">
-    <div class="head">
+    <div class="head rv">
       <h2>Skills：先找，再看，再装。</h2>
     </div>
-    <div class="bento">
+    <div class="bento rv">
       <div class="tile t-wide">
         <h3>浏览团队目录</h3>
         <p><code>teamai skill list</code> 可按 <code>--tag</code>、<code>--owner</code>、<code>--source</code> 过滤。</p>
@@ -449,8 +734,8 @@ Managed user instructions are already converged (2).</pre>
       <div class="tile t-half">
         <h3>两种 Skill</h3>
         <dl class="kv">
-          <dt>standalone</dt><dd>单独安装到 <code>~/.copilot/skills/</code>，用 <code>skill remove</code> 移除。</dd>
-          <dt>plugin:*</dt><dd>随所属 Plugin 启用而可用，不需要再复制一份。</dd>
+          <dt>standalone</dt><dd>逐字节复制到 <code>~/.copilot/skills/</code>，<code>skill remove</code> 只删 teamai 装的那份。</dd>
+          <dt>plugin:*</dt><dd>随所属 Plugin 启用而可用，不再重复复制。</dd>
         </dl>
       </div>
       <div class="tile t-half t-tint">
@@ -464,87 +749,116 @@ Managed user instructions are already converged (2).</pre>
     </div>
   </section>
 
-  <section id="health">
-    <div class="health">
-      <pre class="term"><span class="c">$</span> teamai doctor
-<span class="ok">✓</span> Git: git version 2.54.0.windows.1
-<span class="ok">✓</span> Built-in Team AI Skill: current (0.3.0).
-<span class="ok">✓</span> Copilot backend: GitHub Copilot CLI 1.0.83.
-<span class="ok">✓</span> Team AI config: role=qa
-<span class="ok">✓</span> Managed user instructions: current (2)
-<span class="ok">✓</span> common@teamai is enabled.
-<span class="ok">✓</span> qa@teamai is enabled.
-<span class="ok">✓</span> Logical Project context: current.
-<span class="ok">✓</span> Managed personal skills: current.
-<span class="warn">!</span> Native Plugin Hook runtime inspection is unavailable
-<span class="d">...</span></pre>
-      <div class="notes">
-        <h2>哪里不对，先问 doctor。</h2>
-        <div><h3>doctor 只读</h3><p>检查缺失、过期和冲突，不修复任何东西。修复交给 sync。</p></div>
-        <div><h3>status 看全貌</h3><p>Marketplace、Role、每个 Plugin 的开关、当前 Repo 绑定了什么。</p></div>
-        <div><h3>--dry-run 先预览</h3><p>任何命令加上它，只打印将要写入的内容。</p></div>
+  <section id="share">
+    <div class="head rv">
+      <h2>把经验还给团队。</h2>
+      <p class="lede">分享一条 Learning 或贡献一个 Skill。teamai 在隔离的 bare clone 和 worktree 里提交并用 <code>gh</code> 开 PR，不动你本地的 Marketplace 缓存。</p>
+    </div>
+    <div class="sm rv" role="img" aria-label="learning share 状态流：base-resolved，branch-pushed，pr-open，最终为 published 或 closed-without-merge。每一步都写入本地 outbox，可用 learning pending 查看，learning retry 续传。">
+      <div class="sm-track">
+        <div class="sm-node"><code>share</code><p>写入本地 outbox，生成 UUID</p></div>
+        <div class="sm-node"><code>base-resolved</code><p>确认 teamai-learnings 基线</p></div>
+        <div class="sm-node"><code>branch-pushed</code><p>分支与提交已推送</p></div>
+        <div class="sm-node"><code>pr-open</code><p>等待维护者审核</p></div>
+        <div class="sm-node end"><div class="sm-fork"><code>published</code><code class="x">closed-without-merge</code></div><p>合入后 sync 即可召回</p></div>
       </div>
+      <div class="sm-foot">
+        <div><b>中断了也不丢。</b> 每一步都有检查点，<code>teamai learning pending</code> 列出未完成的操作。</div>
+        <div><b>续传是幂等的。</b> <code>teamai learning retry &lt;id&gt;</code> 从检查点继续，不会重复开 PR。</div>
+      </div>
+    </div>
+    <div class="two">
+<pre class="term rv"><span class="c">$</span> teamai learning share note.md --tags payment retry
+DONE learning share: note.md -&gt; learnings/payments/&lt;uuid&gt;.md
+Learning contribution &lt;uuid&gt;: pr-open
+Pull request: https://github.com/&lt;org&gt;/&lt;marketplace&gt;/pull/42</pre>
+<pre class="term rv"><span class="c">$</span> teamai skill contribute ./my-skill \
+    --owner api-team --target standalone
+<span class="d"># 或放进已有 Plugin</span>
+<span class="c">$</span> teamai skill contribute ./my-skill \
+    --owner api-team --target plugin --plugin api</pre>
     </div>
   </section>
 
-  <section id="share">
-    <div class="head">
-      <h2>把经验还给团队。</h2>
-      <p class="lede">分享一条排障经验，或者贡献一个 Skill。teamai 在隔离的 worktree 里完成提交并通过 <code>gh</code> 开 PR，不动你本地的 Marketplace。</p>
-    </div>
-    <div class="flow">
-      <div><i class="ph ph-file-text"></i><b>本地文件</b><span>一份 Markdown 或一个 Skill 目录</span></div>
-      <div><i class="ph ph-git-fork"></i><b>隔离 worktree</b><span>独立 clone，不影响当前缓存</span></div>
-      <div><i class="ph ph-git-commit"></i><b>分支与提交</b><span>自动生成分支和提交</span></div>
-      <div><i class="ph ph-git-pull-request"></i><b>Pull Request</b><span>由 Marketplace 维护者审核</span></div>
-    </div>
-    <div class="two">
-      <pre class="term"><span class="c">$</span> teamai learning share note.md</pre>
-      <pre class="term"><span class="c">$</span> teamai skill contribute ./my-skill \
-    --owner api-team --target standalone</pre>
+  <section id="health">
+    <div class="health">
+<pre class="term rv"><span class="c">$</span> teamai doctor
+<span class="ok">✓</span> Git: git version 2.54.0.windows.1
+<span class="ok">✓</span> Built-in Recall Agent: current (0.4.0); consumer runtime unobserved.
+<span class="ok">✓</span> Team AI config: role=api
+<span class="ok">✓</span> Published Learnings snapshot: 9c41e2a.
+<span class="ok">✓</span> Marketplace cache/catalog: 3b7fbef.
+<span class="ok">✓</span> Managed user instructions: current (2)
+<span class="ok">✓</span> common@teamai is configured enabled; runtime unobserved.
+<span class="ok">✓</span> api@teamai is configured enabled; runtime unobserved.
+<span class="ok">✓</span> Workspace root: ~/code/payment-service
+<span class="warn">!</span> Native Plugin Hook runtime inspection is unavailable
+<span class="d">...</span></pre>
+      <div class="notes rv">
+        <h2>哪里不对，先问 doctor。</h2>
+        <div><h3>doctor 只读</h3><p>检查缺失、过期和冲突，不刷新缓存也不修复。修复交给 <code>sync</code>。</p></div>
+        <div><h3>status 看全貌</h3><p>Marketplace revision、Role、Plugin 开关、Repo 绑定。<code>--resources</code> 逐项列出资源的交付与归属，<code>--json</code> 给工具用。</p></div>
+        <div><h3>--dry-run 先预览</h3><p>所有写命令都支持，只打印 <code>WOULD ...</code>，不改任何状态。</p></div>
+      </div>
     </div>
   </section>
 
   <section id="commands">
-    <div class="head">
+    <div class="head rv">
       <h2>全部命令。</h2>
-      <p class="lede">精确语法以 <code>teamai --help</code> 为准。</p>
+      <p class="lede">精确语法以 <code>teamai --help</code> 和 <code>teamai &lt;command&gt; --help</code> 为准。</p>
     </div>
-    <div class="ref">
+    <div class="ref rv">
       <div>
-        <h3>设置与 Repo</h3>
+        <h3><i class="ph ph-gear-six"></i>设置与 Repo</h3>
         <dl>
-          <div><dt>init [--marketplace &lt;source&gt;] [--role &lt;role&gt;]</dt><dd>配置你自己。只影响你的机器。</dd></div>
+          <div><dt>init [--marketplace &lt;source&gt;] [--role &lt;role&gt;]</dt><dd>配置你自己，只影响你的机器。</dd></div>
           <div><dt>role list · role set &lt;role&gt;</dt><dd>查看或切换 Role。</dd></div>
-          <div><dt>projects list · projects set &lt;ids...&gt;</dt><dd>查看 Logical Project，绑定当前 Repo。</dd></div>
+          <div><dt>projects [list] · projects set &lt;ids...&gt;</dt><dd>查看 Logical Project，绑定当前 Repo。</dd></div>
           <div><dt>sync</dt><dd>刷新并收敛你的机器和当前 Repo。</dd></div>
         </dl>
       </div>
       <div>
-        <h3>Skills</h3>
+        <h3><i class="ph ph-magnifying-glass"></i>召回</h3>
+        <dl>
+          <div><dt>recall &lt;query&gt; [--scope auto|user|workspace]</dt><dd>本地检索已发布 Learnings 与 Project Docs。</dd></div>
+          <div><dt>  [--project &lt;id&gt;] [--limit &lt;n&gt;]</dt><dd>收窄 Project，限制条数。</dd></div>
+          <div><dt>  [--include-pending] [--json]</dt><dd>带上本地草稿，输出 JSON。</dd></div>
+        </dl>
+      </div>
+      <div>
+        <h3><i class="ph ph-puzzle-piece"></i>Skills</h3>
         <dl>
           <div><dt>skill list [--tag] [--owner] [--source]</dt><dd>浏览团队 Skill 目录。</dd></div>
           <div><dt>skill show &lt;name&gt;</dt><dd>来源、Owner、Tag、本地状态。</dd></div>
-          <div><dt>skill install &lt;name...&gt; · --tag &lt;tag&gt;</dt><dd>按名字或按 Tag 安装。</dd></div>
-          <div><dt>skill remove &lt;name...&gt; · tags list</dt><dd>移除已安装的 Skill，查看全部 Tag。</dd></div>
+          <div><dt>skill install &lt;name...&gt; · --tag &lt;tag&gt; [--yes]</dt><dd>按名字或按 Tag 安装。</dd></div>
+          <div><dt>skill remove &lt;name...&gt; · tags list</dt><dd>移除 teamai 安装的 Skill，查看全部 Tag。</dd></div>
         </dl>
       </div>
       <div>
-        <h3>贡献</h3>
+        <h3><i class="ph ph-git-pull-request"></i>贡献</h3>
         <dl>
-          <div><dt>learning share &lt;file&gt; [--project &lt;id&gt; | --shared]</dt><dd>把经验提交到 Marketplace 的 learnings。</dd></div>
-          <div><dt>skill contribute &lt;path&gt; --owner &lt;owner&gt; --target &lt;t&gt;</dt><dd>把 Skill 贡献为 standalone 或放进某个 Plugin。</dd></div>
+          <div><dt>learning share &lt;file&gt; [--project &lt;id&gt; | --shared] [--tags]</dt><dd>提交到 teamai-learnings。只有一个绑定时默认用它，没有绑定时用 shared。</dd></div>
+          <div><dt>learning pending [--json] · learning retry &lt;id&gt;</dt><dd>查看未完成的贡献，从检查点续传。</dd></div>
+          <div><dt>skill contribute &lt;path&gt; --owner &lt;o&gt; --target standalone|plugin</dt><dd>贡献为 standalone，或配合 <code>--plugin</code> 放进已有 Plugin。</dd></div>
         </dl>
       </div>
       <div>
-        <h3>诊断</h3>
+        <h3><i class="ph ph-stethoscope"></i>诊断</h3>
         <dl>
-          <div><dt>status</dt><dd>当前状态总览。</dd></div>
-          <div><dt>doctor</dt><dd>只读诊断。</dd></div>
+          <div><dt>status [--resources] [--json]</dt><dd>状态总览，或逐项资源清单。</dd></div>
+          <div><dt>doctor [--json]</dt><dd>只读诊断。</dd></div>
+        </dl>
+      </div>
+      <div>
+        <h3><i class="ph ph-wrench"></i>Marketplace 维护者</h3>
+        <dl>
+          <div><dt>node scripts/init-learnings-branch.mjs --marketplace &lt;url&gt; [--apply]</dt><dd>初始化 teamai-learnings 分支，默认只预览。</dd></div>
+          <div><dt>npm run rename:marketplace -- --from &lt;a&gt; --to &lt;b&gt; --dry-run</dt><dd>重命名 Marketplace 逻辑 ID。</dd></div>
         </dl>
       </div>
     </div>
-    <div class="tip"><i class="ph ph-info"></i><div>全局选项 <code>--dry-run</code> 预览所有写入和 Copilot 变更，<code>--version</code> 查看版本。</div></div>
+    <div class="tip"><i class="ph ph-info"></i><div>全局选项：<code>--dry-run</code> 预览所有写入和 Copilot 变更，<code>--version</code> 查看版本，<code>--help</code> 查看帮助。</div></div>
   </section>
 
 </main>
@@ -552,15 +866,57 @@ Managed user instructions are already converged (2).</pre>
 <footer>
   <div class="wrap">
     <span>Team AI CLI. Set once, sync often.</span>
-    <nav>
+    <nav aria-label="外部链接">
       <a href="https://github.com/teamai-vault/teamai-cli-copilot">GitHub</a>
-      <a href="https://github.com/teamai-vault/teamai-cli-copilot/blob/main/README.md">README</a>
       <a href="https://github.com/teamai-vault/teamai-cli-copilot/blob/main/README.zh-CN.md">中文 README</a>
-      <a href="https://github.com/teamai-vault/teamai-cli-copilot/tree/main/docs/v3">设计文档</a>
+      <a href="https://github.com/teamai-vault/teamai-cli-copilot/blob/main/docs/HANDOFF.md">实现状态</a>
+      <a href="https://github.com/teamai-vault/teamai-cli-copilot/tree/main/docs/development">开发文档</a>
       <a href="https://github.com/teamai-vault/teamai-cli-copilot/blob/main/docs/VERSIONING.md">版本规则</a>
     </nav>
   </div>
 </footer>
 
+<script>
+(() => {
+  document.documentElement.classList.add("js");
+
+  // Copy buttons: copy only the commands ("$ ..." lines), not sample output.
+  document.querySelectorAll("pre.term").forEach((pre) => {
+    const cmds = pre.innerText.split("\n").filter((l) => l.startsWith("$ ")).map((l) => l.slice(2));
+    if (!cmds.length || !navigator.clipboard) return;
+    const b = document.createElement("button");
+    b.className = "copy";
+    b.type = "button";
+    b.setAttribute("aria-label", "复制命令");
+    b.innerHTML = '<i class="ph ph-copy"></i>';
+    b.onclick = () => navigator.clipboard.writeText(cmds.join("\n")).then(() => {
+      b.classList.add("done");
+      b.innerHTML = '<i class="ph ph-check"></i>';
+      setTimeout(() => { b.classList.remove("done"); b.innerHTML = '<i class="ph ph-copy"></i>'; }, 1400);
+    });
+    pre.appendChild(b);
+  });
+
+  if (!("IntersectionObserver" in window)) {
+    document.querySelectorAll(".rv").forEach((el) => el.classList.add("in"));
+    return;
+  }
+
+  // Reveal on enter.
+  const rv = new IntersectionObserver((entries) => entries.forEach((e) => {
+    if (e.isIntersecting) { e.target.classList.add("in"); rv.unobserve(e.target); }
+  }), { rootMargin: "0px 0px -8% 0px" });
+  document.querySelectorAll(".rv").forEach((el) => rv.observe(el));
+
+  // Highlight current section in nav.
+  const links = new Map([...document.querySelectorAll(".links a")].map((a) => [a.getAttribute("href").slice(1), a]));
+  const spy = new IntersectionObserver((entries) => entries.forEach((e) => {
+    if (!e.isIntersecting) return;
+    links.forEach((a) => a.classList.remove("on"));
+    links.get(e.target.id)?.classList.add("on");
+  }), { rootMargin: "-45% 0px -50% 0px" });
+  links.forEach((_, id) => { const s = document.getElementById(id); if (s) spy.observe(s); });
+})();
+</script>
 </body>
 </html>
