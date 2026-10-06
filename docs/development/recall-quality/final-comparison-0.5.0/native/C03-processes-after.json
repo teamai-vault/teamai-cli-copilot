@@ -1,0 +1,25 @@
+{
+  "case": "C03",
+  "observedAt": "2026-10-06T05:02:08.7647057+00:00",
+  "processes": [
+    {
+      "pid": 25084,
+      "name": "pwsh.exe",
+      "stillPresent": false,
+      "sameCreationIfPresent": null
+    },
+    {
+      "pid": 29548,
+      "name": "node.exe",
+      "stillPresent": false,
+      "sameCreationIfPresent": null
+    },
+    {
+      "pid": 27544,
+      "name": "copilot.exe",
+      "stillPresent": false,
+      "sameCreationIfPresent": null
+    }
+  ],
+  "allRecordedProcessesAbsent": true
+}

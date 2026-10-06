@@ -1,0 +1,35 @@
+{
+  "result": "PASS_ACTUAL_FIXED_CLI_MEASUREMENT_AND_OWNED_SETUP_ONLY",
+  "sourceRevision": "4977e40ac7e6d327f63710302bac137177f70193",
+  "manifest": {
+    "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v4\\manifest.json",
+    "sha256": "56f6935e691e87a0d48ede91670e12c22c41004b1fd04323606d14645f8c854e",
+    "actualTarballSha256": "b1d9bf3a73525dcc289e87e8afd7a35180d98fe7a1259db7bb7607eaf6389656"
+  },
+  "report": {
+    "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\cli-report.json",
+    "sha256": "e8742af280bcec75d22fa37fd8f2abeaa257bbb32db02b56c036d0eb0c6599fc"
+  },
+  "baseline": {
+    "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\baseline-cli-v2\\cli-report.json",
+    "sha256": "70f45d38d778169a621295af78d667c2eed597133700fc570464d06333609415"
+  },
+  "actualRecallCalls": 34,
+  "protocolObservations": 3,
+  "covered": 22,
+  "notApplicable": 12,
+  "verifiedOriginalHits": 121,
+  "unchangedFrozenFiles": 22,
+  "fixedFacts": 215,
+  "indexArtifacts": 99,
+  "fullOwnedSetup": {
+    "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\supervisor-c-final-v4-full-owned-delivery-acceptance.json",
+    "sha256": "650bf28c7fc6dfcf72c31b3a462e8dccbd35b6eb1733acaa369ccad203f3fad5",
+    "sixPlannedManagedChanges": 6
+  },
+  "currentElapsedMs": 30175,
+  "baselineElapsedMs": 28952,
+  "rankingAndSnippet": "Actual order/snippet changes are measured separately; source coverage is22 in both versions. Single timings establish no performance significance or universal quality improvement.",
+  "nativeModel": "NOT_RUN; separate normal consumer preflight and phase2 required",
+  "acceptedAtUtc": "2026-10-06T03:55:27.938Z"
+}

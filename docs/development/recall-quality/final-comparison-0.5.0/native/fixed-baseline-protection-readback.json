@@ -1,0 +1,7 @@
+{
+  "beforeFacts": 215,
+  "afterFacts": 215,
+  "deltas": [],
+  "equal": true,
+  "scope": "Original fixed CLI fixture business/source/refs/cache facts, after all native sessions; not account or native session metadata"
+}

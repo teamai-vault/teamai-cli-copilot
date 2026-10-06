@@ -1,0 +1,525 @@
+{
+  "status": "PHASE1_ACTUAL_IMMUTABLE_INDEX",
+  "slot": "E17-C30-SYNC-CLI-V4",
+  "recordedAtUtc": "2026-10-06T03:46:44.8144796+00:00",
+  "selfExcluded": "phase1-artifact-index.json",
+  "files": [
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\01-C01-healthy-keywords-5.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\01-C01-healthy-keywords-5.stdout.txt",
+      "bytes": 5691,
+      "sha256": "76b5d92536b258005fb9a1fb349afbae6126b113c745a28944d7237552b1af9e"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\02-C01-healthy-keywords-10.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\02-C01-healthy-keywords-10.stdout.txt",
+      "bytes": 10788,
+      "sha256": "2e957aa97fcdd354fef9a620d4ba685b8a9aa111e8dd175bdd4e3a9f9c805404"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\03-C01-healthy-sentence-5.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\03-C01-healthy-sentence-5.stdout.txt",
+      "bytes": 5833,
+      "sha256": "a1f16589deb2545bb8e6970c41c75532f538aaf1570163f0c1953ff1705dda7f"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\04-C01-healthy-sentence-10.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\04-C01-healthy-sentence-10.stdout.txt",
+      "bytes": 11021,
+      "sha256": "fe4fbc2c640ef35f53fc6f94e80ff7f588874ad987c6ac22737f1ab3465e18b1"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\05-C02-healthy-keywords-5.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\05-C02-healthy-keywords-5.stdout.txt",
+      "bytes": 1349,
+      "sha256": "57e81d70591a59e2193ee213c3c0feead34fc58884205df8421d8431d6425a2e"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\06-C02-healthy-keywords-10.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\06-C02-healthy-keywords-10.stdout.txt",
+      "bytes": 1350,
+      "sha256": "e2a7dfd8a267801c9b4b31498c92c6855f1f2517481b865ca782afc6ae1ee3e5"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\07-C02-healthy-sentence-5.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\07-C02-healthy-sentence-5.stdout.txt",
+      "bytes": 5425,
+      "sha256": "5ef0a7db4b969e04a6f35acda5ed8c9560b713955be3413e6e532caae5ba0084"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\08-C02-healthy-sentence-10.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\08-C02-healthy-sentence-10.stdout.txt",
+      "bytes": 10829,
+      "sha256": "be873f5d48ff8eb2f9f5dd3afdbb3d1816cf10fcb21f7b1890c02cc04f280b85"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\09-C02-healthy-chinese-5.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\09-C02-healthy-chinese-5.stdout.txt",
+      "bytes": 1304,
+      "sha256": "477e197110dc1aa19bb19fe6a4c5d7b915df0ba66587f5cc89804c32ad35ac92"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\10-C02-healthy-chinese-10.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\10-C02-healthy-chinese-10.stdout.txt",
+      "bytes": 1305,
+      "sha256": "285490d3c82ace18a737ea11e24f8d8c4a5e54f1fcb0e3d5a914fc31cb99ed1b"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\11-C03-healthy-keywords-5.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\11-C03-healthy-keywords-5.stdout.txt",
+      "bytes": 3218,
+      "sha256": "08e5a9e0324faf1cbd2585c5eff43fa4cb3c1b94a8b3da1bc5ac40125314648b"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\12-C03-healthy-keywords-10.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\12-C03-healthy-keywords-10.stdout.txt",
+      "bytes": 3219,
+      "sha256": "45f53b473d43e1bcca653332d10ef61341dbc8dc7bfcae5f5c0487367bce7833"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\13-C03-healthy-sentence-5.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\13-C03-healthy-sentence-5.stdout.txt",
+      "bytes": 5589,
+      "sha256": "5910f26c381095fd7b1fa285ac1a9fea75df219360687b229cdbadf17da9f266"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\14-C03-healthy-sentence-10.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\14-C03-healthy-sentence-10.stdout.txt",
+      "bytes": 10837,
+      "sha256": "c950db3eb746525ee700f5a56d6b0fabc6537b7b3a8cc8d075b43be76aaf17e9"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\15-C04-healthy-keywords-5.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\15-C04-healthy-keywords-5.stdout.txt",
+      "bytes": 2099,
+      "sha256": "4a1e2072719793dbd7f54928c031fd9c7f2e7c03e5356f04d431489320605615"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\16-C04-healthy-keywords-10.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\16-C04-healthy-keywords-10.stdout.txt",
+      "bytes": 2100,
+      "sha256": "a87c082953fa7122b20b2cb9ce5126884423a9b55d56a1f6550500d8715f33dd"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\17-C04-healthy-sentence-5.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\17-C04-healthy-sentence-5.stdout.txt",
+      "bytes": 5552,
+      "sha256": "b5194b0bf8b7e044adec5e26203d3ec33495bfa7d111b4ea6ee2a95482e72141"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\18-C04-healthy-sentence-10.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\18-C04-healthy-sentence-10.stdout.txt",
+      "bytes": 10391,
+      "sha256": "7d06758a30b04ae40c390adc6419a672eeccc9a24e3e85825308c13b4961713c"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\19-C05-healthy-keywords-5.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\19-C05-healthy-keywords-5.stdout.txt",
+      "bytes": 1123,
+      "sha256": "0d22a16ee8178979825116b34effc61eaaf7d0c958cff757b6fc927344500d24"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\20-C05-healthy-keywords-10.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\20-C05-healthy-keywords-10.stdout.txt",
+      "bytes": 1124,
+      "sha256": "28acf82835edbbc0c8c1e370b2c4d8a22e27649a245834356a34e85cb35629ef"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\21-C05-healthy-sentence-5.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\21-C05-healthy-sentence-5.stdout.txt",
+      "bytes": 5358,
+      "sha256": "c57bb7e02ea3d67118cc157a3bc286c3e73536b5c5f2e33757e700a82e98d50d"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\22-C05-healthy-sentence-10.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\22-C05-healthy-sentence-10.stdout.txt",
+      "bytes": 10757,
+      "sha256": "85f07881cbb92c04086f176c53b8fe03892b431639424c4179c5f9e72416b191"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\23-C06-healthy-keywords-5.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\23-C06-healthy-keywords-5.stdout.txt",
+      "bytes": 334,
+      "sha256": "58550825a7bbdc2201830e41092039a56e0573829078f25db27371772b32efc5"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\24-C06-healthy-keywords-10.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\24-C06-healthy-keywords-10.stdout.txt",
+      "bytes": 335,
+      "sha256": "ebd17a31584b3910b3ac8679c39087519526176ce96691870c962eed079d29df"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\25-C06-healthy-sentence-5.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\25-C06-healthy-sentence-5.stdout.txt",
+      "bytes": 5557,
+      "sha256": "11e7c752b066b3211a807b8eb882f917c639626d146ed912680edd28a2879d23"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\26-C06-healthy-sentence-10.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\26-C06-healthy-sentence-10.stdout.txt",
+      "bytes": 10201,
+      "sha256": "37e7229e6c995cc5f51446dd58ee1fe4f23bd2d035ea1e81be3ea6c03be39d7a"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\27-C06-missing-keywords-5.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\27-C06-missing-keywords-5.stdout.txt",
+      "bytes": 154,
+      "sha256": "3cbbc366dd456537b0b1ae36e57a443ea6114da6935e7c74b74c049aee9e82ca"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\28-C06-missing-keywords-10.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\28-C06-missing-keywords-10.stdout.txt",
+      "bytes": 154,
+      "sha256": "3cbbc366dd456537b0b1ae36e57a443ea6114da6935e7c74b74c049aee9e82ca"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\29-C06-missing-sentence-5.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\29-C06-missing-sentence-5.stdout.txt",
+      "bytes": 154,
+      "sha256": "3cbbc366dd456537b0b1ae36e57a443ea6114da6935e7c74b74c049aee9e82ca"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\30-C06-missing-sentence-10.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\30-C06-missing-sentence-10.stdout.txt",
+      "bytes": 154,
+      "sha256": "3cbbc366dd456537b0b1ae36e57a443ea6114da6935e7c74b74c049aee9e82ca"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\31-C06-damaged-keywords-5.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\31-C06-damaged-keywords-5.stdout.txt",
+      "bytes": 278,
+      "sha256": "a0f637b4d10ff12f80ee7360e12b8e2f39921ae3b8add74ff02d56e1d92077f6"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\32-C06-damaged-keywords-10.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\32-C06-damaged-keywords-10.stdout.txt",
+      "bytes": 278,
+      "sha256": "a0f637b4d10ff12f80ee7360e12b8e2f39921ae3b8add74ff02d56e1d92077f6"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\33-C06-damaged-sentence-5.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\33-C06-damaged-sentence-5.stdout.txt",
+      "bytes": 278,
+      "sha256": "a0f637b4d10ff12f80ee7360e12b8e2f39921ae3b8add74ff02d56e1d92077f6"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\34-C06-damaged-sentence-10.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\34-C06-damaged-sentence-10.stdout.txt",
+      "bytes": 278,
+      "sha256": "a0f637b4d10ff12f80ee7360e12b8e2f39921ae3b8add74ff02d56e1d92077f6"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\cli-report.json",
+      "bytes": 455442,
+      "sha256": "e8742af280bcec75d22fa37fd8f2abeaa257bbb32db02b56c036d0eb0c6599fc"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\protected-after.json",
+      "bytes": 27711,
+      "sha256": "c1ab05af5f87354062ef2c0c3a9a7847308dea9597ac5509faf8bccfcfed6131"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\cli-v1\\protected-before.json",
+      "bytes": 27711,
+      "sha256": "c1ab05af5f87354062ef2c0c3a9a7847308dea9597ac5509faf8bccfcfed6131"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\actual-delivery-readback.json",
+      "bytes": 1220,
+      "sha256": "45e0cecff9d641ccf9f33e80777745b0bf33e4ab5c8f555a9293c2a43f082b32"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\final-sync-summary.json",
+      "bytes": 2282,
+      "sha256": "a0cfe0a3fd9f4c15c834f96600a95b958ee3a84afd07696c2bb5d27d352c4790"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\fixed-after-final-sync.json",
+      "bytes": 802,
+      "sha256": "7b1c5c115ee01b2bf450d3a414adbb182bf60124248a8d0a199da806b939c675"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\fixed-after-final-sync.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\fixed-after-final-sync.stdout.txt",
+      "bytes": 166,
+      "sha256": "d1ef742db6117c9f24138360a2ff40cb0c2d2f1f32c20790a231bf6ecc4c1668"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\fixed-protected-after-final-sync.json",
+      "bytes": 27711,
+      "sha256": "c1ab05af5f87354062ef2c0c3a9a7847308dea9597ac5509faf8bccfcfed6131"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\fixed-protected-before.json",
+      "bytes": 27711,
+      "sha256": "c1ab05af5f87354062ef2c0c3a9a7847308dea9597ac5509faf8bccfcfed6131"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\native-protected-after-final-sync.json",
+      "bytes": 24361,
+      "sha256": "204fed29897f1876230737a68b4e2170ff84c86b892bee3b74baf6284cb7f96f"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\native-protected-before-final-sync.json",
+      "bytes": 24361,
+      "sha256": "837dbdc614569c928b679a672bd123f28ca10d66660f222e8fc24b455a1431bd"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\phase1-report.json",
+      "bytes": 75649,
+      "sha256": "7972c0c5bec9b6e807a4cc407cf78f85b6498742331e40022b382b5842e50913"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\phase1-step1.json",
+      "bytes": 325,
+      "sha256": "0aa4008f5d2a43e7031551c0cb289916752a06e60fd80cbc552bfddb2dc2175d"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\phase1-step1.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\phase1-step1.stdout.txt",
+      "bytes": 156,
+      "sha256": "5b8cf6de0fa4992ef8d190847ba08f109a11e6869af322fd897e94d7fa953b1d"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\phase1-step2.json",
+      "bytes": 211,
+      "sha256": "c798dd24a845049b3d0c47089cf55b3e0cbc93356124343aef46bb6c1712a9e5"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\phase1-step2.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\phase1-step2.stdout.txt",
+      "bytes": 29,
+      "sha256": "568fef45b36f8aca543f473e22d3f3aa3f0806d0ed72b79fbcb0ff44f06371ff"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\phase1-step3.json",
+      "bytes": 280,
+      "sha256": "a4ca7c2a2bc05a5d38fe8c6a9cc95bda9a24313a61d3e0fb602d2b79f8c4a79f"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\phase1-step3.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\phase1-step3.stdout.txt",
+      "bytes": 193,
+      "sha256": "e7d2e0a4171276fa4fc57394c3a0ef7502f5052fe3b98118a04037cb573a98e4"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\phase1-step4.json",
+      "bytes": 308,
+      "sha256": "5cf6e26c644d8978e31d3f65ee1db235be84ef64df403014646101a5437126d3"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\phase1-step4.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\phase1-step4.stdout.txt",
+      "bytes": 249,
+      "sha256": "d52d62ad9cce2d45afd6cd1dfa199e4da9eebd12d1ba57ed27c6b0413b64a254"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\public-final-projects-list.json",
+      "bytes": 583,
+      "sha256": "38e60580d641698f9b70c9ef7619acad7105a90fbc987268ac3bd651aa13e75a"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\public-final-projects-list.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\public-final-projects-list.stdout.txt",
+      "bytes": 51,
+      "sha256": "d4c6f61cb6a9afd1d1f57c41a2d972b130f5041dbb4889101b55f13b20a9a670"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\public-final-sync.json",
+      "bytes": 561,
+      "sha256": "cef52d449452380baf8b932a79de4243e96f8627b91bbc00f5086579118fff49"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\public-final-sync.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\public-final-sync.stdout.txt",
+      "bytes": 481,
+      "sha256": "7135b2781abde682709e559b4492487022aa969df8b35bfbf7cd13dc7cb570bd"
+    }
+  ],
+  "handoff": {
+    "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-final-v4-phase1.md",
+    "bytes": 4662,
+    "sha256": "03616a90fa902eb6812f6dc6d959aed3c5ff0ab69991e61432f909e7e81b180d"
+  },
+  "allocatedPlan": {
+    "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\slots\\E17-C30-sync-cli-v4-active-plan.json",
+    "sha256": "5f5b4b4973cb54422c066e5eb3d067c552a3b6ab1cf1d45c64f1e20f8b765939"
+  },
+  "preparationIndex": {
+    "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\artifact-index.json",
+    "sha256": "a2b4f179a53fb8e6c8398c37c4cc1164a6a3fa376c939ef234b08429c3e2f124",
+    "indexedBytesUnchanged": true
+  },
+  "cHead": "c73d27a6c33e9bdd4ad91150f3facb8a661a8ee8",
+  "cWorktreeClean": true,
+  "actualRecallCalls": 34,
+  "actualProtocolObservations": 3,
+  "nativeModelCalls": 0,
+  "newNativeControlsMaterialized": false,
+  "ownershipSetupAcceptance": "PENDING_ROOT",
+  "productAcceptance": "NOT_CLAIMED"
+}

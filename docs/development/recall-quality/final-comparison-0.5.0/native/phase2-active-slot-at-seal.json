@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "status": "active",
+  "slot": "E19-C30-NATIVE-V4",
+  "owner": "C",
+  "stage": "FROZEN_NATIVE_COMPARISON",
+  "plan": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\slots\\E19-C30-native-v4-plan.json",
+  "planSha256": "6654cc9263725f45671a26ae2337f92e462ce9489a561165fd05565e0ea0d36e",
+  "revision": "4977e40ac7e6d327f63710302bac137177f70193",
+  "version": "0.5.0",
+  "manifest": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v4\\manifest.json",
+  "manifestSha256": "56f6935e691e87a0d48ede91670e12c22c41004b1fd04323606d14645f8c854e",
+  "rawOutput": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/c-quality/final-comparison-v4-ready/native-v1",
+  "assignedAtUtc": "2026-10-06T04:44:39.4518290Z",
+  "policy": "Original eight sessions/ten frozen turns once. Select actual delivered Agent before EVERY question; source/prompt/oracle frozen. Only exact fictional controls, actual native root/login retained. Capture normal ends, protection, Startup metadata and observed costs. Preserve FAIL, child/parent and routing limits; no retry for green or new variants."
+}

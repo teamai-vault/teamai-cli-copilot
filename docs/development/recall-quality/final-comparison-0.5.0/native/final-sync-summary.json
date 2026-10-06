@@ -1,0 +1,55 @@
+{
+  "status": "DELIVERY_RECORDED_NATIVE_PENDING",
+  "commands": [
+    {
+      "label": "public-final-sync",
+      "executable": "D:\\soft\\nodejs\\node.exe",
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v4\\package\\install\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "sync"
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01",
+      "started": "2026-10-06T03:38:26.596Z",
+      "elapsedMs": 93167,
+      "exitCode": 0,
+      "signal": null,
+      "pid": 16596,
+      "error": null
+    },
+    {
+      "label": "public-final-projects-list",
+      "executable": "D:\\soft\\nodejs\\node.exe",
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v4\\package\\install\\node_modules\\teamai-cli-copilot\\dist\\cli.js",
+        "projects",
+        "list"
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01",
+      "started": "2026-10-06T03:39:59.778Z",
+      "elapsedMs": 553,
+      "exitCode": 0,
+      "signal": null,
+      "pid": 9452,
+      "error": null
+    },
+    {
+      "label": "fixed-after-final-sync",
+      "executable": "D:\\soft\\nodejs\\node.exe",
+      "args": [
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\worktrees\\c-quality-30\\scripts\\measure-recall-quality.mjs",
+        "snapshot",
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\baseline-v2",
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\fixed-protected-after-final-sync.json"
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\worktrees\\c-quality-30",
+      "started": "2026-10-06T03:40:00.463Z",
+      "elapsedMs": 248,
+      "exitCode": 0,
+      "signal": null,
+      "pid": 24036,
+      "error": null
+    }
+  ],
+  "fixedBaselineProtection": "PASS",
+  "nativeSession": "UNVERIFIED"
+}

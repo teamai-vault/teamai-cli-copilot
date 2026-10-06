@@ -1,0 +1,385 @@
+{
+  "scope": "Only two exact ordinary per-case HOME StartupProfileData-NonInteractive paths; complete observed bytes copied without changes",
+  "generatingPid": "UNVERIFIED",
+  "allAppDataOrHomeUnchangedClaim": "NOT_ASSERTED",
+  "sessions": [
+    {
+      "label": "C01",
+      "scope": "Only the two exact ordinary Startup paths for the actual frozen case HOME; no folder exemption or account/config/session identity reads",
+      "files": [
+        {
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+          "before": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+            "status": "PRESENT",
+            "bytes": 68400,
+            "sha256": "625dd07bf1237d6d4b0938c8494e4063ba10166f919876165b643134e7098285",
+            "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\C01-startup-before-1.bin",
+            "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+          },
+          "after": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+            "status": "PRESENT",
+            "bytes": 71828,
+            "sha256": "6b4e0ff44e7a1fb891f7abdaa28e7c87e80eae72772ffb1f3f3b4836a4ce8f8f",
+            "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\C01-startup-after-1.bin",
+            "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+          },
+          "changed": true,
+          "generatingPid": "UNVERIFIED_NOT_INDEPENDENTLY_OBSERVED"
+        },
+        {
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive",
+          "before": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive",
+            "status": "PRESENT",
+            "bytes": 64,
+            "sha256": "a7de5177c68a64bd48b36d49e2853799f4ebcfa8e4761f7cc472f333dc5f65cf",
+            "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\C01-startup-before-2.bin",
+            "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+          },
+          "after": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive",
+            "status": "PRESENT",
+            "bytes": 64,
+            "sha256": "a7de5177c68a64bd48b36d49e2853799f4ebcfa8e4761f7cc472f333dc5f65cf",
+            "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\C01-startup-after-2.bin",
+            "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+          },
+          "changed": false,
+          "generatingPid": "UNVERIFIED_NOT_INDEPENDENTLY_OBSERVED"
+        }
+      ]
+    },
+    {
+      "label": "C02",
+      "scope": "Only the two exact ordinary Startup paths for the actual frozen case HOME; no folder exemption or account/config/session identity reads",
+      "files": [
+        {
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+          "before": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+            "status": "PRESENT",
+            "bytes": 71828,
+            "sha256": "6b4e0ff44e7a1fb891f7abdaa28e7c87e80eae72772ffb1f3f3b4836a4ce8f8f",
+            "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\C02-startup-before-1.bin",
+            "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+          },
+          "after": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+            "status": "PRESENT",
+            "bytes": 71752,
+            "sha256": "b0a5a0779da10d8383b8a26c71ce6dc4f2dac569827bdce3b21a4d3f05845c86",
+            "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\C02-startup-after-1.bin",
+            "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+          },
+          "changed": true,
+          "generatingPid": "UNVERIFIED_NOT_INDEPENDENTLY_OBSERVED"
+        },
+        {
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive",
+          "before": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive",
+            "status": "PRESENT",
+            "bytes": 64,
+            "sha256": "a7de5177c68a64bd48b36d49e2853799f4ebcfa8e4761f7cc472f333dc5f65cf",
+            "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\C02-startup-before-2.bin",
+            "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+          },
+          "after": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive",
+            "status": "PRESENT",
+            "bytes": 64,
+            "sha256": "a7de5177c68a64bd48b36d49e2853799f4ebcfa8e4761f7cc472f333dc5f65cf",
+            "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\C02-startup-after-2.bin",
+            "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+          },
+          "changed": false,
+          "generatingPid": "UNVERIFIED_NOT_INDEPENDENTLY_OBSERVED"
+        }
+      ]
+    },
+    {
+      "label": "C03",
+      "scope": "Only the two exact ordinary Startup paths for the actual frozen case HOME; no folder exemption or account/config/session identity reads",
+      "files": [
+        {
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+          "before": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+            "status": "PRESENT",
+            "bytes": 71752,
+            "sha256": "b0a5a0779da10d8383b8a26c71ce6dc4f2dac569827bdce3b21a4d3f05845c86",
+            "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\C03-startup-before-1.bin",
+            "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+          },
+          "after": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+            "status": "PRESENT",
+            "bytes": 71764,
+            "sha256": "616e9da8f3f52b175030f5910d94a9c3f450d53ce1a305f7dee20259c6392fde",
+            "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\C03-startup-after-1.bin",
+            "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+          },
+          "changed": true,
+          "generatingPid": "UNVERIFIED_NOT_INDEPENDENTLY_OBSERVED"
+        },
+        {
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive",
+          "before": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive",
+            "status": "PRESENT",
+            "bytes": 64,
+            "sha256": "a7de5177c68a64bd48b36d49e2853799f4ebcfa8e4761f7cc472f333dc5f65cf",
+            "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\C03-startup-before-2.bin",
+            "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+          },
+          "after": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive",
+            "status": "PRESENT",
+            "bytes": 64,
+            "sha256": "a7de5177c68a64bd48b36d49e2853799f4ebcfa8e4761f7cc472f333dc5f65cf",
+            "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\C03-startup-after-2.bin",
+            "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+          },
+          "changed": false,
+          "generatingPid": "UNVERIFIED_NOT_INDEPENDENTLY_OBSERVED"
+        }
+      ]
+    },
+    {
+      "label": "C04",
+      "scope": "Only the two exact ordinary Startup paths for the actual frozen case HOME; no folder exemption or account/config/session identity reads",
+      "files": [
+        {
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+          "before": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+            "status": "PRESENT",
+            "bytes": 71764,
+            "sha256": "616e9da8f3f52b175030f5910d94a9c3f450d53ce1a305f7dee20259c6392fde",
+            "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\C04-startup-before-1.bin",
+            "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+          },
+          "after": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+            "status": "PRESENT",
+            "bytes": 71484,
+            "sha256": "f1e8ff9e2bd5d63460fbb07394f07d3dd9da152c97c5d744df75bb3e95f3e680",
+            "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\C04-startup-after-1.bin",
+            "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+          },
+          "changed": true,
+          "generatingPid": "UNVERIFIED_NOT_INDEPENDENTLY_OBSERVED"
+        },
+        {
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive",
+          "before": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive",
+            "status": "PRESENT",
+            "bytes": 64,
+            "sha256": "a7de5177c68a64bd48b36d49e2853799f4ebcfa8e4761f7cc472f333dc5f65cf",
+            "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\C04-startup-before-2.bin",
+            "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+          },
+          "after": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive",
+            "status": "PRESENT",
+            "bytes": 64,
+            "sha256": "a7de5177c68a64bd48b36d49e2853799f4ebcfa8e4761f7cc472f333dc5f65cf",
+            "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\C04-startup-after-2.bin",
+            "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+          },
+          "changed": false,
+          "generatingPid": "UNVERIFIED_NOT_INDEPENDENTLY_OBSERVED"
+        }
+      ]
+    },
+    {
+      "label": "C05",
+      "scope": "Only the two exact ordinary Startup paths for the actual frozen case HOME; no folder exemption or account/config/session identity reads",
+      "files": [
+        {
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+          "before": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+            "status": "PRESENT",
+            "bytes": 71484,
+            "sha256": "f1e8ff9e2bd5d63460fbb07394f07d3dd9da152c97c5d744df75bb3e95f3e680",
+            "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\C05-startup-before-1.bin",
+            "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+          },
+          "after": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+            "status": "PRESENT",
+            "bytes": 71484,
+            "sha256": "3f31a359e685a0e452a162658d661805ccfa319df2f62b32ff3714e4c4cbd167",
+            "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\C05-startup-after-1.bin",
+            "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+          },
+          "changed": true,
+          "generatingPid": "UNVERIFIED_NOT_INDEPENDENTLY_OBSERVED"
+        },
+        {
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive",
+          "before": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive",
+            "status": "PRESENT",
+            "bytes": 64,
+            "sha256": "a7de5177c68a64bd48b36d49e2853799f4ebcfa8e4761f7cc472f333dc5f65cf",
+            "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\C05-startup-before-2.bin",
+            "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+          },
+          "after": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive",
+            "status": "PRESENT",
+            "bytes": 64,
+            "sha256": "a7de5177c68a64bd48b36d49e2853799f4ebcfa8e4761f7cc472f333dc5f65cf",
+            "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\C05-startup-after-2.bin",
+            "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+          },
+          "changed": false,
+          "generatingPid": "UNVERIFIED_NOT_INDEPENDENTLY_OBSERVED"
+        }
+      ]
+    },
+    {
+      "label": "C06",
+      "scope": "Only the two exact ordinary Startup paths for the actual frozen case HOME; no folder exemption or account/config/session identity reads",
+      "files": [
+        {
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+          "before": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+            "status": "PRESENT",
+            "bytes": 71484,
+            "sha256": "3f31a359e685a0e452a162658d661805ccfa319df2f62b32ff3714e4c4cbd167",
+            "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\C06-startup-before-1.bin",
+            "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+          },
+          "after": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+            "status": "PRESENT",
+            "bytes": 71516,
+            "sha256": "20590d01958ccd976bb4c3fdceac18cebf4c008dea708b9df27120711d98c110",
+            "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\C06-startup-after-1.bin",
+            "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+          },
+          "changed": true,
+          "generatingPid": "UNVERIFIED_NOT_INDEPENDENTLY_OBSERVED"
+        },
+        {
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive",
+          "before": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive",
+            "status": "PRESENT",
+            "bytes": 64,
+            "sha256": "a7de5177c68a64bd48b36d49e2853799f4ebcfa8e4761f7cc472f333dc5f65cf",
+            "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\C06-startup-before-2.bin",
+            "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+          },
+          "after": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive",
+            "status": "PRESENT",
+            "bytes": 64,
+            "sha256": "a7de5177c68a64bd48b36d49e2853799f4ebcfa8e4761f7cc472f333dc5f65cf",
+            "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\C06-startup-after-2.bin",
+            "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+          },
+          "changed": false,
+          "generatingPid": "UNVERIFIED_NOT_INDEPENDENTLY_OBSERVED"
+        }
+      ]
+    },
+    {
+      "label": "C06-missing",
+      "scope": "Only the two exact ordinary Startup paths for the actual frozen case HOME; no folder exemption or account/config/session identity reads",
+      "files": [
+        {
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\final-comparison-v4\\controls\\missing\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+          "before": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\final-comparison-v4\\controls\\missing\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+            "status": "ABSENT",
+            "bytes": null,
+            "sha256": null,
+            "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+          },
+          "after": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\final-comparison-v4\\controls\\missing\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+            "status": "PRESENT",
+            "bytes": 71392,
+            "sha256": "a82b46ab2fcaf4f7ca23bcda4cb5ab2e3bf2bbabbbbe5f3852c7f326d9ea4d89",
+            "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\C06-missing-startup-after-1.bin",
+            "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+          },
+          "changed": true,
+          "generatingPid": "UNVERIFIED_NOT_INDEPENDENTLY_OBSERVED"
+        },
+        {
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\final-comparison-v4\\controls\\missing\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive",
+          "before": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\final-comparison-v4\\controls\\missing\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive",
+            "status": "ABSENT",
+            "bytes": null,
+            "sha256": null,
+            "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+          },
+          "after": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\final-comparison-v4\\controls\\missing\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive",
+            "status": "ABSENT",
+            "bytes": null,
+            "sha256": null,
+            "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+          },
+          "changed": false,
+          "generatingPid": "UNVERIFIED_NOT_INDEPENDENTLY_OBSERVED"
+        }
+      ]
+    },
+    {
+      "label": "C06-damaged",
+      "scope": "Only the two exact ordinary Startup paths for the actual frozen case HOME; no folder exemption or account/config/session identity reads",
+      "files": [
+        {
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\final-comparison-v4\\controls\\damaged\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+          "before": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\final-comparison-v4\\controls\\damaged\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+            "status": "ABSENT",
+            "bytes": null,
+            "sha256": null,
+            "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+          },
+          "after": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\final-comparison-v4\\controls\\damaged\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+            "status": "PRESENT",
+            "bytes": 71368,
+            "sha256": "3916ac3c1455ad41e0f880cf6da93aa19afaaa703e829fef9c7933df2fd0153d",
+            "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\C06-damaged-startup-after-1.bin",
+            "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+          },
+          "changed": true,
+          "generatingPid": "UNVERIFIED_NOT_INDEPENDENTLY_OBSERVED"
+        },
+        {
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\final-comparison-v4\\controls\\damaged\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive",
+          "before": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\final-comparison-v4\\controls\\damaged\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive",
+            "status": "ABSENT",
+            "bytes": null,
+            "sha256": null,
+            "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+          },
+          "after": {
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\final-comparison-v4\\controls\\damaged\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive",
+            "status": "ABSENT",
+            "bytes": null,
+            "sha256": null,
+            "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+          },
+          "changed": false,
+          "generatingPid": "UNVERIFIED_NOT_INDEPENDENTLY_OBSERVED"
+        }
+      ]
+    }
+  ]
+}

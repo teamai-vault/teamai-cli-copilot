@@ -1,0 +1,123 @@
+{
+  "result": "PASS_ACTUAL_C_AGENT_AND_FULL_SKILL_OWNERSHIP_ONLY",
+  "sourceRevision": "4977e40ac7e6d327f63710302bac137177f70193",
+  "candidateManifest": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v4\\manifest.json",
+  "candidateManifestSha256": "56f6935e691e87a0d48ede91670e12c22c41004b1fd04323606d14645f8c854e",
+  "beforeReadback": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c-final-owned-readback-v2\\before-readback.json",
+  "afterReadback": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c-final-owned-readback-v2\\after-readback.json",
+  "agent": {
+    "status": "current",
+    "target": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.copilot\\agents\\teamai-recall.agent.md",
+    "copilotRoot": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.copilot",
+    "version": "0.5.0",
+    "contentHash": "03562f41201196a8272e3fbbd6997f989ba6eceb34bbae99276fe1e4359a0452",
+    "owned": true,
+    "pending": false
+  },
+  "skill": {
+    "status": "current",
+    "target": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.copilot\\skills\\teamai",
+    "version": "0.5.0"
+  },
+  "agentReceipt": {
+    "schemaVersion": 1,
+    "managedBy": "teamai-cli",
+    "agent": "teamai-recall",
+    "copilotRoot": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.copilot",
+    "target": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.copilot\\agents\\teamai-recall.agent.md",
+    "version": "0.5.0",
+    "contentHash": "03562f41201196a8272e3fbbd6997f989ba6eceb34bbae99276fe1e4359a0452"
+  },
+  "skillReceipt": {
+    "schemaVersion": 1,
+    "managedBy": "teamai-cli",
+    "skill": "teamai",
+    "version": "0.5.0",
+    "target": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.copilot\\skills\\teamai"
+  },
+  "actualSkillReceiptSha256": "e065f645853bca6c2cecf5a78c0199f188843a253df82e57bfef3e1d60a0ac78",
+  "actualAgentReceiptSha256": "c206b86c9c0e2c16318b6c0bd6c6d89163638b96bfed5e11b686d336bd2b1c38",
+  "actualManagedDeltas": [
+    {
+      "key": "home/.teamai/built-in-agents/teamai-recall.json",
+      "before": "48ac67c9a6e6db0028fcd07579b10e18713df8de85cd430b25f0530f1658550a",
+      "after": "c206b86c9c0e2c16318b6c0bd6c6d89163638b96bfed5e11b686d336bd2b1c38"
+    },
+    {
+      "key": "home/.teamai/built-in-skills/teamai.json",
+      "before": "b60d67a4319fa6230b9f93421426767f0e4fa326aaec8cd2570c8172f3aaf646",
+      "after": "e065f645853bca6c2cecf5a78c0199f188843a253df82e57bfef3e1d60a0ac78"
+    },
+    {
+      "key": "home/.teamai/projects/-cli-customization-.tmp-recall-29-35-runtime-c-native-baseline-v2-workspaces-c01-f42dc00fce522269/state.json",
+      "before": "73013944dd41786aa35492b0e940083bda369625b8dc747a65068ef3a7e8238f",
+      "after": "e0118089434991b3b7f864895a6324797fd4ff1973b3af9e2b852f85c282bf85"
+    },
+    {
+      "key": "home/.copilot/agents/teamai-recall.agent.md",
+      "before": "7e8edba317dde8758d3f238e1845fecb6206d93c00667df4ab8cbe72e7f270e4",
+      "after": "03562f41201196a8272e3fbbd6997f989ba6eceb34bbae99276fe1e4359a0452"
+    },
+    {
+      "key": "home/.copilot/skills/teamai/SKILL.md",
+      "before": "107b885b79d0d8e9775865e00892131668c98b3d2fbf181c262423f83692ae8c",
+      "after": "15b0a7e1a44dc95942d06ec36c2a8b301d6406fe06c8b6fe422b72dfc932f295"
+    },
+    {
+      "key": "home/.copilot/skills/teamai/references/commands.md",
+      "before": "71babacfc3663d5389ec7c33ee29ffebf74a05a317ca2ab5da801a226a15491a",
+      "after": "e2ae88156b20cbad6baadf7b489ef5a8d1782b9f33f10bc5dc5f9cdc0a524fc4"
+    }
+  ],
+  "stateChange": "lastSync only; all binding/resource/refs/unknown fields preserved",
+  "unknownFields": {
+    "agent": [],
+    "skill": [],
+    "beforeAfterEquality": true
+  },
+  "exactStartupBytes": {
+    "before": [
+      {
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+        "status": "PRESENT",
+        "bytes": 68144,
+        "sha256": "a2238081f454170b93a33309abc600d33ebdc272b902ca37fa4266efebb46d43",
+        "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c-final-owned-readback-v2\\before-startup-1.bin",
+        "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+      },
+      {
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive",
+        "status": "PRESENT",
+        "bytes": 64,
+        "sha256": "a7de5177c68a64bd48b36d49e2853799f4ebcfa8e4761f7cc472f333dc5f65cf",
+        "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c-final-owned-readback-v2\\before-startup-2.bin",
+        "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+      }
+    ],
+    "after": [
+      {
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+        "status": "PRESENT",
+        "bytes": 68144,
+        "sha256": "a2238081f454170b93a33309abc600d33ebdc272b902ca37fa4266efebb46d43",
+        "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c-final-owned-readback-v2\\after-startup-1.bin",
+        "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+      },
+      {
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive",
+        "status": "PRESENT",
+        "bytes": 64,
+        "sha256": "a7de5177c68a64bd48b36d49e2853799f4ebcfa8e4761f7cc472f333dc5f65cf",
+        "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c-final-owned-readback-v2\\after-startup-2.bin",
+        "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+      }
+    ],
+    "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+  },
+  "everyOtherProtectedFactDelta": 0,
+  "nativePlatform": "Account/config/session/logs are separate and not scanned; no whole-platform zero claim",
+  "authOrReceiptCopiedIntoOwningRoot": false,
+  "nativeModel": "NOT_RUN_NOT_AUTHORIZED_FROM_THIS_RECORD",
+  "fixedCliAcceptance": "SEPARATE_ROOT_REVIEW_REQUIRED",
+  "acceptedAtUtc": "2026-10-06T03:45:07.244Z"
+}

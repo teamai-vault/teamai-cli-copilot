@@ -1,0 +1,97 @@
+{
+  "totalPremiumRequestCost": 1,
+  "totalUserRequests": 1,
+  "totalNanoAiu": 196589500,
+  "tokenDetails": {
+    "input": {
+      "tokenCount": 12
+    },
+    "cache_read": {
+      "tokenCount": 30682
+    },
+    "cache_write": {
+      "tokenCount": 8343
+    },
+    "output": {
+      "tokenCount": 1230
+    }
+  },
+  "totalApiDurationMs": 19306,
+  "sessionStartTime": "2026-10-06T04:53:59.153Z",
+  "codeChanges": {
+    "linesAdded": 0,
+    "linesRemoved": 0,
+    "filesModifiedCount": 0,
+    "filesModified": []
+  },
+  "modelMetrics": {
+    "gpt-6-luna": {
+      "requests": {
+        "count": 4,
+        "cost": 1
+      },
+      "usage": {
+        "inputTokens": 39037,
+        "outputTokens": 1230,
+        "cacheReadTokens": 30682,
+        "cacheWriteTokens": 8343,
+        "reasoningTokens": 736
+      },
+      "cacheExpiresAt": "2026-10-06T05:27:07.960Z",
+      "totalNanoAiu": 196589500,
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 12
+        },
+        "cache_read": {
+          "tokenCount": 30682
+        },
+        "cache_write": {
+          "tokenCount": 8343
+        },
+        "output": {
+          "tokenCount": 1230
+        }
+      }
+    }
+  },
+  "agentMetrics": {
+    "main": {
+      "totalApiDurationMs": 19306,
+      "totalNanoAiu": 196589500,
+      "modelMetrics": {
+        "gpt-6-luna": {
+          "requests": {
+            "count": 4,
+            "cost": 1
+          },
+          "usage": {
+            "inputTokens": 39037,
+            "outputTokens": 1230,
+            "cacheReadTokens": 30682,
+            "cacheWriteTokens": 8343,
+            "reasoningTokens": 736
+          },
+          "totalNanoAiu": 196589500,
+          "tokenDetails": {
+            "input": {
+              "tokenCount": 12
+            },
+            "cache_read": {
+              "tokenCount": 30682
+            },
+            "cache_write": {
+              "tokenCount": 8343
+            },
+            "output": {
+              "tokenCount": 1230
+            }
+          }
+        }
+      }
+    }
+  },
+  "currentModel": "gpt-6-luna",
+  "lastCallInputTokens": 10999,
+  "lastCallOutputTokens": 877
+}

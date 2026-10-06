@@ -1,0 +1,154 @@
+{
+  "totalPremiumRequestCost": 1.6600000000000001,
+  "totalUserRequests": 3,
+  "totalNanoAiu": 2740798000,
+  "tokenDetails": {
+    "input": {
+      "tokenCount": 32
+    },
+    "cache_read": {
+      "tokenCount": 42416
+    },
+    "cache_write": {
+      "tokenCount": 26943
+    },
+    "output": {
+      "tokenCount": 3345
+    }
+  },
+  "totalApiDurationMs": 45263,
+  "sessionStartTime": "2026-10-06T04:47:32.793Z",
+  "codeChanges": {
+    "linesAdded": 0,
+    "linesRemoved": 0,
+    "filesModifiedCount": 0,
+    "filesModified": []
+  },
+  "modelMetrics": {
+    "gpt-6-luna": {
+      "requests": {
+        "count": 4,
+        "cost": 1
+      },
+      "usage": {
+        "inputTokens": 40742,
+        "outputTokens": 2372,
+        "cacheReadTokens": 28248,
+        "cacheWriteTokens": 12482,
+        "reasoningTokens": 1425
+      },
+      "cacheExpiresAt": "2026-10-06T05:20:00.201Z",
+      "totalNanoAiu": 302993000,
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 12
+        },
+        "cache_read": {
+          "tokenCount": 28248
+        },
+        "cache_write": {
+          "tokenCount": 12482
+        },
+        "output": {
+          "tokenCount": 2372
+        }
+      }
+    },
+    "claude-haiku-4.5": {
+      "requests": {
+        "count": 2,
+        "cost": 0.66
+      },
+      "usage": {
+        "inputTokens": 28649,
+        "outputTokens": 973,
+        "cacheReadTokens": 14168,
+        "cacheWriteTokens": 14461,
+        "reasoningTokens": 515
+      },
+      "cacheExpiresAt": "2026-10-06T04:57:17.398Z",
+      "totalNanoAiu": 2437805000,
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 20
+        },
+        "cache_read": {
+          "tokenCount": 14168
+        },
+        "cache_write": {
+          "tokenCount": 14461
+        },
+        "output": {
+          "tokenCount": 973
+        }
+      }
+    }
+  },
+  "agentMetrics": {
+    "main": {
+      "totalApiDurationMs": 45263,
+      "totalNanoAiu": 2740798000,
+      "modelMetrics": {
+        "gpt-6-luna": {
+          "requests": {
+            "count": 4,
+            "cost": 1
+          },
+          "usage": {
+            "inputTokens": 40742,
+            "outputTokens": 2372,
+            "cacheReadTokens": 28248,
+            "cacheWriteTokens": 12482,
+            "reasoningTokens": 1425
+          },
+          "totalNanoAiu": 302993000,
+          "tokenDetails": {
+            "input": {
+              "tokenCount": 12
+            },
+            "cache_read": {
+              "tokenCount": 28248
+            },
+            "cache_write": {
+              "tokenCount": 12482
+            },
+            "output": {
+              "tokenCount": 2372
+            }
+          }
+        },
+        "claude-haiku-4.5": {
+          "requests": {
+            "count": 2,
+            "cost": 0.66
+          },
+          "usage": {
+            "inputTokens": 28649,
+            "outputTokens": 973,
+            "cacheReadTokens": 14168,
+            "cacheWriteTokens": 14461,
+            "reasoningTokens": 515
+          },
+          "totalNanoAiu": 2437805000,
+          "tokenDetails": {
+            "input": {
+              "tokenCount": 20
+            },
+            "cache_read": {
+              "tokenCount": 14168
+            },
+            "cache_write": {
+              "tokenCount": 14461
+            },
+            "output": {
+              "tokenCount": 973
+            }
+          }
+        }
+      }
+    }
+  },
+  "currentModel": "claude-haiku-4.5",
+  "lastCallInputTokens": 14471,
+  "lastCallOutputTokens": 555
+}

@@ -1,0 +1,26 @@
+{
+  "case": "C06-missing",
+  "observedAt": "2026-10-06T05:14:32.1959537+00:00",
+  "launcherPid": 19576,
+  "processes": [
+    {
+      "pid": 19576,
+      "parentPid": 9076,
+      "name": "pwsh.exe",
+      "creationDate": "2026-10-06T05:14:12.3425480Z"
+    },
+    {
+      "pid": 31992,
+      "parentPid": 19576,
+      "name": "node.exe",
+      "creationDate": "2026-10-06T05:14:14.7438230Z"
+    },
+    {
+      "pid": 19032,
+      "parentPid": 31992,
+      "name": "copilot.exe",
+      "creationDate": "2026-10-06T05:14:14.8192640Z"
+    }
+  ],
+  "scope": "Only launcher and descendants PID/parent/name/start, no command lines/environment/account fields"
+}

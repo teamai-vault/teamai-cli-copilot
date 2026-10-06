@@ -4,6 +4,8 @@ This is a finite, fictional fixture and an observational recipe. It changes no p
 
 The baseline is source 0fb99a7b065de71eb683d774231b518971b57e8c / CLI 0.4.0. Its original Agent SHA-256 is 7e8edba317dde8758d3f238e1845fecb6206d93c00667df4ab8cbe72e7f270e4. The coordinator binds the installed package, tarball, compiled CLI, receipt and actual delivered Agent to one candidate. Raw hashes are separate from semantic equivalence; do not normalize source bytes for a comparison.
 
+The [actual fixed-corpus 0.4.0 / 0.5.0 comparison](final-comparison-0.5.0.md) adds the final installed CLI and normally delivered Agent measurements on the unchanged fixture. It retains diagnostic/provenance FAIL, unrun variants and vendor/Auto-model limitations. Its finite [raw inventory](final-comparison-0.5.0/raw-manifest.json) preserves source bytes; measurement delivery is separate from coordinator product acceptance.
+
 | Case | Independent support / limit |
 | --- | --- |
 | C01 | Full diagnostic, English/Chinese equivalence and prior reference; one retry only for an expired lease AND an intact idempotency record. The legacy 1.6 procedure and five vocabulary notes are weak for the 2.1 incident. |

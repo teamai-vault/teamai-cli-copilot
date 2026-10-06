@@ -1,0 +1,1 @@
+{"schemaVersion":1,"error":{"code":"CACHE_UNAVAILABLE","message":"The cached published Learnings snapshot is unavailable (Published Learnings snapshot size verification failed for 'learnings/shared/30000000-0000-4000-8000-000000000001.md'.). Run `teamai sync` to refresh it."}}

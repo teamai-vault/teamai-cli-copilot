@@ -1,0 +1,104 @@
+{
+  "scope": "190 original owned controlled business/resource/git/Agent/Skill/workspace facts only; auth/config/session identity excluded, Startup handled separately",
+  "overall": {
+    "beforeFacts": 190,
+    "afterFacts": 190,
+    "deltas": [],
+    "equal": true
+  },
+  "sessions": [
+    {
+      "label": "C01",
+      "comparison": {
+        "beforeFacts": 190,
+        "afterFacts": 190,
+        "deltas": [],
+        "equal": true
+      }
+    },
+    {
+      "label": "C02",
+      "comparison": {
+        "beforeFacts": 190,
+        "afterFacts": 190,
+        "deltas": [],
+        "equal": true
+      }
+    },
+    {
+      "label": "C03",
+      "comparison": {
+        "beforeFacts": 190,
+        "afterFacts": 190,
+        "deltas": [],
+        "equal": true
+      }
+    },
+    {
+      "label": "C04",
+      "comparison": {
+        "beforeFacts": 190,
+        "afterFacts": 190,
+        "deltas": [],
+        "equal": true
+      }
+    },
+    {
+      "label": "C05",
+      "comparison": {
+        "beforeFacts": 190,
+        "afterFacts": 190,
+        "deltas": [],
+        "equal": true
+      }
+    },
+    {
+      "label": "C06",
+      "comparison": {
+        "beforeFacts": 190,
+        "afterFacts": 190,
+        "deltas": [],
+        "equal": true
+      }
+    },
+    {
+      "label": "C06-missing",
+      "comparison": {
+        "beforeFacts": 190,
+        "afterFacts": 190,
+        "deltas": [],
+        "equal": true
+      }
+    },
+    {
+      "label": "C06-damaged",
+      "comparison": {
+        "beforeFacts": 190,
+        "afterFacts": 190,
+        "deltas": [],
+        "equal": true
+      }
+    }
+  ],
+  "fixed": {
+    "beforeFacts": 215,
+    "afterFacts": 215,
+    "deltas": [],
+    "equal": true,
+    "scope": "Original fixed CLI fixture business/source/refs/cache facts, after all native sessions; not account or native session metadata"
+  },
+  "missing": {
+    "root": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\final-comparison-v4\\controls\\missing\\.teamai",
+    "beforeFacts": 5,
+    "afterFacts": 5,
+    "deltas": [],
+    "scope": "Controlled fictional .teamai business files only; no native/account/session/credential files"
+  },
+  "damaged": {
+    "root": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\final-comparison-v4\\controls\\damaged\\.teamai",
+    "beforeFacts": 10,
+    "afterFacts": 10,
+    "deltas": [],
+    "scope": "Controlled fictional .teamai business files only; no native/account/session/credential files"
+  }
+}

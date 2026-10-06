@@ -1,0 +1,15 @@
+{
+  "id": "992e31ee-cc06-427b-b1fa-c427877b6b3c",
+  "label": "C06-damaged",
+  "workspace": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01",
+  "home": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\final-comparison-v4\\controls\\damaged",
+  "consumerHome": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.copilot",
+  "agent": "teamai-recall",
+  "questionTurns": [
+    "这些团队资料有同态加密和密钥轮换方案吗？没有依据就明确说无法支持；cache 不可用时请报告错误。"
+  ],
+  "questionHeldUntilRealSelection": true,
+  "oracleSubmitted": false,
+  "keywordsSubmitted": false,
+  "profile": "damaged"
+}
