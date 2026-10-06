@@ -1,0 +1,40 @@
+{
+  "facts": [
+    {
+      "label": "before",
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1/workspaces/bound/.git/index",
+      "bytes": 137,
+      "sha256": "29ce322b8e8972e0af3e6207baec98ac95df2d024e2ba2e8dccea17e9798a2b2",
+      "exactByteCopy": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/B29-coverage-zh-index-before.bin",
+      "gitRead": {
+        "args": [
+          "--no-optional-locks",
+          "ls-files",
+          "--stage"
+        ],
+        "exitCode": 0,
+        "stdout": "100644 edf9edd94953dffe388c67ec4667e600bee1c9ab 0\tREADME.md\n",
+        "stderr": ""
+      }
+    },
+    {
+      "label": "after",
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\fixture\\workspaces\\bound\\.git\\index",
+      "bytes": 137,
+      "sha256": "0b17bc18bac0cb0986ddbfd498611349df491f7a4488522516f95a56cb5784d0",
+      "exactByteCopy": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/B29-coverage-zh-index-after.bin",
+      "gitRead": {
+        "args": [
+          "--no-optional-locks",
+          "ls-files",
+          "--stage"
+        ],
+        "exitCode": 0,
+        "stdout": "100644 edf9edd94953dffe388c67ec4667e600bee1c9ab 0\tREADME.md\n",
+        "stderr": ""
+      }
+    }
+  ],
+  "stageEqual": true,
+  "meaning": "Read-only logical index comparison only. Raw hash change and observer exit1 are retained; no Git exemption or baseline reset."
+}

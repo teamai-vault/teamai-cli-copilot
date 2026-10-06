@@ -1,0 +1,242 @@
+[
+  {
+    "file": "plan.json",
+    "bytes": 13836,
+    "sha256": "bda96bc5b046c727d70bddac6dbd788cc6caaa6098f01e91bc75ef6c32bf9e70",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/plan.json"
+  },
+  {
+    "file": "tasks-0.5.1.json",
+    "bytes": 2192,
+    "sha256": "56438dd887494bfc468311d847670fe322c75a6a08883b0468b0df18dc018030",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/tasks-0.5.1.json"
+  },
+  {
+    "file": "native-consumer-readback.json",
+    "bytes": 526,
+    "sha256": "6230b94f780d76dbba766ec29e0d277aeb9f8b49af114305ba60d04f19cbe999",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/native-consumer-readback.json"
+  },
+  {
+    "file": "actual-owned-delivery.json",
+    "bytes": 2689,
+    "sha256": "a460465d1c3d3c0f311c3710dcbb327ad5c7acc88e09939333a878627f0d6fe6",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/actual-owned-delivery.json"
+  },
+  {
+    "file": "fixture-copy.json",
+    "bytes": 2546,
+    "sha256": "8ea0443b165783f8d44b7feec543cc8f9d433465a331ed022f5ba4753b716db8",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/fixture-copy.json"
+  },
+  {
+    "file": "B29-coverage-zh-index-readback.json",
+    "bytes": 1604,
+    "sha256": "9de67656cd297f9e4f7a0485aebaff323a318d44db142231efd33509359b0246",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/B29-coverage-zh-index-readback.json"
+  },
+  {
+    "file": "root-index-disposition-evidence.json",
+    "bytes": 1291,
+    "sha256": "b5ad8ab4e71dc10255b0f40d7502d1d50f5753f3cf9a684fd5eea7c77f032427",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/root-index-disposition-evidence.json"
+  },
+  {
+    "file": "root-protection-disposition.json",
+    "bytes": 2007,
+    "sha256": "b3b6977256369e11fc5e019435f8043ad3339b4b578f6fb7526c10f06670a355",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/root-protection-disposition.json"
+  },
+  {
+    "file": "root-read-failure-protection-disposition.json",
+    "bytes": 1918,
+    "sha256": "2bd8157de659b6951a5d54e766ae54008119d9be5f761dbbd6b1e6efc1abd74b",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/root-read-failure-protection-disposition.json"
+  },
+  {
+    "file": "B33-read-failure-original-observer-result.json",
+    "bytes": 1329,
+    "sha256": "9c63c62e67180082a31ebb64b67bb2d4d80ff3bffa0f8de3b9e383c7bfbcc013",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/B33-read-failure-original-observer-result.json"
+  },
+  {
+    "file": "B33-read-failure-operator-rename.json",
+    "bytes": 4691,
+    "sha256": "dfe1f783e26a3cacca92be8a461130cefe9c9d6f1e99dfeae5cfecf23c9a9c3b",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/B33-read-failure-operator-rename.json"
+  },
+  {
+    "file": "B33-read-failure-operator-restore.json",
+    "bytes": 1248,
+    "sha256": "23c2f2c1b8cb5b2fac09dd839771d21cc39385efe93626a95f8d7f8bc2709e28",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/B33-read-failure-operator-restore.json"
+  },
+  {
+    "file": "B29-coverage-zh-answer.md",
+    "bytes": 1764,
+    "sha256": "e43e7ea3ce211a90c67eb161679d4b4a317d6dff5d8b27f0c0049d45d3b0fe6e",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/B29-coverage-zh-answer.md"
+  },
+  {
+    "file": "B29-coverage-zh-evidence.json",
+    "bytes": 10992,
+    "sha256": "fe138fe320d75f39be1cf1e9d2f02392d9dff9bd95016cb07047627350034029",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/B29-coverage-zh-evidence.json"
+  },
+  {
+    "file": "B29-coverage-zh-queries.json",
+    "bytes": 49878,
+    "sha256": "1aed8cbeba84f57ec91b9368eee3d83d69c77744d188acea80a1255fb2d58f95",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/B29-coverage-zh-queries.json"
+  },
+  {
+    "file": "B29-coverage-zh-reads.json",
+    "bytes": 28763,
+    "sha256": "ea747ee628b6bbdddcaef628bc44a290a481f51f3e80d856ccfe1ad4472fb40f",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/B29-coverage-zh-reads.json"
+  },
+  {
+    "file": "B29-coverage-zh-observable-events.jsonl",
+    "bytes": 75958,
+    "sha256": "9117c189f7289f6dd91822d740e9bae376a01354395b13e6d641d85f12137bc0",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/B29-coverage-zh-observable-events.jsonl"
+  },
+  {
+    "file": "B29-coverage-zh-metrics.json",
+    "bytes": 1386,
+    "sha256": "76c91cf56cb1fb2aeab0ec8f567965c6699b0c7050cdd32d7c655936182c5657",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/B29-coverage-zh-metrics.json"
+  },
+  {
+    "file": "B29-coverage-zh-protection.json",
+    "bytes": 2844,
+    "sha256": "f9eb8ab6bba7ee3e09b9d3eab9c5ef5870ef6d1652a53b5756fad56e1ed94c20",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/B29-coverage-zh-protection.json"
+  },
+  {
+    "file": "B29-coverage-zh-old-protection.json",
+    "bytes": 336,
+    "sha256": "e801b75ec1ac8b5897c25d0c84c0db46204a93378a4282e9ff7de0718de8b245",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/B29-coverage-zh-old-protection.json"
+  },
+  {
+    "file": "B29-coverage-zh-launch-request.json",
+    "bytes": 1783,
+    "sha256": "44b14f6142ca0bc3c738b96f978499e960d1c2b56c53e80188ea4ebfc181a4d5",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/B29-coverage-zh-launch-request.json"
+  },
+  {
+    "file": "B29-coverage-zh-launch-result.json",
+    "bytes": 318,
+    "sha256": "4cd00c431a5a38dcfd74d3455476d62719a90ee75854d426785239b38fb7f699",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/B29-coverage-zh-launch-result.json"
+  },
+  {
+    "file": "B33-read-failure-answer.md",
+    "bytes": 1423,
+    "sha256": "bd0b39c75ed18c9c98dc916e97ea75327edeacf25d2017c678e0c9756f95663f",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/B33-read-failure-answer.md"
+  },
+  {
+    "file": "B33-read-failure-evidence.json",
+    "bytes": 11765,
+    "sha256": "7414c1882213974476fc5032101c17b17512d2d081a36c8f68f1dedc36a1205e",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/B33-read-failure-evidence.json"
+  },
+  {
+    "file": "B33-read-failure-queries.json",
+    "bytes": 14138,
+    "sha256": "44dda79bf51686f3abd6a998d46a91d1fc1487d37bfe8ed13927f00ed21215d5",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/B33-read-failure-queries.json"
+  },
+  {
+    "file": "B33-read-failure-reads.json",
+    "bytes": 32474,
+    "sha256": "7761c1bfbc7a6cc86313ed441e29e0998e38d778ac61196340ad3d8922da8ff6",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/B33-read-failure-reads.json"
+  },
+  {
+    "file": "B33-read-failure-observable-events.jsonl",
+    "bytes": 78217,
+    "sha256": "19ba250eb036a52a9917d748abbed29c05c6ce1e0e7d45dd2bedf0a7bc502196",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/B33-read-failure-observable-events.jsonl"
+  },
+  {
+    "file": "B33-read-failure-metrics.json",
+    "bytes": 1387,
+    "sha256": "9a733d46cde6f1aa62adb541238355279beac074d2374038292255e456a3c717",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/B33-read-failure-metrics.json"
+  },
+  {
+    "file": "B33-read-failure-protection.json",
+    "bytes": 3358,
+    "sha256": "15063fbb8b16e69da4cc50dfca49525cca9b866f66ce2d7970874e0b987bc3f8",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/B33-read-failure-protection.json"
+  },
+  {
+    "file": "B33-read-failure-old-protection.json",
+    "bytes": 336,
+    "sha256": "e801b75ec1ac8b5897c25d0c84c0db46204a93378a4282e9ff7de0718de8b245",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/B33-read-failure-old-protection.json"
+  },
+  {
+    "file": "B33-read-failure-launch-request.json",
+    "bytes": 1786,
+    "sha256": "95df1f33e4c97055c1ca5c8d377a6fe5e758021b4b5e2de90463600704c44c62",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/B33-read-failure-launch-request.json"
+  },
+  {
+    "file": "B33-read-failure-launch-result.json",
+    "bytes": 319,
+    "sha256": "0fb3487316653d258af407a2999dfcd69293d4ec6f63943700dbd44b0203138b",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/B33-read-failure-launch-result.json"
+  },
+  {
+    "file": "source-review.md",
+    "bytes": 2100,
+    "sha256": "431083f5cabf6058a4b15c7510aefde44df14d2fbfbed46260d366d78b573b7a",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/review/prompt-simplification-20261006/final-0.5.1/source-review.md"
+  },
+  {
+    "file": "coverage-spec-review.md",
+    "bytes": 1867,
+    "sha256": "2471c3536d1bb871e63819115020d0596107bfe54a7e1ddc72b8457158cdc43b",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/review/prompt-simplification-20261006/final-0.5.1/coverage-spec-review.md"
+  },
+  {
+    "file": "source-commit-receipt.json",
+    "bytes": 672,
+    "sha256": "b4f9f208e0e60fc5460dda63185826f428eb5acfcf03d1c080f39f422a45df6d",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/review/prompt-simplification-20261006/final-0.5.1/source-commit-receipt.json"
+  },
+  {
+    "file": "checks.json",
+    "bytes": 1652,
+    "sha256": "b7f8f9fd5193d3dcaaf1cb115a3335678718dcba50c8f6027418b41bd17b5e86",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/review/prompt-simplification-20261006/final-0.5.1/checks.json"
+  },
+  {
+    "file": "package-report.json",
+    "bytes": 8645,
+    "sha256": "d54ab4380c26f1105041d5c53b69b1c3d0dd4f8d74f3260f3336afe688ef6312",
+    "original": "F:/agent-workspace/codex/.tmp/r051/p/package-report.json"
+  },
+  {
+    "file": "checkpoint-read-gap.json",
+    "bytes": 14769,
+    "sha256": "f7593838866165c170ded9f92f1c3b2688ee63c5a3a8ad147179d05b34a752c1",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/checkpoint-read-gap.json"
+  },
+  {
+    "file": "final-handoff.json",
+    "bytes": 2603,
+    "sha256": "f773f5a13a8219e4c885bc20fa5886ca9fd5bb811b1b9817b0bff412a7fe4fb5",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/final-handoff.json"
+  },
+  {
+    "file": "read-failure-spec-review.md",
+    "bytes": 1848,
+    "sha256": "7656f798328aeadcd586586c9a0fa2e0821f73f4c91fdfe2446264fce980d918",
+    "original": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/review/prompt-simplification-20261006/final-0.5.1/read-failure-spec-review.md"
+  }
+]

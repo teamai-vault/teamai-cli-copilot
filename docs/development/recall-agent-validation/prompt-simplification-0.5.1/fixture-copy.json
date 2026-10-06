@@ -1,0 +1,48 @@
+{
+  "copiedAtUtc": "2026-10-06T13:37:02.728Z",
+  "copies": [
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1/resource",
+      "target": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/fixture/resource"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1/published-seed",
+      "target": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/fixture/published-seed"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1/authority.git",
+      "target": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/fixture/authority.git"
+    }
+  ],
+  "sourceRevision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+  "publishedRevision": "cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2",
+  "credentialsCopied": false,
+  "workspaceCopy": "README and .git only; public binding still pending",
+  "sourceFiles": [
+    {
+      "path": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/b/b29-v1/resource/contexts/payments-api/docs/10-display-note.md",
+      "bytes": 490,
+      "sha256": "3bf8e299f32ef4ccbfcbeb03fcb273d13e4c23eef8a359086c6957b50cf6b85e"
+    },
+    {
+      "path": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/b/b29-v1/resource/contexts/payments-api/docs/40-replay-guard.md",
+      "bytes": 1508,
+      "sha256": "0e2751160489cddc7dacb81eb626a71581c0e663ed5c936cb7adf857a001ab25"
+    },
+    {
+      "path": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/b/b29-v1/resource/contexts/payments-api/docs/70-epoch-policy.md",
+      "bytes": 524,
+      "sha256": "d1c3e9d39ca87b5b9192d768ba19301fcd377875fd18c9ca71199295c4001fc1"
+    },
+    {
+      "path": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/b/b29-v1/resource/contexts/payments-api/docs/80-audit-note.md",
+      "bytes": 657,
+      "sha256": "26a4e79b81aa1d8aad0751529869a29e638cbc8442d4383f0ff8908e2eb98b58"
+    },
+    {
+      "path": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/b/b29-v1/resource/contexts/payments-api/docs/90-read-gap.md",
+      "bytes": 745,
+      "sha256": "4ae3a786e26169cf14543b30b7b7225b328f6bd2d1584dd0cf103887719dd4cb"
+    }
+  ]
+}

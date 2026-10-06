@@ -1,0 +1,58 @@
+{
+  "result": "ACTUAL_PUBLIC_DELIVERY_READBACK_PASS",
+  "candidate": {
+    "sourceRevision": "923c905f26251021cc6ecd24a5032a99875c7e36",
+    "version": "0.5.1",
+    "tarball": "F:/agent-workspace/codex/.tmp/r051/p/teamai-cli-copilot-0.5.1.tgz",
+    "tarballSha256": "262455bb3185a35bcbbe78a93df64d1b298a0937506770333dce9eb133148ecd",
+    "packageRoot": "F:/agent-workspace/codex/.tmp/r051/p/install/node_modules/teamai-cli-copilot",
+    "cliSha256": "79f64b93f5b477254d1f6697348603740d13bb7e1b5b33f8a5c75fa7447c20be",
+    "agentSha256": "935932ff22b2312281d0606594ab382e321ed7c146c1ddc74abc883ffcb623d1",
+    "agentBytes": 5594
+  },
+  "modelCalls": 0,
+  "completedAtUtc": "2026-10-06T13:43:21.255Z",
+  "agents": {
+    "receiptFile": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.teamai\\built-in-agents\\teamai-recall.json",
+    "receiptSha256": "f51c96ebaaa9def6f97965dc869806e517a6702773137fa930fd0817b145a353",
+    "receipt": {
+      "schemaVersion": 1,
+      "managedBy": "teamai-cli",
+      "agent": "teamai-recall",
+      "copilotRoot": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.copilot",
+      "target": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.copilot\\agents\\teamai-recall.agent.md",
+      "version": "0.5.1",
+      "contentHash": "935932ff22b2312281d0606594ab382e321ed7c146c1ddc74abc883ffcb623d1"
+    },
+    "files": [
+      {
+        "relativePath": "teamai-recall.agent.md",
+        "bytes": 5594,
+        "sha256": "935932ff22b2312281d0606594ab382e321ed7c146c1ddc74abc883ffcb623d1"
+      }
+    ]
+  },
+  "skills": {
+    "receiptFile": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.teamai\\built-in-skills\\teamai.json",
+    "receiptSha256": "a4f9ab9a8dfcc51dd764c4d812d4ada8fa213981c00dabe181d520dcd453afac",
+    "receipt": {
+      "schemaVersion": 1,
+      "managedBy": "teamai-cli",
+      "skill": "teamai",
+      "version": "0.5.1",
+      "target": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.copilot\\skills\\teamai"
+    },
+    "files": [
+      {
+        "relativePath": "SKILL.md",
+        "bytes": 3152,
+        "sha256": "547fb516fbd1e435fab7bf0e0857820a4241ee8e200be82939079899074131da"
+      },
+      {
+        "relativePath": "references/commands.md",
+        "bytes": 8745,
+        "sha256": "e2ae88156b20cbad6baadf7b489ef5a8d1782b9f33f10bc5dc5f9cdc0a524fc4"
+      }
+    ]
+  }
+}

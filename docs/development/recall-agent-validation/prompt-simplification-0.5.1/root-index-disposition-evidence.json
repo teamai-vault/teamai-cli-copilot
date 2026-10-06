@@ -1,0 +1,52 @@
+{
+  "result": "PASS_INDEX_CONTENT_AND_MODE_UNCHANGED",
+  "before": {
+    "version": 2,
+    "entries": 1,
+    "stat": {
+      "ctimeSeconds": 1791239980,
+      "ctimeNanoseconds": 629234700,
+      "mtimeSeconds": 1791239980,
+      "mtimeNanoseconds": 630246900,
+      "dev": 0,
+      "ino": 0,
+      "mode": 33188,
+      "uid": 0,
+      "gid": 0,
+      "size": 78
+    },
+    "blob": "edf9edd94953dffe388c67ec4667e600bee1c9ab",
+    "flags": 9,
+    "path": "README.md",
+    "extensions": "5452454500000019003120300a440cca26cb8e8527a4dfb3c29756188174469944",
+    "checksumValid": true
+  },
+  "after": {
+    "version": 2,
+    "entries": 1,
+    "stat": {
+      "ctimeSeconds": 1791293822,
+      "ctimeNanoseconds": 627010200,
+      "mtimeSeconds": 1791239980,
+      "mtimeNanoseconds": 630246900,
+      "dev": 0,
+      "ino": 0,
+      "mode": 33188,
+      "uid": 0,
+      "gid": 0,
+      "size": 78
+    },
+    "blob": "edf9edd94953dffe388c67ec4667e600bee1c9ab",
+    "flags": 9,
+    "path": "README.md",
+    "extensions": "5452454500000019003120300a440cca26cb8e8527a4dfb3c29756188174469944",
+    "checksumValid": true
+  },
+  "changedStatFields": [
+    "ctimeSeconds",
+    "ctimeNanoseconds"
+  ],
+  "rawIndexHashesRemainDifferent": true,
+  "originalObserverExit": 1,
+  "noResetOrModelRetry": true
+}

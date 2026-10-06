@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "status": "B_BOUNDED_WORK_COMPLETE_ROOT_DELIVERY_PENDING",
+  "slot": "E26-B-0.5.1-MINIMAL-NATIVE",
+  "source": "923c905f26251021cc6ecd24a5032a99875c7e36",
+  "version": "0.5.1",
+  "base": "1cbbfa433c5a135787487e9856327ae8965868a7",
+  "actualCases": [
+    {
+      "case": "B29-coverage-zh",
+      "sessionId": "1b5cc92a-45f0-4736-9830-fff3d7d9439e",
+      "exitCode": 0,
+      "runs": 1,
+      "independentSpec": "ACCEPT/0Major as notified by root"
+    },
+    {
+      "case": "B33-read-failure",
+      "sessionId": "d9b11382-4836-4705-a7e4-05e46e465b7f",
+      "exitCode": 0,
+      "runs": 1,
+      "readGapAndInjectionExposure": "Independently checked by root; minimal independent Spec review owned by root"
+    }
+  ],
+  "notRunCases": [
+    {
+      "case": "B33-injection",
+      "status": "NOT_RUN",
+      "reason": "Root cancelled duplicate standalone run; no caller PASS claimed"
+    }
+  ],
+  "consumerActiveProcesses": 0,
+  "noActivityEvidence": "Both actual native launch results normal0 and recorded session shutdown; no subsequent native start/resume",
+  "restored": {
+    "bytes": 745,
+    "sha256": "4ae3a786e26169cf14543b30b7b7225b328f6bd2d1584dd0cf103887719dd4cb",
+    "noReplace": true
+  },
+  "rawObserverExits": [
+    1,
+    1
+  ],
+  "narrowDispositionWrapperExit": 1,
+  "rootDispositions": [
+    {
+      "path": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/root-protection-disposition.json",
+      "sha256": "b3b6977256369e11fc5e019435f8043ad3339b4b578f6fb7526c10f06670a355"
+    },
+    {
+      "path": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/root-index-disposition-evidence.json",
+      "sha256": "b5ad8ab4e71dc10255b0f40d7502d1d50f5753f3cf9a684fd5eea7c77f032427"
+    },
+    {
+      "path": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/root-read-failure-protection-disposition.json",
+      "sha256": "2bd8157de659b6951a5d54e766ae54008119d9be5f761dbbd6b1e6efc1abd74b"
+    }
+  ],
+  "protectionLimit": "Exact metadata artifacts only; raw baselines/exits preserved, old8+5 unchanged, native account/session roots excluded, generating PID unknown; no zero-FS-write claim",
+  "handoff": {
+    "path": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/handoff-b-agent.md",
+    "bytes": 4398,
+    "sha256": "eea3813561b2229d51ffec5b7d43015c3e4a5f6e85d1b7b4f50becb4ac5c05a9"
+  },
+  "followupOwner": "root",
+  "completedAtUtc": "2026-10-06T14:21:53.584Z"
+}

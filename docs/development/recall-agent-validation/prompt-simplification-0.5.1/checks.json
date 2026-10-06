@@ -1,0 +1,37 @@
+[
+  {
+    "name": "authored-bytes",
+    "exitCode": 0,
+    "log": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/review/prompt-simplification-20261006/final-0.5.1/authored-bytes.log",
+    "startedAtUtc": "2026-10-06T13:24:04.7588298Z",
+    "finishedAtUtc": "2026-10-06T13:24:04.9177904Z"
+  },
+  {
+    "name": "typecheck",
+    "exitCode": 0,
+    "log": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/review/prompt-simplification-20261006/final-0.5.1/typecheck.log",
+    "startedAtUtc": "2026-10-06T13:24:04.9281562Z",
+    "finishedAtUtc": "2026-10-06T13:24:10.5730849Z"
+  },
+  {
+    "name": "targeted-agent-regression",
+    "exitCode": 0,
+    "log": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/review/prompt-simplification-20261006/final-0.5.1/targeted-agent-regression.log",
+    "startedAtUtc": "2026-10-06T13:24:10.5812897Z",
+    "finishedAtUtc": "2026-10-06T13:25:06.5229553Z"
+  },
+  {
+    "name": "build",
+    "exitCode": 0,
+    "log": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/review/prompt-simplification-20261006/final-0.5.1/build.log",
+    "startedAtUtc": "2026-10-06T13:25:06.5293106Z",
+    "finishedAtUtc": "2026-10-06T13:25:10.8518444Z"
+  },
+  {
+    "name": "actual-pack-install-delivery",
+    "exitCode": 1,
+    "log": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/review/prompt-simplification-20261006/final-0.5.1/actual-pack-install-delivery.log",
+    "startedAtUtc": "2026-10-06T13:25:10.8569050Z",
+    "finishedAtUtc": "2026-10-06T13:25:10.9711509Z"
+  }
+]
