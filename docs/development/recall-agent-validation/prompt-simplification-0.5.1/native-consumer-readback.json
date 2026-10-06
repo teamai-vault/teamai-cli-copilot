@@ -1,0 +1,10 @@
+{
+  "result": "NORMAL_NATIVE_CONSUMER_PREFLIGHT_PASS_ONLY",
+  "ordinaryEntry": "D:/soft/nodejs/node_global/copilot.ps1",
+  "currentVersionProbe": false,
+  "historicalVersion": "1.0.92",
+  "historicalLogin": "E16 original native owning HOME normal successful sessions; no credential inspection/copy",
+  "newModelRun": false,
+  "actualOwnedDelivery": "ACTUAL_PUBLIC_DELIVERY_READBACK_PASS",
+  "meaning": "Normal executable will show current startup/version/selection per allocated case; no discovery/trust/permission change."
+}

@@ -1,0 +1,56 @@
+{
+  "businessRoots": 13,
+  "gitRoots": 5,
+  "deltas": [
+    {
+      "category": "business",
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\fixture\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+      "before": "ABSENT",
+      "after": "3e63c9aeec69e861ad19e7bf54a37065229707c28ed868f1f7b07acb5d0b69c1"
+    },
+    {
+      "category": "gitMetadata",
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\fixture\\workspaces\\bound\\.git\\index",
+      "before": "29ce322b8e8972e0af3e6207baec98ac95df2d024e2ba2e8dccea17e9798a2b2",
+      "after": "0b17bc18bac0cb0986ddbfd498611349df491f7a4488522516f95a56cb5784d0"
+    }
+  ],
+  "case": "B29-coverage-zh",
+  "sinceResumedBaseline": {
+    "businessRoots": 13,
+    "gitRoots": 5,
+    "deltas": [
+      {
+        "category": "business",
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\fixture\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+        "before": "ABSENT",
+        "after": "3e63c9aeec69e861ad19e7bf54a37065229707c28ed868f1f7b07acb5d0b69c1"
+      },
+      {
+        "category": "gitMetadata",
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\fixture\\workspaces\\bound\\.git\\index",
+        "before": "29ce322b8e8972e0af3e6207baec98ac95df2d024e2ba2e8dccea17e9798a2b2",
+        "after": "0b17bc18bac0cb0986ddbfd498611349df491f7a4488522516f95a56cb5784d0"
+      }
+    ]
+  },
+  "exactBusinessStartupDeltas": [
+    {
+      "category": "business",
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\fixture\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+      "before": "ABSENT",
+      "after": "3e63c9aeec69e861ad19e7bf54a37065229707c28ed868f1f7b07acb5d0b69c1"
+    }
+  ],
+  "sinceResumedBaselineExactBusinessStartupDeltas": [
+    {
+      "category": "business",
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\fixture\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+      "before": "ABSENT",
+      "after": "3e63c9aeec69e861ad19e7bf54a37065229707c28ed868f1f7b07acb5d0b69c1"
+    }
+  ],
+  "generatingPlatformArtifactPid": "NOT_INDEPENDENTLY_OBSERVED",
+  "nativePlatform": "Native account/config/session/log writes are separate and not scanned; complete business/Git deltas remain. Unexpected business changes require root disposition.",
+  "behaviorAcceptance": "NOT_INFERRED_FROM_HASHES"
+}

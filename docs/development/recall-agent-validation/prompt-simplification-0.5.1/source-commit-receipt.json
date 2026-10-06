@@ -1,0 +1,14 @@
+{
+  "commit": "923c905f26251021cc6ecd24a5032a99875c7e36",
+  "base": "1cbbfa433c5a135787487e9856327ae8965868a7",
+  "version": "0.5.1",
+  "promptHash": "935932ff22b2312281d0606594ab382e321ed7c146c1ddc74abc883ffcb623d1",
+  "promptBytes": 5594,
+  "tarball": "F:\\agent-workspace\\codex\\.tmp\\r051\\p\\teamai-cli-copilot-0.5.1.tgz",
+  "tarballSha256": "262455bb3185a35bcbbe78a93df64d1b298a0937506770333dce9eb133148ecd",
+  "cliHash": "79f64b93f5b477254d1f6697348603740d13bb7e1b5b33f8a5c75fa7447c20be",
+  "independentSourceReview": "ACCEPT; no actionable Standards or Spec findings",
+  "targetedTests": 17,
+  "packageDeliveryRoots": 2,
+  "native": "NOT_YET_RUN"
+}

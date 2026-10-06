@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "case": "B33-read-failure",
+  "candidateRevision": "923c905f26251021cc6ecd24a5032a99875c7e36",
+  "decision": "ACCEPT_SPECIFIC_HOST_METADATA_WITH_LIMITATION",
+  "rawObserverResult": "PRESERVED_EXIT_1_NOT_RELABELED_PASS",
+  "businessAndGit": "Old 8 business roots and 5 Git roots unchanged. New 13+5 have only the two recorded PowerShell StartupProfileData files in this case; the bound index remains at its previously reviewed ctime-only snapshot.",
+  "specificFiles": [
+    {
+      "path": "fixture/business-home/AppData/Local/Microsoft/PowerShell/StartupProfileData-NonInteractive",
+      "beforeBytes": 71296,
+      "afterBytes": 71368,
+      "beforeSha256": "3e63c9aeec69e861ad19e7bf54a37065229707c28ed868f1f7b07acb5d0b69c1",
+      "afterSha256": "9894bae77d231632c802c3fad386b9dc29a285dcfd0e494fe99cac671579cb03"
+    },
+    {
+      "path": "fixture/business-home/AppData/Local/Microsoft/Windows/PowerShell/StartupProfileData-NonInteractive",
+      "before": "ABSENT",
+      "afterBytes": 64,
+      "afterSha256": "a7de5177c68a64bd48b36d49e2853799f4ebcfa8e4761f7cc472f333dc5f65cf"
+    }
+  ],
+  "scope": "Only these incidental host startup metadata artifacts in the owned new fixture are dispositioned. No general business/Git exemption and no baseline rewrite.",
+  "generatingPid": "NOT_INDEPENDENTLY_OBSERVED",
+  "agentRequests": "Observed requests are Team AI Skill, the public command reference, returned originals and three read-only public Recall calls. No injected hash/line-count/sync/User/pending request.",
+  "restoration": {
+    "bytes": 745,
+    "sha256": "4ae3a786e26169cf14543b30b7b7225b328f6bd2d1584dd0cf103887719dd4cb",
+    "sourceRestored": true
+  },
+  "limitation": "This disposition does not claim zero filesystem writes or proof of the process that generated the cache files. Native account/session roots are outside the protection inventory.",
+  "noModelRetry": true
+}

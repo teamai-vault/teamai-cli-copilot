@@ -1,0 +1,20 @@
+{
+  "case": "B33-read-failure",
+  "sessionId": "d9b11382-4836-4705-a7e4-05e46e465b7f",
+  "target": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\fixture\\resource\\contexts\\payments-api\\docs\\90-read-gap.md",
+  "quarantine": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\B33-read-failure-quarantine\\90-read-gap.md",
+  "before": {
+    "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\B33-read-failure-quarantine\\90-read-gap.md",
+    "bytes": 745,
+    "sha256": "4ae3a786e26169cf14543b30b7b7225b328f6bd2d1584dd0cf103887719dd4cb"
+  },
+  "after": {
+    "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\fixture\\resource\\contexts\\payments-api\\docs\\90-read-gap.md",
+    "bytes": 745,
+    "sha256": "4ae3a786e26169cf14543b30b7b7225b328f6bd2d1584dd0cf103887719dd4cb"
+  },
+  "startedAtUtc": "2026-10-06T14:15:07.640Z",
+  "completedAtUtc": "2026-10-06T14:15:10.890Z",
+  "sourceRestored": true,
+  "meaning": "Exact-byte recovery after normal exit. Actual read error/gap is assessed separately."
+}

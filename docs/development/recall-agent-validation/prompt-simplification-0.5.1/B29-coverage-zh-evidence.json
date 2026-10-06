@@ -1,0 +1,272 @@
+{
+  "case": "B29-coverage-zh",
+  "interpretation": "Observed actual session only; behavioral acceptance is a separate root judgment",
+  "candidateRevision": "923c905f26251021cc6ecd24a5032a99875c7e36",
+  "tarballSha256": "262455bb3185a35bcbbe78a93df64d1b298a0937506770333dce9eb133148ecd",
+  "agentSha256": "935932ff22b2312281d0606594ab382e321ed7c146c1ddc74abc883ffcb623d1",
+  "sourceHash": "debdd6cdee12aad10e98bf04b79bb2587265dbe8003b58d6ad4a8cf9ef16bca6",
+  "sourceRevision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+  "publishedRevision": "cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2",
+  "sessionId": "1b5cc92a-45f0-4736-9830-fff3d7d9439e",
+  "launch": {
+    "case": "B29-coverage-zh",
+    "sessionId": "1b5cc92a-45f0-4736-9830-fff3d7d9439e",
+    "executable": "D:/soft/nodejs/node_global/copilot.ps1",
+    "args": [
+      "--agent",
+      "teamai-recall",
+      "--session-id",
+      "1b5cc92a-45f0-4736-9830-fff3d7d9439e",
+      "--log-dir",
+      "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\B29-coverage-zh-native-logs",
+      "--usage-output-file",
+      "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\B29-coverage-zh-usage.json"
+    ],
+    "cwd": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-minimal-0.5.1/fixture/workspaces/bound",
+    "launcherPid": 12040,
+    "startedAtUtc": "2026-10-06T13:47:00.9790989Z",
+    "nativeRoot": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.copilot",
+    "businessHome": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\fixture\\business-home",
+    "candidateRevision": "923c905f26251021cc6ecd24a5032a99875c7e36",
+    "sourceHash": "debdd6cdee12aad10e98bf04b79bb2587265dbe8003b58d6ad4a8cf9ef16bca6",
+    "agentSha256": "935932ff22b2312281d0606594ab382e321ed7c146c1ddc74abc883ffcb623d1",
+    "modelOverride": null,
+    "questionHeldForActualSelection": true,
+    "permissionFlags": "DEFAULT",
+    "taskMessages": "Only frozen case messages after actual selection; no oracle/rank/path list",
+    "parentChildRoute": "Same delivered teamai-recall with unset/inherited model is allowed",
+    "frozenGuard": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\execution\\."
+  },
+  "end": {
+    "case": "B29-coverage-zh",
+    "sessionId": "1b5cc92a-45f0-4736-9830-fff3d7d9439e",
+    "launcherPid": 12040,
+    "exitCode": 0,
+    "endedAtUtc": "2026-10-06T13:54:01.3746515Z",
+    "meaning": "Normal process end only; record actual events/answer separately. Restore real read-gap source before post protection."
+  },
+  "nativeEvents": {
+    "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.copilot\\session-state\\1b5cc92a-45f0-4736-9830-fff3d7d9439e\\events.jsonl",
+    "bytes": 280250,
+    "sha256": "a0e08f6b7d30cc07178c2a67788e620662be7f4d5044e70aaa007d0f205445cb",
+    "preservedInOriginalSession": true
+  },
+  "capturedModel": "gpt-6-luna",
+  "frozenQuestionExactMatch": true,
+  "parentUserMessageCount": 1,
+  "delegatedUserMessageCount": 0,
+  "answerCount": 1,
+  "selectedAgents": [
+    {
+      "timestamp": "2026-10-06T13:47:23.843Z",
+      "data": {
+        "agentName": "teamai-recall",
+        "agentDisplayName": "teamai-recall",
+        "tools": [
+          "read",
+          "execute"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-10-06T13:47:24.023Z",
+      "data": {
+        "agentName": "teamai-recall",
+        "agentDisplayName": "teamai-recall",
+        "tools": [
+          "read",
+          "execute"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-10-06T13:48:19.451Z",
+      "data": {
+        "agentName": "teamai-recall",
+        "agentDisplayName": "teamai-recall",
+        "tools": [
+          "read",
+          "execute"
+        ]
+      }
+    }
+  ],
+  "nativeChildRoutes": [],
+  "actualRecallQueries": 3,
+  "originalReads": 4,
+  "allViewFilesReturned": false,
+  "metrics": {
+    "sessionStartTime": 1791294432764,
+    "totalApiDurationMs": 44300,
+    "totalNanoAiu": 432869000,
+    "totalPremiumRequests": 1,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 21
+      },
+      "cache_read": {
+        "tokenCount": 73134
+      },
+      "cache_write": {
+        "tokenCount": 17638
+      },
+      "output": {
+        "tokenCount": 2781
+      }
+    },
+    "currentModel": "gpt-6-luna",
+    "modelMetrics": {
+      "gpt-6-luna": {
+        "requests": {
+          "count": 7,
+          "cost": 1
+        },
+        "usage": {
+          "inputTokens": 90793,
+          "outputTokens": 2781,
+          "cacheReadTokens": 73134,
+          "cacheWriteTokens": 17638,
+          "reasoningTokens": 1928
+        },
+        "totalNanoAiu": 432869000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 21
+          },
+          "cache_read": {
+            "tokenCount": 73134
+          },
+          "cache_write": {
+            "tokenCount": 17638
+          },
+          "output": {
+            "tokenCount": 2781
+          }
+        }
+      }
+    },
+    "codeChanges": {
+      "linesAdded": 0,
+      "linesRemoved": 0,
+      "filesModified": []
+    },
+    "modelCalls": 1,
+    "wallMs": 420395,
+    "usageOutput": {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\B29-coverage-zh-usage.json",
+      "sha256": "df5320c36f4a4850bc3947ccfefe7319ba5f590dc7225cd21789bf136e115c49"
+    }
+  },
+  "counts": {
+    "session.start": 1,
+    "subagent.selected": 3,
+    "session.model_change": 1,
+    "subagent.deselected": 1,
+    "session.auto_mode_resolved": 1,
+    "user.message": 1,
+    "model.turn_started": 1,
+    "system.message": 1,
+    "model.model_call_started": 1,
+    "assistant.turn_start": 7,
+    "model.captured_assignment_context": 1,
+    "model.model_call_success": 1,
+    "model.message": 1,
+    "model.response": 1,
+    "model.turn_ended": 1,
+    "model.messages_snapshot": 1,
+    "assistant.message": 8,
+    "tool.execution_start": 7,
+    "tool.execution_complete": 7,
+    "skill.invoked": 1,
+    "skill.context_delivered_ref": 1,
+    "assistant.turn_end": 7,
+    "permission.requested": 5,
+    "permission.completed": 5,
+    "session.usage_checkpoint": 1,
+    "session.shutdown": 1
+  },
+  "protection": {
+    "businessRoots": 13,
+    "gitRoots": 5,
+    "deltas": [
+      {
+        "category": "business",
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\fixture\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+        "before": "ABSENT",
+        "after": "3e63c9aeec69e861ad19e7bf54a37065229707c28ed868f1f7b07acb5d0b69c1"
+      },
+      {
+        "category": "gitMetadata",
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\fixture\\workspaces\\bound\\.git\\index",
+        "before": "29ce322b8e8972e0af3e6207baec98ac95df2d024e2ba2e8dccea17e9798a2b2",
+        "after": "0b17bc18bac0cb0986ddbfd498611349df491f7a4488522516f95a56cb5784d0"
+      }
+    ],
+    "case": "B29-coverage-zh",
+    "sinceResumedBaseline": {
+      "businessRoots": 13,
+      "gitRoots": 5,
+      "deltas": [
+        {
+          "category": "business",
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\fixture\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+          "before": "ABSENT",
+          "after": "3e63c9aeec69e861ad19e7bf54a37065229707c28ed868f1f7b07acb5d0b69c1"
+        },
+        {
+          "category": "gitMetadata",
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\fixture\\workspaces\\bound\\.git\\index",
+          "before": "29ce322b8e8972e0af3e6207baec98ac95df2d024e2ba2e8dccea17e9798a2b2",
+          "after": "0b17bc18bac0cb0986ddbfd498611349df491f7a4488522516f95a56cb5784d0"
+        }
+      ]
+    },
+    "exactBusinessStartupDeltas": [
+      {
+        "category": "business",
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\fixture\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+        "before": "ABSENT",
+        "after": "3e63c9aeec69e861ad19e7bf54a37065229707c28ed868f1f7b07acb5d0b69c1"
+      }
+    ],
+    "sinceResumedBaselineExactBusinessStartupDeltas": [
+      {
+        "category": "business",
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\fixture\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+        "before": "ABSENT",
+        "after": "3e63c9aeec69e861ad19e7bf54a37065229707c28ed868f1f7b07acb5d0b69c1"
+      }
+    ],
+    "generatingPlatformArtifactPid": "NOT_INDEPENDENTLY_OBSERVED",
+    "nativePlatform": "Native account/config/session/log writes are separate and not scanned; complete business/Git deltas remain. Unexpected business changes require root disposition.",
+    "behaviorAcceptance": "NOT_INFERRED_FROM_HASHES"
+  },
+  "outputs": [
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\B29-coverage-zh-observable-events.jsonl",
+      "bytes": 75958,
+      "sha256": "9117c189f7289f6dd91822d740e9bae376a01354395b13e6d641d85f12137bc0"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\B29-coverage-zh-queries.json",
+      "bytes": 49878,
+      "sha256": "1aed8cbeba84f57ec91b9368eee3d83d69c77744d188acea80a1255fb2d58f95"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\B29-coverage-zh-reads.json",
+      "bytes": 28763,
+      "sha256": "ea747ee628b6bbdddcaef628bc44a290a481f51f3e80d856ccfe1ad4472fb40f"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\B29-coverage-zh-answer.md",
+      "bytes": 1764,
+      "sha256": "e43e7ea3ce211a90c67eb161679d4b4a317d6dff5d8b27f0c0049d45d3b0fe6e"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\B29-coverage-zh-metrics.json",
+      "bytes": 1386,
+      "sha256": "76c91cf56cb1fb2aeab0ec8f567965c6699b0c7050cdd32d7c655936182c5657"
+    }
+  ],
+  "excluded": "Authentication/account files, model reasoning, provider request snapshots and opaque provider data are not copied by this recorder"
+}

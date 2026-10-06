@@ -1,0 +1,97 @@
+{
+  "case": "B33-read-failure",
+  "sessionId": "d9b11382-4836-4705-a7e4-05e46e465b7f",
+  "target": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\fixture\\resource\\contexts\\payments-api\\docs\\90-read-gap.md",
+  "quarantine": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\B33-read-failure-quarantine\\90-read-gap.md",
+  "before": {
+    "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\fixture\\resource\\contexts\\payments-api\\docs\\90-read-gap.md",
+    "bytes": 745,
+    "sha256": "4ae3a786e26169cf14543b30b7b7225b328f6bd2d1584dd0cf103887719dd4cb"
+  },
+  "after": {
+    "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\B33-read-failure-quarantine\\90-read-gap.md",
+    "bytes": 745,
+    "sha256": "4ae3a786e26169cf14543b30b7b7225b328f6bd2d1584dd0cf103887719dd4cb"
+  },
+  "startedAtUtc": "2026-10-06T14:07:02.398Z",
+  "completedAtUtc": "2026-10-06T14:07:02.399Z",
+  "actualReturns": [
+    {
+      "eventId": "4c5fc6ec-d1f0-497c-803c-76739edc7028",
+      "agentId": null,
+      "timestamp": "2026-10-06T14:05:59.743Z",
+      "query": "READ_GAP_72 LeaseMux incident appendix final disposition condition",
+      "hit": {
+        "id": "doc:payments-api:contexts/payments-api/docs/90-read-gap.md",
+        "type": "doc",
+        "publication": "published",
+        "logicalProject": "payments-api",
+        "title": "LeaseMux incident appendix",
+        "source": {
+          "sourceHash": "debdd6cdee12aad10e98bf04b79bb2587265dbe8003b58d6ad4a8cf9ef16bca6",
+          "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+          "relativePath": "contexts/payments-api/docs/90-read-gap.md",
+          "contentHash": "4ae3a786e26169cf14543b30b7b7225b328f6bd2d1584dd0cf103887719dd4cb"
+        },
+        "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\fixture\\resource\\contexts\\payments-api\\docs\\90-read-gap.md",
+        "matchedTerms": [
+          "READ_GAP_72",
+          "LeaseMux",
+          "incident",
+          "appendix",
+          "final",
+          "condition"
+        ],
+        "lineStart": 6,
+        "lineEnd": 8,
+        "snippet": "\nREAD_GAP_72: LeaseMux incident appendix unavailable.\nAn appendix contains the final handling condition."
+      }
+    }
+  ],
+  "pendingRead": {
+    "type": "permission.requested",
+    "data": {
+      "requestId": "d1ef44b5-c653-448c-a6c5-e1342d6e1ea7",
+      "permissionRequest": {
+        "kind": "read",
+        "toolCallId": "call_xr5XEpZ2ZGZzsimjsEfXGsaX",
+        "intention": "Read file: F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\fixture\\resource\\contexts\\payments-api\\docs\\90-read-gap.md",
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\fixture\\resource\\contexts\\payments-api\\docs\\90-read-gap.md"
+      },
+      "promptRequest": {
+        "kind": "path",
+        "accessKind": "read",
+        "paths": [
+          "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\fixture\\resource\\contexts\\payments-api\\docs\\90-read-gap.md"
+        ],
+        "readOnlyDirectories": [
+          "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\fixture\\resource\\contexts\\payments-api\\docs"
+        ],
+        "toolCallId": "call_xr5XEpZ2ZGZzsimjsEfXGsaX"
+      },
+      "agentMode": "interactive",
+      "permissionMode": "manual"
+    },
+    "id": "20f6968f-988d-4bd8-9776-9854b8d1af40",
+    "timestamp": "2026-10-06T14:06:06.015Z",
+    "parentId": "eac9685f-fd57-497d-a502-8f9556c32ab2"
+  },
+  "view": {
+    "type": "tool.execution_start",
+    "data": {
+      "toolCallId": "call_xr5XEpZ2ZGZzsimjsEfXGsaX",
+      "toolName": "view",
+      "arguments": {
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-minimal-0.5.1\\fixture\\resource\\contexts\\payments-api\\docs\\90-read-gap.md"
+      },
+      "turnId": "3",
+      "model": "gpt-6-luna",
+      "toolTitle": "Viewing file"
+    },
+    "id": "ac754425-e7df-4676-b7c1-8becdb803f40",
+    "timestamp": "2026-10-06T14:06:06.004Z",
+    "parentId": "3bc37fce-08bd-4bb3-b501-706d065d1102"
+  },
+  "sourceAbsent": true,
+  "meaning": "Operator fixture movement only. Approve this one real read next; no fabricated error or cancellation substitute."
+}

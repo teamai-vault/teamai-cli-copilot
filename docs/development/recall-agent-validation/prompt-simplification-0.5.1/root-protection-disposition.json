@@ -1,0 +1,14 @@
+{
+  "status": "ACCEPT_EXACT_METADATA_DELTAS_CONTINUE_REMAINING_TWO_CASES",
+  "slot": "E26-B-0.5.1-MINIMAL-NATIVE",
+  "source": "923c905f26251021cc6ecd24a5032a99875c7e36",
+  "case": "B29-coverage-zh",
+  "originalObserverExit": 1,
+  "rawFailurePreserved": true,
+  "indexEvidence": "root-index-disposition-evidence.json",
+  "indexDecision": "Independent binary parsing confirms DIRC v2, one README.md entry. Only ctime seconds/nanoseconds changed after fixture copying; path, blob, mode, stage flags, size, TREE extension and valid checksums retain the same staged content. Exact raw hash delta 29ce322b8e8972e0af3e6207baec98ac95df2d024e2ba2e8dccea17e9798a2b2 -> 0b17bc18bac0cb0986ddbfd498611349df491f7a4488522516f95a56cb5784d0 is incidental Git stat-cache refresh, not a business/source/index-content change.",
+  "startupDecision": "The exact new fixture business-home/AppData/Local/Microsoft/PowerShell/StartupProfileData-NonInteractive artifact is recorded separately as host startup-profile metadata. ABSENT -> 71296 bytes, sha256 3e63c9aeec69e861ad19e7bf54a37065229707c28ed868f1f7b07acb5d0b69c1. Generating PID remains NOT_INDEPENDENTLY_OBSERVED; no claim of zero filesystem writes.",
+  "remainingProtection": "Keep all original 13+5 and legacy 8+5 raw baselines unchanged. Record every delta and original observer exit. These same exact persisted metadata deltas may be dispositioned separately on remaining cases; any new business/content/ref/mode/stage/extension change still stops. A changed startup-profile payload at this exact known path is captured and reported as host metadata, not silently omitted.",
+  "scope": "Task artifact interpretation only. No source/prompt/helper outside this exclusive packet, consumer permission/trust/discovery, original fixture, raw baseline, Git reset or model sampling change.",
+  "modelRuns": "Do not rerun completed coverage. Run only B33-read-failure and B33-injection once each in the existing E26 allocation, then close the slot and hand off all results."
+}
