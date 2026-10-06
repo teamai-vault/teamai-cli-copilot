@@ -33,7 +33,7 @@ Use the public `teamai` CLI as the control surface. Translate the user's intent 
 
 When syntax or flags are unknown, read [references/commands.md](references/commands.md) and consult current `teamai <command> --help`. Treat current CLI help as the syntax source of truth. For Recall, reuse this task's confirmed, still-valid syntax and state; inspect help/status/projects only for a real syntax, diagnostic or ID gap, rechecking only affected information when it changes.
 
-Recall is optional and evidence-only. Keep the user's Scope, preserve exact IDs and diagnostics, and report missing cache rather than implicitly syncing or contributing. The native Recall Agent owns research and provenance guidance; this Skill only routes public commands.
+Recall is optional and evidence-only. Keep the user's Scope, preserve IDs when used and meaningful diagnostic conditions, and report missing cache rather than implicitly syncing or contributing. The native Recall Agent owns research and provenance guidance; this Skill only routes public commands.
 
 ## Ownership
 

@@ -894,7 +894,7 @@ describe("CLI integration with fake Copilot executable", () => {
     expect(help.stdout.join("\n")).toContain("teamai <command> [options]");
     const version = capture();
     expect(await runCli(["--version"], { out: version.out, err: version.err })).toBe(0);
-    expect(version.stdout).toEqual(["0.5.0"]);
+    expect(version.stdout).toEqual(["0.5.1"]);
     const dryRunHelp = capture();
     expect(await runCli(["--dry-run"], { out: dryRunHelp.out, err: dryRunHelp.err })).toBe(0);
     expect(dryRunHelp.stdout.join("\n")).toContain("teamai <command> [options]");
