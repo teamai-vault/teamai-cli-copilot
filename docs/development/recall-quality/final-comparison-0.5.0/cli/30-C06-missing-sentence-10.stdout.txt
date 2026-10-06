@@ -1,0 +1,1 @@
+{"schemaVersion":1,"error":{"code":"CACHE_UNAVAILABLE","message":"No verified published Learnings snapshot is cached. Run `teamai sync` to refresh it."}}

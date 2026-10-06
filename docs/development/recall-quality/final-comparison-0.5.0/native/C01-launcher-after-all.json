@@ -1,0 +1,8 @@
+{
+  "case": "C01",
+  "observedAt": "2026-10-06T05:21:10.8793275+00:00",
+  "launcherPid": 30876,
+  "launcherStillPresent": false,
+  "childProcesses": "UNVERIFIED_NO_PRE_END_PID_CAPTURE",
+  "noInventedChildPid": true
+}

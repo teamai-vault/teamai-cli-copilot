@@ -1,0 +1,7 @@
+{
+  "built-in-agents/teamai-recall.json": "c206b86c9c0e2c16318b6c0bd6c6d89163638b96bfed5e11b686d336bd2b1c38",
+  "built-in-skills/teamai.json": "e065f645853bca6c2cecf5a78c0199f188843a253df82e57bfef3e1d60a0ac78",
+  "config.yaml": "7b2f75f4415d2c507fe51ad7db6626c632be9f120115de7e51ca077336453e71",
+  "projects/-cli-customization-.tmp-recall-29-35-runtime-c-native-baseline-v2-workspaces-c01-f42dc00fce522269/anchor": "0dd89fe7e5376164d3e4b73ccb8304aed5fe52fbeb65226eccc183f4692d7faa",
+  "projects/-cli-customization-.tmp-recall-29-35-runtime-c-native-baseline-v2-workspaces-c01-f42dc00fce522269/state.json": "e0118089434991b3b7f864895a6324797fd4ff1973b3af9e2b852f85c282bf85"
+}

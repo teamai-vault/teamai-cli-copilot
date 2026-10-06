@@ -1,0 +1,17 @@
+{
+  "id": "0959f296-9f52-4fdb-bae8-8084fdf36417",
+  "label": "C01",
+  "workspace": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01",
+  "home": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home",
+  "consumerHome": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.copilot",
+  "agent": "teamai-recall",
+  "questionTurns": [
+    "在 atlas-payments，NimbusQueue 2.1 报错 ACME_E_BARRIER_412: retry budget exhausted for tenant=demo-7。什么条件下可以重试，什么条件下不能？",
+    "In atlas-payments, NimbusQueue 2.1 reports ACME_E_BARRIER_412: retry budget exhausted for tenant=demo-7. Under what conditions is a retry safe, and when must it be refused?",
+    "如果它的租约已经到期，但那个幂等记录丢了，还能再试吗？请保留前述诊断原文。"
+  ],
+  "questionHeldUntilRealSelection": true,
+  "oracleSubmitted": false,
+  "keywordsSubmitted": false,
+  "profile": "healthy"
+}

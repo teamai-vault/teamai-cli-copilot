@@ -1,0 +1,26 @@
+{
+  "case": "C06-damaged",
+  "observedAt": "2026-10-06T05:17:09.3448188+00:00",
+  "launcherPid": 31828,
+  "processes": [
+    {
+      "pid": 31828,
+      "parentPid": 33704,
+      "name": "pwsh.exe",
+      "creationDate": "2026-10-06T05:16:50.4500070Z"
+    },
+    {
+      "pid": 15572,
+      "parentPid": 31828,
+      "name": "node.exe",
+      "creationDate": "2026-10-06T05:16:53.0071380Z"
+    },
+    {
+      "pid": 32032,
+      "parentPid": 15572,
+      "name": "copilot.exe",
+      "creationDate": "2026-10-06T05:16:53.0829260Z"
+    }
+  ],
+  "scope": "Only launcher and descendants PID/parent/name/start, no command lines/environment/account fields"
+}

@@ -1,0 +1,199 @@
+{
+  "method": "At each actual user.message use the last selected/deselected event in recorded sequence, not initial launcher banner alone",
+  "sessions": [
+    {
+      "label": "C01",
+      "frozenTurns": 3,
+      "actualUserTurns": 3,
+      "turns": [
+        {
+          "turn": 1,
+          "questionEventId": "0117f9da-2ae5-4a4c-ba0b-6e056952e726",
+          "questionTime": "2026-10-06T04:48:24.775Z",
+          "question": "在 atlas-payments，NimbusQueue 2.1 报错 ACME_E_BARRIER_412: retry budget exhausted for tenant=demo-7。什么条件下可以重试，什么条件下不能？",
+          "latestSelectionType": "subagent.selected",
+          "latestSelectionEventId": "542713d3-5501-4b83-a154-4adc0040b9b6",
+          "latestSelectionTime": "2026-10-06T04:47:40.614Z",
+          "actualCurrentSelectedAgent": "teamai-recall",
+          "currentSelectionBeforeQuestion": true,
+          "questionMatchesFrozen": true
+        },
+        {
+          "turn": 2,
+          "questionEventId": "6ee23fb5-3cba-4537-8faf-749d2cc35cf3",
+          "questionTime": "2026-10-06T04:51:42.75Z",
+          "question": "In atlas-payments, NimbusQueue 2.1 reports ACME_E_BARRIER_412: retry budget exhausted for tenant=demo-7. Under what conditions is a retry safe, and when must it be refused?",
+          "latestSelectionType": "subagent.selected",
+          "latestSelectionEventId": "542713d3-5501-4b83-a154-4adc0040b9b6",
+          "latestSelectionTime": "2026-10-06T04:47:40.614Z",
+          "actualCurrentSelectedAgent": "teamai-recall",
+          "currentSelectionBeforeQuestion": true,
+          "questionMatchesFrozen": true
+        },
+        {
+          "turn": 3,
+          "questionEventId": "32da162f-99be-430c-9f65-69d606d51d5c",
+          "questionTime": "2026-10-06T04:52:17.357Z",
+          "question": "如果它的租约已经到期，但那个幂等记录丢了，还能再试吗？请保留前述诊断原文。",
+          "latestSelectionType": "subagent.selected",
+          "latestSelectionEventId": "542713d3-5501-4b83-a154-4adc0040b9b6",
+          "latestSelectionTime": "2026-10-06T04:47:40.614Z",
+          "actualCurrentSelectedAgent": "teamai-recall",
+          "currentSelectionBeforeQuestion": true,
+          "questionMatchesFrozen": true
+        }
+      ],
+      "allCurrentSelectionsCorrect": true,
+      "allQuestionsFrozen": true
+    },
+    {
+      "label": "C02",
+      "frozenTurns": 1,
+      "actualUserTurns": 1,
+      "turns": [
+        {
+          "turn": 1,
+          "questionEventId": "c18f03b5-1c2f-4707-a074-ec33e44c44d1",
+          "questionTime": "2026-10-06T04:56:17.406Z",
+          "question": "调用方一直排队等连接，是连接池耗尽了吗？先怎么处置，能直接调大池子吗？",
+          "latestSelectionType": "subagent.selected",
+          "latestSelectionEventId": "eaba3b82-92e5-4587-8076-9be43d9c0c79",
+          "latestSelectionTime": "2026-10-06T04:55:43.978Z",
+          "actualCurrentSelectedAgent": "teamai-recall",
+          "currentSelectionBeforeQuestion": true,
+          "questionMatchesFrozen": true
+        }
+      ],
+      "allCurrentSelectionsCorrect": true,
+      "allQuestionsFrozen": true
+    },
+    {
+      "label": "C03",
+      "frozenTurns": 1,
+      "actualUserTurns": 1,
+      "turns": [
+        {
+          "turn": 1,
+          "questionEventId": "d48f170f-534c-4a57-89f4-ec3fb693caa1",
+          "questionTime": "2026-10-06T04:59:27.987Z",
+          "question": "NimbusQueue 2.1 standard mode 在 2026-09-20 的 DrainBudgetMs 应是多少？什么观测才算 drain 完成？如果资料冲突，明确指出。",
+          "latestSelectionType": "subagent.selected",
+          "latestSelectionEventId": "e9b2b027-f993-445c-975a-2f002d54bcef",
+          "latestSelectionTime": "2026-10-06T04:59:20.668Z",
+          "actualCurrentSelectedAgent": "teamai-recall",
+          "currentSelectionBeforeQuestion": true,
+          "questionMatchesFrozen": true
+        }
+      ],
+      "allCurrentSelectionsCorrect": true,
+      "allQuestionsFrozen": true
+    },
+    {
+      "label": "C04",
+      "frozenTurns": 1,
+      "actualUserTurns": 1,
+      "turns": [
+        {
+          "turn": 1,
+          "questionEventId": "5e44e0fe-eba5-41b1-8593-7008d99de71e",
+          "questionTime": "2026-10-06T05:03:28.429Z",
+          "question": "BackoffCapMs 的上限和 jitter 方式是什么？项目文档和 shared Learning 若只是复制，别当成两份独立佐证。",
+          "latestSelectionType": "subagent.selected",
+          "latestSelectionEventId": "9cf2483c-6265-420d-a48f-916df18b95e3",
+          "latestSelectionTime": "2026-10-06T05:03:21.276Z",
+          "actualCurrentSelectedAgent": "teamai-recall",
+          "currentSelectionBeforeQuestion": true,
+          "questionMatchesFrozen": true
+        }
+      ],
+      "allCurrentSelectionsCorrect": true,
+      "allQuestionsFrozen": true
+    },
+    {
+      "label": "C05",
+      "frozenTurns": 1,
+      "actualUserTurns": 1,
+      "turns": [
+        {
+          "turn": 1,
+          "questionEventId": "b694d90c-652c-4f9a-9e22-5d5a17a5da47",
+          "questionTime": "2026-10-06T05:09:27.578Z",
+          "question": "当前已绑定项目的 AuditMarkerColor 是什么？只回答资料支持的颜色，并给原文出处。",
+          "latestSelectionType": "subagent.selected",
+          "latestSelectionEventId": "5bad1a70-9e59-4aa6-acac-a440cf25f2c8",
+          "latestSelectionTime": "2026-10-06T05:09:12.408Z",
+          "actualCurrentSelectedAgent": "teamai-recall",
+          "currentSelectionBeforeQuestion": true,
+          "questionMatchesFrozen": true
+        }
+      ],
+      "allCurrentSelectionsCorrect": true,
+      "allQuestionsFrozen": true
+    },
+    {
+      "label": "C06",
+      "frozenTurns": 1,
+      "actualUserTurns": 1,
+      "turns": [
+        {
+          "turn": 1,
+          "questionEventId": "ee090fd5-3f12-4da4-9958-8747d984510c",
+          "questionTime": "2026-10-06T05:11:53.191Z",
+          "question": "这些团队资料有同态加密和密钥轮换方案吗？没有依据就明确说无法支持；cache 不可用时请报告错误。",
+          "latestSelectionType": "subagent.selected",
+          "latestSelectionEventId": "eaa1d427-7de1-455c-96fa-54647653dc93",
+          "latestSelectionTime": "2026-10-06T05:11:11.926Z",
+          "actualCurrentSelectedAgent": "teamai-recall",
+          "currentSelectionBeforeQuestion": true,
+          "questionMatchesFrozen": true
+        }
+      ],
+      "allCurrentSelectionsCorrect": true,
+      "allQuestionsFrozen": true
+    },
+    {
+      "label": "C06-missing",
+      "frozenTurns": 1,
+      "actualUserTurns": 1,
+      "turns": [
+        {
+          "turn": 1,
+          "questionEventId": "a2997e0f-1e83-41bd-bb53-26705ee428de",
+          "questionTime": "2026-10-06T05:15:14.409Z",
+          "question": "这些团队资料有同态加密和密钥轮换方案吗？没有依据就明确说无法支持；cache 不可用时请报告错误。",
+          "latestSelectionType": "subagent.selected",
+          "latestSelectionEventId": "3414f7c3-9911-4276-82f5-09f3a83c8b27",
+          "latestSelectionTime": "2026-10-06T05:14:57.177Z",
+          "actualCurrentSelectedAgent": "teamai-recall",
+          "currentSelectionBeforeQuestion": true,
+          "questionMatchesFrozen": true
+        }
+      ],
+      "allCurrentSelectionsCorrect": true,
+      "allQuestionsFrozen": true
+    },
+    {
+      "label": "C06-damaged",
+      "frozenTurns": 1,
+      "actualUserTurns": 1,
+      "turns": [
+        {
+          "turn": 1,
+          "questionEventId": "80a07cd4-7613-444a-a179-85221141df5a",
+          "questionTime": "2026-10-06T05:17:48.915Z",
+          "question": "这些团队资料有同态加密和密钥轮换方案吗？没有依据就明确说无法支持；cache 不可用时请报告错误。",
+          "latestSelectionType": "subagent.selected",
+          "latestSelectionEventId": "ca9ae2c0-432c-4529-9cf3-869c10f088b7",
+          "latestSelectionTime": "2026-10-06T05:17:33.467Z",
+          "actualCurrentSelectedAgent": "teamai-recall",
+          "currentSelectionBeforeQuestion": true,
+          "questionMatchesFrozen": true
+        }
+      ],
+      "allCurrentSelectionsCorrect": true,
+      "allQuestionsFrozen": true
+    }
+  ],
+  "allTenCurrentSelectionsCorrect": true,
+  "allTenQuestionsFrozen": true
+}

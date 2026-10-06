@@ -1,0 +1,518 @@
+{
+  "capture": "Actual native task event projection; original visible fields unchanged, opaque/reasoning/provider/account/session-identity fields excluded",
+  "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\.copilot\\session-state\\310e4936-72d3-47ed-bb19-4fad1869d517\\events.jsonl",
+  "sourceSha256": "b5308ad38e3322b99305d0d8f81d624aad35c081d6d5ca9c6f87dfb061bd3e49",
+  "capturedAt": "2026-10-06T04:58:06.789Z",
+  "events": [
+    {
+      "type": "subagent.selected",
+      "id": "0098eb1a-dc0f-46b4-a56d-e5a451529a39",
+      "timestamp": "2026-10-06T04:54:05.252Z",
+      "parentId": "7ec3fd98-107c-4212-b3a8-91e6a43b8a6b",
+      "data": {
+        "agentName": "teamai-recall",
+        "agentDisplayName": "teamai-recall",
+        "tools": [
+          "read",
+          "execute"
+        ]
+      }
+    },
+    {
+      "type": "subagent.selected",
+      "id": "0569f14a-05f9-4dca-a2be-c6dda32259a7",
+      "timestamp": "2026-10-06T04:54:05.627Z",
+      "parentId": "0098eb1a-dc0f-46b4-a56d-e5a451529a39",
+      "data": {
+        "agentName": "teamai-recall",
+        "agentDisplayName": "teamai-recall",
+        "tools": [
+          "read",
+          "execute"
+        ]
+      }
+    },
+    {
+      "type": "subagent.deselected",
+      "id": "4e91d65e-d39e-443c-bbfa-bd178262a039",
+      "timestamp": "2026-10-06T04:54:17.394Z",
+      "parentId": "0569f14a-05f9-4dca-a2be-c6dda32259a7",
+      "data": {}
+    },
+    {
+      "type": "session.model_change",
+      "id": "7922eae4-a585-46a0-96c0-9c967df40aca",
+      "timestamp": "2026-10-06T04:54:17.903Z",
+      "parentId": "4e91d65e-d39e-443c-bbfa-bd178262a039",
+      "data": {
+        "cause": "initial_resolution",
+        "source": "automatic",
+        "contextTier": null,
+        "newModel": "auto",
+        "reasoningEffort": null
+      }
+    },
+    {
+      "type": "subagent.selected",
+      "id": "eaba3b82-92e5-4587-8076-9be43d9c0c79",
+      "timestamp": "2026-10-06T04:55:43.978Z",
+      "parentId": "7922eae4-a585-46a0-96c0-9c967df40aca",
+      "data": {
+        "agentName": "teamai-recall",
+        "agentDisplayName": "teamai-recall",
+        "tools": [
+          "read",
+          "execute"
+        ]
+      }
+    },
+    {
+      "type": "session.auto_mode_resolved",
+      "id": "87720c12-3858-4a23-9c4a-1d15dccb73fa",
+      "timestamp": "2026-10-06T04:56:16.949Z",
+      "parentId": "eaba3b82-92e5-4587-8076-9be43d9c0c79",
+      "data": {
+        "chosenModel": "gpt-6-luna",
+        "routingMethod": "auto_v2",
+        "fallback": false,
+        "endToEndLatencyMs": 2002.7659999999998
+      }
+    },
+    {
+      "type": "user.message",
+      "id": "c18f03b5-1c2f-4707-a074-ec33e44c44d1",
+      "timestamp": "2026-10-06T04:56:17.406Z",
+      "parentId": "87720c12-3858-4a23-9c4a-1d15dccb73fa",
+      "data": {
+        "content": "调用方一直排队等连接，是连接池耗尽了吗？先怎么处置，能直接调大池子吗？",
+        "interactionId": "5021f2ba-9097-4ff2-8cf1-faa8126b7884",
+        "parentAgentTaskId": "96989bed-928c-4d9f-8f29-900491374ae6"
+      }
+    },
+    {
+      "type": "assistant.message",
+      "id": "7d01aaaa-c83e-4e9e-b0ff-03c0f6f4f0ea",
+      "timestamp": "2026-10-06T04:56:21.181Z",
+      "parentId": "adb097f7-f7c5-44cf-b2fd-e7141dfad193",
+      "data": {
+        "content": "",
+        "model": "gpt-6-luna",
+        "toolRequests": [
+          {
+            "toolCallId": "call_tkcrT1WkFOuwfotpUrZ6CIfU",
+            "name": "skill",
+            "arguments": {
+              "skill": "teamai"
+            },
+            "type": "function",
+            "intentionSummary": "teamai"
+          }
+        ],
+        "turnId": "0",
+        "interactionId": "5021f2ba-9097-4ff2-8cf1-faa8126b7884"
+      }
+    },
+    {
+      "type": "tool.execution_start",
+      "id": "67aa7343-9e0b-4410-bfb1-d38b1452de30",
+      "timestamp": "2026-10-06T04:56:21.183Z",
+      "parentId": "7d01aaaa-c83e-4e9e-b0ff-03c0f6f4f0ea",
+      "data": {
+        "toolCallId": "call_tkcrT1WkFOuwfotpUrZ6CIfU",
+        "toolName": "skill",
+        "arguments": {
+          "skill": "teamai"
+        },
+        "model": "gpt-6-luna",
+        "turnId": "0"
+      }
+    },
+    {
+      "type": "tool.execution_complete",
+      "id": "aba9af72-8c2b-41cd-ab72-34b2e2cb6fde",
+      "timestamp": "2026-10-06T04:56:21.188Z",
+      "parentId": "67aa7343-9e0b-4410-bfb1-d38b1452de30",
+      "data": {
+        "toolCallId": "call_tkcrT1WkFOuwfotpUrZ6CIfU",
+        "success": true,
+        "result": {
+          "content": "Skill \"teamai\" loaded successfully. Follow the instructions in the skill context."
+        },
+        "model": "gpt-6-luna",
+        "turnId": "0",
+        "interactionId": "5021f2ba-9097-4ff2-8cf1-faa8126b7884"
+      }
+    },
+    {
+      "type": "assistant.turn_end",
+      "id": "ac57b812-c5a5-4c47-8330-97541677edb9",
+      "timestamp": "2026-10-06T04:56:21.230Z",
+      "parentId": "1275e6db-b693-4033-91b2-faf4200fdff7",
+      "data": {
+        "turnId": "0"
+      }
+    },
+    {
+      "type": "assistant.message",
+      "id": "e634122f-91ae-4e13-b3f7-3ab0161b7f15",
+      "timestamp": "2026-10-06T04:56:25.554Z",
+      "parentId": "3c9c16f7-ff97-4100-8d71-5932d8a4c2b5",
+      "data": {
+        "content": "",
+        "model": "gpt-6-luna",
+        "toolRequests": [
+          {
+            "toolCallId": "call_1BQAPRqjFOHle8O29k5QaeS9",
+            "name": "powershell",
+            "arguments": {
+              "command": "teamai recall \"callers waiting for connections connection pool exhaustion increase pool size triage\" --json",
+              "description": "Recall connection pool troubleshooting guidance"
+            },
+            "type": "function",
+            "intentionSummary": "Recall connection pool troubleshooting guidance",
+            "toolTitle": "Running command"
+          }
+        ],
+        "turnId": "1",
+        "interactionId": "5021f2ba-9097-4ff2-8cf1-faa8126b7884"
+      }
+    },
+    {
+      "type": "tool.execution_start",
+      "id": "f0893360-44b8-4b7a-8622-32a78f92475d",
+      "timestamp": "2026-10-06T04:56:25.649Z",
+      "parentId": "e634122f-91ae-4e13-b3f7-3ab0161b7f15",
+      "data": {
+        "toolCallId": "call_1BQAPRqjFOHle8O29k5QaeS9",
+        "toolName": "powershell",
+        "arguments": {
+          "command": "teamai recall \"callers waiting for connections connection pool exhaustion increase pool size triage\" --json",
+          "description": "Recall connection pool troubleshooting guidance"
+        },
+        "model": "gpt-6-luna",
+        "turnId": "1"
+      }
+    },
+    {
+      "type": "permission.requested",
+      "id": "fcc5a7d1-f8f7-465e-963e-925055f8a746",
+      "timestamp": "2026-10-06T04:56:25.665Z",
+      "parentId": "f0893360-44b8-4b7a-8622-32a78f92475d",
+      "data": {
+        "requestId": "3a8867a7-5bae-450f-9a63-030b9b6cf6b7",
+        "permissionRequest": {
+          "kind": "shell",
+          "toolCallId": "call_1BQAPRqjFOHle8O29k5QaeS9",
+          "fullCommandText": "teamai recall \"callers waiting for connections connection pool exhaustion increase pool size triage\" --json",
+          "shellType": "powershell",
+          "intention": "Recall connection pool troubleshooting guidance",
+          "commands": [
+            {
+              "identifier": "teamai",
+              "readOnly": false,
+              "allowMatchIdentifier": null
+            }
+          ],
+          "commandSegments": [
+            {
+              "identifier": "teamai",
+              "fullCommandText": "teamai recall \"callers waiting for connections connection pool exhaustion increase pool size triage\" --json",
+              "allowMatchIdentifier": null,
+              "staticTokens": [
+                "teamai",
+                "recall",
+                "callers waiting for connections connection pool exhaustion increase pool size triage",
+                "--json"
+              ],
+              "hasUnboundExecutableContent": false,
+              "workingDirectory": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\workspaces\\C01"
+            }
+          ],
+          "possiblePaths": [
+            "recall",
+            "callers waiting for connections connection pool exhaustion increase pool size triage"
+          ],
+          "canOfferSessionApproval": true,
+          "possibleUrls": [],
+          "hasWriteFileRedirection": false
+        },
+        "promptRequest": {
+          "kind": "commands",
+          "fullCommandText": "teamai recall \"callers waiting for connections connection pool exhaustion increase pool size triage\" --json",
+          "intention": "Recall connection pool troubleshooting guidance",
+          "commandIdentifiers": [
+            "teamai"
+          ],
+          "canOfferSessionApproval": true,
+          "toolCallId": "call_1BQAPRqjFOHle8O29k5QaeS9"
+        },
+        "permissionMode": "manual",
+        "agentMode": "interactive"
+      }
+    },
+    {
+      "type": "permission.completed",
+      "id": "29b88848-7d4d-490f-9ebb-d0d9b58bb6c3",
+      "timestamp": "2026-10-06T04:56:32.706Z",
+      "parentId": "fcc5a7d1-f8f7-465e-963e-925055f8a746",
+      "data": {
+        "requestId": "3a8867a7-5bae-450f-9a63-030b9b6cf6b7",
+        "toolCallId": "call_1BQAPRqjFOHle8O29k5QaeS9",
+        "result": {
+          "kind": "approved"
+        }
+      }
+    },
+    {
+      "type": "tool.execution_complete",
+      "id": "6740c4ff-bdb2-492f-a514-061545a92be1",
+      "timestamp": "2026-10-06T04:56:40.532Z",
+      "parentId": "29b88848-7d4d-490f-9ebb-d0d9b58bb6c3",
+      "data": {
+        "toolCallId": "call_1BQAPRqjFOHle8O29k5QaeS9",
+        "success": true,
+        "result": {
+          "content": "{\"schemaVersion\":1,\"query\":\"callers waiting for connections connection pool exhaustion increase pool size triage\",\"scope\":\"workspace\",\"sourceHash\":\"7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096\",\"resourceRevision\":\"7dbb74107cc4c457a5043619090b11a38b74a7a0\",\"learningsRevision\":\"cf573d619178f5b29773ac7c616a231e789eeb75\",\"limit\":5,\"hits\":[{\"id\":\"doc:atlas-payments:contexts/atlas-payments/docs/pool.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"atlas-payments\",\"title\":\"Connection leases and waiting callers\",\"source\":{\"sourceHash\":\"7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096\",\"revision\":\"7dbb74107cc4c457a5043619090b11a38b74a7a0\",\"relativePath\":\"contexts/atlas-payments/docs/pool.md\",\"contentHash\":\"b0c02ef89363e69e9c7b96a39b35a06e61ec3d3b1d7d74371daa1453d5e96b09\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\c\\\\native-baseline-v2\\\\resource\\\\contexts\\\\atlas-payments\\\\docs\\\\pool.md\",\"matchedTerms\":[\"callers\",\"waiting\",\"for\",\"connections\",\"connection\",\"pool\",\"exhaustion\",\"increase\"],\"lineStart\":7,\"lineEnd\":9,\"snippet\":\"When a queue of callers waits for connections, inspect idle leases before changing capacity.\\nClose leaked idle leases and bound the waiting queue; do not increase the pool limit without checking the database connection budget.\\nSaturation and exhaustion describe the same capacity problem in this note.\"},{\"id\":\"doc:atlas-payments:contexts/atlas-payments/docs/drain-observation.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"atlas-payments\",\"title\":\"Drain completion observation\",\"source\":{\"sourceHash\":\"7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096\",\"revision\":\"7dbb74107cc4c457a5043619090b11a38b74a7a0\",\"relativePath\":\"contexts/atlas-payments/docs/drain-observation.md\",\"contentHash\":\"4957fa3b6f2b9e9ff53cf504c7ac5bd76b44d2a7cd169829c15627e3a7f4824a\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\c\\\\native-baseline-v2\\\\resource\\\\contexts\\\\atlas-payments\\\\docs\\\\drain-observation.md\",\"matchedTerms\":[\"waiting\",\"for\"],\"lineStart\":6,\"lineEnd\":8,\"snippet\":\"\\nFor NimbusQueue 2.1 standard mode, completion requires both inFlight == 0 and acked == sent in the same observation window.\\nAn empty waiting queue alone is insufficient.\"},{\"id\":\"doc:atlas-payments:contexts/atlas-payments/docs/drain-long.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"atlas-payments\",\"title\":\"NimbusQueue 2.1 drain reference\",\"source\":{\"sourceHash\":\"7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096\",\"revision\":\"7dbb74107cc4c457a5043619090b11a38b74a7a0\",\"relativePath\":\"contexts/atlas-payments/docs/drain-long.md\",\"contentHash\":\"d564c627c6887092bedc67de3b3adbbfb92e1f4cccab81a29f670e7cc024934d\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\c\\\\native-baseline-v2\\\\resource\\\\contexts\\\\atlas-payments\\\\docs\\\\drain-long.md\",\"matchedTerms\":[\"waiting\",\"for\"],\"lineStart\":22,\"lineEnd\":24,\"snippet\":\"A review should distinguish a cancelled shutdown from an orderly drain.\\nA worker that has no current work can still hold an acknowledgement for an earlier send.\\nAn empty waiting queue alone therefore does not establish completion.\"},{\"id\":\"doc:atlas-payments:contexts/atlas-payments/docs/retry-current.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"atlas-payments\",\"title\":\"NimbusQueue 2.1 retry safety\",\"source\":{\"sourceHash\":\"7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096\",\"revision\":\"7dbb74107cc4c457a5043619090b11a38b74a7a0\",\"relativePath\":\"contexts/atlas-payments/docs/retry-current.md\",\"contentHash\":\"dcd44daddf237eb926d470cd8a7bb3564f04707ad189d6577e32bd4d4df5b3ca\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\c\\\\native-baseline-v2\\\\resource\\\\contexts\\\\atlas-payments\\\\docs\\\\retry-current.md\",\"matchedTerms\":[\"for\"],\"lineStart\":5,\"lineEnd\":7,\"snippet\":\"# NimbusQueue 2.1\\n\\nDiagnostic: `ACME_E_BARRIER_412: retry budget exhausted for tenant=demo-7`.\"},{\"id\":\"doc:atlas-payments:contexts/atlas-payments/docs/retry-legacy.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"atlas-payments\",\"title\":\"Legacy retry error request queue worker lease handbook\",\"source\":{\"sourceHash\":\"7e0deb60b0e77e11643d034e10200e61d1958eb86359e60263677cd50c7ad096\",\"revision\":\"7dbb74107cc4c457a5043619090b11a38b74a7a0\",\"relativePath\":\"contexts/atlas-payments/docs/retry-legacy.md\",\"contentHash\":\"f4d992e7cf9a00fea4e55a3563e204e34d407248c99d9ab468e6fec3255f418a\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\c\\\\native-baseline-v2\\\\resource\\\\contexts\\\\atlas-payments\\\\docs\\\\retry-legacy.md\",\"matchedTerms\":[\"for\"],\"lineStart\":5,\"lineEnd\":7,\"snippet\":\"# Legacy NimbusQueue 1.6\\n\\nDiagnostic: `ACME_E_BARRIER_412: retry budget exhausted for tenant=demo-7`.\"}]}\n<shellId: 0 completed with exit code 0>"
+        },
+        "model": "gpt-6-luna",
+        "turnId": "1",
+        "interactionId": "5021f2ba-9097-4ff2-8cf1-faa8126b7884"
+      }
+    },
+    {
+      "type": "assistant.turn_end",
+      "id": "378ca96c-a478-44d9-835d-51ddf20c95d2",
+      "timestamp": "2026-10-06T04:56:40.554Z",
+      "parentId": "6740c4ff-bdb2-492f-a514-061545a92be1",
+      "data": {
+        "turnId": "1"
+      }
+    },
+    {
+      "type": "assistant.message",
+      "id": "83b7ed59-2753-4867-ba4f-2d5a07ac3796",
+      "timestamp": "2026-10-06T04:56:42.431Z",
+      "parentId": "9aedc437-1fe7-499a-a449-6856291fdcf5",
+      "data": {
+        "content": "",
+        "model": "gpt-6-luna",
+        "toolRequests": [
+          {
+            "toolCallId": "call_3S7WZD7SWj7mLH0MpSwH1nOp",
+            "name": "view",
+            "arguments": {
+              "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\pool.md"
+            },
+            "type": "function",
+            "intentionSummary": "view the file at F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\pool.md.",
+            "toolTitle": "Viewing file"
+          }
+        ],
+        "turnId": "2",
+        "interactionId": "5021f2ba-9097-4ff2-8cf1-faa8126b7884"
+      }
+    },
+    {
+      "type": "tool.execution_start",
+      "id": "568768b0-789d-4ef8-b2d0-3a47a3624363",
+      "timestamp": "2026-10-06T04:56:42.433Z",
+      "parentId": "83b7ed59-2753-4867-ba4f-2d5a07ac3796",
+      "data": {
+        "toolCallId": "call_3S7WZD7SWj7mLH0MpSwH1nOp",
+        "toolName": "view",
+        "arguments": {
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\pool.md"
+        },
+        "model": "gpt-6-luna",
+        "turnId": "2"
+      }
+    },
+    {
+      "type": "permission.requested",
+      "id": "2a4ca0d1-d717-47a6-844c-6ee56d1aa859",
+      "timestamp": "2026-10-06T04:56:42.438Z",
+      "parentId": "568768b0-789d-4ef8-b2d0-3a47a3624363",
+      "data": {
+        "requestId": "542011ae-fd79-4a2a-9ab0-498694ac2926",
+        "permissionRequest": {
+          "kind": "read",
+          "toolCallId": "call_3S7WZD7SWj7mLH0MpSwH1nOp",
+          "intention": "Read file: F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\pool.md",
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\pool.md"
+        },
+        "promptRequest": {
+          "kind": "path",
+          "accessKind": "read",
+          "paths": [
+            "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\pool.md"
+          ],
+          "readOnlyDirectories": [
+            "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs"
+          ],
+          "toolCallId": "call_3S7WZD7SWj7mLH0MpSwH1nOp"
+        },
+        "permissionMode": "manual",
+        "agentMode": "interactive"
+      }
+    },
+    {
+      "type": "permission.completed",
+      "id": "8d364ee8-553d-4d53-a4d5-d82b5c2de5c4",
+      "timestamp": "2026-10-06T04:57:07.686Z",
+      "parentId": "2a4ca0d1-d717-47a6-844c-6ee56d1aa859",
+      "data": {
+        "requestId": "542011ae-fd79-4a2a-9ab0-498694ac2926",
+        "toolCallId": "call_3S7WZD7SWj7mLH0MpSwH1nOp",
+        "result": {
+          "kind": "approved"
+        }
+      }
+    },
+    {
+      "type": "tool.execution_complete",
+      "id": "7edb0797-e0bc-47c4-a049-1641c611292e",
+      "timestamp": "2026-10-06T04:57:07.698Z",
+      "parentId": "8d364ee8-553d-4d53-a4d5-d82b5c2de5c4",
+      "data": {
+        "toolCallId": "call_3S7WZD7SWj7mLH0MpSwH1nOp",
+        "success": true,
+        "result": {
+          "content": "---\ntitle: Connection leases and waiting callers\ntags: [connections, capacity]\n---\n# Pool exhaustion\n\nWhen a queue of callers waits for connections, inspect idle leases before changing capacity.\nClose leaked idle leases and bound the waiting queue; do not increase the pool limit without checking the database connection budget.\nSaturation and exhaustion describe the same capacity problem in this note.\n连接池耗尽：先排查空闲租约泄漏，再约束等待队列。\n",
+          "detailedContent": "\ndiff --git a/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/c/native-baseline-v2/resource/contexts/atlas-payments/docs/pool.md b/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/c/native-baseline-v2/resource/contexts/atlas-payments/docs/pool.md\nindex 0000000..0000000 100644\n--- a/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/c/native-baseline-v2/resource/contexts/atlas-payments/docs/pool.md\n+++ b/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/c/native-baseline-v2/resource/contexts/atlas-payments/docs/pool.md\n@@ -1,11 +1,11 @@\n ---\n title: Connection leases and waiting callers\n tags: [connections, capacity]\n ---\n # Pool exhaustion\n \n When a queue of callers waits for connections, inspect idle leases before changing capacity.\n Close leaked idle leases and bound the waiting queue; do not increase the pool limit without checking the database connection budget.\n Saturation and exhaustion describe the same capacity problem in this note.\n 连接池耗尽：先排查空闲租约泄漏，再约束等待队列。\n \n"
+        },
+        "model": "gpt-6-luna",
+        "turnId": "2",
+        "interactionId": "5021f2ba-9097-4ff2-8cf1-faa8126b7884"
+      }
+    },
+    {
+      "type": "assistant.turn_end",
+      "id": "549105b4-9773-459c-a8ec-0475d1d3888b",
+      "timestamp": "2026-10-06T04:57:07.755Z",
+      "parentId": "7edb0797-e0bc-47c4-a049-1641c611292e",
+      "data": {
+        "turnId": "2"
+      }
+    },
+    {
+      "type": "assistant.message",
+      "id": "d6bcbcad-acba-4221-91f7-b73b738551ba",
+      "timestamp": "2026-10-06T04:57:19.601Z",
+      "parentId": "052fdaaa-c34a-4669-8690-d08baa8a5ca2",
+      "data": {
+        "content": "调用方排队**可能**是连接池饱和/耗尽，但仅凭排队现象不能确认。先检查空闲连接租约是否泄漏，关闭泄漏的租约，并限制等待队列；不要先盲目调大池子。只有确认数据库连接预算还有余量后，才考虑提高池上限。\n\n依据是 Team AI Recall 的 **workspace** 查询（`callers waiting for connections connection pool exhaustion increase pool size triage`，匹配词：`callers`、`waiting`、`connections`、`connection`、`pool`、`exhaustion`、`increase`）：来源 `doc:atlas-payments:contexts/atlas-payments/docs/pool.md`，路径 `F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\resource\\contexts\\atlas-payments\\docs\\pool.md`；Logical Project 为 `atlas-payments`，状态 `published`，revision `7dbb74107cc4c457a5043619090b11a38b74a7a0`，SHA-256 contentHash `b0c02ef89363e69e9c7b96a39b35a06e61ec3d3b1d7d74371daa1453d5e96b09`。原文“inspect idle leases before changing capacity”“Close leaked idle leases and bound the waiting queue”“do not increase the pool limit without checking the database connection budget”支持以上处置；但没有你的连接池和数据库实时指标，无法据此确认当前是否已耗尽。",
+        "model": "gpt-6-luna",
+        "toolRequests": [],
+        "turnId": "3",
+        "interactionId": "5021f2ba-9097-4ff2-8cf1-faa8126b7884"
+      }
+    },
+    {
+      "type": "assistant.turn_end",
+      "id": "73305a71-639e-4afd-b5e8-70cbddc42ada",
+      "timestamp": "2026-10-06T04:57:19.657Z",
+      "parentId": "d6bcbcad-acba-4221-91f7-b73b738551ba",
+      "data": {
+        "turnId": "3"
+      }
+    },
+    {
+      "type": "session.shutdown",
+      "id": "f9500947-675b-4f45-bed9-021ba6fe7ef7",
+      "timestamp": "2026-10-06T04:57:33.939Z",
+      "parentId": "4a9b03a1-7aae-429a-8130-35c96f4a5361",
+      "data": {
+        "shutdownType": "routine",
+        "totalPremiumRequests": 1,
+        "totalNanoAiu": 196589500,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 12
+          },
+          "cache_read": {
+            "tokenCount": 30682
+          },
+          "cache_write": {
+            "tokenCount": 8343
+          },
+          "output": {
+            "tokenCount": 1230
+          }
+        },
+        "totalApiDurationMs": 19306,
+        "codeChanges": {
+          "linesAdded": 0,
+          "linesRemoved": 0,
+          "filesModified": []
+        },
+        "modelMetrics": {
+          "gpt-6-luna": {
+            "requests": {
+              "count": 4,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 39037,
+              "outputTokens": 1230,
+              "cacheReadTokens": 30682,
+              "cacheWriteTokens": 8343,
+              "reasoningTokens": 736
+            },
+            "totalNanoAiu": 196589500,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 12
+              },
+              "cache_read": {
+                "tokenCount": 30682
+              },
+              "cache_write": {
+                "tokenCount": 8343
+              },
+              "output": {
+                "tokenCount": 1230
+              }
+            }
+          }
+        },
+        "agentMetrics": {
+          "main": {
+            "totalApiDurationMs": 19306,
+            "totalNanoAiu": 196589500,
+            "modelMetrics": {
+              "gpt-6-luna": {
+                "requests": {
+                  "count": 4,
+                  "cost": 1
+                },
+                "usage": {
+                  "inputTokens": 39037,
+                  "outputTokens": 1230,
+                  "cacheReadTokens": 30682,
+                  "cacheWriteTokens": 8343,
+                  "reasoningTokens": 736
+                },
+                "totalNanoAiu": 196589500,
+                "tokenDetails": {
+                  "input": {
+                    "tokenCount": 12
+                  },
+                  "cache_read": {
+                    "tokenCount": 30682
+                  },
+                  "cache_write": {
+                    "tokenCount": 8343
+                  },
+                  "output": {
+                    "tokenCount": 1230
+                  }
+                }
+              }
+            }
+          }
+        },
+        "currentModel": "gpt-6-luna"
+      }
+    }
+  ]
+}

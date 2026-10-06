@@ -1,0 +1,23 @@
+{
+  "case": "C01",
+  "point": "before",
+  "scope": "Only the two exact ordinary Startup paths for the actual frozen case HOME; no folder exemption or account/config/session identity reads",
+  "files": [
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+      "status": "PRESENT",
+      "bytes": 68400,
+      "sha256": "625dd07bf1237d6d4b0938c8494e4063ba10166f919876165b643134e7098285",
+      "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\C01-startup-before-1.bin",
+      "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\native-baseline-v2\\home\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive",
+      "status": "PRESENT",
+      "bytes": 64,
+      "sha256": "a7de5177c68a64bd48b36d49e2853799f4ebcfa8e4761f7cc472f333dc5f65cf",
+      "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\C01-startup-before-2.bin",
+      "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+    }
+  ]
+}

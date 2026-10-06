@@ -1,0 +1,8 @@
+{
+  "phase": "FROZEN_NATIVE_OFFLINE_READBACK",
+  "started": "2026-10-06T05:19:53.5084768+00:00",
+  "finished": "2026-10-06T05:19:53.7431371+00:00",
+  "exitCode": 0,
+  "modelCalls": 0,
+  "recipe": "readback-native-observations.mjs unchanged v4"
+}

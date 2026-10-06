@@ -1,0 +1,22 @@
+{
+  "case": "C06-damaged",
+  "point": "after",
+  "scope": "Only the two exact ordinary Startup paths for the actual frozen case HOME; no folder exemption or account/config/session identity reads",
+  "files": [
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\final-comparison-v4\\controls\\damaged\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+      "status": "PRESENT",
+      "bytes": 71368,
+      "sha256": "3916ac3c1455ad41e0f880cf6da93aa19afaaa703e829fef9c7933df2fd0153d",
+      "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\c-quality\\final-comparison-v4-ready\\native-v1\\C06-damaged-startup-after-1.bin",
+      "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\c\\final-comparison-v4\\controls\\damaged\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive",
+      "status": "ABSENT",
+      "bytes": null,
+      "sha256": null,
+      "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+    }
+  ]
+}
