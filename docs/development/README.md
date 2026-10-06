@@ -9,3 +9,4 @@ This directory keeps stable design decisions and lessons that are expensive to r
 - [`recall-quality/README.md`](recall-quality/README.md) — fixed Recall fixtures and actual original CLI/Agent quality measurements, preserving observed failures and unverified comparisons.
 - [`recall-cli-validation/README.md`](recall-cli-validation/README.md) — installed compiled CLI observations for help, required literals, BM25 ranking and original snippets.
 - [`recall-agent-validation/README.md`](recall-agent-validation/README.md) — finite native Agent observations and retained diagnostic, citation and route limitations.
+- [`recall-validation.md`](recall-validation.md) — runtime package identity, reused deterministic checks and measured model quality boundaries.
