@@ -1,0 +1,35 @@
+{
+  "result": "PASS_SCOPED_STOP_SOURCE_ONLY",
+  "readyFile": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-stop-correction-1-source-ready.json",
+  "readySha256": "a2504b11a9c4e6a28e59af63632f480b2391ac317acf1b68ef51b88e36a9a9c5",
+  "base": "8000bae22cf6a3490578e25e1af6b618e73267d5",
+  "target": "4977e40ac7e6d327f63710302bac137177f70193",
+  "tree": "ad24e49fe5c958a22bbaaa111c5193de56c4ab86",
+  "verifiedUniqueArtifacts": 16,
+  "changedFiles": [
+    "agents/teamai-recall.agent.md",
+    "docs/development/builtin-recall-agent.md"
+  ],
+  "sourceIdentities": [
+    {
+      "file": "agents/teamai-recall.agent.md",
+      "bytes": 9279,
+      "sha256": "03562f41201196a8272e3fbbd6997f989ba6eceb34bbae99276fe1e4359a0452",
+      "equalsAfterSnapshot": true
+    },
+    {
+      "file": "docs/development/builtin-recall-agent.md",
+      "bytes": 13038,
+      "sha256": "d243eb4e86d56b49a8067184e5666504b6ee6cf2bb558ad5dbcbe09855a6fc88",
+      "equalsAfterSnapshot": true
+    }
+  ],
+  "frontmatterAndOtherLinesUnchanged": true,
+  "sharedDelta": "NONE",
+  "stopClarificationPass": 1,
+  "runtimeBehavior": "NOT_RUN_FOR_NEW_AGENT",
+  "originalChineseStopMajor": "PRESERVED_AT_8000",
+  "integratedBy": "Root normal fast-forward; no reset",
+  "judgment": "One generic existing-step clarification distinguishes missing source knowledge from unknown present user/runtime facts; no quota, case words, extra framework or tests. One stochastic failure is not proof of an inevitable source defect.",
+  "recordedAtUtc": "2026-10-06T02:03:04.920Z"
+}

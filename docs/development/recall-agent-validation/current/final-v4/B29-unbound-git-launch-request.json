@@ -1,0 +1,29 @@
+{
+  "case": "B29-unbound-git",
+  "sessionId": "5cdf78fb-403a-4da5-80fb-9789a5647c0a",
+  "executable": "D:/soft/nodejs/node_global/copilot.ps1",
+  "args": [
+    "--agent",
+    "teamai-recall",
+    "--session-id",
+    "5cdf78fb-403a-4da5-80fb-9789a5647c0a",
+    "--log-dir",
+    "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-unbound-git-native-logs",
+    "--usage-output-file",
+    "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-unbound-git-usage.json"
+  ],
+  "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\workspaces\\unbound",
+  "launcherPid": 32180,
+  "startedAtUtc": "2026-10-06T02:54:42.5054925Z",
+  "nativeRoot": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.copilot",
+  "businessHome": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home",
+  "candidateRevision": "4977e40ac7e6d327f63710302bac137177f70193",
+  "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+  "agentSha256": "03562f41201196a8272e3fbbd6997f989ba6eceb34bbae99276fe1e4359a0452",
+  "modelOverride": null,
+  "questionHeldForActualSelection": true,
+  "permissionFlags": "DEFAULT",
+  "taskMessages": "Only frozen case messages after actual selection; no oracle/rank/path list",
+  "parentChildRoute": "Same delivered teamai-recall with unset/inherited model is allowed",
+  "frozenGuard": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\29-native-execution-v4\\..\\29-native-preparation-v5"
+}

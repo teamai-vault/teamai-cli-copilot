@@ -1,0 +1,79 @@
+{
+  "result": "REJECT_ACTUAL_B29_COVERAGE_ZH_STOP_AFTER_SUFFICIENT_READ_EVIDENCE",
+  "severity": "Major",
+  "affectedAC": "#29 AC10; sufficient-evidence stopping rule",
+  "sourceRevision": "8000bae22cf6a3490578e25e1af6b618e73267d5",
+  "agentSha256": "7e882003883ea008c30b9c567f77578e318077162ebbba090bcdf901fa27c48f",
+  "sessionId": "e4c964e0-d784-4139-9f16-e35e72a228cd",
+  "normalConsumerExit": 0,
+  "originalConsumerAndAnswersPreserved": true,
+  "rawArtifacts": [
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-zh-observable-events.jsonl",
+      "bytes": 134171,
+      "sha256": "3663a926cd89a45dfed7cfc3400d1162f18b05a221059ae7fa00304113732132"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-zh-queries.json",
+      "bytes": 91716,
+      "sha256": "678ab52497d38c84fbb63d3803082366631334d48fff56a9bc403306d342df5b"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-zh-reads.json",
+      "bytes": 14547,
+      "sha256": "1e0f72ea587a12502358c94805115df0f4a10fc9e316b45a9efb921f0d52e31b"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-zh-answer.md",
+      "bytes": 7231,
+      "sha256": "d97fea7ddbc46cb15af4c6f78b1bfd9bd767d48e2114e81dbf0a0deaec597e04"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-zh-metrics.json",
+      "bytes": 1389,
+      "sha256": "6a4c61d130cc50ddf237c715318da956b0b0d90f9d1f478c70e4a4a62f44ed62"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-zh-evidence.json",
+      "bytes": 13360,
+      "sha256": "3cabf129d62fdb662cfe67199a8cfc3f28d7b8232a0c54dc67d5911d32d3b069"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-zh-protection-readback.json",
+      "bytes": 3338,
+      "sha256": "def6c819f23ee39a034a7d489168e3cc47df772bc55ea6e7c23e7ed1a705dd9a"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-zh-launch-result.json",
+      "bytes": 318,
+      "sha256": "a0e7dfcfe476350ad7586ba97cbc24f4847c9644b0b3bcc73e4243d9cb1dffc4"
+    }
+  ],
+  "rejectedQuery": {
+    "eventId": "b8007168-b9e5-4048-8f28-8011087f2d86",
+    "timestamp": "2026-10-06T01:19:30.826Z",
+    "command": "teamai recall \"generation lease RetryEnvelope E4 previous sender stopped 250 ms\" --scope workspace --project payments-api --limit 10 --json",
+    "resultEventId": "6baf2529-52aa-4a62-a058-f26f3e9bda53",
+    "addedSourceIdentities": 0
+  },
+  "relevantOriginalsAlreadyRead": [
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\40-replay-guard.md",
+      "completedAt": "2026-10-06T01:18:43.985Z",
+      "nativeBodySha256": "0e2751160489cddc7dacb81eb626a71581c0e663ed5c936cb7adf857a001ab25"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\70-epoch-policy.md",
+      "completedAt": "2026-10-06T01:18:53.519Z",
+      "nativeBodySha256": "d1c3e9d39ca87b5b9192d768ba19301fcd377875fd18c9ca71199295c4001fc1"
+    }
+  ],
+  "judgment": "All required retry conditions and the complementary marker rule were already read. Q5 repeats known rule terms with no visible correctable knowledge gap. Q4 may be grounded by the newly read marker clue; no hard query quota is imposed.",
+  "minorParentWording": "Adds 一次 to a rule that gives no retry-count budget; preserve actual original wording",
+  "provenOtherFacts": "Complete diagnostic and core supported conditions/source sections are correct; no LeaseMux/Z8 borrowing. This does not accept other ACs or the whole case.",
+  "independentReview": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\review\\b29-coverage-zh-stop-static-actual-review.md",
+  "action": "Already active English coverage may end normally and be recorded/protected. Then B seals immutable two-case checkpoint and stops before remaining eight. Root will assign the single existing B owner a limited generic stopping clarification and fresh actual retest after handoff; no fixture/oracle edits or output rewriting.",
+  "correctionAssignedYet": false,
+  "humanActionNeeded": false,
+  "recordedAtUtc": "2026-10-06T01:29:50.739Z"
+}

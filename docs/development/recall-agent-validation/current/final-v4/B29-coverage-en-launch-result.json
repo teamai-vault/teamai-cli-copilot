@@ -1,0 +1,8 @@
+{
+  "case": "B29-coverage-en",
+  "sessionId": "7cff9c8a-e87c-432a-b252-d22e51cbf0b1",
+  "launcherPid": 16236,
+  "exitCode": 0,
+  "endedAtUtc": "2026-10-06T02:22:44.5497918Z",
+  "meaning": "Normal process end only; record actual events/answer separately. Restore real read-gap source before post protection."
+}

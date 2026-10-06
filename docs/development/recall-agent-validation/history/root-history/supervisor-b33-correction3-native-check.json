@@ -1,0 +1,26 @@
+{
+  "result": "PASS_FROZEN_ACTUAL_ONE_CASE_EVIDENCE",
+  "checkedAtUtc": "2026-10-05T20:33:09.790Z",
+  "sourceRevision": "b2a81308e779b8b6941aae845c30d889c58536eb",
+  "rawArtifacts": 58,
+  "identitiesChecked": 174,
+  "sessionId": "7847cd49-0a05-4a7a-911f-3d9761a8c572",
+  "model": "gpt-6-luna",
+  "queries": 1,
+  "fullReads": 1,
+  "normalExit": 0,
+  "completeDiagnosticInFinal": true,
+  "originalProtectionDeltas": [
+    {
+      "category": "business",
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-preparation-v2\\workspaces\\bound-payments-api\\.teamai\\context\\b33-c3-ignored-business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+      "before": "ABSENT",
+      "after": "2b934b897eb7b05a0c399d06863781108a0b985b6c62f0bc0010fab91efc9b3c"
+    }
+  ],
+  "currentSinceFinalDeltas": 0,
+  "priorHistoricalArtifactsUnchanged": 109,
+  "behaviorDisposition": "ROOT_MANUAL_REVIEW_PENDING",
+  "ticket29": "LOCKED",
+  "limitation": "This is one affected case on 1.0.92. Earlier actual cases stay at their original package/version and retain all FAIL/REJECT and Minor findings."
+}

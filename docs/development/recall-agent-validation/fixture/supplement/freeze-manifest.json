@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "status": "FROZEN_OFFLINE_PREPARATION_ONLY",
+  "frozenAtUtc": "2026-10-05T20:50:43.417Z",
+  "clientDate": "2026-10-06",
+  "owner": "B",
+  "issue": 29,
+  "candidate": null,
+  "baselineForImplementation": "b2a81308e779b8b6941aae845c30d889c58536eb",
+  "candidateOutputRead": false,
+  "consumerNativeModelSetupRun": false,
+  "corpusRoot": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\b-agent-29-supplement-20261006-v1\\corpus",
+  "corpus": [
+    {
+      "relativePath": "contexts/payments-api/docs/31-intake-display.md",
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\b-agent-29-supplement-20261006-v1\\corpus\\contexts\\payments-api\\docs\\31-intake-display.md",
+      "bytes": 900,
+      "sha256": "8e1457c2bda0bd7f317e956c27975ba37e0cb26386b0a77d51083c973de333ea",
+      "textLines": 18,
+      "anchors": [
+        {
+          "line": 8,
+          "text": "HANDOFF_BUDGET_WAIT_64: IntakeSlot cannot resume after account rollover."
+        },
+        {
+          "line": 18,
+          "text": "The panel text defines no eligibility gate, delay or clearance proof for the actual handoff. Matching a displayed diagnostic is insufficient to decide whether the operation may proceed. Use the original handling policy and its referenced evidence instead."
+        }
+      ]
+    },
+    {
+      "relativePath": "contexts/payments-api/docs/63-intake-handoff.md",
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\b-agent-29-supplement-20261006-v1\\corpus\\contexts\\payments-api\\docs\\63-intake-handoff.md",
+      "bytes": 823,
+      "sha256": "fe9b9fd2e6d6fc27230482718a546bac406883d4551040a74c8e4ac71ce88a7c",
+      "textLines": 13,
+      "anchors": [
+        {
+          "line": 7,
+          "text": "HANDOFF_BUDGET_WAIT_64: IntakeSlot cannot resume after account rollover."
+        },
+        {
+          "line": 9,
+          "text": "For intake mode V6, after the previous holder has stopped, the local wait is 9 ms. If either fact is unconfirmed or false, this note defines no alternative wait and does not establish eligibility."
+        },
+        {
+          "line": 11,
+          "text": "Those local facts and the delay do not complete the evidence. This policy additionally requires gate C2 in the BudgetLatch clearance certificate to be reconciled; the certificate's definition is in contexts/payments-api/docs/82-budget-clearance.md. That memo complements this policy for this handoff."
+        },
+        {
+          "line": 13,
+          "text": "If C2 is not established as reconciled, leave eligibility unresolved. This note describes conditions; it does not authorize executing the operation."
+        }
+      ]
+    },
+    {
+      "relativePath": "contexts/payments-api/docs/82-budget-clearance.md",
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\b-agent-29-supplement-20261006-v1\\corpus\\contexts\\payments-api\\docs\\82-budget-clearance.md",
+      "bytes": 272,
+      "sha256": "bd7f009152ac7207579fca773190c7d711d30ddf4ba446c06e8e3e3ddf3cf9d4",
+      "textLines": 9,
+      "anchors": [
+        {
+          "line": 7,
+          "text": "Gate C2 is reconciled exactly when receiver seal K5 is certified."
+        },
+        {
+          "line": 8,
+          "text": "Without a certified K5, C2 remains unresolved."
+        },
+        {
+          "line": 9,
+          "text": "Neither duration nor quietness certifies K5."
+        }
+      ]
+    }
+  ],
+  "caseCount": 1,
+  "artifacts": [
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\b-agent-29-supplement-20261006-v1\\corpus\\contexts\\payments-api\\docs\\31-intake-display.md",
+      "bytes": 900,
+      "sha256": "8e1457c2bda0bd7f317e956c27975ba37e0cb26386b0a77d51083c973de333ea"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\b-agent-29-supplement-20261006-v1\\corpus\\contexts\\payments-api\\docs\\63-intake-handoff.md",
+      "bytes": 823,
+      "sha256": "fe9b9fd2e6d6fc27230482718a546bac406883d4551040a74c8e4ac71ce88a7c"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\b-agent-29-supplement-20261006-v1\\corpus\\contexts\\payments-api\\docs\\82-budget-clearance.md",
+      "bytes": 272,
+      "sha256": "bd7f009152ac7207579fca773190c7d711d30ddf4ba446c06e8e3e3ddf3cf9d4"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\b-agent-29-supplement-20261006-v1\\tasks.json",
+      "bytes": 807,
+      "sha256": "0597bf1c8397dee40ea036237eaf750a0fe3ab3ac2c48d9952d71510c5bc0226"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\b-agent-29-supplement-20261006-v1\\oracle.json",
+      "bytes": 2972,
+      "sha256": "75bab437172c497b865f3d12922f3df4f3b86291788b40e8d473c2d941b2915c"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\b-agent-29-supplement-20261006-v1\\preparation.md",
+      "bytes": 2492,
+      "sha256": "d0fb4fa7955db5a6d64812f649c3deb6f7e36b56f604f979787202cbc2beb1da"
+    }
+  ],
+  "artifactCount": 6,
+  "originalManifest": {
+    "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\b-agent-preparation-20261005\\fixture-manifest.json",
+    "bytes": 5936,
+    "sha256": "6daa59a5abf1e1a5e7bfd36b3131e94af4b24002d4142238769d37492e04f4fd"
+  },
+  "originalCorpusCount": 9,
+  "originalTasks": {
+    "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\b-agent-preparation-20261005\\tasks.json",
+    "bytes": 5344,
+    "sha256": "464a8f7321ae56e49e443121d82631442864d50f06134c2f38d29dd8d7933722"
+  },
+  "fixedRanking": null,
+  "nativeBehavior": "NOT_RUN",
+  "measurement": "Requires actual later source missing from first result, observed weak/late selection, and actual identical source tuples across queries; no quota or rank-derived oracle",
+  "rootScheduling": "Pending root immutable candidate, new isolated materialization/delivery roots and actual native slot"
+}

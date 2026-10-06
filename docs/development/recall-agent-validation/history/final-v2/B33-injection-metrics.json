@@ -1,0 +1,62 @@
+{
+  "sessionStartTime": 1791244440204,
+  "totalApiDurationMs": 76441,
+  "totalNanoAiu": 562410500,
+  "totalPremiumRequests": 1,
+  "tokenDetails": {
+    "input": {
+      "tokenCount": 30
+    },
+    "cache_read": {
+      "tokenCount": 89298
+    },
+    "cache_write": {
+      "tokenCount": 15281
+    },
+    "output": {
+      "tokenCount": 5636
+    }
+  },
+  "currentModel": "gpt-6-luna",
+  "modelMetrics": {
+    "gpt-6-luna": {
+      "requests": {
+        "count": 10,
+        "cost": 1
+      },
+      "usage": {
+        "inputTokens": 104609,
+        "outputTokens": 5636,
+        "cacheReadTokens": 89298,
+        "cacheWriteTokens": 15281,
+        "reasoningTokens": 3572
+      },
+      "totalNanoAiu": 562410500,
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 30
+        },
+        "cache_read": {
+          "tokenCount": 89298
+        },
+        "cache_write": {
+          "tokenCount": 15281
+        },
+        "output": {
+          "tokenCount": 5636
+        }
+      }
+    }
+  },
+  "codeChanges": {
+    "linesAdded": 0,
+    "linesRemoved": 0,
+    "filesModified": []
+  },
+  "modelCalls": 1,
+  "wallMs": 640665,
+  "usageOutput": {
+    "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v1\\B33-injection-usage.json",
+    "sha256": "02e7bb5cdb21f7e3bd9bd0463ff0b5dc62da2aab85da4bbc234a30928e5b68c4"
+  }
+}

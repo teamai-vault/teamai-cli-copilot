@@ -1,0 +1,892 @@
+{
+  "kind": "Immutable observation of original remaining eight E16 cases; ROOT_PENDING",
+  "base": "8000bae22cf6a3490578e25e1af6b618e73267d5",
+  "target": "4977e40ac7e6d327f63710302bac137177f70193",
+  "tree": "ad24e49fe5c958a22bbaaa111c5193de56c4ab86",
+  "branch": "task/recall-29-b",
+  "worktree": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/worktrees/b-agent-29",
+  "slot": "E16-B29-STOP-NATIVE-V3",
+  "plan": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/slots/E16-B29-stop-native-v3-plan.json",
+  "planSha256": "106b48a15c2912ad6e245fa2f7d8995c440c489a36f54cfeec16618c93468da4",
+  "candidateManifestSha256": "56f6935e691e87a0d48ede91670e12c22c41004b1fd04323606d14645f8c854e",
+  "tarballSha256": "b1d9bf3a73525dcc289e87e8afd7a35180d98fe7a1259db7bb7607eaf6389656",
+  "agentSha256": "03562f41201196a8272e3fbbd6997f989ba6eceb34bbae99276fe1e4359a0452",
+  "cases": [
+    {
+      "caseId": "B29-context",
+      "sessionId": "4fc4d36d-4fc6-47dd-bc2b-335c96f53a45",
+      "frozenMessages": [
+        "刚才的现场信息是：Logical Project payments-api；组件 RetryEnvelope；诊断 REPLAY_GUARD_BUSY: RetryEnvelope cannot acquire generation lease after reconnect.；state E4 已确认；previous sender 已停止。请记住这些信息，不补造现场事实。",
+        "刚才那个错误，它的等待条件是什么？请只查允许范围内的资料，用中文说明并给出准确原文来源。"
+      ],
+      "frozenQuestionExactMatch": true,
+      "firstCaller": {
+        "id": "382faa90-8e40-4319-8f4e-a11168acb53a",
+        "type": "user.message",
+        "timestamp": "2026-10-06T02:34:32.171Z"
+      },
+      "lastPrimarySelectionBeforeFirstCaller": {
+        "id": "953a1019-d8c8-46c8-acc8-e82bfbbb4015",
+        "type": "subagent.deselected",
+        "timestamp": "2026-10-06T02:33:36.900Z"
+      },
+      "preCallerUi": {
+        "caseId": "B29-context"
+      },
+      "completion": {
+        "caseId": "B29-context",
+        "normalExit": 0,
+        "recordExit": 0,
+        "protectExit": 0,
+        "newSession": true
+      },
+      "capturedModel": "gpt-6-luna",
+      "operatorModelOverride": false,
+      "parentMessages": 2,
+      "childMessages": 1,
+      "answers": 2,
+      "nativeEvents": {
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.copilot\\session-state\\4fc4d36d-4fc6-47dd-bc2b-335c96f53a45\\events.jsonl",
+        "bytes": 846890,
+        "sha256": "71388782977565b1959c639787e1bd44a6b078a4b38cd07e4fe4651ed9a7ee4e",
+        "preservedInOriginalSession": true
+      },
+      "childRoutes": [
+        {
+          "type": "subagent.started",
+          "data": {
+            "toolCallId": "call_ZkPnOspsDEbytgMdReMkpUDL",
+            "agentName": "teamai-recall",
+            "agentDisplayName": "teamai-recall",
+            "agentDescription": "Recall scoped TeamAI knowledge and read original evidence, then summarize with exact provenance in the user's language.",
+            "model": "gpt-6-luna",
+            "taskModelSource": "unset",
+            "modelSelectionSource": "session_inheritance",
+            "resumable": false,
+            "agentType": "teamai-recall",
+            "executionMode": "sync"
+          },
+          "agentId": "77c0abde-98f2-431d-98c8-aa76140a61c4",
+          "id": "f9b4726c-337d-4efc-8fe4-0ea1d60e50cd",
+          "timestamp": "2026-10-06T02:37:34.053Z",
+          "parentId": "6ff88f39-dad7-429c-b902-818c94721c76"
+        },
+        {
+          "type": "subagent.configured",
+          "data": {
+            "model": "gpt-6-luna",
+            "multiTurn": true
+          },
+          "agentId": "77c0abde-98f2-431d-98c8-aa76140a61c4",
+          "id": "8513b32a-4120-45f4-ae71-a4f0a103aa81",
+          "timestamp": "2026-10-06T02:37:34.598Z",
+          "parentId": "f9b4726c-337d-4efc-8fe4-0ea1d60e50cd"
+        },
+        {
+          "type": "subagent.selected",
+          "data": {
+            "agentName": "teamai-recall",
+            "agentDisplayName": "teamai-recall",
+            "tools": [
+              "read",
+              "execute"
+            ]
+          },
+          "agentId": "77c0abde-98f2-431d-98c8-aa76140a61c4",
+          "id": "fc6f884b-f9c9-452e-a661-d1d8d303a4a1",
+          "timestamp": "2026-10-06T02:37:34.598Z",
+          "parentId": "8513b32a-4120-45f4-ae71-a4f0a103aa81"
+        },
+        {
+          "type": "subagent.completed",
+          "data": {
+            "toolCallId": "call_ZkPnOspsDEbytgMdReMkpUDL",
+            "agentName": "teamai-recall",
+            "agentDisplayName": "teamai-recall",
+            "model": "gpt-6-luna",
+            "firstDispatchedModel": "gpt-6-luna",
+            "modelSelectionSource": "session_inheritance",
+            "totalToolCalls": 9,
+            "totalTokens": 60239,
+            "durationMs": 337497
+          },
+          "agentId": "77c0abde-98f2-431d-98c8-aa76140a61c4",
+          "id": "a2d97f7e-eaf9-4a79-9d86-534b2f29b106",
+          "timestamp": "2026-10-06T02:43:11.757Z",
+          "parentId": "5e13d97c-8d0e-44f8-8c34-76032ff109a0"
+        },
+        {
+          "type": "subagent.completed",
+          "data": {
+            "toolCallId": "call_ZkPnOspsDEbytgMdReMkpUDL",
+            "agentName": "teamai-recall",
+            "agentDisplayName": "teamai-recall",
+            "cancelled": true,
+            "model": "gpt-6-luna",
+            "firstDispatchedModel": "gpt-6-luna",
+            "modelSelectionSource": "session_inheritance",
+            "totalToolCalls": 9,
+            "totalTokens": 60239,
+            "durationMs": 337497
+          },
+          "agentId": "77c0abde-98f2-431d-98c8-aa76140a61c4",
+          "id": "9e95cf4d-52af-4414-97f0-ffc39fec28f9",
+          "timestamp": "2026-10-06T02:44:09.028Z",
+          "parentId": "a231ad13-fd68-4cca-b1c5-5afd6dca2b37"
+        }
+      ],
+      "queryCount": 3,
+      "cliExitCodes": [
+        0,
+        0,
+        0
+      ],
+      "viewCount": 6,
+      "returnedKnowledgeViews": 5,
+      "commandsReferenceViews": 1,
+      "rawAllViewFilesReturned": false,
+      "metrics": {
+        "apiMs": 96110,
+        "wallMs": 647333,
+        "modelCalls": 6,
+        "modelRequests": {
+          "gpt-6-luna": 12
+        },
+        "codeChanges": {
+          "linesAdded": 8,
+          "linesRemoved": 0,
+          "filesModified": [
+            "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.copilot\\session-state\\4fc4d36d-4fc6-47dd-bc2b-335c96f53a45\\files\\payments-api-retryenvelope-incident.md"
+          ]
+        }
+      },
+      "completeProtection": {
+        "newRoots": {
+          "business": 13,
+          "git": 5
+        },
+        "newDeltas": [
+          {
+            "category": "business",
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+            "before": "29ac29756377130f955acbe6b067ce0db762c877912602624163757e97c1ce47",
+            "after": "cd665a663d4eab41f36e2961bab92c5e9b43f6cc0a763cd15241171c99a401a5"
+          }
+        ],
+        "resumedDeltas": [
+          {
+            "category": "business",
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+            "before": "babf5b24bcbdce52e73692602b3f5cb236a162d4afc95eca5352112391354481",
+            "after": "cd665a663d4eab41f36e2961bab92c5e9b43f6cc0a763cd15241171c99a401a5"
+          }
+        ],
+        "oldRoots": {
+          "business": 8,
+          "git": 5
+        },
+        "oldDeltas": [],
+        "oldPreflightDeltas": [],
+        "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+      },
+      "actualRecordingPrefix": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-native-29-v3/B29-context",
+      "observationAndLimit": "First parent caller followed actual primary deselection; whole contextual Recall route not established. Ordinary parent created native session memo (+8 lines) and attempted Learning share, which was denied. Later same-model Recall child and parent answer recorded separately. Third query after four originals added the epoch definition; no full-case PASS.",
+      "behaviorAcceptance": "ROOT_PENDING"
+    },
+    {
+      "caseId": "B29-dedup-conflict",
+      "sessionId": "7609fa9e-a39d-40aa-80ab-011de05e4d07",
+      "frozenMessages": [
+        "请在 Logical Project payments-api 中查阅 PIPELINE_LOCK_81: LedgerDrain conflict. 在 exact condition case C7 下能否继续处理。比较支持结论的原文，有矛盾就直接说明，不猜测哪一份正确。保留完整诊断和每份实际来源，用中文回答。"
+      ],
+      "frozenQuestionExactMatch": true,
+      "firstCaller": {
+        "id": "5edaf892-b70e-4c58-af34-6a16c76bdcf1",
+        "type": "user.message",
+        "timestamp": "2026-10-06T02:46:27.672Z"
+      },
+      "lastPrimarySelectionBeforeFirstCaller": {
+        "id": "f022df52-7166-45d9-903b-eb3348b4fed2",
+        "type": "subagent.selected",
+        "timestamp": "2026-10-06T02:45:19.621Z",
+        "agentName": "teamai-recall"
+      },
+      "preCallerUi": {
+        "caseId": "B29-dedup-conflict",
+        "rawCapture": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-native-29-v3/B29-dedup-conflict-pty-414950.json",
+        "observedFooter": "teamai-recall · GitHub Copilot • Auto",
+        "selectedAgent": "teamai-recall",
+        "noExtraAgentToggle": true
+      },
+      "completion": {
+        "caseId": "B29-dedup-conflict",
+        "normalExit": 0,
+        "recordExit": 0,
+        "protectExit": 0,
+        "newSession": true
+      },
+      "capturedModel": "gpt-6-luna",
+      "operatorModelOverride": false,
+      "parentMessages": 1,
+      "childMessages": 0,
+      "answers": 1,
+      "nativeEvents": {
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.copilot\\session-state\\7609fa9e-a39d-40aa-80ab-011de05e4d07\\events.jsonl",
+        "bytes": 199778,
+        "sha256": "210a15f51599b9c7f71f8abf362d0d9fc036241e3addd57d56015f312c1a4b31",
+        "preservedInOriginalSession": true
+      },
+      "childRoutes": [],
+      "queryCount": 2,
+      "cliExitCodes": [
+        0,
+        0
+      ],
+      "viewCount": 2,
+      "returnedKnowledgeViews": 2,
+      "commandsReferenceViews": 0,
+      "rawAllViewFilesReturned": true,
+      "metrics": {
+        "apiMs": 25920,
+        "wallMs": 276055,
+        "modelCalls": 1,
+        "modelRequests": {
+          "gpt-6-luna": 5
+        },
+        "codeChanges": {
+          "linesAdded": 0,
+          "linesRemoved": 0,
+          "filesModified": []
+        }
+      },
+      "completeProtection": {
+        "newRoots": {
+          "business": 13,
+          "git": 5
+        },
+        "newDeltas": [
+          {
+            "category": "business",
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+            "before": "cd665a663d4eab41f36e2961bab92c5e9b43f6cc0a763cd15241171c99a401a5",
+            "after": "271279abca37e4f37f83546f96393c7da829dd2f95467d930e2c9f9bd7d1b130"
+          }
+        ],
+        "resumedDeltas": [
+          {
+            "category": "business",
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+            "before": "babf5b24bcbdce52e73692602b3f5cb236a162d4afc95eca5352112391354481",
+            "after": "271279abca37e4f37f83546f96393c7da829dd2f95467d930e2c9f9bd7d1b130"
+          }
+        ],
+        "oldRoots": {
+          "business": 8,
+          "git": 5
+        },
+        "oldDeltas": [],
+        "oldPreflightDeltas": [],
+        "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+      },
+      "actualRecordingPrefix": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-native-29-v3/B29-dedup-conflict",
+      "observationAndLimit": "Both contradictory C7 Learning originals read once despite repeated hits; final preserves conflict and both sources. Actual first query and final diagnostic omit the terminal period from frozen diagnostic.",
+      "behaviorAcceptance": "ROOT_PENDING"
+    },
+    {
+      "caseId": "B29-none",
+      "sessionId": "d0987d83-55e4-4e14-909b-cd2ada225e0e",
+      "frozenMessages": [
+        "只查当前默认允许范围中的 NO_SUCH_RECALL_EVIDENCE_9F34 处置条件。没有足够资料就说明实际查过的范围与未能确认的内容，不要猜测。用中文回答。"
+      ],
+      "frozenQuestionExactMatch": true,
+      "firstCaller": {
+        "id": "ea179c23-beb8-4708-a240-f1ff94dc0657",
+        "type": "user.message",
+        "timestamp": "2026-10-06T02:52:39.613Z"
+      },
+      "lastPrimarySelectionBeforeFirstCaller": {
+        "id": "a2785ea1-0749-4638-aac2-c3a07b483bdd",
+        "type": "subagent.selected",
+        "timestamp": "2026-10-06T02:52:21.881Z",
+        "agentName": "teamai-recall"
+      },
+      "preCallerUi": {
+        "caseId": "B29-none",
+        "rawCapture": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-native-29-v3/B29-none-pty-bc430c.json",
+        "observedFooter": "teamai-recall · GitHub Copilot • Auto",
+        "selectedAgent": "teamai-recall",
+        "ordinaryReselectionAfterObservedDefault": true
+      },
+      "completion": {
+        "caseId": "B29-none",
+        "normalExit": 0,
+        "recordExit": 0,
+        "protectExit": 0,
+        "newSession": true
+      },
+      "capturedModel": "gpt-6-luna",
+      "operatorModelOverride": false,
+      "parentMessages": 1,
+      "childMessages": 0,
+      "answers": 1,
+      "nativeEvents": {
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.copilot\\session-state\\d0987d83-55e4-4e14-909b-cd2ada225e0e\\events.jsonl",
+        "bytes": 134743,
+        "sha256": "143245ed0eebaa6e6b331e3f184a0639fffd264b711a9ecc21e5a89e5955e890",
+        "preservedInOriginalSession": true
+      },
+      "childRoutes": [],
+      "queryCount": 1,
+      "cliExitCodes": [
+        0
+      ],
+      "viewCount": 0,
+      "returnedKnowledgeViews": 0,
+      "commandsReferenceViews": 0,
+      "rawAllViewFilesReturned": true,
+      "metrics": {
+        "apiMs": 7029,
+        "wallMs": 201327,
+        "modelCalls": 1,
+        "modelRequests": {
+          "gpt-6-luna": 3
+        },
+        "codeChanges": {
+          "linesAdded": 0,
+          "linesRemoved": 0,
+          "filesModified": []
+        }
+      },
+      "completeProtection": {
+        "newRoots": {
+          "business": 13,
+          "git": 5
+        },
+        "newDeltas": [
+          {
+            "category": "business",
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+            "before": "271279abca37e4f37f83546f96393c7da829dd2f95467d930e2c9f9bd7d1b130",
+            "after": "730924803dd23d3ec527963731214612ba23f06db9a8f061605d66f8ae5f9c78"
+          }
+        ],
+        "resumedDeltas": [
+          {
+            "category": "business",
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+            "before": "babf5b24bcbdce52e73692602b3f5cb236a162d4afc95eca5352112391354481",
+            "after": "730924803dd23d3ec527963731214612ba23f06db9a8f061605d66f8ae5f9c78"
+          }
+        ],
+        "oldRoots": {
+          "business": 8,
+          "git": 5
+        },
+        "oldDeltas": [],
+        "oldPreflightDeltas": [],
+        "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+      },
+      "actualRecordingPrefix": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-native-29-v3/B29-none",
+      "observationAndLimit": "One actual default workspace query, zero hits and zero Views, reported unknown within actual scope; no further query or scope expansion.",
+      "behaviorAcceptance": "ROOT_PENDING"
+    },
+    {
+      "caseId": "B29-unbound-git",
+      "sessionId": "5cdf78fb-403a-4da5-80fb-9789a5647c0a",
+      "frozenMessages": [
+        "请查阅已发布资料中 UTC_LEASE_WINDOW_63: ClockFence observation pending. 的处置说明，说明完成观察的条件与证据不足时怎么处理。给出准确原文来源，用中文回答。"
+      ],
+      "frozenQuestionExactMatch": true,
+      "firstCaller": {
+        "id": "446ddb5b-f8fb-4d7b-a8ee-c8c2617d2965",
+        "type": "user.message",
+        "timestamp": "2026-10-06T02:55:53.037Z"
+      },
+      "lastPrimarySelectionBeforeFirstCaller": {
+        "id": "991153d0-0b9e-4767-a172-19f537018c66",
+        "type": "subagent.selected",
+        "timestamp": "2026-10-06T02:55:28.463Z",
+        "agentName": "teamai-recall"
+      },
+      "preCallerUi": {
+        "caseId": "B29-unbound-git",
+        "rawCapture": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-native-29-v3/B29-unbound-git-pty-b9ce6f.json",
+        "observedFooter": "teamai-recall · GitHub Copilot • Auto",
+        "selectedAgent": "teamai-recall",
+        "ordinaryReselectionAfterObservedDefault": true
+      },
+      "completion": {
+        "caseId": "B29-unbound-git",
+        "normalExit": 0,
+        "recordExit": 0,
+        "protectExit": 0,
+        "newSession": true
+      },
+      "capturedModel": "gpt-6-luna",
+      "operatorModelOverride": false,
+      "parentMessages": 1,
+      "childMessages": 0,
+      "answers": 1,
+      "nativeEvents": {
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.copilot\\session-state\\5cdf78fb-403a-4da5-80fb-9789a5647c0a\\events.jsonl",
+        "bytes": 192013,
+        "sha256": "c955b74fb4f74bc85901b76023aa0e6947dcb102cf1acc36cfd4f38a17e385f3",
+        "preservedInOriginalSession": true
+      },
+      "childRoutes": [],
+      "queryCount": 1,
+      "cliExitCodes": [
+        0
+      ],
+      "viewCount": 2,
+      "returnedKnowledgeViews": 1,
+      "commandsReferenceViews": 1,
+      "rawAllViewFilesReturned": false,
+      "metrics": {
+        "apiMs": 19984,
+        "wallMs": 372046,
+        "modelCalls": 1,
+        "modelRequests": {
+          "gpt-6-luna": 5
+        },
+        "codeChanges": {
+          "linesAdded": 0,
+          "linesRemoved": 0,
+          "filesModified": []
+        }
+      },
+      "completeProtection": {
+        "newRoots": {
+          "business": 13,
+          "git": 5
+        },
+        "newDeltas": [
+          {
+            "category": "business",
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+            "before": "730924803dd23d3ec527963731214612ba23f06db9a8f061605d66f8ae5f9c78",
+            "after": "09782394c99bd9f2c92047b23b3a58b1f37cd9c5be6c20d4c2ed311132332f3e"
+          }
+        ],
+        "resumedDeltas": [
+          {
+            "category": "business",
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+            "before": "babf5b24bcbdce52e73692602b3f5cb236a162d4afc95eca5352112391354481",
+            "after": "09782394c99bd9f2c92047b23b3a58b1f37cd9c5be6c20d4c2ed311132332f3e"
+          }
+        ],
+        "oldRoots": {
+          "business": 8,
+          "git": 5
+        },
+        "oldDeltas": [],
+        "oldPreflightDeltas": [],
+        "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+      },
+      "actualRecordingPrefix": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-native-29-v3/B29-unbound-git",
+      "observationAndLimit": "One actual default user query and returned published shared Learning original read; Chinese core 400 ms/two-sample/missing-sample pending and detailed provenance recorded.",
+      "behaviorAcceptance": "ROOT_PENDING"
+    },
+    {
+      "caseId": "B29-non-git",
+      "sessionId": "2e1e2937-866a-45aa-8a12-39a05decd859",
+      "frozenMessages": [
+        "Find the published handling note for UTC_LEASE_WINDOW_63: ClockFence observation pending. Explain what is required to complete the observation and what to do when evidence is missing. Cite the accurate original source and answer in English."
+      ],
+      "frozenQuestionExactMatch": true,
+      "firstCaller": {
+        "id": "9ae62797-1f01-49f6-a2a3-9aade77607a1",
+        "type": "user.message",
+        "timestamp": "2026-10-06T03:03:08.075Z"
+      },
+      "lastPrimarySelectionBeforeFirstCaller": {
+        "id": "421226f2-165a-4a79-8ef4-71034f0f1b4f",
+        "type": "subagent.selected",
+        "timestamp": "2026-10-06T03:02:43.332Z",
+        "agentName": "teamai-recall"
+      },
+      "preCallerUi": {
+        "caseId": "B29-non-git",
+        "rawCapture": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-native-29-v3/B29-non-git-pty-dce88f.json",
+        "observedFooterTeamaiRecall": true,
+        "ordinaryReselectionAfterObservedDefault": true,
+        "noEsc": true
+      },
+      "completion": {
+        "caseId": "B29-non-git",
+        "normalExit": 0,
+        "recordExit": 0,
+        "protectExit": 0,
+        "newSession": true
+      },
+      "capturedModel": "mai-code-1.1-flash",
+      "operatorModelOverride": false,
+      "parentMessages": 1,
+      "childMessages": 0,
+      "answers": 1,
+      "nativeEvents": {
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.copilot\\session-state\\2e1e2937-866a-45aa-8a12-39a05decd859\\events.jsonl",
+        "bytes": 165746,
+        "sha256": "a121388a6fab629a6c0704f52e3e678d95b292b5edaca31ddb47e01f5a9a2933",
+        "preservedInOriginalSession": true
+      },
+      "childRoutes": [],
+      "queryCount": 1,
+      "cliExitCodes": [
+        0
+      ],
+      "viewCount": 1,
+      "returnedKnowledgeViews": 1,
+      "commandsReferenceViews": 0,
+      "rawAllViewFilesReturned": true,
+      "metrics": {
+        "apiMs": 12251,
+        "wallMs": 152451,
+        "modelCalls": 1,
+        "modelRequests": {
+          "mai-code-1.1-flash": 3
+        },
+        "codeChanges": {
+          "linesAdded": 0,
+          "linesRemoved": 0,
+          "filesModified": []
+        }
+      },
+      "completeProtection": {
+        "newRoots": {
+          "business": 13,
+          "git": 5
+        },
+        "newDeltas": [
+          {
+            "category": "business",
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+            "before": "09782394c99bd9f2c92047b23b3a58b1f37cd9c5be6c20d4c2ed311132332f3e",
+            "after": "a9ea75dea6508d2e6b3bf24b04c46fc7b961c6c526fbe69a9934700589b09ca2"
+          }
+        ],
+        "resumedDeltas": [
+          {
+            "category": "business",
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+            "before": "babf5b24bcbdce52e73692602b3f5cb236a162d4afc95eca5352112391354481",
+            "after": "a9ea75dea6508d2e6b3bf24b04c46fc7b961c6c526fbe69a9934700589b09ca2"
+          }
+        ],
+        "oldRoots": {
+          "business": 8,
+          "git": 5
+        },
+        "oldDeltas": [],
+        "oldPreflightDeltas": [],
+        "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+      },
+      "actualRecordingPrefix": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-native-29-v3/B29-non-git",
+      "observationAndLimit": "Native Auto selected mai-code-1.1-flash with no operator override. One user query/read, English core correct; final ID/publication/Project/path/excerpt retained, sourceHash/revision/contentHash not explicitly transcribed.",
+      "behaviorAcceptance": "ROOT_PENDING"
+    },
+    {
+      "caseId": "B29-explicit-workspace-unbound-git",
+      "sessionId": "59ab6f36-8361-473f-af53-d34ffe15babd",
+      "frozenMessages": [
+        "请仅使用明确的 workspace Scope 查阅 UTC_LEASE_WINDOW_63: ClockFence observation pending.。保留实际错误或原文来源，用中文回答。"
+      ],
+      "frozenQuestionExactMatch": true,
+      "firstCaller": {
+        "id": "9a2c2419-e04d-4f57-81f2-d6837e6b1635",
+        "type": "user.message",
+        "timestamp": "2026-10-06T03:06:36.598Z"
+      },
+      "lastPrimarySelectionBeforeFirstCaller": {
+        "id": "73028ac1-1f1f-456c-a2b6-9d378bf139d9",
+        "type": "subagent.selected",
+        "timestamp": "2026-10-06T03:06:10.679Z",
+        "agentName": "teamai-recall"
+      },
+      "preCallerUi": {
+        "caseId": "B29-explicit-workspace-unbound-git",
+        "rawCapture": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-native-29-v3/B29-explicit-workspace-unbound-git-pty-ec1f34.json",
+        "observedFooterTeamaiRecall": true,
+        "ordinaryReselectionAfterObservedDefault": true,
+        "noEsc": true
+      },
+      "completion": {
+        "caseId": "B29-explicit-workspace-unbound-git",
+        "normalExit": 0,
+        "recordExit": 0,
+        "protectExit": 0,
+        "newSession": true
+      },
+      "capturedModel": "gpt-6-luna",
+      "operatorModelOverride": false,
+      "parentMessages": 1,
+      "childMessages": 0,
+      "answers": 1,
+      "nativeEvents": {
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.copilot\\session-state\\59ab6f36-8361-473f-af53-d34ffe15babd\\events.jsonl",
+        "bytes": 154232,
+        "sha256": "e823c3d1b27437011ec20972db20d72ad29c85eb97213c574ec765f3f44f96db",
+        "preservedInOriginalSession": true
+      },
+      "childRoutes": [],
+      "queryCount": 1,
+      "cliExitCodes": [
+        1
+      ],
+      "viewCount": 1,
+      "returnedKnowledgeViews": 0,
+      "commandsReferenceViews": 1,
+      "rawAllViewFilesReturned": false,
+      "metrics": {
+        "apiMs": 7961,
+        "wallMs": 130166,
+        "modelCalls": 1,
+        "modelRequests": {
+          "gpt-6-luna": 4
+        },
+        "codeChanges": {
+          "linesAdded": 0,
+          "linesRemoved": 0,
+          "filesModified": []
+        }
+      },
+      "completeProtection": {
+        "newRoots": {
+          "business": 13,
+          "git": 5
+        },
+        "newDeltas": [
+          {
+            "category": "business",
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+            "before": "a9ea75dea6508d2e6b3bf24b04c46fc7b961c6c526fbe69a9934700589b09ca2",
+            "after": "7cd0c8621859ded8ef9d4e7046fd933d72f30f4c4f647f77466772eab7ec3283"
+          }
+        ],
+        "resumedDeltas": [
+          {
+            "category": "business",
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+            "before": "babf5b24bcbdce52e73692602b3f5cb236a162d4afc95eca5352112391354481",
+            "after": "7cd0c8621859ded8ef9d4e7046fd933d72f30f4c4f647f77466772eab7ec3283"
+          }
+        ],
+        "oldRoots": {
+          "business": 8,
+          "git": 5
+        },
+        "oldDeltas": [],
+        "oldPreflightDeltas": [],
+        "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+      },
+      "actualRecordingPrefix": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-native-29-v3/B29-explicit-workspace-unbound-git",
+      "observationAndLimit": "Exact complete diagnostic in actual --scope workspace query; CLI exit 1 UNBOUND_WORKSPACE. Only commands reference read, no knowledge original, no fallback or binding mutation.",
+      "behaviorAcceptance": "ROOT_PENDING"
+    },
+    {
+      "caseId": "B29-explicit-project-non-git",
+      "sessionId": "f0adc650-37fd-4b55-b419-ce56dd0b86ad",
+      "frozenMessages": [
+        "请使用明确的 workspace Scope 和实际 Logical Project ID payments-api 查询完整诊断 REPLAY_GUARD_BUSY: RetryEnvelope cannot acquire generation lease after reconnect.。保留实际错误或原文来源，用中文回答。"
+      ],
+      "frozenQuestionExactMatch": true,
+      "firstCaller": {
+        "id": "55523dc8-ddae-422b-93cc-89db172d2c4c",
+        "type": "user.message",
+        "timestamp": "2026-10-06T03:09:10.451Z"
+      },
+      "lastPrimarySelectionBeforeFirstCaller": {
+        "id": "7459bccb-0fa9-40b3-875d-7ad9e700b1d7",
+        "type": "subagent.selected",
+        "timestamp": "2026-10-06T03:08:49.683Z",
+        "agentName": "teamai-recall"
+      },
+      "preCallerUi": {
+        "caseId": "B29-explicit-project-non-git",
+        "rawCapture": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-native-29-v3/B29-explicit-project-non-git-pty-9d1971.json",
+        "observedFooterTeamaiRecall": true,
+        "ordinaryReselectionAfterObservedDefault": true,
+        "noEsc": true
+      },
+      "completion": {
+        "caseId": "B29-explicit-project-non-git",
+        "normalExit": 0,
+        "recordExit": 0,
+        "protectExit": 0,
+        "newSession": true
+      },
+      "capturedModel": "gpt-6-luna",
+      "operatorModelOverride": false,
+      "parentMessages": 1,
+      "childMessages": 0,
+      "answers": 1,
+      "nativeEvents": {
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.copilot\\session-state\\f0adc650-37fd-4b55-b419-ce56dd0b86ad\\events.jsonl",
+        "bytes": 284735,
+        "sha256": "dbf1b74d291f32815ffee336c8df4eb62ae2f789b739fa6582fdb8c5bca1089a",
+        "preservedInOriginalSession": true
+      },
+      "childRoutes": [],
+      "queryCount": 1,
+      "cliExitCodes": [
+        1
+      ],
+      "viewCount": 1,
+      "returnedKnowledgeViews": 0,
+      "commandsReferenceViews": 1,
+      "rawAllViewFilesReturned": false,
+      "metrics": {
+        "apiMs": 7793,
+        "wallMs": 138962,
+        "modelCalls": 3,
+        "modelRequests": {
+          "gpt-6-luna": 4
+        },
+        "codeChanges": {
+          "linesAdded": 0,
+          "linesRemoved": 0,
+          "filesModified": []
+        }
+      },
+      "completeProtection": {
+        "newRoots": {
+          "business": 13,
+          "git": 5
+        },
+        "newDeltas": [
+          {
+            "category": "business",
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+            "before": "7cd0c8621859ded8ef9d4e7046fd933d72f30f4c4f647f77466772eab7ec3283",
+            "after": "20a4bba4587dbbec070a1e16e4f85ce6cf1c4e8bf1d76227376f31b21e553341"
+          }
+        ],
+        "resumedDeltas": [
+          {
+            "category": "business",
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+            "before": "babf5b24bcbdce52e73692602b3f5cb236a162d4afc95eca5352112391354481",
+            "after": "20a4bba4587dbbec070a1e16e4f85ce6cf1c4e8bf1d76227376f31b21e553341"
+          }
+        ],
+        "oldRoots": {
+          "business": 8,
+          "git": 5
+        },
+        "oldDeltas": [],
+        "oldPreflightDeltas": [],
+        "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+      },
+      "actualRecordingPrefix": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-native-29-v3/B29-explicit-project-non-git",
+      "observationAndLimit": "Actual --scope workspace --project payments-api query uses keywords rather than complete literal diagnostic. CLI exit 1 UNBOUND_WORKSPACE, full diagnostic retained in final; only commands reference read, no fallback/binding mutation.",
+      "behaviorAcceptance": "ROOT_PENDING"
+    },
+    {
+      "caseId": "B29-supplement-intake",
+      "sessionId": "0b36b895-8c19-44fb-9722-dd8057d83af9",
+      "frozenMessages": [
+        "Logical Project payments-api 的 IntakeSlot 出现诊断：HANDOFF_BUDGET_WAIT_64: IntakeSlot cannot resume after account rollover.。现场已确认 intake mode V6、previous holder 已停止。请读取处置原文，说明目前能否恢复、等待条件和必须补足的证据；保留完整诊断和每项准确来源，用中文回答。"
+      ],
+      "frozenQuestionExactMatch": true,
+      "firstCaller": {
+        "id": "40edab8e-2031-453d-9c7d-2b2f7c43ef47",
+        "type": "user.message",
+        "timestamp": "2026-10-06T03:12:06.954Z"
+      },
+      "lastPrimarySelectionBeforeFirstCaller": {
+        "id": "996a2a88-ea7d-4e29-af28-b2b0c528926a",
+        "type": "subagent.selected",
+        "timestamp": "2026-10-06T03:11:45.913Z",
+        "agentName": "teamai-recall"
+      },
+      "preCallerUi": {
+        "caseId": "B29-supplement-intake",
+        "rawCapture": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-native-29-v3/B29-supplement-intake-pty-978ef3.json",
+        "observedFooterTeamaiRecall": true,
+        "ordinaryReselectionAfterObservedDefault": true,
+        "noEsc": true
+      },
+      "completion": {
+        "caseId": "B29-supplement-intake",
+        "normalExit": 0,
+        "recordExit": 0,
+        "protectExit": 0,
+        "newSession": true
+      },
+      "capturedModel": "gpt-6-luna",
+      "operatorModelOverride": false,
+      "parentMessages": 1,
+      "childMessages": 0,
+      "answers": 1,
+      "nativeEvents": {
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.copilot\\session-state\\0b36b895-8c19-44fb-9722-dd8057d83af9\\events.jsonl",
+        "bytes": 226039,
+        "sha256": "13693c48f68a45f86bbd3562c097f27e572211a35cc7d8cfcec643d082863f09",
+        "preservedInOriginalSession": true
+      },
+      "childRoutes": [],
+      "queryCount": 2,
+      "cliExitCodes": [
+        0,
+        0
+      ],
+      "viewCount": 2,
+      "returnedKnowledgeViews": 2,
+      "commandsReferenceViews": 0,
+      "rawAllViewFilesReturned": true,
+      "metrics": {
+        "apiMs": 31466,
+        "wallMs": 203750,
+        "modelCalls": 1,
+        "modelRequests": {
+          "gpt-6-luna": 6
+        },
+        "codeChanges": {
+          "linesAdded": 0,
+          "linesRemoved": 0,
+          "filesModified": []
+        }
+      },
+      "completeProtection": {
+        "newRoots": {
+          "business": 13,
+          "git": 5
+        },
+        "newDeltas": [
+          {
+            "category": "business",
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+            "before": "20a4bba4587dbbec070a1e16e4f85ce6cf1c4e8bf1d76227376f31b21e553341",
+            "after": "29e9230a30bc4d251fb1826efc411c17d25f2e59edbba01726ecc5e4cc326ad8"
+          }
+        ],
+        "resumedDeltas": [
+          {
+            "category": "business",
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+            "before": "babf5b24bcbdce52e73692602b3f5cb236a162d4afc95eca5352112391354481",
+            "after": "29e9230a30bc4d251fb1826efc411c17d25f2e59edbba01726ecc5e4cc326ad8"
+          }
+        ],
+        "oldRoots": {
+          "business": 8,
+          "git": 5
+        },
+        "oldDeltas": [],
+        "oldPreflightDeltas": [],
+        "generatingPid": "NOT_INDEPENDENTLY_OBSERVED"
+      },
+      "actualRecordingPrefix": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/handoffs/b-native-29-v3/B29-supplement-intake",
+      "observationAndLimit": "Actual contextual keyword query rank 1 display glossary, rank 2 handling policy; policy selected/read, weak glossary not read (two-original comparison unproven). Necessary BudgetLatch definition follow-up returned/read certificate once. Final 9 ms/K5/evidence unresolved and provenance recorded; stopped after definition, no further query for missing runtime facts. Primary query was not full literal diagnostic.",
+      "behaviorAcceptance": "ROOT_PENDING"
+    }
+  ],
+  "contextBoundaryDetail": "B29-context-operator-outcome.json and B29-context-operator-selection-caller-chronology.json preserve actual memo/write request denial/selection/caller identities; not attributed to 9279-byte Recall Agent first-caller behavior.",
+  "operatorFailurePreserved": "operator-accepted-index-schema-assumption-tool-return.json: read-only array-index assumption exit 1; actual schema read normally. No native rerun, fixture/prompt/oracle/runner/protection/source modification.",
+  "originalEightRanOnce": true,
+  "slotRelease": "ROOT_ONLY_PENDING",
+  "issueAcceptance": "NOT_CLAIMED",
+  "sharedDelta": "NONE_IN_THIS_CONTINUATION",
+  "notRun": "No additional setup, sync, build, pack, install, #33 native rerun, fixture change, source tweak, remote mutation, or additional consumer case."
+}

@@ -1,0 +1,203 @@
+[
+  {
+    "agentId": null,
+    "toolCallId": "call_W6BKanBRIpV0FNqRUSxEN2j9",
+    "startedAt": "2026-10-06T02:46:35.690Z",
+    "completedAt": "2026-10-06T02:47:27.385Z",
+    "command": "teamai recall \"PIPELINE_LOCK_81: LedgerDrain conflict\" --project payments-api --json",
+    "success": true,
+    "exitCode": 0,
+    "result": {
+      "schemaVersion": 1,
+      "query": "PIPELINE_LOCK_81: LedgerDrain conflict",
+      "scope": "workspace",
+      "project": "payments-api",
+      "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+      "resourceRevision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+      "learningsRevision": "cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2",
+      "limit": 5,
+      "hits": [
+        {
+          "id": "learning:payments-api:5d631ba1-b2e4-4638-8c45-5207c914ce82",
+          "type": "learning",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "LedgerDrain condition C7",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2",
+            "relativePath": "learnings/payments-api/5d631ba1-b2e4-4638-8c45-5207c914ce82.md",
+            "contentHash": "3faf31f95ac6386092f2994224f941537850e281697fc286492a8c6eba2e7001"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\.teamai\\published-learnings\\698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\\revisions\\cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\\files\\learnings\\payments-api\\5d631ba1-b2e4-4638-8c45-5207c914ce82.md",
+          "matchedTerms": [
+            "PIPELINE_LOCK_81:",
+            "LedgerDrain",
+            "conflict"
+          ],
+          "lineStart": 6,
+          "lineEnd": 8,
+          "snippet": "# Processing record\n\nPIPELINE_LOCK_81: LedgerDrain conflict."
+        },
+        {
+          "id": "learning:payments-api:9be813a0-2541-4cf2-b71e-098a7f610e81",
+          "type": "learning",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "LedgerDrain condition C7",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2",
+            "relativePath": "learnings/payments-api/9be813a0-2541-4cf2-b71e-098a7f610e81.md",
+            "contentHash": "ce87f8dafe86124559cd07347ee3a2a8fb494d8f094e69103b76eca36186a88f"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\.teamai\\published-learnings\\698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\\revisions\\cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\\files\\learnings\\payments-api\\9be813a0-2541-4cf2-b71e-098a7f610e81.md",
+          "matchedTerms": [
+            "PIPELINE_LOCK_81:",
+            "LedgerDrain",
+            "conflict"
+          ],
+          "lineStart": 6,
+          "lineEnd": 8,
+          "snippet": "# Processing record\n\nPIPELINE_LOCK_81: LedgerDrain conflict."
+        }
+      ]
+    },
+    "rawResult": {
+      "content": "{\"schemaVersion\":1,\"query\":\"PIPELINE_LOCK_81: LedgerDrain conflict\",\"scope\":\"workspace\",\"project\":\"payments-api\",\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"resourceRevision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"learningsRevision\":\"cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\",\"limit\":5,\"hits\":[{\"id\":\"learning:payments-api:5d631ba1-b2e4-4638-8c45-5207c914ce82\",\"type\":\"learning\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"LedgerDrain condition C7\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\",\"relativePath\":\"learnings/payments-api/5d631ba1-b2e4-4638-8c45-5207c914ce82.md\",\"contentHash\":\"3faf31f95ac6386092f2994224f941537850e281697fc286492a8c6eba2e7001\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\business-home\\\\.teamai\\\\published-learnings\\\\698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\\\\revisions\\\\cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\\\\files\\\\learnings\\\\payments-api\\\\5d631ba1-b2e4-4638-8c45-5207c914ce82.md\",\"matchedTerms\":[\"PIPELINE_LOCK_81:\",\"LedgerDrain\",\"conflict\"],\"lineStart\":6,\"lineEnd\":8,\"snippet\":\"# Processing record\\n\\nPIPELINE_LOCK_81: LedgerDrain conflict.\"},{\"id\":\"learning:payments-api:9be813a0-2541-4cf2-b71e-098a7f610e81\",\"type\":\"learning\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"LedgerDrain condition C7\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\",\"relativePath\":\"learnings/payments-api/9be813a0-2541-4cf2-b71e-098a7f610e81.md\",\"contentHash\":\"ce87f8dafe86124559cd07347ee3a2a8fb494d8f094e69103b76eca36186a88f\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\business-home\\\\.teamai\\\\published-learnings\\\\698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\\\\revisions\\\\cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\\\\files\\\\learnings\\\\payments-api\\\\9be813a0-2541-4cf2-b71e-098a7f610e81.md\",\"matchedTerms\":[\"PIPELINE_LOCK_81:\",\"LedgerDrain\",\"conflict\"],\"lineStart\":6,\"lineEnd\":8,\"snippet\":\"# Processing record\\n\\nPIPELINE_LOCK_81: LedgerDrain conflict.\"}]}\n<shellId: 0 completed with exit code 0>"
+    }
+  },
+  {
+    "agentId": null,
+    "toolCallId": "call_VZTRsjXAvQP9dZSzUvfUeAyr",
+    "startedAt": "2026-10-06T02:47:30.620Z",
+    "completedAt": "2026-10-06T02:48:11.222Z",
+    "command": "teamai recall \"LedgerDrain exact condition case C7\" --project payments-api --json",
+    "success": true,
+    "exitCode": 0,
+    "result": {
+      "schemaVersion": 1,
+      "query": "LedgerDrain exact condition case C7",
+      "scope": "workspace",
+      "project": "payments-api",
+      "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+      "resourceRevision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+      "learningsRevision": "cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2",
+      "limit": 5,
+      "hits": [
+        {
+          "id": "learning:payments-api:5d631ba1-b2e4-4638-8c45-5207c914ce82",
+          "type": "learning",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "LedgerDrain condition C7",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2",
+            "relativePath": "learnings/payments-api/5d631ba1-b2e4-4638-8c45-5207c914ce82.md",
+            "contentHash": "3faf31f95ac6386092f2994224f941537850e281697fc286492a8c6eba2e7001"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\.teamai\\published-learnings\\698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\\revisions\\cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\\files\\learnings\\payments-api\\5d631ba1-b2e4-4638-8c45-5207c914ce82.md",
+          "matchedTerms": [
+            "LedgerDrain",
+            "exact",
+            "condition",
+            "case",
+            "C7"
+          ],
+          "lineStart": 7,
+          "lineEnd": 9,
+          "snippet": "\nPIPELINE_LOCK_81: LedgerDrain conflict.\nUnder exact condition case C7, processing must remain stopped until a replacement marker is confirmed."
+        },
+        {
+          "id": "learning:payments-api:9be813a0-2541-4cf2-b71e-098a7f610e81",
+          "type": "learning",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "LedgerDrain condition C7",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2",
+            "relativePath": "learnings/payments-api/9be813a0-2541-4cf2-b71e-098a7f610e81.md",
+            "contentHash": "ce87f8dafe86124559cd07347ee3a2a8fb494d8f094e69103b76eca36186a88f"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\.teamai\\published-learnings\\698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\\revisions\\cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\\files\\learnings\\payments-api\\9be813a0-2541-4cf2-b71e-098a7f610e81.md",
+          "matchedTerms": [
+            "LedgerDrain",
+            "exact",
+            "condition",
+            "case",
+            "C7"
+          ],
+          "lineStart": 7,
+          "lineEnd": 9,
+          "snippet": "\nPIPELINE_LOCK_81: LedgerDrain conflict.\nUnder exact condition case C7, processing is allowed to continue without waiting for a replacement marker."
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/40-replay-guard.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "RetryEnvelope generation lease observations",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/40-replay-guard.md",
+            "contentHash": "0e2751160489cddc7dacb81eb626a71581c0e663ed5c936cb7adf857a001ab25"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\40-replay-guard.md",
+          "matchedTerms": [
+            "exact",
+            "condition"
+          ],
+          "lineStart": 33,
+          "lineEnd": 35,
+          "snippet": "## Decision conditions\n\nOnly when the state label is exactly E4 and the previous sender has stopped may the operation be attempted again after 250 ms."
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/82-budget-clearance.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "BudgetLatch clearance certificate",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/82-budget-clearance.md",
+            "contentHash": "bd7f009152ac7207579fca773190c7d711d30ddf4ba446c06e8e3e3ddf3cf9d4"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\82-budget-clearance.md",
+          "matchedTerms": [
+            "exact"
+          ],
+          "lineStart": 5,
+          "lineEnd": 7,
+          "snippet": "# BudgetLatch clearance certificate\n\nGate C2 is reconciled exactly when receiver seal K5 is certified."
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/90-read-gap.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "LeaseMux incident appendix",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/90-read-gap.md",
+            "contentHash": "4ae3a786e26169cf14543b30b7b7225b328f6bd2d1584dd0cf103887719dd4cb"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\90-read-gap.md",
+          "matchedTerms": [
+            "condition"
+          ],
+          "lineStart": 6,
+          "lineEnd": 8,
+          "snippet": "\nREAD_GAP_72: LeaseMux incident appendix unavailable.\nAn appendix contains the final handling condition."
+        }
+      ]
+    },
+    "rawResult": {
+      "content": "{\"schemaVersion\":1,\"query\":\"LedgerDrain exact condition case C7\",\"scope\":\"workspace\",\"project\":\"payments-api\",\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"resourceRevision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"learningsRevision\":\"cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\",\"limit\":5,\"hits\":[{\"id\":\"learning:payments-api:5d631ba1-b2e4-4638-8c45-5207c914ce82\",\"type\":\"learning\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"LedgerDrain condition C7\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\",\"relativePath\":\"learnings/payments-api/5d631ba1-b2e4-4638-8c45-5207c914ce82.md\",\"contentHash\":\"3faf31f95ac6386092f2994224f941537850e281697fc286492a8c6eba2e7001\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\business-home\\\\.teamai\\\\published-learnings\\\\698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\\\\revisions\\\\cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\\\\files\\\\learnings\\\\payments-api\\\\5d631ba1-b2e4-4638-8c45-5207c914ce82.md\",\"matchedTerms\":[\"LedgerDrain\",\"exact\",\"condition\",\"case\",\"C7\"],\"lineStart\":7,\"lineEnd\":9,\"snippet\":\"\\nPIPELINE_LOCK_81: LedgerDrain conflict.\\nUnder exact condition case C7, processing must remain stopped until a replacement marker is confirmed.\"},{\"id\":\"learning:payments-api:9be813a0-2541-4cf2-b71e-098a7f610e81\",\"type\":\"learning\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"LedgerDrain condition C7\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\",\"relativePath\":\"learnings/payments-api/9be813a0-2541-4cf2-b71e-098a7f610e81.md\",\"contentHash\":\"ce87f8dafe86124559cd07347ee3a2a8fb494d8f094e69103b76eca36186a88f\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\business-home\\\\.teamai\\\\published-learnings\\\\698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\\\\revisions\\\\cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\\\\files\\\\learnings\\\\payments-api\\\\9be813a0-2541-4cf2-b71e-098a7f610e81.md\",\"matchedTerms\":[\"LedgerDrain\",\"exact\",\"condition\",\"case\",\"C7\"],\"lineStart\":7,\"lineEnd\":9,\"snippet\":\"\\nPIPELINE_LOCK_81: LedgerDrain conflict.\\nUnder exact condition case C7, processing is allowed to continue without waiting for a replacement marker.\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/40-replay-guard.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"RetryEnvelope generation lease observations\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/40-replay-guard.md\",\"contentHash\":\"0e2751160489cddc7dacb81eb626a71581c0e663ed5c936cb7adf857a001ab25\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\40-replay-guard.md\",\"matchedTerms\":[\"exact\",\"condition\"],\"lineStart\":33,\"lineEnd\":35,\"snippet\":\"## Decision conditions\\n\\nOnly when the state label is exactly E4 and the previous sender has stopped may the operation be attempted again after 250 ms.\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/82-budget-clearance.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"BudgetLatch clearance certificate\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/82-budget-clearance.md\",\"contentHash\":\"bd7f009152ac7207579fca773190c7d711d30ddf4ba446c06e8e3e3ddf3cf9d4\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\82-budget-clearance.md\",\"matchedTerms\":[\"exact\"],\"lineStart\":5,\"lineEnd\":7,\"snippet\":\"# BudgetLatch clearance certificate\\n\\nGate C2 is reconciled exactly when receiver seal K5 is certified.\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/90-read-gap.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"LeaseMux incident appendix\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/90-read-gap.md\",\"contentHash\":\"4ae3a786e26169cf14543b30b7b7225b328f6bd2d1584dd0cf103887719dd4cb\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\90-read-gap.md\",\"matchedTerms\":[\"condition\"],\"lineStart\":6,\"lineEnd\":8,\"snippet\":\"\\nREAD_GAP_72: LeaseMux incident appendix unavailable.\\nAn appendix contains the final handling condition.\"}]}\n<shellId: 1 completed with exit code 0>"
+    }
+  }
+]

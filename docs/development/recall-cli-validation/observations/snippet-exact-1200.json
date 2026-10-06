@@ -1,0 +1,24 @@
+{
+  "name": "snippet-exact-1200",
+  "args": [
+    "recall",
+    "capWindow",
+    "--scope",
+    "workspace",
+    "--project",
+    "payments",
+    "--limit",
+    "20",
+    "--json"
+  ],
+  "home": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\business-home",
+  "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\a\\temp-35\\teamai-git-gA1pyT",
+  "noGit": false,
+  "node": "v24.15.0",
+  "startedAt": "2026-10-05T14:50:01.634Z",
+  "finishedAt": "2026-10-05T14:50:03.364Z",
+  "exitCode": 0,
+  "error": null,
+  "stdout": "{\"schemaVersion\":1,\"query\":\"capWindow\",\"scope\":\"workspace\",\"project\":\"payments\",\"sourceHash\":\"eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809\",\"resourceRevision\":\"0df6e2919c48f90bb2adf45a35a517d6cd588837\",\"learningsRevision\":\"c4a2b9be3f3b7c947fa564f6ef83160082fde6ab\",\"limit\":20,\"hits\":[{\"id\":\"doc:payments:contexts/payments/docs/snippets/cap.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments\",\"title\":\"cap\",\"source\":{\"sourceHash\":\"eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809\",\"revision\":\"0df6e2919c48f90bb2adf45a35a517d6cd588837\",\"relativePath\":\"contexts/payments/docs/snippets/cap.md\",\"contentHash\":\"77b82645f3f3671e465cbb426f6ec8e57fd7f3facb8fca6cfea4795b4d9e0e09\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\candidates\\\\a-all-b33-c1\\\\compiled-recall-public-fixture-v3\\\\resource\\\\contexts\\\\payments\\\\docs\\\\snippets\\\\cap.md\",\"matchedTerms\":[\"capWindow\"],\"lineStart\":1,\"lineEnd\":1,\"snippet\":\"capWindowxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"}]}\n",
+  "stderr": ""
+}

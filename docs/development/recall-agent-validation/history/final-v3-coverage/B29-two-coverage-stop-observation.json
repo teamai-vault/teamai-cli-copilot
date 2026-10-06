@@ -1,0 +1,547 @@
+{
+  "schemaVersion": 1,
+  "status": "TWO_ACTUAL_COVERAGE_CASES_PAUSED_ROOT_MAJOR_STOP_REJECT",
+  "candidateRevision": "8000bae22cf6a3490578e25e1af6b618e73267d5",
+  "manifestSha256": "230cd96d12c06373bde3fb117ae461792f7184b587a4968c85b420cc5957484b",
+  "agentSha256": "7e882003883ea008c30b9c567f77578e318077162ebbba090bcdf901fa27c48f",
+  "rootReject": {
+    "result": "REJECT_ACTUAL_B29_COVERAGE_ZH_STOP_AFTER_SUFFICIENT_READ_EVIDENCE",
+    "severity": "Major",
+    "affectedAC": "#29 AC10; sufficient-evidence stopping rule",
+    "sourceRevision": "8000bae22cf6a3490578e25e1af6b618e73267d5",
+    "agentSha256": "7e882003883ea008c30b9c567f77578e318077162ebbba090bcdf901fa27c48f",
+    "sessionId": "e4c964e0-d784-4139-9f16-e35e72a228cd",
+    "normalConsumerExit": 0,
+    "originalConsumerAndAnswersPreserved": true,
+    "rawArtifacts": [
+      {
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-zh-observable-events.jsonl",
+        "bytes": 134171,
+        "sha256": "3663a926cd89a45dfed7cfc3400d1162f18b05a221059ae7fa00304113732132"
+      },
+      {
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-zh-queries.json",
+        "bytes": 91716,
+        "sha256": "678ab52497d38c84fbb63d3803082366631334d48fff56a9bc403306d342df5b"
+      },
+      {
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-zh-reads.json",
+        "bytes": 14547,
+        "sha256": "1e0f72ea587a12502358c94805115df0f4a10fc9e316b45a9efb921f0d52e31b"
+      },
+      {
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-zh-answer.md",
+        "bytes": 7231,
+        "sha256": "d97fea7ddbc46cb15af4c6f78b1bfd9bd767d48e2114e81dbf0a0deaec597e04"
+      },
+      {
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-zh-metrics.json",
+        "bytes": 1389,
+        "sha256": "6a4c61d130cc50ddf237c715318da956b0b0d90f9d1f478c70e4a4a62f44ed62"
+      },
+      {
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-zh-evidence.json",
+        "bytes": 13360,
+        "sha256": "3cabf129d62fdb662cfe67199a8cfc3f28d7b8232a0c54dc67d5911d32d3b069"
+      },
+      {
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-zh-protection-readback.json",
+        "bytes": 3338,
+        "sha256": "def6c819f23ee39a034a7d489168e3cc47df772bc55ea6e7c23e7ed1a705dd9a"
+      },
+      {
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-zh-launch-result.json",
+        "bytes": 318,
+        "sha256": "a0e7dfcfe476350ad7586ba97cbc24f4847c9644b0b3bcc73e4243d9cb1dffc4"
+      }
+    ],
+    "rejectedQuery": {
+      "eventId": "b8007168-b9e5-4048-8f28-8011087f2d86",
+      "timestamp": "2026-10-06T01:19:30.826Z",
+      "command": "teamai recall \"generation lease RetryEnvelope E4 previous sender stopped 250 ms\" --scope workspace --project payments-api --limit 10 --json",
+      "resultEventId": "6baf2529-52aa-4a62-a058-f26f3e9bda53",
+      "addedSourceIdentities": 0
+    },
+    "relevantOriginalsAlreadyRead": [
+      {
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\40-replay-guard.md",
+        "completedAt": "2026-10-06T01:18:43.985Z",
+        "nativeBodySha256": "0e2751160489cddc7dacb81eb626a71581c0e663ed5c936cb7adf857a001ab25"
+      },
+      {
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\70-epoch-policy.md",
+        "completedAt": "2026-10-06T01:18:53.519Z",
+        "nativeBodySha256": "d1c3e9d39ca87b5b9192d768ba19301fcd377875fd18c9ca71199295c4001fc1"
+      }
+    ],
+    "judgment": "All required retry conditions and the complementary marker rule were already read. Q5 repeats known rule terms with no visible correctable knowledge gap. Q4 may be grounded by the newly read marker clue; no hard query quota is imposed.",
+    "minorParentWording": "Adds 一次 to a rule that gives no retry-count budget; preserve actual original wording",
+    "provenOtherFacts": "Complete diagnostic and core supported conditions/source sections are correct; no LeaseMux/Z8 borrowing. This does not accept other ACs or the whole case.",
+    "independentReview": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\review\\b29-coverage-zh-stop-static-actual-review.md",
+    "action": "Already active English coverage may end normally and be recorded/protected. Then B seals immutable two-case checkpoint and stops before remaining eight. Root will assign the single existing B owner a limited generic stopping clarification and fresh actual retest after handoff; no fixture/oracle edits or output rewriting.",
+    "correctionAssignedYet": false,
+    "humanActionNeeded": false,
+    "recordedAtUtc": "2026-10-06T01:29:50.739Z",
+    "identity": {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\supervisor-b29-coverage-zh-stop-reject.json",
+      "bytes": 4879,
+      "sha256": "b2fa0b062cc7e8053790c04a028e16fdc71ce5e53da27ceeac2ce013dd42edf7"
+    }
+  },
+  "stoppingCheck": {
+    "rejectedQuery": "teamai recall \"generation lease RetryEnvelope E4 previous sender stopped 250 ms\" --scope workspace --project payments-api --limit 10 --json",
+    "startedAt": "2026-10-06T01:19:30.826Z",
+    "sourceIdentitiesAdded": 0,
+    "originals40And70AlreadyRead": true,
+    "queryCeiling": "NOT_IMPOSED",
+    "judgment": "Root rejects query of already-read E4/250ms rule without a visible correctable knowledge gap; Q4 may use newly read marker clue."
+  },
+  "actualCases": [
+    {
+      "caseId": "B29-coverage-zh",
+      "sessionId": "e4c964e0-d784-4139-9f16-e35e72a228cd",
+      "normalEnd": 0,
+      "recorderExit": 0,
+      "protectionExit": 0,
+      "capturedModel": "gpt-6-luna",
+      "frozenCallerExact": true,
+      "queries": [
+        {
+          "command": "teamai recall \"REPLAY_GUARD_BUSY: RetryEnvelope cannot acquire generation lease after reconnect.\" --scope workspace --project payments-api --limit 10 --json",
+          "exitCode": 0,
+          "hitCount": 7,
+          "actualRankedIDs": [
+            "doc:payments-api:contexts/payments-api/docs/40-replay-guard.md",
+            "doc:payments-api:contexts/payments-api/docs/10-display-note.md",
+            "doc:payments-api:contexts/payments-api/docs/63-intake-handoff.md",
+            "doc:payments-api:contexts/payments-api/docs/31-intake-display.md",
+            "doc:payments-api:contexts/payments-api/docs/80-audit-note.md",
+            "doc:payments-api:contexts/payments-api/docs/90-read-gap.md",
+            "learning:shared:11f67190-c1b4-4cb7-a082-188a7dd98f63"
+          ]
+        },
+        {
+          "command": "teamai recall \"RetryEnvelope state E4 previous sender stopped reconnect\" --scope workspace --project payments-api --limit 10 --json",
+          "exitCode": 0,
+          "hitCount": 8,
+          "actualRankedIDs": [
+            "doc:payments-api:contexts/payments-api/docs/40-replay-guard.md",
+            "doc:payments-api:contexts/payments-api/docs/10-display-note.md",
+            "doc:payments-api:contexts/payments-api/docs/70-epoch-policy.md",
+            "doc:payments-api:contexts/payments-api/docs/63-intake-handoff.md",
+            "learning:payments-api:5d631ba1-b2e4-4638-8c45-5207c914ce82",
+            "learning:shared:11f67190-c1b4-4cb7-a082-188a7dd98f63",
+            "doc:payments-api:contexts/payments-api/docs/31-intake-display.md",
+            "doc:payments-api:contexts/payments-api/docs/80-audit-note.md"
+          ]
+        },
+        {
+          "command": "teamai recall \"old producer stale owner epoch duplicate send retry fence evidence\" --scope workspace --project payments-api --limit 10 --json",
+          "exitCode": 0,
+          "hitCount": 7,
+          "actualRankedIDs": [
+            "doc:payments-api:contexts/payments-api/docs/70-epoch-policy.md",
+            "doc:payments-api:contexts/payments-api/docs/40-replay-guard.md",
+            "learning:shared:11f67190-c1b4-4cb7-a082-188a7dd98f63",
+            "doc:payments-api:contexts/payments-api/docs/10-display-note.md",
+            "doc:payments-api:contexts/payments-api/docs/80-audit-note.md",
+            "doc:payments-api:contexts/payments-api/docs/63-intake-handoff.md",
+            "doc:payments-api:contexts/payments-api/docs/31-intake-display.md"
+          ]
+        },
+        {
+          "command": "teamai recall \"former producer relinquished outstanding request marker replacement producer safe\" --scope workspace --project payments-api --limit 10 --json",
+          "exitCode": 0,
+          "hitCount": 7,
+          "actualRankedIDs": [
+            "doc:payments-api:contexts/payments-api/docs/70-epoch-policy.md",
+            "learning:payments-api:5d631ba1-b2e4-4638-8c45-5207c914ce82",
+            "learning:payments-api:9be813a0-2541-4cf2-b71e-098a7f610e81",
+            "doc:payments-api:contexts/payments-api/docs/40-replay-guard.md",
+            "doc:payments-api:contexts/payments-api/docs/90-read-gap.md",
+            "doc:payments-api:contexts/payments-api/docs/10-display-note.md",
+            "doc:payments-api:contexts/payments-api/docs/80-audit-note.md"
+          ]
+        },
+        {
+          "command": "teamai recall \"generation lease RetryEnvelope E4 previous sender stopped 250 ms\" --scope workspace --project payments-api --limit 10 --json",
+          "exitCode": 0,
+          "hitCount": 9,
+          "actualRankedIDs": [
+            "doc:payments-api:contexts/payments-api/docs/40-replay-guard.md",
+            "doc:payments-api:contexts/payments-api/docs/10-display-note.md",
+            "doc:payments-api:contexts/payments-api/docs/63-intake-handoff.md",
+            "learning:shared:11f67190-c1b4-4cb7-a082-188a7dd98f63",
+            "doc:payments-api:contexts/payments-api/docs/80-audit-note.md",
+            "doc:payments-api:contexts/payments-api/docs/90-read-gap.md",
+            "doc:payments-api:contexts/payments-api/docs/70-epoch-policy.md",
+            "learning:payments-api:5d631ba1-b2e4-4638-8c45-5207c914ce82",
+            "doc:payments-api:contexts/payments-api/docs/31-intake-display.md"
+          ]
+        }
+      ],
+      "reads": [
+        {
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\40-replay-guard.md",
+          "success": true,
+          "exactReturnedFile": true,
+          "nativeBodySha256": "0e2751160489cddc7dacb81eb626a71581c0e663ed5c936cb7adf857a001ab25"
+        },
+        {
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\70-epoch-policy.md",
+          "success": true,
+          "exactReturnedFile": true,
+          "nativeBodySha256": "d1c3e9d39ca87b5b9192d768ba19301fcd377875fd18c9ca71199295c4001fc1"
+        },
+        {
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\80-audit-note.md",
+          "success": true,
+          "exactReturnedFile": true,
+          "nativeBodySha256": "26a4e79b81aa1d8aad0751529869a29e638cbc8442d4383f0ff8908e2eb98b58"
+        },
+        {
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\10-display-note.md",
+          "success": true,
+          "exactReturnedFile": true,
+          "nativeBodySha256": "3bf8e299f32ef4ccbfcbeb03fcb273d13e4c23eef8a359086c6957b50cf6b85e"
+        },
+        {
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\90-read-gap.md",
+          "success": true,
+          "exactReturnedFile": true,
+          "nativeBodySha256": "4ae3a786e26169cf14543b30b7b7225b328f6bd2d1584dd0cf103887719dd4cb"
+        }
+      ],
+      "nativeEvents": {
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.copilot\\session-state\\e4c964e0-d784-4139-9f16-e35e72a228cd\\events.jsonl",
+        "bytes": 564290,
+        "sha256": "5b2d47d27d2959620f8c3fe541ffaf381719f05aec381090a21d41213c1f617d",
+        "preservedInOriginalSession": true
+      },
+      "metrics": {
+        "sessionStartTime": 1791249369908,
+        "totalApiDurationMs": 95102,
+        "totalNanoAiu": 842491000,
+        "totalPremiumRequests": 1,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 27
+          },
+          "cache_read": {
+            "tokenCount": 105296
+          },
+          "cache_write": {
+            "tokenCount": 25046
+          },
+          "output": {
+            "tokenCount": 8477
+          }
+        },
+        "currentModel": "gpt-6-luna",
+        "modelMetrics": {
+          "gpt-6-luna": {
+            "requests": {
+              "count": 9,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 130369,
+              "outputTokens": 8477,
+              "cacheReadTokens": 105296,
+              "cacheWriteTokens": 25046,
+              "reasoningTokens": 5558
+            },
+            "totalNanoAiu": 842491000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 27
+              },
+              "cache_read": {
+                "tokenCount": 105296
+              },
+              "cache_write": {
+                "tokenCount": 25046
+              },
+              "output": {
+                "tokenCount": 8477
+              }
+            }
+          }
+        },
+        "codeChanges": {
+          "linesAdded": 0,
+          "linesRemoved": 0,
+          "filesModified": []
+        },
+        "modelCalls": 1,
+        "wallMs": 390486,
+        "usageOutput": {
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-zh-usage.json",
+          "sha256": "d3acb4f2fbdd1f860f4e7abe747031325c1db9985ea39de30996029c662807ef"
+        }
+      },
+      "newProtectedDeltas": [
+        {
+          "category": "business",
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+          "before": "47777fc9dffceecd487efdf8f1ce420958702e4ec202f27dd7e2997670d7eb00",
+          "after": "a428534f0d2adb7b7637f1272b4d2244573564fa8a30858bcb77ed79108f32b7"
+        }
+      ],
+      "sinceResumedBaselineDeltas": [
+        {
+          "category": "business",
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+          "before": "e17f77be2d81f8e9fb362a3176166c8aa1425f8b6f2cd18622d51b068b850a94",
+          "after": "a428534f0d2adb7b7637f1272b4d2244573564fa8a30858bcb77ed79108f32b7"
+        }
+      ],
+      "oldDeltas": 0,
+      "oldSincePreflightDeltas": 0,
+      "behaviorStatus": "FAIL_ROOT_MAJOR_AC10_STOP"
+    },
+    {
+      "caseId": "B29-coverage-en",
+      "sessionId": "0c3244b5-2617-40b9-96da-6188b34fd1f5",
+      "normalEnd": 0,
+      "recorderExit": 0,
+      "protectionExit": 0,
+      "capturedModel": "gpt-6-luna",
+      "frozenCallerExact": true,
+      "queries": [
+        {
+          "command": "teamai recall \"RetryEnvelope REPLAY_GUARD_BUSY RetryEnvelope cannot acquire generation lease after reconnect\" --scope workspace --project payments-api --require \"REPLAY_GUARD_BUSY: RetryEnvelope cannot acquire generation lease after reconnect.\" --limit 10 --json",
+          "exitCode": 0,
+          "hitCount": 1,
+          "actualRankedIDs": [
+            "doc:payments-api:contexts/payments-api/docs/40-replay-guard.md"
+          ]
+        },
+        {
+          "command": "teamai recall \"E4 previous sender stopped generation lease handling\" --scope workspace --project payments-api --limit 10 --json",
+          "exitCode": 0,
+          "hitCount": 9,
+          "actualRankedIDs": [
+            "doc:payments-api:contexts/payments-api/docs/40-replay-guard.md",
+            "doc:payments-api:contexts/payments-api/docs/63-intake-handoff.md",
+            "doc:payments-api:contexts/payments-api/docs/10-display-note.md",
+            "doc:payments-api:contexts/payments-api/docs/90-read-gap.md",
+            "doc:payments-api:contexts/payments-api/docs/31-intake-display.md",
+            "doc:payments-api:contexts/payments-api/docs/70-epoch-policy.md",
+            "learning:payments-api:5d631ba1-b2e4-4638-8c45-5207c914ce82",
+            "doc:payments-api:contexts/payments-api/docs/80-audit-note.md",
+            "learning:shared:11f67190-c1b4-4cb7-a082-188a7dd98f63"
+          ]
+        },
+        {
+          "command": "teamai recall \"stale owner epoch duplicate sending old producer fencing\" --scope workspace --project payments-api --limit 10 --json",
+          "exitCode": 0,
+          "hitCount": 5,
+          "actualRankedIDs": [
+            "doc:payments-api:contexts/payments-api/docs/70-epoch-policy.md",
+            "doc:payments-api:contexts/payments-api/docs/40-replay-guard.md",
+            "doc:payments-api:contexts/payments-api/docs/10-display-note.md",
+            "doc:payments-api:contexts/payments-api/docs/63-intake-handoff.md",
+            "doc:payments-api:contexts/payments-api/docs/31-intake-display.md"
+          ]
+        }
+      ],
+      "reads": [
+        {
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\40-replay-guard.md",
+          "success": true,
+          "exactReturnedFile": true,
+          "nativeBodySha256": "0e2751160489cddc7dacb81eb626a71581c0e663ed5c936cb7adf857a001ab25"
+        },
+        {
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\70-epoch-policy.md",
+          "success": true,
+          "exactReturnedFile": true,
+          "nativeBodySha256": "d1c3e9d39ca87b5b9192d768ba19301fcd377875fd18c9ca71199295c4001fc1"
+        }
+      ],
+      "nativeEvents": {
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.copilot\\session-state\\0c3244b5-2617-40b9-96da-6188b34fd1f5\\events.jsonl",
+        "bytes": 318481,
+        "sha256": "ec693b6f0149c4428112bae1fd3fe7e9626645070673d5d2a6cebf49f1271fc2",
+        "preservedInOriginalSession": true
+      },
+      "metrics": {
+        "sessionStartTime": 1791249856508,
+        "totalApiDurationMs": 47975,
+        "totalNanoAiu": 407870500,
+        "totalPremiumRequests": 1,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 21
+          },
+          "cache_read": {
+            "tokenCount": 67848
+          },
+          "cache_write": {
+            "tokenCount": 14853
+          },
+          "output": {
+            "tokenCount": 3083
+          }
+        },
+        "currentModel": "gpt-6-luna",
+        "modelMetrics": {
+          "gpt-6-luna": {
+            "requests": {
+              "count": 7,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 82722,
+              "outputTokens": 3083,
+              "cacheReadTokens": 67848,
+              "cacheWriteTokens": 14853,
+              "reasoningTokens": 1626
+            },
+            "totalNanoAiu": 407870500,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 21
+              },
+              "cache_read": {
+                "tokenCount": 67848
+              },
+              "cache_write": {
+                "tokenCount": 14853
+              },
+              "output": {
+                "tokenCount": 3083
+              }
+            }
+          }
+        },
+        "codeChanges": {
+          "linesAdded": 0,
+          "linesRemoved": 0,
+          "filesModified": []
+        },
+        "modelCalls": 1,
+        "wallMs": 213025,
+        "usageOutput": {
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-en-usage.json",
+          "sha256": "169e5675fcbfa34a40428422bb19371ab2917d2baaf9b3b7dea18c48e225551b"
+        }
+      },
+      "newProtectedDeltas": [
+        {
+          "category": "business",
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+          "before": "a428534f0d2adb7b7637f1272b4d2244573564fa8a30858bcb77ed79108f32b7",
+          "after": "0dff3bfb03d90b9f8f2bb1ca996415e5cb8a1f9eff5f96775c294fe936eada7c"
+        }
+      ],
+      "sinceResumedBaselineDeltas": [
+        {
+          "category": "business",
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+          "before": "e17f77be2d81f8e9fb362a3176166c8aa1425f8b6f2cd18622d51b068b850a94",
+          "after": "0dff3bfb03d90b9f8f2bb1ca996415e5cb8a1f9eff5f96775c294fe936eada7c"
+        }
+      ],
+      "oldDeltas": 0,
+      "oldSincePreflightDeltas": 0,
+      "behaviorStatus": "ROOT_PENDING"
+    }
+  ],
+  "startupBoundary": {
+    "caseId": "B29-context",
+    "sessionId": "c1f4d0ae-6dc1-4d2a-b192-1a0f70d26d74",
+    "normalStartupEnd": 0,
+    "callerSubmitted": false,
+    "actualCallerCase": "NOT_RUN",
+    "nativeUsage": {
+      "totalPremiumRequestCost": 0,
+      "totalUserRequests": 0,
+      "totalNanoAiu": 0,
+      "totalApiDurationMs": 0,
+      "sessionStartTime": "2026-10-06T01:29:09.433Z",
+      "codeChanges": {
+        "linesAdded": 0,
+        "linesRemoved": 0,
+        "filesModifiedCount": 0,
+        "filesModified": []
+      },
+      "modelMetrics": {},
+      "agentMetrics": {},
+      "lastCallInputTokens": 0,
+      "lastCallOutputTokens": 0
+    },
+    "formalRecorderExit": 1,
+    "formalRecorderError": "ENOENT absent native events.jsonl",
+    "formalAfterObserver": "NOT_RUN",
+    "separateOperatorProtectionExit": 0,
+    "newDeltas": [
+      {
+        "category": "business",
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+        "before": "0dff3bfb03d90b9f8f2bb1ca996415e5cb8a1f9eff5f96775c294fe936eada7c",
+        "after": "babf5b24bcbdce52e73692602b3f5cb236a162d4afc95eca5352112391354481"
+      }
+    ],
+    "oldDeltas": 0,
+    "notCountedAsBehavior": true
+  },
+  "preservedHistory": [
+    {
+      "index": {
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\native-injection-checkpoint-artifact-index.json",
+        "bytes": 29162,
+        "sha256": "2cc0f06c56f313f6d98a3b1a6f284475440e0e96d8143f45dc3f77420e67bb7f"
+      },
+      "identitiesUnchanged": 105
+    },
+    {
+      "index": {
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v1\\native-through-injection-artifact-index.json",
+        "bytes": 60603,
+        "sha256": "cd0613d7a5505105aa1a6cc222fcb3e736f89fc43fedc1cfbc66a3a7fcf00f5f"
+      },
+      "identitiesUnchanged": 222
+    }
+  ],
+  "remainingCases": [
+    {
+      "caseId": "B29-context",
+      "status": "NOT_RUN"
+    },
+    {
+      "caseId": "B29-dedup-conflict",
+      "status": "NOT_RUN"
+    },
+    {
+      "caseId": "B29-none",
+      "status": "NOT_RUN"
+    },
+    {
+      "caseId": "B29-unbound-git",
+      "status": "NOT_RUN"
+    },
+    {
+      "caseId": "B29-non-git",
+      "status": "NOT_RUN"
+    },
+    {
+      "caseId": "B29-explicit-workspace-unbound-git",
+      "status": "NOT_RUN"
+    },
+    {
+      "caseId": "B29-explicit-project-non-git",
+      "status": "NOT_RUN"
+    },
+    {
+      "caseId": "B29-supplement-intake",
+      "status": "NOT_RUN"
+    }
+  ],
+  "remainingCount": 8,
+  "sourceChanges": 0,
+  "sharedDelta": "NONE",
+  "rootAcceptance": "PENDING_PAUSED_TWO_CASE_HANDOFF",
+  "createdAtUtc": "2026-10-06T01:39:22.960Z"
+}

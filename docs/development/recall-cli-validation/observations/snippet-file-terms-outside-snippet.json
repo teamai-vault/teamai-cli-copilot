@@ -1,0 +1,24 @@
+{
+  "name": "snippet-file-terms-outside-snippet",
+  "args": [
+    "recall",
+    "spareCue firstCue secondCue thirdCue",
+    "--scope",
+    "workspace",
+    "--project",
+    "payments",
+    "--limit",
+    "20",
+    "--json"
+  ],
+  "home": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\business-home",
+  "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\a\\temp-35\\teamai-git-gA1pyT",
+  "noGit": false,
+  "node": "v24.15.0",
+  "startedAt": "2026-10-05T14:50:16.720Z",
+  "finishedAt": "2026-10-05T14:50:18.836Z",
+  "exitCode": 0,
+  "error": null,
+  "stdout": "{\"schemaVersion\":1,\"query\":\"spareCue firstCue secondCue thirdCue\",\"scope\":\"workspace\",\"project\":\"payments\",\"sourceHash\":\"eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809\",\"resourceRevision\":\"0df6e2919c48f90bb2adf45a35a517d6cd588837\",\"learningsRevision\":\"c4a2b9be3f3b7c947fa564f6ef83160082fde6ab\",\"limit\":20,\"hits\":[{\"id\":\"doc:payments:contexts/payments/docs/snippets/outside-window.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments\",\"title\":\"outside window\",\"source\":{\"sourceHash\":\"eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809\",\"revision\":\"0df6e2919c48f90bb2adf45a35a517d6cd588837\",\"relativePath\":\"contexts/payments/docs/snippets/outside-window.md\",\"contentHash\":\"c004a5aec2830bd999881dde702caac7ac1c6f1ab3b81c3e456549000557b545\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\candidates\\\\a-all-b33-c1\\\\compiled-recall-public-fixture-v3\\\\resource\\\\contexts\\\\payments\\\\docs\\\\snippets\\\\outside-window.md\",\"matchedTerms\":[\"spareCue\",\"firstCue\",\"secondCue\",\"thirdCue\"],\"lineStart\":3,\"lineEnd\":5,\"snippet\":\"gap two\\nfirstCue secondCue\\nthirdCue proof\"}]}\n",
+  "stderr": ""
+}

@@ -1,0 +1,381 @@
+{
+  "schemaVersion": 1,
+  "result": "LOCAL_BYTE_PRESERVING_STAGING_OF_ACCEPTED_COMPILED_CLI_EVIDENCE",
+  "artifacts": [
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\report.json",
+      "relativePath": "report.json",
+      "bytes": 76473,
+      "sha256": "e20ba9eb9f7ffe8593a3a7426fc29ce386474eeec4032ba714981b8216eea7aa"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\expected-before-queries.json",
+      "relativePath": "expected-before-queries.json",
+      "bytes": 60216,
+      "sha256": "9b902e2c36ea67e394476c867f2f060844131bc0e6758de72061610c406b6217"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\original-protected-before.json",
+      "relativePath": "original-protected-before.json",
+      "bytes": 51961,
+      "sha256": "42596ee77f961661791c1c46f750f00aa1bc02ca42dbfc224fba0455183cfbbb"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\snippet-dense-lf-crlf.json",
+      "relativePath": "observations/snippet-dense-lf-crlf.json",
+      "bytes": 2907,
+      "sha256": "5ae51cf1407801b5f4ba61ae674597a78b16cf8e50ae3da01de53173d93ff855"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\snippet-dense-required-outside-window.json",
+      "relativePath": "observations/snippet-dense-required-outside-window.json",
+      "bytes": 3002,
+      "sha256": "06a24f5a3e1ab228edd44652734dba7c1e1fcb1cf7cd3d6bcc1475a04381eeee"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\snippet-tie-earliest.json",
+      "relativePath": "observations/snippet-tie-earliest.json",
+      "bytes": 1852,
+      "sha256": "60d8c603e961579d8d8a9dc6f1330b9459e2c182e74f06ac4aba663fbe27e6b5"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\snippet-start-full-window.json",
+      "relativePath": "observations/snippet-start-full-window.json",
+      "bytes": 1875,
+      "sha256": "86361ea88b7ea262696f5b50803f8fab4e0c521dc7db55947687fa8cf814a962"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\snippet-end-full-window.json",
+      "relativePath": "observations/snippet-end-full-window.json",
+      "bytes": 1903,
+      "sha256": "faff93af262367aa362451e1a6677b72ee90c1ab11bf42eae329b997e5dfc050"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\snippet-short-original-file.json",
+      "relativePath": "observations/snippet-short-original-file.json",
+      "bytes": 1856,
+      "sha256": "c5a77091d16edb3fd10d7e220af098f98f36fd87c4bd34ffcbf5bdaf212eca46"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\snippet-exact-1200.json",
+      "relativePath": "observations/snippet-exact-1200.json",
+      "bytes": 3009,
+      "sha256": "9ac827ae299eb8107b747da177418ade33921cbc54625c900183279df7f2d850"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\snippet-long-line-head.json",
+      "relativePath": "observations/snippet-long-line-head.json",
+      "bytes": 3052,
+      "sha256": "52fed3e706c6dc373a17b7b2c9a4504d5af539734196b8e10c1b8d2ce56b319e"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\snippet-long-line-tail.json",
+      "relativePath": "observations/snippet-long-line-tail.json",
+      "bytes": 3052,
+      "sha256": "180a82a976a611ca5eb0e6279922dbf2be09c05b2ef1ca5d8322cf4e211be0f5"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\snippet-nfd-emoji-raw-offset.json",
+      "relativePath": "observations/snippet-nfd-emoji-raw-offset.json",
+      "bytes": 4850,
+      "sha256": "b5118f5a37dd3d3cd65e92bc94a15b4414e528408e65647b229fbe5d743a9ecf"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\snippet-lowercase-expansion-offset.json",
+      "relativePath": "observations/snippet-lowercase-expansion-offset.json",
+      "bytes": 3681,
+      "sha256": "70bd7310472739ceffd7eb0d4de7b73725b2e1a76080b0bb2db1142de604ee0f"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\snippet-inside-long-grapheme.json",
+      "relativePath": "observations/snippet-inside-long-grapheme.json",
+      "bytes": 3651,
+      "sha256": "ba7256822b0a408675bea59f96ac99d83ae81255a440b728228b07c916867c38"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\snippet-canonical-reordering-offset.json",
+      "relativePath": "observations/snippet-canonical-reordering-offset.json",
+      "bytes": 3670,
+      "sha256": "27a629bf3c9849bbbce73efef35327edc660281e15874ec8300dbfad60cdc2b0"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\snippet-derived-title-only.json",
+      "relativePath": "observations/snippet-derived-title-only.json",
+      "bytes": 1914,
+      "sha256": "ed7e7dd5e9659e038682acb1c7ba14a7478518fe82b7a43fb6a1cbc5fdf48b97"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\snippet-file-terms-outside-snippet.json",
+      "relativePath": "observations/snippet-file-terms-outside-snippet.json",
+      "bytes": 2007,
+      "sha256": "2b4079cb093d30ad16199a1ba8d8ce01511d238fc0ecdb1f644eab3f6d96498e"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\snippet-contiguous-multiline-cap.json",
+      "relativePath": "observations/snippet-contiguous-multiline-cap.json",
+      "bytes": 3066,
+      "sha256": "8ac765a9b7f5e4b00fe71965481f6e151a589cd74bae620237e9be502ab5788e"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\snippet-published-user-window.json",
+      "relativePath": "observations/snippet-published-user-window.json",
+      "bytes": 2048,
+      "sha256": "e1ab9b18dde85b979139aa0c8ef9762c7a3176cf8f67a247d936cf6570153c54"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\snippet-pending-user-window.json",
+      "relativePath": "observations/snippet-pending-user-window.json",
+      "bytes": 1968,
+      "sha256": "6150fb97d8e6b3c5669c31a604917931435992e23c222039b1c0c21828011a02"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\required-repeated-and.json",
+      "relativePath": "observations/required-repeated-and.json",
+      "bytes": 3034,
+      "sha256": "701f8d708b033a67a6eed28b5cca6fe34316b8c474a1129b5b3db66b63df9974"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\required-and-no-match.json",
+      "relativePath": "observations/required-and-no-match.json",
+      "bytes": 1237,
+      "sha256": "4705989cbea216adfed93ff59b304e5c29b1789f5695d387105b05d26f76c447"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\ranking-cached-user-ranking.json",
+      "relativePath": "observations/ranking-cached-user-ranking.json",
+      "bytes": 11372,
+      "sha256": "94a84a3824e56a39c2e8b0d104f838001ef0b407d104e75934d3f388f3f43292"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\ranking-cached-user-required.json",
+      "relativePath": "observations/ranking-cached-user-required.json",
+      "bytes": 2026,
+      "sha256": "330e53b6bea4fbb1331b3db4c6823e1a4facba366c84ac9ab596d9a5d9afd1de"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall\\version.json",
+      "relativePath": "observations/version.json",
+      "bytes": 570,
+      "sha256": "b2b6902019c5fccffeb33c17d7ed9adfdc10f1e519535c1b5e2f277b1a749273"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall\\recall-help.json",
+      "relativePath": "observations/recall-help.json",
+      "bytes": 4937,
+      "sha256": "26018d1a3369b4c1e8d8147e4c62c6c67283a788b1d5750a01cef267c2149cd7"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall\\help-recall.json",
+      "relativePath": "observations/help-recall.json",
+      "bytes": 4935,
+      "sha256": "9c583bab0e425a6cdc111d3f7cbfcdd58576d9d9603e68ed542ae1c9764f5dcd"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall\\recall-help-json.json",
+      "relativePath": "observations/recall-help-json.json",
+      "bytes": 4956,
+      "sha256": "9435386a932fa415687ee4497284c6af7e58fda14e9e20de989f2b07bf8ecdfb"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall\\missing-query.json",
+      "relativePath": "observations/missing-query.json",
+      "bytes": 691,
+      "sha256": "bf9a66c508f4c22458ca31cccf380af15f6cfa4c3d011ae6b23d29ab11d7375d"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall\\missing-query-json.json",
+      "relativePath": "observations/missing-query-json.json",
+      "bytes": 783,
+      "sha256": "961827b1b6d7da24d809958def4aa03cb0ef235392a64ad99a3b74e55184525d"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall\\help-unknown-option.json",
+      "relativePath": "observations/help-unknown-option.json",
+      "bytes": 652,
+      "sha256": "2b7534b323e75b814cc32b77d6cf56f573c566ac69fd7f2e0491591c33b853a0"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall\\help-missing-limit.json",
+      "relativePath": "observations/help-missing-limit.json",
+      "bytes": 634,
+      "sha256": "ada2d32360a85457427086ac2a4793f6f8a9e4bee0b69803e9b2ee15381473a7"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall\\help-duplicate.json",
+      "relativePath": "observations/help-duplicate.json",
+      "bytes": 637,
+      "sha256": "75a8aaa431b3f5ea289a3ad57be33abda3498cc3e2aa11ed58fcecf611ab685d"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall\\help-required-repeat.json",
+      "relativePath": "observations/help-required-repeat.json",
+      "bytes": 5002,
+      "sha256": "b47dd55ffc048a888cff57bb6a04b7d320828f7e320481a74c7524116627715c"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall\\help-required-missing.json",
+      "relativePath": "observations/help-required-missing.json",
+      "bytes": 641,
+      "sha256": "96a6be3869d001038dfcb81d2a64f1edf39554dacf919e7d86cd7c3d58962569"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall\\help-empty-required.json",
+      "relativePath": "observations/help-empty-required.json",
+      "bytes": 640,
+      "sha256": "263bcfecdc7af01ece7a6db6e992da801cb3a0e09c891c6ab3734d567d017dec"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall\\duplicate-limit.json",
+      "relativePath": "observations/duplicate-limit.json",
+      "bytes": 759,
+      "sha256": "2ef706155ce8e1d404aff08344df5d14dfaa427da18e8c8086e4a8e326aab5fb"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall\\snippet-dense-lf-crlf.json",
+      "relativePath": "history/snippet-dense-lf-crlf.json",
+      "bytes": 963,
+      "sha256": "e75771d8c801e79e02da55af5e9f419352f1f886177e6fdc1c7afed2f1c0fe58"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\contexts\\payments\\docs\\retry.md",
+      "relativePath": "originals/contexts/payments/docs/retry.md",
+      "bytes": 4263,
+      "sha256": "3fdb1595408852cf124b8c111aada3057b1e0b229f7cadcdc997b70d306a9b21"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\contexts\\payments\\docs\\snippets\\a-dense-crlf.md",
+      "relativePath": "originals/contexts/payments/docs/snippets/a-dense-crlf.md",
+      "bytes": 193,
+      "sha256": "5a1d824dd85223d67e936e2c82a0cb848c2589a4790ad1460d90ee15682860e2"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\contexts\\payments\\docs\\snippets\\a-dense-lf.md",
+      "relativePath": "originals/contexts/payments/docs/snippets/a-dense-lf.md",
+      "bytes": 185,
+      "sha256": "91a071965da868dc0a9bf4ce74848e7e28791e8a299264352f401bbc3d076480"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\contexts\\payments\\docs\\snippets\\cap.md",
+      "relativePath": "originals/contexts/payments/docs/snippets/cap.md",
+      "bytes": 1200,
+      "sha256": "77b82645f3f3671e465cbb426f6ec8e57fd7f3facb8fca6cfea4795b4d9e0e09"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\contexts\\payments\\docs\\snippets\\case-expansion.md",
+      "relativePath": "originals/contexts/payments/docs/snippets/case-expansion.md",
+      "bytes": 3113,
+      "sha256": "3648fc1d839b880a6eb214c6810ec5b3bbb36fe8fe51b26dc335a8be9913e449"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\contexts\\payments\\docs\\snippets\\derivedOnly.md",
+      "relativePath": "originals/contexts/payments/docs/snippets/derivedOnly.md",
+      "bytes": 60,
+      "sha256": "0dc9e7df4e6be0990006207227149a4ca87363d43b8d357dd1e2403c89cef6d9"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\contexts\\payments\\docs\\snippets\\head.md",
+      "relativePath": "originals/contexts/payments/docs/snippets/head.md",
+      "bytes": 35,
+      "sha256": "35d7d99eff8015e5fc3dbc0689e2852a284ce2cb5f1c2baf76507fd17abd32cc"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\contexts\\payments\\docs\\snippets\\inside-combining.md",
+      "relativePath": "originals/contexts/payments/docs/snippets/inside-combining.md",
+      "bytes": 4603,
+      "sha256": "3abed7a0b12ed66078b92f23d5158fd9308b154a1542788edf9d4f136598c269"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\contexts\\payments\\docs\\snippets\\long-head.md",
+      "relativePath": "originals/contexts/payments/docs/snippets/long-head.md",
+      "bytes": 1914,
+      "sha256": "546553909013bdf8577f3cde2f030e69159b50bc6843ce2aab2dd40fe647cebb"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\contexts\\payments\\docs\\snippets\\long-tail.md",
+      "relativePath": "originals/contexts/payments/docs/snippets/long-tail.md",
+      "bytes": 1914,
+      "sha256": "73416b484bb4ffb7d30e36fdda24740bbe92b0d76cb8775c870a634e8f0daf51"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\contexts\\payments\\docs\\snippets\\multi-line-cap.md",
+      "relativePath": "originals/contexts/payments/docs/snippets/multi-line-cap.md",
+      "bytes": 2261,
+      "sha256": "70321d6717ede166051d73f6d26989b45da2a4eb5aa3cf69735609d442f08a22"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\contexts\\payments\\docs\\snippets\\nfd-emoji.md",
+      "relativePath": "originals/contexts/payments/docs/snippets/nfd-emoji.md",
+      "bytes": 4812,
+      "sha256": "a337053298969145b236a58bda9b195c5fae1f465d2c6c5ea86c3a4bcbf71428"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\contexts\\payments\\docs\\snippets\\outside-window.md",
+      "relativePath": "originals/contexts/payments/docs/snippets/outside-window.md",
+      "bytes": 65,
+      "sha256": "c004a5aec2830bd999881dde702caac7ac1c6f1ab3b81c3e456549000557b545"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\contexts\\payments\\docs\\snippets\\reordered-combining.md",
+      "relativePath": "originals/contexts/payments/docs/snippets/reordered-combining.md",
+      "bytes": 4603,
+      "sha256": "1811bffe9ee81acf6cfadb3fe4ff3420ec18171a264cbc39aedf85a3f9949508"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\contexts\\payments\\docs\\snippets\\tail.md",
+      "relativePath": "originals/contexts/payments/docs/snippets/tail.md",
+      "bytes": 37,
+      "sha256": "c14fb415b6154285f5d4be40c2f05810e48bfd07d2b281ecdb9ebe5b0f739eb5"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\contexts\\payments\\docs\\snippets\\tie.md",
+      "relativePath": "originals/contexts/payments/docs/snippets/tie.md",
+      "bytes": 54,
+      "sha256": "8e539f0d5fe42ef9664342f66c73de7214c17ffe6b2f1c7c3b439acdcc646cfa"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\contexts\\payments\\docs\\snippets\\two-lines.md",
+      "relativePath": "originals/contexts/payments/docs/snippets/two-lines.md",
+      "bytes": 15,
+      "sha256": "755812243972389a724be1c7820852116dbeed6a4dc27c7010ec3115d89ca9c0"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\contexts\\risk\\docs\\risk.md",
+      "relativePath": "originals/contexts/risk/docs/risk.md",
+      "bytes": 63,
+      "sha256": "d25e388e963c66ad9f90d8ec73eb322a29f85669b55652b06adef4b5d13f3bc0"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\manifest\\projects.yaml",
+      "relativePath": "originals/manifest/projects.yaml",
+      "bytes": 189,
+      "sha256": "321b27ad887345579b23297adf3adc936593f0434e5081a0946e4a3294b94e69"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\README.md",
+      "relativePath": "originals/README.md",
+      "bytes": 7,
+      "sha256": "e621bcce928241db8b0609ac56504cd1e81a1d7d9625d6c00eca21d2de76295d"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\supervisor-compiled-candidate-check.json",
+      "relativePath": "root-compiled-acceptance.json",
+      "bytes": 16684,
+      "sha256": "ccf394096a4bb7fdf565ac4f4bf92528bce218af3c2f0795d168b6d602f67680"
+    }
+  ],
+  "observedSourceRevision": "740f5d0cadf6dfec0533e64442a61b0ac88e21b7",
+  "actualCompiledCliSha256": "79f64b93f5b477254d1f6697348603740d13bb7e1b5b33f8a5c75fa7447c20be",
+  "currentRuntimeSourceRevision": "4977e40ac7e6d327f63710302bac137177f70193",
+  "bridge": "Identical actual compiled CLI bytes; earlier Agent hash in original report is not current native Agent evidence",
+  "observationCounts": {
+    "entryAndParser": 13,
+    "snippet": 18,
+    "required": 2,
+    "cachedUserRanking": 2,
+    "rawOriginalDocuments": 20
+  },
+  "platform": "win32",
+  "node": "v24.15.0",
+  "nativeModel": "NOT_RUN_BY_THIS_CHECK",
+  "createdAtUtc": "2026-10-06T02:49:03.245Z"
+}

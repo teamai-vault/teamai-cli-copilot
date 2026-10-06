@@ -1,0 +1,16 @@
+{
+  "name": "version",
+  "args": [
+    "--version"
+  ],
+  "home": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall\\empty-home",
+  "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall\\empty-workspace",
+  "noGit": true,
+  "node": "v24.15.0",
+  "startedAt": "2026-10-05T14:31:10.395Z",
+  "finishedAt": "2026-10-05T14:31:13.843Z",
+  "exitCode": 0,
+  "error": null,
+  "stdout": "0.5.0\n",
+  "stderr": ""
+}

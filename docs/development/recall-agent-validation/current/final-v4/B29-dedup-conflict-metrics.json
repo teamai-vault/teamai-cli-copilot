@@ -1,0 +1,62 @@
+{
+  "sessionStartTime": 1791254714715,
+  "totalApiDurationMs": 25920,
+  "totalNanoAiu": 265741500,
+  "totalPremiumRequests": 1,
+  "tokenDetails": {
+    "input": {
+      "tokenCount": 15
+    },
+    "cache_read": {
+      "tokenCount": 42154
+    },
+    "cache_write": {
+      "tokenCount": 9991
+    },
+    "output": {
+      "tokenCount": 1971
+    }
+  },
+  "currentModel": "gpt-6-luna",
+  "modelMetrics": {
+    "gpt-6-luna": {
+      "requests": {
+        "count": 5,
+        "cost": 1
+      },
+      "usage": {
+        "inputTokens": 52160,
+        "outputTokens": 1971,
+        "cacheReadTokens": 42154,
+        "cacheWriteTokens": 9991,
+        "reasoningTokens": 762
+      },
+      "totalNanoAiu": 265741500,
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 15
+        },
+        "cache_read": {
+          "tokenCount": 42154
+        },
+        "cache_write": {
+          "tokenCount": 9991
+        },
+        "output": {
+          "tokenCount": 1971
+        }
+      }
+    }
+  },
+  "codeChanges": {
+    "linesAdded": 0,
+    "linesRemoved": 0,
+    "filesModified": []
+  },
+  "modelCalls": 1,
+  "wallMs": 276055,
+  "usageOutput": {
+    "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-dedup-conflict-usage.json",
+    "sha256": "14c5161252616ae4cff3f1ea53a3b063ce003521dd35a5d0a3e728c4f2d20126"
+  }
+}

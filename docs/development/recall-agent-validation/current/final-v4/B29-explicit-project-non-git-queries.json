@@ -1,0 +1,21 @@
+[
+  {
+    "agentId": null,
+    "toolCallId": "call_2loFqUz42f7rR6cXmGsQv9m3",
+    "startedAt": "2026-10-06T03:09:36.917Z",
+    "completedAt": "2026-10-06T03:09:56.443Z",
+    "command": "teamai recall \"REPLAY_GUARD_BUSY RetryEnvelope generation lease reconnect\" --scope workspace --project payments-api --json",
+    "success": true,
+    "exitCode": 1,
+    "result": {
+      "schemaVersion": 1,
+      "error": {
+        "code": "UNBOUND_WORKSPACE",
+        "message": "Workspace Recall requires a Git Workspace with an active Logical Project binding."
+      }
+    },
+    "rawResult": {
+      "content": "{\"schemaVersion\":1,\"error\":{\"code\":\"UNBOUND_WORKSPACE\",\"message\":\"Workspace Recall requires a Git Workspace with an active Logical Project binding.\"}}\n<shellId: 1 completed with exit code 1>"
+    }
+  }
+]

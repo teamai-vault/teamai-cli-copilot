@@ -1,0 +1,1080 @@
+{
+  "frozenAtUtc": "2026-10-05T14:49:52.204Z",
+  "sourceRevision": "740f5d0cadf6dfec0533e64442a61b0ac88e21b7",
+  "oldSource": "file:///F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/a/temp-35/teamai-recall-origin-XHRx3o/origin.git",
+  "newSource": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/candidates/a-all-b33-c1/compiled-recall-public-fixture-v3/resource",
+  "oldHash": "dcd904bd61810d03b2322811a79c5a4a9a01d47763bc88abdbd35ba12e988e8a",
+  "newHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+  "oldResourceRevision": "3f1a902194a3927c54f26b5358fff46d4a0eaebc",
+  "newRevision": "0df6e2919c48f90bb2adf45a35a517d6cd588837",
+  "corpusSha256": "fc2d909ba67c448553437dfbe67ca910d70e0c8591d61aa5555b23c41b190822",
+  "oracleSha256": "85a159953c145e4e5de6c299fbf5c98df0839eb91523c3ba0b653854ba5c379b",
+  "rawCopies": [
+    {
+      "relativePath": "contexts/payments/docs/retry.md",
+      "bytes": 4263,
+      "sha256": "3fdb1595408852cf124b8c111aada3057b1e0b229f7cadcdc997b70d306a9b21",
+      "initialCloneSha256": "9270aba39793c3fe7d83bed23c66291430cc1f0e34993f99191ffbc6b00572dc"
+    },
+    {
+      "relativePath": "contexts/payments/docs/snippets/a-dense-crlf.md",
+      "bytes": 193,
+      "sha256": "5a1d824dd85223d67e936e2c82a0cb848c2589a4790ad1460d90ee15682860e2",
+      "initialCloneSha256": "91a071965da868dc0a9bf4ce74848e7e28791e8a299264352f401bbc3d076480"
+    },
+    {
+      "relativePath": "contexts/payments/docs/snippets/a-dense-lf.md",
+      "bytes": 185,
+      "sha256": "91a071965da868dc0a9bf4ce74848e7e28791e8a299264352f401bbc3d076480",
+      "initialCloneSha256": "91a071965da868dc0a9bf4ce74848e7e28791e8a299264352f401bbc3d076480"
+    },
+    {
+      "relativePath": "contexts/payments/docs/snippets/cap.md",
+      "bytes": 1200,
+      "sha256": "77b82645f3f3671e465cbb426f6ec8e57fd7f3facb8fca6cfea4795b4d9e0e09",
+      "initialCloneSha256": "77b82645f3f3671e465cbb426f6ec8e57fd7f3facb8fca6cfea4795b4d9e0e09"
+    },
+    {
+      "relativePath": "contexts/payments/docs/snippets/case-expansion.md",
+      "bytes": 3113,
+      "sha256": "3648fc1d839b880a6eb214c6810ec5b3bbb36fe8fe51b26dc335a8be9913e449",
+      "initialCloneSha256": "3648fc1d839b880a6eb214c6810ec5b3bbb36fe8fe51b26dc335a8be9913e449"
+    },
+    {
+      "relativePath": "contexts/payments/docs/snippets/derivedOnly.md",
+      "bytes": 60,
+      "sha256": "0dc9e7df4e6be0990006207227149a4ca87363d43b8d357dd1e2403c89cef6d9",
+      "initialCloneSha256": "0dc9e7df4e6be0990006207227149a4ca87363d43b8d357dd1e2403c89cef6d9"
+    },
+    {
+      "relativePath": "contexts/payments/docs/snippets/head.md",
+      "bytes": 35,
+      "sha256": "35d7d99eff8015e5fc3dbc0689e2852a284ce2cb5f1c2baf76507fd17abd32cc",
+      "initialCloneSha256": "35d7d99eff8015e5fc3dbc0689e2852a284ce2cb5f1c2baf76507fd17abd32cc"
+    },
+    {
+      "relativePath": "contexts/payments/docs/snippets/inside-combining.md",
+      "bytes": 4603,
+      "sha256": "3abed7a0b12ed66078b92f23d5158fd9308b154a1542788edf9d4f136598c269",
+      "initialCloneSha256": "3abed7a0b12ed66078b92f23d5158fd9308b154a1542788edf9d4f136598c269"
+    },
+    {
+      "relativePath": "contexts/payments/docs/snippets/long-head.md",
+      "bytes": 1914,
+      "sha256": "546553909013bdf8577f3cde2f030e69159b50bc6843ce2aab2dd40fe647cebb",
+      "initialCloneSha256": "546553909013bdf8577f3cde2f030e69159b50bc6843ce2aab2dd40fe647cebb"
+    },
+    {
+      "relativePath": "contexts/payments/docs/snippets/long-tail.md",
+      "bytes": 1914,
+      "sha256": "73416b484bb4ffb7d30e36fdda24740bbe92b0d76cb8775c870a634e8f0daf51",
+      "initialCloneSha256": "73416b484bb4ffb7d30e36fdda24740bbe92b0d76cb8775c870a634e8f0daf51"
+    },
+    {
+      "relativePath": "contexts/payments/docs/snippets/multi-line-cap.md",
+      "bytes": 2261,
+      "sha256": "70321d6717ede166051d73f6d26989b45da2a4eb5aa3cf69735609d442f08a22",
+      "initialCloneSha256": "70321d6717ede166051d73f6d26989b45da2a4eb5aa3cf69735609d442f08a22"
+    },
+    {
+      "relativePath": "contexts/payments/docs/snippets/nfd-emoji.md",
+      "bytes": 4812,
+      "sha256": "a337053298969145b236a58bda9b195c5fae1f465d2c6c5ea86c3a4bcbf71428",
+      "initialCloneSha256": "a337053298969145b236a58bda9b195c5fae1f465d2c6c5ea86c3a4bcbf71428"
+    },
+    {
+      "relativePath": "contexts/payments/docs/snippets/outside-window.md",
+      "bytes": 65,
+      "sha256": "c004a5aec2830bd999881dde702caac7ac1c6f1ab3b81c3e456549000557b545",
+      "initialCloneSha256": "c004a5aec2830bd999881dde702caac7ac1c6f1ab3b81c3e456549000557b545"
+    },
+    {
+      "relativePath": "contexts/payments/docs/snippets/reordered-combining.md",
+      "bytes": 4603,
+      "sha256": "1811bffe9ee81acf6cfadb3fe4ff3420ec18171a264cbc39aedf85a3f9949508",
+      "initialCloneSha256": "1811bffe9ee81acf6cfadb3fe4ff3420ec18171a264cbc39aedf85a3f9949508"
+    },
+    {
+      "relativePath": "contexts/payments/docs/snippets/tail.md",
+      "bytes": 37,
+      "sha256": "c14fb415b6154285f5d4be40c2f05810e48bfd07d2b281ecdb9ebe5b0f739eb5",
+      "initialCloneSha256": "c14fb415b6154285f5d4be40c2f05810e48bfd07d2b281ecdb9ebe5b0f739eb5"
+    },
+    {
+      "relativePath": "contexts/payments/docs/snippets/tie.md",
+      "bytes": 54,
+      "sha256": "8e539f0d5fe42ef9664342f66c73de7214c17ffe6b2f1c7c3b439acdcc646cfa",
+      "initialCloneSha256": "8e539f0d5fe42ef9664342f66c73de7214c17ffe6b2f1c7c3b439acdcc646cfa"
+    },
+    {
+      "relativePath": "contexts/payments/docs/snippets/two-lines.md",
+      "bytes": 15,
+      "sha256": "755812243972389a724be1c7820852116dbeed6a4dc27c7010ec3115d89ca9c0",
+      "initialCloneSha256": "755812243972389a724be1c7820852116dbeed6a4dc27c7010ec3115d89ca9c0"
+    },
+    {
+      "relativePath": "contexts/risk/docs/risk.md",
+      "bytes": 63,
+      "sha256": "d25e388e963c66ad9f90d8ec73eb322a29f85669b55652b06adef4b5d13f3bc0",
+      "initialCloneSha256": "d25e388e963c66ad9f90d8ec73eb322a29f85669b55652b06adef4b5d13f3bc0"
+    },
+    {
+      "relativePath": "manifest/projects.yaml",
+      "bytes": 189,
+      "sha256": "321b27ad887345579b23297adf3adc936593f0434e5081a0946e4a3294b94e69",
+      "initialCloneSha256": "321b27ad887345579b23297adf3adc936593f0434e5081a0946e4a3294b94e69"
+    },
+    {
+      "relativePath": "README.md",
+      "bytes": 7,
+      "sha256": "e621bcce928241db8b0609ac56504cd1e81a1d7d9625d6c00eca21d2de76295d",
+      "initialCloneSha256": "e621bcce928241db8b0609ac56504cd1e81a1d7d9625d6c00eca21d2de76295d"
+    }
+  ],
+  "homeCopies": [
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\a\\temp-35\\teamai-recall-home-urABNK\\.teamai\\config.yaml",
+      "destination": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\business-home\\.teamai\\config.yaml",
+      "sourceSha256": "e9502e4d4e38d764a2067b6c9a6e8c8393752bcdc9ac837c1f05a8018cdf75c0",
+      "destinationSha256": "b008eb6f695979ad9ecf69e3bb94aeaeeb9ce5ef02cb1d62f61992cd72483572",
+      "delta": "Fixture source identity only"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\a\\temp-35\\teamai-recall-home-urABNK\\.teamai\\outbox\\learning-payloads\\70000000-0000-4000-8000-000000000002.md",
+      "destination": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\business-home\\.teamai\\outbox\\learning-payloads\\70000000-0000-4000-8000-000000000002.md",
+      "sourceSha256": "7aeb30a6edcffe8aeac0f76b78b0c67128810a223b8d6b1d2008c65f27b9e953",
+      "destinationSha256": "7aeb30a6edcffe8aeac0f76b78b0c67128810a223b8d6b1d2008c65f27b9e953",
+      "delta": "Exact bytes"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\a\\temp-35\\teamai-recall-home-urABNK\\.teamai\\outbox\\learnings\\70000000-0000-4000-8000-000000000002.json",
+      "destination": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\business-home\\.teamai\\outbox\\learnings\\70000000-0000-4000-8000-000000000002.json",
+      "sourceSha256": "d89593426f7c8bcf43150ae8f06ac7db8cf087af74374b87e64e17938956560e",
+      "destinationSha256": "7a09a348638dfc1a447ef1ee935fce72283db1756365a3a7b1f79154129db649",
+      "delta": "Fixture source identity only"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\a\\temp-35\\teamai-recall-home-urABNK\\.teamai\\projects\\t-teamai-cli-customization-.tmp-recall-29-35-runtime-a-temp-35-teamai-git-ga1pyt-bc5e5d7e0046c9dc\\anchor",
+      "destination": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\business-home\\.teamai\\projects\\t-teamai-cli-customization-.tmp-recall-29-35-runtime-a-temp-35-teamai-git-ga1pyt-bc5e5d7e0046c9dc\\anchor",
+      "sourceSha256": "152a7a14fdd1370d547f3f2df8ffb3c339fe6dd97629b29837fb6e0faeec2fdd",
+      "destinationSha256": "152a7a14fdd1370d547f3f2df8ffb3c339fe6dd97629b29837fb6e0faeec2fdd",
+      "delta": "Exact bytes"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\a\\temp-35\\teamai-recall-home-urABNK\\.teamai\\projects\\t-teamai-cli-customization-.tmp-recall-29-35-runtime-a-temp-35-teamai-git-ga1pyt-bc5e5d7e0046c9dc\\state.json",
+      "destination": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\business-home\\.teamai\\projects\\t-teamai-cli-customization-.tmp-recall-29-35-runtime-a-temp-35-teamai-git-ga1pyt-bc5e5d7e0046c9dc\\state.json",
+      "sourceSha256": "6e12b0aa87126a132d47d7bc18ffe1422053ebe8fda5b9af652d1970f6fcfc6a",
+      "destinationSha256": "6e12b0aa87126a132d47d7bc18ffe1422053ebe8fda5b9af652d1970f6fcfc6a",
+      "delta": "Exact bytes"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\a\\temp-35\\teamai-recall-home-urABNK\\.teamai\\published-learnings\\dcd904bd61810d03b2322811a79c5a4a9a01d47763bc88abdbd35ba12e988e8a\\current.json",
+      "destination": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\business-home\\.teamai\\published-learnings\\eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809\\current.json",
+      "sourceSha256": "4c0de70bc82dc4f7e13428386cf97130f578271a814ca2de896ceb0b5fbeca29",
+      "destinationSha256": "d549932a33d1dc32e3ce758706316e5594c3d2515f0fc3a65064deca8643aea7",
+      "delta": "Fixture source identity only"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\a\\temp-35\\teamai-recall-home-urABNK\\.teamai\\published-learnings\\dcd904bd61810d03b2322811a79c5a4a9a01d47763bc88abdbd35ba12e988e8a\\revisions\\c4a2b9be3f3b7c947fa564f6ef83160082fde6ab\\files\\learnings\\shared\\70000000-0000-4000-8000-000000000001.md",
+      "destination": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\business-home\\.teamai\\published-learnings\\eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809\\revisions\\c4a2b9be3f3b7c947fa564f6ef83160082fde6ab\\files\\learnings\\shared\\70000000-0000-4000-8000-000000000001.md",
+      "sourceSha256": "52a3f6b9e4344b878b2a08c9165a16c3e4fedbb6c77ef35cae08b631ef411552",
+      "destinationSha256": "52a3f6b9e4344b878b2a08c9165a16c3e4fedbb6c77ef35cae08b631ef411552",
+      "delta": "Exact bytes"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\a\\temp-35\\teamai-recall-home-urABNK\\.teamai\\published-learnings\\dcd904bd61810d03b2322811a79c5a4a9a01d47763bc88abdbd35ba12e988e8a\\revisions\\c4a2b9be3f3b7c947fa564f6ef83160082fde6ab\\snapshot.json",
+      "destination": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\business-home\\.teamai\\published-learnings\\eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809\\revisions\\c4a2b9be3f3b7c947fa564f6ef83160082fde6ab\\snapshot.json",
+      "sourceSha256": "1d0c65aa37fec29538443e0c3b9ba5afe3a9a7faa399f46baf137ae0156a32cb",
+      "destinationSha256": "e7490be1b43ded06a578be7644b7dedca59ff881895a0a735d1c3ccd8a6b046e",
+      "delta": "Fixture source identity only"
+    }
+  ],
+  "expected": [
+    {
+      "name": "dense-lf-crlf",
+      "args": [
+        "recall",
+        "weakcue anchorOne anchorTwo",
+        "--scope",
+        "workspace",
+        "--project",
+        "payments",
+        "--limit",
+        "20",
+        "--json"
+      ],
+      "result": {
+        "schemaVersion": 1,
+        "query": "weakcue anchorOne anchorTwo",
+        "scope": "workspace",
+        "project": "payments",
+        "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+        "resourceRevision": "0df6e2919c48f90bb2adf45a35a517d6cd588837",
+        "learningsRevision": "c4a2b9be3f3b7c947fa564f6ef83160082fde6ab",
+        "limit": 20,
+        "hits": [
+          {
+            "id": "doc:payments:contexts/payments/docs/snippets/a-dense-crlf.md",
+            "type": "doc",
+            "publication": "published",
+            "logicalProject": "payments",
+            "title": "a dense crlf",
+            "source": {
+              "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+              "revision": "0df6e2919c48f90bb2adf45a35a517d6cd588837",
+              "relativePath": "contexts/payments/docs/snippets/a-dense-crlf.md",
+              "contentHash": "5a1d824dd85223d67e936e2c82a0cb848c2589a4790ad1460d90ee15682860e2"
+            },
+            "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\contexts\\payments\\docs\\snippets\\a-dense-crlf.md",
+            "matchedTerms": [
+              "weakcue",
+              "anchorOne",
+              "anchorTwo"
+            ],
+            "lineStart": 6,
+            "lineEnd": 8,
+            "snippet": "anchorOne precise\nanchorTwo original\nweakcue corroboration ⟦/evidence⟧"
+          },
+          {
+            "id": "doc:payments:contexts/payments/docs/snippets/a-dense-lf.md",
+            "type": "doc",
+            "publication": "published",
+            "logicalProject": "payments",
+            "title": "a dense lf",
+            "source": {
+              "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+              "revision": "0df6e2919c48f90bb2adf45a35a517d6cd588837",
+              "relativePath": "contexts/payments/docs/snippets/a-dense-lf.md",
+              "contentHash": "91a071965da868dc0a9bf4ce74848e7e28791e8a299264352f401bbc3d076480"
+            },
+            "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\contexts\\payments\\docs\\snippets\\a-dense-lf.md",
+            "matchedTerms": [
+              "weakcue",
+              "anchorOne",
+              "anchorTwo"
+            ],
+            "lineStart": 6,
+            "lineEnd": 8,
+            "snippet": "anchorOne precise\nanchorTwo original\nweakcue corroboration ⟦/evidence⟧"
+          }
+        ]
+      }
+    },
+    {
+      "name": "dense-required-outside-window",
+      "args": [
+        "recall",
+        "weakcue anchorOne anchorTwo",
+        "--require",
+        "trailing text",
+        "--scope",
+        "workspace",
+        "--project",
+        "payments",
+        "--limit",
+        "20",
+        "--json"
+      ],
+      "result": {
+        "schemaVersion": 1,
+        "query": "weakcue anchorOne anchorTwo",
+        "requiredLiterals": [
+          "trailing text"
+        ],
+        "scope": "workspace",
+        "project": "payments",
+        "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+        "resourceRevision": "0df6e2919c48f90bb2adf45a35a517d6cd588837",
+        "learningsRevision": "c4a2b9be3f3b7c947fa564f6ef83160082fde6ab",
+        "limit": 20,
+        "hits": [
+          {
+            "id": "doc:payments:contexts/payments/docs/snippets/a-dense-crlf.md",
+            "type": "doc",
+            "publication": "published",
+            "logicalProject": "payments",
+            "title": "a dense crlf",
+            "source": {
+              "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+              "revision": "0df6e2919c48f90bb2adf45a35a517d6cd588837",
+              "relativePath": "contexts/payments/docs/snippets/a-dense-crlf.md",
+              "contentHash": "5a1d824dd85223d67e936e2c82a0cb848c2589a4790ad1460d90ee15682860e2"
+            },
+            "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\contexts\\payments\\docs\\snippets\\a-dense-crlf.md",
+            "matchedTerms": [
+              "weakcue",
+              "anchorOne",
+              "anchorTwo"
+            ],
+            "lineStart": 6,
+            "lineEnd": 8,
+            "snippet": "anchorOne precise\nanchorTwo original\nweakcue corroboration ⟦/evidence⟧"
+          },
+          {
+            "id": "doc:payments:contexts/payments/docs/snippets/a-dense-lf.md",
+            "type": "doc",
+            "publication": "published",
+            "logicalProject": "payments",
+            "title": "a dense lf",
+            "source": {
+              "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+              "revision": "0df6e2919c48f90bb2adf45a35a517d6cd588837",
+              "relativePath": "contexts/payments/docs/snippets/a-dense-lf.md",
+              "contentHash": "91a071965da868dc0a9bf4ce74848e7e28791e8a299264352f401bbc3d076480"
+            },
+            "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\contexts\\payments\\docs\\snippets\\a-dense-lf.md",
+            "matchedTerms": [
+              "weakcue",
+              "anchorOne",
+              "anchorTwo"
+            ],
+            "lineStart": 6,
+            "lineEnd": 8,
+            "snippet": "anchorOne precise\nanchorTwo original\nweakcue corroboration ⟦/evidence⟧"
+          }
+        ]
+      }
+    },
+    {
+      "name": "tie-earliest",
+      "args": [
+        "recall",
+        "tieOne tieTwo",
+        "--scope",
+        "workspace",
+        "--project",
+        "payments",
+        "--limit",
+        "20",
+        "--json"
+      ],
+      "result": {
+        "schemaVersion": 1,
+        "query": "tieOne tieTwo",
+        "scope": "workspace",
+        "project": "payments",
+        "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+        "resourceRevision": "0df6e2919c48f90bb2adf45a35a517d6cd588837",
+        "learningsRevision": "c4a2b9be3f3b7c947fa564f6ef83160082fde6ab",
+        "limit": 20,
+        "hits": [
+          {
+            "id": "doc:payments:contexts/payments/docs/snippets/tie.md",
+            "type": "doc",
+            "publication": "published",
+            "logicalProject": "payments",
+            "title": "tie",
+            "source": {
+              "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+              "revision": "0df6e2919c48f90bb2adf45a35a517d6cd588837",
+              "relativePath": "contexts/payments/docs/snippets/tie.md",
+              "contentHash": "8e539f0d5fe42ef9664342f66c73de7214c17ffe6b2f1c7c3b439acdcc646cfa"
+            },
+            "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\contexts\\payments\\docs\\snippets\\tie.md",
+            "matchedTerms": [
+              "tieOne",
+              "tieTwo"
+            ],
+            "lineStart": 1,
+            "lineEnd": 3,
+            "snippet": "preface\ntieOne\ntieTwo"
+          }
+        ]
+      }
+    },
+    {
+      "name": "start-full-window",
+      "args": [
+        "recall",
+        "headOne headTwo",
+        "--scope",
+        "workspace",
+        "--project",
+        "payments",
+        "--limit",
+        "20",
+        "--json"
+      ],
+      "result": {
+        "schemaVersion": 1,
+        "query": "headOne headTwo",
+        "scope": "workspace",
+        "project": "payments",
+        "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+        "resourceRevision": "0df6e2919c48f90bb2adf45a35a517d6cd588837",
+        "learningsRevision": "c4a2b9be3f3b7c947fa564f6ef83160082fde6ab",
+        "limit": 20,
+        "hits": [
+          {
+            "id": "doc:payments:contexts/payments/docs/snippets/head.md",
+            "type": "doc",
+            "publication": "published",
+            "logicalProject": "payments",
+            "title": "head",
+            "source": {
+              "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+              "revision": "0df6e2919c48f90bb2adf45a35a517d6cd588837",
+              "relativePath": "contexts/payments/docs/snippets/head.md",
+              "contentHash": "35d7d99eff8015e5fc3dbc0689e2852a284ce2cb5f1c2baf76507fd17abd32cc"
+            },
+            "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\contexts\\payments\\docs\\snippets\\head.md",
+            "matchedTerms": [
+              "headOne",
+              "headTwo"
+            ],
+            "lineStart": 1,
+            "lineEnd": 3,
+            "snippet": "headOne\nheadTwo\nthird context"
+          }
+        ]
+      }
+    },
+    {
+      "name": "end-full-window",
+      "args": [
+        "recall",
+        "tailOne tailTwo tailThree",
+        "--scope",
+        "workspace",
+        "--project",
+        "payments",
+        "--limit",
+        "20",
+        "--json"
+      ],
+      "result": {
+        "schemaVersion": 1,
+        "query": "tailOne tailTwo tailThree",
+        "scope": "workspace",
+        "project": "payments",
+        "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+        "resourceRevision": "0df6e2919c48f90bb2adf45a35a517d6cd588837",
+        "learningsRevision": "c4a2b9be3f3b7c947fa564f6ef83160082fde6ab",
+        "limit": 20,
+        "hits": [
+          {
+            "id": "doc:payments:contexts/payments/docs/snippets/tail.md",
+            "type": "doc",
+            "publication": "published",
+            "logicalProject": "payments",
+            "title": "tail",
+            "source": {
+              "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+              "revision": "0df6e2919c48f90bb2adf45a35a517d6cd588837",
+              "relativePath": "contexts/payments/docs/snippets/tail.md",
+              "contentHash": "c14fb415b6154285f5d4be40c2f05810e48bfd07d2b281ecdb9ebe5b0f739eb5"
+            },
+            "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\contexts\\payments\\docs\\snippets\\tail.md",
+            "matchedTerms": [
+              "tailOne",
+              "tailTwo",
+              "tailThree"
+            ],
+            "lineStart": 3,
+            "lineEnd": 5,
+            "snippet": "tailOne\ntailTwo\ntailThree"
+          }
+        ]
+      }
+    },
+    {
+      "name": "short-original-file",
+      "args": [
+        "recall",
+        "edgeSolo",
+        "--scope",
+        "workspace",
+        "--project",
+        "payments",
+        "--limit",
+        "20",
+        "--json"
+      ],
+      "result": {
+        "schemaVersion": 1,
+        "query": "edgeSolo",
+        "scope": "workspace",
+        "project": "payments",
+        "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+        "resourceRevision": "0df6e2919c48f90bb2adf45a35a517d6cd588837",
+        "learningsRevision": "c4a2b9be3f3b7c947fa564f6ef83160082fde6ab",
+        "limit": 20,
+        "hits": [
+          {
+            "id": "doc:payments:contexts/payments/docs/snippets/two-lines.md",
+            "type": "doc",
+            "publication": "published",
+            "logicalProject": "payments",
+            "title": "two lines",
+            "source": {
+              "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+              "revision": "0df6e2919c48f90bb2adf45a35a517d6cd588837",
+              "relativePath": "contexts/payments/docs/snippets/two-lines.md",
+              "contentHash": "755812243972389a724be1c7820852116dbeed6a4dc27c7010ec3115d89ca9c0"
+            },
+            "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\contexts\\payments\\docs\\snippets\\two-lines.md",
+            "matchedTerms": [
+              "edgeSolo"
+            ],
+            "lineStart": 1,
+            "lineEnd": 2,
+            "snippet": "edgeSolo\nsecond"
+          }
+        ]
+      }
+    },
+    {
+      "name": "exact-1200",
+      "args": [
+        "recall",
+        "capWindow",
+        "--scope",
+        "workspace",
+        "--project",
+        "payments",
+        "--limit",
+        "20",
+        "--json"
+      ],
+      "result": {
+        "schemaVersion": 1,
+        "query": "capWindow",
+        "scope": "workspace",
+        "project": "payments",
+        "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+        "resourceRevision": "0df6e2919c48f90bb2adf45a35a517d6cd588837",
+        "learningsRevision": "c4a2b9be3f3b7c947fa564f6ef83160082fde6ab",
+        "limit": 20,
+        "hits": [
+          {
+            "id": "doc:payments:contexts/payments/docs/snippets/cap.md",
+            "type": "doc",
+            "publication": "published",
+            "logicalProject": "payments",
+            "title": "cap",
+            "source": {
+              "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+              "revision": "0df6e2919c48f90bb2adf45a35a517d6cd588837",
+              "relativePath": "contexts/payments/docs/snippets/cap.md",
+              "contentHash": "77b82645f3f3671e465cbb426f6ec8e57fd7f3facb8fca6cfea4795b4d9e0e09"
+            },
+            "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\contexts\\payments\\docs\\snippets\\cap.md",
+            "matchedTerms": [
+              "capWindow"
+            ],
+            "lineStart": 1,
+            "lineEnd": 1,
+            "snippet": "capWindowxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+          }
+        ]
+      }
+    },
+    {
+      "name": "long-line-head",
+      "args": [
+        "recall",
+        "longHeadWindow",
+        "--scope",
+        "workspace",
+        "--project",
+        "payments",
+        "--limit",
+        "20",
+        "--json"
+      ],
+      "result": {
+        "schemaVersion": 1,
+        "query": "longHeadWindow",
+        "scope": "workspace",
+        "project": "payments",
+        "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+        "resourceRevision": "0df6e2919c48f90bb2adf45a35a517d6cd588837",
+        "learningsRevision": "c4a2b9be3f3b7c947fa564f6ef83160082fde6ab",
+        "limit": 20,
+        "hits": [
+          {
+            "id": "doc:payments:contexts/payments/docs/snippets/long-head.md",
+            "type": "doc",
+            "publication": "published",
+            "logicalProject": "payments",
+            "title": "long head",
+            "source": {
+              "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+              "revision": "0df6e2919c48f90bb2adf45a35a517d6cd588837",
+              "relativePath": "contexts/payments/docs/snippets/long-head.md",
+              "contentHash": "546553909013bdf8577f3cde2f030e69159b50bc6843ce2aab2dd40fe647cebb"
+            },
+            "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\contexts\\payments\\docs\\snippets\\long-head.md",
+            "matchedTerms": [
+              "longHeadWindow"
+            ],
+            "lineStart": 1,
+            "lineEnd": 1,
+            "snippet": "longHeadWindowxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+          }
+        ]
+      }
+    },
+    {
+      "name": "long-line-tail",
+      "args": [
+        "recall",
+        "longTailWindow",
+        "--scope",
+        "workspace",
+        "--project",
+        "payments",
+        "--limit",
+        "20",
+        "--json"
+      ],
+      "result": {
+        "schemaVersion": 1,
+        "query": "longTailWindow",
+        "scope": "workspace",
+        "project": "payments",
+        "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+        "resourceRevision": "0df6e2919c48f90bb2adf45a35a517d6cd588837",
+        "learningsRevision": "c4a2b9be3f3b7c947fa564f6ef83160082fde6ab",
+        "limit": 20,
+        "hits": [
+          {
+            "id": "doc:payments:contexts/payments/docs/snippets/long-tail.md",
+            "type": "doc",
+            "publication": "published",
+            "logicalProject": "payments",
+            "title": "long tail",
+            "source": {
+              "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+              "revision": "0df6e2919c48f90bb2adf45a35a517d6cd588837",
+              "relativePath": "contexts/payments/docs/snippets/long-tail.md",
+              "contentHash": "73416b484bb4ffb7d30e36fdda24740bbe92b0d76cb8775c870a634e8f0daf51"
+            },
+            "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\contexts\\payments\\docs\\snippets\\long-tail.md",
+            "matchedTerms": [
+              "longTailWindow"
+            ],
+            "lineStart": 1,
+            "lineEnd": 1,
+            "snippet": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxlongTailWindow"
+          }
+        ]
+      }
+    },
+    {
+      "name": "nfd-emoji-raw-offset",
+      "args": [
+        "recall",
+        "CAFÉWINDOW",
+        "--scope",
+        "workspace",
+        "--project",
+        "payments",
+        "--limit",
+        "20",
+        "--json"
+      ],
+      "result": {
+        "schemaVersion": 1,
+        "query": "CAFÉWINDOW",
+        "scope": "workspace",
+        "project": "payments",
+        "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+        "resourceRevision": "0df6e2919c48f90bb2adf45a35a517d6cd588837",
+        "learningsRevision": "c4a2b9be3f3b7c947fa564f6ef83160082fde6ab",
+        "limit": 20,
+        "hits": [
+          {
+            "id": "doc:payments:contexts/payments/docs/snippets/nfd-emoji.md",
+            "type": "doc",
+            "publication": "published",
+            "logicalProject": "payments",
+            "title": "nfd emoji",
+            "source": {
+              "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+              "revision": "0df6e2919c48f90bb2adf45a35a517d6cd588837",
+              "relativePath": "contexts/payments/docs/snippets/nfd-emoji.md",
+              "contentHash": "a337053298969145b236a58bda9b195c5fae1f465d2c6c5ea86c3a4bcbf71428"
+            },
+            "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\contexts\\payments\\docs\\snippets\\nfd-emoji.md",
+            "matchedTerms": [
+              "CAFÉWINDOW"
+            ],
+            "lineStart": 1,
+            "lineEnd": 1,
+            "snippet": "🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂CaféWindowxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+          }
+        ]
+      }
+    },
+    {
+      "name": "lowercase-expansion-offset",
+      "args": [
+        "recall",
+        "expand_window",
+        "--scope",
+        "workspace",
+        "--project",
+        "payments",
+        "--limit",
+        "20",
+        "--json"
+      ],
+      "result": {
+        "schemaVersion": 1,
+        "query": "expand_window",
+        "scope": "workspace",
+        "project": "payments",
+        "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+        "resourceRevision": "0df6e2919c48f90bb2adf45a35a517d6cd588837",
+        "learningsRevision": "c4a2b9be3f3b7c947fa564f6ef83160082fde6ab",
+        "limit": 20,
+        "hits": [
+          {
+            "id": "doc:payments:contexts/payments/docs/snippets/case-expansion.md",
+            "type": "doc",
+            "publication": "published",
+            "logicalProject": "payments",
+            "title": "case expansion",
+            "source": {
+              "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+              "revision": "0df6e2919c48f90bb2adf45a35a517d6cd588837",
+              "relativePath": "contexts/payments/docs/snippets/case-expansion.md",
+              "contentHash": "3648fc1d839b880a6eb214c6810ec5b3bbb36fe8fe51b26dc335a8be9913e449"
+            },
+            "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\contexts\\payments\\docs\\snippets\\case-expansion.md",
+            "matchedTerms": [
+              "expand_window"
+            ],
+            "lineStart": 1,
+            "lineEnd": 1,
+            "snippet": "İİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİEXPAND_WINDOWqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"
+          }
+        ]
+      }
+    },
+    {
+      "name": "inside-long-grapheme",
+      "args": [
+        "recall",
+        "͟",
+        "--scope",
+        "workspace",
+        "--project",
+        "payments",
+        "--limit",
+        "20",
+        "--json"
+      ],
+      "result": {
+        "schemaVersion": 1,
+        "query": "͟",
+        "scope": "workspace",
+        "project": "payments",
+        "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+        "resourceRevision": "0df6e2919c48f90bb2adf45a35a517d6cd588837",
+        "learningsRevision": "c4a2b9be3f3b7c947fa564f6ef83160082fde6ab",
+        "limit": 20,
+        "hits": [
+          {
+            "id": "doc:payments:contexts/payments/docs/snippets/inside-combining.md",
+            "type": "doc",
+            "publication": "published",
+            "logicalProject": "payments",
+            "title": "inside combining",
+            "source": {
+              "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+              "revision": "0df6e2919c48f90bb2adf45a35a517d6cd588837",
+              "relativePath": "contexts/payments/docs/snippets/inside-combining.md",
+              "contentHash": "3abed7a0b12ed66078b92f23d5158fd9308b154a1542788edf9d4f136598c269"
+            },
+            "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\contexts\\payments\\docs\\snippets\\inside-combining.md",
+            "matchedTerms": [
+              "͟"
+            ],
+            "lineStart": 1,
+            "lineEnd": 1,
+            "snippet": "́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́͟zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+          }
+        ]
+      }
+    },
+    {
+      "name": "canonical-reordering-offset",
+      "args": [
+        "recall",
+        "̣",
+        "--scope",
+        "workspace",
+        "--project",
+        "payments",
+        "--limit",
+        "20",
+        "--json"
+      ],
+      "result": {
+        "schemaVersion": 1,
+        "query": "̣",
+        "scope": "workspace",
+        "project": "payments",
+        "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+        "resourceRevision": "0df6e2919c48f90bb2adf45a35a517d6cd588837",
+        "learningsRevision": "c4a2b9be3f3b7c947fa564f6ef83160082fde6ab",
+        "limit": 20,
+        "hits": [
+          {
+            "id": "doc:payments:contexts/payments/docs/snippets/reordered-combining.md",
+            "type": "doc",
+            "publication": "published",
+            "logicalProject": "payments",
+            "title": "reordered combining",
+            "source": {
+              "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+              "revision": "0df6e2919c48f90bb2adf45a35a517d6cd588837",
+              "relativePath": "contexts/payments/docs/snippets/reordered-combining.md",
+              "contentHash": "1811bffe9ee81acf6cfadb3fe4ff3420ec18171a264cbc39aedf85a3f9949508"
+            },
+            "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\contexts\\payments\\docs\\snippets\\reordered-combining.md",
+            "matchedTerms": [
+              "̣"
+            ],
+            "lineStart": 1,
+            "lineEnd": 1,
+            "snippet": "̣́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+          }
+        ]
+      }
+    },
+    {
+      "name": "derived-title-only",
+      "args": [
+        "recall",
+        "DERIVEDONLY",
+        "--scope",
+        "workspace",
+        "--project",
+        "payments",
+        "--limit",
+        "20",
+        "--json"
+      ],
+      "result": {
+        "schemaVersion": 1,
+        "query": "DERIVEDONLY",
+        "scope": "workspace",
+        "project": "payments",
+        "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+        "resourceRevision": "0df6e2919c48f90bb2adf45a35a517d6cd588837",
+        "learningsRevision": "c4a2b9be3f3b7c947fa564f6ef83160082fde6ab",
+        "limit": 20,
+        "hits": [
+          {
+            "id": "doc:payments:contexts/payments/docs/snippets/derivedOnly.md",
+            "type": "doc",
+            "publication": "published",
+            "logicalProject": "payments",
+            "title": "derivedOnly",
+            "source": {
+              "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+              "revision": "0df6e2919c48f90bb2adf45a35a517d6cd588837",
+              "relativePath": "contexts/payments/docs/snippets/derivedOnly.md",
+              "contentHash": "0dc9e7df4e6be0990006207227149a4ca87363d43b8d357dd1e2403c89cef6d9"
+            },
+            "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\contexts\\payments\\docs\\snippets\\derivedOnly.md",
+            "matchedTerms": [
+              "DERIVEDONLY"
+            ],
+            "lineStart": 1,
+            "lineEnd": 3,
+            "snippet": "Original opening\nStill only original text\nThird context"
+          }
+        ]
+      }
+    },
+    {
+      "name": "file-terms-outside-snippet",
+      "args": [
+        "recall",
+        "spareCue firstCue secondCue thirdCue",
+        "--scope",
+        "workspace",
+        "--project",
+        "payments",
+        "--limit",
+        "20",
+        "--json"
+      ],
+      "result": {
+        "schemaVersion": 1,
+        "query": "spareCue firstCue secondCue thirdCue",
+        "scope": "workspace",
+        "project": "payments",
+        "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+        "resourceRevision": "0df6e2919c48f90bb2adf45a35a517d6cd588837",
+        "learningsRevision": "c4a2b9be3f3b7c947fa564f6ef83160082fde6ab",
+        "limit": 20,
+        "hits": [
+          {
+            "id": "doc:payments:contexts/payments/docs/snippets/outside-window.md",
+            "type": "doc",
+            "publication": "published",
+            "logicalProject": "payments",
+            "title": "outside window",
+            "source": {
+              "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+              "revision": "0df6e2919c48f90bb2adf45a35a517d6cd588837",
+              "relativePath": "contexts/payments/docs/snippets/outside-window.md",
+              "contentHash": "c004a5aec2830bd999881dde702caac7ac1c6f1ab3b81c3e456549000557b545"
+            },
+            "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\contexts\\payments\\docs\\snippets\\outside-window.md",
+            "matchedTerms": [
+              "spareCue",
+              "firstCue",
+              "secondCue",
+              "thirdCue"
+            ],
+            "lineStart": 3,
+            "lineEnd": 5,
+            "snippet": "gap two\nfirstCue secondCue\nthirdCue proof"
+          }
+        ]
+      }
+    },
+    {
+      "name": "contiguous-multiline-cap",
+      "args": [
+        "recall",
+        "multiCue",
+        "--scope",
+        "workspace",
+        "--project",
+        "payments",
+        "--limit",
+        "20",
+        "--json"
+      ],
+      "result": {
+        "schemaVersion": 1,
+        "query": "multiCue",
+        "scope": "workspace",
+        "project": "payments",
+        "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+        "resourceRevision": "0df6e2919c48f90bb2adf45a35a517d6cd588837",
+        "learningsRevision": "c4a2b9be3f3b7c947fa564f6ef83160082fde6ab",
+        "limit": 20,
+        "hits": [
+          {
+            "id": "doc:payments:contexts/payments/docs/snippets/multi-line-cap.md",
+            "type": "doc",
+            "publication": "published",
+            "logicalProject": "payments",
+            "title": "multi line cap",
+            "source": {
+              "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+              "revision": "0df6e2919c48f90bb2adf45a35a517d6cd588837",
+              "relativePath": "contexts/payments/docs/snippets/multi-line-cap.md",
+              "contentHash": "70321d6717ede166051d73f6d26989b45da2a4eb5aa3cf69735609d442f08a22"
+            },
+            "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\resource\\contexts\\payments\\docs\\snippets\\multi-line-cap.md",
+            "matchedTerms": [
+              "multiCue"
+            ],
+            "lineStart": 1,
+            "lineEnd": 2,
+            "snippet": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\nmultiCue ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          }
+        ]
+      }
+    },
+    {
+      "name": "published-user-window",
+      "args": [
+        "recall",
+        "pubWeakHint pubTraceAlpha pubTraceBeta",
+        "--scope",
+        "user",
+        "--json"
+      ],
+      "result": {
+        "schemaVersion": 1,
+        "query": "pubWeakHint pubTraceAlpha pubTraceBeta",
+        "scope": "user",
+        "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+        "learningsRevision": "c4a2b9be3f3b7c947fa564f6ef83160082fde6ab",
+        "limit": 5,
+        "hits": [
+          {
+            "id": "learning:shared:70000000-0000-4000-8000-000000000001",
+            "type": "learning",
+            "publication": "published",
+            "logicalProject": "shared",
+            "title": "Snippet learning record",
+            "source": {
+              "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+              "revision": "c4a2b9be3f3b7c947fa564f6ef83160082fde6ab",
+              "relativePath": "learnings/shared/70000000-0000-4000-8000-000000000001.md",
+              "contentHash": "52a3f6b9e4344b878b2a08c9165a16c3e4fedbb6c77ef35cae08b631ef411552"
+            },
+            "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\business-home\\.teamai\\published-learnings\\eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809\\revisions\\c4a2b9be3f3b7c947fa564f6ef83160082fde6ab\\files\\learnings\\shared\\70000000-0000-4000-8000-000000000001.md",
+            "matchedTerms": [
+              "pubWeakHint",
+              "pubTraceAlpha",
+              "pubTraceBeta"
+            ],
+            "lineStart": 9,
+            "lineEnd": 11,
+            "snippet": "pubTraceAlpha precise\npubTraceBeta original\npubWeakHint close"
+          }
+        ]
+      }
+    },
+    {
+      "name": "pending-user-window",
+      "args": [
+        "recall",
+        "draftWeakHint draftTraceAlpha draftTraceBeta",
+        "--scope",
+        "user",
+        "--include-pending",
+        "--require",
+        "draftTraceAlpha",
+        "--json"
+      ],
+      "result": {
+        "schemaVersion": 1,
+        "query": "draftWeakHint draftTraceAlpha draftTraceBeta",
+        "requiredLiterals": [
+          "draftTraceAlpha"
+        ],
+        "scope": "user",
+        "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+        "learningsRevision": "c4a2b9be3f3b7c947fa564f6ef83160082fde6ab",
+        "limit": 5,
+        "hits": [
+          {
+            "id": "learning:shared:70000000-0000-4000-8000-000000000002",
+            "type": "learning",
+            "publication": "pending",
+            "logicalProject": "shared",
+            "title": "Snippet pending record",
+            "source": {
+              "sourceHash": "eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809",
+              "relativePath": "learnings/shared/70000000-0000-4000-8000-000000000002.md",
+              "contentHash": "7aeb30a6edcffe8aeac0f76b78b0c67128810a223b8d6b1d2008c65f27b9e953"
+            },
+            "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\business-home\\.teamai\\outbox\\learning-payloads\\70000000-0000-4000-8000-000000000002.md",
+            "matchedTerms": [
+              "draftWeakHint",
+              "draftTraceAlpha",
+              "draftTraceBeta"
+            ],
+            "lineStart": 9,
+            "lineEnd": 11,
+            "snippet": "draftTraceAlpha precise\ndraftTraceBeta original\ndraftWeakHint close"
+          }
+        ]
+      }
+    }
+  ],
+  "method": "Original independent windows, eligibility, order and other fields retained. Only independently materialized fixture source identity, resource revision and returned physical file paths remapped before any compiled query."
+}

@@ -1,0 +1,173 @@
+{
+  "result": "PASS_DELIVERED_RECALL_AGENT_READ_GAP_WITH_CONSUMER_TRANSCRIPT_LIMIT",
+  "readyFile": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-29-native-first-case-stop-ready.json",
+  "readySha256": "cbeea3d17f4757e4d5e515159531f7be2b71b4965b884b00f555fd6715caa600",
+  "indexedIdentities": 159,
+  "candidateRevision": "e0eb6a4734b78608709fb16398701cbbf26cae4a",
+  "caseId": "B33-read-failure",
+  "sessionId": "f2f003fb-1b6f-4092-909d-b610965cb677",
+  "normalExit": 0,
+  "observerExit": 1,
+  "observerRejectionPreserved": true,
+  "actualENOENT": {
+    "eventId": "bcdeaa0d-6ee6-493b-a6a3-8d93732d8732",
+    "timestamp": "2026-10-05T23:32:16.383Z",
+    "error": {
+      "message": "Unhandled error: Error: ENOENT: no such file or directory, open 'F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\90-read-gap.md'",
+      "code": "failure"
+    }
+  },
+  "exact745ByteRestore": {
+    "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\90-read-gap.md",
+    "bytes": 745,
+    "sha256": "4ae3a786e26169cf14543b30b7b7225b328f6bd2d1584dd0cf103887719dd4cb"
+  },
+  "childAnswer": {
+    "eventId": "1d278844-59f1-4af7-bf5d-dcc432daefeb",
+    "provenance": "Complete actual Recall Agent fields and CLI/read attribution"
+  },
+  "parentAnswer": {
+    "eventId": "c2b1c1a3-ff65-4da1-8d6b-45521bb2e18a",
+    "provenance": "Incomplete metadata after actual main Agent deselection; retains diagnostic, Project, evidence gap, relative paths and original quote",
+    "limitation": "Do not label final parent provenance complete or infer default caller inherits Recall profile"
+  },
+  "narrowIndependentReview": {
+    "agent": "/root/b33_line_capability_review",
+    "conclusion": "Actual query/read failure/no-replace restoration proven. Parent metadata omission is a consumer transcript limitation, not a proven product Major under the allowed same-Agent task route. Two exact ordinary platform paths may be separately disposed; generating PID remains unknown."
+  },
+  "platformDisposition": {
+    "exactPaths": [
+      "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+      "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive"
+    ],
+    "firstCaseRawDeltas": {
+      "businessRoots": 13,
+      "gitRoots": 5,
+      "deltas": [
+        {
+          "category": "business",
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+          "before": "9ddb4c472d3ec8daaf74a02afeeced740e73b218a55b38664beb8674ba949555",
+          "after": "305b90d0e78a72726f4eac6811526d4bd05128724f0704dff656cb155fddcba1"
+        },
+        {
+          "category": "business",
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive",
+          "before": "ABSENT",
+          "after": "a7de5177c68a64bd48b36d49e2853799f4ebcfa8e4761f7cc472f333dc5f65cf"
+        }
+      ],
+      "case": "B33-read-failure",
+      "sinceSetup": {
+        "businessRoots": 13,
+        "gitRoots": 5,
+        "deltas": [
+          {
+            "category": "business",
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+            "before": "ABSENT",
+            "after": "305b90d0e78a72726f4eac6811526d4bd05128724f0704dff656cb155fddcba1"
+          },
+          {
+            "category": "business",
+            "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive",
+            "before": "ABSENT",
+            "after": "a7de5177c68a64bd48b36d49e2853799f4ebcfa8e4761f7cc472f333dc5f65cf"
+          }
+        ]
+      },
+      "exactBusinessStartupDeltas": [
+        {
+          "category": "business",
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+          "before": "9ddb4c472d3ec8daaf74a02afeeced740e73b218a55b38664beb8674ba949555",
+          "after": "305b90d0e78a72726f4eac6811526d4bd05128724f0704dff656cb155fddcba1"
+        }
+      ],
+      "sinceSetupExactBusinessStartupDeltas": [
+        {
+          "category": "business",
+          "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+          "before": "ABSENT",
+          "after": "305b90d0e78a72726f4eac6811526d4bd05128724f0704dff656cb155fddcba1"
+        }
+      ],
+      "generatingPlatformArtifactPid": "NOT_INDEPENDENTLY_OBSERVED",
+      "nativePlatform": "Native account/config/session/log writes are separate and not scanned; complete business/Git deltas remain. Unexpected business changes require root disposition.",
+      "behaviorAcceptance": "NOT_INFERRED_FROM_HASHES"
+    },
+    "exactBytes": [
+      {
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+        "bytes": 71448,
+        "sha256": "305b90d0e78a72726f4eac6811526d4bd05128724f0704dff656cb155fddcba1",
+        "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v1\\B33-read-failure-after-startup-profile.bin",
+        "generatingPid": "NOT_INDEPENDENTLY_OBSERVED",
+        "meaning": "Exact operator protection artifact; not a consumer source read"
+      },
+      {
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive",
+        "bytes": 64,
+        "sha256": "a7de5177c68a64bd48b36d49e2853799f4ebcfa8e4761f7cc472f333dc5f65cf",
+        "exactByteCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v1\\B33-read-failure-unallocated-windows-startup-profile.bin",
+        "before": "ABSENT",
+        "generatingPid": "NOT_INDEPENDENTLY_OBSERVED",
+        "meaning": "Unexpected exact business HOME platform artifact; no blanket cache exemption"
+      }
+    ],
+    "generatingPid": "NOT_INDEPENDENTLY_OBSERVED",
+    "firstCaseOriginalObserver": "REJECT_EXIT_1_PRESERVED",
+    "subsequentCases": "Only these two exact ordinary paths; complete before/after bytes and deltas retained, every other business/Git change rejected. No blanket AppData/native exclusion."
+  },
+  "currentProtectedDeltasSinceFirstCase": 0,
+  "oldProtectedDeltas": 0,
+  "remainingCases": [
+    {
+      "id": "B33-injection",
+      "native": "NOT_RUN"
+    },
+    {
+      "id": "B29-coverage-zh",
+      "native": "NOT_RUN"
+    },
+    {
+      "id": "B29-coverage-en",
+      "native": "NOT_RUN"
+    },
+    {
+      "id": "B29-context",
+      "native": "NOT_RUN"
+    },
+    {
+      "id": "B29-dedup-conflict",
+      "native": "NOT_RUN"
+    },
+    {
+      "id": "B29-none",
+      "native": "NOT_RUN"
+    },
+    {
+      "id": "B29-unbound-git",
+      "native": "NOT_RUN"
+    },
+    {
+      "id": "B29-non-git",
+      "native": "NOT_RUN"
+    },
+    {
+      "id": "B29-explicit-workspace-unbound-git",
+      "native": "NOT_RUN"
+    },
+    {
+      "id": "B29-explicit-project-non-git",
+      "native": "NOT_RUN"
+    },
+    {
+      "id": "B29-supplement-intake",
+      "native": "NOT_RUN"
+    }
+  ],
+  "ticket29Acceptance": "PENDING_REMAINING_TEN_CASES",
+  "ticket33Acceptance": "READ_FAILURE_ONLY_NOT_WHOLE_TICKET",
+  "acceptedAtUtc": "2026-10-05T23:50:46.158Z"
+}

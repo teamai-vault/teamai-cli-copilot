@@ -1,0 +1,34 @@
+[
+  {
+    "agentId": null,
+    "toolCallId": "call_o5rzTkXM11G9gFkHQd8ZOv4u",
+    "startedAt": "2026-10-06T02:48:15.642Z",
+    "completedAt": "2026-10-06T02:48:49.150Z",
+    "arguments": {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\.teamai\\published-learnings\\698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\\revisions\\cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\\files\\learnings\\payments-api\\5d631ba1-b2e4-4638-8c45-5207c914ce82.md"
+    },
+    "exactReturnedFile": true,
+    "success": true,
+    "result": {
+      "content": "---\nid: 5d631ba1-b2e4-4638-8c45-5207c914ce82\ntitle: LedgerDrain condition C7\ntags: [LedgerDrain, PIPELINE_LOCK_81]\n---\n# Processing record\n\nPIPELINE_LOCK_81: LedgerDrain conflict.\nUnder exact condition case C7, processing must remain stopped until a replacement marker is confirmed.\nThis record provides no decision for any other condition.\n",
+      "detailedContent": "\ndiff --git a/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/b/b29-v1/business-home/.teamai/published-learnings/698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34/revisions/cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2/files/learnings/payments-api/5d631ba1-b2e4-4638-8c45-5207c914ce82.md b/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/b/b29-v1/business-home/.teamai/published-learnings/698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34/revisions/cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2/files/learnings/payments-api/5d631ba1-b2e4-4638-8c45-5207c914ce82.md\nindex 0000000..0000000 100644\n--- a/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/b/b29-v1/business-home/.teamai/published-learnings/698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34/revisions/cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2/files/learnings/payments-api/5d631ba1-b2e4-4638-8c45-5207c914ce82.md\n+++ b/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/b/b29-v1/business-home/.teamai/published-learnings/698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34/revisions/cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2/files/learnings/payments-api/5d631ba1-b2e4-4638-8c45-5207c914ce82.md\n@@ -1,11 +1,11 @@\n ---\n id: 5d631ba1-b2e4-4638-8c45-5207c914ce82\n title: LedgerDrain condition C7\n tags: [LedgerDrain, PIPELINE_LOCK_81]\n ---\n # Processing record\n \n PIPELINE_LOCK_81: LedgerDrain conflict.\n Under exact condition case C7, processing must remain stopped until a replacement marker is confirmed.\n This record provides no decision for any other condition.\n \n"
+    },
+    "nativeBodySha256": "3faf31f95ac6386092f2994224f941537850e281697fc286492a8c6eba2e7001"
+  },
+  {
+    "agentId": null,
+    "toolCallId": "call_54PlZXK4L5C7oV4j3wnxJzRp",
+    "startedAt": "2026-10-06T02:48:15.644Z",
+    "completedAt": "2026-10-06T02:49:01.883Z",
+    "arguments": {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\.teamai\\published-learnings\\698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\\revisions\\cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\\files\\learnings\\payments-api\\9be813a0-2541-4cf2-b71e-098a7f610e81.md"
+    },
+    "exactReturnedFile": true,
+    "success": true,
+    "result": {
+      "content": "---\nid: 9be813a0-2541-4cf2-b71e-098a7f610e81\ntitle: LedgerDrain condition C7\ntags: [LedgerDrain, PIPELINE_LOCK_81]\n---\n# Processing record\n\nPIPELINE_LOCK_81: LedgerDrain conflict.\nUnder exact condition case C7, processing is allowed to continue without waiting for a replacement marker.\nThis record provides no decision for any other condition.\n",
+      "detailedContent": "\ndiff --git a/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/b/b29-v1/business-home/.teamai/published-learnings/698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34/revisions/cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2/files/learnings/payments-api/9be813a0-2541-4cf2-b71e-098a7f610e81.md b/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/b/b29-v1/business-home/.teamai/published-learnings/698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34/revisions/cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2/files/learnings/payments-api/9be813a0-2541-4cf2-b71e-098a7f610e81.md\nindex 0000000..0000000 100644\n--- a/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/b/b29-v1/business-home/.teamai/published-learnings/698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34/revisions/cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2/files/learnings/payments-api/9be813a0-2541-4cf2-b71e-098a7f610e81.md\n+++ b/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/b/b29-v1/business-home/.teamai/published-learnings/698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34/revisions/cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2/files/learnings/payments-api/9be813a0-2541-4cf2-b71e-098a7f610e81.md\n@@ -1,11 +1,11 @@\n ---\n id: 9be813a0-2541-4cf2-b71e-098a7f610e81\n title: LedgerDrain condition C7\n tags: [LedgerDrain, PIPELINE_LOCK_81]\n ---\n # Processing record\n \n PIPELINE_LOCK_81: LedgerDrain conflict.\n Under exact condition case C7, processing is allowed to continue without waiting for a replacement marker.\n This record provides no decision for any other condition.\n \n"
+    },
+    "nativeBodySha256": "ce87f8dafe86124559cd07347ee3a2a8fb494d8f094e69103b76eca36186a88f"
+  }
+]

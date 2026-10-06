@@ -1,0 +1,24 @@
+{
+  "name": "snippet-dense-lf-crlf",
+  "args": [
+    "recall",
+    "weakcue anchorOne anchorTwo",
+    "--scope",
+    "workspace",
+    "--project",
+    "payments",
+    "--limit",
+    "20",
+    "--json"
+  ],
+  "home": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\a\\temp-35\\teamai-recall-home-urABNK",
+  "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\a\\temp-35\\teamai-git-gA1pyT",
+  "noGit": false,
+  "node": "v24.15.0",
+  "startedAt": "2026-10-05T14:31:19.581Z",
+  "finishedAt": "2026-10-05T14:31:20.606Z",
+  "exitCode": 1,
+  "error": null,
+  "stdout": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Marketplace cache is missing for 'file:///F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/a/temp-35/teamai-recall-origin-XHRx3o/origin.git'. Run `teamai init` or `teamai sync` first.\"}}\n",
+  "stderr": ""
+}

@@ -1,0 +1,461 @@
+{
+  "result": "PASS_COMPILED_ONLY",
+  "checkedAtUtc": "2026-10-05T14:57:28.545Z",
+  "candidate": {
+    "sourceRevision": "740f5d0cadf6dfec0533e64442a61b0ac88e21b7",
+    "sourceTree": "0290c1d1a2f1f76d101ef945dbdad7678d603cc8",
+    "version": "0.5.0",
+    "tarball": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\package\\teamai-cli-copilot-0.5.0.tgz",
+    "tarballBytes": 200261,
+    "tarballSha256": "772afebbb03607eb3cac829045d79cbc30f8d277b9bf8a6e0b6c4fecf1c5531e",
+    "packageRoot": "F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/candidates/a-all-b33-c1/installed/node_modules/teamai-cli-copilot",
+    "cliSha256": "79f64b93f5b477254d1f6697348603740d13bb7e1b5b33f8a5c75fa7447c20be",
+    "agentSha256": "55bc2bd5692928cf8a13f05e588db3c19188d477e53268943f056cb1a40a06ee",
+    "build": "PASS",
+    "packInstall": "PASS",
+    "compiledRecall": "PASS",
+    "compiledEvidence": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\report.json",
+    "retainedFailure": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall",
+    "nativeBehavior": "UNVERIFIED",
+    "createdAtUtc": "2026-10-05T14:50:29.967Z"
+  },
+  "candidateManifestSha256": "c47e853e8a2c0e21442d4eb347770e4d0c67cf55ec87d94092d0160d5ec8b5f4",
+  "reportSha256": "e20ba9eb9f7ffe8593a3a7426fc29ce386474eeec4032ba714981b8216eea7aa",
+  "expectedFrozenSha256": "9b902e2c36ea67e394476c867f2f060844131bc0e6758de72061610c406b6217",
+  "rawDocumentCopies": 20,
+  "basicCases": 13,
+  "independentSnippetCases": 18,
+  "requiredCompiledCases": 2,
+  "rankingCompiledCases": 2,
+  "controlledRoots": 12,
+  "controlledFactsUnchanged": true,
+  "retainedFailure": {
+    "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall\\snippet-dense-lf-crlf.json",
+    "sha256": "e75771d8c801e79e02da55af5e9f419352f1f886177e6fdc1c7afed2f1c0fe58",
+    "exitCode": 1,
+    "assessment": "Source runCli fixture injected loadMarketplace. Independent compiled fixture lacked real catalog/cache; product correctly rejected missing cache. Original source proof and raw failure retained."
+  },
+  "retainedPreparationRejection": {
+    "result": "REJECTED_BEFORE_QUERIES",
+    "scope": "Supervisor independent compiled fixture preparation",
+    "reason": "Clone contained LF committed bytes; retained frozen physical retry source deliberately has CRLF. Copying raw working bytes and committing under attributes in a new exclusively owned fixture preserves the source contract.",
+    "original": {
+      "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\a\\temp-35\\teamai-git-iomjZu\\contexts\\payments\\docs\\retry.md",
+      "bytes": 4263,
+      "sha256": "3fdb1595408852cf124b8c111aada3057b1e0b229f7cadcdc997b70d306a9b21"
+    },
+    "clone": {
+      "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v2\\resource\\contexts\\payments\\docs\\retry.md",
+      "bytes": 4254,
+      "sha256": "9270aba39793c3fe7d83bed23c66291430cc1f0e34993f99191ffbc6b00572dc"
+    },
+    "failedOutput": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v2",
+    "queryOutputCount": 0,
+    "originalFixtureWrites": 0,
+    "productWrites": 0,
+    "candidateRepackCount": 0
+  },
+  "checks": [
+    {
+      "name": "snippet-dense-lf-crlf",
+      "args": [
+        "recall",
+        "weakcue anchorOne anchorTwo",
+        "--scope",
+        "workspace",
+        "--project",
+        "payments",
+        "--limit",
+        "20",
+        "--json"
+      ],
+      "exitCode": 0,
+      "startedAt": "2026-10-05T14:49:52.414Z",
+      "finishedAt": "2026-10-05T14:49:53.918Z",
+      "rawFile": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\snippet-dense-lf-crlf.json"
+    },
+    {
+      "name": "snippet-dense-required-outside-window",
+      "args": [
+        "recall",
+        "weakcue anchorOne anchorTwo",
+        "--require",
+        "trailing text",
+        "--scope",
+        "workspace",
+        "--project",
+        "payments",
+        "--limit",
+        "20",
+        "--json"
+      ],
+      "exitCode": 0,
+      "startedAt": "2026-10-05T14:49:53.922Z",
+      "finishedAt": "2026-10-05T14:49:55.405Z",
+      "rawFile": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\snippet-dense-required-outside-window.json"
+    },
+    {
+      "name": "snippet-tie-earliest",
+      "args": [
+        "recall",
+        "tieOne tieTwo",
+        "--scope",
+        "workspace",
+        "--project",
+        "payments",
+        "--limit",
+        "20",
+        "--json"
+      ],
+      "exitCode": 0,
+      "startedAt": "2026-10-05T14:49:55.407Z",
+      "finishedAt": "2026-10-05T14:49:56.947Z",
+      "rawFile": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\snippet-tie-earliest.json"
+    },
+    {
+      "name": "snippet-start-full-window",
+      "args": [
+        "recall",
+        "headOne headTwo",
+        "--scope",
+        "workspace",
+        "--project",
+        "payments",
+        "--limit",
+        "20",
+        "--json"
+      ],
+      "exitCode": 0,
+      "startedAt": "2026-10-05T14:49:56.950Z",
+      "finishedAt": "2026-10-05T14:49:58.480Z",
+      "rawFile": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\snippet-start-full-window.json"
+    },
+    {
+      "name": "snippet-end-full-window",
+      "args": [
+        "recall",
+        "tailOne tailTwo tailThree",
+        "--scope",
+        "workspace",
+        "--project",
+        "payments",
+        "--limit",
+        "20",
+        "--json"
+      ],
+      "exitCode": 0,
+      "startedAt": "2026-10-05T14:49:58.483Z",
+      "finishedAt": "2026-10-05T14:50:00.107Z",
+      "rawFile": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\snippet-end-full-window.json"
+    },
+    {
+      "name": "snippet-short-original-file",
+      "args": [
+        "recall",
+        "edgeSolo",
+        "--scope",
+        "workspace",
+        "--project",
+        "payments",
+        "--limit",
+        "20",
+        "--json"
+      ],
+      "exitCode": 0,
+      "startedAt": "2026-10-05T14:50:00.109Z",
+      "finishedAt": "2026-10-05T14:50:01.632Z",
+      "rawFile": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\snippet-short-original-file.json"
+    },
+    {
+      "name": "snippet-exact-1200",
+      "args": [
+        "recall",
+        "capWindow",
+        "--scope",
+        "workspace",
+        "--project",
+        "payments",
+        "--limit",
+        "20",
+        "--json"
+      ],
+      "exitCode": 0,
+      "startedAt": "2026-10-05T14:50:01.634Z",
+      "finishedAt": "2026-10-05T14:50:03.364Z",
+      "rawFile": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\snippet-exact-1200.json"
+    },
+    {
+      "name": "snippet-long-line-head",
+      "args": [
+        "recall",
+        "longHeadWindow",
+        "--scope",
+        "workspace",
+        "--project",
+        "payments",
+        "--limit",
+        "20",
+        "--json"
+      ],
+      "exitCode": 0,
+      "startedAt": "2026-10-05T14:50:03.366Z",
+      "finishedAt": "2026-10-05T14:50:04.988Z",
+      "rawFile": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\snippet-long-line-head.json"
+    },
+    {
+      "name": "snippet-long-line-tail",
+      "args": [
+        "recall",
+        "longTailWindow",
+        "--scope",
+        "workspace",
+        "--project",
+        "payments",
+        "--limit",
+        "20",
+        "--json"
+      ],
+      "exitCode": 0,
+      "startedAt": "2026-10-05T14:50:04.991Z",
+      "finishedAt": "2026-10-05T14:50:06.737Z",
+      "rawFile": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\snippet-long-line-tail.json"
+    },
+    {
+      "name": "snippet-nfd-emoji-raw-offset",
+      "args": [
+        "recall",
+        "CAFÉWINDOW",
+        "--scope",
+        "workspace",
+        "--project",
+        "payments",
+        "--limit",
+        "20",
+        "--json"
+      ],
+      "exitCode": 0,
+      "startedAt": "2026-10-05T14:50:06.739Z",
+      "finishedAt": "2026-10-05T14:50:08.431Z",
+      "rawFile": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\snippet-nfd-emoji-raw-offset.json"
+    },
+    {
+      "name": "snippet-lowercase-expansion-offset",
+      "args": [
+        "recall",
+        "expand_window",
+        "--scope",
+        "workspace",
+        "--project",
+        "payments",
+        "--limit",
+        "20",
+        "--json"
+      ],
+      "exitCode": 0,
+      "startedAt": "2026-10-05T14:50:08.433Z",
+      "finishedAt": "2026-10-05T14:50:10.329Z",
+      "rawFile": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\snippet-lowercase-expansion-offset.json"
+    },
+    {
+      "name": "snippet-inside-long-grapheme",
+      "args": [
+        "recall",
+        "͟",
+        "--scope",
+        "workspace",
+        "--project",
+        "payments",
+        "--limit",
+        "20",
+        "--json"
+      ],
+      "exitCode": 0,
+      "startedAt": "2026-10-05T14:50:10.331Z",
+      "finishedAt": "2026-10-05T14:50:12.319Z",
+      "rawFile": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\snippet-inside-long-grapheme.json"
+    },
+    {
+      "name": "snippet-canonical-reordering-offset",
+      "args": [
+        "recall",
+        "̣",
+        "--scope",
+        "workspace",
+        "--project",
+        "payments",
+        "--limit",
+        "20",
+        "--json"
+      ],
+      "exitCode": 0,
+      "startedAt": "2026-10-05T14:50:12.321Z",
+      "finishedAt": "2026-10-05T14:50:14.741Z",
+      "rawFile": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\snippet-canonical-reordering-offset.json"
+    },
+    {
+      "name": "snippet-derived-title-only",
+      "args": [
+        "recall",
+        "DERIVEDONLY",
+        "--scope",
+        "workspace",
+        "--project",
+        "payments",
+        "--limit",
+        "20",
+        "--json"
+      ],
+      "exitCode": 0,
+      "startedAt": "2026-10-05T14:50:14.745Z",
+      "finishedAt": "2026-10-05T14:50:16.717Z",
+      "rawFile": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\snippet-derived-title-only.json"
+    },
+    {
+      "name": "snippet-file-terms-outside-snippet",
+      "args": [
+        "recall",
+        "spareCue firstCue secondCue thirdCue",
+        "--scope",
+        "workspace",
+        "--project",
+        "payments",
+        "--limit",
+        "20",
+        "--json"
+      ],
+      "exitCode": 0,
+      "startedAt": "2026-10-05T14:50:16.720Z",
+      "finishedAt": "2026-10-05T14:50:18.836Z",
+      "rawFile": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\snippet-file-terms-outside-snippet.json"
+    },
+    {
+      "name": "snippet-contiguous-multiline-cap",
+      "args": [
+        "recall",
+        "multiCue",
+        "--scope",
+        "workspace",
+        "--project",
+        "payments",
+        "--limit",
+        "20",
+        "--json"
+      ],
+      "exitCode": 0,
+      "startedAt": "2026-10-05T14:50:18.840Z",
+      "finishedAt": "2026-10-05T14:50:20.800Z",
+      "rawFile": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\snippet-contiguous-multiline-cap.json"
+    },
+    {
+      "name": "snippet-published-user-window",
+      "args": [
+        "recall",
+        "pubWeakHint pubTraceAlpha pubTraceBeta",
+        "--scope",
+        "user",
+        "--json"
+      ],
+      "exitCode": 0,
+      "startedAt": "2026-10-05T14:50:20.802Z",
+      "finishedAt": "2026-10-05T14:50:21.615Z",
+      "rawFile": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\snippet-published-user-window.json"
+    },
+    {
+      "name": "snippet-pending-user-window",
+      "args": [
+        "recall",
+        "draftWeakHint draftTraceAlpha draftTraceBeta",
+        "--scope",
+        "user",
+        "--include-pending",
+        "--require",
+        "draftTraceAlpha",
+        "--json"
+      ],
+      "exitCode": 0,
+      "startedAt": "2026-10-05T14:50:21.619Z",
+      "finishedAt": "2026-10-05T14:50:22.529Z",
+      "rawFile": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\snippet-pending-user-window.json"
+    },
+    {
+      "name": "required-repeated-and",
+      "args": [
+        "recall",
+        "weakcue anchorOne anchorTwo",
+        "--require",
+        "trailing text",
+        "--scope",
+        "workspace",
+        "--project",
+        "payments",
+        "--limit",
+        "20",
+        "--json",
+        "--require",
+        "anchorOne"
+      ],
+      "exitCode": 0,
+      "startedAt": "2026-10-05T14:50:22.532Z",
+      "finishedAt": "2026-10-05T14:50:24.960Z",
+      "rawFile": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\required-repeated-and.json"
+    },
+    {
+      "name": "required-and-no-match",
+      "args": [
+        "recall",
+        "weakcue anchorOne anchorTwo",
+        "--require",
+        "trailing text",
+        "--scope",
+        "workspace",
+        "--project",
+        "payments",
+        "--limit",
+        "20",
+        "--json",
+        "--require",
+        "NO_REQUIRED_LITERAL_49627C05_81FA"
+      ],
+      "exitCode": 0,
+      "startedAt": "2026-10-05T14:50:24.964Z",
+      "finishedAt": "2026-10-05T14:50:27.222Z",
+      "rawFile": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\required-and-no-match.json"
+    },
+    {
+      "name": "ranking-cached-user-ranking",
+      "args": [
+        "recall",
+        "plugin load ERR_NODE_47",
+        "--scope",
+        "user",
+        "--limit",
+        "10",
+        "--json"
+      ],
+      "exitCode": 0,
+      "startedAt": "2026-10-05T14:50:27.227Z",
+      "finishedAt": "2026-10-05T14:50:28.354Z",
+      "rawFile": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\ranking-cached-user-ranking.json"
+    },
+    {
+      "name": "ranking-cached-user-required",
+      "args": [
+        "recall",
+        "plugin load ERR_NODE_47",
+        "--require",
+        "ERR_NODE_47",
+        "--scope",
+        "user",
+        "--json"
+      ],
+      "exitCode": 0,
+      "startedAt": "2026-10-05T14:50:28.478Z",
+      "finishedAt": "2026-10-05T14:50:29.400Z",
+      "rawFile": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\ranking-cached-user-required.json"
+    }
+  ],
+  "native": "NOT_ACCEPTED",
+  "fullBatchGates": "PENDING_COMPLETE_B29_CANDIDATE",
+  "independentReview": "PENDING",
+  "externalDelivery": "PENDING"
+}

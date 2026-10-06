@@ -1,0 +1,8 @@
+{
+  "case": "B29-dedup-conflict",
+  "sessionId": "7609fa9e-a39d-40aa-80ab-011de05e4d07",
+  "launcherPid": 27168,
+  "exitCode": 0,
+  "endedAtUtc": "2026-10-06T02:49:46.2501619Z",
+  "meaning": "Normal process end only; record actual events/answer separately. Restore real read-gap source before post protection."
+}

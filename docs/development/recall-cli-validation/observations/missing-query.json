@@ -1,0 +1,16 @@
+{
+  "name": "missing-query",
+  "args": [
+    "recall"
+  ],
+  "home": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall\\empty-home",
+  "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall\\empty-workspace",
+  "noGit": true,
+  "node": "v24.15.0",
+  "startedAt": "2026-10-05T14:31:15.167Z",
+  "finishedAt": "2026-10-05T14:31:15.609Z",
+  "exitCode": 2,
+  "error": null,
+  "stdout": "",
+  "stderr": "ERROR: Use teamai recall <query> [--scope auto|user|workspace] [--project <id>] [--limit <n>] [--include-pending] [--json].\n"
+}

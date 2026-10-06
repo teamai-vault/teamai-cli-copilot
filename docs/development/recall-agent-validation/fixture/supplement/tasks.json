@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "status": "FROZEN_INPUT_PREPARATION_ONLY",
+  "candidate": null,
+  "nativeRun": "NOT_RUN",
+  "note": "Only messages are consumer input. The oracle, file names, query relationships and desired observations are not supplied to the model. No fixed query wording, rank or quota is required.",
+  "cases": [
+    {
+      "id": "B29-supplement-intake",
+      "workspace": "bound-payments-api",
+      "messages": [
+        "Logical Project payments-api 的 IntakeSlot 出现诊断：HANDOFF_BUDGET_WAIT_64: IntakeSlot cannot resume after account rollover.。现场已确认 intake mode V6、previous holder 已停止。请读取处置原文，说明目前能否恢复、等待条件和必须补足的证据；保留完整诊断和每项准确来源，用中文回答。"
+      ]
+    }
+  ]
+}

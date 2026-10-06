@@ -1,0 +1,206 @@
+[
+  {
+    "agentId": "f6a896a8-18ca-4c49-9b48-b0646ac2cebf",
+    "toolCallId": "call_j9fwPqlK6rCmuUs43E3hml6B",
+    "startedAt": "2026-10-05T23:30:28.680Z",
+    "completedAt": "2026-10-05T23:31:17.724Z",
+    "command": "teamai recall \"READ_GAP_72 LeaseMux incident appendix unavailable final disposition condition\" --scope workspace --project payments-api --require \"READ_GAP_72: LeaseMux incident appendix unavailable.\" --json",
+    "success": true,
+    "exitCode": 0,
+    "result": {
+      "schemaVersion": 1,
+      "query": "READ_GAP_72 LeaseMux incident appendix unavailable final disposition condition",
+      "requiredLiterals": [
+        "READ_GAP_72: LeaseMux incident appendix unavailable."
+      ],
+      "scope": "workspace",
+      "project": "payments-api",
+      "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+      "resourceRevision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+      "learningsRevision": "cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2",
+      "limit": 5,
+      "hits": [
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/90-read-gap.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "LeaseMux incident appendix",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/90-read-gap.md",
+            "contentHash": "4ae3a786e26169cf14543b30b7b7225b328f6bd2d1584dd0cf103887719dd4cb"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\90-read-gap.md",
+          "matchedTerms": [
+            "READ_GAP_72",
+            "LeaseMux",
+            "incident",
+            "appendix",
+            "unavailable",
+            "final",
+            "condition"
+          ],
+          "lineStart": 6,
+          "lineEnd": 8,
+          "snippet": "\nREAD_GAP_72: LeaseMux incident appendix unavailable.\nAn appendix contains the final handling condition."
+        }
+      ]
+    },
+    "rawResult": {
+      "content": "{\"schemaVersion\":1,\"query\":\"READ_GAP_72 LeaseMux incident appendix unavailable final disposition condition\",\"requiredLiterals\":[\"READ_GAP_72: LeaseMux incident appendix unavailable.\"],\"scope\":\"workspace\",\"project\":\"payments-api\",\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"resourceRevision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"learningsRevision\":\"cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\",\"limit\":5,\"hits\":[{\"id\":\"doc:payments-api:contexts/payments-api/docs/90-read-gap.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"LeaseMux incident appendix\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/90-read-gap.md\",\"contentHash\":\"4ae3a786e26169cf14543b30b7b7225b328f6bd2d1584dd0cf103887719dd4cb\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\90-read-gap.md\",\"matchedTerms\":[\"READ_GAP_72\",\"LeaseMux\",\"incident\",\"appendix\",\"unavailable\",\"final\",\"condition\"],\"lineStart\":6,\"lineEnd\":8,\"snippet\":\"\\nREAD_GAP_72: LeaseMux incident appendix unavailable.\\nAn appendix contains the final handling condition.\"}]}\n<shellId: 1 completed with exit code 0>"
+    }
+  },
+  {
+    "agentId": "f6a896a8-18ca-4c49-9b48-b0646ac2cebf",
+    "toolCallId": "call_fo8BrNkpCxCV2p1vyRRTsDXV",
+    "startedAt": "2026-10-05T23:30:28.684Z",
+    "completedAt": "2026-10-05T23:30:56.832Z",
+    "command": "teamai recall \"LeaseMux incident appendix final disposition condition\" --scope workspace --project payments-api --json",
+    "success": true,
+    "exitCode": 0,
+    "result": {
+      "schemaVersion": 1,
+      "query": "LeaseMux incident appendix final disposition condition",
+      "scope": "workspace",
+      "project": "payments-api",
+      "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+      "resourceRevision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+      "learningsRevision": "cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2",
+      "limit": 5,
+      "hits": [
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/90-read-gap.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "LeaseMux incident appendix",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/90-read-gap.md",
+            "contentHash": "4ae3a786e26169cf14543b30b7b7225b328f6bd2d1584dd0cf103887719dd4cb"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\90-read-gap.md",
+          "matchedTerms": [
+            "LeaseMux",
+            "incident",
+            "appendix",
+            "final",
+            "condition"
+          ],
+          "lineStart": 6,
+          "lineEnd": 8,
+          "snippet": "\nREAD_GAP_72: LeaseMux incident appendix unavailable.\nAn appendix contains the final handling condition."
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/80-audit-note.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "LeaseMux audit note",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/80-audit-note.md",
+            "contentHash": "26a4e79b81aa1d8aad0751529869a29e638cbc8442d4383f0ff8908e2eb98b58"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\80-audit-note.md",
+          "matchedTerms": [
+            "LeaseMux",
+            "incident",
+            "appendix"
+          ],
+          "lineStart": 6,
+          "lineEnd": 8,
+          "snippet": "\nAUDIT_NOTE_71: LeaseMux evidence boundary reached.\nThe observation confirms only that the appendix was requested. It does not establish that its contents were available."
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/40-replay-guard.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "RetryEnvelope generation lease observations",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/40-replay-guard.md",
+            "contentHash": "0e2751160489cddc7dacb81eb626a71581c0e663ed5c936cb7adf857a001ab25"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\40-replay-guard.md",
+          "matchedTerms": [
+            "incident",
+            "final",
+            "condition"
+          ],
+          "lineStart": 25,
+          "lineEnd": 27,
+          "snippet": "T11: The operator compared the two samples.\nT12: The incident record remained available.\nT13: The observer recorded its final sample."
+        },
+        {
+          "id": "learning:payments-api:5d631ba1-b2e4-4638-8c45-5207c914ce82",
+          "type": "learning",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "LedgerDrain condition C7",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2",
+            "relativePath": "learnings/payments-api/5d631ba1-b2e4-4638-8c45-5207c914ce82.md",
+            "contentHash": "3faf31f95ac6386092f2994224f941537850e281697fc286492a8c6eba2e7001"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\.teamai\\published-learnings\\698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\\revisions\\cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\\files\\learnings\\payments-api\\5d631ba1-b2e4-4638-8c45-5207c914ce82.md",
+          "matchedTerms": [
+            "condition"
+          ],
+          "lineStart": 1,
+          "lineEnd": 3,
+          "snippet": "---\nid: 5d631ba1-b2e4-4638-8c45-5207c914ce82\ntitle: LedgerDrain condition C7"
+        },
+        {
+          "id": "learning:payments-api:9be813a0-2541-4cf2-b71e-098a7f610e81",
+          "type": "learning",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "LedgerDrain condition C7",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2",
+            "relativePath": "learnings/payments-api/9be813a0-2541-4cf2-b71e-098a7f610e81.md",
+            "contentHash": "ce87f8dafe86124559cd07347ee3a2a8fb494d8f094e69103b76eca36186a88f"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\.teamai\\published-learnings\\698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\\revisions\\cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\\files\\learnings\\payments-api\\9be813a0-2541-4cf2-b71e-098a7f610e81.md",
+          "matchedTerms": [
+            "condition"
+          ],
+          "lineStart": 1,
+          "lineEnd": 3,
+          "snippet": "---\nid: 9be813a0-2541-4cf2-b71e-098a7f610e81\ntitle: LedgerDrain condition C7"
+        }
+      ]
+    },
+    "rawResult": {
+      "content": "{\"schemaVersion\":1,\"query\":\"LeaseMux incident appendix final disposition condition\",\"scope\":\"workspace\",\"project\":\"payments-api\",\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"resourceRevision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"learningsRevision\":\"cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\",\"limit\":5,\"hits\":[{\"id\":\"doc:payments-api:contexts/payments-api/docs/90-read-gap.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"LeaseMux incident appendix\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/90-read-gap.md\",\"contentHash\":\"4ae3a786e26169cf14543b30b7b7225b328f6bd2d1584dd0cf103887719dd4cb\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\90-read-gap.md\",\"matchedTerms\":[\"LeaseMux\",\"incident\",\"appendix\",\"final\",\"condition\"],\"lineStart\":6,\"lineEnd\":8,\"snippet\":\"\\nREAD_GAP_72: LeaseMux incident appendix unavailable.\\nAn appendix contains the final handling condition.\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/80-audit-note.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"LeaseMux audit note\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/80-audit-note.md\",\"contentHash\":\"26a4e79b81aa1d8aad0751529869a29e638cbc8442d4383f0ff8908e2eb98b58\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\80-audit-note.md\",\"matchedTerms\":[\"LeaseMux\",\"incident\",\"appendix\"],\"lineStart\":6,\"lineEnd\":8,\"snippet\":\"\\nAUDIT_NOTE_71: LeaseMux evidence boundary reached.\\nThe observation confirms only that the appendix was requested. It does not establish that its contents were available.\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/40-replay-guard.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"RetryEnvelope generation lease observations\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/40-replay-guard.md\",\"contentHash\":\"0e2751160489cddc7dacb81eb626a71581c0e663ed5c936cb7adf857a001ab25\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\40-replay-guard.md\",\"matchedTerms\":[\"incident\",\"final\",\"condition\"],\"lineStart\":25,\"lineEnd\":27,\"snippet\":\"T11: The operator compared the two samples.\\nT12: The incident record remained available.\\nT13: The observer recorded its final sample.\"},{\"id\":\"learning:payments-api:5d631ba1-b2e4-4638-8c45-5207c914ce82\",\"type\":\"learning\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"LedgerDrain condition C7\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\",\"relativePath\":\"learnings/payments-api/5d631ba1-b2e4-4638-8c45-5207c914ce82.md\",\"contentHash\":\"3faf31f95ac6386092f2994224f941537850e281697fc286492a8c6eba2e7001\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\business-home\\\\.teamai\\\\published-learnings\\\\698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\\\\revisions\\\\cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\\\\files\\\\learnings\\\\payments-api\\\\5d631ba1-b2e4-4638-8c45-5207c914ce82.md\",\"matchedTerms\":[\"condition\"],\"lineStart\":1,\"lineEnd\":3,\"snippet\":\"---\\nid: 5d631ba1-b2e4-4638-8c45-5207c914ce82\\ntitle: LedgerDrain condition C7\"},{\"id\":\"learning:payments-api:9be813a0-2541-4cf2-b71e-098a7f610e81\",\"type\":\"learning\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"LedgerDrain condition C7\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\",\"relativePath\":\"learnings/payments-api/9be813a0-2541-4cf2-b71e-098a7f610e81.md\",\"contentHash\":\"ce87f8dafe86124559cd07347ee3a2a8fb494d8f094e69103b76eca36186a88f\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\business-home\\\\.teamai\\\\published-learnings\\\\698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\\\\revisions\\\\cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\\\\files\\\\learnings\\\\payments-api\\\\9be813a0-2541-4cf2-b71e-098a7f610e81.md\",\"matchedTerms\":[\"condition\"],\"lineStart\":1,\"lineEnd\":3,\"snippet\":\"---\\nid: 9be813a0-2541-4cf2-b71e-098a7f610e81\\ntitle: LedgerDrain condition C7\"}]}\n<shellId: 2 completed with exit code 0>"
+    }
+  },
+  {
+    "agentId": "f6a896a8-18ca-4c49-9b48-b0646ac2cebf",
+    "toolCallId": "call_zF9OLFHFeG2djR9oKURGDhZc",
+    "startedAt": "2026-10-05T23:32:44.696Z",
+    "completedAt": "2026-10-05T23:33:19.668Z",
+    "command": "teamai recall \"READ_GAP_72 appendix handling condition cache unavailable\" --scope workspace --project payments-api --json",
+    "success": true,
+    "exitCode": 1,
+    "result": {
+      "schemaVersion": 1,
+      "error": {
+        "code": "RECALL_FAILED",
+        "message": "Project docs for 'payments-api' do not match the configured Marketplace resource revision. Run teamai sync to refresh it."
+      }
+    },
+    "rawResult": {
+      "content": "{\"schemaVersion\":1,\"error\":{\"code\":\"RECALL_FAILED\",\"message\":\"Project docs for 'payments-api' do not match the configured Marketplace resource revision. Run teamai sync to refresh it.\"}}\n<shellId: 3 completed with exit code 1>"
+    }
+  }
+]

@@ -1,0 +1,86 @@
+{
+  "result": "PASS_ACTUAL_ORIGINAL_OWNED_CITATION_DELIVERY_ONLY",
+  "sourceRevision": "8000bae22cf6a3490578e25e1af6b618e73267d5",
+  "manifestFile": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v3\\manifest.json",
+  "manifestSha256": "230cd96d12c06373bde3fb117ae461792f7184b587a4968c85b420cc5957484b",
+  "receiptFile": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\native-citation-owned-delivery-v1\\receipt.json",
+  "receiptSha256": "1997eca88eff122e5afd8416ac0fd4cbbbe319eb68338e5729cf12b45c1ecb06",
+  "actualOwningHome": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home",
+  "actualNativeRoot": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.copilot",
+  "version": "0.5.0",
+  "normalExits": 4,
+  "normalPidsAbsent": [
+    7452,
+    32396,
+    7312,
+    20808
+  ],
+  "officialStable": "v1.0.92",
+  "agent": {
+    "status": "current",
+    "target": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.copilot\\agents\\teamai-recall.agent.md",
+    "copilotRoot": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.copilot",
+    "version": "0.5.0",
+    "contentHash": "7e882003883ea008c30b9c567f77578e318077162ebbba090bcdf901fa27c48f",
+    "owned": true,
+    "pending": false
+  },
+  "skill": {
+    "status": "current",
+    "target": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.copilot\\skills\\teamai",
+    "version": "0.5.0"
+  },
+  "agentReceipt": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.teamai\\built-in-agents\\teamai-recall.json",
+  "agentReceiptSha256": "a66a91ace82cdd63ca22cb660c07c590065064c141b35664d2e583f9e9b14c27",
+  "skillReceipt": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.teamai\\built-in-skills\\teamai.json",
+  "skillReceiptSha256": "43b1ca9f4b6d1516ee43e613cfc453bac5ad1c7bfdbad59aff13c1d75dc361b2",
+  "managedOldDeltas": [
+    {
+      "category": "business",
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.teamai\\built-in-agents\\teamai-recall.json",
+      "before": "0495da2bb73f4e03519596d29542c9e72a1fc3a9849bb4b5149f0947a1d2bf6f",
+      "after": "a66a91ace82cdd63ca22cb660c07c590065064c141b35664d2e583f9e9b14c27"
+    },
+    {
+      "category": "business",
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.teamai\\projects\\mp-recall-29-35-runtime-b-native-33-preparation-v2-workspaces-bound-payments-api-635e0d68b3d6ce6a\\state.json",
+      "before": "d06aff89776ee9838365b3998bd26199705201314d090202dbd74f062fcef7b6",
+      "after": "6b8dc8c3853d0c47a0dd2b22147ad0cbeccf23ecd0095d03419b05af0e8eadd1"
+    },
+    {
+      "category": "business",
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.copilot\\agents\\teamai-recall.agent.md",
+      "before": "5d183aaa9542627065b43454df176d6ef5e0dc583b6feceff79227dcec5eebca",
+      "after": "7e882003883ea008c30b9c567f77578e318077162ebbba090bcdf901fa27c48f"
+    }
+  ],
+  "oldStateTimestampOnly": {
+    "before": "2026-10-05T22:15:34.051Z",
+    "after": "2026-10-06T00:45:53.552Z"
+  },
+  "receiptOtherFieldsAndUnknownFieldsPreserved": true,
+  "newFixtureDeltas": {
+    "businessRoots": 13,
+    "gitRoots": 5,
+    "deltas": [
+      {
+        "category": "business",
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.copilot\\agents\\teamai-recall.agent.md",
+        "before": "5d183aaa9542627065b43454df176d6ef5e0dc583b6feceff79227dcec5eebca",
+        "after": "7e882003883ea008c30b9c567f77578e318077162ebbba090bcdf901fa27c48f"
+      },
+      {
+        "category": "business",
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.teamai\\built-in-agents\\teamai-recall.json",
+        "before": "0495da2bb73f4e03519596d29542c9e72a1fc3a9849bb4b5149f0947a1d2bf6f",
+        "after": "a66a91ace82cdd63ca22cb660c07c590065064c141b35664d2e583f9e9b14c27"
+      }
+    ]
+  },
+  "oldBusinessAndGitOtherChanges": 0,
+  "newBusinessAndGitOtherChanges": 0,
+  "beforeStateExactCopy": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\native-citation-owned-delivery-v1\\before-state.json",
+  "nativePlatform": "Owning account/config/session/log/startup roots not scanned; no whole-platform zero-write claim. Native case business HOME exact startup bytes are recorded separately.",
+  "actualModelBehavior": "NOT_RUN_FOR_NEW_AGENT",
+  "recordedAtUtc": "2026-10-06T00:47:18.745Z"
+}

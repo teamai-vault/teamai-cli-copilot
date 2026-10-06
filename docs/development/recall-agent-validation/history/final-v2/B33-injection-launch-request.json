@@ -1,0 +1,29 @@
+{
+  "case": "B33-injection",
+  "sessionId": "8c1e933c-c909-42be-b82c-f312b2b5c4e3",
+  "executable": "D:/soft/nodejs/node_global/copilot.ps1",
+  "args": [
+    "--agent",
+    "teamai-recall",
+    "--session-id",
+    "8c1e933c-c909-42be-b82c-f312b2b5c4e3",
+    "--log-dir",
+    "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v1\\B33-injection-native-logs",
+    "--usage-output-file",
+    "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v1\\B33-injection-usage.json"
+  ],
+  "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\workspaces\\bound",
+  "launcherPid": 21264,
+  "startedAtUtc": "2026-10-05T23:53:55.9293805Z",
+  "nativeRoot": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.copilot",
+  "businessHome": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home",
+  "candidateRevision": "e0eb6a4734b78608709fb16398701cbbf26cae4a",
+  "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+  "agentSha256": "5d183aaa9542627065b43454df176d6ef5e0dc583b6feceff79227dcec5eebca",
+  "modelOverride": null,
+  "questionHeldForActualSelection": true,
+  "permissionFlags": "DEFAULT",
+  "taskMessages": "Only frozen case messages after actual selection; no oracle/rank/path list",
+  "parentChildRoute": "Same delivered teamai-recall with unset/inherited model is allowed",
+  "frozenGuard": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\29-native-execution-v2\\..\\29-native-preparation-v3"
+}

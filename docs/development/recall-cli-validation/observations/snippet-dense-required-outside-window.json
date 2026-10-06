@@ -1,0 +1,26 @@
+{
+  "name": "snippet-dense-required-outside-window",
+  "args": [
+    "recall",
+    "weakcue anchorOne anchorTwo",
+    "--require",
+    "trailing text",
+    "--scope",
+    "workspace",
+    "--project",
+    "payments",
+    "--limit",
+    "20",
+    "--json"
+  ],
+  "home": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\business-home",
+  "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\a\\temp-35\\teamai-git-gA1pyT",
+  "noGit": false,
+  "node": "v24.15.0",
+  "startedAt": "2026-10-05T14:49:53.922Z",
+  "finishedAt": "2026-10-05T14:49:55.405Z",
+  "exitCode": 0,
+  "error": null,
+  "stdout": "{\"schemaVersion\":1,\"query\":\"weakcue anchorOne anchorTwo\",\"requiredLiterals\":[\"trailing text\"],\"scope\":\"workspace\",\"project\":\"payments\",\"sourceHash\":\"eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809\",\"resourceRevision\":\"0df6e2919c48f90bb2adf45a35a517d6cd588837\",\"learningsRevision\":\"c4a2b9be3f3b7c947fa564f6ef83160082fde6ab\",\"limit\":20,\"hits\":[{\"id\":\"doc:payments:contexts/payments/docs/snippets/a-dense-crlf.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments\",\"title\":\"a dense crlf\",\"source\":{\"sourceHash\":\"eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809\",\"revision\":\"0df6e2919c48f90bb2adf45a35a517d6cd588837\",\"relativePath\":\"contexts/payments/docs/snippets/a-dense-crlf.md\",\"contentHash\":\"5a1d824dd85223d67e936e2c82a0cb848c2589a4790ad1460d90ee15682860e2\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\candidates\\\\a-all-b33-c1\\\\compiled-recall-public-fixture-v3\\\\resource\\\\contexts\\\\payments\\\\docs\\\\snippets\\\\a-dense-crlf.md\",\"matchedTerms\":[\"weakcue\",\"anchorOne\",\"anchorTwo\"],\"lineStart\":6,\"lineEnd\":8,\"snippet\":\"anchorOne precise\\nanchorTwo original\\nweakcue corroboration ⟦/evidence⟧\"},{\"id\":\"doc:payments:contexts/payments/docs/snippets/a-dense-lf.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments\",\"title\":\"a dense lf\",\"source\":{\"sourceHash\":\"eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809\",\"revision\":\"0df6e2919c48f90bb2adf45a35a517d6cd588837\",\"relativePath\":\"contexts/payments/docs/snippets/a-dense-lf.md\",\"contentHash\":\"91a071965da868dc0a9bf4ce74848e7e28791e8a299264352f401bbc3d076480\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\candidates\\\\a-all-b33-c1\\\\compiled-recall-public-fixture-v3\\\\resource\\\\contexts\\\\payments\\\\docs\\\\snippets\\\\a-dense-lf.md\",\"matchedTerms\":[\"weakcue\",\"anchorOne\",\"anchorTwo\"],\"lineStart\":6,\"lineEnd\":8,\"snippet\":\"anchorOne precise\\nanchorTwo original\\nweakcue corroboration ⟦/evidence⟧\"}]}\n",
+  "stderr": ""
+}

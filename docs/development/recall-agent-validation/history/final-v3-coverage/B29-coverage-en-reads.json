@@ -1,0 +1,34 @@
+[
+  {
+    "agentId": "d3d3cf00-3864-4d41-a515-9fe39ab33e22",
+    "toolCallId": "call_dWnM4MVm1sPQYdaEMPC1zAP8",
+    "startedAt": "2026-10-06T01:26:17.322Z",
+    "completedAt": "2026-10-06T01:26:38.626Z",
+    "arguments": {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\40-replay-guard.md"
+    },
+    "exactReturnedFile": true,
+    "success": true,
+    "result": {
+      "content": "---\ntitle: RetryEnvelope generation lease observations\ntags: [RetryEnvelope, reconnect]\n---\n# Incident observation\n\nObserved diagnostic:\nREPLAY_GUARD_BUSY: RetryEnvelope cannot acquire generation lease after reconnect.\n\nThe incident field for an old producer is stale owner epoch. Its duplicate-send rule is documented separately.\n\n## Timeline\n\nT00: The transport was open.\nT01: A disconnect was observed.\nT02: A connection was established.\nT03: The consumer kept the previous request marker.\nT04: The observer kept its last sample.\nT05: The operator examined the request marker.\nT06: The incident record was retained.\nT07: The observer recorded the next sample.\nT08: The record retained the original component spelling.\nT09: The incident field was recorded separately from the transport record.\nT10: The observer recorded a stable sample.\nT11: The operator compared the two samples.\nT12: The incident record remained available.\nT13: The observer recorded its final sample.\nT14: The operator retained the before and after markers.\nT15: The report retained the original diagnostic.\nT16: The report ended the observation interval.\nT17: The observer recorded completion.\n\n## Decision conditions\n\nOnly when the state label is exactly E4 and the previous sender has stopped may the operation be attempted again after 250 ms.\nIf either condition is unknown or false, this note grants no retry permission and provides no alternative delay.\nThe same label on the dashboard alone does not establish these conditions.\n",
+      "detailedContent": "\ndiff --git a/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/b/b29-v1/resource/contexts/payments-api/docs/40-replay-guard.md b/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/b/b29-v1/resource/contexts/payments-api/docs/40-replay-guard.md\nindex 0000000..0000000 100644\n--- a/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/b/b29-v1/resource/contexts/payments-api/docs/40-replay-guard.md\n+++ b/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/b/b29-v1/resource/contexts/payments-api/docs/40-replay-guard.md\n@@ -1,38 +1,38 @@\n ---\n title: RetryEnvelope generation lease observations\n tags: [RetryEnvelope, reconnect]\n ---\n # Incident observation\n \n Observed diagnostic:\n REPLAY_GUARD_BUSY: RetryEnvelope cannot acquire generation lease after reconnect.\n \n The incident field for an old producer is stale owner epoch. Its duplicate-send rule is documented separately.\n \n ## Timeline\n \n T00: The transport was open.\n T01: A disconnect was observed.\n T02: A connection was established.\n T03: The consumer kept the previous request marker.\n T04: The observer kept its last sample.\n T05: The operator examined the request marker.\n T06: The incident record was retained.\n T07: The observer recorded the next sample.\n T08: The record retained the original component spelling.\n T09: The incident field was recorded separately from the transport record.\n T10: The observer recorded a stable sample.\n T11: The operator compared the two samples.\n T12: The incident record remained available.\n T13: The observer recorded its final sample.\n T14: The operator retained the before and after markers.\n T15: The report retained the original diagnostic.\n T16: The report ended the observation interval.\n T17: The observer recorded completion.\n \n ## Decision conditions\n \n Only when the state label is exactly E4 and the previous sender has stopped may the operation be attempted again after 250 ms.\n If either condition is unknown or false, this note grants no retry permission and provides no alternative delay.\n The same label on the dashboard alone does not establish these conditions.\n \n"
+    },
+    "nativeBodySha256": "0e2751160489cddc7dacb81eb626a71581c0e663ed5c936cb7adf857a001ab25"
+  },
+  {
+    "agentId": "d3d3cf00-3864-4d41-a515-9fe39ab33e22",
+    "toolCallId": "call_k1raNsFpRgzAJnfFfH8wYUtC",
+    "startedAt": "2026-10-06T01:26:17.323Z",
+    "completedAt": "2026-10-06T01:26:47.780Z",
+    "arguments": {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\70-epoch-policy.md"
+    },
+    "exactReturnedFile": true,
+    "success": true,
+    "result": {
+      "content": "---\ntitle: Stale owner epoch and duplicate send\ntags: [epoch, duplicate]\n---\n# Producer epoch rule\n\nA stale owner epoch can cause duplicate send when the former producer still owns an outstanding request marker.\nThe operator must establish that the former producer has relinquished that marker before treating the replacement producer as safe.\nAn elapsed delay by itself does not establish relinquishment.\nThe rule complements the E4 state observation; it does not determine that state or approve changing project bindings.\n",
+      "detailedContent": "\ndiff --git a/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/b/b29-v1/resource/contexts/payments-api/docs/70-epoch-policy.md b/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/b/b29-v1/resource/contexts/payments-api/docs/70-epoch-policy.md\nindex 0000000..0000000 100644\n--- a/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/b/b29-v1/resource/contexts/payments-api/docs/70-epoch-policy.md\n+++ b/F:/agent-workspace/multiAgent/teamai-cli-customization/.tmp/recall-29-35/runtime/b/b29-v1/resource/contexts/payments-api/docs/70-epoch-policy.md\n@@ -1,11 +1,11 @@\n ---\n title: Stale owner epoch and duplicate send\n tags: [epoch, duplicate]\n ---\n # Producer epoch rule\n \n A stale owner epoch can cause duplicate send when the former producer still owns an outstanding request marker.\n The operator must establish that the former producer has relinquished that marker before treating the replacement producer as safe.\n An elapsed delay by itself does not establish relinquishment.\n The rule complements the E4 state observation; it does not determine that state or approve changing project bindings.\n \n"
+    },
+    "nativeBodySha256": "d1c3e9d39ca87b5b9192d768ba19301fcd377875fd18c9ca71199295c4001fc1"
+  }
+]

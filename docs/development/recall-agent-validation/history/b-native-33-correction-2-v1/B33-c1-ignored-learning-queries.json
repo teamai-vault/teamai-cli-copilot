@@ -1,0 +1,159 @@
+[
+  {
+    "agentId": null,
+    "toolCallId": "call_6AaHZkKYOlQgKJBecjSzexRK",
+    "startedAt": "2026-10-05T19:08:04.708Z",
+    "completedAt": "2026-10-05T19:08:32.096Z",
+    "command": "teamai recall \"UTC_LEASE_WINDOW_63 ClockFence observation pending 400 ms preceding sample\" --scope workspace --project payments-api --limit 20 --json",
+    "success": true,
+    "exitCode": 0,
+    "result": {
+      "schemaVersion": 1,
+      "query": "UTC_LEASE_WINDOW_63 ClockFence observation pending 400 ms preceding sample",
+      "scope": "workspace",
+      "project": "payments-api",
+      "sourceHash": "9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa",
+      "resourceRevision": "1fa6573a20a65b3d1cfea9ba98cacf5d2c5f0c53",
+      "learningsRevision": "2ef6af28a0d3147fabf24613d76f8b33051a1916",
+      "limit": 20,
+      "hits": [
+        {
+          "id": "learning:shared:11f67190-c1b4-4cb7-a082-188a7dd98f63",
+          "type": "learning",
+          "publication": "published",
+          "logicalProject": "shared",
+          "title": "ClockFence observation window",
+          "source": {
+            "sourceHash": "9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa",
+            "revision": "2ef6af28a0d3147fabf24613d76f8b33051a1916",
+            "relativePath": "learnings/shared/11f67190-c1b4-4cb7-a082-188a7dd98f63.md",
+            "contentHash": "0360cd3086cb8d79b0ae92f2d9a8cce1b4eb8c2fa9739e755e50560ba0a230a2"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-preparation-v2\\workspaces\\bound-payments-api\\.teamai\\context\\b33-c2-ignored-business-home\\.teamai\\published-learnings\\9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa\\revisions\\2ef6af28a0d3147fabf24613d76f8b33051a1916\\files\\learnings\\shared\\11f67190-c1b4-4cb7-a082-188a7dd98f63.md",
+          "matchedTerms": [
+            "UTC_LEASE_WINDOW_63",
+            "ClockFence",
+            "observation",
+            "pending",
+            "400",
+            "ms",
+            "preceding",
+            "sample"
+          ],
+          "lineStart": 7,
+          "lineEnd": 9,
+          "snippet": "\nUTC_LEASE_WINDOW_63: ClockFence observation pending.\nFor a confirmed UTC sample interval of 400 ms, compare the preceding sample and the current sample before marking the observation complete."
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/90-read-gap.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "LeaseMux incident appendix",
+          "source": {
+            "sourceHash": "9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa",
+            "revision": "1fa6573a20a65b3d1cfea9ba98cacf5d2c5f0c53",
+            "relativePath": "contexts/payments-api/docs/90-read-gap.md",
+            "contentHash": "4ae3a786e26169cf14543b30b7b7225b328f6bd2d1584dd0cf103887719dd4cb"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-preparation-v2\\resource\\contexts\\payments-api\\docs\\90-read-gap.md",
+          "matchedTerms": [
+            "observation",
+            "ms",
+            "sample"
+          ],
+          "lineStart": 12,
+          "lineEnd": 14,
+          "snippet": "Record A: An observation was opened.\nRecord B: A record was attached.\nRecord C: The observer recorded a sample."
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/80-audit-note.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "LeaseMux audit note",
+          "source": {
+            "sourceHash": "9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa",
+            "revision": "1fa6573a20a65b3d1cfea9ba98cacf5d2c5f0c53",
+            "relativePath": "contexts/payments-api/docs/80-audit-note.md",
+            "contentHash": "26a4e79b81aa1d8aad0751529869a29e638cbc8442d4383f0ff8908e2eb98b58"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-preparation-v2\\resource\\contexts\\payments-api\\docs\\80-audit-note.md",
+          "matchedTerms": [
+            "observation",
+            "pending",
+            "ms"
+          ],
+          "lineStart": 6,
+          "lineEnd": 8,
+          "snippet": "\nAUDIT_NOTE_71: LeaseMux evidence boundary reached.\nThe observation confirms only that the appendix was requested. It does not establish that its contents were available."
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/40-replay-guard.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "RetryEnvelope generation lease observations",
+          "source": {
+            "sourceHash": "9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa",
+            "revision": "1fa6573a20a65b3d1cfea9ba98cacf5d2c5f0c53",
+            "relativePath": "contexts/payments-api/docs/40-replay-guard.md",
+            "contentHash": "0e2751160489cddc7dacb81eb626a71581c0e663ed5c936cb7adf857a001ab25"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-preparation-v2\\resource\\contexts\\payments-api\\docs\\40-replay-guard.md",
+          "matchedTerms": [
+            "observation",
+            "ms",
+            "sample"
+          ],
+          "lineStart": 1,
+          "lineEnd": 3,
+          "snippet": "---\ntitle: RetryEnvelope generation lease observations\ntags: [RetryEnvelope, reconnect]"
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/10-display-note.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "RetryEnvelope reconnect REPLAY_GUARD_BUSY dashboard",
+          "source": {
+            "sourceHash": "9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa",
+            "revision": "1fa6573a20a65b3d1cfea9ba98cacf5d2c5f0c53",
+            "relativePath": "contexts/payments-api/docs/10-display-note.md",
+            "contentHash": "3bf8e299f32ef4ccbfcbeb03fcb273d13e4c23eef8a359086c6957b50cf6b85e"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-preparation-v2\\resource\\contexts\\payments-api\\docs\\10-display-note.md",
+          "matchedTerms": [
+            "ms"
+          ],
+          "lineStart": 5,
+          "lineEnd": 7,
+          "snippet": "# Dashboard display vocabulary\n\nThe dashboard places the terms RetryEnvelope, reconnect and REPLAY_GUARD_BUSY in the same chart legend."
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/70-epoch-policy.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "Stale owner epoch and duplicate send",
+          "source": {
+            "sourceHash": "9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa",
+            "revision": "1fa6573a20a65b3d1cfea9ba98cacf5d2c5f0c53",
+            "relativePath": "contexts/payments-api/docs/70-epoch-policy.md",
+            "contentHash": "d1c3e9d39ca87b5b9192d768ba19301fcd377875fd18c9ca71199295c4001fc1"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-preparation-v2\\resource\\contexts\\payments-api\\docs\\70-epoch-policy.md",
+          "matchedTerms": [
+            "observation"
+          ],
+          "lineStart": 8,
+          "lineEnd": 10,
+          "snippet": "The operator must establish that the former producer has relinquished that marker before treating the replacement producer as safe.\nAn elapsed delay by itself does not establish relinquishment.\nThe rule complements the E4 state observation; it does not determine that state or approve changing project bindings."
+        }
+      ]
+    },
+    "rawResult": {
+      "content": "{\"schemaVersion\":1,\"query\":\"UTC_LEASE_WINDOW_63 ClockFence observation pending 400 ms preceding sample\",\"scope\":\"workspace\",\"project\":\"payments-api\",\"sourceHash\":\"9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa\",\"resourceRevision\":\"1fa6573a20a65b3d1cfea9ba98cacf5d2c5f0c53\",\"learningsRevision\":\"2ef6af28a0d3147fabf24613d76f8b33051a1916\",\"limit\":20,\"hits\":[{\"id\":\"learning:shared:11f67190-c1b4-4cb7-a082-188a7dd98f63\",\"type\":\"learning\",\"publication\":\"published\",\"logicalProject\":\"shared\",\"title\":\"ClockFence observation window\",\"source\":{\"sourceHash\":\"9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa\",\"revision\":\"2ef6af28a0d3147fabf24613d76f8b33051a1916\",\"relativePath\":\"learnings/shared/11f67190-c1b4-4cb7-a082-188a7dd98f63.md\",\"contentHash\":\"0360cd3086cb8d79b0ae92f2d9a8cce1b4eb8c2fa9739e755e50560ba0a230a2\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\native-33-preparation-v2\\\\workspaces\\\\bound-payments-api\\\\.teamai\\\\context\\\\b33-c2-ignored-business-home\\\\.teamai\\\\published-learnings\\\\9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa\\\\revisions\\\\2ef6af28a0d3147fabf24613d76f8b33051a1916\\\\files\\\\learnings\\\\shared\\\\11f67190-c1b4-4cb7-a082-188a7dd98f63.md\",\"matchedTerms\":[\"UTC_LEASE_WINDOW_63\",\"ClockFence\",\"observation\",\"pending\",\"400\",\"ms\",\"preceding\",\"sample\"],\"lineStart\":7,\"lineEnd\":9,\"snippet\":\"\\nUTC_LEASE_WINDOW_63: ClockFence observation pending.\\nFor a confirmed UTC sample interval of 400 ms, compare the preceding sample and the current sample before marking the observation complete.\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/90-read-gap.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"LeaseMux incident appendix\",\"source\":{\"sourceHash\":\"9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa\",\"revision\":\"1fa6573a20a65b3d1cfea9ba98cacf5d2c5f0c53\",\"relativePath\":\"contexts/payments-api/docs/90-read-gap.md\",\"contentHash\":\"4ae3a786e26169cf14543b30b7b7225b328f6bd2d1584dd0cf103887719dd4cb\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\native-33-preparation-v2\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\90-read-gap.md\",\"matchedTerms\":[\"observation\",\"ms\",\"sample\"],\"lineStart\":12,\"lineEnd\":14,\"snippet\":\"Record A: An observation was opened.\\nRecord B: A record was attached.\\nRecord C: The observer recorded a sample.\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/80-audit-note.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"LeaseMux audit note\",\"source\":{\"sourceHash\":\"9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa\",\"revision\":\"1fa6573a20a65b3d1cfea9ba98cacf5d2c5f0c53\",\"relativePath\":\"contexts/payments-api/docs/80-audit-note.md\",\"contentHash\":\"26a4e79b81aa1d8aad0751529869a29e638cbc8442d4383f0ff8908e2eb98b58\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\native-33-preparation-v2\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\80-audit-note.md\",\"matchedTerms\":[\"observation\",\"pending\",\"ms\"],\"lineStart\":6,\"lineEnd\":8,\"snippet\":\"\\nAUDIT_NOTE_71: LeaseMux evidence boundary reached.\\nThe observation confirms only that the appendix was requested. It does not establish that its contents were available.\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/40-replay-guard.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"RetryEnvelope generation lease observations\",\"source\":{\"sourceHash\":\"9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa\",\"revision\":\"1fa6573a20a65b3d1cfea9ba98cacf5d2c5f0c53\",\"relativePath\":\"contexts/payments-api/docs/40-replay-guard.md\",\"contentHash\":\"0e2751160489cddc7dacb81eb626a71581c0e663ed5c936cb7adf857a001ab25\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\native-33-preparation-v2\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\40-replay-guard.md\",\"matchedTerms\":[\"observation\",\"ms\",\"sample\"],\"lineStart\":1,\"lineEnd\":3,\"snippet\":\"---\\ntitle: RetryEnvelope generation lease observations\\ntags: [RetryEnvelope, reconnect]\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/10-display-note.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"RetryEnvelope reconnect REPLAY_GUARD_BUSY dashboard\",\"source\":{\"sourceHash\":\"9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa\",\"revision\":\"1fa6573a20a65b3d1cfea9ba98cacf5d2c5f0c53\",\"relativePath\":\"contexts/payments-api/docs/10-display-note.md\",\"contentHash\":\"3bf8e299f32ef4ccbfcbeb03fcb273d13e4c23eef8a359086c6957b50cf6b85e\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\native-33-preparation-v2\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\10-display-note.md\",\"matchedTerms\":[\"ms\"],\"lineStart\":5,\"lineEnd\":7,\"snippet\":\"# Dashboard display vocabulary\\n\\nThe dashboard places the terms RetryEnvelope, reconnect and REPLAY_GUARD_BUSY in the same chart legend.\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/70-epoch-policy.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"Stale owner epoch and duplicate send\",\"source\":{\"sourceHash\":\"9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa\",\"revision\":\"1fa6573a20a65b3d1cfea9ba98cacf5d2c5f0c53\",\"relativePath\":\"contexts/payments-api/docs/70-epoch-policy.md\",\"contentHash\":\"d1c3e9d39ca87b5b9192d768ba19301fcd377875fd18c9ca71199295c4001fc1\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\native-33-preparation-v2\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\70-epoch-policy.md\",\"matchedTerms\":[\"observation\"],\"lineStart\":8,\"lineEnd\":10,\"snippet\":\"The operator must establish that the former producer has relinquished that marker before treating the replacement producer as safe.\\nAn elapsed delay by itself does not establish relinquishment.\\nThe rule complements the E4 state observation; it does not determine that state or approve changing project bindings.\"}]}\n<shellId: 1 completed with exit code 0>"
+    }
+  }
+]

@@ -1,0 +1,92 @@
+{
+  "sourceRevision": "4977e40ac7e6d327f63710302bac137177f70193",
+  "sourceTree": "ad24e49fe5c958a22bbaaa111c5193de56c4ab86",
+  "version": "0.5.0",
+  "tarball": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v4\\package\\teamai-cli-copilot-0.5.0.tgz",
+  "tarballBytes": 202345,
+  "tarballSha256": "b1d9bf3a73525dcc289e87e8afd7a35180d98fe7a1259db7bb7607eaf6389656",
+  "packageRoot": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v4\\package\\install\\node_modules\\teamai-cli-copilot",
+  "cliSha256": "79f64b93f5b477254d1f6697348603740d13bb7e1b5b33f8a5c75fa7447c20be",
+  "agentSha256": "03562f41201196a8272e3fbbd6997f989ba6eceb34bbae99276fe1e4359a0452",
+  "skillSha256": "15b0a7e1a44dc95942d06ec36c2a8b301d6406fe06c8b6fe422b72dfc932f295",
+  "commandsSha256": "e2ae88156b20cbad6baadf7b489ef5a8d1782b9f33f10bc5dc5f9cdc0a524fc4",
+  "build": "PASS",
+  "packInstall": "PASS",
+  "authoredBytes": "PASS",
+  "nativeBehavior": "PENDING_NEW_STOP_B29_AND_C30_COMPARISON",
+  "gatePhases": [
+    {
+      "name": "build",
+      "executable": "npm",
+      "arguments": [
+        "run",
+        "build"
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\worktrees\\integration",
+      "sourceRevision": "4977e40ac7e6d327f63710302bac137177f70193",
+      "startedAtUtc": "2026-10-06T02:03:28.6396250Z",
+      "endedAtUtc": "2026-10-06T02:03:37.7577489Z",
+      "elapsedMs": 9118,
+      "exitCode": 0,
+      "rawLog": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v4\\build.log"
+    },
+    {
+      "name": "package",
+      "executable": "node",
+      "arguments": [
+        "test/helpers/verify-builtin-package.mjs",
+        "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v4\\package"
+      ],
+      "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\worktrees\\integration",
+      "sourceRevision": "4977e40ac7e6d327f63710302bac137177f70193",
+      "startedAtUtc": "2026-10-06T02:03:37.7993102Z",
+      "endedAtUtc": "2026-10-06T02:04:07.3218894Z",
+      "elapsedMs": 29523,
+      "exitCode": 0,
+      "rawLog": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v4\\package.log"
+    }
+  ],
+  "authored": [
+    {
+      "file": "agents/teamai-recall.agent.md",
+      "sha256": "03562f41201196a8272e3fbbd6997f989ba6eceb34bbae99276fe1e4359a0452",
+      "installedEqualsCommittedSource": true
+    },
+    {
+      "file": "skills/teamai/SKILL.md",
+      "sha256": "15b0a7e1a44dc95942d06ec36c2a8b301d6406fe06c8b6fe422b72dfc932f295",
+      "installedEqualsCommittedSource": true
+    },
+    {
+      "file": "skills/teamai/references/commands.md",
+      "sha256": "e2ae88156b20cbad6baadf7b489ef5a8d1782b9f33f10bc5dc5f9cdc0a524fc4",
+      "installedEqualsCommittedSource": true
+    },
+    {
+      "file": "README.md",
+      "sha256": "75a2fb6cc6e0cdc1e3a558dd0ebc1dd85aec32f659da44973a2575a96e247318",
+      "installedEqualsCommittedSource": true
+    },
+    {
+      "file": "README.zh-CN.md",
+      "sha256": "83d65c3f963e82452aa1ac3d400ab2c0e5f7c53a2f04d697bc3afd2fdb60d0f0",
+      "installedEqualsCommittedSource": true
+    }
+  ],
+  "packageReport": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v4\\package\\package-report.json",
+  "fullTestReuse": {
+    "sourceRevision": "e0eb6a4734b78608709fb16398701cbbf26cae4a",
+    "receipt": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v2\\test-result.json",
+    "receiptSha256": "df95be49e8044026279f445959c358a52ee15a247715e811116e4e34fa2f6339",
+    "result": "253_PASS_1_SKIP_AT_PREDECESSOR",
+    "reason": "Only Agent instruction and dedicated doc changed since e0eb. TypeScript, delivery logic, lock, all tests/fixtures and compiled CLI unchanged. Typecheck and 11 delivery units retain their actual8000 revision; real package/install with two deliveries runs on this candidate. Actual stopping behavior requires fresh native evidence."
+  },
+  "unchangedCodeChecks": {
+    "sourceRevision": "8000bae22cf6a3490578e25e1af6b618e73267d5",
+    "typecheck": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v3\\typecheck-result.json",
+    "agentUnits": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v3\\focused-delivery-result.json",
+    "freshOnThisCandidate": false
+  },
+  "compiledEvidence": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\supervisor-compiled-candidate-check.json",
+  "createdAtUtc": "2026-10-06T02:04:07.5798949Z"
+}

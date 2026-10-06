@@ -1,0 +1,8 @@
+{
+  "case": "B29-non-git",
+  "sessionId": "2e1e2937-866a-45aa-8a12-39a05decd859",
+  "launcherPid": 3892,
+  "exitCode": 0,
+  "endedAtUtc": "2026-10-06T03:04:26.3173050Z",
+  "meaning": "Normal process end only; record actual events/answer separately. Restore real read-gap source before post protection."
+}

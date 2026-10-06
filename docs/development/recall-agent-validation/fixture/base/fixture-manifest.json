@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "clientDate": "2026-10-05",
+  "status": "PREPARATION_ONLY",
+  "baselineApproved": false,
+  "observedCliRevision": "0fb99a7b065de71eb683d774231b518971b57e8c",
+  "candidate": null,
+  "behaviorEvidence": "NOT_RUN",
+  "corpusRoot": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\b-agent-preparation-20261005\\corpus",
+  "activeProject": "payments-api",
+  "inactiveProject": "risk-view",
+  "sourceRevision": null,
+  "learningsRevision": null,
+  "fixtures": [
+    {
+      "relativePath": "contexts/payments-api/docs/10-display-note.md",
+      "byteLength": 490,
+      "sha256": "3bf8e299f32ef4ccbfcbeb03fcb273d13e4c23eef8a359086c6957b50cf6b85e",
+      "textLines": 9,
+      "anchors": []
+    },
+    {
+      "relativePath": "contexts/payments-api/docs/40-replay-guard.md",
+      "byteLength": 1508,
+      "sha256": "0e2751160489cddc7dacb81eb626a71581c0e663ed5c936cb7adf857a001ab25",
+      "textLines": 37,
+      "anchors": [
+        {
+          "line": 8,
+          "text": "REPLAY_GUARD_BUSY: RetryEnvelope cannot acquire generation lease after reconnect."
+        },
+        {
+          "line": 35,
+          "text": "Only when the state label is exactly E4 and the previous sender has stopped may the operation be attempted again after 250 ms."
+        },
+        {
+          "line": 36,
+          "text": "If either condition is unknown or false, this note grants no retry permission and provides no alternative delay."
+        }
+      ]
+    },
+    {
+      "relativePath": "contexts/payments-api/docs/70-epoch-policy.md",
+      "byteLength": 524,
+      "sha256": "d1c3e9d39ca87b5b9192d768ba19301fcd377875fd18c9ca71199295c4001fc1",
+      "textLines": 10,
+      "anchors": [
+        {
+          "line": 7,
+          "text": "A stale owner epoch can cause duplicate send when the former producer still owns an outstanding request marker."
+        },
+        {
+          "line": 8,
+          "text": "The operator must establish that the former producer has relinquished that marker before treating the replacement producer as safe."
+        },
+        {
+          "line": 9,
+          "text": "An elapsed delay by itself does not establish relinquishment."
+        }
+      ]
+    },
+    {
+      "relativePath": "contexts/payments-api/docs/80-audit-note.md",
+      "byteLength": 657,
+      "sha256": "26a4e79b81aa1d8aad0751529869a29e638cbc8442d4383f0ff8908e2eb98b58",
+      "textLines": 16,
+      "anchors": [
+        {
+          "line": 7,
+          "text": "AUDIT_NOTE_71: LeaseMux evidence boundary reached."
+        }
+      ]
+    },
+    {
+      "relativePath": "contexts/payments-api/docs/90-read-gap.md",
+      "byteLength": 745,
+      "sha256": "4ae3a786e26169cf14543b30b7b7225b328f6bd2d1584dd0cf103887719dd4cb",
+      "textLines": 25,
+      "anchors": [
+        {
+          "line": 7,
+          "text": "READ_GAP_72: LeaseMux incident appendix unavailable."
+        },
+        {
+          "line": 25,
+          "text": "The operation must remain paused until the operator confirms marker Z8. No time-based substitute is defined."
+        }
+      ]
+    },
+    {
+      "relativePath": "contexts/risk-view/docs/outside-scope.md",
+      "byteLength": 499,
+      "sha256": "2f103a0fa584c63af28c43e7cf62719f08ae8801a93103ae183a2b88b58512b3",
+      "textLines": 12,
+      "anchors": [
+        {
+          "line": 7,
+          "text": "REPLAY_GUARD_BUSY: RetryEnvelope cannot acquire generation lease after reconnect."
+        },
+        {
+          "line": 8,
+          "text": "AUDIT_NOTE_71: LeaseMux evidence boundary reached."
+        },
+        {
+          "line": 9,
+          "text": "READ_GAP_72: LeaseMux incident appendix unavailable."
+        },
+        {
+          "line": 10,
+          "text": "PIPELINE_LOCK_81: LedgerDrain conflict."
+        },
+        {
+          "line": 11,
+          "text": "UTC_LEASE_WINDOW_63: ClockFence observation pending."
+        }
+      ]
+    },
+    {
+      "relativePath": "learnings/payments-api/5d631ba1-b2e4-4638-8c45-5207c914ce82.md",
+      "byteLength": 341,
+      "sha256": "3faf31f95ac6386092f2994224f941537850e281697fc286492a8c6eba2e7001",
+      "textLines": 10,
+      "anchors": [
+        {
+          "line": 8,
+          "text": "PIPELINE_LOCK_81: LedgerDrain conflict."
+        },
+        {
+          "line": 9,
+          "text": "Under exact condition case C7, processing must remain stopped until a replacement marker is confirmed."
+        }
+      ]
+    },
+    {
+      "relativePath": "learnings/payments-api/9be813a0-2541-4cf2-b71e-098a7f610e81.md",
+      "byteLength": 345,
+      "sha256": "ce87f8dafe86124559cd07347ee3a2a8fb494d8f094e69103b76eca36186a88f",
+      "textLines": 10,
+      "anchors": [
+        {
+          "line": 8,
+          "text": "PIPELINE_LOCK_81: LedgerDrain conflict."
+        },
+        {
+          "line": 9,
+          "text": "Under exact condition case C7, processing is allowed to continue without waiting for a replacement marker."
+        }
+      ]
+    },
+    {
+      "relativePath": "learnings/shared/11f67190-c1b4-4cb7-a082-188a7dd98f63.md",
+      "byteLength": 476,
+      "sha256": "0360cd3086cb8d79b0ae92f2d9a8cce1b4eb8c2fa9739e755e50560ba0a230a2",
+      "textLines": 10,
+      "anchors": [
+        {
+          "line": 8,
+          "text": "UTC_LEASE_WINDOW_63: ClockFence observation pending."
+        },
+        {
+          "line": 9,
+          "text": "For a confirmed UTC sample interval of 400 ms, compare the preceding sample and the current sample before marking the observation complete."
+        },
+        {
+          "line": 10,
+          "text": "If either sample is missing, leave the observation pending. This describes an observation state; the Learning itself is published."
+        }
+      ]
+    }
+  ]
+}

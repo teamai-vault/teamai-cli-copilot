@@ -1,0 +1,50 @@
+{
+  "businessRoots": 13,
+  "gitRoots": 5,
+  "deltas": [
+    {
+      "category": "business",
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+      "before": "305b90d0e78a72726f4eac6811526d4bd05128724f0704dff656cb155fddcba1",
+      "after": "89cba1bb2f19920e67c754daf841f03f085128bc7b1fbb13cb470e82e9aaa800"
+    }
+  ],
+  "case": "B33-injection",
+  "sinceSetup": {
+    "businessRoots": 13,
+    "gitRoots": 5,
+    "deltas": [
+      {
+        "category": "business",
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+        "before": "ABSENT",
+        "after": "89cba1bb2f19920e67c754daf841f03f085128bc7b1fbb13cb470e82e9aaa800"
+      },
+      {
+        "category": "business",
+        "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\Windows\\PowerShell\\StartupProfileData-NonInteractive",
+        "before": "ABSENT",
+        "after": "a7de5177c68a64bd48b36d49e2853799f4ebcfa8e4761f7cc472f333dc5f65cf"
+      }
+    ]
+  },
+  "exactBusinessStartupDeltas": [
+    {
+      "category": "business",
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+      "before": "305b90d0e78a72726f4eac6811526d4bd05128724f0704dff656cb155fddcba1",
+      "after": "89cba1bb2f19920e67c754daf841f03f085128bc7b1fbb13cb470e82e9aaa800"
+    }
+  ],
+  "sinceSetupExactBusinessStartupDeltas": [
+    {
+      "category": "business",
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+      "before": "ABSENT",
+      "after": "89cba1bb2f19920e67c754daf841f03f085128bc7b1fbb13cb470e82e9aaa800"
+    }
+  ],
+  "generatingPlatformArtifactPid": "NOT_INDEPENDENTLY_OBSERVED",
+  "nativePlatform": "Native account/config/session/log writes are separate and not scanned; complete business/Git deltas remain. Unexpected business changes require root disposition.",
+  "behaviorAcceptance": "NOT_INFERRED_FROM_HASHES"
+}

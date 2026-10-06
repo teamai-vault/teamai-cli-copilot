@@ -1,0 +1,397 @@
+[
+  {
+    "agentId": "77c0abde-98f2-431d-98c8-aa76140a61c4",
+    "toolCallId": "call_kBrvrjKMHr8SvMX3jH7qGDpY",
+    "startedAt": "2026-10-06T02:38:13.993Z",
+    "completedAt": "2026-10-06T02:38:35.725Z",
+    "command": "teamai recall \"REPLAY_GUARD_BUSY RetryEnvelope generation lease reconnect\" --project payments-api --json",
+    "success": true,
+    "exitCode": 0,
+    "result": {
+      "schemaVersion": 1,
+      "query": "REPLAY_GUARD_BUSY RetryEnvelope generation lease reconnect",
+      "scope": "workspace",
+      "project": "payments-api",
+      "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+      "resourceRevision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+      "learningsRevision": "cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2",
+      "limit": 5,
+      "hits": [
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/10-display-note.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "RetryEnvelope reconnect REPLAY_GUARD_BUSY dashboard",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/10-display-note.md",
+            "contentHash": "3bf8e299f32ef4ccbfcbeb03fcb273d13e4c23eef8a359086c6957b50cf6b85e"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\10-display-note.md",
+          "matchedTerms": [
+            "REPLAY_GUARD_BUSY",
+            "RetryEnvelope",
+            "generation",
+            "lease",
+            "reconnect"
+          ],
+          "lineStart": 1,
+          "lineEnd": 3,
+          "snippet": "---\ntitle: RetryEnvelope reconnect REPLAY_GUARD_BUSY dashboard\ntags: [RetryEnvelope, reconnect, REPLAY_GUARD_BUSY, generation, lease]"
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/40-replay-guard.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "RetryEnvelope generation lease observations",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/40-replay-guard.md",
+            "contentHash": "0e2751160489cddc7dacb81eb626a71581c0e663ed5c936cb7adf857a001ab25"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\40-replay-guard.md",
+          "matchedTerms": [
+            "REPLAY_GUARD_BUSY",
+            "RetryEnvelope",
+            "generation",
+            "lease",
+            "reconnect"
+          ],
+          "lineStart": 6,
+          "lineEnd": 8,
+          "snippet": "\nObserved diagnostic:\nREPLAY_GUARD_BUSY: RetryEnvelope cannot acquire generation lease after reconnect."
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/80-audit-note.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "LeaseMux audit note",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/80-audit-note.md",
+            "contentHash": "26a4e79b81aa1d8aad0751529869a29e638cbc8442d4383f0ff8908e2eb98b58"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\80-audit-note.md",
+          "matchedTerms": [
+            "lease"
+          ],
+          "lineStart": 1,
+          "lineEnd": 3,
+          "snippet": "---\ntitle: LeaseMux audit note\ntags: [LeaseMux, AUDIT_NOTE_71]"
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/90-read-gap.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "LeaseMux incident appendix",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/90-read-gap.md",
+            "contentHash": "4ae3a786e26169cf14543b30b7b7225b328f6bd2d1584dd0cf103887719dd4cb"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\90-read-gap.md",
+          "matchedTerms": [
+            "lease"
+          ],
+          "lineStart": 1,
+          "lineEnd": 3,
+          "snippet": "---\ntitle: LeaseMux incident appendix\ntags: [LeaseMux, READ_GAP_72]"
+        },
+        {
+          "id": "learning:shared:11f67190-c1b4-4cb7-a082-188a7dd98f63",
+          "type": "learning",
+          "publication": "published",
+          "logicalProject": "shared",
+          "title": "ClockFence observation window",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2",
+            "relativePath": "learnings/shared/11f67190-c1b4-4cb7-a082-188a7dd98f63.md",
+            "contentHash": "0360cd3086cb8d79b0ae92f2d9a8cce1b4eb8c2fa9739e755e50560ba0a230a2"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\.teamai\\published-learnings\\698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\\revisions\\cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\\files\\learnings\\shared\\11f67190-c1b4-4cb7-a082-188a7dd98f63.md",
+          "matchedTerms": [
+            "lease"
+          ],
+          "lineStart": 2,
+          "lineEnd": 4,
+          "snippet": "id: 11f67190-c1b4-4cb7-a082-188a7dd98f63\ntitle: ClockFence observation window\ntags: [ClockFence, UTC_LEASE_WINDOW_63]"
+        }
+      ]
+    },
+    "rawResult": {
+      "content": "{\"schemaVersion\":1,\"query\":\"REPLAY_GUARD_BUSY RetryEnvelope generation lease reconnect\",\"scope\":\"workspace\",\"project\":\"payments-api\",\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"resourceRevision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"learningsRevision\":\"cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\",\"limit\":5,\"hits\":[{\"id\":\"doc:payments-api:contexts/payments-api/docs/10-display-note.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"RetryEnvelope reconnect REPLAY_GUARD_BUSY dashboard\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/10-display-note.md\",\"contentHash\":\"3bf8e299f32ef4ccbfcbeb03fcb273d13e4c23eef8a359086c6957b50cf6b85e\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\10-display-note.md\",\"matchedTerms\":[\"REPLAY_GUARD_BUSY\",\"RetryEnvelope\",\"generation\",\"lease\",\"reconnect\"],\"lineStart\":1,\"lineEnd\":3,\"snippet\":\"---\\ntitle: RetryEnvelope reconnect REPLAY_GUARD_BUSY dashboard\\ntags: [RetryEnvelope, reconnect, REPLAY_GUARD_BUSY, generation, lease]\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/40-replay-guard.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"RetryEnvelope generation lease observations\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/40-replay-guard.md\",\"contentHash\":\"0e2751160489cddc7dacb81eb626a71581c0e663ed5c936cb7adf857a001ab25\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\40-replay-guard.md\",\"matchedTerms\":[\"REPLAY_GUARD_BUSY\",\"RetryEnvelope\",\"generation\",\"lease\",\"reconnect\"],\"lineStart\":6,\"lineEnd\":8,\"snippet\":\"\\nObserved diagnostic:\\nREPLAY_GUARD_BUSY: RetryEnvelope cannot acquire generation lease after reconnect.\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/80-audit-note.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"LeaseMux audit note\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/80-audit-note.md\",\"contentHash\":\"26a4e79b81aa1d8aad0751529869a29e638cbc8442d4383f0ff8908e2eb98b58\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\80-audit-note.md\",\"matchedTerms\":[\"lease\"],\"lineStart\":1,\"lineEnd\":3,\"snippet\":\"---\\ntitle: LeaseMux audit note\\ntags: [LeaseMux, AUDIT_NOTE_71]\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/90-read-gap.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"LeaseMux incident appendix\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/90-read-gap.md\",\"contentHash\":\"4ae3a786e26169cf14543b30b7b7225b328f6bd2d1584dd0cf103887719dd4cb\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\90-read-gap.md\",\"matchedTerms\":[\"lease\"],\"lineStart\":1,\"lineEnd\":3,\"snippet\":\"---\\ntitle: LeaseMux incident appendix\\ntags: [LeaseMux, READ_GAP_72]\"},{\"id\":\"learning:shared:11f67190-c1b4-4cb7-a082-188a7dd98f63\",\"type\":\"learning\",\"publication\":\"published\",\"logicalProject\":\"shared\",\"title\":\"ClockFence observation window\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\",\"relativePath\":\"learnings/shared/11f67190-c1b4-4cb7-a082-188a7dd98f63.md\",\"contentHash\":\"0360cd3086cb8d79b0ae92f2d9a8cce1b4eb8c2fa9739e755e50560ba0a230a2\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\business-home\\\\.teamai\\\\published-learnings\\\\698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\\\\revisions\\\\cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\\\\files\\\\learnings\\\\shared\\\\11f67190-c1b4-4cb7-a082-188a7dd98f63.md\",\"matchedTerms\":[\"lease\"],\"lineStart\":2,\"lineEnd\":4,\"snippet\":\"id: 11f67190-c1b4-4cb7-a082-188a7dd98f63\\ntitle: ClockFence observation window\\ntags: [ClockFence, UTC_LEASE_WINDOW_63]\"}]}\n<shellId: 3 completed with exit code 0>"
+    }
+  },
+  {
+    "agentId": "77c0abde-98f2-431d-98c8-aa76140a61c4",
+    "toolCallId": "call_2g7vPPG1E7TOOL8SF5FTCLko",
+    "startedAt": "2026-10-06T02:38:13.995Z",
+    "completedAt": "2026-10-06T02:40:16.505Z",
+    "command": "teamai recall \"RetryEnvelope generation lease wait condition\" --project payments-api --json",
+    "success": true,
+    "exitCode": 0,
+    "result": {
+      "schemaVersion": 1,
+      "query": "RetryEnvelope generation lease wait condition",
+      "scope": "workspace",
+      "project": "payments-api",
+      "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+      "resourceRevision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+      "learningsRevision": "cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2",
+      "limit": 5,
+      "hits": [
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/10-display-note.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "RetryEnvelope reconnect REPLAY_GUARD_BUSY dashboard",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/10-display-note.md",
+            "contentHash": "3bf8e299f32ef4ccbfcbeb03fcb273d13e4c23eef8a359086c6957b50cf6b85e"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\10-display-note.md",
+          "matchedTerms": [
+            "RetryEnvelope",
+            "generation",
+            "lease"
+          ],
+          "lineStart": 1,
+          "lineEnd": 3,
+          "snippet": "---\ntitle: RetryEnvelope reconnect REPLAY_GUARD_BUSY dashboard\ntags: [RetryEnvelope, reconnect, REPLAY_GUARD_BUSY, generation, lease]"
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/40-replay-guard.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "RetryEnvelope generation lease observations",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/40-replay-guard.md",
+            "contentHash": "0e2751160489cddc7dacb81eb626a71581c0e663ed5c936cb7adf857a001ab25"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\40-replay-guard.md",
+          "matchedTerms": [
+            "RetryEnvelope",
+            "generation",
+            "lease",
+            "condition"
+          ],
+          "lineStart": 1,
+          "lineEnd": 3,
+          "snippet": "---\ntitle: RetryEnvelope generation lease observations\ntags: [RetryEnvelope, reconnect]"
+        },
+        {
+          "id": "learning:payments-api:9be813a0-2541-4cf2-b71e-098a7f610e81",
+          "type": "learning",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "LedgerDrain condition C7",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2",
+            "relativePath": "learnings/payments-api/9be813a0-2541-4cf2-b71e-098a7f610e81.md",
+            "contentHash": "ce87f8dafe86124559cd07347ee3a2a8fb494d8f094e69103b76eca36186a88f"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\.teamai\\published-learnings\\698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\\revisions\\cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\\files\\learnings\\payments-api\\9be813a0-2541-4cf2-b71e-098a7f610e81.md",
+          "matchedTerms": [
+            "wait",
+            "condition"
+          ],
+          "lineStart": 7,
+          "lineEnd": 9,
+          "snippet": "\nPIPELINE_LOCK_81: LedgerDrain conflict.\nUnder exact condition case C7, processing is allowed to continue without waiting for a replacement marker."
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/63-intake-handoff.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "IntakeSlot handling policy",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/63-intake-handoff.md",
+            "contentHash": "fe9b9fd2e6d6fc27230482718a546bac406883d4551040a74c8e4ac71ce88a7c"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\63-intake-handoff.md",
+          "matchedTerms": [
+            "wait",
+            "condition"
+          ],
+          "lineStart": 5,
+          "lineEnd": 7,
+          "snippet": "# IntakeSlot handling policy\n\nHANDOFF_BUDGET_WAIT_64: IntakeSlot cannot resume after account rollover."
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/90-read-gap.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "LeaseMux incident appendix",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/90-read-gap.md",
+            "contentHash": "4ae3a786e26169cf14543b30b7b7225b328f6bd2d1584dd0cf103887719dd4cb"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\90-read-gap.md",
+          "matchedTerms": [
+            "lease",
+            "condition"
+          ],
+          "lineStart": 6,
+          "lineEnd": 8,
+          "snippet": "\nREAD_GAP_72: LeaseMux incident appendix unavailable.\nAn appendix contains the final handling condition."
+        }
+      ]
+    },
+    "rawResult": {
+      "content": "{\"schemaVersion\":1,\"query\":\"RetryEnvelope generation lease wait condition\",\"scope\":\"workspace\",\"project\":\"payments-api\",\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"resourceRevision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"learningsRevision\":\"cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\",\"limit\":5,\"hits\":[{\"id\":\"doc:payments-api:contexts/payments-api/docs/10-display-note.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"RetryEnvelope reconnect REPLAY_GUARD_BUSY dashboard\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/10-display-note.md\",\"contentHash\":\"3bf8e299f32ef4ccbfcbeb03fcb273d13e4c23eef8a359086c6957b50cf6b85e\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\10-display-note.md\",\"matchedTerms\":[\"RetryEnvelope\",\"generation\",\"lease\"],\"lineStart\":1,\"lineEnd\":3,\"snippet\":\"---\\ntitle: RetryEnvelope reconnect REPLAY_GUARD_BUSY dashboard\\ntags: [RetryEnvelope, reconnect, REPLAY_GUARD_BUSY, generation, lease]\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/40-replay-guard.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"RetryEnvelope generation lease observations\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/40-replay-guard.md\",\"contentHash\":\"0e2751160489cddc7dacb81eb626a71581c0e663ed5c936cb7adf857a001ab25\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\40-replay-guard.md\",\"matchedTerms\":[\"RetryEnvelope\",\"generation\",\"lease\",\"condition\"],\"lineStart\":1,\"lineEnd\":3,\"snippet\":\"---\\ntitle: RetryEnvelope generation lease observations\\ntags: [RetryEnvelope, reconnect]\"},{\"id\":\"learning:payments-api:9be813a0-2541-4cf2-b71e-098a7f610e81\",\"type\":\"learning\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"LedgerDrain condition C7\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\",\"relativePath\":\"learnings/payments-api/9be813a0-2541-4cf2-b71e-098a7f610e81.md\",\"contentHash\":\"ce87f8dafe86124559cd07347ee3a2a8fb494d8f094e69103b76eca36186a88f\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\business-home\\\\.teamai\\\\published-learnings\\\\698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\\\\revisions\\\\cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\\\\files\\\\learnings\\\\payments-api\\\\9be813a0-2541-4cf2-b71e-098a7f610e81.md\",\"matchedTerms\":[\"wait\",\"condition\"],\"lineStart\":7,\"lineEnd\":9,\"snippet\":\"\\nPIPELINE_LOCK_81: LedgerDrain conflict.\\nUnder exact condition case C7, processing is allowed to continue without waiting for a replacement marker.\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/63-intake-handoff.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"IntakeSlot handling policy\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/63-intake-handoff.md\",\"contentHash\":\"fe9b9fd2e6d6fc27230482718a546bac406883d4551040a74c8e4ac71ce88a7c\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\63-intake-handoff.md\",\"matchedTerms\":[\"wait\",\"condition\"],\"lineStart\":5,\"lineEnd\":7,\"snippet\":\"# IntakeSlot handling policy\\n\\nHANDOFF_BUDGET_WAIT_64: IntakeSlot cannot resume after account rollover.\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/90-read-gap.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"LeaseMux incident appendix\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/90-read-gap.md\",\"contentHash\":\"4ae3a786e26169cf14543b30b7b7225b328f6bd2d1584dd0cf103887719dd4cb\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\90-read-gap.md\",\"matchedTerms\":[\"lease\",\"condition\"],\"lineStart\":6,\"lineEnd\":8,\"snippet\":\"\\nREAD_GAP_72: LeaseMux incident appendix unavailable.\\nAn appendix contains the final handling condition.\"}]}\n<shellId: 4 completed with exit code 0>"
+    }
+  },
+  {
+    "agentId": "77c0abde-98f2-431d-98c8-aa76140a61c4",
+    "toolCallId": "call_wQhQm9vZLZTon5XWGnPcbFRA",
+    "startedAt": "2026-10-06T02:41:28.017Z",
+    "completedAt": "2026-10-06T02:42:19.580Z",
+    "command": "teamai recall \"E4 previous sender stopped 250 ms\" --project payments-api --json",
+    "success": true,
+    "exitCode": 0,
+    "result": {
+      "schemaVersion": 1,
+      "query": "E4 previous sender stopped 250 ms",
+      "scope": "workspace",
+      "project": "payments-api",
+      "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+      "resourceRevision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+      "learningsRevision": "cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2",
+      "limit": 5,
+      "hits": [
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/40-replay-guard.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "RetryEnvelope generation lease observations",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/40-replay-guard.md",
+            "contentHash": "0e2751160489cddc7dacb81eb626a71581c0e663ed5c936cb7adf857a001ab25"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\40-replay-guard.md",
+          "matchedTerms": [
+            "E4",
+            "previous",
+            "sender",
+            "stopped",
+            "250",
+            "ms"
+          ],
+          "lineStart": 33,
+          "lineEnd": 35,
+          "snippet": "## Decision conditions\n\nOnly when the state label is exactly E4 and the previous sender has stopped may the operation be attempted again after 250 ms."
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/63-intake-handoff.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "IntakeSlot handling policy",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/63-intake-handoff.md",
+            "contentHash": "fe9b9fd2e6d6fc27230482718a546bac406883d4551040a74c8e4ac71ce88a7c"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\63-intake-handoff.md",
+          "matchedTerms": [
+            "previous",
+            "stopped",
+            "ms"
+          ],
+          "lineStart": 7,
+          "lineEnd": 9,
+          "snippet": "HANDOFF_BUDGET_WAIT_64: IntakeSlot cannot resume after account rollover.\n\nFor intake mode V6, after the previous holder has stopped, the local wait is 9 ms. If either fact is unconfirmed or false, this note defines no alternative wait and does not establish eligibility."
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/70-epoch-policy.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "Stale owner epoch and duplicate send",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/70-epoch-policy.md",
+            "contentHash": "d1c3e9d39ca87b5b9192d768ba19301fcd377875fd18c9ca71199295c4001fc1"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\70-epoch-policy.md",
+          "matchedTerms": [
+            "E4"
+          ],
+          "lineStart": 8,
+          "lineEnd": 10,
+          "snippet": "The operator must establish that the former producer has relinquished that marker before treating the replacement producer as safe.\nAn elapsed delay by itself does not establish relinquishment.\nThe rule complements the E4 state observation; it does not determine that state or approve changing project bindings."
+        },
+        {
+          "id": "learning:payments-api:5d631ba1-b2e4-4638-8c45-5207c914ce82",
+          "type": "learning",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "LedgerDrain condition C7",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2",
+            "relativePath": "learnings/payments-api/5d631ba1-b2e4-4638-8c45-5207c914ce82.md",
+            "contentHash": "3faf31f95ac6386092f2994224f941537850e281697fc286492a8c6eba2e7001"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\business-home\\.teamai\\published-learnings\\698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\\revisions\\cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\\files\\learnings\\payments-api\\5d631ba1-b2e4-4638-8c45-5207c914ce82.md",
+          "matchedTerms": [
+            "stopped"
+          ],
+          "lineStart": 7,
+          "lineEnd": 9,
+          "snippet": "\nPIPELINE_LOCK_81: LedgerDrain conflict.\nUnder exact condition case C7, processing must remain stopped until a replacement marker is confirmed."
+        },
+        {
+          "id": "doc:payments-api:contexts/payments-api/docs/31-intake-display.md",
+          "type": "doc",
+          "publication": "published",
+          "logicalProject": "payments-api",
+          "title": "IntakeSlot HANDOFF_BUDGET_WAIT_64 account rollover resume",
+          "source": {
+            "sourceHash": "698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34",
+            "revision": "3df2318a88d551876cd587a21e4cf8435af08d3c",
+            "relativePath": "contexts/payments-api/docs/31-intake-display.md",
+            "contentHash": "8e1457c2bda0bd7f317e956c27975ba37e0cb26386b0a77d51083c973de333ea"
+          },
+          "file": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\b29-v1\\resource\\contexts\\payments-api\\docs\\31-intake-display.md",
+          "matchedTerms": [
+            "previous"
+          ],
+          "lineStart": 11,
+          "lineEnd": 13,
+          "snippet": "An IntakeSlot label is repeated in the overview and detail cards.\nThe overview lists intake mode V6 as a display category.\nThe detail card repeats the previous holder field."
+        }
+      ]
+    },
+    "rawResult": {
+      "content": "{\"schemaVersion\":1,\"query\":\"E4 previous sender stopped 250 ms\",\"scope\":\"workspace\",\"project\":\"payments-api\",\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"resourceRevision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"learningsRevision\":\"cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\",\"limit\":5,\"hits\":[{\"id\":\"doc:payments-api:contexts/payments-api/docs/40-replay-guard.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"RetryEnvelope generation lease observations\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/40-replay-guard.md\",\"contentHash\":\"0e2751160489cddc7dacb81eb626a71581c0e663ed5c936cb7adf857a001ab25\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\40-replay-guard.md\",\"matchedTerms\":[\"E4\",\"previous\",\"sender\",\"stopped\",\"250\",\"ms\"],\"lineStart\":33,\"lineEnd\":35,\"snippet\":\"## Decision conditions\\n\\nOnly when the state label is exactly E4 and the previous sender has stopped may the operation be attempted again after 250 ms.\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/63-intake-handoff.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"IntakeSlot handling policy\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/63-intake-handoff.md\",\"contentHash\":\"fe9b9fd2e6d6fc27230482718a546bac406883d4551040a74c8e4ac71ce88a7c\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\63-intake-handoff.md\",\"matchedTerms\":[\"previous\",\"stopped\",\"ms\"],\"lineStart\":7,\"lineEnd\":9,\"snippet\":\"HANDOFF_BUDGET_WAIT_64: IntakeSlot cannot resume after account rollover.\\n\\nFor intake mode V6, after the previous holder has stopped, the local wait is 9 ms. If either fact is unconfirmed or false, this note defines no alternative wait and does not establish eligibility.\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/70-epoch-policy.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"Stale owner epoch and duplicate send\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/70-epoch-policy.md\",\"contentHash\":\"d1c3e9d39ca87b5b9192d768ba19301fcd377875fd18c9ca71199295c4001fc1\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\70-epoch-policy.md\",\"matchedTerms\":[\"E4\"],\"lineStart\":8,\"lineEnd\":10,\"snippet\":\"The operator must establish that the former producer has relinquished that marker before treating the replacement producer as safe.\\nAn elapsed delay by itself does not establish relinquishment.\\nThe rule complements the E4 state observation; it does not determine that state or approve changing project bindings.\"},{\"id\":\"learning:payments-api:5d631ba1-b2e4-4638-8c45-5207c914ce82\",\"type\":\"learning\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"LedgerDrain condition C7\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\",\"relativePath\":\"learnings/payments-api/5d631ba1-b2e4-4638-8c45-5207c914ce82.md\",\"contentHash\":\"3faf31f95ac6386092f2994224f941537850e281697fc286492a8c6eba2e7001\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\business-home\\\\.teamai\\\\published-learnings\\\\698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\\\\revisions\\\\cc4a266abe9e9d86223d0dc63ace0ebdd05f2ee2\\\\files\\\\learnings\\\\payments-api\\\\5d631ba1-b2e4-4638-8c45-5207c914ce82.md\",\"matchedTerms\":[\"stopped\"],\"lineStart\":7,\"lineEnd\":9,\"snippet\":\"\\nPIPELINE_LOCK_81: LedgerDrain conflict.\\nUnder exact condition case C7, processing must remain stopped until a replacement marker is confirmed.\"},{\"id\":\"doc:payments-api:contexts/payments-api/docs/31-intake-display.md\",\"type\":\"doc\",\"publication\":\"published\",\"logicalProject\":\"payments-api\",\"title\":\"IntakeSlot HANDOFF_BUDGET_WAIT_64 account rollover resume\",\"source\":{\"sourceHash\":\"698b4c8833e096c2e1ca1e016fb8d3eb615cf9d86600c0b51a9de7f35edcaf34\",\"revision\":\"3df2318a88d551876cd587a21e4cf8435af08d3c\",\"relativePath\":\"contexts/payments-api/docs/31-intake-display.md\",\"contentHash\":\"8e1457c2bda0bd7f317e956c27975ba37e0cb26386b0a77d51083c973de333ea\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\b\\\\b29-v1\\\\resource\\\\contexts\\\\payments-api\\\\docs\\\\31-intake-display.md\",\"matchedTerms\":[\"previous\"],\"lineStart\":11,\"lineEnd\":13,\"snippet\":\"An IntakeSlot label is repeated in the overview and detail cards.\\nThe overview lists intake mode V6 as a display category.\\nThe detail card repeats the previous holder field.\"}]}\n<shellId: 5 completed with exit code 0>"
+    }
+  }
+]

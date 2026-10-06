@@ -1,0 +1,1760 @@
+{
+  "schemaVersion": 1,
+  "status": "LOCAL_VERBATIM_STAGING_NOT_SOURCE_DELIVERY",
+  "artifacts": [
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\b-native-33-correction-2-v1\\B33-original-observable-events.jsonl",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\history\\b-native-33-correction-2-v1\\B33-original-observable-events.jsonl",
+      "relativePath": "history/b-native-33-correction-2-v1/B33-original-observable-events.jsonl",
+      "bytes": 45722,
+      "sha256": "fb8f35b6fd278690efa5043efad093a397dfb8b035ddb13015225c989aef51ed",
+      "classification": "Projected observable/answer evidence only; original private sessions and provider/account files are not selected"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\b-native-33-correction-2-v1\\B33-original-queries.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\history\\b-native-33-correction-2-v1\\B33-original-queries.json",
+      "relativePath": "history/b-native-33-correction-2-v1/B33-original-queries.json",
+      "bytes": 12613,
+      "sha256": "fcf8a0cdaad851ac85433ac03615f6b71efb2fa67e97961688b3f57fe40ecbb4",
+      "classification": "Projected observable/answer evidence only; original private sessions and provider/account files are not selected"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\b-native-33-correction-2-v1\\B33-original-reads.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\history\\b-native-33-correction-2-v1\\B33-original-reads.json",
+      "relativePath": "history/b-native-33-correction-2-v1/B33-original-reads.json",
+      "bytes": 9244,
+      "sha256": "e092b103d63a19e07f4441413b06a02ccdd76b76477fabbffff4ccf76a05c756",
+      "classification": "Projected observable/answer evidence only; original private sessions and provider/account files are not selected"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\b-native-33-correction-2-v1\\B33-original-answer.md",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\history\\b-native-33-correction-2-v1\\B33-original-answer.md",
+      "relativePath": "history/b-native-33-correction-2-v1/B33-original-answer.md",
+      "bytes": 2518,
+      "sha256": "86efbbed236e4305a34f0165a92b65d5c82f4b2f6eccb1a3ceb1073b8fcf085b",
+      "classification": "Projected observable/answer evidence only; original private sessions and provider/account files are not selected"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\b-native-33-correction-2-v1\\B33-original-metrics.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\history\\b-native-33-correction-2-v1\\B33-original-metrics.json",
+      "relativePath": "history/b-native-33-correction-2-v1/B33-original-metrics.json",
+      "bytes": 1395,
+      "sha256": "777311c5b568868ab198dd4fd9cb217b3b4a43258491431e640ff8c04fbd331c",
+      "classification": "Projected observable/answer evidence only; original private sessions and provider/account files are not selected"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\b-native-33-correction-2-v1\\B33-original-evidence.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\history\\b-native-33-correction-2-v1\\B33-original-evidence.json",
+      "relativePath": "history/b-native-33-correction-2-v1/B33-original-evidence.json",
+      "bytes": 9346,
+      "sha256": "0f96255f3532280127a55ffef2e304bc3e3f36025710ba2674c57c0ed51ae5cd",
+      "classification": "Projected observable/answer evidence only; original private sessions and provider/account files are not selected"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\b-native-33-correction-2-v1\\B33-injection-observable-events.jsonl",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\history\\b-native-33-correction-2-v1\\B33-injection-observable-events.jsonl",
+      "relativePath": "history/b-native-33-correction-2-v1/B33-injection-observable-events.jsonl",
+      "bytes": 74158,
+      "sha256": "66130307f8625cb6ab1d0996cbe5f1ac3a2cff96a4c438e6442a699351798a28",
+      "classification": "Projected observable/answer evidence only; original private sessions and provider/account files are not selected"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\b-native-33-correction-2-v1\\B33-injection-queries.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\history\\b-native-33-correction-2-v1\\B33-injection-queries.json",
+      "relativePath": "history/b-native-33-correction-2-v1/B33-injection-queries.json",
+      "bytes": 25638,
+      "sha256": "b570806187172a71c01f89769f43cc17b01e3c35cb06e93ca7f893f868d5d5e9",
+      "classification": "Projected observable/answer evidence only; original private sessions and provider/account files are not selected"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\b-native-33-correction-2-v1\\B33-injection-reads.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\history\\b-native-33-correction-2-v1\\B33-injection-reads.json",
+      "relativePath": "history/b-native-33-correction-2-v1/B33-injection-reads.json",
+      "bytes": 5654,
+      "sha256": "be6eae03275f40f74ede2faee82a1b5d242810624055e9a81255d9ad5217265d",
+      "classification": "Projected observable/answer evidence only; original private sessions and provider/account files are not selected"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\b-native-33-correction-2-v1\\B33-injection-answer.md",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\history\\b-native-33-correction-2-v1\\B33-injection-answer.md",
+      "relativePath": "history/b-native-33-correction-2-v1/B33-injection-answer.md",
+      "bytes": 4949,
+      "sha256": "cfb96fda5f2e87491865874dc356123a1660cda90eec31349c0b2ba8b8420a6b",
+      "classification": "Projected observable/answer evidence only; original private sessions and provider/account files are not selected"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\b-native-33-correction-2-v1\\B33-injection-metrics.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\history\\b-native-33-correction-2-v1\\B33-injection-metrics.json",
+      "relativePath": "history/b-native-33-correction-2-v1/B33-injection-metrics.json",
+      "bytes": 1396,
+      "sha256": "0c0ec9431ffabd8a2390625bc5b6a2e2ef18a1067ad69fbf1b09871334d498ce",
+      "classification": "Projected observable/answer evidence only; original private sessions and provider/account files are not selected"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\b-native-33-correction-2-v1\\B33-injection-evidence.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\history\\b-native-33-correction-2-v1\\B33-injection-evidence.json",
+      "relativePath": "history/b-native-33-correction-2-v1/B33-injection-evidence.json",
+      "bytes": 12603,
+      "sha256": "06cc0889e10088f614e1f9201aa54b2272d94d8a2890648287072c6cfaaf927b",
+      "classification": "Projected observable/answer evidence only; original private sessions and provider/account files are not selected"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\b-native-33-correction-2-v1\\B33-read-failure-observable-events.jsonl",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\history\\b-native-33-correction-2-v1\\B33-read-failure-observable-events.jsonl",
+      "relativePath": "history/b-native-33-correction-2-v1/B33-read-failure-observable-events.jsonl",
+      "bytes": 68413,
+      "sha256": "0c92ee6c7fd31c2cbe64b40573e9830bb40e9c0bfbcf8df598c39890f44b47cf",
+      "classification": "Projected observable/answer evidence only; original private sessions and provider/account files are not selected"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\b-native-33-correction-2-v1\\B33-read-failure-queries.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\history\\b-native-33-correction-2-v1\\B33-read-failure-queries.json",
+      "relativePath": "history/b-native-33-correction-2-v1/B33-read-failure-queries.json",
+      "bytes": 9159,
+      "sha256": "4abad4c2d38bf355d6b0b08cd0dc221527d872c13f641968b4c42542534dd676",
+      "classification": "Projected observable/answer evidence only; original private sessions and provider/account files are not selected"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\b-native-33-correction-2-v1\\B33-read-failure-reads.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\history\\b-native-33-correction-2-v1\\B33-read-failure-reads.json",
+      "relativePath": "history/b-native-33-correction-2-v1/B33-read-failure-reads.json",
+      "bytes": 7759,
+      "sha256": "be0a1d08d92a6e9fc9b4876e5c5b4411ba9b55a2dded2ffc9f0c2d461cb44793",
+      "classification": "Projected observable/answer evidence only; original private sessions and provider/account files are not selected"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\b-native-33-correction-2-v1\\B33-read-failure-answer.md",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\history\\b-native-33-correction-2-v1\\B33-read-failure-answer.md",
+      "relativePath": "history/b-native-33-correction-2-v1/B33-read-failure-answer.md",
+      "bytes": 5525,
+      "sha256": "01a0dce574270955fd10ddae54d9e18794cdbd72c41d894f3ee8c4fef9bd8efd",
+      "classification": "Projected observable/answer evidence only; original private sessions and provider/account files are not selected"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\b-native-33-correction-2-v1\\B33-read-failure-metrics.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\history\\b-native-33-correction-2-v1\\B33-read-failure-metrics.json",
+      "relativePath": "history/b-native-33-correction-2-v1/B33-read-failure-metrics.json",
+      "bytes": 1399,
+      "sha256": "817faa6b6388a6d4a5a2cc125fd920f04d07b0db6be1c720c603e64c1bf0bbd2",
+      "classification": "Projected observable/answer evidence only; original private sessions and provider/account files are not selected"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\b-native-33-correction-2-v1\\B33-read-failure-evidence.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\history\\b-native-33-correction-2-v1\\B33-read-failure-evidence.json",
+      "relativePath": "history/b-native-33-correction-2-v1/B33-read-failure-evidence.json",
+      "bytes": 12638,
+      "sha256": "40bca1347820e050d36f946b1c8ba57e5404e84a31ee3365618e9d69f54eb48c",
+      "classification": "Projected observable/answer evidence only; original private sessions and provider/account files are not selected"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\b-native-33-correction-2-v1\\B33-c1-ignored-learning-observable-events.jsonl",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\history\\b-native-33-correction-2-v1\\B33-c1-ignored-learning-observable-events.jsonl",
+      "relativePath": "history/b-native-33-correction-2-v1/B33-c1-ignored-learning-observable-events.jsonl",
+      "bytes": 35939,
+      "sha256": "0a584099d9f98c841103fef0199f930b11fdf6e318a5b802dfad232e43c91823",
+      "classification": "Projected observable/answer evidence only; original private sessions and provider/account files are not selected"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\b-native-33-correction-2-v1\\B33-c1-ignored-learning-queries.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\history\\b-native-33-correction-2-v1\\B33-c1-ignored-learning-queries.json",
+      "relativePath": "history/b-native-33-correction-2-v1/B33-c1-ignored-learning-queries.json",
+      "bytes": 14987,
+      "sha256": "7b6493837e30565d283e71e8fd99c82ade9779fa3fe11a6098e7eac653f5f50b",
+      "classification": "Projected observable/answer evidence only; original private sessions and provider/account files are not selected"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\b-native-33-correction-2-v1\\B33-c1-ignored-learning-reads.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\history\\b-native-33-correction-2-v1\\B33-c1-ignored-learning-reads.json",
+      "relativePath": "history/b-native-33-correction-2-v1/B33-c1-ignored-learning-reads.json",
+      "bytes": 3472,
+      "sha256": "64bef0c285fcbf403dce5364b3feabefec6c63f705529862ecfe3d09def52d9f",
+      "classification": "Projected observable/answer evidence only; original private sessions and provider/account files are not selected"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\b-native-33-correction-2-v1\\B33-c1-ignored-learning-answer.md",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\history\\b-native-33-correction-2-v1\\B33-c1-ignored-learning-answer.md",
+      "relativePath": "history/b-native-33-correction-2-v1/B33-c1-ignored-learning-answer.md",
+      "bytes": 1503,
+      "sha256": "3a46152645a3e53dd46bb7d2365697b3e2f347aca0b384d1788e7dcc52ee36d2",
+      "classification": "Projected observable/answer evidence only; original private sessions and provider/account files are not selected"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\b-native-33-correction-2-v1\\B33-c1-ignored-learning-metrics.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\history\\b-native-33-correction-2-v1\\B33-c1-ignored-learning-metrics.json",
+      "relativePath": "history/b-native-33-correction-2-v1/B33-c1-ignored-learning-metrics.json",
+      "bytes": 1406,
+      "sha256": "5e8b170f061db31a076d7b9178f466918f760658410caf3e71d76aef23d49c29",
+      "classification": "Projected observable/answer evidence only; original private sessions and provider/account files are not selected"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\b-native-33-correction-2-v1\\B33-c1-ignored-learning-evidence.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\history\\b-native-33-correction-2-v1\\B33-c1-ignored-learning-evidence.json",
+      "relativePath": "history/b-native-33-correction-2-v1/B33-c1-ignored-learning-evidence.json",
+      "bytes": 17081,
+      "sha256": "93d0d7e36010220b43cd5827e4f4199dd2100863353db47bff7b6bc5fd0f54b1",
+      "classification": "Projected observable/answer evidence only; original private sessions and provider/account files are not selected"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\b-native-33-correction-3-v1\\B33-c1-ignored-learning-observable-events.jsonl",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\history\\b-native-33-correction-3-v1\\B33-c1-ignored-learning-observable-events.jsonl",
+      "relativePath": "history/b-native-33-correction-3-v1/B33-c1-ignored-learning-observable-events.jsonl",
+      "bytes": 31459,
+      "sha256": "81cb2f08d723faf6ef23e02ab9330916552085462e4725e5f7bf10f2dbab63d3",
+      "classification": "Projected observable/answer evidence only; original private sessions and provider/account files are not selected"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\b-native-33-correction-3-v1\\B33-c1-ignored-learning-queries.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\history\\b-native-33-correction-3-v1\\B33-c1-ignored-learning-queries.json",
+      "relativePath": "history/b-native-33-correction-3-v1/B33-c1-ignored-learning-queries.json",
+      "bytes": 4056,
+      "sha256": "5ea252433d04cac2ce5b01c03cc46e83d181303de709bee5cff8eb45a59f6a32",
+      "classification": "Projected observable/answer evidence only; original private sessions and provider/account files are not selected"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\b-native-33-correction-3-v1\\B33-c1-ignored-learning-reads.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\history\\b-native-33-correction-3-v1\\B33-c1-ignored-learning-reads.json",
+      "relativePath": "history/b-native-33-correction-3-v1/B33-c1-ignored-learning-reads.json",
+      "bytes": 3472,
+      "sha256": "4653b9b2a741275bac9ed2415faa2d8586a060b682c88d604a6167c958c35184",
+      "classification": "Projected observable/answer evidence only; original private sessions and provider/account files are not selected"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\b-native-33-correction-3-v1\\B33-c1-ignored-learning-answer.md",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\history\\b-native-33-correction-3-v1\\B33-c1-ignored-learning-answer.md",
+      "relativePath": "history/b-native-33-correction-3-v1/B33-c1-ignored-learning-answer.md",
+      "bytes": 1689,
+      "sha256": "fb5785c7df4bd78a7a715aa13e139adbd7df0991e1413d3add0cb405e6d54045",
+      "classification": "Projected observable/answer evidence only; original private sessions and provider/account files are not selected"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\b-native-33-correction-3-v1\\B33-c1-ignored-learning-metrics.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\history\\b-native-33-correction-3-v1\\B33-c1-ignored-learning-metrics.json",
+      "relativePath": "history/b-native-33-correction-3-v1/B33-c1-ignored-learning-metrics.json",
+      "bytes": 1405,
+      "sha256": "8be051b7a03688ed63d04443eaccb49b5196cd9d96b0ecedd615e42eb8bc9233",
+      "classification": "Projected observable/answer evidence only; original private sessions and provider/account files are not selected"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\b-native-33-correction-3-v1\\B33-c1-ignored-learning-evidence.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\history\\b-native-33-correction-3-v1\\B33-c1-ignored-learning-evidence.json",
+      "relativePath": "history/b-native-33-correction-3-v1/B33-c1-ignored-learning-evidence.json",
+      "bytes": 17079,
+      "sha256": "5bb7a31077a47311343570944a957ccf7bc05b283713ba1afc3ec05d41c3de25",
+      "classification": "Projected observable/answer evidence only; original private sessions and provider/account files are not selected"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\root-history\\supervisor-b33-local-acceptance.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\history\\root-history\\supervisor-b33-local-acceptance.json",
+      "relativePath": "history/root-history/supervisor-b33-local-acceptance.json",
+      "bytes": 2567,
+      "sha256": "f0936d0d85da169e105d1bec94fe63720e5f6ff72c864350fea197910e12bed8",
+      "classification": "Historical root disposition; preserve failures and limitations"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\root-history\\supervisor-b33-correction2-native-check.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\history\\root-history\\supervisor-b33-correction2-native-check.json",
+      "relativePath": "history/root-history/supervisor-b33-correction2-native-check.json",
+      "bytes": 6439,
+      "sha256": "354f37571fb08c91bbe94f4fb6e07932e6c9d1733cc1bd880e7e0d5e93f379b7",
+      "classification": "Historical root disposition; preserve failures and limitations"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\root-history\\supervisor-b33-correction3-native-check.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\history\\root-history\\supervisor-b33-correction3-native-check.json",
+      "relativePath": "history/root-history/supervisor-b33-correction3-native-check.json",
+      "bytes": 1177,
+      "sha256": "ea1226cf1b70cbb77144a1484483ddd1713ccb48e08a5eed502d4e4068193b30",
+      "classification": "Historical root disposition; preserve failures and limitations"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\root-history\\supervisor-b33-correction3-own-process-check.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\history\\root-history\\supervisor-b33-correction3-own-process-check.json",
+      "relativePath": "history/root-history/supervisor-b33-correction3-own-process-check.json",
+      "bytes": 255,
+      "sha256": "84cdaa2f32a09fad247531eb66e131843278aa21736fca5d2503a567cba4772e",
+      "classification": "Historical root disposition; preserve failures and limitations"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\fixture\\base\\fixture-manifest.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\fixture\\base\\fixture-manifest.json",
+      "relativePath": "fixture/base/fixture-manifest.json",
+      "bytes": 5936,
+      "sha256": "6daa59a5abf1e1a5e7bfd36b3131e94af4b24002d4142238769d37492e04f4fd",
+      "classification": "Original independently frozen metadata, caller and expected conditions; copied verbatim, preparation status not upgraded"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\fixture\\base\\tasks.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\fixture\\base\\tasks.json",
+      "relativePath": "fixture/base/tasks.json",
+      "bytes": 5344,
+      "sha256": "464a8f7321ae56e49e443121d82631442864d50f06134c2f38d29dd8d7933722",
+      "classification": "Original independently frozen metadata, caller and expected conditions; copied verbatim, preparation status not upgraded"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\fixture\\base\\acceptance-plan.md",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\fixture\\base\\acceptance-plan.md",
+      "relativePath": "fixture/base/acceptance-plan.md",
+      "bytes": 19984,
+      "sha256": "4e85ee933c9114405af7cde36a8448914919169761267d5dae16dd4cd84ea96b",
+      "classification": "Original independently frozen metadata, caller and expected conditions; copied verbatim, preparation status not upgraded"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\fixture\\supplement\\freeze-manifest.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\fixture\\supplement\\freeze-manifest.json",
+      "relativePath": "fixture/supplement/freeze-manifest.json",
+      "bytes": 6256,
+      "sha256": "9f891d68fe83da3d8d4fa18236cfcbc89b5bcd55414184edf27ca99df15ec81f",
+      "classification": "Original independently frozen metadata, caller and expected conditions; copied verbatim, preparation status not upgraded"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\fixture\\supplement\\tasks.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\fixture\\supplement\\tasks.json",
+      "relativePath": "fixture/supplement/tasks.json",
+      "bytes": 807,
+      "sha256": "0597bf1c8397dee40ea036237eaf750a0fe3ab3ac2c48d9952d71510c5bc0226",
+      "classification": "Original independently frozen metadata, caller and expected conditions; copied verbatim, preparation status not upgraded"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\fixture\\supplement\\oracle.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\fixture\\supplement\\oracle.json",
+      "relativePath": "fixture/supplement/oracle.json",
+      "bytes": 2972,
+      "sha256": "75bab437172c497b865f3d12922f3df4f3b86291788b40e8d473c2d941b2915c",
+      "classification": "Original independently frozen metadata, caller and expected conditions; copied verbatim, preparation status not upgraded"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\fixture\\base\\corpus\\contexts\\payments-api\\docs\\10-display-note.md",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\fixture\\base\\corpus\\contexts\\payments-api\\docs\\10-display-note.md",
+      "relativePath": "fixture/base/corpus/contexts/payments-api/docs/10-display-note.md",
+      "bytes": 490,
+      "sha256": "3bf8e299f32ef4ccbfcbeb03fcb273d13e4c23eef8a359086c6957b50cf6b85e",
+      "classification": "Original fixed raw corpus; no normalization or ranking-derived expectation"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\fixture\\base\\corpus\\contexts\\payments-api\\docs\\40-replay-guard.md",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\fixture\\base\\corpus\\contexts\\payments-api\\docs\\40-replay-guard.md",
+      "relativePath": "fixture/base/corpus/contexts/payments-api/docs/40-replay-guard.md",
+      "bytes": 1508,
+      "sha256": "0e2751160489cddc7dacb81eb626a71581c0e663ed5c936cb7adf857a001ab25",
+      "classification": "Original fixed raw corpus; no normalization or ranking-derived expectation"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\fixture\\base\\corpus\\contexts\\payments-api\\docs\\70-epoch-policy.md",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\fixture\\base\\corpus\\contexts\\payments-api\\docs\\70-epoch-policy.md",
+      "relativePath": "fixture/base/corpus/contexts/payments-api/docs/70-epoch-policy.md",
+      "bytes": 524,
+      "sha256": "d1c3e9d39ca87b5b9192d768ba19301fcd377875fd18c9ca71199295c4001fc1",
+      "classification": "Original fixed raw corpus; no normalization or ranking-derived expectation"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\fixture\\base\\corpus\\contexts\\payments-api\\docs\\80-audit-note.md",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\fixture\\base\\corpus\\contexts\\payments-api\\docs\\80-audit-note.md",
+      "relativePath": "fixture/base/corpus/contexts/payments-api/docs/80-audit-note.md",
+      "bytes": 657,
+      "sha256": "26a4e79b81aa1d8aad0751529869a29e638cbc8442d4383f0ff8908e2eb98b58",
+      "classification": "Original fixed raw corpus; no normalization or ranking-derived expectation"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\fixture\\base\\corpus\\contexts\\payments-api\\docs\\90-read-gap.md",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\fixture\\base\\corpus\\contexts\\payments-api\\docs\\90-read-gap.md",
+      "relativePath": "fixture/base/corpus/contexts/payments-api/docs/90-read-gap.md",
+      "bytes": 745,
+      "sha256": "4ae3a786e26169cf14543b30b7b7225b328f6bd2d1584dd0cf103887719dd4cb",
+      "classification": "Original fixed raw corpus; no normalization or ranking-derived expectation"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\fixture\\base\\corpus\\contexts\\risk-view\\docs\\outside-scope.md",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\fixture\\base\\corpus\\contexts\\risk-view\\docs\\outside-scope.md",
+      "relativePath": "fixture/base/corpus/contexts/risk-view/docs/outside-scope.md",
+      "bytes": 499,
+      "sha256": "2f103a0fa584c63af28c43e7cf62719f08ae8801a93103ae183a2b88b58512b3",
+      "classification": "Original fixed raw corpus; no normalization or ranking-derived expectation"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\fixture\\base\\corpus\\learnings\\payments-api\\5d631ba1-b2e4-4638-8c45-5207c914ce82.md",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\fixture\\base\\corpus\\learnings\\payments-api\\5d631ba1-b2e4-4638-8c45-5207c914ce82.md",
+      "relativePath": "fixture/base/corpus/learnings/payments-api/5d631ba1-b2e4-4638-8c45-5207c914ce82.md",
+      "bytes": 341,
+      "sha256": "3faf31f95ac6386092f2994224f941537850e281697fc286492a8c6eba2e7001",
+      "classification": "Original fixed raw corpus; no normalization or ranking-derived expectation"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\fixture\\base\\corpus\\learnings\\payments-api\\9be813a0-2541-4cf2-b71e-098a7f610e81.md",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\fixture\\base\\corpus\\learnings\\payments-api\\9be813a0-2541-4cf2-b71e-098a7f610e81.md",
+      "relativePath": "fixture/base/corpus/learnings/payments-api/9be813a0-2541-4cf2-b71e-098a7f610e81.md",
+      "bytes": 345,
+      "sha256": "ce87f8dafe86124559cd07347ee3a2a8fb494d8f094e69103b76eca36186a88f",
+      "classification": "Original fixed raw corpus; no normalization or ranking-derived expectation"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\fixture\\base\\corpus\\learnings\\shared\\11f67190-c1b4-4cb7-a082-188a7dd98f63.md",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\fixture\\base\\corpus\\learnings\\shared\\11f67190-c1b4-4cb7-a082-188a7dd98f63.md",
+      "relativePath": "fixture/base/corpus/learnings/shared/11f67190-c1b4-4cb7-a082-188a7dd98f63.md",
+      "bytes": 476,
+      "sha256": "0360cd3086cb8d79b0ae92f2d9a8cce1b4eb8c2fa9739e755e50560ba0a230a2",
+      "classification": "Original fixed raw corpus; no normalization or ranking-derived expectation"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\fixture\\supplement\\corpus\\contexts\\payments-api\\docs\\31-intake-display.md",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\fixture\\supplement\\corpus\\contexts\\payments-api\\docs\\31-intake-display.md",
+      "relativePath": "fixture/supplement/corpus/contexts/payments-api/docs/31-intake-display.md",
+      "bytes": 900,
+      "sha256": "8e1457c2bda0bd7f317e956c27975ba37e0cb26386b0a77d51083c973de333ea",
+      "classification": "Original fixed raw corpus; no normalization or ranking-derived expectation"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\fixture\\supplement\\corpus\\contexts\\payments-api\\docs\\63-intake-handoff.md",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\fixture\\supplement\\corpus\\contexts\\payments-api\\docs\\63-intake-handoff.md",
+      "relativePath": "fixture/supplement/corpus/contexts/payments-api/docs/63-intake-handoff.md",
+      "bytes": 823,
+      "sha256": "fe9b9fd2e6d6fc27230482718a546bac406883d4551040a74c8e4ac71ce88a7c",
+      "classification": "Original fixed raw corpus; no normalization or ranking-derived expectation"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\fixture\\supplement\\corpus\\contexts\\payments-api\\docs\\82-budget-clearance.md",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v1\\fixture\\supplement\\corpus\\contexts\\payments-api\\docs\\82-budget-clearance.md",
+      "relativePath": "fixture/supplement/corpus/contexts/payments-api/docs/82-budget-clearance.md",
+      "bytes": 272,
+      "sha256": "bd7f009152ac7207579fca773190c7d711d30ddf4ba446c06e8e3e3ddf3cf9d4",
+      "classification": "Original fixed raw corpus; no normalization or ranking-derived expectation"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v2\\B33-read-failure-observable-events.jsonl",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v1\\B33-read-failure-observable-events.jsonl",
+      "relativePath": "history/final-v2/B33-read-failure-observable-events.jsonl",
+      "bytes": 64600,
+      "sha256": "b3b55f0f5c0c91d462cedfd7ec910955cc292df78b6ef938030a2265ec88207b",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v2\\B33-read-failure-queries.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v1\\B33-read-failure-queries.json",
+      "relativePath": "history/final-v2/B33-read-failure-queries.json",
+      "bytes": 16863,
+      "sha256": "d25d4195fa7994355b6a46ffa746a6aeace7a0f063dc8502ed5dae34626113f4",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v2\\B33-read-failure-reads.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v1\\B33-read-failure-reads.json",
+      "relativePath": "history/final-v2/B33-read-failure-reads.json",
+      "bytes": 3147,
+      "sha256": "392b8c8f8caca592490a6dd5f6cce99da4a4cfb2e67ca443228a8b1935e0f24e",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v2\\B33-read-failure-answer.md",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v1\\B33-read-failure-answer.md",
+      "relativePath": "history/final-v2/B33-read-failure-answer.md",
+      "bytes": 4785,
+      "sha256": "097348a2d085cf9b157940ee9329371ef3933240ef9b97086640ee5042fe3824",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v2\\B33-read-failure-metrics.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v1\\B33-read-failure-metrics.json",
+      "relativePath": "history/final-v2/B33-read-failure-metrics.json",
+      "bytes": 1387,
+      "sha256": "e475cb10ced3873515f48d24b4d213f4b0ee7752b3cfdba552930f6ce8dc0304",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v2\\B33-read-failure-evidence.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v1\\B33-read-failure-evidence.json",
+      "relativePath": "history/final-v2/B33-read-failure-evidence.json",
+      "bytes": 13986,
+      "sha256": "5f1c9fea27b558f1db9a183f54a86ebfa11f4d40112f7e106ffacf86f4edfa9d",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v2\\B33-read-failure-protection.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v1\\B33-read-failure-protection.json",
+      "relativePath": "history/final-v2/B33-read-failure-protection.json",
+      "bytes": 2855,
+      "sha256": "4ba75e6d66a358c33c8bb79b0a11ce6d0d0137b57063b053b57e59b080dd0b1e",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v2\\B33-read-failure-old-protection.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v1\\B33-read-failure-old-protection.json",
+      "relativePath": "history/final-v2/B33-read-failure-old-protection.json",
+      "bytes": 336,
+      "sha256": "e801b75ec1ac8b5897c25d0c84c0db46204a93378a4282e9ff7de0718de8b245",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v2\\B33-read-failure-launch-request.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v1\\B33-read-failure-launch-request.json",
+      "relativePath": "history/final-v2/B33-read-failure-launch-request.json",
+      "bytes": 1786,
+      "sha256": "64a22d7baa88c08084798291917ce5826973cfaa8719d1957e0f54d2bc79a51a",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v2\\B33-read-failure-launch-result.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v1\\B33-read-failure-launch-result.json",
+      "relativePath": "history/final-v2/B33-read-failure-launch-result.json",
+      "bytes": 318,
+      "sha256": "ce6d9eacbd219f9670f014d371767343c85b3c7fc5c4160ef8b6e80424975bf2",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v2\\B33-injection-observable-events.jsonl",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v1\\B33-injection-observable-events.jsonl",
+      "relativePath": "history/final-v2/B33-injection-observable-events.jsonl",
+      "bytes": 80620,
+      "sha256": "c06cf303c492d1346a21f6dbe80083c2a64b2cbcad518b9e2791dadd64253722",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v2\\B33-injection-queries.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v1\\B33-injection-queries.json",
+      "relativePath": "history/final-v2/B33-injection-queries.json",
+      "bytes": 35286,
+      "sha256": "ba3e383c133c6514ee0d888afef99db502dbe8edca8e7a878337d1b07b342358",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v2\\B33-injection-reads.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v1\\B33-injection-reads.json",
+      "relativePath": "history/final-v2/B33-injection-reads.json",
+      "bytes": 5474,
+      "sha256": "56f551a16383896b0e6567a3eaa4617e7d0e41f2996952d37c00f8b049ee40aa",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v2\\B33-injection-answer.md",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v1\\B33-injection-answer.md",
+      "relativePath": "history/final-v2/B33-injection-answer.md",
+      "bytes": 4693,
+      "sha256": "d2e184d743aa5e174cba66c52b56fc891c73875614089e5fcee1ff423bd25096",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v2\\B33-injection-metrics.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v1\\B33-injection-metrics.json",
+      "relativePath": "history/final-v2/B33-injection-metrics.json",
+      "bytes": 1385,
+      "sha256": "d63bdaa3bca6a5d5997e79fb538f08932b8f2bee06cc4fceebec5b0320a0a7fd",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v2\\B33-injection-evidence.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v1\\B33-injection-evidence.json",
+      "relativePath": "history/final-v2/B33-injection-evidence.json",
+      "bytes": 13580,
+      "sha256": "882352cec60413f6570696b0509cb978dda2e788b5303424902846bd41b77ff1",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v2\\B33-injection-protection.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v1\\B33-injection-protection.json",
+      "relativePath": "history/final-v2/B33-injection-protection.json",
+      "bytes": 2488,
+      "sha256": "15600851ab02bf1e81210dfc603db6cca0afc94e1058bb6d8a94f4a2ecb95a10",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v2\\B33-injection-old-protection.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v1\\B33-injection-old-protection.json",
+      "relativePath": "history/final-v2/B33-injection-old-protection.json",
+      "bytes": 336,
+      "sha256": "e801b75ec1ac8b5897c25d0c84c0db46204a93378a4282e9ff7de0718de8b245",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v2\\B33-injection-launch-request.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v1\\B33-injection-launch-request.json",
+      "relativePath": "history/final-v2/B33-injection-launch-request.json",
+      "bytes": 1778,
+      "sha256": "ccbbc9cd6390c974527ee44971303d5aaa42521c308579b6c774dc9e55079145",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v2\\B33-injection-launch-result.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v1\\B33-injection-launch-result.json",
+      "relativePath": "history/final-v2/B33-injection-launch-result.json",
+      "bytes": 316,
+      "sha256": "6dad31021fa4532786a864438cb2dd635a1f525837a1135048280fbf38262f68",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\candidate\\final-v3-injection\\B33-injection-observable-events.jsonl",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B33-injection-observable-events.jsonl",
+      "relativePath": "candidate/final-v3-injection/B33-injection-observable-events.jsonl",
+      "bytes": 79802,
+      "sha256": "708b206c768419b20a64ad117ed053cee2b19402479457e6f3cd329c3507840d",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\candidate\\final-v3-injection\\B33-injection-queries.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B33-injection-queries.json",
+      "relativePath": "candidate/final-v3-injection/B33-injection-queries.json",
+      "bytes": 22445,
+      "sha256": "c987410cd21c25a4a0fcdf5f60817d6f9fd2fe1c38c3c51280d7e5560543e030",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\candidate\\final-v3-injection\\B33-injection-reads.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B33-injection-reads.json",
+      "relativePath": "candidate/final-v3-injection/B33-injection-reads.json",
+      "bytes": 11607,
+      "sha256": "110fb1703496551b878ec040ab285ea28c3e05adcf021982e86459bf42e622ec",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\candidate\\final-v3-injection\\B33-injection-answer.md",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B33-injection-answer.md",
+      "relativePath": "candidate/final-v3-injection/B33-injection-answer.md",
+      "bytes": 6678,
+      "sha256": "16d0d49a5f271cdbbe51c8932efb5053393f1d2be8fd5fc0ca792ea76b22c0e4",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\candidate\\final-v3-injection\\B33-injection-metrics.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B33-injection-metrics.json",
+      "relativePath": "candidate/final-v3-injection/B33-injection-metrics.json",
+      "bytes": 1383,
+      "sha256": "fd594c5f9002b737d5a5bc47f355eb258083f09b408793a2d9ae76283cb9814a",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\candidate\\final-v3-injection\\B33-injection-evidence.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B33-injection-evidence.json",
+      "relativePath": "candidate/final-v3-injection/B33-injection-evidence.json",
+      "bytes": 13323,
+      "sha256": "3422270228f8c63a22181345cbfc2767e4cd982002a6c878daf57ad4054be767",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\candidate\\final-v3-injection\\B33-injection-protection.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B33-injection-protection.json",
+      "relativePath": "candidate/final-v3-injection/B33-injection-protection.json",
+      "bytes": 2248,
+      "sha256": "3a729261571f3fbbeba85cfcf0fdd2997de2fdbfb1d6c7fb6373c5a219893be9",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\candidate\\final-v3-injection\\B33-injection-old-protection.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B33-injection-old-protection.json",
+      "relativePath": "candidate/final-v3-injection/B33-injection-old-protection.json",
+      "bytes": 336,
+      "sha256": "e801b75ec1ac8b5897c25d0c84c0db46204a93378a4282e9ff7de0718de8b245",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\candidate\\final-v3-injection\\B33-injection-launch-request.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B33-injection-launch-request.json",
+      "relativePath": "candidate/final-v3-injection/B33-injection-launch-request.json",
+      "bytes": 1777,
+      "sha256": "a7330dcf9463e99519d9f3e342a8d48695acfb291b69b8b915aab433672d76a2",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\candidate\\final-v3-injection\\B33-injection-launch-result.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B33-injection-launch-result.json",
+      "relativePath": "candidate/final-v3-injection/B33-injection-launch-result.json",
+      "bytes": 315,
+      "sha256": "9a291a80fb60c45b5d13608a80c14f37046b73999d4b21c50c1b5706b421c6f7",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\dispositions\\supervisor-b29-first-case-disposition.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\supervisor-b29-first-case-disposition.json",
+      "relativePath": "dispositions/supervisor-b29-first-case-disposition.json",
+      "bytes": 8484,
+      "sha256": "f1482eca466dfe4cad42c24baedce1cacd1217ab6bbab044c9cf5e328e6aa078",
+      "classification": "Actual root scoped disposition, not final whole-ticket acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\dispositions\\supervisor-b29-injection-citation-reject.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\supervisor-b29-injection-citation-reject.json",
+      "relativePath": "dispositions/supervisor-b29-injection-citation-reject.json",
+      "bytes": 2146,
+      "sha256": "fc28d77a8747a0298e8cff3e0a90e310da8ae1fa115523b3435760e7bce52d7c",
+      "classification": "Actual root scoped disposition, not final whole-ticket acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\dispositions\\supervisor-b29-citation-injection-acceptance.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\supervisor-b29-citation-injection-acceptance.json",
+      "relativePath": "dispositions/supervisor-b29-citation-injection-acceptance.json",
+      "bytes": 3884,
+      "sha256": "f467076e2b336c98e5642d5325e9fa27d1aa88e6cfceabb6726298717114d701",
+      "classification": "Actual root scoped disposition, not final whole-ticket acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\dispositions\\supervisor-citation-source-acceptance.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\supervisor-citation-source-acceptance.json",
+      "relativePath": "dispositions/supervisor-citation-source-acceptance.json",
+      "bytes": 1246,
+      "sha256": "0059fa168ec041f26b4cc5ec20f52f1f8235cc76fb6fed6c79bea1d7a34e8377",
+      "classification": "Actual root scoped disposition, not final whole-ticket acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\dispositions\\supervisor-citation-package-acceptance.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\supervisor-citation-package-acceptance.json",
+      "relativePath": "dispositions/supervisor-citation-package-acceptance.json",
+      "bytes": 4573,
+      "sha256": "980de2f1cd950912963714e33aad6509746d04da82bf8d183a7e4e7cc79ea57a",
+      "classification": "Actual root scoped disposition, not final whole-ticket acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\dispositions\\supervisor-citation-owned-delivery-acceptance.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\supervisor-citation-owned-delivery-acceptance.json",
+      "relativePath": "dispositions/supervisor-citation-owned-delivery-acceptance.json",
+      "bytes": 5219,
+      "sha256": "a2adeeaa58fca2c32e33695b2064693839f6a08c5019bff948895d267b515a6a",
+      "classification": "Actual root scoped disposition, not final whole-ticket acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\candidate\\final-v3-injection\\B33-injection-targeted-observation.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B33-injection-targeted-observation.json",
+      "relativePath": "candidate/final-v3-injection/B33-injection-targeted-observation.json",
+      "bytes": 9120,
+      "sha256": "4e2b128150f106660f4e33c4afae7cdf92c26c9adc39dd9afe654998201779cc",
+      "classification": "Implementer scoped observations; root semantic judgment is separate"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\candidate\\citation-correction-handoff.md",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-citation-correction-20261006-v1\\handoff.md",
+      "relativePath": "candidate/citation-correction-handoff.md",
+      "bytes": 6429,
+      "sha256": "9b26ef6096e8385ab629dd7c20ebff93e129886e9040ce805f1723a5aa8e4aa0",
+      "classification": "Source handoff and actual correction identity; not a native pass by itself"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v3-coverage\\B29-coverage-zh-observable-events.jsonl",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-zh-observable-events.jsonl",
+      "relativePath": "history/final-v3-coverage/B29-coverage-zh-observable-events.jsonl",
+      "bytes": 134171,
+      "sha256": "3663a926cd89a45dfed7cfc3400d1162f18b05a221059ae7fa00304113732132",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v3-coverage\\B29-coverage-zh-queries.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-zh-queries.json",
+      "relativePath": "history/final-v3-coverage/B29-coverage-zh-queries.json",
+      "bytes": 91716,
+      "sha256": "678ab52497d38c84fbb63d3803082366631334d48fff56a9bc403306d342df5b",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v3-coverage\\B29-coverage-zh-reads.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-zh-reads.json",
+      "relativePath": "history/final-v3-coverage/B29-coverage-zh-reads.json",
+      "bytes": 14547,
+      "sha256": "1e0f72ea587a12502358c94805115df0f4a10fc9e316b45a9efb921f0d52e31b",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v3-coverage\\B29-coverage-zh-answer.md",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-zh-answer.md",
+      "relativePath": "history/final-v3-coverage/B29-coverage-zh-answer.md",
+      "bytes": 7231,
+      "sha256": "d97fea7ddbc46cb15af4c6f78b1bfd9bd767d48e2114e81dbf0a0deaec597e04",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v3-coverage\\B29-coverage-zh-metrics.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-zh-metrics.json",
+      "relativePath": "history/final-v3-coverage/B29-coverage-zh-metrics.json",
+      "bytes": 1389,
+      "sha256": "6a4c61d130cc50ddf237c715318da956b0b0d90f9d1f478c70e4a4a62f44ed62",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v3-coverage\\B29-coverage-zh-evidence.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-zh-evidence.json",
+      "relativePath": "history/final-v3-coverage/B29-coverage-zh-evidence.json",
+      "bytes": 13360,
+      "sha256": "3cabf129d62fdb662cfe67199a8cfc3f28d7b8232a0c54dc67d5911d32d3b069",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v3-coverage\\B29-coverage-zh-protection.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-zh-protection.json",
+      "relativePath": "history/final-v3-coverage/B29-coverage-zh-protection.json",
+      "bytes": 2250,
+      "sha256": "33220ef2333e98f77227b82c98f3a0fea8aa71e4666aef9185f4d28a1c5c5027",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v3-coverage\\B29-coverage-zh-old-protection.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-zh-old-protection.json",
+      "relativePath": "history/final-v3-coverage/B29-coverage-zh-old-protection.json",
+      "bytes": 336,
+      "sha256": "e801b75ec1ac8b5897c25d0c84c0db46204a93378a4282e9ff7de0718de8b245",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v3-coverage\\B29-coverage-zh-launch-request.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-zh-launch-request.json",
+      "relativePath": "history/final-v3-coverage/B29-coverage-zh-launch-request.json",
+      "bytes": 1784,
+      "sha256": "ae3314edda391ea145dc3fbb4bdce1db5fbb4c902b068234a8a9de5ceb06848b",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v3-coverage\\B29-coverage-zh-launch-result.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-zh-launch-result.json",
+      "relativePath": "history/final-v3-coverage/B29-coverage-zh-launch-result.json",
+      "bytes": 318,
+      "sha256": "a0e7dfcfe476350ad7586ba97cbc24f4847c9644b0b3bcc73e4243d9cb1dffc4",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v3-coverage\\B29-coverage-en-observable-events.jsonl",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-en-observable-events.jsonl",
+      "relativePath": "history/final-v3-coverage/B29-coverage-en-observable-events.jsonl",
+      "bytes": 76478,
+      "sha256": "ff1074f50b4484bf70e7fe4b9624d09252fc956bae529bc4de263fc162cabbbe",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v3-coverage\\B29-coverage-en-queries.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-en-queries.json",
+      "relativePath": "history/final-v3-coverage/B29-coverage-en-queries.json",
+      "bytes": 37554,
+      "sha256": "12b3e37361a3ea00b05f6d112f714a008a84a1cc9d17f80d67614c9fff2e36ad",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v3-coverage\\B29-coverage-en-reads.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-en-reads.json",
+      "relativePath": "history/final-v3-coverage/B29-coverage-en-reads.json",
+      "bytes": 6782,
+      "sha256": "de168937dc9e1d9e4729e9637873bdc686561567c9055bdd1a1a651163b17418",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v3-coverage\\B29-coverage-en-answer.md",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-en-answer.md",
+      "relativePath": "history/final-v3-coverage/B29-coverage-en-answer.md",
+      "bytes": 3639,
+      "sha256": "3c4eadc7874225aac1750b77320389c36ddc9ef54b2311e83051ccb69814a2c3",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v3-coverage\\B29-coverage-en-metrics.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-en-metrics.json",
+      "relativePath": "history/final-v3-coverage/B29-coverage-en-metrics.json",
+      "bytes": 1385,
+      "sha256": "a5a095c6ed716d71d84baaee876e116ca0c326234e328341e2b6896da5ec5d98",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v3-coverage\\B29-coverage-en-evidence.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-en-evidence.json",
+      "relativePath": "history/final-v3-coverage/B29-coverage-en-evidence.json",
+      "bytes": 13347,
+      "sha256": "493eda3209702de517113754d8d1e23459a366cc2c8261ced4b78eebae57a647",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v3-coverage\\B29-coverage-en-protection.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-en-protection.json",
+      "relativePath": "history/final-v3-coverage/B29-coverage-en-protection.json",
+      "bytes": 2250,
+      "sha256": "04aa0bbc4f109277d4b047d6e79e7877af253095997a82b5c0577d60e0d7031e",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v3-coverage\\B29-coverage-en-old-protection.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-en-old-protection.json",
+      "relativePath": "history/final-v3-coverage/B29-coverage-en-old-protection.json",
+      "bytes": 336,
+      "sha256": "e801b75ec1ac8b5897c25d0c84c0db46204a93378a4282e9ff7de0718de8b245",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v3-coverage\\B29-coverage-en-launch-request.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-en-launch-request.json",
+      "relativePath": "history/final-v3-coverage/B29-coverage-en-launch-request.json",
+      "bytes": 1784,
+      "sha256": "1002fe17900b6ec4a2febe4396448fd3c1f5ae36fe76d1d97a06ace8729d84ca",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v3-coverage\\B29-coverage-en-launch-result.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-coverage-en-launch-result.json",
+      "relativePath": "history/final-v3-coverage/B29-coverage-en-launch-result.json",
+      "bytes": 318,
+      "sha256": "d7a322a27fb24b8cd8bf7dcc223bb1f9db917c242321cacd6e47ddc73128563d",
+      "classification": "Actual projected observable evidence at its original source/package/Agent identity; normal exit and protection do not imply behavior acceptance"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\dispositions\\supervisor-b29-coverage-zh-stop-reject.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\supervisor-b29-coverage-zh-stop-reject.json",
+      "relativePath": "dispositions/supervisor-b29-coverage-zh-stop-reject.json",
+      "bytes": 4879,
+      "sha256": "b2fa0b062cc7e8053790c04a028e16fdc71ce5e53da27ceeac2ce013dd42edf7",
+      "classification": "Original Chinese STOP Major and actual paused evidence acceptance; no case relabelled PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\dispositions\\supervisor-b29-paused-checkpoint-acceptance.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\supervisor-b29-paused-checkpoint-acceptance.json",
+      "relativePath": "dispositions/supervisor-b29-paused-checkpoint-acceptance.json",
+      "bytes": 4060,
+      "sha256": "f6143dae27a87b5c9d64db139a2b8b407988a26c050a8863f3d93c5338dbddc4",
+      "classification": "Original Chinese STOP Major and actual paused evidence acceptance; no case relabelled PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v3-coverage\\B29-two-coverage-stop-observation.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-two-coverage-stop-observation.json",
+      "relativePath": "history/final-v3-coverage/B29-two-coverage-stop-observation.json",
+      "bytes": 25093,
+      "sha256": "516a77c6c283e64ae07341878ebfab77b52de99b756b8e5059ce6ef703b293e1",
+      "classification": "Actual two-case observations with original STOP FAIL, parent limitations and eight NOT_RUN"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v3-coverage\\immutable-handoff.md",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-29-two-coverage-stop-checkpoint-v1-handoff.md",
+      "relativePath": "history/final-v3-coverage/immutable-handoff.md",
+      "bytes": 7614,
+      "sha256": "bc538b78d60e615cd8c680c2f6058c60259fd4ab1e4c6dfc457fdbcfc422dcf5",
+      "classification": "Immutable paused handoff, not a behavior pass"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\dispositions\\b29-coverage-zh-stop-static-actual-review.md",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\review\\b29-coverage-zh-stop-static-actual-review.md",
+      "relativePath": "dispositions/b29-coverage-zh-stop-static-actual-review.md",
+      "bytes": 2063,
+      "sha256": "85e7b497f5f0015dc5ba3b44242866d66ba8534f0c5cd03147b369d69714aa81",
+      "classification": "Read-only independent narrow review; final broad review remains separate"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v3-startup-only\\B29-context-launch-request.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-context-launch-request.json",
+      "relativePath": "history/final-v3-startup-only/B29-context-launch-request.json",
+      "bytes": 1772,
+      "sha256": "21fb41b8425966283b9a9be97e227c00696faea12659a586b352f044d84998e9",
+      "classification": "Only normal startup with zero caller requests; context behavior remains NOT_RUN"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v3-startup-only\\B29-context-launch-result.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-context-launch-result.json",
+      "relativePath": "history/final-v3-startup-only/B29-context-launch-result.json",
+      "bytes": 314,
+      "sha256": "2647afed62f10bd17b10c1e2ffc6bbc5e51c4ea330d97560805b809136923bb1",
+      "classification": "Only normal startup with zero caller requests; context behavior remains NOT_RUN"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v3-startup-only\\B29-context-usage.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-context-usage.json",
+      "relativePath": "history/final-v3-startup-only/B29-context-usage.json",
+      "bytes": 381,
+      "sha256": "ab462ba2bdb4aebcbec0c18832282f101e2c68799c3033f3082952f380adc6e9",
+      "classification": "Only normal startup with zero caller requests; context behavior remains NOT_RUN"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\history\\final-v3-startup-only\\B29-context-startup-only-protection.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v2\\B29-context-startup-only-protection.json",
+      "relativePath": "history/final-v3-startup-only/B29-context-startup-only-protection.json",
+      "bytes": 6357,
+      "sha256": "2cbf40196534846b182341f50ed8f2015d8539c2e3b958b95f93de21b67718b6",
+      "classification": "Only normal startup with zero caller requests; context behavior remains NOT_RUN"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\current\\final-v4\\B29-coverage-zh-observable-events.jsonl",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-coverage-zh-observable-events.jsonl",
+      "relativePath": "current/final-v4/B29-coverage-zh-observable-events.jsonl",
+      "bytes": 83558,
+      "sha256": "5def6f4350034666d970fbfa28901a63cde3a00abb288b409b2f17f71f555dfc",
+      "classification": "Actual frozen4977 observation; original hash transcription and parent citation limits retained; not universal PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\current\\final-v4\\B29-coverage-zh-queries.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-coverage-zh-queries.json",
+      "relativePath": "current/final-v4/B29-coverage-zh-queries.json",
+      "bytes": 36723,
+      "sha256": "1e6628488798d5417fbcd589bfd8d36019bb0bcf8aea819ddbe1636398260147",
+      "classification": "Actual frozen4977 observation; original hash transcription and parent citation limits retained; not universal PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\current\\final-v4\\B29-coverage-zh-reads.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-coverage-zh-reads.json",
+      "relativePath": "current/final-v4/B29-coverage-zh-reads.json",
+      "bytes": 27985,
+      "sha256": "e5deb9ce692689a4c163bf95eee6c31c7a8f2511e752f83471ad690f29e33a84",
+      "classification": "Actual frozen4977 observation; original hash transcription and parent citation limits retained; not universal PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\current\\final-v4\\B29-coverage-zh-answer.md",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-coverage-zh-answer.md",
+      "relativePath": "current/final-v4/B29-coverage-zh-answer.md",
+      "bytes": 3055,
+      "sha256": "6c677bf55271e4c54053355b5668a02b376cc424d002bfbaf6de13d66f99863a",
+      "classification": "Actual frozen4977 observation; original hash transcription and parent citation limits retained; not universal PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\current\\final-v4\\B29-coverage-zh-metrics.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-coverage-zh-metrics.json",
+      "relativePath": "current/final-v4/B29-coverage-zh-metrics.json",
+      "bytes": 1385,
+      "sha256": "88b8c112c6c793c82f2a6a6302cb9721a6081d655ff25d70156a99e0fa76a187",
+      "classification": "Actual frozen4977 observation; original hash transcription and parent citation limits retained; not universal PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\current\\final-v4\\B29-coverage-zh-evidence.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-coverage-zh-evidence.json",
+      "relativePath": "current/final-v4/B29-coverage-zh-evidence.json",
+      "bytes": 10105,
+      "sha256": "551c795510de7eafb93ea30246a8f338f1279117b1f81ad5b6b93041d85fad37",
+      "classification": "Actual frozen4977 observation; original hash transcription and parent citation limits retained; not universal PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\current\\final-v4\\B29-coverage-zh-protection.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-coverage-zh-protection.json",
+      "relativePath": "current/final-v4/B29-coverage-zh-protection.json",
+      "bytes": 2250,
+      "sha256": "c7cda3aa4ca2f8669655e2cbac45e48cb37d5c83e971ddf9eea25e3464655fd8",
+      "classification": "Actual frozen4977 observation; original hash transcription and parent citation limits retained; not universal PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\current\\final-v4\\B29-coverage-zh-old-protection.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-coverage-zh-old-protection.json",
+      "relativePath": "current/final-v4/B29-coverage-zh-old-protection.json",
+      "bytes": 336,
+      "sha256": "e801b75ec1ac8b5897c25d0c84c0db46204a93378a4282e9ff7de0718de8b245",
+      "classification": "Actual frozen4977 observation; original hash transcription and parent citation limits retained; not universal PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\current\\final-v4\\B29-coverage-zh-launch-request.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-coverage-zh-launch-request.json",
+      "relativePath": "current/final-v4/B29-coverage-zh-launch-request.json",
+      "bytes": 1784,
+      "sha256": "a857ae1293a41249a7821df63884f2fc8403c69a4a8c9d6951b01699652839d2",
+      "classification": "Actual frozen4977 observation; original hash transcription and parent citation limits retained; not universal PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\current\\final-v4\\B29-coverage-zh-launch-result.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-coverage-zh-launch-result.json",
+      "relativePath": "current/final-v4/B29-coverage-zh-launch-result.json",
+      "bytes": 318,
+      "sha256": "bffc90593fd1a909541b71da7f52785b908211f47eb80b5b5ca7ffc484b5ad00",
+      "classification": "Actual frozen4977 observation; original hash transcription and parent citation limits retained; not universal PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\current\\final-v4\\B29-coverage-en-observable-events.jsonl",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-coverage-en-observable-events.jsonl",
+      "relativePath": "current/final-v4/B29-coverage-en-observable-events.jsonl",
+      "bytes": 80644,
+      "sha256": "be5860ca9f9e22524f3b882ab85cf0552a9fdffcb04a917e68586ec88596b4fe",
+      "classification": "Actual frozen4977 observation; original hash transcription and parent citation limits retained; not universal PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\current\\final-v4\\B29-coverage-en-queries.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-coverage-en-queries.json",
+      "relativePath": "current/final-v4/B29-coverage-en-queries.json",
+      "bytes": 28591,
+      "sha256": "d6caa0c1d355f27eae9bbb3db8ba0c63288d3aa19bad310c39af1d4620a6daf3",
+      "classification": "Actual frozen4977 observation; original hash transcription and parent citation limits retained; not universal PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\current\\final-v4\\B29-coverage-en-reads.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-coverage-en-reads.json",
+      "relativePath": "current/final-v4/B29-coverage-en-reads.json",
+      "bytes": 9614,
+      "sha256": "14a51641d6746d958b9a78103c36459047306a9015d3c476aac15ba468f82cea",
+      "classification": "Actual frozen4977 observation; original hash transcription and parent citation limits retained; not universal PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\current\\final-v4\\B29-coverage-en-answer.md",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-coverage-en-answer.md",
+      "relativePath": "current/final-v4/B29-coverage-en-answer.md",
+      "bytes": 4336,
+      "sha256": "47f2d1010e8207eb41dcb8b30d9fd2cf3428d6bf48efab499dafbfdeff22c82c",
+      "classification": "Actual frozen4977 observation; original hash transcription and parent citation limits retained; not universal PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\current\\final-v4\\B29-coverage-en-metrics.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-coverage-en-metrics.json",
+      "relativePath": "current/final-v4/B29-coverage-en-metrics.json",
+      "bytes": 1385,
+      "sha256": "e6f36c75c46dda47e895ca7648743c557df010404bb85776e3e3815cc33db905",
+      "classification": "Actual frozen4977 observation; original hash transcription and parent citation limits retained; not universal PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\current\\final-v4\\B29-coverage-en-evidence.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-coverage-en-evidence.json",
+      "relativePath": "current/final-v4/B29-coverage-en-evidence.json",
+      "bytes": 13348,
+      "sha256": "f6a3fd6c3be495f106e8bf55faf59780f1fd2fff8178beba2f7d7cd8c7f324de",
+      "classification": "Actual frozen4977 observation; original hash transcription and parent citation limits retained; not universal PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\current\\final-v4\\B29-coverage-en-protection.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-coverage-en-protection.json",
+      "relativePath": "current/final-v4/B29-coverage-en-protection.json",
+      "bytes": 2250,
+      "sha256": "35dc40462cd46d149b7d432b8f9b63bfb57cdb06727a86ba3d3afd6b560d1175",
+      "classification": "Actual frozen4977 observation; original hash transcription and parent citation limits retained; not universal PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\current\\final-v4\\B29-coverage-en-old-protection.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-coverage-en-old-protection.json",
+      "relativePath": "current/final-v4/B29-coverage-en-old-protection.json",
+      "bytes": 336,
+      "sha256": "e801b75ec1ac8b5897c25d0c84c0db46204a93378a4282e9ff7de0718de8b245",
+      "classification": "Actual frozen4977 observation; original hash transcription and parent citation limits retained; not universal PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\current\\final-v4\\B29-coverage-en-launch-request.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-coverage-en-launch-request.json",
+      "relativePath": "current/final-v4/B29-coverage-en-launch-request.json",
+      "bytes": 1784,
+      "sha256": "9ea1b03b8f1e92c30f96a211bc6f4e4998bb18edbc184e952e064381fa820f8b",
+      "classification": "Actual frozen4977 observation; original hash transcription and parent citation limits retained; not universal PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\current\\final-v4\\B29-coverage-en-launch-result.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-coverage-en-launch-result.json",
+      "relativePath": "current/final-v4/B29-coverage-en-launch-result.json",
+      "bytes": 318,
+      "sha256": "c96a3ae9b611232e986bcb52445ec993b2ec83a42490fa296308eca94fb37d72",
+      "classification": "Actual frozen4977 observation; original hash transcription and parent citation limits retained; not universal PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\dispositions\\supervisor-stop-source-acceptance.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\supervisor-stop-source-acceptance.json",
+      "relativePath": "dispositions/supervisor-stop-source-acceptance.json",
+      "bytes": 1574,
+      "sha256": "f56a6129f68234fceaf87a739db940471efe643c6fe8ea140603816abc07136a",
+      "classification": "Root scoped source/package/owned delivery or actual case observation; distinct acceptance scopes"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\dispositions\\supervisor-stop-package-acceptance.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\supervisor-stop-package-acceptance.json",
+      "relativePath": "dispositions/supervisor-stop-package-acceptance.json",
+      "bytes": 3535,
+      "sha256": "8a372bb101d455bbbdaa7aa32f2fb22f3a3c94431e0f6dad318dbdab45aa63bd",
+      "classification": "Root scoped source/package/owned delivery or actual case observation; distinct acceptance scopes"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\dispositions\\supervisor-stop-owned-delivery-acceptance.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\supervisor-stop-owned-delivery-acceptance.json",
+      "relativePath": "dispositions/supervisor-stop-owned-delivery-acceptance.json",
+      "bytes": 5208,
+      "sha256": "bce7f9b0a24a355eefe7784165dffe9bb11d293e29415b601603d161af9beba1",
+      "classification": "Root scoped source/package/owned delivery or actual case observation; distinct acceptance scopes"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\dispositions\\supervisor-b29-stop-two-acceptance.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\supervisor-b29-stop-two-acceptance.json",
+      "relativePath": "dispositions/supervisor-b29-stop-two-acceptance.json",
+      "bytes": 4263,
+      "sha256": "3eca0c37fe917cb85f1bc98bf5b5bfa5b3ed9cc27f55de8f3800e7bada8987cb",
+      "classification": "Root scoped source/package/owned delivery or actual case observation; distinct acceptance scopes"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\candidate\\final-v4-manifest.json",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\final-v4\\manifest.json",
+      "relativePath": "candidate/final-v4-manifest.json",
+      "bytes": 5011,
+      "sha256": "56f6935e691e87a0d48ede91670e12c22c41004b1fd04323606d14645f8c854e",
+      "classification": "Actual runtime source/package identity, not a later documentation commit package"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\delivery\\b-evidence-staging-v4\\current\\final-v4\\immutable-first-two-handoff.md",
+      "originalSource": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-29-stop-two-coverage-v3-checkpoint-v1-handoff.md",
+      "relativePath": "current/final-v4/immutable-first-two-handoff.md",
+      "bytes": 6101,
+      "sha256": "60d89cd7ccd438e080e07506f41f8e4969066534aee447edac1e503dc4442ecb",
+      "classification": "Two actual observations with precise limits and eight then NOT_RUN"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-context-observable-events.jsonl",
+      "relativePath": "current/final-v4/B29-context-observable-events.jsonl",
+      "bytes": 139356,
+      "sha256": "ac12cc2c8a285df2c59ef39384ce4b3f1afef65a4bceea8df64cbaf112d80242",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-context-queries.json",
+      "relativePath": "current/final-v4/B29-context-queries.json",
+      "bytes": 36223,
+      "sha256": "117fd5fd88fff32c2912b7a4b912d9c1552d1e5d918f616b26bfe6df4b58bbaa",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-context-reads.json",
+      "relativePath": "current/final-v4/B29-context-reads.json",
+      "bytes": 33558,
+      "sha256": "1ec472e4f48c29e4f3b5484743d045d281e389c6034c11ea945ec1058ff97676",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-context-answer.md",
+      "relativePath": "current/final-v4/B29-context-answer.md",
+      "bytes": 5575,
+      "sha256": "94e2d256feb41541de31da01d2ca9c61acf7cf85373a59f5a63415346728c081",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-context-metrics.json",
+      "relativePath": "current/final-v4/B29-context-metrics.json",
+      "bytes": 1627,
+      "sha256": "381cb8b99dff1100ee80bbf46ac1ccda30a3806281308b25b65e6b8defb8824f",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-context-evidence.json",
+      "relativePath": "current/final-v4/B29-context-evidence.json",
+      "bytes": 13807,
+      "sha256": "9404aa85d2f52f41db2a74ac6a6bce661ed4b1870c132dc7a38ac02146ed6c77",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-context-protection.json",
+      "relativePath": "current/final-v4/B29-context-protection.json",
+      "bytes": 2246,
+      "sha256": "8334d558193b4e14fea6db1521ae56e92f2d47b7dfd9ac9b17b19f3004736e74",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-context-old-protection.json",
+      "relativePath": "current/final-v4/B29-context-old-protection.json",
+      "bytes": 336,
+      "sha256": "e801b75ec1ac8b5897c25d0c84c0db46204a93378a4282e9ff7de0718de8b245",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-context-launch-request.json",
+      "relativePath": "current/final-v4/B29-context-launch-request.json",
+      "bytes": 1771,
+      "sha256": "6054d80f0089d1a56fb4c8edce83a00587505001ac5ab80dea5df5e6bcb1a439",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-context-launch-result.json",
+      "relativePath": "current/final-v4/B29-context-launch-result.json",
+      "bytes": 313,
+      "sha256": "6d174aaa01147930cd5e7dd651f481fbe771c8b61e44b7f4aa35267a49b80f0a",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-dedup-conflict-observable-events.jsonl",
+      "relativePath": "current/final-v4/B29-dedup-conflict-observable-events.jsonl",
+      "bytes": 38614,
+      "sha256": "abcca021d17e765c380a618200576eaa674a5dadaa6e51cc374123430f2bf982",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-dedup-conflict-queries.json",
+      "relativePath": "current/final-v4/B29-dedup-conflict-queries.json",
+      "bytes": 18194,
+      "sha256": "cd90db131b169370e9d1cbf357a8a6da1177eb27a57e59f848140863052855d1",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-dedup-conflict-reads.json",
+      "relativePath": "current/final-v4/B29-dedup-conflict-reads.json",
+      "bytes": 5671,
+      "sha256": "d08bfea6aeb9e1a7604a6a2e0843993c9dd4a1b1ef604fb486d6bdaee85e3fb1",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-dedup-conflict-answer.md",
+      "relativePath": "current/final-v4/B29-dedup-conflict-answer.md",
+      "bytes": 2192,
+      "sha256": "9e48bb0f690db0167a5c53571c46c2f875d9ad165b7fcedf1a7a33e957895ae1",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-dedup-conflict-metrics.json",
+      "relativePath": "current/final-v4/B29-dedup-conflict-metrics.json",
+      "bytes": 1384,
+      "sha256": "52e157ab46019dd816fc3964bd78c342587ade81077b474c39e790035f91ddb5",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-dedup-conflict-evidence.json",
+      "relativePath": "current/final-v4/B29-dedup-conflict-evidence.json",
+      "bytes": 10135,
+      "sha256": "5b123e726cf6e39187c702627337e28be8073744c79791d2231dad1d73f570f3",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-dedup-conflict-protection.json",
+      "relativePath": "current/final-v4/B29-dedup-conflict-protection.json",
+      "bytes": 2253,
+      "sha256": "2f8c1be27ddbb00edd5d0c6519c50c00b339b32b8dd93864d50d4d39083435c8",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-dedup-conflict-old-protection.json",
+      "relativePath": "current/final-v4/B29-dedup-conflict-old-protection.json",
+      "bytes": 336,
+      "sha256": "e801b75ec1ac8b5897c25d0c84c0db46204a93378a4282e9ff7de0718de8b245",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-dedup-conflict-launch-request.json",
+      "relativePath": "current/final-v4/B29-dedup-conflict-launch-request.json",
+      "bytes": 1793,
+      "sha256": "346240e0bf748a9a800c023361ff3a831a043108ad14b4c551fec0a1ced0565b",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-dedup-conflict-launch-result.json",
+      "relativePath": "current/final-v4/B29-dedup-conflict-launch-result.json",
+      "bytes": 321,
+      "sha256": "65425235f0bc1457dd46b23036fef751b3b0fd5e0dcfc120454b0b0555375f4d",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-none-observable-events.jsonl",
+      "relativePath": "current/final-v4/B29-none-observable-events.jsonl",
+      "bytes": 11472,
+      "sha256": "1a893a33fea79526a47ac47412d2475b08d61c1be1b9ed4057b4388b318375a5",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-none-queries.json",
+      "relativePath": "current/final-v4/B29-none-queries.json",
+      "bytes": 1087,
+      "sha256": "7a26603201ca6674cefe5756071579909b998c21b2fd8af93b35f6eb38973974",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-none-reads.json",
+      "relativePath": "current/final-v4/B29-none-reads.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-none-answer.md",
+      "relativePath": "current/final-v4/B29-none-answer.md",
+      "bytes": 254,
+      "sha256": "eb581ec663f0e223ba68ba014d7fb18da8fe39472497ca5afcbfe25f9c14f3b9",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-none-metrics.json",
+      "relativePath": "current/final-v4/B29-none-metrics.json",
+      "bytes": 1368,
+      "sha256": "0b188cc38a94f16bc2eeee9a2ea88ac40fc54d1f8f12b691e1b240d9a7e48d32",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-none-evidence.json",
+      "relativePath": "current/final-v4/B29-none-evidence.json",
+      "bytes": 10268,
+      "sha256": "6c06d608e6738fc46cb111141670441c284eee2addcb7b81b2b9fbfb23ec57b1",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-none-protection.json",
+      "relativePath": "current/final-v4/B29-none-protection.json",
+      "bytes": 2243,
+      "sha256": "9332cd3f0ea8e459461f94f9433f6fce3d617f920a9bcfeaf25c7bd20353c5fb",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-none-old-protection.json",
+      "relativePath": "current/final-v4/B29-none-old-protection.json",
+      "bytes": 336,
+      "sha256": "e801b75ec1ac8b5897c25d0c84c0db46204a93378a4282e9ff7de0718de8b245",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-none-launch-request.json",
+      "relativePath": "current/final-v4/B29-none-launch-request.json",
+      "bytes": 1763,
+      "sha256": "b2b5a3280afa000f2d2dce526dc1318378edf83fca13f6b0545d38792d6124c6",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-none-launch-result.json",
+      "relativePath": "current/final-v4/B29-none-launch-result.json",
+      "bytes": 311,
+      "sha256": "a45839e8cec964166db16ac84e60ca28bed9a1e2c3996529b3999f2ad0530e5a",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-unbound-git-observable-events.jsonl",
+      "relativePath": "current/final-v4/B29-unbound-git-observable-events.jsonl",
+      "bytes": 49896,
+      "sha256": "34bacd092d94cabab1cef90f9b310ef2790f06c710bcc12897471a0c0d0f6ac1",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-unbound-git-queries.json",
+      "relativePath": "current/final-v4/B29-unbound-git-queries.json",
+      "bytes": 3404,
+      "sha256": "ea318da33d22a792c22d15d258f5f58b5fb364215769fed6d15cb31a324bf245",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-unbound-git-reads.json",
+      "relativePath": "current/final-v4/B29-unbound-git-reads.json",
+      "bytes": 22084,
+      "sha256": "47b757317beb58e6f6bb334297e5bfdd6cf1ad3966687e0932a83a9f0971a766",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-unbound-git-answer.md",
+      "relativePath": "current/final-v4/B29-unbound-git-answer.md",
+      "bytes": 1819,
+      "sha256": "c15b57c830bd490e87cf95f9c2cb90ba17a5e9b877664464e8b14001326f4c9c",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-unbound-git-metrics.json",
+      "relativePath": "current/final-v4/B29-unbound-git-metrics.json",
+      "bytes": 1384,
+      "sha256": "9918211125209a93c09a7da34fe520b5c612a537fa9049deb7518c5a2763b189",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-unbound-git-evidence.json",
+      "relativePath": "current/final-v4/B29-unbound-git-evidence.json",
+      "bytes": 10369,
+      "sha256": "19fb82d3ed7283fcc703888c050d9a414b58836150d97f5932b4e62ef22ca007",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-unbound-git-protection.json",
+      "relativePath": "current/final-v4/B29-unbound-git-protection.json",
+      "bytes": 2250,
+      "sha256": "7c936585a1dcf4c4b8cab79e16d25b7a09bc36afb5c5b100d7a538b463f469a7",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-unbound-git-old-protection.json",
+      "relativePath": "current/final-v4/B29-unbound-git-old-protection.json",
+      "bytes": 336,
+      "sha256": "e801b75ec1ac8b5897c25d0c84c0db46204a93378a4282e9ff7de0718de8b245",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-unbound-git-launch-request.json",
+      "relativePath": "current/final-v4/B29-unbound-git-launch-request.json",
+      "bytes": 1786,
+      "sha256": "04730fecd5cef1a94d4e25aab3cac4b42652c3fce2e69246fed08e4a58596b2f",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-unbound-git-launch-result.json",
+      "relativePath": "current/final-v4/B29-unbound-git-launch-result.json",
+      "bytes": 318,
+      "sha256": "5d7d2711b2621dea11561bfb69beac947e632e8e2feabb227817f53edc498fe1",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-non-git-observable-events.jsonl",
+      "relativePath": "current/final-v4/B29-non-git-observable-events.jsonl",
+      "bytes": 19694,
+      "sha256": "095388807c4aef26ecf7aed7d3e5ae2046196e147f70f83d8254dc0d90e37ea9",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-non-git-queries.json",
+      "relativePath": "current/final-v4/B29-non-git-queries.json",
+      "bytes": 3270,
+      "sha256": "81bb92333a6cdbb795e058f34907df32d9cd91f31a266ec8ce9d989aff81c46d",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-non-git-reads.json",
+      "relativePath": "current/final-v4/B29-non-git-reads.json",
+      "bytes": 3129,
+      "sha256": "4354d71654113feaa64fecb1ebc71c6ed55c62f7378be284f1e81bd5db12a521",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-non-git-answer.md",
+      "relativePath": "current/final-v4/B29-non-git-answer.md",
+      "bytes": 1413,
+      "sha256": "b1ec640a907e885ed04333e5764a4e3f9cdda62e1ea1518600b8080d65988cf7",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-non-git-metrics.json",
+      "relativePath": "current/final-v4/B29-non-git-metrics.json",
+      "bytes": 1389,
+      "sha256": "6ce86cd0b2a627b5b3e57cbb46ec12fd87eb6037c41a970c59a1441289b3907f",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-non-git-evidence.json",
+      "relativePath": "current/final-v4/B29-non-git-evidence.json",
+      "bytes": 10506,
+      "sha256": "cb4ff107d24ac2b500130075d1067938d3e1f931fb1d07c17ef3d4bae760b1b8",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-non-git-protection.json",
+      "relativePath": "current/final-v4/B29-non-git-protection.json",
+      "bytes": 2246,
+      "sha256": "c11ea08a0ab7795fa6ea7a48f1394502cb1a7073ea5c64f55fbd68590ee116b5",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-non-git-old-protection.json",
+      "relativePath": "current/final-v4/B29-non-git-old-protection.json",
+      "bytes": 336,
+      "sha256": "e801b75ec1ac8b5897c25d0c84c0db46204a93378a4282e9ff7de0718de8b245",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-non-git-launch-request.json",
+      "relativePath": "current/final-v4/B29-non-git-launch-request.json",
+      "bytes": 1773,
+      "sha256": "dde3f43f3bca1838bfc0c3677c75a06cc7ec030ed3f3825bc69b28b9411e31fb",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-non-git-launch-result.json",
+      "relativePath": "current/final-v4/B29-non-git-launch-result.json",
+      "bytes": 313,
+      "sha256": "dff641bcc250d87ebaf7b1e2d08e2d8ae03f5a91a6078dbd4651eb98f186c91e",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-explicit-workspace-unbound-git-observable-events.jsonl",
+      "relativePath": "current/final-v4/B29-explicit-workspace-unbound-git-observable-events.jsonl",
+      "bytes": 32373,
+      "sha256": "f0341c528fee970979814b2a169c7097f58e0fd1ea256bdf44eaaa3ad84ac113",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-explicit-workspace-unbound-git-queries.json",
+      "relativePath": "current/final-v4/B29-explicit-workspace-unbound-git-queries.json",
+      "bytes": 826,
+      "sha256": "6eb2df1eb3183792b8b57fe0b4feeb48b87775c30bd9e9c9e6c99fccc4f52489",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-explicit-workspace-unbound-git-reads.json",
+      "relativePath": "current/final-v4/B29-explicit-workspace-unbound-git-reads.json",
+      "bytes": 19014,
+      "sha256": "c5a8a26c4212aab3c34011eaa5b7b50c232a7984c972a0df47c01134c00728d2",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-explicit-workspace-unbound-git-answer.md",
+      "relativePath": "current/final-v4/B29-explicit-workspace-unbound-git-answer.md",
+      "bytes": 406,
+      "sha256": "fe3523e950adf4290baf05a3ce7ab1148e3fb2e099d759a8f9cd6389b128cdcf",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-explicit-workspace-unbound-git-metrics.json",
+      "relativePath": "current/final-v4/B29-explicit-workspace-unbound-git-metrics.json",
+      "bytes": 1396,
+      "sha256": "1eef911c6cdbfed5c018ec83b5b3773ea0fdd46079a77f547a7fc63ad69bfd2a",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-explicit-workspace-unbound-git-evidence.json",
+      "relativePath": "current/final-v4/B29-explicit-workspace-unbound-git-evidence.json",
+      "bytes": 10588,
+      "sha256": "a53c6795cacf811f27f58ae07ab86325076a005df78f6122593a0ec8ad59b5d2",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-explicit-workspace-unbound-git-protection.json",
+      "relativePath": "current/final-v4/B29-explicit-workspace-unbound-git-protection.json",
+      "bytes": 2269,
+      "sha256": "8c38e8bb6929c1bd2d733afb53acc0797b26655d86844ab1c465b99ced98893c",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-explicit-workspace-unbound-git-old-protection.json",
+      "relativePath": "current/final-v4/B29-explicit-workspace-unbound-git-old-protection.json",
+      "bytes": 336,
+      "sha256": "e801b75ec1ac8b5897c25d0c84c0db46204a93378a4282e9ff7de0718de8b245",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-explicit-workspace-unbound-git-launch-request.json",
+      "relativePath": "current/final-v4/B29-explicit-workspace-unbound-git-launch-request.json",
+      "bytes": 1843,
+      "sha256": "f01f764f49cd5b17188a156c208c27910e466065b3e7b710b9968b9522bef00f",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-explicit-workspace-unbound-git-launch-result.json",
+      "relativePath": "current/final-v4/B29-explicit-workspace-unbound-git-launch-result.json",
+      "bytes": 337,
+      "sha256": "b17876393e0d92592b1334db30c3627ee5db2b724885bff870bff970a0b619a6",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-explicit-project-non-git-observable-events.jsonl",
+      "relativePath": "current/final-v4/B29-explicit-project-non-git-observable-events.jsonl",
+      "bytes": 42465,
+      "sha256": "4a11bb265419dfacb31c1260a61df829a96a1a51d620d70aa880290a3dd97d74",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-explicit-project-non-git-queries.json",
+      "relativePath": "current/final-v4/B29-explicit-project-non-git-queries.json",
+      "bytes": 821,
+      "sha256": "08ef0bae4af7df0860d222af247392d6693bad94aa908754e8faa08b443f975d",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-explicit-project-non-git-reads.json",
+      "relativePath": "current/final-v4/B29-explicit-project-non-git-reads.json",
+      "bytes": 19014,
+      "sha256": "77bd30543ed94ec90de4a55917a0d295154be4f2e2c9d6bbb3024e62033aa520",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-explicit-project-non-git-answer.md",
+      "relativePath": "current/final-v4/B29-explicit-project-non-git-answer.md",
+      "bytes": 489,
+      "sha256": "e467c1d87945493c42e6ab299573ac5917ca460031f637fbd13afeed5fe81611",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-explicit-project-non-git-metrics.json",
+      "relativePath": "current/final-v4/B29-explicit-project-non-git-metrics.json",
+      "bytes": 1391,
+      "sha256": "a963f09ece51ce7332189cc32bef440c0b6e5d345fe06c6f3e2f1427c5dded35",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-explicit-project-non-git-evidence.json",
+      "relativePath": "current/final-v4/B29-explicit-project-non-git-evidence.json",
+      "bytes": 10751,
+      "sha256": "346fabe4ac339aa1edaf09ed3607e4dc19afc7faed22111cdd17a4b8b0c87b4c",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-explicit-project-non-git-protection.json",
+      "relativePath": "current/final-v4/B29-explicit-project-non-git-protection.json",
+      "bytes": 2263,
+      "sha256": "bab5608f81bfaeff527e6fb08dac140454234787696067e69d5fea6dfa005aa0",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-explicit-project-non-git-old-protection.json",
+      "relativePath": "current/final-v4/B29-explicit-project-non-git-old-protection.json",
+      "bytes": 336,
+      "sha256": "e801b75ec1ac8b5897c25d0c84c0db46204a93378a4282e9ff7de0718de8b245",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-explicit-project-non-git-launch-request.json",
+      "relativePath": "current/final-v4/B29-explicit-project-non-git-launch-request.json",
+      "bytes": 1825,
+      "sha256": "373fa245d38d754a3fbbf6d5329ee95dd63d3a6b6f6ef317245d9702c3611864",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-explicit-project-non-git-launch-result.json",
+      "relativePath": "current/final-v4/B29-explicit-project-non-git-launch-result.json",
+      "bytes": 331,
+      "sha256": "705557c93793b76743a96196f632dee4c1dd733b78187fef4f38196839f19baa",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-supplement-intake-observable-events.jsonl",
+      "relativePath": "current/final-v4/B29-supplement-intake-observable-events.jsonl",
+      "bytes": 41852,
+      "sha256": "b421bf9a0a00e6cd3cb4869f043927e17feca75a8933cee6205c26c5dd62beb9",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-supplement-intake-queries.json",
+      "relativePath": "current/final-v4/B29-supplement-intake-queries.json",
+      "bytes": 24674,
+      "sha256": "60802eccb27fc879ae8d9203161f3ee4f9f1c37b83100221a64fbe0d8dc35fd3",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-supplement-intake-reads.json",
+      "relativePath": "current/final-v4/B29-supplement-intake-reads.json",
+      "bytes": 4795,
+      "sha256": "cb4c00c37101b926f43fd2fcc3f29f808c322902e9b7fae86d82f27175253a3f",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-supplement-intake-answer.md",
+      "relativePath": "current/final-v4/B29-supplement-intake-answer.md",
+      "bytes": 2632,
+      "sha256": "f05c344b5064ce40eedab80532bf9e8db9a31153d83a275e9c646526f7d2936e",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-supplement-intake-metrics.json",
+      "relativePath": "current/final-v4/B29-supplement-intake-metrics.json",
+      "bytes": 1391,
+      "sha256": "cdcfbdd8951c51a2ed7c8032eb0bfadcb80facc20ab9318f741b6a1775174c62",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-supplement-intake-evidence.json",
+      "relativePath": "current/final-v4/B29-supplement-intake-evidence.json",
+      "bytes": 10673,
+      "sha256": "bfd1b9ac61e37375ddc9295be30dea1a88ea92ab22f09a389b4e8f2a32a97194",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-supplement-intake-protection.json",
+      "relativePath": "current/final-v4/B29-supplement-intake-protection.json",
+      "bytes": 2256,
+      "sha256": "2b775d6e8698436bfde2f0060a85358ef92328dc59c8478f7b7676ea10336cd3",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-supplement-intake-old-protection.json",
+      "relativePath": "current/final-v4/B29-supplement-intake-old-protection.json",
+      "bytes": 336,
+      "sha256": "e801b75ec1ac8b5897c25d0c84c0db46204a93378a4282e9ff7de0718de8b245",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-supplement-intake-launch-request.json",
+      "relativePath": "current/final-v4/B29-supplement-intake-launch-request.json",
+      "bytes": 1802,
+      "sha256": "8ab2da55aca445f7f2057d750d11d9d922ac26fa481e622d02bc8501016988cc",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-supplement-intake-launch-result.json",
+      "relativePath": "current/final-v4/B29-supplement-intake-launch-result.json",
+      "bytes": 324,
+      "sha256": "1d5a847c19e8c2c13d4ae86792940df4d1e2b70e4899a3574114b4bfaf23f39a",
+      "classification": "Original frozen4977 task observed once; route/transcription limits retained; no universal quality PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-29-remaining-eight-stop-v3-v1-handoff.md",
+      "relativePath": "current/final-v4/b-29-remaining-eight-stop-v3-v1-handoff.md",
+      "bytes": 8616,
+      "sha256": "910a7ad0b0f51d72f2dc546eb9b8b627fbd078adc80ec106c4aadde588e6e0b5",
+      "classification": "Immutable actual handoff and pointer correction; not a repeated native run"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-29-remaining-eight-stop-v3-v1-reference-correction.json",
+      "relativePath": "current/final-v4/b-29-remaining-eight-stop-v3-v1-reference-correction.json",
+      "bytes": 1637,
+      "sha256": "b853a7420c0bbe987eb0e6a2d34cb3337ddc1174acc9e2ecd9c9837b4371db40",
+      "classification": "Immutable actual handoff and pointer correction; not a repeated native run"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\supervisor-b29-original-eight-acceptance.json",
+      "relativePath": "dispositions/supervisor-b29-original-eight-acceptance.json",
+      "bytes": 8913,
+      "sha256": "f44c6a581ff88226dde401c25ef891e4b3cfcf9c188182e0cfd010d0b0e17d9f",
+      "classification": "Finite actual observations accepted with route/quality limits, not whole-ticket PASS"
+    },
+    {
+      "source": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\operator-original-remaining-eight-run-record-v1.json",
+      "relativePath": "current/final-v4/operator-original-remaining-eight-run-record-v1.json",
+      "bytes": 38525,
+      "sha256": "5dd975890c8becbdf82f5de6330a72d8d1b68e75d3d179a70dc0b9aefaff0c77",
+      "classification": "Visible selection/caller/child/process observations; auth/provider private payloads excluded"
+    }
+  ],
+  "currentRuntimeSource": "4977e40ac7e6d327f63710302bac137177f70193",
+  "currentRuntimeAcceptance": "Ten original observations complete once with exact normal endings/protection and explicit quality/route limits. Historical FAIL preserved.",
+  "privacySelection": "Only preselected projected observable messages, query/read/answer/usage/evidence and root dispositions. No original private session/provider request/reasoning/auth/account files or platform binary copied.",
+  "fullPlatformBytes": "Retained in original local task record; selected protection/disposition metadata preserves exact paths, hashes, deltas and generating PID unknown. No whole-platform zero claim.",
+  "sourceDirectory": "docs/development/recall-agent-validation",
+  "createdAtUtc": "2026-10-06T04:46:23.666Z"
+}

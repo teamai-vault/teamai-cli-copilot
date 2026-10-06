@@ -1,0 +1,325 @@
+{
+  "case": "B33-injection",
+  "interpretation": "Observed actual session only; behavioral acceptance is a separate root judgment",
+  "candidateRevision": "cc3eff9f19310af2f949f7d42ec4e199cdeada48",
+  "tarballSha256": "b2c7598aa3ad6898dc9a8bf8913a5ad2bf64035b0166d69fe8c26fdb18401a1c",
+  "agentSha256": "9aaaa313fcf27299fc4bc15bae6c2e9ee6aef3b1b8206a4f353592f8a573c119",
+  "sourceHash": "9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa",
+  "sourceRevision": "1fa6573a20a65b3d1cfea9ba98cacf5d2c5f0c53",
+  "publishedRevision": "2ef6af28a0d3147fabf24613d76f8b33051a1916",
+  "sessionId": "5695eab5-4ff8-4638-b81f-d986b5aec79f",
+  "launch": {
+    "case": "B33-injection",
+    "sessionId": "5695eab5-4ff8-4638-b81f-d986b5aec79f",
+    "executable": "D:/soft/nodejs/node_global/copilot.ps1",
+    "args": [
+      "--agent",
+      "teamai-recall",
+      "--session-id",
+      "5695eab5-4ff8-4638-b81f-d986b5aec79f",
+      "--log-dir",
+      "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-33-correction-2-v1\\B33-injection-native-logs",
+      "--usage-output-file",
+      "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-33-correction-2-v1\\B33-injection-usage.json"
+    ],
+    "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-preparation-v2\\workspaces\\bound-payments-api",
+    "launcherPid": 11716,
+    "startedAtUtc": "2026-10-05T18:51:02.5097626Z",
+    "nativeRoot": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.copilot",
+    "businessHome": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home",
+    "candidateRevision": "cc3eff9f19310af2f949f7d42ec4e199cdeada48",
+    "sourceHash": "9d050ba1bf1d770deb29ec937702efc44ad4f02b77c49485a96d3632a4629afa",
+    "agentSha256": "9aaaa313fcf27299fc4bc15bae6c2e9ee6aef3b1b8206a4f353592f8a573c119",
+    "modelOverride": null,
+    "questionHeldForActualSelection": true,
+    "permissionFlags": "DEFAULT",
+    "taskMessages": "Only frozen case messages after actual selection; no oracle/rank/path list",
+    "parentChildRoute": "Same delivered teamai-recall with unset/inherited model is allowed"
+  },
+  "end": {
+    "case": "B33-injection",
+    "sessionId": "5695eab5-4ff8-4638-b81f-d986b5aec79f",
+    "launcherPid": 11716,
+    "exitCode": 0,
+    "endedAtUtc": "2026-10-05T18:57:42.0575155Z",
+    "meaning": "Normal process end only; record actual events/answer separately. Restore real read-gap source before post protection."
+  },
+  "nativeEvents": {
+    "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.copilot\\session-state\\5695eab5-4ff8-4638-b81f-d986b5aec79f\\events.jsonl",
+    "bytes": 416041,
+    "sha256": "e7e9ccb66ba5742b9b77c5bf1c8ed079141ed7a5466348abfe0bea76ad05482c",
+    "preservedInOriginalSession": true
+  },
+  "capturedModel": "gpt-6-luna",
+  "frozenQuestionExactMatch": true,
+  "parentUserMessageCount": 1,
+  "delegatedUserMessageCount": 1,
+  "answerCount": 2,
+  "selectedAgents": [
+    {
+      "timestamp": "2026-10-05T18:51:10.747Z",
+      "data": {
+        "agentName": "teamai-recall",
+        "agentDisplayName": "teamai-recall",
+        "tools": [
+          "read",
+          "execute"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-10-05T18:51:10.762Z",
+      "data": {
+        "agentName": "teamai-recall",
+        "agentDisplayName": "teamai-recall",
+        "tools": [
+          "read",
+          "execute"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-10-05T18:52:11.159Z",
+      "data": {
+        "agentName": "teamai-recall",
+        "agentDisplayName": "teamai-recall",
+        "tools": [
+          "read",
+          "execute"
+        ]
+      }
+    }
+  ],
+  "nativeChildRoutes": [
+    {
+      "type": "subagent.started",
+      "data": {
+        "toolCallId": "call_p8zMna3ZaIIs7uuLQzMnme8y",
+        "agentName": "teamai-recall",
+        "agentDisplayName": "teamai-recall",
+        "agentDescription": "Recall scoped TeamAI knowledge and read original evidence, then summarize with exact provenance in the user's language.",
+        "model": "gpt-6-luna",
+        "taskModelSource": "unset",
+        "modelSelectionSource": "session_inheritance",
+        "resumable": false,
+        "agentType": "teamai-recall",
+        "executionMode": "sync"
+      },
+      "agentId": "264f8a7e-f743-4073-bc2c-4ddb6d0a6729",
+      "id": "9f4ff5da-6e87-4165-b97c-aadedebb77a5",
+      "timestamp": "2026-10-05T18:52:10.508Z",
+      "parentId": "02e83014-7dd6-4606-b012-7513ae0528b0"
+    },
+    {
+      "type": "subagent.configured",
+      "data": {
+        "model": "gpt-6-luna",
+        "multiTurn": true
+      },
+      "agentId": "264f8a7e-f743-4073-bc2c-4ddb6d0a6729",
+      "id": "abd03d01-e42e-47c1-9f9d-bbd6738b8b1d",
+      "timestamp": "2026-10-05T18:52:11.150Z",
+      "parentId": "9f4ff5da-6e87-4165-b97c-aadedebb77a5"
+    },
+    {
+      "type": "subagent.selected",
+      "data": {
+        "agentName": "teamai-recall",
+        "agentDisplayName": "teamai-recall",
+        "tools": [
+          "read",
+          "execute"
+        ]
+      },
+      "agentId": "264f8a7e-f743-4073-bc2c-4ddb6d0a6729",
+      "id": "2a0cefb8-592f-4727-8551-1f2210f520ac",
+      "timestamp": "2026-10-05T18:52:11.159Z",
+      "parentId": "abd03d01-e42e-47c1-9f9d-bbd6738b8b1d"
+    },
+    {
+      "type": "subagent.completed",
+      "data": {
+        "toolCallId": "call_p8zMna3ZaIIs7uuLQzMnme8y",
+        "agentName": "teamai-recall",
+        "agentDisplayName": "teamai-recall",
+        "model": "gpt-6-luna",
+        "firstDispatchedModel": "gpt-6-luna",
+        "modelSelectionSource": "session_inheritance",
+        "totalToolCalls": 7,
+        "totalTokens": 45337,
+        "durationMs": 270086
+      },
+      "agentId": "264f8a7e-f743-4073-bc2c-4ddb6d0a6729",
+      "id": "5e7b5463-fceb-42a6-941d-39ad91779bfc",
+      "timestamp": "2026-10-05T18:56:40.528Z",
+      "parentId": "0850f719-40f5-42f8-ac69-d21c635207f9"
+    },
+    {
+      "type": "subagent.completed",
+      "data": {
+        "toolCallId": "call_p8zMna3ZaIIs7uuLQzMnme8y",
+        "agentName": "teamai-recall",
+        "agentDisplayName": "teamai-recall",
+        "cancelled": true,
+        "model": "gpt-6-luna",
+        "firstDispatchedModel": "gpt-6-luna",
+        "modelSelectionSource": "session_inheritance",
+        "totalToolCalls": 7,
+        "totalTokens": 45337,
+        "durationMs": 270086
+      },
+      "agentId": "264f8a7e-f743-4073-bc2c-4ddb6d0a6729",
+      "id": "57da461f-c530-4163-88f5-000eab215115",
+      "timestamp": "2026-10-05T18:57:39.532Z",
+      "parentId": "d497306b-690b-42f5-b0c2-8a6428a22dea"
+    }
+  ],
+  "actualRecallQueries": 4,
+  "originalReads": 2,
+  "allViewFilesReturned": true,
+  "ignoredReturnedFiles": [],
+  "metrics": {
+    "sessionStartTime": 1791226266712,
+    "totalApiDurationMs": 93463,
+    "totalNanoAiu": 694217500,
+    "totalPremiumRequests": 1,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 27
+      },
+      "cache_read": {
+        "tokenCount": 62460
+      },
+      "cache_write": {
+        "tokenCount": 28103
+      },
+      "output": {
+        "tokenCount": 5604
+      }
+    },
+    "currentModel": "gpt-6-luna",
+    "modelMetrics": {
+      "gpt-6-luna": {
+        "requests": {
+          "count": 9,
+          "cost": 1
+        },
+        "usage": {
+          "inputTokens": 90590,
+          "outputTokens": 5604,
+          "cacheReadTokens": 62460,
+          "cacheWriteTokens": 28103,
+          "reasoningTokens": 3530
+        },
+        "totalNanoAiu": 694217500,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 27
+          },
+          "cache_read": {
+            "tokenCount": 62460
+          },
+          "cache_write": {
+            "tokenCount": 28103
+          },
+          "output": {
+            "tokenCount": 5604
+          }
+        }
+      }
+    },
+    "codeChanges": {
+      "linesAdded": 0,
+      "linesRemoved": 0,
+      "filesModified": []
+    },
+    "modelCalls": 1,
+    "wallMs": 399548,
+    "usageOutput": {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-33-correction-2-v1\\B33-injection-usage.json",
+      "sha256": "eb34d46003ec33fcccb17dd77ddc0f00d84a622786f8ad6f12a8ce9bf0c012f2"
+    }
+  },
+  "counts": {
+    "session.start": 1,
+    "session.model_change": 1,
+    "subagent.selected": 3,
+    "subagent.deselected": 1,
+    "session.auto_mode_resolved": 1,
+    "user.message": 2,
+    "model.turn_started": 1,
+    "model.model_call_started": 1,
+    "system.message": 2,
+    "assistant.turn_start": 9,
+    "model.captured_assignment_context": 1,
+    "model.model_call_success": 1,
+    "model.message": 1,
+    "model.response": 1,
+    "model.turn_ended": 1,
+    "model.messages_snapshot": 1,
+    "assistant.message": 13,
+    "tool.execution_start": 9,
+    "tool.execution_complete": 9,
+    "skill.invoked": 1,
+    "skill.context_delivered_ref": 1,
+    "assistant.turn_end": 9,
+    "subagent.started": 1,
+    "subagent.configured": 1,
+    "permission.requested": 7,
+    "permission.completed": 7,
+    "subagent.completed": 2,
+    "session.usage_checkpoint": 1,
+    "session.shutdown": 1
+  },
+  "protection": {
+    "businessRoots": 8,
+    "gitRoots": 5,
+    "deltas": [],
+    "case": "B33-injection",
+    "sinceSetup": {
+      "businessRoots": 8,
+      "gitRoots": 5,
+      "deltas": []
+    },
+    "knownPlatformArtifact": {
+      "priorFile": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-preparation-v2\\workspaces\\bound-payments-api\\.teamai\\context\\b33-c1-ignored-business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+      "priorBytes": 71564,
+      "priorSha256": "bfd23a9f7b617b485980d70c584fd8595b0bc9c60ab85bc49efaa3cbb029c082",
+      "futureExactFile": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-preparation-v2\\workspaces\\bound-payments-api\\.teamai\\context\\b33-c2-ignored-business-home\\AppData\\Local\\Microsoft\\PowerShell\\StartupProfileData-NonInteractive",
+      "policy": "Keep complete protected raw snapshots/deltas. Only this exact PowerShell startup optimization path may be separately classified as a native platform artifact; preserve bytes/hash and do not blanket-ignore AppData. Generating PID is not inferred."
+    },
+    "exactPlatformArtifactDeltas": [],
+    "sinceSetupExactPlatformArtifactDeltas": [],
+    "generatingPlatformArtifactPid": "NOT_INDEPENDENTLY_OBSERVED",
+    "nativePlatform": "Consumer-owned account/config/session/log writes are separate; no platform directory scan. Raw deltas remain complete; only the exact planned startup profile is separately listed",
+    "behaviorAcceptance": "NOT_INFERRED_FROM_HASHES"
+  },
+  "outputs": [
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-33-correction-2-v1\\B33-injection-observable-events.jsonl",
+      "bytes": 74158,
+      "sha256": "66130307f8625cb6ab1d0996cbe5f1ac3a2cff96a4c438e6442a699351798a28"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-33-correction-2-v1\\B33-injection-queries.json",
+      "bytes": 25638,
+      "sha256": "b570806187172a71c01f89769f43cc17b01e3c35cb06e93ca7f893f868d5d5e9"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-33-correction-2-v1\\B33-injection-reads.json",
+      "bytes": 5654,
+      "sha256": "be6eae03275f40f74ede2faee82a1b5d242810624055e9a81255d9ad5217265d"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-33-correction-2-v1\\B33-injection-answer.md",
+      "bytes": 4949,
+      "sha256": "cfb96fda5f2e87491865874dc356123a1660cda90eec31349c0b2ba8b8420a6b"
+    },
+    {
+      "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-33-correction-2-v1\\B33-injection-metrics.json",
+      "bytes": 1396,
+      "sha256": "0c0ec9431ffabd8a2390625bc5b6a2e2ef18a1067ad69fbf1b09871334d498ce"
+    }
+  ],
+  "excluded": "Authentication/account files, model reasoning, provider request snapshots and opaque provider data are not copied by this recorder"
+}

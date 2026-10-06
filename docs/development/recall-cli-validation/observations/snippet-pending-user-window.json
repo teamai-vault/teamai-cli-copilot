@@ -1,0 +1,23 @@
+{
+  "name": "snippet-pending-user-window",
+  "args": [
+    "recall",
+    "draftWeakHint draftTraceAlpha draftTraceBeta",
+    "--scope",
+    "user",
+    "--include-pending",
+    "--require",
+    "draftTraceAlpha",
+    "--json"
+  ],
+  "home": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\candidates\\a-all-b33-c1\\compiled-recall-public-fixture-v3\\business-home",
+  "cwd": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\a\\temp-35\\teamai-git-gA1pyT",
+  "noGit": false,
+  "node": "v24.15.0",
+  "startedAt": "2026-10-05T14:50:21.619Z",
+  "finishedAt": "2026-10-05T14:50:22.529Z",
+  "exitCode": 0,
+  "error": null,
+  "stdout": "{\"schemaVersion\":1,\"query\":\"draftWeakHint draftTraceAlpha draftTraceBeta\",\"requiredLiterals\":[\"draftTraceAlpha\"],\"scope\":\"user\",\"sourceHash\":\"eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809\",\"learningsRevision\":\"c4a2b9be3f3b7c947fa564f6ef83160082fde6ab\",\"limit\":5,\"hits\":[{\"id\":\"learning:shared:70000000-0000-4000-8000-000000000002\",\"type\":\"learning\",\"publication\":\"pending\",\"logicalProject\":\"shared\",\"title\":\"Snippet pending record\",\"source\":{\"sourceHash\":\"eb59819d94acde2aa9cea7ae39125f647b8c512c539a156747d63df790018809\",\"relativePath\":\"learnings/shared/70000000-0000-4000-8000-000000000002.md\",\"contentHash\":\"7aeb30a6edcffe8aeac0f76b78b0c67128810a223b8d6b1d2008c65f27b9e953\"},\"file\":\"F:\\\\agent-workspace\\\\multiAgent\\\\teamai-cli-customization\\\\.tmp\\\\recall-29-35\\\\runtime\\\\candidates\\\\a-all-b33-c1\\\\compiled-recall-public-fixture-v3\\\\business-home\\\\.teamai\\\\outbox\\\\learning-payloads\\\\70000000-0000-4000-8000-000000000002.md\",\"matchedTerms\":[\"draftWeakHint\",\"draftTraceAlpha\",\"draftTraceBeta\"],\"lineStart\":9,\"lineEnd\":11,\"snippet\":\"draftTraceAlpha precise\\ndraftTraceBeta original\\ndraftWeakHint close\"}]}\n",
+  "stderr": ""
+}

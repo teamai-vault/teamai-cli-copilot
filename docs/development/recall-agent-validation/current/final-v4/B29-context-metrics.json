@@ -1,0 +1,64 @@
+{
+  "sessionStartTime": 1791254008643,
+  "totalApiDurationMs": 96110,
+  "totalNanoAiu": 794626500,
+  "totalPremiumRequests": 2,
+  "tokenDetails": {
+    "input": {
+      "tokenCount": 36
+    },
+    "cache_read": {
+      "tokenCount": 144429
+    },
+    "cache_write": {
+      "tokenCount": 24575
+    },
+    "output": {
+      "tokenCount": 6853
+    }
+  },
+  "currentModel": "gpt-6-luna",
+  "modelMetrics": {
+    "gpt-6-luna": {
+      "requests": {
+        "count": 12,
+        "cost": 2
+      },
+      "usage": {
+        "inputTokens": 169040,
+        "outputTokens": 6853,
+        "cacheReadTokens": 144429,
+        "cacheWriteTokens": 24575,
+        "reasoningTokens": 4175
+      },
+      "totalNanoAiu": 794626500,
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 36
+        },
+        "cache_read": {
+          "tokenCount": 144429
+        },
+        "cache_write": {
+          "tokenCount": 24575
+        },
+        "output": {
+          "tokenCount": 6853
+        }
+      }
+    }
+  },
+  "codeChanges": {
+    "linesAdded": 8,
+    "linesRemoved": 0,
+    "filesModified": [
+      "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\runtime\\b\\native-33-runtime-v2\\home\\.copilot\\session-state\\4fc4d36d-4fc6-47dd-bc2b-335c96f53a45\\files\\payments-api-retryenvelope-incident.md"
+    ]
+  },
+  "modelCalls": 6,
+  "wallMs": 647333,
+  "usageOutput": {
+    "path": "F:\\agent-workspace\\multiAgent\\teamai-cli-customization\\.tmp\\recall-29-35\\handoffs\\b-native-29-v3\\B29-context-usage.json",
+    "sha256": "cd018d0d6f0e7a8a90721961ac2c08633f06fae6142fc4ba06ca4daa5fced937"
+  }
+}
