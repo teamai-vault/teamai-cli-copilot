@@ -6,6 +6,8 @@ Team AI uses Semantic Versioning independently for the CLI, the Marketplace cata
 
 The CLI version must match in `package.json`, `package-lock.json`, and `teamai --version`.
 
+TeamAI V4 is the product/design line; the current CLI package is `0.5.1`. Marketplace and Plugin versions remain independent. Documentation-only clarifications do not require a CLI version bump; a change to the shipped Agent/Skill behavior must be evaluated as a package change.
+
 - Major: breaking command, config, or managed-state contract.
 - Minor: backward-compatible command or capability.
 - Patch: backward-compatible fix or internal hardening.
@@ -37,3 +39,7 @@ Unchanged Plugins keep their versions when another Plugin or the Marketplace cat
 ## Release gate
 
 Before publishing, run the full checks in both changed repositories. Run the real Copilot contract smoke whenever the Marketplace manifest, Plugin packaging, or Copilot adapter changes. Record any unsupported or unexecuted platform check instead of inferring success.
+
+Update both READMEs, the version label and examples in `docs/index.html`, and `docs/HANDOFF.md` with the affected version/behavior. Validate the built public help, documentation links and Pages presentation. Preserve versioned evidence at its original identity; a version label change is not a new runtime observation.
+
+GitHub Pages uses `main:/docs`. Documentation prepared on `teamai-v4` is published by the normal Pages build after its merge into `main`; no separate post-merge documentation edit is required. Confirm the deployed result when performing that merge/release. V4's remaining real-consumer and reviewed-contribution gates are tracked from [Spec #14](https://github.com/teamai-vault/teamai-cli-copilot/issues/14); a successful Pages deployment is independent of product release acceptance.

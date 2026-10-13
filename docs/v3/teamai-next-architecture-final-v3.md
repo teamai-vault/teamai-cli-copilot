@@ -1,6 +1,8 @@
 # Team AI 下一阶段最终架构与设计 v3
 
-> 状态：Latest frozen direction  
+> 历史 V3 设计：当前实现以 [V4 入口](../IMPLEMENTATION-PLAN.md) 和 [实现状态](../HANDOFF.md) 为准。下文保留原始设计，不作为当前功能或验收承诺。
+>
+> 状态：V3 frozen direction（历史）
 > 更新时间：2026-09-22  
 > 范围：仅定义下一阶段新增的 Team AI Marketplace / CLI 能力、目录模型与 Instruction Scope。  
 > 基线：保留当前 Copilot Agent Plugin-first、Marketplace-first 实现，不推翻现有 `init / sync / role / status / doctor`。

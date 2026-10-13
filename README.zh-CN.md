@@ -2,6 +2,10 @@
 
 中文 | [English](README.md)
 
+**TeamAI V4 · CLI 0.5.1** · [可视化指南](https://teamai-vault.github.io/teamai-cli-copilot/) · [实现与验证状态](docs/HANDOFF.md)
+
+V4 是产品方案名称，`0.5.1` 是 CLI 包版本。Pages 随合并后的 `main:/docs` 发布；预览分支内容时，打开该 checkout 的 `docs/index.html`。
+
 `teamai` 是建立在 GitHub Copilot 原生能力之上的轻量控制层，用于统一团队共享能力。Agent Plugin、部门 Marketplace 和项目本地 `.github/*` customization 都留在各自的原生位置，不新增另一套 Runtime 或 Plugin 格式。
 
 CLI 与任何具体部门 Marketplace 解耦。每个用户绑定一个 Marketplace source；不同部门可以维护自己的 Marketplace，同时使用同一份 CLI。
@@ -26,18 +30,20 @@ CLI 与任何具体部门 Marketplace 解耦。每个用户绑定一个 Marketpl
               qa@<marketplace>
               design@<marketplace>
 
-真实业务 Repository
-  .github/copilot/settings.json
-  .github/copilot-instructions.md
+已绑定的业务 Git Workspace
+  .github/instructions/teamai/
+  .teamai/context/
+  # 可选的已声明 Project 组件
   .github/skills/
   .github/agents/
-  .github/instructions/
   .github/hooks/
+  .mcp.json
+  .teamai/project-components/
 ```
 
 CLI 不内置部门 Marketplace。`teamai-vault/teamai-marketplace` 是本 workspace 使用的 Reference / Template Marketplace，不是 CLI 依赖。
 
-## 内置 Agent Skill
+## 内置 Skill 与 Recall Agent
 
 npm package 会随 CLI 一起分发一份很薄、完全自包含的 `teamai` Agent Skill，source 位于 `skills/teamai/`。`teamai init` 和 `teamai sync` 会将这份 bundled Skill convergence 到：
 
@@ -57,21 +63,26 @@ Recall Agent 根据当前问题及必要的可见前文形成英文技术查询�
 
 - Node.js 20+
 - Git
+- 创建贡献 PR 需要已认证的 GitHub CLI（`gh`）和可访问 Marketplace 的 Git 凭据；Learnings 发布需要管理员预先准备 `teamai-learnings` 分支。
 - 可选后端：GitHub Copilot CLI（`copilot`，优先）或 VS Code（`code`，fallback）。Marketplace-managed user instructions 是文件级部署，即使两个后端都不可用也能 convergence；但 Plugin convergence 仍需要其中一个后端。
 
 ## 本地开发安装
 
 ```text
+git clone https://github.com/teamai-vault/teamai-cli-copilot.git
+cd teamai-cli-copilot
 npm install
 npm run build
 npm link
 ```
 
+合并前预览 V4，可在 clone 后、安装前运行 `git switch teamai-v4`；合并后，上述默认分支安装步骤即包含这些改动。路径使用默认 Copilot 根。设置 `COPILOT_HOME` 时必须使用非文件系统根的绝对目录；它只改变 Copilot 目标，不移动 `~/.teamai`，且必须与现有 ownership 根一致。Windows 路径限制见[平台说明](docs/development/platform-portability.md)。
+
 ## Marketplace 与 Plugin contract
 
 `--marketplace` 接受 Copilot 原生 source：GitHub `owner/repo`、带 ref 的引用、HTTP(S)/SSH/git URL 或本地路径。相对本地路径会在保存前解析成绝对路径。CLI 从已加载 Marketplace 的 manifest 发现真实 name，用户不需要重复填写 name。
 
-Marketplace 发布的 Plugin 名称为：
+Plugin 名称及可选 Role 来自配置的 Marketplace。以下是参考 catalog 的名称，CLI 不固定这组 Role：
 
 ```text
 common
@@ -103,6 +114,8 @@ Plugin 名称不再编码 kind。CLI 读取统一的 metadata namespace `com.com
 
 active Project instruction 文件按原始字节镜像到 `.github/instructions/teamai/<id>/`；Project docs 与 Project/shared learnings 写入 `.teamai/context/`。Team AI 只写一个 `applyTo: "**"` 的 `context.instructions.md` pointer，并通过 Git 解析后的 `info/exclude` 仅排除这两个 reserved root。即使目录为空，也不会接管未声明 ownership 的 reserved path，也不会改写 Marketplace source frontmatter。portable 或 path-specific `applyTo` 的匹配仍是后续验证事项；当前不宣称 runtime instruction injection。
 
+不带 ID 运行 `teamai projects set` 即可解绑当前 Workspace；非空列表会替换绑定。解绑只清理 owned 投影，修改过的组件会保留并报告；linked worktree 各自保留绑定。未绑定时 `sync` 只收敛用户范围。绑定依赖有效的已发布 Learnings 快照，由 `init`/`sync` 刷新。
+
 ## Marketplace 管理的用户级 Instructions
 
 Marketplace 可以选择性提供任意层级的原生 Copilot instruction 文件：
@@ -113,7 +126,7 @@ instructions/**/*.instructions.md
 
 `teamai init` 和 `teamai sync` 会按原始字节将这些文件镜像到受 Team AI 管理的用户级目录 `~/.copilot/instructions/teamai/`，并保留相对路径。该目录属于 Team AI；个人 instructions 应放在 `~/.copilot/instructions/` 下的其他位置。文件名和目录名只用于组织内容，Team AI 不赋予 company、department、role 或 action 语义，Copilot 原生 frontmatter 也不会被改写。
 
-这是禁止 arbitrary 或 generic resource copying/injection 的唯一窄例外：具体 use case 是部署部门批准的 Copilot 用户级 instructions。Marketplace maintainer 负责内容 ownership 与 review；Team AI 只拥有 `~/.copilot/instructions/teamai/`，并在那里镜像 frozen 的 `instructions/**/*.instructions.md` contract。CLI 只接受 regular 且单一 link count 的文件；在 filesystem check 可观察到 link-like entry 或 unsafe source/target boundary 时拒绝，使用 atomic write，并保持其他用户 instructions 不变。它不防御独立进程在操作期间替换已检查路径的竞态；该竞态不在 V1 threat model 内。
+用户级 Instructions 与显式 Logical Project 投影各有确定的交付契约。Marketplace maintainer 负责内容 ownership 与 review；在用户 Instructions 中，Team AI 只拥有 `~/.copilot/instructions/teamai/`，并在那里镜像 `instructions/**/*.instructions.md`。CLI 只接受 regular 且单一 link count 的文件；在 filesystem check 可观察到 link-like entry 或 unsafe source/target boundary 时拒绝，使用 atomic write，并保持其他用户 instructions 不变。它不防御独立进程在操作期间替换已检查路径的竞态；该竞态不在 managed instructions 的 threat model 内。
 
 如果 Copilot CLI 和 VS Code 都不可用，`init`/`sync` 仍会 convergence 这棵文件树，但会返回明确错误说明 Plugin convergence 无法运行；命令不能伪报完整初始化或同步成功。
 
@@ -146,7 +159,7 @@ teamai init --marketplace <source> --role <role>
 
 可选 `kind: project` Plugin 只作为 Marketplace source，提供 `manifest/projects.yaml` 选中的 components。绑定 Logical Project 后，声明的 Agent 写入 `.github/agents/`、Rule 写入 `.github/instructions/teamai/<id>/`、Skill 写入 `.github/skills/`、Hook 声明及引用文件写入 `.github/hooks/`，MCP server entries 与引用的本地文件写入 `.mcp.json` 和 `.teamai/project-components/`。CLI 为文件和配置项记录精确 ownership；取消绑定时只移除这些 owned 项，并拒绝覆盖无 ownership 的同名目标。Project Plugin 不会安装或启用到用户级 Copilot state。同名用户 Plugin 会被保留；只有在相应 consumer 中实测后才能确认隔离与 runtime loading。
 
-保存后的配置示例：
+最小配置示意（实际保存时还包含交付回执和 managed Skill 状态）：
 
 ```yaml
 version: 1
@@ -168,14 +181,16 @@ config schema 固定为 `version: 1`，唯一的 Marketplace source 字段为 `m
 ## 命令
 
 ```text
-teamai init [--marketplace <source>] [--role api|ios|aos|qa|design]
+teamai init [--marketplace <source>] [--role <role>]
 teamai projects [list]
 teamai projects set <ids...>
 teamai learning share <file> [--project <id>|--shared] [--tags <tag...>]
+teamai learning pending [--json]
+teamai learning retry <id>
 teamai recall <query> [--scope auto|user|workspace] [--project <id>] [--limit <n>] [--require <literal>] [--include-pending] [--json]
 teamai skill list [--tag <tag>] [--owner <owner>] [--source plugin|standalone]
 teamai skill show <name>
-teamai skill install <name...>
+teamai skill install <name...> [--yes]
 teamai skill install --tag <tag> [--yes]
 teamai skill remove <name...>
 teamai skill contribute <path> --owner <owner> [--tags <tag...>] --target standalone|plugin [--plugin <plugin>]
@@ -183,15 +198,19 @@ teamai tags list
 teamai sync
 teamai role list
 teamai role set <role>
-teamai status
-teamai doctor
+teamai status [--resources] [--json]
+teamai doctor [--json]
 ```
 
-所有写操作支持全局 `--dry-run`。首次 dry-run 会读取给定 Marketplace 并显示计划中的 Marketplace、Plugin、config 与 project 改动，不产生实际 mutation。
+所有写操作支持全局 `--dry-run`。首次 dry-run 会读取给定 Marketplace 并显示计划中的 Marketplace、Plugin、config 与 project 改动，不持久修改产品状态。预览可能联网拉取来源到临时目录，并非保证离线。
 
 `learning share` 会把提供的 Markdown 正文经由 GitHub PR 加入 `learnings/<project>/<uuid>.md`。生成的 UUID 同时用作 frontmatter `id` 和已保存的 operation ID。恰有一个 active Logical Project 时默认选中它，没有 active Project 时写入 `shared`，有多个时必须给出 `--project` 或 `--shared`。贡献流程使用隔离的 bare clone 和 worktree，不会修改当前 Marketplace checkout 或 shared read cache；dry-run 只预览 branch、commit、push 与 PR 步骤。
 
+`learning share` 要在 Git Repo 中执行，并配置 `user.name`/`user.email`。Learning PR 的 base 固定为 `teamai-learnings`，只有该分支的快照作为已发布知识。远端提交前，outbox 保存 UUID、目标和冻结正文；已保存的失败操作使用 `learning retry <id>` 续办，不要重新 share。`learning pending [--json]` 只读列出当前来源的未完成本地记录，不轮询 GitHub。Retry 核查原分支/PR 和发布正文；冲突会 blocked，打开 PR 不等于 published，未合并关闭是终态。Skill PR 使用资源仓库默认分支，不进入 Learning 续传队列。英文优先是贡献规范；CLI 保留正文原字节，不代为翻译。
+
 `recall` 只在本地搜索缓存中的已发布 Learnings 和 active Project docs。当前 Git Workspace 有 active Logical Project 时，`auto` 使用 Workspace scope，否则使用 User scope；User 只搜索 shared Learnings，Workspace 搜索 shared 和 active Project 的 docs/Learnings。`--project` 可把 Workspace scope 缩到一个 active Project。`--include-pending` 只加入符合 source 与 scope 的未完成本地草稿。Learning 的 published 和 pending JSON 结果都使用 `learning:<logicalProject>:<uuid>` 作为 ID（shared Learning 的 logicalProject 为 `shared`），由 `publication` 标明状态。Recall 不访问网络或模型，也不写入状态。中文可用空格拆分关键词，例如 `teamai recall 支付 重试`；JSON 结果包含实际本地文件、source revision/hash、匹配词、原始行号和 evidence 片段。
+
+显式 `--scope user` 不能同时带 `--project`；无绑定的显式 Workspace/Project 查询会报错。Project 过滤保留 shared 和该 active Project。Pending 必须匹配 source：User 可包含任意来源 Workspace 的 shared 草稿；Workspace 还要求来自当前 Workspace，并属于 shared 或所选 active Project。Cache 失败是错误，不是零命中。允许语料上限为 5000 文件、总计 64 MiB、单文件 1 MiB。
 
 Recall snippet 在原文连续行中选择不同 query 词覆盖最多的窗口，同分取最早位置，最多 3 行、1200 Unicode code points。过长窗口截取真实连续原文，并报告对应行号；仅派生标题命中时保留开头窗口。文件 ID、排名、source revision 和全文 hash 不变，matchedTerms 仍表示文件级匹配，即使短 snippet 没展示全部词。snippet 是检索提示，片段之外的结论仍须读取原文。
 
@@ -200,6 +219,8 @@ Recall snippet 在原文连续行中选择不同 query 词覆盖最多的窗口�
 确需字面条件时，可用 `teamai recall "Plugin not" --require "Plugin not found: E_PLUGIN_42." --scope user`。`--require <literal>` 可重复指定，所有 literal 都必须满足（AND）；每个完整 literal 经 NFC 和大小写归一后，须连续出现在一个 title、单个 tag 或 body 中，不拆词、不跨字段或 tags 拼接，也不作正则扩展。query 仍必填且至少一词命中。query 与全部原始 required 值合计最多 1024 Unicode code points；query 去重前的空白词数加 required 值数量合计最多 32 项，重复 literal 逐项计数。空值、仅空白、缺值和超限均为输入错误；以 `-` 开头的 literal 使用 `--require=<literal>`。text 显示实际应用的原文值；仅在使用参数时，JSON 增加保留调用顺序和原文的顶层 `requiredLiterals`，`matchedTerms` 仍只表示 query 命中的词。required 不能扩大已核验的 source/scope/pending 集合，也不能掩盖 cache 错误；provenance、原始 hash、路径/行号和 evidence 合同不变。字面过滤不代表理解诊断关联、否定或因果。
 
 ### `teamai sync`
+
+资源 source/ref 与 `teamai-learnings` 权威分支分别刷新。预检可提前发现冲突，但后续失败仍可能保留已完成的用户级写入或 Workspace 检查点。按诊断确认可恢复后显式重跑 `sync`；碰撞和个人修改过的内置文件需要检查。已收敛时仍可能刷新缓存和机器状态时间戳。
 
 `sync` 表示 convergence / repair：补齐缺失的 Team AI-owned User Plugin，恢复 enablement，刷新 Marketplace 注册和 VS Code Marketplace 注册，刷新 Project machine state，并修复受管理的 personal Skill。已绑定 Workspace 只投射所选 Logical Projects 声明的兼容 components；common 和 role 内容仍由原生 User Plugins 提供。
 
@@ -258,7 +279,11 @@ Logical Project 投影使用 `.github/instructions/teamai/**` 和 `.teamai/conte
 
 `managedPlugins` 是 ownership 边界。Team AI 只能 install、enable、disable、update 或 repair 自己在 convergence 中明确安装/claim 的 Plugin。用户-owned 和第三方 Plugin 状态保持不动。
 
-真实业务 Git Repo 就是 Project Scope。Project-specific Copilot customization 保留在 `.github/*`；Project 本身不是 Plugin 类型。Machine state 按稳定的 Git project anchor 分区：
+真实业务 Git Repo 就是 Project Scope。Project-specific Copilot customization 保留在原生 Workspace 路径；Project 本身不是 Plugin 类型。
+
+只有 `.github/instructions/teamai/` 和 `.teamai/context/` 自动加入本地 Git exclude。忽略规则只影响未跟踪文件，不取消已有跟踪，也不阻止强制添加；其他 Project 组件路径不会自动忽略。上下文指针位于 `.github/instructions/teamai/context.instructions.md`。
+
+Machine state 按稳定的 Git project anchor 分区：
 
 ```text
 ~/.teamai/
@@ -282,19 +307,22 @@ npm run rename:marketplace -- --from teamai --to payments-platform-ai --display-
 
 ## 验证与测试
 
+纯文档改动只需核对源码与公开帮助、链接、文本编码及受影响的页面交互，不要求运行下列代码与打包门禁。内置 Agent/Skill 的 prompt 改动会影响产品行为，需要相应的行为与打包检查。
+
 ```text
-npm run build
 npm run typecheck
-npm run test:unit
-npm run test:integration
-npm run test:e2e:copilot
-npm run test:e2e:fallback
-npm test
+npm run test:ci
+npm run build
+npm run package:test -- <new-absolute-artifact-directory>
 ```
+
+顺序执行门禁。开发时可运行 `test:unit` 或单个 Vitest 文件；本地 `npm test` 仍串行执行。修改 Marketplace 打包、Plugin 收敛或 backend 时，构建后还需运行 `npm run test:e2e:copilot` 和 `npm run test:e2e:fallback`。两者需要同级 `../teamai-marketplace`、Git 与真实 `copilot`；fallback 另需 `code`。纯文档改动不要求这些 E2E。完整交付、Scope 和 retry 链路见 [V4 联合验证](docs/development/v4-integration.md)。
 
 两个 E2E 脚本都会创建隔离的临时 profile 和 Git Repo。`test:e2e:copilot` 验证投影 instruction 的原始字节，以及 native instruction list 的 name/scope/source，并验证真实 personal Skill 与已启用 Plugin Skill 的精确 native path；`test:e2e:fallback` 需要 `TEAM_AI_E2E_CODE_BIN` 或可用的 `code` 命令，并在隔离 profile 中先验证它，再验证 VS Code-only materializer 与 native 对 materialized state 的识别。资源列表不等于模型读取 ignored docs 或应用 `applyTo`；认证 model-read probe 仍未验证。当前实现状态与验证边界见 [`docs/HANDOFF.md`](docs/HANDOFF.md)。
 
 [Recall 固定资料、测量方法与基线](docs/development/recall-quality/README.md)记录了原始 0.4.0 公开 CLI 和实际 Copilot Agent 的结果，保留回答、引用及查询方面的实际失败。支持资料进入候选不等于回答正确；后续候选比较和未运行变体单独标明。
+
+[0.5.1 Agent 报告](docs/development/recall-agent-prompt-0.5.1.md)记录了其指定包 hash 下的有限 Windows 原生观察；后续 prompt 改字不代表新的运行时实测。[V4 状态说明](docs/HANDOFF.md)列出 macOS ARM 等未完成验收；CI 通过不等于所有 consumer 已支持。
 
 ## 当前不做
 
@@ -302,6 +330,8 @@ npm test
 
 ## 项目文档
 
-- [`docs/IMPLEMENTATION-PLAN.md`](docs/IMPLEMENTATION-PLAN.md)：V3 设计与实施要求的入口。
-- [`docs/HANDOFF.md`](docs/HANDOFF.md)：当前 V3 实现状态与验证边界。
+- [`docs/index.html`](docs/index.html)：V4 可视化指南与 GitHub Pages 入口。
+- [`docs/IMPLEMENTATION-PLAN.md`](docs/IMPLEMENTATION-PLAN.md)：V4 需求与后续 Recall 迭代入口；V3 为历史资料。
+- [`docs/HANDOFF.md`](docs/HANDOFF.md)：当前 V4 实现状态、源码入口与验证边界。
+- [`docs/development/README.md`](docs/development/README.md)：维护中的契约及分版本验证证据。
 - [`docs/VERSIONING.md`](docs/VERSIONING.md)：CLI、Marketplace 与 Plugin 的版本规则。

@@ -2,6 +2,10 @@
 
 [中文](README.zh-CN.md) | English
 
+**TeamAI V4 · CLI 0.5.1** · [Visual guide](https://teamai-vault.github.io/teamai-cli-copilot/) · [Implementation and verification status](docs/HANDOFF.md)
+
+V4 is the product line; `0.5.1` is the CLI package version. The Pages site follows `main:/docs` after merge. For a branch preview, open that checkout's `docs/index.html`.
+
 `teamai` is a thin, Copilot-native control layer for shared GitHub Copilot capabilities. It keeps Agent Plugin packages, the department Marketplace, and project-local `.github/*` customization in their native locations instead of introducing another runtime or plugin format.
 
 The CLI is independent from any particular department Marketplace. Each user configures one Marketplace source; departments can maintain their own Marketplace while using the same CLI.
@@ -26,18 +30,20 @@ The CLI is independent from any particular department Marketplace. Each user con
               qa@<marketplace>
               design@<marketplace>
 
-real business repository
-  .github/copilot/settings.json
-  .github/copilot-instructions.md
+bound business Git workspace
+  .github/instructions/teamai/
+  .teamai/context/
+  # optional declared Project components
   .github/skills/
   .github/agents/
-  .github/instructions/
   .github/hooks/
+  .mcp.json
+  .teamai/project-components/
 ```
 
 The CLI has no built-in department Marketplace. `teamai-vault/teamai-marketplace` is the reference/template Marketplace used by this workspace, not a CLI dependency.
 
-## Built-in Agent Skill
+## Bundled Skill and Recall Agent
 
 The npm package ships a small, self-contained `teamai` Agent Skill from `skills/teamai/`. `teamai init` and `teamai sync` converge that bundled Skill to:
 
@@ -57,21 +63,26 @@ Recall Agent uses the current question and necessary visible context to form Eng
 
 - Node.js 20+
 - Git
+- Contribution PRs require authenticated GitHub CLI (`gh`) and Git access to the Marketplace. Learnings publication requires an administrator-prepared `teamai-learnings` branch.
 - Optional backend: GitHub Copilot CLI available as `copilot` (native backend), or VS Code available as `code` (fallback backend). Marketplace-managed user instructions are file-based and can converge without either backend; plugin convergence still requires one.
 
 ## Development installation
 
 ```text
+git clone https://github.com/teamai-vault/teamai-cli-copilot.git
+cd teamai-cli-copilot
 npm install
 npm run build
 npm link
 ```
 
+To preview V4 before merge, run `git switch teamai-v4` after cloning and before installation. After merge, the normal default-branch installation above includes these changes. Paths use the default Copilot root. `COPILOT_HOME`, when set, must be an absolute non-root directory; it changes Copilot targets but not `~/.teamai`. Existing ownership must match that root. See [platform limits](docs/development/platform-portability.md) for Windows path constraints.
+
 ## Marketplace and plugin contract
 
 `--marketplace` accepts a native Copilot source: a GitHub `owner/repo` reference, a ref-qualified reference, an HTTP(S)/SSH/git URL, or a local path. Relative local paths are normalized to absolute paths before they are persisted. The manifest name is discovered from the registered Marketplace; users do not provide it separately.
 
-Plugin names are the names published by the Marketplace:
+Plugin names and selectable roles come from the configured Marketplace. The reference catalog uses these names; the CLI does not hard-code this role list:
 
 ```text
 common
@@ -103,6 +114,8 @@ The plugin name does not encode its kind. The CLI reads the shared metadata name
 
 Active Project instruction files are mirrored byte-for-byte to `.github/instructions/teamai/<id>/`; project docs and project/shared learnings go to `.teamai/context/`. Team AI writes one `context.instructions.md` pointer with `applyTo: "**"`, plus Git-resolved `info/exclude` entries for only those two reserved roots. It never adopts an occupied reserved path, even if empty, and never rewrites Marketplace source frontmatter. Portable or path-specific `applyTo` matching remains a documented future validation item; no runtime instruction injection is claimed.
 
+To unbind the current Workspace, run `teamai projects set` with no IDs. A nonempty list replaces the binding. Unbinding removes owned projections and preserves modified components with diagnostics; linked worktrees retain independent bindings. Unbound `sync` only converges user scope. Binding requires a valid published-Learnings snapshot, refreshed by `init`/`sync`.
+
 ## Marketplace-managed user instructions
 
 An optional Marketplace `instructions/` directory may contain native Copilot instruction files at any depth:
@@ -113,7 +126,7 @@ instructions/**/*.instructions.md
 
 `teamai init` and `teamai sync` mirror those files byte-for-byte into the managed user-level directory `~/.copilot/instructions/teamai/`, preserving relative paths. The directory is Team AI-owned; keep personal instructions elsewhere under `~/.copilot/instructions/`. File and folder names only organize content—Team AI does not assign company, department, role, or action semantics, and native Copilot frontmatter remains unchanged.
 
-This is the only narrow exception to the prohibition on arbitrary or generic resource copying/injection: the concrete use case is deploying department-approved Copilot user instructions. Marketplace maintainers own and review the content; Team AI owns only `~/.copilot/instructions/teamai/` and mirrors the frozen `instructions/**/*.instructions.md` contract there. The CLI accepts regular single-link-count files and rejects link-like entries or unsafe source/target boundaries visible during its filesystem checks, writes atomically, and leaves all other user instructions untouched. It does not defend against a separate process replacing an already-checked path during the operation; that race is outside the V1 threat model.
+User instructions have a specific delivery contract, alongside explicit Logical Project projections: Marketplace maintainers own and review the content; Team AI owns only `~/.copilot/instructions/teamai/` within user instructions and mirrors `instructions/**/*.instructions.md` there. The CLI accepts regular single-link-count files and rejects link-like entries or unsafe source/target boundaries visible during its filesystem checks, writes atomically, and leaves all other user instructions untouched. It does not defend against a separate process replacing an already-checked path during the operation; that race is outside the managed-instruction threat model.
 
 If both Copilot CLI and VS Code are unavailable, `init`/`sync` still converge this file tree but return an error explaining that plugin convergence could not run; the command must not report full initialization or synchronization success.
 
@@ -146,7 +159,7 @@ Initialization:
 
 An optional `kind: project` Plugin is only a Marketplace source for components selected by `manifest/projects.yaml`. Binding a Logical Project projects its declared Agents to `.github/agents/`, Rules to `.github/instructions/teamai/<id>/`, Skills to `.github/skills/`, Hook declarations and referenced files to `.github/hooks/`, and MCP server entries plus referenced local files to `.mcp.json` and `.teamai/project-components/`. The CLI records exact file/config ownership, rejects unowned target collisions, and removes only those owned entries on unbind. It never installs or enables the Project Plugin in user-level Copilot state. A same-name user Plugin is preserved; consumer isolation and runtime loading remain unobserved until tested in that consumer.
 
-Example persisted config:
+Minimal config illustration (the saved config also contains delivery receipts and managed Skill state):
 
 ```yaml
 version: 1
@@ -168,14 +181,16 @@ The config schema is version `1` and uses `marketplace.source` as its only sourc
 ## Commands
 
 ```text
-teamai init [--marketplace <source>] [--role api|ios|aos|qa|design]
+teamai init [--marketplace <source>] [--role <role>]
 teamai projects [list]
 teamai projects set <ids...>
 teamai learning share <file> [--project <id>|--shared] [--tags <tag...>]
+teamai learning pending [--json]
+teamai learning retry <id>
 teamai recall <query> [--scope auto|user|workspace] [--project <id>] [--limit <n>] [--require <literal>] [--include-pending] [--json]
 teamai skill list [--tag <tag>] [--owner <owner>] [--source plugin|standalone]
 teamai skill show <name>
-teamai skill install <name...>
+teamai skill install <name...> [--yes]
 teamai skill install --tag <tag> [--yes]
 teamai skill remove <name...>
 teamai skill contribute <path> --owner <owner> [--tags <tag...>] --target standalone|plugin [--plugin <plugin>]
@@ -183,15 +198,19 @@ teamai tags list
 teamai sync
 teamai role list
 teamai role set <role>
-teamai status
-teamai doctor
+teamai status [--resources] [--json]
+teamai doctor [--json]
 ```
 
-All write commands support the global `--dry-run` option. A first-time dry run can inspect the supplied Marketplace and reports planned Marketplace/plugin/config/project changes without mutating state.
+All write commands support the global `--dry-run` option. A first-time dry run can inspect the supplied Marketplace and reports planned Marketplace/plugin/config/project changes without persistent product-state mutations. Preview may fetch sources into disposable temporary directories; it is not necessarily offline.
 
 `learning share` adds the supplied Markdown body to `learnings/<project>/<uuid>.md` through a GitHub pull request. The generated UUID is also the frontmatter `id` and saved operation ID. It defaults to the one active Logical Project, uses `shared` with none, and requires `--project` or `--shared` with several. Contributions use an isolated bare clone and worktree; they never change the active Marketplace checkout or shared read cache. A dry run previews the branch, commit, push, and pull-request steps without performing them.
 
+Run `learning share` inside a Git repository with `user.name`/`user.email` set. The Learning PR targets `teamai-learnings`, whose snapshots are the only published-Learning authority. The outbox saves the UUID, target and frozen payload before remote submission; after a saved failure, use `learning retry <id>` rather than creating another share. `learning pending [--json]` lists incomplete local records for the configured source without polling GitHub. Retry reconciles the existing branch/PR and verifies publication bytes; conflicts become blocked, an open PR is not published, and a closed unmerged PR is terminal. Skill contributions use the resource repository's default branch and do not share the Learning retry queue. English-first is a contribution convention; the CLI preserves body bytes and does not translate them.
+
 `recall` searches the cached published Learnings and active Project docs locally. `auto` uses Workspace scope when the current Git workspace has active Logical Projects and User scope otherwise; User scope searches shared Learnings, while Workspace scope searches shared Learnings and active Project docs/Learnings. `--project` narrows Workspace scope to one active Project. `--include-pending` adds only incomplete local drafts that match the source and scope. Learning JSON IDs use `learning:<logicalProject>:<uuid>` for both published and pending results (`shared` for shared Learnings); `publication` identifies their state. Recall makes no network or model calls and writes no state. Use whitespace-separated Chinese terms, for example `teamai recall 支付 重试`; JSON results include the local file, source revision/hash, matching terms, original line numbers, and evidence snippet.
+
+Explicit `--scope user` cannot be combined with `--project`; explicit Workspace/Project queries without a binding fail. A Project filter retains shared Learnings plus that active Project. Pending drafts must match the source: User scope allows shared drafts from any originating Workspace, while Workspace scope requires the current origin and shared/selected active Projects. Cache failures are errors, not zero hits. The verified allowed corpus is limited to 5000 files, 64 MiB total and 1 MiB per file.
 
 Recall snippets choose the earliest consecutive original window with the greatest coverage of distinct query terms, up to three lines and 1200 Unicode code points. Long windows are clipped as a continuous original span with actual line numbers; derived-title-only hits keep the opening. File IDs/order, source revisions and full-file hashes stay unchanged, and matchedTerms remains file-level matches even if the snippet omits a term. Snippets are retrieval hints; claims beyond them require reading the original evidence.
 
@@ -200,6 +219,8 @@ Recall snippets choose the earliest consecutive original window with the greates
 For a required literal condition, use `teamai recall "Plugin not" --require "Plugin not found: E_PLUGIN_42." --scope user`. Repeat `--require <literal>` for AND conditions. Each complete NFC/case-normalized literal must occur in one title, one individual tag or body, without word splitting, cross-field/tag joins or regex expansion; the query still needs an ordinary term match. Query plus all raw required values totals at most 1024 Unicode code points, and query whitespace terms before deduplication plus required value count totals at most 32 items. Empty, whitespace-only, missing and over-limit values are input errors; use `--require=<literal>` for a leading `-`. Applied original values appear in text and, only when used, JSON `requiredLiterals`; `matchedTerms` remains the query matches. Required cannot expand the verified source/scope/pending set or hide cache errors. Provenance, raw hashes and evidence stay unchanged. Literal filtering does not imply diagnostic, negation or causal understanding.
 
 ### `teamai sync`
+
+The resource source/ref and `teamai-learnings` authority are refreshed separately. Preflight reduces conflicts before delivery, but later failures may leave applied user changes or a pending Workspace checkpoint. Follow the diagnostic and rerun explicit `sync` when recovery is safe; collisions and personally modified bundled files require inspection. A converged run can still refresh caches and machine-state timestamps.
 
 `sync` means convergence and repair. It installs missing Team AI-owned user plugins, restores enablement, refreshes Marketplace registration, updates VS Code Marketplace registration, refreshes project machine state, and repairs managed personal Skills. For a bound workspace, it projects only the compatible components declared by its selected Logical Projects; common and role content remains in native user Plugins.
 
@@ -258,7 +279,11 @@ Logical Project projections use `.github/instructions/teamai/**` and `.teamai/co
 
 `managedPlugins` is the ownership boundary. Team AI may install, enable, disable, update, or repair only plugins it explicitly installed or claimed during convergence. User-owned and third-party plugin state remains untouched.
 
-The real business Git repository is the Project scope. Project-specific Copilot customization stays in `.github/*`; Project is not a Plugin type. Machine state is partitioned by the stable Git project anchor:
+The real business Git repository is the Project scope. Project-specific Copilot customization stays in native Workspace paths; Project is not a Plugin type.
+
+Only `.github/instructions/teamai/` and `.teamai/context/` receive automatic local Git exclude entries. Excludes affect untracked files; they do not untrack existing files or prevent force-add. Other Project component paths are not automatically ignored. The instruction pointer is `.github/instructions/teamai/context.instructions.md`.
+
+Machine state is partitioned by the stable Git project anchor:
 
 ```text
 ~/.teamai/
@@ -282,19 +307,22 @@ See [`scripts/README.md`](scripts/README.md).
 
 ## Validation and tests
 
+For documentation-only changes, check source/help accuracy, links, text encoding and affected page interactions. The code and package gates below are not required solely for prose or static-page edits. Bundled Agent/Skill prompt changes need the relevant behavior and packaging checks.
+
 ```text
-npm run build
 npm run typecheck
-npm run test:unit
-npm run test:integration
-npm run test:e2e:copilot
-npm run test:e2e:fallback
-npm test
+npm run test:ci
+npm run build
+npm run package:test -- <new-absolute-artifact-directory>
 ```
+
+Run gates sequentially. Use `test:unit` or a focused Vitest file during development; local `npm test` remains serial. For Marketplace packaging, Plugin convergence or backend changes, also run `npm run test:e2e:copilot` and `npm run test:e2e:fallback` after building. Both need the sibling `../teamai-marketplace`, Git and a real `copilot`; fallback also needs `code`. These are not prerequisites for a documentation-only edit. See the [V4 joint verifier](docs/development/v4-integration.md) for the broader delivery/Scope/retry chain.
 
 The two E2E scripts create isolated temporary profiles and repositories. `test:e2e:copilot` verifies projected instruction bytes and native instruction listing by name/scope/source, plus exact native paths for a real personal Skill and an enabled Plugin Skill. `test:e2e:fallback` requires `TEAM_AI_E2E_CODE_BIN` or a working `code` command, validates it with the isolated profile, then exercises the VS Code-only materializer and native recognition of the materialized state. Resource listing is not proof that a model read ignored docs or applied `applyTo`; that authenticated model-read probe remains unverified. Current implementation status and verification limits are summarized in [`docs/HANDOFF.md`](docs/HANDOFF.md).
 
 The [Recall quality method and fixed baseline](docs/development/recall-quality/README.md) record the original 0.4.0 public CLI and actual Copilot Agent measurements, including observed answer, citation and query failures. Coverage of a supporting source does not establish answer correctness; later candidate comparisons and unrun variants are identified separately.
+
+The [0.5.1 Agent report](docs/development/recall-agent-prompt-0.5.1.md) records bounded Windows native observations at its stated package hash. Later prompt edits are not new runtime runs. The [V4 status guide](docs/HANDOFF.md) links remaining consumer/release gates, including macOS ARM acceptance; passing CI is not a blanket consumer-support claim.
 
 ## Non-goals
 
@@ -302,6 +330,8 @@ This project does not implement a default Marketplace, multiple-Marketplace merg
 
 ## Project documents
 
-- [`docs/IMPLEMENTATION-PLAN.md`](docs/IMPLEMENTATION-PLAN.md) — entry to the V3 design and implementation requirements.
-- [`docs/HANDOFF.md`](docs/HANDOFF.md) — current V3 implementation status and verification limits.
+- [`docs/index.html`](docs/index.html) — V4 visual guide and GitHub Pages entry.
+- [`docs/IMPLEMENTATION-PLAN.md`](docs/IMPLEMENTATION-PLAN.md) — V4 requirements and subsequent Recall changes; V3 is historical.
+- [`docs/HANDOFF.md`](docs/HANDOFF.md) — current V4 implementation status, source map and verification limits.
+- [`docs/development/README.md`](docs/development/README.md) — maintained contracts and versioned evidence.
 - [`docs/VERSIONING.md`](docs/VERSIONING.md) — CLI, Marketplace, and Plugin release/version rules.

@@ -1,5 +1,7 @@
 # Team AI 下一阶段详细实施顺序与方案 v3
 
+> 历史 V3 实施计划：当前实现以 [V4 入口](../IMPLEMENTATION-PLAN.md) 和 [实现状态](../HANDOFF.md) 为准。保留原阶段描述用于溯源，不据此重新实施已完成或已替代的路线。
+
 > 对应文档：`Team AI 下一阶段最终架构与设计（最新版）`  
 > 更新时间：2026-09-22  
 > 目标：在不推翻当前 Copilot Plugin-first 实现的前提下，分阶段加入 Logical Project、Context/Learning、Skill Catalog/Tag/Install/Contribute，明确四层 Instruction Scope，并处理大型 Marketplace 性能。
