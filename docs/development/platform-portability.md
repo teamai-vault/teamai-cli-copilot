@@ -57,12 +57,14 @@ existing error envelope. Help and version do not initialize the profile.
 Use short writable roots for test profiles and temporary directories. Do not
 move existing receipts, ownership or pending operations automatically.
 
-## Current platform acceptance
+## Historical platform acceptance (2026-10-04 patch)
 
 On 2026-10-04, macOS testing for this patch is explicitly skipped because no
 macOS test environment is available. Keep this recorded as skipped, rather
 than passed. Earlier macOS CI results apply to their earlier revisions.
 Actual model and VS Code extension consumption remain unverified.
+
+This dated note applies to that patch, not to every later revision. Current source-delivery evidence and remaining consumer gates are indexed in [HANDOFF](../HANDOFF.md); preserve the original skipped result when using this report.
 
 References: [Git attributes](https://git-scm.com/docs/gitattributes),
 [npm lifecycle scripts](https://docs.npmjs.com/cli/v12/using-npm/scripts/).

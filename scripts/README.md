@@ -87,7 +87,7 @@ teamai-marketplace
 
 ### 发布后的人工检查
 
-该脚本只改源码 Repo。若旧 Marketplace ID 已经被注册或写入用户/业务环境，需要人工分别更新 Copilot registration、已安装 Plugin、`~/.teamai/`、`~/.copilot/` 和业务 Repo `.github/copilot/settings.json`。脚本不会擅自改动这些外部 state，因此最好在大规模 rollout 前确定最终 Marketplace 名称。
+该脚本只改源码 Repo。若旧 Marketplace ID 已部署，需要另行规划迁移：核对 Copilot registration、已安装 Plugin、`~/.teamai/` 中的用户与 Project ownership state、实际 Copilot profile，以及已绑定 Workspace 的投影和组件。V4 不使用业务 Repo 的 `.github/copilot/settings.json` 保存项目绑定。改名脚本不迁移这些外部状态，也不要靠改写 ownership 记录模拟迁移；最好在大规模 rollout 前确定最终名称。当前状态与路径见 [CLI 中文文档](../README.zh-CN.md)。
 
 ### 改名后的验证
 
@@ -189,7 +189,7 @@ The script creates a parentless root commit in an isolated temporary Git reposit
 
 Preview and apply run all Git commands in an isolated temporary bare repository. The operation stops if system, global, or environment Git configuration rewrites either fetch or push to a different target, and it rejects `GIT_NAMESPACE`. Credentials and hooks come from the system, global, and environment configuration visible to that isolated repository; the caller checkout's local Git configuration is not loaded. Ensure `user.name`, `user.email`, and required credentials are available from those configuration sources.
 
-If the old Marketplace ID is already deployed, update Copilot registrations, installed Plugin specs, `~/.teamai/`, `~/.copilot/`, and `.github/copilot/settings.json` separately. This source-repository utility never changes those external locations.
+If the old Marketplace ID is already deployed, plan its environment migration separately: inspect Copilot registrations, installed Plugin specs, user/Project ownership state under `~/.teamai/`, the actual Copilot profile, and bound Workspace projections/components. V4 does not store project bindings in repository `.github/copilot/settings.json`. This utility does not migrate external state; do not simulate migration by rewriting ownership records. Prefer choosing the final ID before rollout. See the [CLI README](../README.md) for current state and path contracts.
 
 ## Real Copilot E2E
 

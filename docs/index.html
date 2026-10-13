@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Team AI CLI</title>
-<meta name="description" content="teamai 把部门 Marketplace 里的 Copilot Plugins、Instructions、Skills 和团队经验同步到你的机器和你的 Repo，并支持本地召回与回馈。">
+<title>Team AI CLI · V4</title>
+<meta name="description" content="TeamAI V4 / CLI 0.5.1：按归属同步 Copilot 能力，显式绑定 Workspace，离线检索团队知识，并通过 PR 分享与续传 Learnings。">
 <meta name="color-scheme" content="light dark">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/geist@5/index.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/geist-mono@5/index.css">
@@ -85,6 +85,7 @@ nav.top .btn{height:34px;padding:0 12px}
 .hero .term{font-size:13.5px;padding:22px 24px}
 .hero .loop{display:block;margin-top:14px;font-size:13px;color:var(--faint);font-family:var(--mono)}
 .hero .loop b{color:var(--accent);font-weight:500}
+.hero p.cap{margin:12px 0 0;font-size:13px;max-width:none}
 
 /* architecture */
 .diagram{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);padding:28px;overflow-x:auto}
@@ -279,7 +280,7 @@ nav.top .btn{height:34px;padding:0 12px}
 .ref h3{font-size:14px;color:var(--muted);font-weight:550;margin-bottom:6px;display:flex;align-items:center;gap:8px}
 .ref h3 i{color:var(--accent)}
 .ref dl{margin:0}
-.ref dt{font-family:var(--mono);font-size:13.5px;padding-top:12px}
+.ref dt{font-family:var(--mono);font-size:13.5px;padding-top:12px;overflow-wrap:anywhere}
 .ref dd{margin:2px 0 0;color:var(--muted);font-size:14px;padding-bottom:12px;border-bottom:1px solid var(--line)}
 .ref dl div:last-child dd{border-bottom:0}
 .tip{margin-top:48px;padding:18px 22px;border-radius:var(--r);background:var(--sunken);font-size:14.5px;color:var(--muted);display:flex;gap:12px;align-items:flex-start}
@@ -320,6 +321,8 @@ footer a:hover{color:var(--text)}
 @media (max-width:640px){
   .wrap{padding:0 16px}
   .diagram{padding:16px}
+  .skl{table-layout:fixed}
+  .skl td{white-space:normal;overflow-wrap:anywhere}
   .skl td:nth-child(3){display:none}
   .gset{padding:20px}
   .gset dl div{grid-template-columns:minmax(0,1fr);gap:4px}
@@ -340,7 +343,7 @@ footer a:hover{color:var(--text)}
 
 <nav class="top" aria-label="页面导航">
   <div class="wrap">
-    <a class="brand" href="#top"><i class="ph ph-terminal-window"></i>teamai <small>0.4.0</small></a>
+    <a class="brand" href="#top"><i class="ph ph-terminal-window"></i>teamai <small>V4 · 0.5.1</small></a>
     <div class="links">
       <a href="#arch">架构</a>
       <a href="#market">Marketplace</a>
@@ -361,9 +364,9 @@ footer a:hover{color:var(--text)}
   <header class="hero">
     <div>
       <h1>团队的 Copilot 配置，<br>一条命令<em>同步到位</em>。</h1>
-      <p>Marketplace 定义 Plugins、Instructions、Skills 和团队经验。teamai 把它们装到你的机器和 Repo，并保持收敛。</p>
+      <p>Marketplace 定义 Plugins、Instructions、Skills 和团队经验。teamai 把它们按归属同步到用户范围与已绑定的 Repo。</p>
       <div class="ctas">
-        <a class="btn primary" href="#start">3 分钟上手<i class="ph ph-arrow-down"></i></a>
+        <a class="btn primary" href="#start">开始使用<i class="ph ph-arrow-down"></i></a>
         <a class="btn" href="#arch">看架构</a>
       </div>
     </div>
@@ -373,16 +376,17 @@ footer a:hover{color:var(--text)}
 <span class="c">$</span> teamai projects set payments
 <span class="c">$</span> teamai sync
 <span class="c">$</span> teamai recall 支付 重试</pre>
-      <span class="loop">设置一次 <b>init</b>，绑定一次 <b>projects set</b>，之后只需 <b>sync</b>。</span>
+      <span class="loop">设置 <b>init</b>，绑定 <b>projects set</b>，日常更新 <b>sync</b>。</span>
+      <p class="cap">V4 是产品方案，0.5.1 是 CLI 包版本。<a href="#verification">查看验证范围</a>。</p>
     </div>
   </header>
 
   <section id="arch">
     <div class="head rv">
       <h2>一张图看懂。</h2>
-      <p class="lede">Marketplace 是唯一内容源。CLI 只做控制面：通过 Copilot 原生命令管理 Plugins，把其余内容按归属写到两个范围。</p>
+      <p class="lede">Marketplace 提供团队资源与已发布知识；CLI 随包提供 teamai Skill 和 Recall Agent。CLI 通过原生适配器管理用户 Plugins，把上下文与声明组件写到已绑定的 Repo。</p>
     </div>
-    <div class="diagram rv" role="img" aria-label="架构图：部门 Marketplace 的 main 分支与 teamai-learnings 分支被 teamai CLI 读取，CLI 通过原生 Copilot CLI 或 VS Code fallback 写入用户范围，并把业务上下文写入当前 Repo；learning share 和 skill contribute 通过 gh PR 回到 Marketplace。">
+    <div class="diagram rv" role="img" aria-label="架构图：部门 Marketplace 的资源 source/ref 与 teamai-learnings 权威分支被 CLI 读取；CLI 管理用户资源并把业务上下文写入已绑定 Repo，也交付随包的 Skill 和 Agent。Learning 与 Skill 贡献经 gh PR 回到各自分支。">
       <svg viewBox="0 0 1060 540" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="dg-head"/></marker>
@@ -394,10 +398,10 @@ footer a:hover{color:var(--text)}
         <text x="32" y="50" class="dg-k">owner/repo</text>
         <text x="32" y="72" class="dg-t">部门 Marketplace</text>
         <rect x="26" y="90" width="258" height="250" rx="8" class="dg-sunk"/>
-        <text x="42" y="114" class="dg-a">main</text>
+        <text x="42" y="114" class="dg-a">资源分支 / ref（示例 main）</text>
         <text x="42" y="142" class="dg-m">.github/plugin/marketplace.json</text>
         <text x="42" y="168" class="dg-m">plugins/&lt;name&gt;/</text>
-        <text x="62" y="188" class="dg-s">common · 5 个 role · project</text>
+        <text x="62" y="188" class="dg-s">common · catalog roles · project</text>
         <text x="42" y="214" class="dg-m">instructions/**</text>
         <text x="42" y="240" class="dg-m">skills/ + skills.yaml</text>
         <text x="42" y="266" class="dg-m">manifest/projects.yaml</text>
@@ -471,8 +475,8 @@ footer a:hover{color:var(--text)}
     <div class="maps rv">
       <div class="band"><i class="ph ph-desktop"></i>你的机器</div>
       <div class="m"><code>.github/plugin/marketplace.json</code><em>注册</em><code>Copilot 与 VS Code 的 Marketplace 设置</code></div>
-      <div class="m"><code>plugins/&lt;name&gt;/plugin.json</code><em>install · enable</em><code>~/.copilot/installed-plugins/</code></div>
-      <div class="m sub"><code>skills/ · com.github.copilot/{agents,rules,hooks}</code><em>原生加载</em><code>随 Plugin 生效，CLI 不拆包</code></div>
+      <div class="m"><code>common / role 的 plugin.json</code><em>install · enable</em><code>~/.copilot/installed-plugins/</code></div>
+      <div class="m sub"><code>skills/ · mcp.json · com.github.copilot/*</code><em>原生包承载</em><code>由 consumer 发现和加载，CLI 不拆包</code></div>
       <div class="m"><code>instructions/**/*.instructions.md</code><em>逐字节镜像</em><code>~/.copilot/instructions/teamai/</code></div>
       <div class="m"><code>skills/&lt;name&gt;/ + skills.yaml</code><em>skill install</em><code>~/.copilot/skills/&lt;name&gt;/</code></div>
       <div class="band"><i class="ph ph-folder-simple"></i>当前 Repo</div>
@@ -480,11 +484,12 @@ footer a:hover{color:var(--text)}
       <div class="m"><code>contexts/&lt;id&gt;/instructions/</code><em>镜像</em><code>.github/instructions/teamai/&lt;id&gt;/</code></div>
       <div class="m"><code>contexts/&lt;id&gt;/docs/</code><em>镜像</em><code>.teamai/context/&lt;id&gt;/docs/</code></div>
       <div class="m"><code>plugins/&lt;project&gt;/</code><em>组件投射</em><code>.github/agents|skills|hooks/ · .mcp.json</code></div>
+      <div class="m sub"><code>Project Rules · MCP 引用文件</code><em>按声明投射</em><code>.github/instructions/teamai/&lt;id&gt;/ · .teamai/project-components/</code></div>
       <div class="band"><i class="ph ph-git-branch"></i>teamai-learnings 分支</div>
       <div class="m"><code>learnings/&lt;project|shared&gt;/&lt;uuid&gt;.md</code><em>快照 · 投射</em><code>~/.teamai/published-learnings/ · .teamai/context/</code></div>
       <div class="m back"><code>learning share</code><em>PR</em><code>learnings/&lt;project&gt;/&lt;uuid&gt;.md</code></div>
     </div>
-    <p class="cap">Plugin 的类型只看 <code>plugin.json</code> 里的 <code>extensions.com.company.teamai.kind</code>，不看名字。project Plugin 只在 <code>projects.yaml</code> 用 <code>plugin:</code> 引用时才被消费。</p>
+    <p class="cap">Plugin 的类型只看 <code>extensions.com.company.teamai.kind</code>，不看名字。Project Plugin 只在 manifest 用 <code>plugin:</code> 引用时提供组件，不作为用户 Plugin 安装。团队资源使用配置的 source/ref；已发布 Learnings 只读独立的 <code>teamai-learnings</code> 分支。</p>
   </section>
 
   <section id="terms">
@@ -498,7 +503,7 @@ footer a:hover{color:var(--text)}
         <dl>
           <div><dt>Marketplace<small>部门仓库</small></dt><dd>一个 Git 仓库，部门共同维护。CLI 不内置任何 Marketplace，每个用户用 <code>init</code> 指定一个。</dd></div>
           <div><dt>Plugin<small>Agent Plugin</small></dt><dd>Copilot 原生扩展包。按 <code>extensions.com.company.teamai.kind</code> 分为 <code>common</code>、<code>role</code>、<code>project</code>。</dd></div>
-          <div><dt>Role<small>你的岗位</small></dt><dd><code>api</code>、<code>ios</code>、<code>aos</code>、<code>qa</code>、<code>design</code> 之一。决定启用哪个 role Plugin。</dd></div>
+          <div><dt>Role<small>你的岗位</small></dt><dd>从 Marketplace 的 role catalog 中选一个。参考目录提供 <code>api</code>、<code>ios</code>、<code>aos</code>、<code>qa</code>、<code>design</code>，名称可由部门定义。</dd></div>
           <div><dt>Skill<small>按需加载的能力</small></dt><dd>一个 <code>SKILL.md</code> 目录。随 Plugin 提供，或作为 standalone 单独安装。</dd></div>
           <div><dt>Instructions<small>常驻规则</small></dt><dd><code>*.instructions.md</code>。部门级的逐字节镜像到 <code>~/.copilot/instructions/teamai/</code>。</dd></div>
           <div><dt>Recall Agent<small>内置</small></dt><dd>随 CLI 分发的 <code>teamai-recall</code> Agent。只读检索团队知识，带出处回答，不改代码。</dd></div>
@@ -509,7 +514,7 @@ footer a:hover{color:var(--text)}
         <dl>
           <div><dt>Logical Project<small>业务项目</small></dt><dd>业务意义上的项目，如 <code>payments</code>，在 <code>manifest/projects.yaml</code> 声明。可以横跨多个 Repo。</dd></div>
           <div><dt>Physical Project<small>本地 Repo</small></dt><dd>你本地的一个 Git 工作区。用 <code>projects set</code> 绑定一个或多个 Logical Project。</dd></div>
-          <div><dt>Context<small>业务上下文</small></dt><dd>Logical Project 的 Instructions 和 Docs。绑定后写入 Repo，Copilot 在这里就懂这块业务。</dd></div>
+          <div><dt>Context<small>业务上下文</small></dt><dd>Logical Project 的 Instructions 和 Docs。绑定后写入 Repo 并提供索引指针；实际读取和应用取决于 consumer。</dd></div>
           <div><dt>Learning<small>团队经验</small></dt><dd>一篇排障或踩坑记录。经 PR 合入 <code>teamai-learnings</code> 分支后成为已发布内容。</dd></div>
           <div><dt>Project Plugin<small>可选</small></dt><dd>只是组件来源。CLI 把 manifest 选中的 Agents、Rules、Skills、Hooks、MCP 投射到 Repo 的原生位置，<b>不会</b>安装或启用这个包。</dd></div>
         </dl>
@@ -520,34 +525,34 @@ footer a:hover{color:var(--text)}
   <section id="model">
     <div class="head rv">
       <h2>只需要记住三个命令。</h2>
-      <p class="lede">每个命令只管一个范围。</p>
+      <p class="lede">先设置用户，再显式绑定 Workspace，之后按保存的状态同步。</p>
     </div>
     <div class="rows rv">
       <div class="row">
         <code>teamai init</code>
         <div class="say">我是谁</div>
-        <div><span class="scope">你的机器</span><div class="what">Marketplace、Role、用户级 Instructions、内置 Skill 与 Recall Agent。只做一次，从不绑定 Repo。</div></div>
+        <div><span class="scope">你的机器</span><div class="what">Marketplace、Role、用户级 Instructions、内置 Skill 与 Recall Agent。初始化用户，不绑定 Repo。</div></div>
       </div>
       <div class="row">
         <code>teamai projects set <span>&lt;ids&gt;</span></code>
         <div class="say">这个 Repo 做什么</div>
-        <div><span class="scope">当前 Repo</span><div class="what">绑定一个或多个 Logical Project，立即写入业务上下文和声明的组件。</div></div>
+        <div><span class="scope">当前 Repo</span><div class="what">替换 Logical Project 绑定并收敛上下文和组件。不带 ID 即解绑；linked worktree 各自保存绑定。</div></div>
       </div>
       <div class="row">
         <code>teamai sync</code>
         <div class="say">更新到最新</div>
-        <div><span class="scope">你的机器 + 当前 Repo</span><div class="what">刷新 Marketplace，按已声明的状态重新收敛并修复。不扫描机器上的其他 Repo。</div></div>
+        <div><span class="scope">你的机器 + 当前 Repo</span><div class="what">刷新来源，按已保存的绑定重新收敛。未绑定时只处理用户范围；中断时按检查点恢复可安全续办的步骤。</div></div>
       </div>
     </div>
 
     <div class="pipe rv">
       <div>
         <h3>一次 sync 做了什么</h3>
-        <p>先整体预检，任何一步不通过就不写入。之后每一步都只动 teamai 拥有的东西。</p>
+        <p>先预检归属与交付计划，再分阶段写入。后续失败可能留下已完成写入和 pending 检查点；按诊断处理冲突后再显式 sync。</p>
       </div>
       <ol class="stages">
-        <li><b>刷新 Marketplace 与已发布 Learnings 快照</b><span>main + teamai-learnings</span></li>
-        <li class="gate"><b>预检全部收敛计划</b><span>dry-run</span></li>
+        <li><b>读取 Marketplace 与已发布 Learnings</b><span>source/ref + teamai-learnings</span></li>
+        <li class="gate"><b>预检、刷新快照并复核交付计划</b><span>不承诺全程事务回滚</span></li>
         <li><b>内置 Recall Agent</b><span>agents/teamai-recall.agent.md</span></li>
         <li><b>内置 teamai Skill</b><span>skills/teamai/</span></li>
         <li><b>用户级 Instructions 镜像</b><span>instructions/teamai/</span></li>
@@ -562,14 +567,16 @@ footer a:hover{color:var(--text)}
   <section id="start">
     <div class="head rv">
       <h2>从零到可用。</h2>
-      <p class="lede">需要 Node.js 20+ 和 Git。Plugins 收敛需要 GitHub Copilot CLI（<code>copilot</code>），没有时回退到 VS Code（<code>code</code>）。</p>
+      <p class="lede">需要 Node.js 20+ 和 Git。Plugins 收敛需要 <code>copilot</code>，仅当它不可用且 <code>code</code> 可用时选择 fallback；原生执行失败会直接报错。贡献 PR 另需已认证的 <code>gh</code>。</p>
     </div>
     <div class="steps">
       <div class="step rv">
-        <div><h3><i class="ph ph-download-simple"></i>安装</h3><p>目前从源码安装，<code>npm link</code> 后即可全局使用 <code>teamai</code>。</p></div>
+        <div><h3><i class="ph ph-download-simple"></i>安装</h3><p>从源码安装，<code>npm link</code> 后可全局使用。合并前预览 V4，可在 clone 后、安装前执行 <code>git switch teamai-v4</code>；合并后按默认分支安装。</p></div>
 <pre class="term"><span class="c">$</span> git clone https://github.com/teamai-vault/teamai-cli-copilot.git
 <span class="c">$</span> cd teamai-cli-copilot
-<span class="c">$</span> npm install &amp;&amp; npm run build &amp;&amp; npm link
+<span class="c">$</span> npm install
+<span class="c">$</span> npm run build
+<span class="c">$</span> npm link
 <span class="c">$</span> teamai --version</pre>
       </div>
       <div class="step rv">
@@ -585,7 +592,7 @@ DONE plugin-install: ios@teamai
 DONE plugin-disable: ios@teamai
 <span class="d">...</span>
 DONE create: ~/.copilot/instructions/teamai/global.instructions.md</pre>
-          <p class="cap">输出为节选。不确定时先加 <code>--dry-run</code>。</p>
+          <p class="cap">输出为示意节选，名称随 catalog 变化。Marketplace 需已准备 <code>teamai-learnings</code> 分支；普通 init 不代建。可先加 <code>--dry-run</code> 预览。</p>
         </div>
       </div>
       <div class="step rv">
@@ -594,15 +601,15 @@ DONE create: ~/.copilot/instructions/teamai/global.instructions.md</pre>
 <pre class="term"><span class="c">$</span> cd payment-service
 <span class="c">$</span> teamai projects list
 <span class="c">$</span> teamai projects set payments
-DONE write: .github/instructions/teamai/payments/context.instructions.md
+DONE write: .github/instructions/teamai/context.instructions.md
 DONE write: .teamai/context/payments/docs/architecture.md
 DONE write: .teamai/context/shared/learnings/&lt;uuid&gt;.md
 DONE write: .git/info/exclude</pre>
-          <p class="cap">路径已缩短为相对 Repo 根目录。两个保留目录自动加入 Git exclude。</p>
+          <p class="cap">示意路径按 Repo 根缩短，文件取决于 catalog。需要有效的 Learnings 快照；两个保留根加入 Git exclude。<code>teamai projects set</code> 不带 ID 即解绑。</p>
         </div>
       </div>
       <div class="step rv">
-        <div><h3><i class="ph ph-arrows-clockwise"></i>保持最新</h3><p>团队更新了 Plugins、文档、Skills 或 Learnings 之后，在 Repo 里跑一次。已收敛时不写任何东西。</p></div>
+        <div><h3><i class="ph ph-arrows-clockwise"></i>保持最新</h3><p>团队更新后，在 Repo 里运行。相同资源无需重复交付，但缓存和机器状态仍可能更新。</p></div>
 <pre class="term"><span class="c">$</span> teamai sync
 Copilot plugin state is already converged.
 Managed user instructions are already converged (2).</pre>
@@ -613,23 +620,24 @@ Managed user instructions are already converged (2).</pre>
   <section id="files">
     <div class="head rv">
       <h2>它会写到哪里。</h2>
-      <p class="lede">只管理高亮的路径，并为每一处写入记录所有权回执。路径已被别人占用时直接拒绝，不会覆盖。</p>
+      <p class="lede">高亮表示受管理的资源或配置项，不代表整个父目录归 teamai。内置能力和 Project 组件按回执防冲突；用户级 Instructions 的保留子树按 Marketplace 来源镜像。</p>
     </div>
     <div class="trees rv">
       <div class="tree">
         <h3><i class="ph ph-desktop"></i>你的机器</h3>
         <ol>
-          <li>~/.copilot/ <span>可用 COPILOT_HOME 改根</span></li>
+          <li>~/.copilot/ <span>COPILOT_HOME 可指定绝对根；需匹配已有回执</span></li>
           <li class="own i1">installed-plugins/<span>原生 Copilot 管理</span></li>
           <li class="own i1">instructions/teamai/<span>部门 Instructions</span></li>
           <li class="own i1">skills/teamai/<span>内置 Skill</span></li>
           <li class="own i1">agents/teamai-recall.agent.md<span>内置 Agent</span></li>
           <li class="own opt i1">skills/release-helper/<span>你装的 Team Skill</span></li>
           <li class="no i1">instructions/my-notes.md<span>你自己的</span></li>
-          <li>~/.teamai/</li>
+          <li>~/.teamai/<span>不随 COPILOT_HOME 改变</span></li>
           <li class="own i1">config.yaml<span>Marketplace、Role、所有权</span></li>
           <li class="own i1">built-in-skills/ · built-in-agents/<span>交付回执</span></li>
           <li class="own i1">published-learnings/<span>只读快照</span></li>
+          <li class="own i1">outbox/<span>learnings/ 记录 · learning-payloads/ 正文</span></li>
           <li class="own i1">projects/&lt;anchor&gt;/<span>每个 Repo 的绑定</span></li>
         </ol>
       </div>
@@ -648,7 +656,8 @@ Managed user instructions are already converged (2).</pre>
         </ol>
       </div>
     </div>
-    <div class="legend"><span><i class="a"></i>teamai 管理</span><span><i class="c"></i>按需出现</span><span><i class="b"></i>不会触碰</span><span><i class="l"></i>本地忽略：写入 .git/info/exclude，不出现在 git status，不会被提交</span></div>
+    <div class="legend"><span><i class="a"></i>teamai 管理</span><span><i class="c"></i>按需出现</span><span><i class="b"></i>保留个人内容</span><span><i class="l"></i>本地忽略：仅影响未跟踪文件；不取消已跟踪文件，也不阻止 git add -f</span></div>
+    <p class="cap">Git exclude 路径由 Git 解析，linked worktree 不假定 <code>.git</code> 是目录。Project 组件的其他路径没有自动忽略，是否提交由仓库维护者决定。已修改的组件在解绑时保留并报告。</p>
   </section>
 
   <section id="recall">
@@ -660,7 +669,7 @@ Managed user instructions are already converged (2).</pre>
       <div class="rv">
         <div class="matrix">
           <table>
-            <thead><tr><th>检索内容</th><th>user<small>未绑定 Repo</small></th><th>workspace<small>已绑定 Repo</small></th></tr></thead>
+            <thead><tr><th>检索内容</th><th>user<small>显式指定，或 auto 无绑定</small></th><th>workspace<small>必须已有绑定</small></th></tr></thead>
             <tbody>
               <tr><td>shared Learnings</td><td><i class="ph ph-check y" aria-label="包含"></i></td><td><i class="ph ph-check y" aria-label="包含"></i></td></tr>
               <tr><td>Project Learnings</td><td><i class="ph ph-minus n" aria-label="不包含"></i></td><td><i class="ph ph-check y" aria-label="包含"></i></td></tr>
@@ -670,9 +679,10 @@ Managed user instructions are already converged (2).</pre>
           </table>
         </div>
         <div class="facts">
-          <div><b>scope 默认 auto</b><p>当前 Repo 有绑定就用 workspace，否则用 user。<code>--project</code> 收窄到一个 Project。</p></div>
+          <div><b>scope 默认 auto</b><p>有绑定就用 workspace，否则用 user。<code>--project</code> 要求已绑定且 active，结果保留 shared 加所选 Project。user 不能带 <code>--project</code>；显式 workspace 无绑定会报错。</p></div>
+          <div><b>pending 也有范围</b><p>默认排除草稿。显式加入时，user 只含同 source 的 shared 草稿；workspace 还要求来自当前 Workspace，且属于 shared 或 active Project。</p></div>
           <div><b>每条结果都有出处</b><p>本地文件、source revision、SHA-256、原始行号和 evidence 片段。<code>--json</code> 给脚本用。</p></div>
-          <div><b>交给 Agent</b><p>在 Copilot 里直接问 <code>teamai-recall</code>。它会把问题转成英文技术词，保留原始报错和 ID，用你的语言带出处回答。</p></div>
+          <div><b>交给 Agent</b><p>consumer 发现 <code>teamai-recall</code> 后可选择它。它用英文技术词检索，保留关键条件和使用到的 ID，读取并比较原文，用你的语言附全部支持来源。模型回答仍需结合证据判断。</p></div>
         </div>
       </div>
 <pre class="term rv"><span class="c">$</span> teamai recall 支付 重试
@@ -682,14 +692,30 @@ Recall found 2 result(s) in workspace scope for "支付 重试".
 <span class="d">Source:</span> learnings/payments/&lt;uuid&gt;.md @ 9c41e2a
 <span class="d">File:</span> ~/.teamai/published-learnings/&lt;hash&gt;/learnings/payments/&lt;uuid&gt;.md
 <span class="d">SHA-256:</span> 5f0d…e81a
-<span class="d">Lines:</span> 12-19
+<span class="d">Lines:</span> 12-14
 <span class="d">Matched terms:</span> 支付, 重试
 ⟦evidence⟧
-重试前先用幂等键查询订单状态…
+支付回调超时后，先查询订单状态。
+重试前检查原请求的幂等键。
+仅在满足文档条件时继续重试。
 ⟦/evidence⟧
 
 <span class="hl">[2] doc · published · payments · 支付网关接入说明</span>
 <span class="d">...</span></pre>
+    </div>
+    <p class="cap">上方为格式示意，路径与 hash 已缩短；不是实测输出。snippet 最多 3 行、1200 Unicode code points，选取覆盖不同查询词最多的连续原文，同分取最早位置；片段之外的结论需读原文。</p>
+    <div class="two rv">
+      <div class="notes">
+        <h3>词法检索，BM25 排序</h3>
+        <p>按空白拆词，NFC 与大小写归一后，至少一个子串命中即可。title / tag / body 权重为 3 / 2 / 1，按内存 BM25 降序、稳定 ID 同分排序。排名不代表语义置信度，CLI 不翻译或调用模型。</p>
+        <p><code>--limit</code> 为 1–20，默认 5。query 与 required 原文合计最多 1024 Unicode code points；去重前 query 词数加 required 数量最多 32 项。允许语料限 5000 文件、总计 64 MiB、单文件 1 MiB。</p>
+      </div>
+      <div>
+<pre class="term"><span class="c">$</span> teamai recall "Plugin not" --require "Plugin not found: E_PLUGIN_42." --scope user
+<span class="c">$</span> teamai recall "支付 重试" --limit 5 --json
+<span class="c">$</span> teamai recall --help</pre>
+        <p class="cap"><code>--require</code> 可重复，全部字面条件都须匹配；不拆词、不作正则，也不扩大 Scope。shell 引号只传参，不开启短语搜索。help 不需要初始化、cache 或 consumer，即使加 <code>--json</code> 也输出文本帮助。</p>
+      </div>
     </div>
   </section>
 
@@ -697,7 +723,7 @@ Recall found 2 result(s) in workspace scope for "支付 重试".
     <div class="roles">
       <div class="rv">
         <h2>切换 Role，不用重装。</h2>
-        <p class="lede">所有 role Plugin 都已安装。teamai 只启用 common 加上你选的那一个，切换只是换开关。你自己装的同名 Plugin 不会被接管。</p>
+        <p class="lede">初始化会安装 catalog 中的所有 role。正常切换调整启用状态；若资源缺失，也会收敛交付。对 teamai 拥有的 Plugins，只启用 common 加所选 role；用户自有同名包保留并报告。下图为参考 catalog。</p>
       </div>
       <div class="rv">
         <div class="label"><code>--role api</code></div>
@@ -740,7 +766,7 @@ Recall found 2 result(s) in workspace scope for "支付 重试".
         <h3>两种 Skill</h3>
         <dl class="kv">
           <dt>standalone</dt><dd>逐字节复制到 <code>~/.copilot/skills/</code>，<code>skill remove</code> 只删 teamai 装的那份。</dd>
-          <dt>plugin:*</dt><dd>随所属 Plugin 启用而可用，不再重复复制。</dd>
+          <dt>plugin:*</dt><dd>所属 Plugin 启用时由原生包提供；仅 metadata 允许 standalone 且包未启用时，才可另装个人副本。</dd>
         </dl>
       </div>
       <div class="tile t-half t-tint">
@@ -757,19 +783,19 @@ Recall found 2 result(s) in workspace scope for "支付 重试".
   <section id="share">
     <div class="head rv">
       <h2>把经验还给团队。</h2>
-      <p class="lede">分享一条 Learning 或贡献一个 Skill。teamai 在隔离的 bare clone 和 worktree 里提交并用 <code>gh</code> 开 PR，不动你本地的 Marketplace 缓存。</p>
+      <p class="lede">在 Git Repo 中分享 Learning 或贡献 Skill。需要 Git 提交身份、GitHub 来源和贡献权限。teamai 在隔离的 bare clone 与 worktree 里提交，用 <code>gh</code> 开 PR；Learnings 的 base 固定为 <code>teamai-learnings</code>。</p>
     </div>
-    <div class="sm rv" role="img" aria-label="learning share 状态流：base-resolved，branch-pushed，pr-open，最终为 published 或 closed-without-merge。每一步都写入本地 outbox，可用 learning pending 查看，learning retry 续传。">
+    <div class="sm rv" role="img" aria-label="Learning 操作从 queued，经基线检查点到 branch-pushed、pr-open；retry 核查后记录 published 或 closed-without-merge。冲突可阻断续办。">
       <div class="sm-track">
-        <div class="sm-node"><code>share</code><p>写入本地 outbox，生成 UUID</p></div>
-        <div class="sm-node"><code>base-resolved</code><p>确认 teamai-learnings 基线</p></div>
+        <div class="sm-node"><code>queued</code><p>保存 UUID、冻结正文与目标</p></div>
+        <div class="sm-node"><code>baseCommit</code><p>确认基线的检查点；phase 仍为 queued</p></div>
         <div class="sm-node"><code>branch-pushed</code><p>分支与提交已推送</p></div>
         <div class="sm-node"><code>pr-open</code><p>等待维护者审核</p></div>
-        <div class="sm-node end"><div class="sm-fork"><code>published</code><code class="x">closed-without-merge</code></div><p>合入后 sync 即可召回</p></div>
+        <div class="sm-node end"><div class="sm-fork"><code>published</code><code class="x">closed-without-merge</code></div><p>retry 核查终态；合入内容经 sync 后可召回</p></div>
       </div>
       <div class="sm-foot">
-        <div><b>中断了也不丢。</b> 每一步都有检查点，<code>teamai learning pending</code> 列出未完成的操作。</div>
-        <div><b>续传是幂等的。</b> <code>teamai learning retry &lt;id&gt;</code> 从检查点继续，不会重复开 PR。</div>
+        <div><b>保存后可续办。</b> <code>teamai learning pending</code> 只读列出当前来源未完成的本地记录，不查询远端 PR。</div>
+        <div><b>沿用原 ID。</b> <code>teamai learning retry &lt;id&gt;</code> 先核查远端再续办，冲突时阻断。重跑 share 会创建新操作。</div>
       </div>
     </div>
     <div class="two">
@@ -777,19 +803,18 @@ Recall found 2 result(s) in workspace scope for "支付 重试".
 DONE learning share: note.md -&gt; learnings/payments/&lt;uuid&gt;.md
 Learning contribution &lt;uuid&gt;: pr-open
 Pull request: https://github.com/&lt;org&gt;/&lt;marketplace&gt;/pull/42</pre>
-<pre class="term rv"><span class="c">$</span> teamai skill contribute ./my-skill \
-    --owner api-team --target standalone
+<pre class="term rv"><span class="c">$</span> teamai skill contribute ./my-skill --owner api-team --target standalone
 <span class="d"># 或放进已有 Plugin</span>
-<span class="c">$</span> teamai skill contribute ./my-skill \
-    --owner api-team --target plugin --plugin api</pre>
+<span class="c">$</span> teamai skill contribute ./my-skill --owner api-team --target plugin --plugin api</pre>
     </div>
+    <p class="cap">示例中的 Project、UUID 和 PR 地址为占位。多个绑定时需明确 <code>--project</code> 或 <code>--shared</code>。贡献内容建议英文优先；CLI 保留正文，不代为翻译。Skill PR 使用资源仓库的默认分支，独立于 Learning 的 outbox/retry。</p>
   </section>
 
   <section id="health">
     <div class="health">
 <pre class="term rv"><span class="c">$</span> teamai doctor
 <span class="ok">✓</span> Git: git version 2.54.0.windows.1
-<span class="ok">✓</span> Built-in Recall Agent: current (0.4.0); consumer runtime unobserved.
+<span class="ok">✓</span> Built-in Recall Agent: current (0.5.1); consumer runtime unobserved.
 <span class="ok">✓</span> Team AI config: role=api
 <span class="ok">✓</span> Published Learnings snapshot: 9c41e2a.
 <span class="ok">✓</span> Marketplace cache/catalog: 3b7fbef.
@@ -801,9 +826,9 @@ Pull request: https://github.com/&lt;org&gt;/&lt;marketplace&gt;/pull/42</pre>
 <span class="d">...</span></pre>
       <div class="notes rv">
         <h2>哪里不对，先问 doctor。</h2>
-        <div><h3>doctor 只读</h3><p>检查缺失、过期和冲突，不刷新缓存也不修复。修复交给 <code>sync</code>。</p></div>
+        <div><h3>doctor 只读</h3><p>检查缺失、过期和冲突，不刷新缓存也不修复。可安全恢复的状态交给显式 <code>sync</code>；个人修改和归属冲突先检查。左侧为示意输出。</p></div>
         <div><h3>status 看全貌</h3><p>Marketplace revision、Role、Plugin 开关、Repo 绑定。<code>--resources</code> 逐项列出资源的交付与归属，<code>--json</code> 给工具用。</p></div>
-        <div><h3>--dry-run 先预览</h3><p>所有写命令都支持，只打印 <code>WOULD ...</code>，不改任何状态。</p></div>
+        <div><h3>--dry-run 先预览</h3><p>写命令支持预览，不持久修改产品状态。读取来源可能联网并使用临时目录；它不等于离线模式。</p></div>
       </div>
     </div>
   </section>
@@ -819,7 +844,7 @@ Pull request: https://github.com/&lt;org&gt;/&lt;marketplace&gt;/pull/42</pre>
         <dl>
           <div><dt>init [--marketplace &lt;source&gt;] [--role &lt;role&gt;]</dt><dd>配置你自己，只影响你的机器。</dd></div>
           <div><dt>role list · role set &lt;role&gt;</dt><dd>查看或切换 Role。</dd></div>
-          <div><dt>projects [list] · projects set &lt;ids...&gt;</dt><dd>查看 Logical Project，绑定当前 Repo。</dd></div>
+          <div><dt>projects [list] · projects set [ids...]</dt><dd>查看或替换绑定；set 不带 ID 即解绑当前 Repo。</dd></div>
           <div><dt>sync</dt><dd>刷新并收敛你的机器和当前 Repo。</dd></div>
         </dl>
       </div>
@@ -828,13 +853,14 @@ Pull request: https://github.com/&lt;org&gt;/&lt;marketplace&gt;/pull/42</pre>
         <dl>
           <div><dt>recall &lt;query&gt; [--scope auto|user|workspace]</dt><dd>本地检索已发布 Learnings 与 Project Docs。</dd></div>
           <div><dt>  [--project &lt;id&gt;] [--limit &lt;n&gt;]</dt><dd>收窄 Project，限制条数。</dd></div>
+          <div><dt>  [--require &lt;literal&gt;]</dt><dd>可重复的 AND 字面条件，query 仍须命中。</dd></div>
           <div><dt>  [--include-pending] [--json]</dt><dd>带上本地草稿，输出 JSON。</dd></div>
         </dl>
       </div>
       <div>
         <h3><i class="ph ph-puzzle-piece"></i>Skills</h3>
         <dl>
-          <div><dt>skill list [--tag] [--owner] [--source]</dt><dd>浏览团队 Skill 目录。</dd></div>
+          <div><dt>skill list [--tag &lt;tag&gt;] [--owner &lt;owner&gt;] [--source plugin|standalone]</dt><dd>浏览团队 Skill 目录。</dd></div>
           <div><dt>skill show &lt;name&gt;</dt><dd>来源、Owner、Tag、本地状态。</dd></div>
           <div><dt>skill install &lt;name...&gt; · --tag &lt;tag&gt; [--yes]</dt><dd>按名字或按 Tag 安装。</dd></div>
           <div><dt>skill remove &lt;name...&gt; · tags list</dt><dd>移除 teamai 安装的 Skill，查看全部 Tag。</dd></div>
@@ -843,9 +869,9 @@ Pull request: https://github.com/&lt;org&gt;/&lt;marketplace&gt;/pull/42</pre>
       <div>
         <h3><i class="ph ph-git-pull-request"></i>贡献</h3>
         <dl>
-          <div><dt>learning share &lt;file&gt; [--project &lt;id&gt; | --shared] [--tags]</dt><dd>提交到 teamai-learnings。只有一个绑定时默认用它，没有绑定时用 shared。</dd></div>
+          <div><dt>learning share &lt;file&gt; [--project &lt;id&gt; | --shared] [--tags &lt;tag...&gt;]</dt><dd>提交到 teamai-learnings。一个绑定时默认用它，无绑定用 shared，多个时必须明确选择。</dd></div>
           <div><dt>learning pending [--json] · learning retry &lt;id&gt;</dt><dd>查看未完成的贡献，从检查点续传。</dd></div>
-          <div><dt>skill contribute &lt;path&gt; --owner &lt;o&gt; --target standalone|plugin</dt><dd>贡献为 standalone，或配合 <code>--plugin</code> 放进已有 Plugin。</dd></div>
+          <div><dt>skill contribute &lt;path&gt; --owner &lt;o&gt; --target standalone|plugin [--tags &lt;tag...&gt;]</dt><dd>贡献为 standalone；plugin target 必须提供 <code>--plugin &lt;name&gt;</code>。</dd></div>
         </dl>
       </div>
       <div>
@@ -858,12 +884,30 @@ Pull request: https://github.com/&lt;org&gt;/&lt;marketplace&gt;/pull/42</pre>
       <div>
         <h3><i class="ph ph-wrench"></i>Marketplace 维护者</h3>
         <dl>
-          <div><dt>node scripts/init-learnings-branch.mjs --marketplace &lt;url&gt; [--apply]</dt><dd>初始化 teamai-learnings 分支，默认只预览。</dd></div>
+          <div><dt>node scripts/init-learnings-branch.mjs --marketplace &lt;url&gt; [--apply]</dt><dd>维护者在 CLI 源码仓库运行，初始化 teamai-learnings 分支，默认只预览。</dd></div>
           <div><dt>npm run rename:marketplace -- --from &lt;a&gt; --to &lt;b&gt; --dry-run</dt><dd>重命名 Marketplace 逻辑 ID。</dd></div>
         </dl>
       </div>
     </div>
     <div class="tip"><i class="ph ph-info"></i><div>全局选项：<code>--dry-run</code> 预览所有写入和 Copilot 变更，<code>--version</code> 查看版本，<code>--help</code> 查看帮助。</div></div>
+  </section>
+
+  <section id="verification">
+    <div class="head rv">
+      <h2>已交付，与已生效，分别确认。</h2>
+      <p class="lede">V4 的命令、交付、Scope、Learnings 续传与 Recall 已有实现。正式发布与 consumer 支持，以对应版本的实际证据为准。</p>
+    </div>
+    <div class="gloss rv">
+      <div class="gset">
+        <h3><i class="ph ph-check-circle"></i>已实现的检查</h3>
+        <p>typecheck、测试、构建与实际 npm 包验证；原生 / fallback 交付检查；公开 CLI 的 Recall、Scope、ownership 和 retry 检查。status 将交付、配置启用和 runtime 分开显示。</p>
+      </div>
+      <div class="gset">
+        <h3><i class="ph ph-info"></i>使用前看清边界</h3>
+        <p>有限 Windows Agent 观察不代表所有模型或平台通过。macOS ARM 验收 <a href="https://github.com/teamai-vault/teamai-cli-copilot/issues/38">#38</a> 仍需完成；自定义根投递不代表 VS Code 已发现，真实 PR 审核链也需独立验证。</p>
+      </div>
+    </div>
+    <p class="cap">完整功能与证据见 <a href="https://github.com/teamai-vault/teamai-cli-copilot/blob/main/docs/HANDOFF.md">实现状态</a> 和 <a href="https://github.com/teamai-vault/teamai-cli-copilot/blob/main/docs/development/README.md">开发文档索引</a>。Project MCP 当前接受 <code>stdio</code>（或省略 type）、<code>http</code>、<code>sse</code>；<code>streamable-http</code> 尚不接受。</p>
   </section>
 
 </main>

@@ -41,7 +41,7 @@ The independent receipt is `~/.teamai/built-in-agents/teamai-recall.json`:
   "agent": "teamai-recall",
   "copilotRoot": "<absolute resolved root>",
   "target": "<absolute exact Agent file>",
-  "version": "0.4.0",
+  "version": "0.5.1",
   "contentHash": "<SHA-256 of delivered bytes>"
 }
 ```
